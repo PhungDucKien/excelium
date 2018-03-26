@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-cli/excelium-cli.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-cli/excelium-cli.iml" group="excelium-cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-cli/excelium-cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-cli/excelium-cli_main.iml" group="excelium-cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-cli/excelium-cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-cli/excelium-cli_test.iml" group="excelium-cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-common/excelium-common.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-common/excelium-common.iml" group="excelium-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-common/excelium-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-common/excelium-common_main.iml" group="excelium-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-common/excelium-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-common/excelium-common_test.iml" group="excelium-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-core/excelium-core.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-core/excelium-core.iml" group="excelium-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-core/excelium-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-core/excelium-core_main.iml" group="excelium-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-core/excelium-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-core/excelium-core_test.iml" group="excelium-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-generator/excelium-generator.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-generator/excelium-generator.iml" group="excelium-generator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-generator/excelium-generator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-generator/excelium-generator_main.iml" group="excelium-generator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-generator/excelium-generator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-generator/excelium-generator_test.iml" group="excelium-generator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-model/excelium-model.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-model/excelium-model.iml" group="excelium-model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-model/excelium-model_main.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-model/excelium-model_main.iml" group="excelium-model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-model/excelium-model_test.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-model/excelium-model_test.iml" group="excelium-model" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-sheets/excelium-sheets.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-sheets/excelium-sheets.iml" group="excelium-sheets" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-sheets/excelium-sheets_main.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-sheets/excelium-sheets_main.iml" group="excelium-sheets" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-sheets/excelium-sheets_test.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-sheets/excelium-sheets_test.iml" group="excelium-sheets" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-xls/excelium-xls.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-xls/excelium-xls.iml" group="excelium-xls" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-xls/excelium-xls_main.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-xls/excelium-xls_main.iml" group="excelium-xls" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/excelium-xls/excelium-xls_test.iml" filepath="$PROJECT_DIR$/.idea/modules/excelium-xls/excelium-xls_test.iml" group="excelium-xls" />
+    </modules>
+  </component>
+</project>

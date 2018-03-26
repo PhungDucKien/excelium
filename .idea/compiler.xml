@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="excelium-cli_main" target="1.8" />
+      <module name="excelium-cli_test" target="1.8" />
+      <module name="excelium-common_main" target="1.8" />
+      <module name="excelium-common_test" target="1.8" />
+      <module name="excelium-core_main" target="1.8" />
+      <module name="excelium-core_test" target="1.8" />
+      <module name="excelium-generator_main" target="1.8" />
+      <module name="excelium-generator_test" target="1.8" />
+      <module name="excelium-model_main" target="1.8" />
+      <module name="excelium-model_test" target="1.8" />
+      <module name="excelium-sheets_main" target="1.8" />
+      <module name="excelium-sheets_test" target="1.8" />
+      <module name="excelium-xls_main" target="1.8" />
+      <module name="excelium-xls_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

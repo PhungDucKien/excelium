@@ -1,0 +1,9 @@
+rootProject.name = 'excelium'
+
+include 'excelium-model'
+include 'excelium-common'
+include 'excelium-core'
+include 'excelium-sheets'
+include 'excelium-xls'
+include 'excelium-generator'
+include 'excelium-cli'
