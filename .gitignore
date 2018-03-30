@@ -49,6 +49,7 @@ gradle-app.setting
 .idea/**/tasks.xml
 .idea/dictionaries
 .idea/**/*.iml
+*.iml
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
