@@ -31,7 +31,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Adapts {@link java.nio.file.Path} for custom marshaling.
+ * Adapts {@link Path} for custom marshaling.
  *
  * @author PhungDucKien
  * @since 2018.03.27
