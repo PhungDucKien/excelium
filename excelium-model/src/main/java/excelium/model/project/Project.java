@@ -30,7 +30,6 @@ import excelium.model.enums.WorkbookType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.nio.file.Path;
@@ -80,11 +79,9 @@ public class Project {
     private Path downloadPath;
 
     /** Test files */
-    @XmlElement(name = "tests")
-    private Map<String, TestFile> testFiles;
+    private Map<String, TestFile> tests;
 
     /** Templates */
-    @XmlElement(name = "templates")
     private Map<String, Template> templates;
 
     /** Default template */
@@ -253,21 +250,21 @@ public class Project {
     }
 
     /**
-     * Gets test files.
+     * Gets tests.
      *
-     * @return the test files
+     * @return the tests
      */
-    public Map<String, TestFile> getTestFiles() {
-        return testFiles;
+    public Map<String, TestFile> getTests() {
+        return tests;
     }
 
     /**
-     * Sets test files.
+     * Sets tests.
      *
-     * @param testFiles the test files
+     * @param tests the tests
      */
-    public void setTestFiles(Map<String, TestFile> testFiles) {
-        this.testFiles = testFiles;
+    public void setTests(Map<String, TestFile> tests) {
+        this.tests = tests;
     }
 
     /**

@@ -375,20 +375,39 @@ public class Template {
      */
     public static final String DATA_BODY = "%DATA_BODY%";
 
-    @XmlElement(name="markupLocations")
+    /**
+     * Markup locations. This store a map of markup and its location in the template.
+     */
     private Map<Object, String> markupLocations;
 
+    /**
+     * Pattern for name of the sheet that should be considered as configuration sheet.
+     */
     private String configurationPattern;
 
+    /**
+     * Pattern for name of sheets that should be considered as mapping item sheets.
+     */
     private String mappingPattern;
 
+    /**
+     * Pattern for name of sheets that should be considered as action sheets.
+     */
     private String actionPattern;
 
+    /**
+     * Pattern for name of sheets that should be considered as data sheets.
+     */
     private String dataPattern;
 
+    /**
+     * Pattern for name of sheets that should be considered as test sheets.
+     */
     private String testPattern;
 
-    @XmlElement(name="ignorePattern")
+    /**
+     * Pattern for name of sheets that should be ignored.
+     */
     private List<String> ignorePatterns;
 
     /**
@@ -524,6 +543,7 @@ public class Template {
      *
      * @return the ignore patterns
      */
+    @XmlElement(name="ignorePattern")
     public List<String> getIgnorePatterns() {
         return ignorePatterns;
     }

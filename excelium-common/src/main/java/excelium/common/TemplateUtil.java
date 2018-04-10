@@ -1,0 +1,142 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Excelium
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package excelium.common;
+
+import excelium.model.project.Template;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Collection of template handling utilities
+ *
+ * @author PhungDucKien
+ * @since 2018.04.09
+ */
+public class TemplateUtil {
+
+    /**
+     * Get the suggestion for the name of configuration sheet.
+     * This method lists up all the sheets that contain configuration items and take the highest
+     * repeating sheet.
+     *
+     * @param template Template
+     * @return The suggestion of the configuration sheet
+     * @throws IllegalAccessException if illegal access occurs
+     */
+    public static String getSuggestSheetForConfiguration(Template template) throws IllegalAccessException {
+        String highestRepeatingElement = null;
+        int maxFrequency = -1;
+        Map<String, Integer> freqMap = new HashMap<>();
+
+        List<Object> markupList = Template.getMarkupList();
+        for (Object item : markupList) {
+            if (item instanceof String) {
+                String markup = (String) item;
+                if (!markup.startsWith("%MAPPING_") && !markup.startsWith("%ACTION_")
+                        && !markup.startsWith("%TEST_") && !markup.startsWith("%DATA_")) {
+                    String location = template.getMarkupLocations().get(markup);
+                    if (StringUtils.isNotBlank(location)) {
+                        CellLocation cellLocation = new CellLocation(location);
+                        String sheet = cellLocation.getSheetName();
+
+                        if (freqMap.containsKey(sheet)) {
+                            freqMap.put(sheet, 1 + freqMap.get(sheet));
+                        } else {
+                            freqMap.put(sheet, 1);
+                        }
+                        if (maxFrequency < freqMap.get(sheet)) {
+                            maxFrequency = freqMap.get(sheet);
+                            highestRepeatingElement = sheet;
+                        }
+                    }
+                }
+            }
+        }
+        return highestRepeatingElement;
+    }
+
+    /**
+     * Get the suggestion for the name of mapping sheet.
+     *
+     * @param template Template
+     * @return The suggestion of the mapping sheet
+     */
+    public static String getSuggestSheetForMapping(Template template) {
+        String mappingItemNameLoc = template.getMarkupLocations().get(Template.MAPPING_ITEM_NAME);
+        if (StringUtils.isNotBlank(mappingItemNameLoc)) {
+            CellLocation cellLocation = new CellLocation(mappingItemNameLoc);
+            return cellLocation.getSheetName();
+        }
+        return null;
+    }
+
+    /**
+     * Get the suggestion for the name of action sheet.
+     *
+     * @param template Template
+     * @return The suggestion of the action sheet
+     */
+    public static String getSuggestSheetForAction(Template template) {
+        String actionNameLoc = template.getMarkupLocations().get(Template.ACTION_NAME);
+        if (StringUtils.isNotBlank(actionNameLoc)) {
+            CellLocation cellLocation = new CellLocation(actionNameLoc);
+            return cellLocation.getSheetName();
+        }
+        return null;
+    }
+
+    /**
+     * Get the suggestion for the name of data sheet.
+     *
+     * @param template Template
+     * @return The suggestion of the data sheet
+     */
+    public static String getSuggestSheetForData(Template template) {
+        String dataNameLoc = template.getMarkupLocations().get(Template.DATA_NAME);
+        if (StringUtils.isNotBlank(dataNameLoc)) {
+            CellLocation cellLocation = new CellLocation(dataNameLoc);
+            return cellLocation.getSheetName();
+        }
+        return null;
+    }
+
+    /**
+     * Get the suggestion for the name of test sheet.
+     *
+     * @param template Template
+     * @return The suggestion of the test sheet
+     */
+    public static String getSuggestSheetForTest(Template template) {
+        String testCommandLoc = template.getMarkupLocations().get(Template.TEST_COMMAND);
+        if (StringUtils.isNotBlank(testCommandLoc)) {
+            CellLocation cellLocation = new CellLocation(testCommandLoc);
+            return cellLocation.getSheetName();
+        }
+        return null;
+    }
+}
