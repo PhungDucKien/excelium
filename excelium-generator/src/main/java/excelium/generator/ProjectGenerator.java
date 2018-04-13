@@ -74,4 +74,17 @@ public class ProjectGenerator {
 
         XmlMarshaller.marshaller(project, basePath.resolve("project.xml"));
     }
+
+    /**
+     * Update project configuration file.
+     *
+     * @param project  Project model
+     * @param basePath Project base path
+     * @throws IOException   if any unexpected problem occurs during directory creation
+     * @throws JAXBException if any unexpected problem occurs during the project marshalling
+     */
+    public void updateProject(Project project, Path basePath) throws JAXBException, IOException {
+        Files.createDirectories(basePath);
+        XmlMarshaller.marshaller(project, basePath.resolve("project.xml"));
+    }
 }

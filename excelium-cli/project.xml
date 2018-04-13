@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project>
+    <name>excelium</name>
+    <appType>WEB</appType>
+    <workbookType>SHEETS</workbookType>
+    <filePath>file</filePath>
+    <screenshotPath>screenshot</screenshotPath>
+    <downloadPath>download</downloadPath>
+    <templates>
+        <entry>
+            <key>Simple Template</key>
+            <value>
+                <markupLocations>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_PARAM3%</key>
+                        <value>'Test Case'!D2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_PARAM1%</key>
+                        <value>'Test Case'!B2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_PARAM2%</key>
+                        <value>'Test Case'!C2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_COMMAND%</key>
+                        <value>'Test Case'!A2</value>
+                    </entry>
+                </markupLocations>
+                <testPattern>*</testPattern>
+            </value>
+        </entry>
+    </templates>
+    <defaultTemplate>Simple Template</defaultTemplate>
+</project>

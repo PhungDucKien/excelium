@@ -1,0 +1,15 @@
+apply plugin : 'application'
+
+mainClassName = 'excelium.cli.Application'
+
+dependencies {
+    compile project(':excelium-model')
+    compile project(':excelium-common')
+    compile project(':excelium-core')
+    compile project(':excelium-sheets')
+    compile project(':excelium-xls')
+    compile project(':excelium-generator')
+
+    compile group: 'com.beust', name: 'jcommander', version: '1.72'
+    compile group: 'de.codeshelf.consoleui', name: 'consoleui', version: '0.0.9'
+}
