@@ -47,7 +47,7 @@ public class XmlMarshaller {
      * @return Unmarshalled java object
      * @throws JAXBException if any unexpected errors occur while unmarshalling
      */
-    public static Object unmarshaller(Path path, Class clazz) throws JAXBException {
+    public static Object unmarshall(Path path, Class clazz) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(clazz);
         Unmarshaller um = context.createUnmarshaller();
         return um.unmarshal(path.toFile());
@@ -60,7 +60,7 @@ public class XmlMarshaller {
      * @param path The file path to marshal to
      * @throws JAXBException if any unexpected problem occurs during the marshalling
      */
-    public static void marshaller(Object object, Path path) throws JAXBException {
+    public static void marshall(Object object, Path path) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(object.getClass());
 
         Marshaller m = context.createMarshaller();

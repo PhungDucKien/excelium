@@ -8,5 +8,5 @@ dependencies {
 
     compile group: 'com.google.oauth-client', name: 'google-oauth-client-jetty', version: '1.23.0'
     compile group: 'com.google.apis', name: 'google-api-services-oauth2', version: 'v2-rev134-1.23.0'
-    compile group: 'com.google.apis', name: 'google-api-services-sheets', version: 'v4-rev512-1.23.0'
+    compile group: 'com.google.apis', name: 'google-api-services-sheets', version: 'v4-rev516-1.23.0'
 }

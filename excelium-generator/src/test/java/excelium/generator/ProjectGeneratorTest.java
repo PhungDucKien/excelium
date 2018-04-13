@@ -86,7 +86,7 @@ public class ProjectGeneratorTest {
         Assert.assertEquals(true, Files.exists(basePath.resolve("config")));
         Assert.assertEquals(true, Files.exists(basePath.resolve("project.xml")));
 
-        Project unmarshalled = (Project) XmlMarshaller.unmarshaller(basePath.resolve("project.xml"), Project.class);
+        Project unmarshalled = (Project) XmlMarshaller.unmarshall(basePath.resolve("project.xml"), Project.class);
 
         Assert.assertEquals("myproject", unmarshalled.getName());
         Assert.assertEquals(AppType.WEB, unmarshalled.getAppType());
@@ -155,7 +155,7 @@ public class ProjectGeneratorTest {
         Assert.assertEquals(true, Files.exists(basePath.resolve("download")));
         Assert.assertEquals(true, Files.exists(basePath.resolve("project.xml")));
 
-        Project unmarshalled = (Project) XmlMarshaller.unmarshaller(basePath.resolve("project.xml"), Project.class);
+        Project unmarshalled = (Project) XmlMarshaller.unmarshall(basePath.resolve("project.xml"), Project.class);
 
         Assert.assertEquals("myproject", unmarshalled.getName());
         Assert.assertEquals(AppType.WEB, unmarshalled.getAppType());

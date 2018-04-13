@@ -55,7 +55,7 @@ public class BeanFactory {
      */
     @Bean
     public Project getProject() throws JAXBException {
-        return (Project) XmlMarshaller.unmarshaller(Paths.get("project.xml"), Project.class);
+        return (Project) XmlMarshaller.unmarshall(Paths.get("project.xml"), Project.class);
     }
 
     /**

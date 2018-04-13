@@ -72,7 +72,7 @@ public class ProjectGenerator {
             Files.createDirectories(basePath.resolve(project.getDownloadPath()));
         }
 
-        XmlMarshaller.marshaller(project, basePath.resolve("project.xml"));
+        XmlMarshaller.marshall(project, basePath.resolve("project.xml"));
     }
 
     /**
@@ -85,6 +85,6 @@ public class ProjectGenerator {
      */
     public void updateProject(Project project, Path basePath) throws JAXBException, IOException {
         Files.createDirectories(basePath);
-        XmlMarshaller.marshaller(project, basePath.resolve("project.xml"));
+        XmlMarshaller.marshall(project, basePath.resolve("project.xml"));
     }
 }

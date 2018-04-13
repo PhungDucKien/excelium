@@ -50,7 +50,7 @@ import java.util.Map;
 public class XmlMarshallerTest {
 
     @Test
-    public void testMarshaller() throws JAXBException, IOException {
+    public void testMarshall() throws JAXBException, IOException {
         Project project = new Project();
         project.setName("myproject");
         project.setAppType(AppType.WEB);
@@ -75,9 +75,9 @@ public class XmlMarshallerTest {
         templates.put("default", template);
         project.setTemplates(templates);
 
-        XmlMarshaller.marshaller(project, Paths.get("dump"));
+        XmlMarshaller.marshall(project, Paths.get("dump"));
 
-        Project unmarshalled = (Project) XmlMarshaller.unmarshaller(Paths.get("dump"), Project.class);
+        Project unmarshalled = (Project) XmlMarshaller.unmarshall(Paths.get("dump"), Project.class);
 
         Assert.assertEquals("myproject", unmarshalled.getName());
         Assert.assertEquals(AppType.WEB, unmarshalled.getAppType());
