@@ -375,6 +375,12 @@ public class Template {
      */
     public static final String DATA_BODY = "%DATA_BODY%";
 
+    /** Template location. File path or spreadsheet ID */
+    private String location;
+
+    /** Template name */
+    private String name;
+
     /**
      * Markup locations. This store a map of markup and its location in the template.
      */
@@ -428,6 +434,42 @@ public class Template {
             }
         }
         return values;
+    }
+
+    /**
+     * Gets location.
+     *
+     * @return the location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * Sets location.
+     *
+     * @param location the location
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -555,5 +597,17 @@ public class Template {
      */
     public void setIgnorePatterns(List<String> ignorePatterns) {
         this.ignorePatterns = ignorePatterns;
+    }
+
+    /**
+     * Add ignore pattern.
+     *
+     * @param ignorePattern the ignore pattern
+     */
+    public void addIgnorePattern(String ignorePattern) {
+        if (ignorePatterns == null) {
+            ignorePatterns = new ArrayList<>();
+        }
+        ignorePatterns.add(ignorePattern);
     }
 }

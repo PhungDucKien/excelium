@@ -26,6 +26,7 @@ package excelium.cli;
 
 import excelium.cli.controller.ProjectController;
 import excelium.cli.controller.TemplateController;
+import excelium.cli.controller.TestController;
 import excelium.cli.controller.TestFileController;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -59,7 +60,7 @@ public class Application {
 
         // Registers controllers
         commander.registerControllers(
-//                TestController.class,
+                TestController.class,
                 ProjectController.class,
                 TemplateController.class,
                 TestFileController.class

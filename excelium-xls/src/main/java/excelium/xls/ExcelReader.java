@@ -53,8 +53,8 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
     /** Logger */
     private static final Logger LOG = LogManager.getLogger();
 
-    /** File name */
-    private String fileName;
+    /** File path */
+    private String filePath;
 
     /**
      * Instantiates a new reader for a specific Excel file.
@@ -65,7 +65,7 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
     public ExcelReader(String filePath) throws IOException {
         File file = Paths.get(filePath).toFile();
 
-        this.fileName = file.getName();
+        this.filePath = filePath;
         if (file.getName().endsWith(".xlsx")) {
             this.workbook = new XSSFWorkbook(new FileInputStream(file));
         } else {
@@ -75,7 +75,7 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
 
     @Override
     public String getWorkbookName() throws IOException {
-        return fileName;
+        return filePath;
     }
 
     @Override

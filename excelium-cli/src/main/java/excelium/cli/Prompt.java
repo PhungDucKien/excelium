@@ -31,8 +31,12 @@ import de.codeshelf.consoleui.prompt.InputResult;
 import de.codeshelf.consoleui.prompt.ListResult;
 import de.codeshelf.consoleui.prompt.builder.ListPromptBuilder;
 import de.codeshelf.consoleui.prompt.builder.PromptBuilder;
+import excelium.common.FileUtil;
+import excelium.common.StringUtil;
+import excelium.model.enums.WorkbookType;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -131,5 +135,29 @@ public class Prompt {
 
         ConfirmResult confirmResult = (ConfirmResult) prompt.prompt(promptBuilder.build()).values().iterator().next();
         return confirmResult.getConfirmed() == ConfirmChoice.ConfirmationValue.YES;
+    }
+
+    /**
+     * Prompts for file location.
+     * Lists all files in a given directory, if workbook type is Microsoft Excel,
+     * or asks for the spreadsheet url or id, if workbook type is Google Sheets.
+     *
+     * @param workbookType   the workbook type
+     * @param excelPath      the excel path
+     * @param excelQuestion  the excel question
+     * @param sheetsQuestion the sheets question
+     * @return the string
+     * @throws IOException the io exception
+     */
+    public static String promptFileLocation(WorkbookType workbookType, Path excelPath, String excelQuestion, String sheetsQuestion) throws IOException {
+        if (workbookType == WorkbookType.EXCEL) {
+            List<String> filePaths = FileUtil.listFiles(excelPath);
+            String filePath = Prompt.promptList(excelQuestion, filePaths);
+            return excelPath.resolve(filePath).toString();
+        } else if (workbookType == WorkbookType.SHEETS) {
+            String spreadsheetLocation = Prompt.promptInput(sheetsQuestion, null);
+            return StringUtil.extractSpreadsheetId(spreadsheetLocation);
+        }
+        return null;
     }
 }

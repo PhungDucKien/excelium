@@ -24,9 +24,7 @@
 
 package excelium.cli;
 
-import excelium.cli.controller.ProjectController;
-import excelium.cli.controller.TemplateController;
-import excelium.cli.controller.TestFileController;
+import excelium.cli.controller.*;
 import mockit.Mocked;
 import mockit.Verifications;
 import org.junit.Test;
@@ -47,6 +45,9 @@ public class ApplicationTest {
 
     @Mocked
     private TestFileController testFileController;
+
+    @Mocked
+    private TestController testController;
 
     @Test
     public void testProjectCreate() throws Exception {
@@ -90,6 +91,15 @@ public class ApplicationTest {
 
         new Verifications(){{
             testFileController.remove();
+        }};
+    }
+
+    @Test
+    public void testTestExecute() throws Exception {
+        Application.main(new String[] {});
+
+        new Verifications(){{
+            testController.execute();
         }};
     }
 }

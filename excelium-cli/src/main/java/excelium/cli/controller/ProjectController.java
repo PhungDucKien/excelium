@@ -25,7 +25,6 @@
 package excelium.cli.controller;
 
 import com.beust.jcommander.Parameter;
-import excelium.cli.Prompt;
 import excelium.cli.annotation.Command;
 import excelium.cli.annotation.Controller;
 import excelium.generator.ProjectGenerator;
@@ -40,6 +39,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static excelium.cli.Prompt.*;
+
 /**
  * Provides commands for controlling Project.
  *
@@ -49,26 +50,26 @@ import java.nio.file.Paths;
 @Controller(name = "project")
 public class ProjectController {
 
-    /** Folder name */
+    /**
+     * Folder name
+     */
     @Parameter(description = "Folder name")
     private String folderName;
 
     /**
      * Creates an empty structured project folder.
      * Project configuration file will be written to project.xml of specified folder.
+     *
+     * @throws IOException   the io exception
+     * @throws JAXBException the jaxb exception
      */
     @Command(name = "create")
     public void create() throws IOException, JAXBException {
-        String defaultProjectName = folderName;
-        if (StringUtils.isBlank(folderName)) {
-            defaultProjectName = getWorkingDirectoryName();
-        }
-
         Path basePath = StringUtils.isBlank(folderName) ? Paths.get(".") : Paths.get(folderName);
         File projectFile = basePath.resolve("project.xml").toFile();
 
         if (projectFile.exists()) {
-            boolean overwrite = Prompt.promptConfirm("Project configuration file (project.xml) already exists. Would you like to overwrite?");
+            boolean overwrite = promptConfirm("Project configuration file (project.xml) already exists. Would you like to overwrite?");
             if (!overwrite) {
                 return;
             }
@@ -77,43 +78,38 @@ public class ProjectController {
         // Project instance
         Project project = new Project();
 
-        String name = Prompt.promptInput("What is the name of your project?", defaultProjectName);
+        String name = promptInput("What is the name of your project?", getDefaultProjectName());
         project.setName(name);
 
-        String appTypeId = Prompt.promptList("Which type of application would you like to test?",
-                new String[] { AppType.WEB.name(), AppType.WEB.getText() },
-                new String[] { AppType.MOBILE.name(), AppType.MOBILE.getText() },
-                new String[] { AppType.UNDEFINED.name(), AppType.UNDEFINED.getText() });
+        String appTypeId = promptList("Which type of application would you like to test?", AppType.getListChoice());
         project.setAppType(AppType.fromName(appTypeId));
 
-        String workbookTypeId = Prompt.promptList("Which type of workbook would you like to use?",
-                new String[] { WorkbookType.SHEETS.name(), WorkbookType.SHEETS.getText() },
-                new String[] { WorkbookType.EXCEL.name(), WorkbookType.EXCEL.getText() });
+        String workbookTypeId = promptList("Which type of workbook would you like to use?", WorkbookType.getListChoice());
         project.setWorkbookType(WorkbookType.fromName(workbookTypeId));
 
         if (project.getWorkbookType() == WorkbookType.EXCEL) {
-            String testFolder = Prompt.promptInput("Where do you want to load test files?", "test");
+            String testFolder = promptInput("Where do you want to load test files?", "test");
             project.setTestPath(Paths.get(testFolder));
 
-            String templateFolder = Prompt.promptInput("Where do you want to load templates?", "template");
+            String templateFolder = promptInput("Where do you want to load templates?", "template");
             project.setTemplatePath(Paths.get(templateFolder));
         }
 
         if (project.getAppType() != AppType.WEB) {
-            String appFolder = Prompt.promptInput("Where do you want to load application?", "app");
+            String appFolder = promptInput("Where do you want to load application?", "app");
             project.setAppPath(Paths.get(appFolder));
         }
 
         if (project.getAppType() != AppType.MOBILE) {
-            String fileFolder = Prompt.promptInput("Where do you want to load files?", "file");
+            String fileFolder = promptInput("Where do you want to load files?", "file");
             project.setFilePath(Paths.get(fileFolder));
         }
 
-        String screenshotFolder = Prompt.promptInput("Where do you want to store screenshots?", "screenshot");
+        String screenshotFolder = promptInput("Where do you want to store screenshots?", "screenshot");
         project.setScreenshotPath(Paths.get(screenshotFolder));
 
         if (project.getAppType() != AppType.MOBILE) {
-            String downloadFolder = Prompt.promptInput("Where do you want to store downloads?", "download");
+            String downloadFolder = promptInput("Where do you want to store downloads?", "download");
             project.setDownloadPath(Paths.get(downloadFolder));
         }
 
@@ -122,11 +118,14 @@ public class ProjectController {
     }
 
     /**
-     * Returns current working directory name.
+     * Gets default project name.
      *
-     * @return Current working directory name
+     * @return the default project name
      */
-    private String getWorkingDirectoryName() {
-        return Paths.get(System.getProperty("user.dir")).getFileName().toString();
+    private String getDefaultProjectName() {
+        if (StringUtils.isBlank(folderName)) {
+            return Paths.get(System.getProperty("user.dir")).getFileName().toString();
+        }
+        return folderName;
     }
 }

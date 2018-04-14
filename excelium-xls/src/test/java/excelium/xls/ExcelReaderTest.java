@@ -53,7 +53,7 @@ public class ExcelReaderTest {
     @Test
     public void testGetWorkbookName() throws IOException, URISyntaxException {
         TestReader sheetsReader = readerFactory.createReader(ExcelReader.class.getResource("/Simple Template.xlsx").toURI().getPath());
-        Assert.assertEquals("Simple Template.xlsx", sheetsReader.getWorkbookName());
+        Assert.assertTrue(sheetsReader.getWorkbookName().endsWith("Simple Template.xlsx"));
     }
 
     @Test

@@ -30,6 +30,8 @@ import excelium.model.test.config.TestConfig;
 import excelium.model.test.data.TestData;
 import excelium.model.test.item.PageSet;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -40,7 +42,7 @@ import java.util.Map;
  * @author PhungDucKien
  * @since 2018.03.28
  */
-public class Test<W, S> {
+public class Test<W, S> implements Closeable {
 
     /** Workbook name */
     private String workbookName;
@@ -208,5 +210,13 @@ public class Test<W, S> {
      */
     public void setCommands(Map<String, Command> commands) {
         this.commands = commands;
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (workbook != null && workbook instanceof Closeable) {
+            ((Closeable) workbook).close();
+        }
+        workbook = null;
     }
 }

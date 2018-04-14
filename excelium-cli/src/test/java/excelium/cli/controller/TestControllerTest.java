@@ -22,76 +22,35 @@
  * SOFTWARE.
  */
 
-package excelium.model.project;
+package excelium.cli.controller;
+
+import excelium.core.TestExecutor;
+import excelium.model.test.TestFilter;
+import mockit.Mocked;
+import mockit.Tested;
+import mockit.Verifications;
+import org.junit.Test;
 
 /**
- * Represents test file model.
+ * Tests for {@link TestController}.
  *
  * @author PhungDucKien
- * @since 2018.03.27
+ * @since 2018.04.14
  */
-public class TestFile {
+public class TestControllerTest {
 
-    /** File location. File path or spreadsheet ID */
-    private String location;
+    @Mocked
+    TestExecutor testExecutor;
 
-    /** File name */
-    private String name;
+    @Tested
+    TestController testController;
 
-    /** Template */
-    private String template;
+    @Test
+    public void testExecute() {
+        testController.execute();
 
-    /**
-     * Gets location.
-     *
-     * @return the location
-     */
-    public String getLocation() {
-        return location;
-    }
-
-    /**
-     * Sets location.
-     *
-     * @param location the location
-     */
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets template.
-     *
-     * @return the template
-     */
-    public String getTemplate() {
-        return template;
-    }
-
-    /**
-     * Sets template.
-     *
-     * @param template the template
-     */
-    public void setTemplate(String template) {
-        this.template = template;
+        new Verifications() {{
+            testExecutor.execute((TestFilter) any);
+        }};
     }
 }

@@ -58,7 +58,7 @@ public class SheetsReaderTest {
     @Test
     public void testGetWorkbookName() throws IOException {
         TestReader sheetsReader = readerFactory.createReader("10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY");
-        Assert.assertEquals("Simple Template", sheetsReader.getWorkbookName());
+        Assert.assertEquals("10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY - Simple Template", sheetsReader.getWorkbookName());
     }
 
     @Test

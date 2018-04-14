@@ -106,17 +106,15 @@ public class TemplateControllerTest {
             result = new HashMap<String, ListResult>() {{ put("", new ListResult("Template2")); }};
 
             project.setTemplates(new HashMap<String, Template>() {{
-                put("Template1", null);
-                put("Template2", null);
-                put("Template3", null);
+                put("Template1", new Template());
+                put("Template2", new Template());
+                put("Template3", new Template());
             }});
-            project.setDefaultTemplate("Template1");
         }};
 
         templateController.remove();
 
         Assert.assertEquals(2, project.getTemplates().size());
-        Assert.assertEquals("Template1", project.getDefaultTemplate());
         new Verifications() {{
             projectGenerator.updateProject((Project) any, (Path) any);
         }};
@@ -134,17 +132,15 @@ public class TemplateControllerTest {
                     new HashMap<String, ListResult>() {{ put("", new ListResult("Template3")); }});
 
             project.setTemplates(new HashMap<String, Template>() {{
-                put("Template1", null);
-                put("Template2", null);
-                put("Template3", null);
+                put("Template1", new Template());
+                put("Template2", new Template());
+                put("Template3", new Template());
             }});
-            project.setDefaultTemplate("Template1");
         }};
 
         templateController.remove();
 
         Assert.assertEquals(2, project.getTemplates().size());
-        Assert.assertEquals("Template3", project.getDefaultTemplate());
         new Verifications() {{
             projectGenerator.updateProject((Project) any, (Path) any);
         }};
@@ -161,15 +157,13 @@ public class TemplateControllerTest {
             result = new HashMap<String, ListResult>() {{ put("", new ListResult("Template1")); }};
 
             project.setTemplates(new HashMap<String, Template>() {{
-                put("Template1", null);
+                put("Template1", new Template());
             }});
-            project.setDefaultTemplate("Template1");
         }};
 
         templateController.remove();
 
         Assert.assertEquals(0, project.getTemplates().size());
-        Assert.assertNull(project.getDefaultTemplate());
         new Verifications() {{
             projectGenerator.updateProject((Project) any, (Path) any);
         }};

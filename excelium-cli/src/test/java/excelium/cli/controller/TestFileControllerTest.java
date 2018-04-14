@@ -85,9 +85,9 @@ public class TestFileControllerTest {
 
             project.setWorkbookType(WorkbookType.SHEETS);
             project.setTemplates(new HashMap<String, Template>() {{
-                put("Template1", null);
-                put("Template2", null);
-                put("Template3", null);
+                put("Template1", new Template());
+                put("Template2", new Template());
+                put("Template3", new Template());
             }});
         }};
 
@@ -110,9 +110,9 @@ public class TestFileControllerTest {
             result = new HashMap<String, ListResult>() {{ put("", new ListResult("File2")); }};
 
             project.setTests(new HashMap<String, TestFile>() {{
-                put("File1", null);
-                put("File2", null);
-                put("File3", null);
+                put("File1", new TestFile());
+                put("File2", new TestFile());
+                put("File3", new TestFile());
             }});
         }};
 

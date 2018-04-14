@@ -80,7 +80,7 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
 
     @Override
     public String getWorkbookName() throws IOException {
-        return getSpreadsheet().getProperties().getTitle();
+        return spreadsheetId + " - " + getSpreadsheet().getProperties().getTitle();
     }
 
     @Override

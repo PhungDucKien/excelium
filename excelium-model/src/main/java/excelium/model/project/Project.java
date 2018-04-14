@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -83,9 +84,6 @@ public class Project {
 
     /** Templates */
     private Map<String, Template> templates;
-
-    /** Default template */
-    private String defaultTemplate;
 
     /**
      * Gets name.
@@ -286,20 +284,60 @@ public class Project {
     }
 
     /**
-     * Gets default template.
+     * Get test file list choice.
      *
-     * @return the default template
+     * @return the test file list choice
      */
-    public String getDefaultTemplate() {
-        return defaultTemplate;
+    public String[][] getTestListChoice() {
+        if (tests != null) {
+            String[][] listChoice = new String[tests.size()][2];
+            int i = 0;
+            for (TestFile t : tests.values()) {
+                listChoice[i++] = new String[] { t.getLocation(), t.getName() };
+            }
+            return listChoice;
+        }
+        return null;
     }
 
     /**
-     * Sets default template.
+     * Get template list choice.
      *
-     * @param defaultTemplate the default template
+     * @return the template list choice
      */
-    public void setDefaultTemplate(String defaultTemplate) {
-        this.defaultTemplate = defaultTemplate;
+    public String[][] getTemplateListChoice() {
+        if (templates != null) {
+            String[][] listChoice = new String[templates.size()][2];
+            int i = 0;
+            for (Template t : templates.values()) {
+                listChoice[i++] = new String[] { t.getLocation(), t.getName() };
+            }
+            return listChoice;
+        }
+        return null;
+    }
+
+    /**
+     * Add test.
+     *
+     * @param test the test
+     */
+    public void addTest(TestFile test) {
+        if (tests == null) {
+            tests = new LinkedHashMap<>();
+        }
+        tests.put(test.getLocation(), test);
+    }
+
+    /**
+     * Add template.
+     *
+     * @param template the template
+     */
+    public void addTemplate(Template template) {
+        if (templates == null) {
+            templates = new LinkedHashMap<>();
+        }
+        templates.put(template.getLocation(), template);
     }
 }
