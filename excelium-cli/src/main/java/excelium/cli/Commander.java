@@ -29,6 +29,7 @@ import excelium.cli.annotation.Bean;
 import excelium.cli.annotation.Command;
 import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
+import excelium.cli.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
@@ -58,7 +59,7 @@ public class Commander extends JCommander {
     /**
      * Controller instances
      */
-    private static Map<String, Object> controllerObjects = new HashMap<>();
+    private static Map<String, BaseController> controllerObjects = new HashMap<>();
 
     /**
      * Bean factory instance
@@ -85,12 +86,12 @@ public class Commander extends JCommander {
      * @throws IllegalAccessException if an exception is thrown by an illegal access
      * @throws InstantiationException if an exception is thrown by an invoked constructor
      */
-    void registerControllers(Class... classes) throws IllegalAccessException, InstantiationException {
-        for (Class clazz : classes) {
+    void registerControllers(Class<? extends BaseController>... classes) throws IllegalAccessException, InstantiationException {
+        for (Class<? extends BaseController> clazz : classes) {
             Controller controller = (Controller) clazz.getDeclaredAnnotation(Controller.class);
             if (controller != null) {
                 String controllerName = controller.name();
-                Object controllerObject = clazz.newInstance();
+                BaseController controllerObject = clazz.newInstance();
                 if (StringUtils.isBlank(controllerName)) {
                     controllerObjects.put(DEFAULT_OBJECT, controllerObject);
                     addObject(controllerObject);
@@ -145,11 +146,20 @@ public class Commander extends JCommander {
 
         String controller = getParsedCommand();
         String command = getExecutionCommand();
-        Object controllerObject;
+        BaseController controllerObject;
         if (StringUtils.isBlank(controller)) {
             controllerObject = controllerObjects.get(DEFAULT_OBJECT);
         } else {
             controllerObject = controllerObjects.get(controller);
+        }
+
+        if (controllerObject.isHelp()) {
+            if (StringUtils.isBlank(controller)) {
+                usage();
+            } else {
+                usage(controller);
+            }
+            return;
         }
 
         // Finds injectable fields

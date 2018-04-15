@@ -45,14 +45,10 @@ import java.util.List;
  * @since 2018.04.13
  */
 @Controller
-public class TestController {
+public class TestController extends BaseController {
 
     /** Logger */
     private static final Logger LOG = LogManager.getLogger();
-
-    /** Help flag */
-    @Parameter(names = { "-h", "-help" }, description = "Print help information", help = true)
-    private boolean help = false;
 
     /** Debug flag */
     @Parameter(names = { "-d", "-debug" }, description = "Debug mode. Use breakpoints to pause execution")

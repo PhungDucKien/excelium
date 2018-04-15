@@ -84,6 +84,7 @@ public class TestExecutor {
 //                TestRunner testRunner = new TestRunner(test, testWriter, screenshotService, debug, silent);
 //                testRunner.runAll();
             } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
             }
         }
     }

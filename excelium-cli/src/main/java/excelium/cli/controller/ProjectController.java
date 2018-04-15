@@ -48,7 +48,7 @@ import static excelium.cli.Prompt.*;
  * @since 2018.04.10
  */
 @Controller(name = "project")
-public class ProjectController {
+public class ProjectController extends BaseController {
 
     /**
      * Folder name

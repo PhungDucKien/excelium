@@ -47,7 +47,7 @@ import static excelium.cli.Prompt.promptList;
  * @since 2018.04.13
  */
 @Controller(name = "test")
-public class TestFileController {
+public class TestFileController extends BaseController {
 
     /**
      * Project instance

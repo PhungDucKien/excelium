@@ -48,7 +48,7 @@ import static excelium.cli.Prompt.*;
  * @since 2018.04.11
  */
 @Controller(name = "template")
-public class TemplateController {
+public class TemplateController extends BaseController {
 
     /**
      * Project instance
