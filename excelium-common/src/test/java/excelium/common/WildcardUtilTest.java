@@ -22,24 +22,26 @@
  * SOFTWARE.
  */
 
-package excelium.model.project;
+package excelium.common;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-
 /**
- * Tests for {@link Template}.
+ * Tests for {@link WildcardUtil}.
  *
  * @author PhungDucKien
- * @since 2018.03.28
+ * @since 2018.04.15
  */
-public class TemplateTest {
+public class WildcardUtilTest {
 
     @Test
-    public void testGetMarkupList() throws IllegalAccessException {
-        List<Object> markupList = Template.getMarkupList();
-        Assert.assertEquals(81, markupList.size());
+    public void testIsMatch() {
+        Assert.assertEquals(false, WildcardUtil.isMatch("aa", "a"));
+        Assert.assertEquals(true, WildcardUtil.isMatch("aa", "*"));
+        Assert.assertEquals(false, WildcardUtil.isMatch("cb", "?a"));
+        Assert.assertEquals(true, WildcardUtil.isMatch("adceb", "*a*b"));
+        Assert.assertEquals(false, WildcardUtil.isMatch("acdcb", "a*c?b"));
+        Assert.assertEquals(true, WildcardUtil.isMatch("abbabbbaabaaabbbbbabbabbabbbabbaaabbbababbabaaabbab" , "*aabb***aa**a******aa*"));
     }
 }

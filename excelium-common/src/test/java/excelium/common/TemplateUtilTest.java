@@ -29,6 +29,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +41,13 @@ import java.util.Map;
 public class TemplateUtilTest {
 
     @Test
-    public void testGetSuggestSheetForConfiguration() throws IllegalAccessException {
+    public void testGetMarkups() throws IllegalAccessException {
+        List<Object> markupList = TemplateUtil.getMarkups();
+        Assert.assertEquals(81, markupList.size());
+    }
+
+    @Test
+    public void testGetConfigurationMarkupLocations() throws IllegalAccessException {
         Template template = new Template();
         Map<Object, String> markupLocations = new HashMap<>();
         markupLocations.put("%SYSTEM_NAME%", "configuration!A2");
@@ -48,20 +55,50 @@ public class TemplateUtilTest {
         markupLocations.put("%FUNCTION_NAME%", "configuration!A4");
         markupLocations.put("%FUNCTION_IDENTIFIER%", "config!A5");
         markupLocations.put("%BASE_URL%", "config!A6");
+        markupLocations.put("%MAPPING_ITEM_NAME%", "mapping!A2");
+        markupLocations.put("%MAPPING_ITEM_DESC%", "map!A3");
+        markupLocations.put("%ACTION_NAME%", "action!A2");
+        markupLocations.put("%ACTION_DESC%", "act!A3");
+        markupLocations.put("%DATA_NAME%", "data!A2");
+        markupLocations.put("%DATA_DESC%", "dat!A3");
+        markupLocations.put("%TEST_COMMAND%", "test!A2");
+        markupLocations.put("%TEST_NAME%", "tes!A3");
         template.setMarkupLocations(markupLocations);
 
-        Assert.assertEquals("configuration", TemplateUtil.getSuggestSheetForConfiguration(template));
+        Map<Object, String> configurationMarkupLocations = TemplateUtil.getConfigurationMarkupLocations(template);
 
-        template = new Template();
-        markupLocations = new HashMap<>();
+        Assert.assertEquals(5, configurationMarkupLocations.size());
+        Assert.assertEquals("configuration!A2", configurationMarkupLocations.get("%SYSTEM_NAME%"));
+        Assert.assertEquals("configuration!A3", configurationMarkupLocations.get("%SYSTEM_IDENTIFIER%"));
+        Assert.assertEquals("configuration!A4", configurationMarkupLocations.get("%FUNCTION_NAME%"));
+        Assert.assertEquals("config!A5", configurationMarkupLocations.get("%FUNCTION_IDENTIFIER%"));
+        Assert.assertEquals("config!A6", configurationMarkupLocations.get("%BASE_URL%"));
+    }
+
+    @Test
+    public void testGetConfigurationSheets() throws IllegalAccessException {
+        Template template = new Template();
+        Map<Object, String> markupLocations = new HashMap<>();
         markupLocations.put("%SYSTEM_NAME%", "configuration!A2");
-        markupLocations.put("%SYSTEM_IDENTIFIER%", "config!A3");
+        markupLocations.put("%SYSTEM_IDENTIFIER%", "configuration!A3");
         markupLocations.put("%FUNCTION_NAME%", "configuration!A4");
         markupLocations.put("%FUNCTION_IDENTIFIER%", "config!A5");
         markupLocations.put("%BASE_URL%", "config!A6");
+        markupLocations.put("%MAPPING_ITEM_NAME%", "mapping!A2");
+        markupLocations.put("%MAPPING_ITEM_DESC%", "map!A3");
+        markupLocations.put("%ACTION_NAME%", "action!A2");
+        markupLocations.put("%ACTION_DESC%", "act!A3");
+        markupLocations.put("%DATA_NAME%", "data!A2");
+        markupLocations.put("%DATA_DESC%", "dat!A3");
+        markupLocations.put("%TEST_COMMAND%", "test!A2");
+        markupLocations.put("%TEST_NAME%", "tes!A3");
         template.setMarkupLocations(markupLocations);
 
-        Assert.assertEquals("config", TemplateUtil.getSuggestSheetForConfiguration(template));
+        List<String> configurationSheets = TemplateUtil.getConfigurationSheets(template);
+
+        Assert.assertEquals(2, configurationSheets.size());
+        Assert.assertEquals("configuration", configurationSheets.get(0));
+        Assert.assertEquals("config", configurationSheets.get(1));
     }
 
     @Test

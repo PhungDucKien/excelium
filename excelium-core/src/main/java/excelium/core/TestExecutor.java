@@ -147,6 +147,7 @@ public class TestExecutor {
                     TestReader testReader = testReaderFactory.createReader(testFile.getLocation());
                     return testReader.parseTest(template);
                 } catch (IOException e) {
+                    LOG.error(e.getMessage(), e);
                     throw new NoSuchElementException();
                 } finally {
                     cursor++;

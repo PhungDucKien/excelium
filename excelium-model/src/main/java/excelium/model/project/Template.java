@@ -25,8 +25,6 @@
 package excelium.model.project;
 
 import javax.xml.bind.annotation.XmlElement;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -387,11 +385,6 @@ public class Template {
     private Map<Object, String> markupLocations;
 
     /**
-     * Pattern for name of the sheet that should be considered as configuration sheet.
-     */
-    private String configurationPattern;
-
-    /**
      * Pattern for name of sheets that should be considered as mapping item sheets.
      */
     private String mappingPattern;
@@ -415,26 +408,6 @@ public class Template {
      * Pattern for name of sheets that should be ignored.
      */
     private List<String> ignorePatterns;
-
-    /**
-     * Gets markup list.
-     *
-     * @return the markup list
-     * @throws IllegalAccessException the illegal access exception
-     */
-    public static List<Object> getMarkupList() throws IllegalAccessException {
-        Template template = new Template();
-        List<Object> values = new ArrayList<>();
-        Field[] fields = Template.class.getDeclaredFields();
-        if (fields != null && fields.length > 0) {
-            for (Field field : fields) {
-                if (Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers()) && field.getType().equals(String.class)) {
-                    values.add(field.get(template));
-                }
-            }
-        }
-        return values;
-    }
 
     /**
      * Gets location.
@@ -488,24 +461,6 @@ public class Template {
      */
     public void setMarkupLocations(Map<Object, String> markupLocations) {
         this.markupLocations = markupLocations;
-    }
-
-    /**
-     * Gets configuration pattern.
-     *
-     * @return the configuration pattern
-     */
-    public String getConfigurationPattern() {
-        return configurationPattern;
-    }
-
-    /**
-     * Sets configuration pattern.
-     *
-     * @param configurationPattern the configuration pattern
-     */
-    public void setConfigurationPattern(String configurationPattern) {
-        this.configurationPattern = configurationPattern;
     }
 
     /**

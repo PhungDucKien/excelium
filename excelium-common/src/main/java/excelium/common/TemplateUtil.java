@@ -27,6 +27,9 @@ package excelium.common;
 import excelium.model.project.Template;
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,44 +43,71 @@ import java.util.Map;
 public class TemplateUtil {
 
     /**
-     * Get the suggestion for the name of configuration sheet.
-     * This method lists up all the sheets that contain configuration items and take the highest
-     * repeating sheet.
+     * Gets markup list.
+     * The markups are defined in {@link Template} as public static strings.
      *
-     * @param template Template
-     * @return The suggestion of the configuration sheet
-     * @throws IllegalAccessException if illegal access occurs
+     * @return the markup list
+     * @throws IllegalAccessException the illegal access exception
      */
-    public static String getSuggestSheetForConfiguration(Template template) throws IllegalAccessException {
-        String highestRepeatingElement = null;
-        int maxFrequency = -1;
-        Map<String, Integer> freqMap = new HashMap<>();
+    public static List<Object> getMarkups() throws IllegalAccessException {
+        Template template = new Template();
+        List<Object> values = new ArrayList<>();
+        Field[] fields = Template.class.getDeclaredFields();
+        if (fields != null && fields.length > 0) {
+            for (Field field : fields) {
+                if (Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers()) && field.getType().equals(String.class)) {
+                    values.add(field.get(template));
+                }
+            }
+        }
+        return values;
+    }
 
-        List<Object> markupList = Template.getMarkupList();
-        for (Object item : markupList) {
+    /**
+     * Gets map of configuration markups and their locations.
+     *
+     * @param template the template
+     * @return the map of configuration markups and their locations
+     */
+    public static Map<Object, String> getConfigurationMarkupLocations(Template template) {
+        if (template.getMarkupLocations() == null) {
+            return new HashMap<>();
+        }
+        Map<Object, String> configurationMarkupLocations = new HashMap<>();
+        for (Object item : template.getMarkupLocations().keySet()) {
             if (item instanceof String) {
                 String markup = (String) item;
                 if (!markup.startsWith("%MAPPING_") && !markup.startsWith("%ACTION_")
                         && !markup.startsWith("%TEST_") && !markup.startsWith("%DATA_")) {
                     String location = template.getMarkupLocations().get(markup);
                     if (StringUtils.isNotBlank(location)) {
-                        CellLocation cellLocation = new CellLocation(location);
-                        String sheet = cellLocation.getSheetName();
-
-                        if (freqMap.containsKey(sheet)) {
-                            freqMap.put(sheet, 1 + freqMap.get(sheet));
-                        } else {
-                            freqMap.put(sheet, 1);
-                        }
-                        if (maxFrequency < freqMap.get(sheet)) {
-                            maxFrequency = freqMap.get(sheet);
-                            highestRepeatingElement = sheet;
-                        }
+                        configurationMarkupLocations.put(markup, location);
                     }
                 }
             }
         }
-        return highestRepeatingElement;
+        return configurationMarkupLocations;
+    }
+
+    /**
+     * Get the names of configuration sheets.
+     * This method lists up all the sheets that contain configuration items.
+     *
+     * @param template Template
+     * @return The names of configuration sheets
+     */
+    public static List<String> getConfigurationSheets(Template template) {
+        List<String> configurationSheets = new ArrayList<>();
+        Map<Object, String> configurationMarkupLocations = getConfigurationMarkupLocations(template);
+        for (String location : configurationMarkupLocations.values()) {
+            CellLocation cellLocation = new CellLocation(location);
+            String sheet = cellLocation.getSheetName();
+
+            if (!configurationSheets.contains(sheet)) {
+                configurationSheets.add(sheet);
+            }
+        }
+        return configurationSheets;
     }
 
     /**
