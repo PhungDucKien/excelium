@@ -272,7 +272,7 @@ public class CellLocation {
     /**
      * Determines whether {@code rowStr} is a valid row number for a given SpreadsheetVersion.
      *
-     * @param rowStr    the numeric portion of an A1-style cell reference (1-based index)
+     * @param rowStr the numeric portion of an A1-style cell reference (1-based index)
      * @throws NumberFormatException if rowStr is not parseable as an integer
      */
     public static boolean isRowWithinRange(String rowStr) {
@@ -283,7 +283,7 @@ public class CellLocation {
     /**
      * Determines whether {@code row} is a valid row number for a given SpreadsheetVersion.
      *
-     * @param rowNum    the row number (0-based index)
+     * @param rowNum the row number (0-based index)
      * @since 3.17 beta 1
      */
     public static boolean isRowWithinRange(int rowNum) {

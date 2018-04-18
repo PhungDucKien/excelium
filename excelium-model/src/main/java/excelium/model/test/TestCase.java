@@ -35,13 +35,19 @@ import java.util.List;
  */
 public class TestCase {
 
-    /** Serial number */
+    /**
+     * Serial number
+     */
     private Integer no;
 
-    /** Name */
+    /**
+     * Name
+     */
     private String name;
 
-    /** Test steps */
+    /**
+     * Test steps
+     */
     private List<TestStep> testSteps;
 
     /**

@@ -64,7 +64,7 @@ public abstract class DefaultTestReader<W, S> extends BaseTestReader<W, S> {
     /**
      * Parses test file.
      *
-     * @param test Test object
+     * @param test     Test object
      * @param template Template object
      * @throws IOException if the IOException occurs
      */
@@ -94,7 +94,7 @@ public abstract class DefaultTestReader<W, S> extends BaseTestReader<W, S> {
     /**
      * Sets test configuration.
      *
-     * @param test Test
+     * @param test     Test
      * @param template Template
      * @throws IOException if the IOException occurs
      */
@@ -206,7 +206,7 @@ public abstract class DefaultTestReader<W, S> extends BaseTestReader<W, S> {
      * Maps markup to markup values.
      *
      * @param markupLocations Map of markup and its location
-     * @param cellValues Map of location and its values
+     * @param cellValues      Map of location and its values
      * @return Map of markup and its values
      */
     private Map<Object, Object> getMarkupValues(Map<Object, String> markupLocations, Map<String, Object> cellValues) {
@@ -223,7 +223,7 @@ public abstract class DefaultTestReader<W, S> extends BaseTestReader<W, S> {
     /**
      * Filter sheets that their names match the given wildcard pattern.
      *
-     * @param sheets List of sheets
+     * @param sheets  List of sheets
      * @param pattern the wildcard pattern
      * @return the filtered sheets
      * @throws IOException if the IOException occurs
@@ -237,7 +237,7 @@ public abstract class DefaultTestReader<W, S> extends BaseTestReader<W, S> {
     /**
      * Filter sheets that their names match the given wildcard patterns.
      *
-     * @param sheets List of sheets
+     * @param sheets   List of sheets
      * @param patterns List of wildcard patterns
      * @return the filtered sheets
      * @throws IOException if the IOException occurs

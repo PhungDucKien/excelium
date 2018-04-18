@@ -33,43 +33,69 @@ package excelium.model.test;
  */
 public class TestStep {
 
-    /** Serial number */
+    /**
+     * Serial number
+     */
     private Integer no;
 
-    /** Gutter */
+    /**
+     * Gutter
+     */
     private String gutter;
 
-    /** Android gutter */
+    /**
+     * Android gutter
+     */
     private String androidGutter;
 
-    /** iOS gutter */
+    /**
+     * iOS gutter
+     */
     private String iosGutter;
 
-    /** Is capture taken after step execution? */
+    /**
+     * Is capture taken after step execution?
+     */
     private boolean capture;
 
-    /** Name */
+    /**
+     * Name
+     */
     private String name;
 
-    /** Description */
+    /**
+     * Description
+     */
     private String description;
 
-    /** Command */
+    /**
+     * Command
+     */
     private String command;
 
-    /** Parameter 1 */
+    /**
+     * Parameter 1
+     */
     private String param1;
 
-    /** Parameter 2 */
+    /**
+     * Parameter 2
+     */
     private String param2;
 
-    /** Parameter 3 */
+    /**
+     * Parameter 3
+     */
     private String param3;
 
-    /** Test data */
+    /**
+     * Test data
+     */
     private String testData;
 
-    /** Row index */
+    /**
+     * Row index
+     */
     private int rowIndex;
 
     /**

@@ -34,13 +34,19 @@ import java.util.List;
  */
 public class TestData {
 
-    /** Name */
+    /**
+     * Name
+     */
     private String name;
 
-    /** Description */
+    /**
+     * Description
+     */
     private String description;
 
-    /** List of table data */
+    /**
+     * List of table data
+     */
     private List<TableData> tableData;
 
     /**

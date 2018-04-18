@@ -106,7 +106,7 @@ public enum Browser {
         String[][] listChoice = new String[Browser.values().length][2];
         int i = 0;
         for (Browser t : Browser.values()) {
-            listChoice[i++] = new String[] { t.name(), t.getText() };
+            listChoice[i++] = new String[]{t.name(), t.getText()};
         }
         return listChoice;
     }

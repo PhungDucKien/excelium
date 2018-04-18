@@ -33,10 +33,14 @@ package excelium.model.locator;
  */
 public class Locator<T> {
 
-    /** Type */
+    /**
+     * Type
+     */
     private T type;
 
-    /** Value */
+    /**
+     * Value
+     */
     private String value;
 
     /**

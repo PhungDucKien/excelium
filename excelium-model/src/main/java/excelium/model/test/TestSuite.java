@@ -36,13 +36,19 @@ import java.util.List;
  */
 public class TestSuite<S> {
 
-    /** Sheet name */
+    /**
+     * Sheet name
+     */
     private String sheetName;
 
-    /** Sheet object */
+    /**
+     * Sheet object
+     */
     private S sheet;
 
-    /** Test cases */
+    /**
+     * Test cases
+     */
     private List<TestCase> testCases;
 
     /**

@@ -50,9 +50,9 @@ public class Prompt {
     /**
      * Prompts for user to input text.
      *
-     * @param message A message that is displayed to user
+     * @param message      A message that is displayed to user
      * @param defaultValue A default value if user press Enter immediately
-     * @return User-input value
+     * @return User input value
      * @throws IOException if an I/O exception is thrown
      */
     public static String promptInput(String message, String defaultValue) throws IOException {

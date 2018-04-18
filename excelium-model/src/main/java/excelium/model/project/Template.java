@@ -373,10 +373,14 @@ public class Template {
      */
     public static final String DATA_BODY = "%DATA_BODY%";
 
-    /** Template location. File path or spreadsheet ID */
+    /**
+     * Template location. File path or spreadsheet ID
+     */
     private String location;
 
-    /** Template name */
+    /**
+     * Template name
+     */
     private String name;
 
     /**
@@ -540,7 +544,7 @@ public class Template {
      *
      * @return the ignore patterns
      */
-    @XmlElement(name="ignorePattern")
+    @XmlElement(name = "ignorePattern")
     public List<String> getIgnorePatterns() {
         return ignorePatterns;
     }

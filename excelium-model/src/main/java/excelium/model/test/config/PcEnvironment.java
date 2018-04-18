@@ -34,13 +34,19 @@ import excelium.model.enums.Browser;
  */
 public class PcEnvironment extends Environment {
 
-    /** Browser */
+    /**
+     * Browser
+     */
     private Browser browser;
 
-    /** Browser version */
+    /**
+     * Browser version
+     */
     private String browserVersion;
 
-    /** Resolution */
+    /**
+     * Resolution
+     */
     private String resolution;
 
     /**

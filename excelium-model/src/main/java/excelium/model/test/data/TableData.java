@@ -35,16 +35,24 @@ import java.util.Map;
  */
 public class TableData {
 
-    /** Table name */
+    /**
+     * Table name
+     */
     private String name;
 
-    /** List of primary keys */
+    /**
+     * List of primary keys
+     */
     private List<String> primaryKeys;
 
-    /** List of columns */
+    /**
+     * List of columns
+     */
     private List<Column> columns;
 
-    /** Row data */
+    /**
+     * Row data
+     */
     private List<Map<Column, Object>> rowData;
 
     /**

@@ -50,6 +50,9 @@ public class Application {
      * Parses command line arguments and takes corresponding actions.
      *
      * @param args command line arguments
+     * @throws InstantiationException    the instantiation exception
+     * @throws IllegalAccessException    the illegal access exception
+     * @throws InvocationTargetException the invocation target exception
      */
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, InvocationTargetException {
         AnsiConsole.systemInstall();

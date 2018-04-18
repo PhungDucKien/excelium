@@ -34,10 +34,14 @@ import excelium.model.enums.Browser;
  */
 public class MobileWebEnvironment extends MobileEnvironment {
 
-    /** Browser */
+    /**
+     * Browser
+     */
     private Browser browser;
 
-    /** Browser version */
+    /**
+     * Browser version
+     */
     private String browserVersion;
 
     /**

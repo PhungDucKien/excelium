@@ -41,10 +41,14 @@ import java.util.*;
  */
 public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
 
-    /** Spreadsheet id */
+    /**
+     * Spreadsheet id
+     */
     private String spreadsheetId;
 
-    /** Sheets service */
+    /**
+     * Sheets service
+     */
     private Sheets sheetsService;
 
     /**

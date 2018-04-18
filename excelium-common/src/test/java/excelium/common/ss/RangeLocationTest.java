@@ -90,18 +90,18 @@ public class RangeLocationTest extends TestCase {
         RangeLocation ar = new RangeLocation("$A$1:$B$2");
         assertFalse("Two cells expected", ar.isSingleCell());
         CellLocation cf = ar.getFirstCell();
-        assertTrue("row is 4",cf.getRow()==0);
-        assertTrue("col is 1",cf.getCol()==0);
-        assertTrue("row is abs",cf.isRowAbsolute());
-        assertTrue("col is abs",cf.isColAbsolute());
-        assertTrue("string is $A$1",cf.formatAsString().equals("$A$1"));
+        assertTrue("row is 4", cf.getRow() == 0);
+        assertTrue("col is 1", cf.getCol() == 0);
+        assertTrue("row is abs", cf.isRowAbsolute());
+        assertTrue("col is abs", cf.isColAbsolute());
+        assertTrue("string is $A$1", cf.formatAsString().equals("$A$1"));
 
         cf = ar.getLastCell();
-        assertTrue("row is 4",cf.getRow()==1);
-        assertTrue("col is 1",cf.getCol()==1);
-        assertTrue("row is abs",cf.isRowAbsolute());
-        assertTrue("col is abs",cf.isColAbsolute());
-        assertTrue("string is $B$2",cf.formatAsString().equals("$B$2"));
+        assertTrue("row is 4", cf.getRow() == 1);
+        assertTrue("col is 1", cf.getCol() == 1);
+        assertTrue("row is abs", cf.isRowAbsolute());
+        assertTrue("col is abs", cf.isColAbsolute());
+        assertTrue("string is $B$2", cf.formatAsString().equals("$B$2"));
 
         CellLocation[] refs = ar.getAllReferencedCells();
         assertEquals(4, refs.length);
@@ -171,19 +171,19 @@ public class RangeLocationTest extends TestCase {
         try {
             new RangeLocation(refDCSimple);
             fail("expected IllegalArgumentException");
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             // expected during successful test
         }
         try {
             new RangeLocation(refDC2D);
             fail("expected IllegalArgumentException");
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             // expected during successful test
         }
         try {
             new RangeLocation(refDC3D);
             fail("expected IllegalArgumentException");
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             // expected during successful test
         }
 

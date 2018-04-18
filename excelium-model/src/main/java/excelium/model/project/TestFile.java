@@ -32,13 +32,19 @@ package excelium.model.project;
  */
 public class TestFile {
 
-    /** File location. File path or spreadsheet ID */
+    /**
+     * File location. File path or spreadsheet ID
+     */
     private String location;
 
-    /** File name */
+    /**
+     * File name
+     */
     private String name;
 
-    /** Template */
+    /**
+     * Template
+     */
     private String template;
 
     /**

@@ -32,19 +32,29 @@ package excelium.model.test.config;
  */
 public class MobileAppEnvironment extends MobileEnvironment {
 
-    /** App path */
+    /**
+     * App path
+     */
     private String appPath;
 
-    /** App activity */
+    /**
+     * App activity
+     */
     private String appActivity;
 
-    /** App package */
+    /**
+     * App package
+     */
     private String appPackage;
 
-    /** App wait activity */
+    /**
+     * App wait activity
+     */
     private String appWaitActivity;
 
-    /** App wait package */
+    /**
+     * App wait package
+     */
     private String appWaitPackage;
 
     /**

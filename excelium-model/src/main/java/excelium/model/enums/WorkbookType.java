@@ -82,7 +82,7 @@ public enum WorkbookType {
         String[][] listChoice = new String[WorkbookType.values().length][2];
         int i = 0;
         for (WorkbookType t : WorkbookType.values()) {
-            listChoice[i++] = new String[] { t.name(), t.getText() };
+            listChoice[i++] = new String[]{t.name(), t.getText()};
         }
         return listChoice;
     }

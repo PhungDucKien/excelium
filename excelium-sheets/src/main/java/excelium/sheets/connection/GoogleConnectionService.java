@@ -43,23 +43,35 @@ import java.io.*;
  */
 public class GoogleConnectionService extends GoogleConnection {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger LOG = LogManager.getLogger();
 
-    /** Command line client secret json file */
+    /**
+     * Command line client secret json file
+     */
     private static final String CLIENT_SECRETS = "cli_client_secret.json";
 
-    /** Directory to store user credentials for this application. */
+    /**
+     * Directory to store user credentials for this application.
+     */
     private static final File DATA_STORE_DIR = new File(
             System.getProperty("user.home"), ".credentials/sheets.googleapis.com-excelium");
 
-    /** Global instance of the {@link FileDataStoreFactory}. */
+    /**
+     * Global instance of the {@link FileDataStoreFactory}.
+     */
     private static FileDataStoreFactory DATA_STORE_FACTORY;
 
-    /** Client secrets */
+    /**
+     * Client secrets
+     */
     private static GoogleClientSecrets clientSecrets;
 
-    /** Credential */
+    /**
+     * Credential
+     */
     private Credential credential;
 
     /**

@@ -34,8 +34,10 @@ import com.beust.jcommander.Parameter;
  */
 public class BaseController {
 
-    /** Help flag */
-    @Parameter(names = { "-h", "-help" }, description = "Print help information", help = true)
+    /**
+     * Help flag
+     */
+    @Parameter(names = {"-h", "-help"}, description = "Print help information", help = true)
     private boolean help = false;
 
     /**

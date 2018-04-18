@@ -32,37 +32,59 @@ package excelium.model.test.command;
  */
 public class Command {
 
-    /** Name */
+    /**
+     * Name
+     */
     private String name;
 
-    /** Description */
+    /**
+     * Description
+     */
     private String description;
 
-    /** Japanese description */
+    /**
+     * Japanese description
+     */
     private String jaDescription;
 
-    /** Method */
+    /**
+     * Method
+     */
     private String method;
 
-    /** Parameter 1 */
+    /**
+     * Parameter 1
+     */
     private String param1;
 
-    /** Parameter 2 */
+    /**
+     * Parameter 2
+     */
     private String param2;
 
-    /** Parameter 3 */
+    /**
+     * Parameter 3
+     */
     private String param3;
 
-    /** Is command for web only */
+    /**
+     * Is command for web only
+     */
     private boolean webOnly;
 
-    /** Is command for android app only */
+    /**
+     * Is command for android app only
+     */
     private boolean androidOnly;
 
-    /** Is command for iOs app only */
+    /**
+     * Is command for iOs app only
+     */
     private boolean iosOnly;
 
-    /** Consumer that executed when command is called. */
+    /**
+     * Consumer that executed when command is called.
+     */
     private TriConsumer<Object, Object, Object> consumer;
 
     /**

@@ -32,10 +32,14 @@ package excelium.model.test.data;
  */
 public class Column {
 
-    /** Column name */
+    /**
+     * Column name
+     */
     private String name;
 
-    /** Column data type */
+    /**
+     * Column data type
+     */
     private String type;
 
     /**

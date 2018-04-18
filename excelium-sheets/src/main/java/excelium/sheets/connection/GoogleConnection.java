@@ -46,7 +46,9 @@ import java.util.List;
  */
 public abstract class GoogleConnection {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger LOG = LogManager.getLogger();
 
     /**

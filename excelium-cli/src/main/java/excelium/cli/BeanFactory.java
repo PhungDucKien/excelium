@@ -52,6 +52,7 @@ public class BeanFactory {
      * Reads the current working directory's project configuration file and constructs project instance.
      *
      * @return Project instance
+     * @throws JAXBException the jaxb exception
      */
     @Bean
     public Project getProject() throws JAXBException {
@@ -75,7 +76,7 @@ public class BeanFactory {
     /**
      * Constructs Sheets service.
      *
-     * @param project Project instance
+     * @param project    Project instance
      * @param connection Google connection
      * @return Sheets service if project uses Sheets file. Otherwise, return null.
      * @throws IOException if IOException occurs
@@ -92,7 +93,7 @@ public class BeanFactory {
     /**
      * Constructs test reader factory
      *
-     * @param project Project instance
+     * @param project       Project instance
      * @param sheetsService Sheets service
      * @return Excel test reader factory if project uses Excel files. Sheets test reader factory if projects uses Sheets files.
      */

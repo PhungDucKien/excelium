@@ -42,6 +42,6 @@ public class WildcardUtilTest {
         Assert.assertEquals(false, WildcardUtil.isMatch("cb", "?a"));
         Assert.assertEquals(true, WildcardUtil.isMatch("adceb", "*a*b"));
         Assert.assertEquals(false, WildcardUtil.isMatch("acdcb", "a*c?b"));
-        Assert.assertEquals(true, WildcardUtil.isMatch("abbabbbaabaaabbbbbabbabbabbbabbaaabbbababbabaaabbab" , "*aabb***aa**a******aa*"));
+        Assert.assertEquals(true, WildcardUtil.isMatch("abbabbbaabaaabbbbbabbabbabbbabbaaabbbababbabaaabbab", "*aabb***aa**a******aa*"));
     }
 }

@@ -42,7 +42,9 @@ import java.util.Map;
  */
 public class ExcelReaderTest {
 
-    /** Excel reader factory */
+    /**
+     * Excel reader factory
+     */
     private static ExcelReaderFactory readerFactory;
 
     @BeforeClass

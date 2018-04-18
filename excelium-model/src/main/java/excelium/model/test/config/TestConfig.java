@@ -34,10 +34,14 @@ import java.util.List;
  */
 public class TestConfig {
 
-    /** Base url */
+    /**
+     * Base url
+     */
     private String baseUrl;
 
-    /** List of environments that tests are executed on */
+    /**
+     * List of environments that tests are executed on
+     */
     private List<Environment> environments;
 
     /**

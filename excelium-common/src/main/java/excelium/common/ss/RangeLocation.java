@@ -47,11 +47,17 @@ import java.util.StringTokenizer;
 
 public class RangeLocation {
 
-    /** The character (!) that separates sheet names from cell references */
+    /**
+     * The character (!) that separates sheet names from cell references
+     */
     private static final char SHEET_NAME_DELIMITER = '!';
-    /** The character (:) that separates the two cell references in a multi-cell area reference */
+    /**
+     * The character (:) that separates the two cell references in a multi-cell area reference
+     */
     private static final char CELL_DELIMITER = ':';
-    /** The character (') used to quote sheet names when they contain special characters */
+    /**
+     * The character (') used to quote sheet names when they contain special characters
+     */
     private static final char SPECIAL_NAME_DELIMITER = '\'';
 
     private final CellLocation _firstCell;
@@ -64,7 +70,7 @@ public class RangeLocation {
      * The area reference must be contiguous (i.e. represent a single rectangle, not a union of rectangles)
      */
     public RangeLocation(String reference) {
-        if(! isContiguous(reference)) {
+        if (!isContiguous(reference)) {
             throw new IllegalArgumentException(
                     "References passed to the RangeLocation must be contiguous, " +
                             "use generateContiguous(ref) if you have non-contiguous references");
@@ -112,9 +118,9 @@ public class RangeLocation {
     }
 
     private static boolean isPlainColumn(String refPart) {
-        for(int i=refPart.length()-1; i>=0; i--) {
+        for (int i = refPart.length() - 1; i >= 0; i--) {
             int ch = refPart.charAt(i);
-            if (ch == '$' && i==0) {
+            if (ch == '$' && i == 0) {
                 continue;
             }
             if (ch < 'A' || ch > 'Z') {
@@ -172,15 +178,15 @@ public class RangeLocation {
 
     /**
      * Is the reference for a contiguous (i.e.
-     *  unbroken) area, or is it made up of
-     *  several different parts?
+     * unbroken) area, or is it made up of
+     * several different parts?
      * (If it is, you will need to call
-     *  {@link #generateContiguous(String)})
+     * {@link #generateContiguous(String)})
      */
     public static boolean isContiguous(String reference) {
         // If there's a sheet name, strip it off
         int sheetRefEnd = reference.indexOf('!');
-        if(sheetRefEnd != -1) {
+        if (sheetRefEnd != -1) {
             reference = reference.substring(sheetRefEnd);
         }
 
@@ -198,7 +204,7 @@ public class RangeLocation {
 
     /**
      * Is the reference for a whole-column reference,
-     *  such as C:C or D:G ?
+     * such as C:C or D:G ?
      */
     public static boolean isWholeColumnReference(CellLocation topLeft, CellLocation botRight) {
         // These are represented as something like
@@ -209,18 +215,20 @@ public class RangeLocation {
                 && botRight.getRow() == 65535
                 && botRight.isRowAbsolute());
     }
+
     public boolean isWholeColumnReference() {
         return isWholeColumnReference(_firstCell, _lastCell);
     }
 
     /**
      * Takes a non-contiguous area reference, and returns an array of contiguous area references
+     *
      * @return an array of contiguous area references.
      */
     public static RangeLocation[] generateContiguous(String reference) {
         List<RangeLocation> refs = new ArrayList<>();
         StringTokenizer st = new StringTokenizer(reference, ",");
-        while(st.hasMoreTokens()) {
+        while (st.hasMoreTokens()) {
             refs.add(
                     new RangeLocation(st.nextToken())
             );
@@ -246,6 +254,7 @@ public class RangeLocation {
     /**
      * Note - if this area reference refers to a single cell, the return value of this method will
      * be identical to that of <tt>getFirstCell()</tt>
+     *
      * @return the second cell reference which defines this area.  For multi-cell areas, this is
      * cell diagonally opposite the 'first cell'.  Usually this cell is in the lower right corner
      * of the area (but this is not a requirement).
@@ -253,13 +262,14 @@ public class RangeLocation {
     public CellLocation getLastCell() {
         return _lastCell;
     }
+
     /**
      * Returns a reference to every cell covered by this area
      */
     public CellLocation[] getAllReferencedCells() {
         // Special case for single cell reference
-        if(_isSingleCell) {
-            return  new CellLocation[] { _firstCell, };
+        if (_isSingleCell) {
+            return new CellLocation[]{_firstCell,};
         }
 
         // Interpolate between the two
@@ -270,8 +280,8 @@ public class RangeLocation {
         String sheetName = _firstCell.getSheetName();
 
         List<CellLocation> refs = new ArrayList<>();
-        for(int row=minRow; row<=maxRow; row++) {
-            for(int col=minCol; col<=maxCol; col++) {
+        for (int row = minRow; row <= maxRow; row++) {
+            for (int col = minCol; col <= maxCol; col++) {
                 CellLocation ref = new CellLocation(sheetName, row, col, _firstCell.isRowAbsolute(), _firstCell.isColAbsolute());
                 refs.add(ref);
             }
@@ -282,19 +292,20 @@ public class RangeLocation {
     /**
      * Returns a text representation of this area reference.
      * <p>
-     *  Example return values:
-     *    <table border="0" cellpadding="1" cellspacing="0" summary="Example return values">
-     *      <tr><th align='left'>Result</th><th align='left'>Comment</th></tr>
-     *      <tr><td>A1:A1</td><td>Single cell area reference without sheet</td></tr>
-     *      <tr><td>A1:$C$1</td><td>Multi-cell area reference without sheet</td></tr>
-     *      <tr><td>Sheet1!A$1:B4</td><td>Standard sheet name</td></tr>
-     *      <tr><td>'O''Brien''s Sales'!B5:C6'&nbsp;</td><td>Sheet name with special characters</td></tr>
-     *    </table>
+     * Example return values:
+     * <table border="0" cellpadding="1" cellspacing="0" summary="Example return values">
+     * <tr><th align='left'>Result</th><th align='left'>Comment</th></tr>
+     * <tr><td>A1:A1</td><td>Single cell area reference without sheet</td></tr>
+     * <tr><td>A1:$C$1</td><td>Multi-cell area reference without sheet</td></tr>
+     * <tr><td>Sheet1!A$1:B4</td><td>Standard sheet name</td></tr>
+     * <tr><td>'O''Brien''s Sales'!B5:C6'&nbsp;</td><td>Sheet name with special characters</td></tr>
+     * </table>
+     *
      * @return the text representation of this area reference as it would appear in a formula.
      */
     public String formatAsString() {
         // Special handling for whole-column references
-        if(isWholeColumnReference()) {
+        if (isWholeColumnReference()) {
             return
                     CellLocation.convertNumToColString(_firstCell.getCol())
                             + ":" +
@@ -303,9 +314,9 @@ public class RangeLocation {
 
         StringBuilder sb = new StringBuilder(32);
         sb.append(_firstCell.formatAsString());
-        if(!_isSingleCell) {
+        if (!_isSingleCell) {
             sb.append(CELL_DELIMITER);
-            if(_lastCell.getSheetName() == null) {
+            if (_lastCell.getSheetName() == null) {
                 sb.append(_lastCell.formatAsString());
             } else {
                 // don't want to include the sheet name twice
@@ -320,7 +331,7 @@ public class RangeLocation {
         sb.append(getClass().getName()).append(" [");
         try {
             sb.append(formatAsString());
-        } catch(Exception e) {
+        } catch (Exception e) {
             sb.append(e.toString());
         }
         sb.append(']');
@@ -345,11 +356,11 @@ public class RangeLocation {
         int len = reference.length();
         int delimiterPos = -1;
         boolean insideDelimitedName = false;
-        for(int i=0; i<len; i++) {
-            switch(reference.charAt(i)) {
+        for (int i = 0; i < len; i++) {
+            switch (reference.charAt(i)) {
                 case CELL_DELIMITER:
-                    if(!insideDelimitedName) {
-                        if(delimiterPos >=0) {
+                    if (!insideDelimitedName) {
+                        if (delimiterPos >= 0) {
                             throw new IllegalArgumentException("More than one cell delimiter '"
                                     + CELL_DELIMITER + "' appears in area reference '" + reference + "'");
                         }
@@ -361,18 +372,18 @@ public class RangeLocation {
                 default:
                     continue; //continue the for-loop
             }
-            if(!insideDelimitedName) {
+            if (!insideDelimitedName) {
                 insideDelimitedName = true;
                 continue;
             }
 
-            if(i >= len-1) {
+            if (i >= len - 1) {
                 // reference ends with the delimited name.
                 // Assume names like: "Sheet1!'A1'" are never legal.
                 throw new IllegalArgumentException("Area reference '" + reference
-                        + "' ends with special name delimiter '"  + SPECIAL_NAME_DELIMITER + "'");
+                        + "' ends with special name delimiter '" + SPECIAL_NAME_DELIMITER + "'");
             }
-            if(reference.charAt(i+1) == SPECIAL_NAME_DELIMITER) {
+            if (reference.charAt(i + 1) == SPECIAL_NAME_DELIMITER) {
                 // two consecutive quotes is the escape sequence for a single one
                 i++; // skip this and keep parsing the special name
             } else {
@@ -380,13 +391,13 @@ public class RangeLocation {
                 insideDelimitedName = false;
             }
         }
-        if(delimiterPos < 0) {
-            return new String[] { reference, };
+        if (delimiterPos < 0) {
+            return new String[]{reference,};
         }
 
         String partA = reference.substring(0, delimiterPos);
-        String partB = reference.substring(delimiterPos+1);
-        if(partB.indexOf(SHEET_NAME_DELIMITER) >= 0) {
+        String partB = reference.substring(delimiterPos + 1);
+        if (partB.indexOf(SHEET_NAME_DELIMITER) >= 0) {
             // partB contains SHEET_NAME_DELIMITER
             // TODO - are references like "Sheet1!A1:Sheet1:B2" ever valid?
             // FormulaParser has code to handle that.
@@ -396,12 +407,12 @@ public class RangeLocation {
         }
 
         int plingPos = partA.lastIndexOf(SHEET_NAME_DELIMITER);
-        if(plingPos < 0) {
-            return new String [] { partA, partB, };
+        if (plingPos < 0) {
+            return new String[]{partA, partB,};
         }
 
         String sheetName = partA.substring(0, plingPos + 1); // +1 to include delimiter
 
-        return new String [] { partA, sheetName + partB, };
+        return new String[]{partA, sheetName + partB,};
     }
 }

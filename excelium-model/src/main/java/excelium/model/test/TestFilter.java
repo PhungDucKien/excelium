@@ -34,13 +34,19 @@ import java.util.List;
  */
 public class TestFilter {
 
-    /** Workbook filter */
+    /**
+     * Workbook filter
+     */
     private List<String> workbooks;
 
-    /** Sheet filter */
+    /**
+     * Sheet filter
+     */
     private List<String> sheets;
 
-    /** Test case filter */
+    /**
+     * Test case filter
+     */
     private List<String> testCases;
 
     /**

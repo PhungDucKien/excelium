@@ -24,7 +24,10 @@
 
 package excelium.cli;
 
-import excelium.cli.controller.*;
+import excelium.cli.controller.ProjectController;
+import excelium.cli.controller.TemplateController;
+import excelium.cli.controller.TestController;
+import excelium.cli.controller.TestFileController;
 import mockit.Mocked;
 import mockit.Verifications;
 import org.junit.Test;
@@ -51,54 +54,54 @@ public class ApplicationTest {
 
     @Test
     public void testProjectCreate() throws Exception {
-        Application.main(new String[] {"project", "create"});
+        Application.main(new String[]{"project", "create"});
 
-        new Verifications(){{
+        new Verifications() {{
             projectController.create();
         }};
     }
 
     @Test
     public void testTemplateImport() throws Exception {
-        Application.main(new String[] {"template", "import"});
+        Application.main(new String[]{"template", "import"});
 
-        new Verifications(){{
+        new Verifications() {{
             templateController.importTemplate();
         }};
     }
 
     @Test
     public void testTemplateRemove() throws Exception {
-        Application.main(new String[] {"template", "remove"});
+        Application.main(new String[]{"template", "remove"});
 
-        new Verifications(){{
+        new Verifications() {{
             templateController.remove();
         }};
     }
 
     @Test
     public void testTestFileAdd() throws Exception {
-        Application.main(new String[] {"test", "add"});
+        Application.main(new String[]{"test", "add"});
 
-        new Verifications(){{
+        new Verifications() {{
             testFileController.add();
         }};
     }
 
     @Test
     public void testTestFileRemove() throws Exception {
-        Application.main(new String[] {"test", "remove"});
+        Application.main(new String[]{"test", "remove"});
 
-        new Verifications(){{
+        new Verifications() {{
             testFileController.remove();
         }};
     }
 
     @Test
     public void testTestExecute() throws Exception {
-        Application.main(new String[] {});
+        Application.main(new String[]{});
 
-        new Verifications(){{
+        new Verifications() {{
             testController.execute();
         }};
     }

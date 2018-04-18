@@ -42,7 +42,7 @@ public class XmlMarshaller {
      * Unmarshal XML data from the specified file path and return the resulting
      * content tree.
      *
-     * @param path The file path to unmarshal XML data from
+     * @param path  The file path to unmarshal XML data from
      * @param clazz java class to be return
      * @return Unmarshalled java object
      * @throws JAXBException if any unexpected errors occur while unmarshalling
@@ -57,7 +57,7 @@ public class XmlMarshaller {
      * Marshal the content tree rooted at <tt>jaxbElement</tt> into a file.
      *
      * @param object the java content tree to be marshalled
-     * @param path The file path to marshal to
+     * @param path   The file path to marshal to
      * @throws JAXBException if any unexpected problem occurs during the marshalling
      */
     public static void marshall(Object object, Path path) throws JAXBException {

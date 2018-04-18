@@ -86,7 +86,7 @@ public enum AppType {
         String[][] listChoice = new String[AppType.values().length][2];
         int i = 0;
         for (AppType t : AppType.values()) {
-            listChoice[i++] = new String[] { t.name(), t.getText() };
+            listChoice[i++] = new String[]{t.name(), t.getText()};
         }
         return listChoice;
     }

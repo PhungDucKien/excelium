@@ -44,28 +44,44 @@ import java.util.Map;
  */
 public class Test<W, S> implements Closeable {
 
-    /** Workbook name */
+    /**
+     * Workbook name
+     */
     private String workbookName;
 
-    /** Workbook object */
+    /**
+     * Workbook object
+     */
     private W workbook;
 
-    /** Test configuration */
+    /**
+     * Test configuration
+     */
     private TestConfig config;
 
-    /** Map of sheet name and test suites */
+    /**
+     * Map of sheet name and test suites
+     */
     private Map<String, TestSuite<S>> testSuites;
 
-    /** Map of page sets */
+    /**
+     * Map of page sets
+     */
     private Map<String, PageSet> pageSets;
 
-    /** Map of actions */
+    /**
+     * Map of actions
+     */
     private Map<String, TestAction> actions;
 
-    /** Map of test data */
+    /**
+     * Map of test data
+     */
     private Map<String, TestData> testData;
 
-    /** Map of commands */
+    /**
+     * Map of commands
+     */
     private Map<String, Command> commands;
 
     /**

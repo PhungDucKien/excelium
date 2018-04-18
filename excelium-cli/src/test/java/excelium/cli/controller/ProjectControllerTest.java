@@ -77,7 +77,7 @@ public class ProjectControllerTest {
         projectController.create();
 
         new Verifications() {{
-           projectGenerator.createProject((Project) any, (Path) any);
+            projectGenerator.createProject((Project) any, (Path) any);
         }};
     }
 

@@ -34,10 +34,14 @@ import excelium.model.enums.Platform;
  */
 public class Environment {
 
-    /** Platform */
+    /**
+     * Platform
+     */
     private Platform platform;
 
-    /** Platform version */
+    /**
+     * Platform version
+     */
     private String platformVersion;
 
     /**

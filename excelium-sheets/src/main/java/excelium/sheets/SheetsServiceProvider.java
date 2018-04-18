@@ -42,10 +42,14 @@ public class SheetsServiceProvider {
      */
     protected static final String APPLICATION_NAME = "Excelium";
 
-    /** Google connection */
+    /**
+     * Google connection
+     */
     private GoogleConnection connection;
 
-    /** Sheets service */
+    /**
+     * Sheets service
+     */
     private Sheets sheetsService;
 
     /**

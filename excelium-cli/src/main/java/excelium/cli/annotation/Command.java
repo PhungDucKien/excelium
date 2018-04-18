@@ -40,6 +40,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(METHOD)
 public @interface Command {
 
-    /** Command name */
+    /**
+     * Command name
+     */
     String name() default "";
 }

@@ -44,7 +44,9 @@ import java.util.Map;
  */
 public class SheetsReaderTest {
 
-    /** Sheets reader factory */
+    /**
+     * Sheets reader factory
+     */
     private static SheetsReaderFactory readerFactory;
 
     @BeforeClass

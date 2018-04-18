@@ -38,8 +38,8 @@ public abstract class TestReaderFactory {
      * Creates test reader for the given file.
      *
      * @param fileLocation File location.
-     *                         May be the file path if the file is local system file.
-     *                         Or the spreadsheet ID or URL if the file is a remote web file.
+     *                     May be the file path if the file is local system file.
+     *                     Or the spreadsheet ID or URL if the file is a remote web file.
      * @return Test reader to access specified file
      */
     public abstract TestReader createReader(String fileLocation) throws IOException;

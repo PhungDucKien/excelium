@@ -1,4 +1,4 @@
-apply plugin : 'application'
+apply plugin: 'application'
 
 mainClassName = 'excelium.cli.Application'
 

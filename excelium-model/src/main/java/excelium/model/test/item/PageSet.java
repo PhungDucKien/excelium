@@ -35,19 +35,29 @@ import java.util.Map;
  */
 public class PageSet {
 
-    /** Name */
+    /**
+     * Name
+     */
     private String name;
 
-    /** Description */
+    /**
+     * Description
+     */
     private String description;
 
-    /** Path regex */
+    /**
+     * Path regex
+     */
     private String path;
 
-    /** Title regex */
+    /**
+     * Title regex
+     */
     private String title;
 
-    /** Items */
+    /**
+     * Items
+     */
     private Map<String, Item> items;
 
     /**

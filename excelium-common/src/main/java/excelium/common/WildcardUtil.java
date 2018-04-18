@@ -61,7 +61,7 @@ public class WildcardUtil {
                 j++;
             } else if (starIndex != -1) {
                 j = starIndex + 1;
-                i = iIndex+1;
+                i = iIndex + 1;
                 iIndex++;
             } else {
                 return false;

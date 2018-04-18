@@ -121,7 +121,9 @@ public class TestExecutor {
          */
         List<TestFile> testFiles;
 
-        /** Cursor */
+        /**
+         * Cursor
+         */
         private int cursor;
 
         /**

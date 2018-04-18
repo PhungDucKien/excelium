@@ -32,13 +32,19 @@ package excelium.model.test.config;
  */
 public class MobileEnvironment extends Environment {
 
-    /** Device name */
+    /**
+     * Device name
+     */
     private String deviceName;
 
-    /** UDID */
+    /**
+     * UDID
+     */
     private String udid;
 
-    /** Orientation */
+    /**
+     * Orientation
+     */
     private String orientation;
 
     /**

@@ -38,10 +38,14 @@ import java.util.Locale;
  */
 public class PlatformDetector {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger LOG = LogManager.getLogger();
 
-    /** Detected platform. For later uses */
+    /**
+     * Detected platform. For later uses
+     */
     private static Platform detectedPlatform;
 
     /**

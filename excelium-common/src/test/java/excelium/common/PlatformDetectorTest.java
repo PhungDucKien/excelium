@@ -41,8 +41,7 @@ public class PlatformDetectorTest {
 
     @Test
     public void testGetPlatform_Win32() {
-        new MockUp<PlatformDetector>()
-        {
+        new MockUp<PlatformDetector>() {
             @Mock
             String getOsName() {
                 return "windows";
@@ -62,8 +61,7 @@ public class PlatformDetectorTest {
 
     @Test
     public void testGetPlatform_Win64() {
-        new MockUp<PlatformDetector>()
-        {
+        new MockUp<PlatformDetector>() {
             @Mock
             String getOsName() {
                 return "windows";
@@ -83,8 +81,7 @@ public class PlatformDetectorTest {
 
     @Test
     public void testGetPlatform_MacOS() {
-        new MockUp<PlatformDetector>()
-        {
+        new MockUp<PlatformDetector>() {
             @Mock
             String getOsName() {
                 return "mac os x";
@@ -104,8 +101,7 @@ public class PlatformDetectorTest {
 
     @Test
     public void testGetPlatform_Linux() {
-        new MockUp<PlatformDetector>()
-        {
+        new MockUp<PlatformDetector>() {
             @Mock
             String getOsName() {
                 return "linux";

@@ -46,43 +46,65 @@ import java.util.Map;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Project {
 
-    /** Project name */
+    /**
+     * Project name
+     */
     private String name;
 
-    /** Application type */
+    /**
+     * Application type
+     */
     private AppType appType;
 
-    /** Workbook type */
+    /**
+     * Workbook type
+     */
     private WorkbookType workbookType;
 
-    /** Test path */
+    /**
+     * Test path
+     */
     @XmlJavaTypeAdapter(PathXmlAdapter.class)
     private Path testPath;
 
-    /** Template path */
+    /**
+     * Template path
+     */
     @XmlJavaTypeAdapter(PathXmlAdapter.class)
     private Path templatePath;
 
-    /** App path */
+    /**
+     * App path
+     */
     @XmlJavaTypeAdapter(PathXmlAdapter.class)
     private Path appPath;
 
-    /** File path */
+    /**
+     * File path
+     */
     @XmlJavaTypeAdapter(PathXmlAdapter.class)
     private Path filePath;
 
-    /** Screenshot path */
+    /**
+     * Screenshot path
+     */
     @XmlJavaTypeAdapter(PathXmlAdapter.class)
     private Path screenshotPath;
 
-    /** Download path */
+    /**
+     * Download path
+     */
     @XmlJavaTypeAdapter(PathXmlAdapter.class)
     private Path downloadPath;
 
-    /** Test files */
+    /**
+     * Test files
+     */
     private Map<String, TestFile> tests;
 
-    /** Templates */
+    /**
+     * Templates
+     */
     private Map<String, Template> templates;
 
     /**
@@ -293,7 +315,7 @@ public class Project {
             String[][] listChoice = new String[tests.size()][2];
             int i = 0;
             for (TestFile t : tests.values()) {
-                listChoice[i++] = new String[] { t.getLocation(), t.getName() };
+                listChoice[i++] = new String[]{t.getLocation(), t.getName()};
             }
             return listChoice;
         }
@@ -310,7 +332,7 @@ public class Project {
             String[][] listChoice = new String[templates.size()][2];
             int i = 0;
             for (Template t : templates.values()) {
-                listChoice[i++] = new String[] { t.getLocation(), t.getName() };
+                listChoice[i++] = new String[]{t.getLocation(), t.getName()};
             }
             return listChoice;
         }

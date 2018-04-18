@@ -47,27 +47,39 @@ import java.util.List;
 @Controller
 public class TestController extends BaseController {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger LOG = LogManager.getLogger();
 
-    /** Debug flag */
-    @Parameter(names = { "-d", "-debug" }, description = "Debug mode. Use breakpoints to pause execution")
+    /**
+     * Debug flag
+     */
+    @Parameter(names = {"-d", "-debug"}, description = "Debug mode. Use breakpoints to pause execution")
     private boolean debug = false;
 
-    /** Silent flag */
-    @Parameter(names = { "-silent" }, description = "Do not write results to workbooks")
+    /**
+     * Silent flag
+     */
+    @Parameter(names = {"-silent"}, description = "Do not write results to workbooks")
     private boolean silent = false;
 
-    /** Workbook filter */
-    @Parameter(names = { "-w", "-workbooks" }, description = "Use the given workbooks", variableArity = true)
+    /**
+     * Workbook filter
+     */
+    @Parameter(names = {"-w", "-workbooks"}, description = "Use the given workbooks", variableArity = true)
     private List<String> workbooks = new ArrayList<>();
 
-    /** Sheet filter */
-    @Parameter(names = { "-s", "-sheets" }, description = "Use the given sheets", variableArity = true)
+    /**
+     * Sheet filter
+     */
+    @Parameter(names = {"-s", "-sheets"}, description = "Use the given sheets", variableArity = true)
     private List<String> sheets = new ArrayList<>();
 
-    /** Test case filter */
-    @Parameter(names = { "-t", "-test-cases" }, description = "Use the given test cases", variableArity = true)
+    /**
+     * Test case filter
+     */
+    @Parameter(names = {"-t", "-test-cases"}, description = "Use the given test cases", variableArity = true)
     private List<String> testCases = new ArrayList<>();
 
     /**

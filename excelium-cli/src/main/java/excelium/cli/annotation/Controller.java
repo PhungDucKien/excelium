@@ -40,6 +40,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(TYPE)
 public @interface Controller {
 
-    /** Controller name */
+    /**
+     * Controller name
+     */
     String name() default "";
 }

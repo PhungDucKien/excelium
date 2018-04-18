@@ -188,7 +188,7 @@ public class EnvironmentUtil {
      * Checks if the given browser is available on the platform
      *
      * @param platform the platform
-     * @param browser the browser
+     * @param browser  the browser
      * @return is the browser available
      */
     private static boolean isBrowserAvailable(Platform platform, Browser browser) {

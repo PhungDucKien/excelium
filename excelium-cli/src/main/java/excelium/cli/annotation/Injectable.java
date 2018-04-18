@@ -41,6 +41,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(FIELD)
 public @interface Injectable {
 
-    /** Specifies that the injection should be ignored when executing a command with name matches any element of this array. */
+    /**
+     * Specifies that the injection should be ignored when executing a command with name matches any element of this array.
+     */
     String[] ignore() default {};
 }

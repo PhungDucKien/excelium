@@ -32,19 +32,29 @@ package excelium.model.test.item;
  */
 public class Item {
 
-    /** Name */
+    /**
+     * Name
+     */
     private String name;
 
-    /** Description */
+    /**
+     * Description
+     */
     private String description;
 
-    /** Value */
+    /**
+     * Value
+     */
     private String value;
 
-    /** Android value */
+    /**
+     * Android value
+     */
     private String androidValue;
 
-    /** iOS value */
+    /**
+     * iOS value
+     */
     private String iosValue;
 
     /**

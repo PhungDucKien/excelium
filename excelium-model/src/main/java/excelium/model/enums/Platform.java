@@ -102,7 +102,7 @@ public enum Platform {
         String[][] listChoice = new String[Platform.values().length][2];
         int i = 0;
         for (Platform t : Platform.values()) {
-            listChoice[i++] = new String[] { t.name(), t.getText() };
+            listChoice[i++] = new String[]{t.name(), t.getText()};
         }
         return listChoice;
     }

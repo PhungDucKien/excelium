@@ -38,7 +38,9 @@ import java.io.IOException;
  */
 public class SheetsReaderFactory extends TestReaderFactory {
 
-    /** Sheets service */
+    /**
+     * Sheets service
+     */
     private Sheets sheetsService;
 
     /**
