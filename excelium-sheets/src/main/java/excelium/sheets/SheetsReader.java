@@ -26,16 +26,12 @@ package excelium.sheets;
 
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.*;
-import excelium.common.CellLocation;
+import excelium.common.ss.CellLocation;
+import excelium.common.ss.RangeLocation;
 import excelium.core.reader.DefaultTestReader;
-import excelium.model.project.Template;
-import excelium.model.test.Test;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Reads Google Sheet spreadsheets.
@@ -44,9 +40,6 @@ import java.util.List;
  * @since 2018.04.10
  */
 public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
-
-    /** Logger */
-    private static final Logger LOG = LogManager.getLogger();
 
     /** Spreadsheet id */
     private String spreadsheetId;
@@ -84,8 +77,8 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
     }
 
     @Override
-    public Test parseTest(Template template) throws IOException {
-        return null;
+    public String getSheetName(Sheet sheet) {
+        return sheet.getProperties().getTitle();
     }
 
     @Override
@@ -141,5 +134,30 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
             i++;
         }
         return cellLocations;
+    }
+
+    @Override
+    public Map<String, List<List<Object>>> getBatchRangeCellValues(String... ranges) throws IOException {
+        List<String> rangeList = Arrays.asList(ranges);
+
+        BatchGetValuesResponse response = sheetsService.spreadsheets().values().batchGet(spreadsheetId)
+                .setRanges(rangeList)
+                .execute();
+
+        Map<String, List<List<Object>>> values = new HashMap<>();
+        List<ValueRange> valueRanges = response.getValueRanges();
+        for (ValueRange valueRange : valueRanges) {
+            RangeLocation range = new RangeLocation(valueRange.getRange());
+            values.put(range.formatAsString(), valueRange.getValues());
+        }
+        return values;
+    }
+
+    @Override
+    public List<List<Object>> getRangeCellValues(String range) throws IOException {
+        ValueRange valueRange = sheetsService.spreadsheets().values()
+                .get(spreadsheetId, range)
+                .execute();
+        return valueRange.getValues();
     }
 }

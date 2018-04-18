@@ -24,15 +24,13 @@
 
 package excelium.xls;
 
-import excelium.common.CellLocation;
+import excelium.common.ss.CellLocation;
+import excelium.common.ss.RangeLocation;
 import excelium.core.reader.DefaultTestReader;
-import excelium.model.project.Template;
-import excelium.model.test.Test;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -50,10 +48,14 @@ import java.util.*;
  */
 public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger LOG = LogManager.getLogger();
 
-    /** File path */
+    /**
+     * File path
+     */
     private String filePath;
 
     /**
@@ -79,8 +81,8 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
     }
 
     @Override
-    public Test parseTest(Template template) throws IOException {
-        return null;
+    public String getSheetName(Sheet sheet) {
+        return sheet.getSheetName();
     }
 
     @Override
@@ -106,12 +108,37 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
         return cellLocations;
     }
 
+    @Override
+    public Map<String, List<List<Object>>> getBatchRangeCellValues(String... ranges) throws IOException {
+        Map<String, List<List<Object>>> rangeCellValues = new HashMap<>();
+        for (String range : ranges) {
+            RangeLocation rangeLocation = new RangeLocation(range);
+            String sheetName = rangeLocation.getFirstCell().getSheetName();
+            Sheet sheet = workbook.getSheet(sheetName);
+            List<List<Object>> values = new ArrayList<>();
+            for (int r = rangeLocation.getFirstCell().getRow(); r <= rangeLocation.getLastCell().getRow(); r++) {
+                List<Object> rowValues = new ArrayList<>();
+                for (int c = rangeLocation.getFirstCell().getCol(); c <= rangeLocation.getLastCell().getCol(); c++) {
+                    rowValues.add(getCellValue(sheet, r, c));
+                }
+                values.add(rowValues);
+            }
+            rangeCellValues.put(rangeLocation.formatAsString(), values);
+        }
+        return rangeCellValues;
+    }
+
+    @Override
+    public List<List<Object>> getRangeCellValues(String range) throws IOException {
+        return getBatchRangeCellValues(range).get(range);
+    }
+
     /**
      * Searches the given sheet to find the location of the first cell that has
      * value matches the given markup.
      *
      * @param markup The markup to search
-     * @param sheet Sheet
+     * @param sheet  Sheet
      * @return Cell location with sheet name. Return null if no cell found
      */
     private String getMarkupLocation(Object markup, Sheet sheet) {
@@ -145,8 +172,8 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
      * Get value of a cell at specific location in a given sheet
      *
      * @param sheet Sheet
-     * @param row Row index
-     * @param col Column index
+     * @param row   Row index
+     * @param col   Column index
      * @return Cell value
      */
     private Object getCellValue(Sheet sheet, int row, int col) {
@@ -214,54 +241,5 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
             }
         }
         return null;
-    }
-
-    /**
-     * Get 2-dimension list of values of a cell range in a given sheet that identified by sheet name.
-     *
-     * @param sheetName Sheet name
-     * @param range Range reference
-     * @return A 2-dimension list of values of range.
-     */
-    public List<List<Object>> getRangeCellValues(String sheetName, String range) {
-        Sheet sheet = workbook.getSheet(sheetName);
-        Map<String, List<List<Object>>> values = getBatchRangeCellValues(sheet, range);
-        return values.values().iterator().next();
-    }
-
-    /**
-     * Get a map of 2-dimension list of values of multiple cell ranges in a given sheet that identified by sheet name.
-     *
-     * @param sheetName Sheet name
-     * @param ranges Range array
-     * @return Map of range object values. The key of the return map is range definition.
-     */
-    public Map<String, List<List<Object>>> getBatchRangeCellValues(String sheetName, String... ranges) {
-        Sheet sheet = workbook.getSheet(sheetName);
-        return getBatchRangeCellValues(sheet, ranges);
-    }
-
-    /**
-     * Get a map of 2-dimension list of values of multiple cell ranges in a given sheet
-     *
-     * @param sheet Sheet
-     * @param ranges Range array
-     * @return Map of range object values. The key of the return map is range definition.
-     */
-    private Map<String, List<List<Object>>> getBatchRangeCellValues(Sheet sheet, String... ranges) {
-        Map<String, List<List<Object>>> rangeCellValues = new HashMap<>();
-        for (String range : ranges) {
-            CellRangeAddress cellRangeAddress = CellRangeAddress.valueOf(range);
-            List<List<Object>> values = new ArrayList<>();
-            for (int r = cellRangeAddress.getFirstRow(); r <= cellRangeAddress.getLastRow(); r++) {
-                List<Object> rowValues = new ArrayList<>();
-                for (int c = cellRangeAddress.getFirstColumn(); c <= cellRangeAddress.getLastColumn(); c++) {
-                    rowValues.add(getCellValue(sheet, r, c));
-                }
-                values.add(rowValues);
-            }
-            rangeCellValues.put(range, values);
-        }
-        return rangeCellValues;
     }
 }

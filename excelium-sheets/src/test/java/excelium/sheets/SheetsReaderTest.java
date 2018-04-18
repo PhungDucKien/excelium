@@ -25,8 +25,8 @@
 package excelium.sheets;
 
 import com.google.api.services.sheets.v4.Sheets;
+import excelium.common.TemplateUtil;
 import excelium.core.reader.TestReader;
-import excelium.model.project.Template;
 import excelium.sheets.connection.GoogleConnection;
 import excelium.sheets.connection.GoogleConnectionService;
 import org.junit.Assert;
@@ -64,7 +64,7 @@ public class SheetsReaderTest {
     @Test
     public void testGetMarkupLocationMap() throws IllegalAccessException, IOException {
         TestReader sheetsReader = readerFactory.createReader("10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY");
-        Map<Object, String> markupLocations = sheetsReader.getMarkupLocationMap(Template.getMarkupList());
+        Map<Object, String> markupLocations = sheetsReader.getMarkupLocationMap(TemplateUtil.getMarkups());
         Assert.assertEquals(4, markupLocations.size());
         Assert.assertEquals("'Test Case'!A2", markupLocations.get("%TEST_COMMAND%"));
         Assert.assertEquals("'Test Case'!B2", markupLocations.get("%TEST_PARAM1%"));

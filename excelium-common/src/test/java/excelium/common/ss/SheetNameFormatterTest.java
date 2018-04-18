@@ -39,7 +39,7 @@
    limitations under the License.
 ==================================================================== */
 
-package excelium.common;
+package excelium.common.ss;
 
 import junit.framework.TestCase;
 

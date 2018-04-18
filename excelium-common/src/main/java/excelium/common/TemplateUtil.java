@@ -24,6 +24,7 @@
 
 package excelium.common;
 
+import excelium.common.ss.CellLocation;
 import excelium.model.project.Template;
 import org.apache.commons.lang3.StringUtils;
 

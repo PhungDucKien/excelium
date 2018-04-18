@@ -39,7 +39,7 @@
    limitations under the License.
 ==================================================================== */
 
-package excelium.common;
+package excelium.common.ss;
 
 import org.junit.Test;
 
@@ -343,7 +343,7 @@ public final class CellLocationTest {
     @Test
     public void testToString() {
         CellLocation ref = new CellLocation("'Sheet 1'!A5");
-        assertEquals("excelium.common.CellLocation ['Sheet 1'!A5]", ref.toString());
+        assertEquals("excelium.common.ss.CellLocation ['Sheet 1'!A5]", ref.toString());
     }
 
     @Test

@@ -106,4 +106,22 @@ public enum Platform {
         }
         return listChoice;
     }
+
+    /**
+     * Checks if platform is Windows
+     *
+     * @return return true if platform is Windows
+     */
+    public boolean isWindows() {
+        return this == Platform.WINDOWS_32 || this == Platform.WINDOWS_64;
+    }
+
+    /**
+     * Checks if platform is Mac OS
+     *
+     * @return return true if platform is Mac OS
+     */
+    public boolean isMac() {
+        return this == Platform.MAC_OS;
+    }
 }

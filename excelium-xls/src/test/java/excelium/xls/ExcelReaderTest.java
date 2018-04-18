@@ -24,8 +24,8 @@
 
 package excelium.xls;
 
+import excelium.common.TemplateUtil;
 import excelium.core.reader.TestReader;
-import excelium.model.project.Template;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -59,7 +59,7 @@ public class ExcelReaderTest {
     @Test
     public void testGetMarkupLocationMap() throws IllegalAccessException, IOException, URISyntaxException {
         TestReader sheetsReader = readerFactory.createReader(ExcelReader.class.getResource("/Simple Template.xlsx").toURI().getPath());
-        Map<Object, String> markupLocations = sheetsReader.getMarkupLocationMap(Template.getMarkupList());
+        Map<Object, String> markupLocations = sheetsReader.getMarkupLocationMap(TemplateUtil.getMarkups());
         Assert.assertEquals(4, markupLocations.size());
         Assert.assertEquals("'Test Case'!A2", markupLocations.get("%TEST_COMMAND%"));
         Assert.assertEquals("'Test Case'!B2", markupLocations.get("%TEST_PARAM1%"));

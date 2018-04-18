@@ -39,7 +39,7 @@
    limitations under the License.
 ==================================================================== */
 
-package excelium.common;
+package excelium.common.ss;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -252,7 +252,7 @@ final class SheetNameFormatter {
      * Excel uses range checking on the apparent 'row' and 'column' components.  Note however that
      * the maximum sheet size varies across versions.
      *
-     * @see excelium.common.CellLocation
+     * @see CellLocation
      */
     /* package */
     static boolean cellReferenceIsWithinRange(String lettersPrefix, String numbersSuffix) {
