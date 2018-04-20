@@ -24,33 +24,40 @@
 
 package excelium.common;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
- * Collection of string handling utilities
+ * Collection of number handling utilities
  *
  * @author PhungDucKien
- * @since 2018.04.11
+ * @since 2018.04.19
  */
-public class StringUtil {
+public class NumberUtil {
 
     /**
-     * Extract spreadsheet id from a spreadsheet url.
+     * Gets appropriate numeric value from a double value.
+     * This method returns integer or long value if the given number can be written without a fractional component,
+     * otherwise, the double value is returned.
      *
-     * @param url the spreadsheet url
-     * @return the spreadsheet id. Return the given string if it is not a spreadsheet url.
-     * @see <a href="https://developers.google.com/sheets/api/guides/concepts">Key Concepts in the Google Sheets API</a>
+     * @param number double value
+     * @return numeric value
      */
-    public static String extractSpreadsheetId(String url) {
-        String regex = "/spreadsheets/d/([a-zA-Z0-9-_]+)";
+    public static Object getNumericValue(double number) {
+        if (Math.floor(number) == number) return getIntValue(number);
+        return number;
+    }
 
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(url);
-
-        if (matcher.find()) {
-            return matcher.group(1);
+    /**
+     * Gets integer value from a double value.
+     * If the value is over integer's limit, the long value is returned.
+     *
+     * @param number double value
+     * @return integer or long value
+     */
+    public static Object getIntValue(double number) {
+        final double abs = Math.abs(number);
+        if (abs <= Integer.MAX_VALUE) {
+            return Double.valueOf(number).intValue();
+        } else {
+            return Double.valueOf(number).longValue();
         }
-        return url;
     }
 }

@@ -43,7 +43,7 @@ public class WildcardUtil {
      * @param s the input string
      * @param p the pattern
      * @return the input string matches the pattern or not
-     * @see <a href="https://www.quora.com/How-do-I-solve-the-wildcard-matching-problem-in-Java">https://www.quora.com/How-do-I-solve-the-wildcard-matching-problem-in-Java</a>
+     * @see <a href="https://www.quora.com/How-do-I-solve-the-wildcard-matching-problem-in-Java">How do I solve the wildcard matching problem in Java?</a>
      */
     public static boolean isMatch(String s, String p) {
         int i = 0;

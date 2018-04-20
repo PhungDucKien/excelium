@@ -25,8 +25,10 @@
 package excelium.xls;
 
 import excelium.common.ss.CellLocation;
+import excelium.common.ss.DateUtil;
 import excelium.common.ss.RangeLocation;
 import excelium.core.reader.DefaultTestReader;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -39,6 +41,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
+
+import static excelium.common.NumberUtil.getIntValue;
+import static excelium.common.NumberUtil.getNumericValue;
 
 /**
  * Reads Microsoft Excel files.
@@ -128,11 +133,6 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
         return rangeCellValues;
     }
 
-    @Override
-    public List<List<Object>> getRangeCellValues(String range) throws IOException {
-        return getBatchRangeCellValues(range).get(range);
-    }
-
     /**
      * Searches the given sheet to find the location of the first cell that has
      * value matches the given markup.
@@ -194,52 +194,77 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
                 throw e;
             }
             if (c != null) {
-                if (c.getCellTypeEnum() == CellType.STRING) {
-                    CellStyle cellStyle = c.getCellStyle();
-                    Font cellFont = sheet.getWorkbook().getFontAt(cellStyle.getFontIndex());
+                CellStyle cellStyle = c.getCellStyle();
+                Font cellFont = sheet.getWorkbook().getFontAt(cellStyle.getFontIndex());
+                if (cellFont != null && cellFont.getStrikeout()) {
+                    return null;
+                }
 
-                    RichTextString richText = c.getRichStringCellValue();
-                    if (richText != null) {
-                        XSSFRichTextString xssfRichText = (XSSFRichTextString) richText;
-                        int runs = xssfRichText.numFormattingRuns();
-                        if (runs > 0) {
-                            StringBuilder plainText = new StringBuilder();
-                            for (int i = 0; i < runs; i++) {
-                                Font indexFont = xssfRichText.getFontOfFormattingRun(i);
-                                if (indexFont == null) {
-                                    indexFont = cellFont;
+                switch (c.getCellTypeEnum()) {
+                    case STRING:
+                        RichTextString richText = c.getRichStringCellValue();
+                        if (richText != null) {
+                            XSSFRichTextString xssfRichText = (XSSFRichTextString) richText;
+                            int runs = xssfRichText.numFormattingRuns();
+                            if (runs > 0) {
+                                StringBuilder plainText = new StringBuilder();
+                                for (int i = 0; i < runs; i++) {
+                                    Font indexFont = xssfRichText.getFontOfFormattingRun(i);
+                                    if (indexFont == null) {
+                                        indexFont = cellFont;
+                                    }
+                                    if (indexFont == null || !indexFont.getStrikeout()) {
+                                        plainText.append(xssfRichText.getString().substring(xssfRichText.getIndexOfFormattingRun(i),
+                                                xssfRichText.getIndexOfFormattingRun(i)
+                                                        + xssfRichText.getLengthOfFormattingRun(i)));
+                                    }
                                 }
-                                if (indexFont == null || !indexFont.getStrikeout()) {
-                                    plainText.append(xssfRichText.getString().substring(xssfRichText.getIndexOfFormattingRun(i),
-                                            xssfRichText.getIndexOfFormattingRun(i)
-                                                    + xssfRichText.getLengthOfFormattingRun(i)));
+                                if (plainText.length() > 0) {
+                                    return plainText.toString();
+                                } else {
+                                    return null;
                                 }
-                            }
-                            if (plainText.length() > 0) {
-                                return plainText.toString();
-                            } else {
-                                return null;
                             }
                         }
-                    }
-                    if (cellFont == null || !cellFont.getStrikeout()) {
                         return c.getStringCellValue();
-                    } else {
-                        return null;
-                    }
-                } else if (c.getCellTypeEnum() == CellType.FORMULA) {
-                    if (c.getCachedFormulaResultTypeEnum() == CellType.STRING) {
-                        return c.getStringCellValue();
-                    } else if (c.getCachedFormulaResultTypeEnum() == CellType.NUMERIC) {
-                        return c.getNumericCellValue();
-                    }
-                } else if (c.getCellTypeEnum() == CellType.NUMERIC) {
-                    return c.getNumericCellValue();
-                } else if (c.getCellTypeEnum() == CellType.BOOLEAN) {
-                    return c.getBooleanCellValue();
+                    case NUMERIC:
+                        return getNumericCellValue(c);
+                    case BOOLEAN:
+                        return c.getBooleanCellValue();
+                    case FORMULA:
+                        switch (c.getCachedFormulaResultTypeEnum()) {
+                            case STRING:
+                                return c.getStringCellValue();
+                            case NUMERIC:
+                                return getNumericCellValue(c);
+                            case BOOLEAN:
+                                return c.getBooleanCellValue();
+                        }
                 }
             }
         }
         return null;
+    }
+
+    /**
+     * Get numeric cell value.
+     * This method converts cell value to appropriate data type using cell data format.
+     *
+     * @param cell Cell object
+     * @return numeric cell value
+     */
+    private Object getNumericCellValue(Cell cell) {
+        String format = cell.getCellStyle().getDataFormatString();
+        if (StringUtils.isBlank(format) || "General".equals(format)) {
+            return getNumericValue(cell.getNumericCellValue());
+        } else if (StringUtils.equalsAnyIgnoreCase(format, "TEXT", "@")) {
+            return String.valueOf(getNumericValue(cell.getNumericCellValue()));
+        } else if (DateUtil.isADateFormat(format)) {
+            return cell.getDateCellValue();
+        } else if (StringUtils.containsAny(format, ".0", ".#", ".?")) {
+            return cell.getNumericCellValue();
+        } else {
+            return getIntValue(cell.getNumericCellValue());
+        }
     }
 }

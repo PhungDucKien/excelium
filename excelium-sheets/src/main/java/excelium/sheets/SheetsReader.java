@@ -27,11 +27,17 @@ package excelium.sheets;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.*;
 import excelium.common.ss.CellLocation;
+import excelium.common.ss.DateUtil;
 import excelium.common.ss.RangeLocation;
 import excelium.core.reader.DefaultTestReader;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.*;
+
+import static excelium.common.NumberUtil.getIntValue;
+import static excelium.common.NumberUtil.getNumericValue;
 
 /**
  * Reads Google Sheet spreadsheets.
@@ -68,11 +74,31 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
      * @return the spreadsheet
      * @throws IOException the io exception
      */
-    public Spreadsheet getSpreadsheet() throws IOException {
+    private Spreadsheet getSpreadsheet() throws IOException {
         if (workbook == null) {
-            workbook = sheetsService.spreadsheets().get(spreadsheetId).execute();
+            workbook = sheetsService.spreadsheets().get(spreadsheetId)
+                    .setFields("properties.title,sheets(properties(title,sheetId))")
+                    .setPrettyPrint(false)
+                    .execute();
         }
         return workbook;
+    }
+
+    /**
+     * Gets sheet by specified name.
+     *
+     * @param spreadsheet Spreadsheet
+     * @param sheetName Sheet name
+     * @return Sheet
+     */
+    private Sheet getSheet(Spreadsheet spreadsheet, String sheetName) {
+        List<Sheet> sheets = spreadsheet.getSheets();
+        for (Sheet sheet : sheets) {
+            if (getSheetName(sheet).equals(sheetName)) {
+                return sheet;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -144,24 +170,139 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
     public Map<String, List<List<Object>>> getBatchRangeCellValues(String... ranges) throws IOException {
         List<String> rangeList = Arrays.asList(ranges);
 
-        BatchGetValuesResponse response = sheetsService.spreadsheets().values().batchGet(spreadsheetId)
+        Spreadsheet spreadsheetData = sheetsService.spreadsheets().get(spreadsheetId)
+                .setFields("sheets(properties.title,data(rowData.values(effectiveValue,effectiveFormat(textFormat.strikethrough,numberFormat),textFormatRuns(format.strikethrough,startIndex))))")
+                .setIncludeGridData(true)
+                .setPrettyPrint(false)
                 .setRanges(rangeList)
                 .execute();
 
+        Map<String, List<String>> rangeGroup = groupRanges(ranges);
         Map<String, List<List<Object>>> values = new HashMap<>();
-        List<ValueRange> valueRanges = response.getValueRanges();
-        for (ValueRange valueRange : valueRanges) {
-            RangeLocation range = new RangeLocation(valueRange.getRange());
-            values.put(range.formatAsString(), valueRange.getValues());
+        for (String sheetName : rangeGroup.keySet()) {
+            Sheet sheet = getSheet(spreadsheetData, sheetName);
+            if (sheet != null) {
+                List<GridData> gridData = sheet.getData();
+                if (CollectionUtils.isNotEmpty(gridData)) {
+                    int i = 0;
+                    for (GridData data : gridData) {
+                        String range = rangeGroup.get(sheetName).get(i);
+                        values.put(range, getRangeData(data));
+                        i++;
+                    }
+                }
+            }
         }
         return values;
     }
 
-    @Override
-    public List<List<Object>> getRangeCellValues(String range) throws IOException {
-        ValueRange valueRange = sheetsService.spreadsheets().values()
-                .get(spreadsheetId, range)
-                .execute();
-        return valueRange.getValues();
+    /**
+     * Groups input ranges by range's sheet name.
+     *
+     * @param ranges the ranges
+     * @return grouped range
+     */
+    private Map<String, List<String>> groupRanges(String... ranges) {
+        Map<String, List<String>> rangeGroup = new HashMap<>();
+        for(String range : ranges) {
+            RangeLocation rangeLocation = new RangeLocation(range);
+            List<String> group = rangeGroup.computeIfAbsent(rangeLocation.getFirstCell().getSheetName(), k -> new ArrayList<>());
+            if (!group.contains(range)) {
+                group.add(range);
+            }
+        }
+        return rangeGroup;
+    }
+
+    /**
+     * Get range data from the given {@link GridData}
+     *
+     * @param gridData Grid data
+     * @return Range data
+     */
+    private List<List<Object>> getRangeData(GridData gridData) {
+        List<List<Object>> rangeData = new ArrayList<>();
+        List<RowData> gridRowData = gridData.getRowData();
+        if (CollectionUtils.isNotEmpty(gridRowData)) {
+            for (RowData gridRow : gridRowData) {
+                List<Object> rowData = new ArrayList<>();
+                List<CellData> gridCellData = gridRow.getValues();
+                if (CollectionUtils.isNotEmpty(gridCellData)) {
+                    for (CellData gridCell : gridCellData) {
+                        rowData.add(getCellDataValue(gridCell));
+                    }
+                }
+                rangeData.add(rowData);
+            }
+        }
+        return rangeData;
+    }
+
+    /**
+     * Get cell data value from the given {@link CellData}
+     *
+     * @param cellData Cell data
+     * @return Cell data value
+     */
+    private Object getCellDataValue(CellData cellData) {
+        ExtendedValue effectiveValue = cellData.getEffectiveValue();
+        CellFormat effectiveFormat = cellData.getEffectiveFormat();
+        if (effectiveValue == null || (effectiveFormat != null && isStrikethrough(effectiveFormat.getTextFormat()))) {
+            return null;
+        }
+        if (effectiveValue.getStringValue() != null) {
+            List<TextFormatRun> formatRuns = cellData.getTextFormatRuns();
+            if (CollectionUtils.isNotEmpty(formatRuns)) {
+                StringBuilder plainText = new StringBuilder();
+                int i = 0;
+                for (TextFormatRun formatRun : formatRuns) {
+                    int runStart = formatRun.getStartIndex() == null ? 0 : formatRun.getStartIndex();
+                    int runLength;
+                    if (i < formatRuns.size() - 1) {
+                        TextFormatRun nextRun = formatRuns.get(i + 1);
+                        runLength = nextRun.getStartIndex() - runStart;
+                    } else {
+                        runLength = effectiveValue.getStringValue().length() - 1 - runStart;
+                    }
+                    if (!isStrikethrough(formatRun.getFormat())) {
+                        plainText.append(effectiveValue.getStringValue().substring(runStart, runStart + runLength));
+                    }
+                    i++;
+                }
+                if (plainText.length() > 0) {
+                    return plainText.toString();
+                } else {
+                    return null;
+                }
+            }
+            return effectiveValue.getStringValue();
+        } else if (effectiveValue.getNumberValue() != null) {
+            if (effectiveFormat == null || effectiveFormat.getNumberFormat() == null) {
+                return getNumericValue(effectiveValue.getNumberValue());
+            } else if (StringUtils.equalsAnyIgnoreCase(effectiveFormat.getNumberFormat().getType(), "TEXT")) {
+                return String.valueOf(getNumericValue(effectiveValue.getNumberValue()));
+            } else if (StringUtils.equalsAnyIgnoreCase(effectiveFormat.getNumberFormat().getType(), "DATE", "TIME", "DATE_TIME")) {
+                return DateUtil.getJavaDate(effectiveValue.getNumberValue(), false);
+            } else {
+                if (StringUtils.containsAny(effectiveFormat.getNumberFormat().getPattern(), ".0", ".#", ".?")) {
+                    return effectiveValue.getNumberValue();
+                } else {
+                    return getIntValue(effectiveValue.getNumberValue());
+                }
+            }
+        } else if (effectiveValue.getBoolValue() != null) {
+            return effectiveValue.getBoolValue();
+        }
+        return null;
+    }
+
+    /**
+     * Checks if the text format is strike-through.
+     *
+     * @param textFormat The text format
+     * @return true if the text format is strike-through
+     */
+    private boolean isStrikethrough(TextFormat textFormat) {
+        return textFormat != null && textFormat.getStrikethrough() != null && textFormat.getStrikethrough();
     }
 }

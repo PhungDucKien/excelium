@@ -26,12 +26,15 @@ package excelium.xls;
 
 import excelium.common.TemplateUtil;
 import excelium.core.reader.TestReader;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,18 +57,86 @@ public class ExcelReaderTest {
 
     @Test
     public void testGetWorkbookName() throws IOException, URISyntaxException {
-        TestReader sheetsReader = readerFactory.createReader(ExcelReader.class.getResource("/Simple Template.xlsx").toURI().getPath());
-        Assert.assertTrue(sheetsReader.getWorkbookName().endsWith("Simple Template.xlsx"));
+        String filePath = ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath();
+        TestReader excelReader = readerFactory.createReader(filePath);
+        Assert.assertEquals(filePath, excelReader.getWorkbookName());
+    }
+
+    @Test
+    public void testGetSheetName() throws URISyntaxException, IOException {
+        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        List<Sheet> sheets = excelReader.listSheets();
+        Assert.assertEquals("Sheet1", excelReader.getSheetName(sheets.get(0)));
+        Assert.assertEquals("Sheet2", excelReader.getSheetName(sheets.get(1)));
+        Assert.assertEquals("Sheet3", excelReader.getSheetName(sheets.get(2)));
+    }
+
+    @Test
+    public void testListSheets() throws URISyntaxException, IOException {
+        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        List<Sheet> sheets = excelReader.listSheets();
+        Assert.assertEquals(3, sheets.size());
     }
 
     @Test
     public void testGetMarkupLocationMap() throws IllegalAccessException, IOException, URISyntaxException {
-        TestReader sheetsReader = readerFactory.createReader(ExcelReader.class.getResource("/Simple Template.xlsx").toURI().getPath());
-        Map<Object, String> markupLocations = sheetsReader.getMarkupLocationMap(TemplateUtil.getMarkups());
+        TestReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Simple Template.xlsx").toURI().getPath());
+        Map<Object, String> markupLocations = excelReader.getMarkupLocationMap(TemplateUtil.getMarkups());
         Assert.assertEquals(4, markupLocations.size());
         Assert.assertEquals("'Test Case'!A2", markupLocations.get("%TEST_COMMAND%"));
         Assert.assertEquals("'Test Case'!B2", markupLocations.get("%TEST_PARAM1%"));
         Assert.assertEquals("'Test Case'!C2", markupLocations.get("%TEST_PARAM2%"));
         Assert.assertEquals("'Test Case'!D2", markupLocations.get("%TEST_PARAM3%"));
+    }
+
+    @Test
+    public void testGetBatchRangeCellValues() throws IOException, URISyntaxException {
+        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        Map<String, List<List<Object>>> rangeCellValues = excelReader.getBatchRangeCellValues(
+                "Sheet1!B2", "Sheet1!C2", "Sheet1!D2", "Sheet1!B3", "Sheet1!C3", "Sheet1!B4", "Sheet1!C4", "Sheet1!D4", "Sheet1!E4",
+                "Sheet1!B5", "Sheet1!C5", "Sheet1!B6", "Sheet1!C6", "Sheet1!B7", "Sheet1!C7", "Sheet1!B8", "Sheet1!C8"
+        );
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Assert.assertEquals("Cell B2", rangeCellValues.get("Sheet1!B2").get(0).get(0));
+        Assert.assertEquals("Cell C2", rangeCellValues.get("Sheet1!C2").get(0).get(0));
+        Assert.assertEquals("Cell D2", rangeCellValues.get("Sheet1!D2").get(0).get(0));
+        Assert.assertEquals(1, rangeCellValues.get("Sheet1!B3").get(0).get(0));
+        Assert.assertEquals(2, rangeCellValues.get("Sheet1!C3").get(0).get(0));
+        Assert.assertEquals(true, rangeCellValues.get("Sheet1!B4").get(0).get(0));
+        Assert.assertEquals(false, rangeCellValues.get("Sheet1!C4").get(0).get(0));
+        Assert.assertEquals(true, rangeCellValues.get("Sheet1!D4").get(0).get(0));
+        Assert.assertEquals(false, rangeCellValues.get("Sheet1!E4").get(0).get(0));
+        Assert.assertEquals(1.1, rangeCellValues.get("Sheet1!B5").get(0).get(0));
+        Assert.assertEquals(2.1, rangeCellValues.get("Sheet1!C5").get(0).get(0));
+        Assert.assertEquals("2018-01-01", format.format(rangeCellValues.get("Sheet1!B6").get(0).get(0)));
+        Assert.assertEquals("2018-01-02", format.format(rangeCellValues.get("Sheet1!C6").get(0).get(0)));
+        Assert.assertEquals(1, rangeCellValues.get("Sheet1!B7").get(0).get(0));
+        Assert.assertEquals("2.2", rangeCellValues.get("Sheet1!C7").get(0).get(0));
+        Assert.assertEquals("2018-01-01", format.format(rangeCellValues.get("Sheet1!B8").get(0).get(0)));
+        Assert.assertEquals("2018-01-02", format.format(rangeCellValues.get("Sheet1!C8").get(0).get(0)));
+    }
+
+    @Test
+    public void testGetRangeCellValues() throws IOException, URISyntaxException {
+        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        List<List<Object>> rangeCellValue = excelReader.getRangeCellValues("Sheet1!B2:E8");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Assert.assertEquals("Cell B2", rangeCellValue.get(0).get(0));
+        Assert.assertEquals("Cell C2", rangeCellValue.get(0).get(1));
+        Assert.assertEquals("Cell D2", rangeCellValue.get(0).get(2));
+        Assert.assertEquals(1, rangeCellValue.get(1).get(0));
+        Assert.assertEquals(2, rangeCellValue.get(1).get(1));
+        Assert.assertEquals(true, rangeCellValue.get(2).get(0));
+        Assert.assertEquals(false, rangeCellValue.get(2).get(1));
+        Assert.assertEquals(true, rangeCellValue.get(2).get(2));
+        Assert.assertEquals(false, rangeCellValue.get(2).get(3));
+        Assert.assertEquals(1.1, rangeCellValue.get(3).get(0));
+        Assert.assertEquals(2.1, rangeCellValue.get(3).get(1));
+        Assert.assertEquals("2018-01-01", format.format(rangeCellValue.get(4).get(0)));
+        Assert.assertEquals("2018-01-02", format.format(rangeCellValue.get(4).get(1)));
+        Assert.assertEquals(1, rangeCellValue.get(5).get(0));
+        Assert.assertEquals("2.2", rangeCellValue.get(5).get(1));
+        Assert.assertEquals("2018-01-01", format.format(rangeCellValue.get(6).get(0)));
+        Assert.assertEquals("2018-01-02", format.format(rangeCellValue.get(6).get(1)));
     }
 }

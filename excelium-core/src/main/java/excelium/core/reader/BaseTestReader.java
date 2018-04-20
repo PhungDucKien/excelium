@@ -96,6 +96,17 @@ public abstract class BaseTestReader<W, S> extends TestReader<W> {
     }
 
     /**
+     * Get 2-dimension list of values of a single cell range
+     *
+     * @param range Cell range
+     * @return range object values
+     * @throws IOException the io exception
+     */
+    public List<List<Object>> getRangeCellValues(String range) throws IOException {
+        return getBatchRangeCellValues(range).get(range);
+    }
+
+    /**
      * Get a map of 2-dimension list of values of multiple cell ranges
      *
      * @param ranges Range array
@@ -103,15 +114,6 @@ public abstract class BaseTestReader<W, S> extends TestReader<W> {
      * @throws IOException the io exception
      */
     public abstract Map<String, List<List<Object>>> getBatchRangeCellValues(String... ranges) throws IOException;
-
-    /**
-     * Get 2-dimension list of values of a single cell range
-     *
-     * @param range Cell range
-     * @return range object values
-     * @throws IOException the io exception
-     */
-    public abstract List<List<Object>> getRangeCellValues(String range) throws IOException;
 
     /**
      * Searches the given sheet of the workbook/spreadsheet to find the locations of the first cells

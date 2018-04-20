@@ -24,33 +24,32 @@
 
 package excelium.common;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
- * Collection of string handling utilities
+ * Tests for {@link NumberUtil}.
  *
  * @author PhungDucKien
- * @since 2018.04.11
+ * @since 2018.04.19
  */
-public class StringUtil {
+public class NumberUtilTest {
 
-    /**
-     * Extract spreadsheet id from a spreadsheet url.
-     *
-     * @param url the spreadsheet url
-     * @return the spreadsheet id. Return the given string if it is not a spreadsheet url.
-     * @see <a href="https://developers.google.com/sheets/api/guides/concepts">Key Concepts in the Google Sheets API</a>
-     */
-    public static String extractSpreadsheetId(String url) {
-        String regex = "/spreadsheets/d/([a-zA-Z0-9-_]+)";
+    @Test
+    public void testGetNumericValue() {
+        Assert.assertEquals(1, NumberUtil.getNumericValue(1.0));
+        Assert.assertEquals(1.4, NumberUtil.getNumericValue(1.4));
+        Assert.assertEquals(-1, NumberUtil.getNumericValue(-1.0));
+        Assert.assertEquals(10000000000L, NumberUtil.getNumericValue(10000000000.0));
+    }
 
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(url);
-
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-        return url;
+    @Test
+    public void testGetIntValue() {
+        Assert.assertEquals(1, NumberUtil.getIntValue(1.0));
+        Assert.assertEquals(1, NumberUtil.getIntValue(1.4));
+        Assert.assertEquals(1, NumberUtil.getIntValue(1.5));
+        Assert.assertEquals(1, NumberUtil.getIntValue(1.6));
+        Assert.assertEquals(-1, NumberUtil.getIntValue(-1.0));
+        Assert.assertEquals(10000000000L, NumberUtil.getIntValue(10000000000.0));
     }
 }
