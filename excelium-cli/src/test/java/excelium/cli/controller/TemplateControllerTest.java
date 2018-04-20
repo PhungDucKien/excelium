@@ -68,7 +68,7 @@ public class TemplateControllerTest {
     TemplateController templateController;
 
     @Test
-    public void testImportTemplate() throws IOException, JAXBException, IllegalAccessException {
+    public void testImportTemplateSimple() throws IOException, JAXBException, IllegalAccessException {
         Project project = new Project();
 
         GoogleConnection connection = new GoogleConnectionService();
@@ -96,7 +96,40 @@ public class TemplateControllerTest {
     }
 
     @Test
-    public void testRemoveNotDefaultTemplate() throws IOException, JAXBException, IllegalAccessException {
+    public void testImportTemplateComplex() throws IOException, JAXBException, IllegalAccessException {
+        Project project = new Project();
+
+        GoogleConnection connection = new GoogleConnectionService();
+        SheetsServiceProvider sheetsServiceProvider = new SheetsServiceProvider(connection);
+        Sheets sheetsService = sheetsServiceProvider.createSheetsService();
+        TestReaderFactory testReaderFactory = new SheetsReaderFactory(sheetsService);
+
+        Deencapsulation.setField(templateController, project);
+        Deencapsulation.setField(templateController, testReaderFactory);
+
+        new Expectations() {{
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, InputResult>() {{ put("", new InputResult("https://docs.google.com/spreadsheets/d/1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50/edit#gid=0")); }},
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("Mapping")); }},
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("Actions")); }},
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("Test Data")); }},
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("*")); }},
+                    new HashMap<String, ConfirmResult>() {{ put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES)); }},
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("Commands")); }},
+                    new HashMap<String, ConfirmResult>() {{ put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.NO)); }});
+
+            project.setWorkbookType(WorkbookType.SHEETS);
+        }};
+
+        templateController.importTemplate();
+
+        new Verifications() {{
+            projectGenerator.updateProject((Project) any, (Path) any);
+        }};
+    }
+
+    @Test
+    public void testRemove() throws IOException, JAXBException, IllegalAccessException {
         Project project = new Project();
 
         Deencapsulation.setField(templateController, project);
@@ -115,55 +148,6 @@ public class TemplateControllerTest {
         templateController.remove();
 
         Assert.assertEquals(2, project.getTemplates().size());
-        new Verifications() {{
-            projectGenerator.updateProject((Project) any, (Path) any);
-        }};
-    }
-
-    @Test
-    public void testRemoveDefaultTemplate() throws IOException, JAXBException, IllegalAccessException {
-        Project project = new Project();
-
-        Deencapsulation.setField(templateController, project);
-
-        new Expectations() {{
-            consolePrompt.prompt((List<PromptableElementIF>) any);
-            returns(new HashMap<String, ListResult>() {{ put("", new ListResult("Template1")); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult("Template3")); }});
-
-            project.setTemplates(new HashMap<String, Template>() {{
-                put("Template1", new Template());
-                put("Template2", new Template());
-                put("Template3", new Template());
-            }});
-        }};
-
-        templateController.remove();
-
-        Assert.assertEquals(2, project.getTemplates().size());
-        new Verifications() {{
-            projectGenerator.updateProject((Project) any, (Path) any);
-        }};
-    }
-
-    @Test
-    public void testRemoveLastTemplate() throws IOException, JAXBException, IllegalAccessException {
-        Project project = new Project();
-
-        Deencapsulation.setField(templateController, project);
-
-        new Expectations() {{
-            consolePrompt.prompt((List<PromptableElementIF>) any);
-            result = new HashMap<String, ListResult>() {{ put("", new ListResult("Template1")); }};
-
-            project.setTemplates(new HashMap<String, Template>() {{
-                put("Template1", new Template());
-            }});
-        }};
-
-        templateController.remove();
-
-        Assert.assertEquals(0, project.getTemplates().size());
         new Verifications() {{
             projectGenerator.updateProject((Project) any, (Path) any);
         }};

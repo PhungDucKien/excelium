@@ -143,4 +143,31 @@ public class SheetsReaderTest {
         Assert.assertEquals("2018-01-01", format.format(rangeCellValue.get(6).get(0)));
         Assert.assertEquals("2018-01-02", format.format(rangeCellValue.get(6).get(1)));
     }
+
+    @Test
+    public void testGetBatchCellValues() throws IOException {
+        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
+        Map<String, Object> cellValues = sheetsReader.getBatchCellValues(
+                "Sheet1!B2", "Sheet1!C2", "Sheet1!D2", "Sheet1!B3", "Sheet1!C3", "Sheet1!B4", "Sheet1!C4", "Sheet1!D4", "Sheet1!E4",
+                "Sheet1!B5", "Sheet1!C5", "Sheet1!B6", "Sheet1!C6", "Sheet1!B7", "Sheet1!C7", "Sheet1!B8", "Sheet1!C8"
+        );
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Assert.assertEquals("Cell B2", cellValues.get("Sheet1!B2"));
+        Assert.assertEquals("Cell C2", cellValues.get("Sheet1!C2"));
+        Assert.assertEquals("Cell D2", cellValues.get("Sheet1!D2"));
+        Assert.assertEquals(1, cellValues.get("Sheet1!B3"));
+        Assert.assertEquals(2, cellValues.get("Sheet1!C3"));
+        Assert.assertEquals(true, cellValues.get("Sheet1!B4"));
+        Assert.assertEquals(false, cellValues.get("Sheet1!C4"));
+        Assert.assertEquals(true, cellValues.get("Sheet1!D4"));
+        Assert.assertEquals(false, cellValues.get("Sheet1!E4"));
+        Assert.assertEquals(1.1, cellValues.get("Sheet1!B5"));
+        Assert.assertEquals(2.1, cellValues.get("Sheet1!C5"));
+        Assert.assertEquals("2018-01-01", format.format(cellValues.get("Sheet1!B6")));
+        Assert.assertEquals("2018-01-02", format.format(cellValues.get("Sheet1!C6")));
+        Assert.assertEquals(1, cellValues.get("Sheet1!B7"));
+        Assert.assertEquals("2.2", cellValues.get("Sheet1!C7"));
+        Assert.assertEquals("2018-01-01", format.format(cellValues.get("Sheet1!B8")));
+        Assert.assertEquals("2018-01-02", format.format(cellValues.get("Sheet1!C8")));
+    }
 }

@@ -43,7 +43,7 @@ public class StringUtil {
      * @see <a href="https://developers.google.com/sheets/api/guides/concepts">Key Concepts in the Google Sheets API</a>
      */
     public static String extractSpreadsheetId(String url) {
-        String regex = "/spreadsheets/d/([a-zA-Z0-9-_]+)";
+        String regex = "/d/([a-zA-Z0-9-_]+)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(url);

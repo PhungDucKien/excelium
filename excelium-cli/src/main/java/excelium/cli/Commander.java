@@ -59,22 +59,22 @@ public class Commander extends JCommander {
     /**
      * Controller instances
      */
-    private static Map<String, BaseController> controllerObjects = new HashMap<>();
+    private Map<String, BaseController> controllerObjects = new HashMap<>();
 
     /**
      * Bean factory instance
      */
-    private static Object beanFactoryObject;
+    private Object beanFactoryObject;
 
     /**
      * Mapping bean class type to bean factory method
      */
-    private static Map<Class, Method> beanMethodMap = new HashMap<>();
+    private Map<Class, Method> beanMethodMap = new HashMap<>();
 
     /**
      * Map of bean class type to bean instantiated object
      */
-    private static Map<Class, Object> beanMap = new HashMap<>();
+    private Map<Class, Object> beanMap = new HashMap<>();
 
     /**
      * Registers controllers by using an array of controller classes.
@@ -88,7 +88,7 @@ public class Commander extends JCommander {
      */
     void registerControllers(Class<? extends BaseController>... classes) throws IllegalAccessException, InstantiationException {
         for (Class<? extends BaseController> clazz : classes) {
-            Controller controller = (Controller) clazz.getDeclaredAnnotation(Controller.class);
+            Controller controller = clazz.getDeclaredAnnotation(Controller.class);
             if (controller != null) {
                 String controllerName = controller.name();
                 BaseController controllerObject = clazz.newInstance();

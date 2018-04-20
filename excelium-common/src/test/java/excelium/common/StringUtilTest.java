@@ -40,6 +40,9 @@ public class StringUtilTest {
         Assert.assertEquals("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU", StringUtil.extractSpreadsheetId("https://docs.google.com/spreadsheets/d/1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU"));
         Assert.assertEquals("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU", StringUtil.extractSpreadsheetId("https://docs.google.com/spreadsheets/d/1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU/"));
         Assert.assertEquals("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU", StringUtil.extractSpreadsheetId("https://docs.google.com/spreadsheets/d/1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU/edit#gid=1160173419"));
+        Assert.assertEquals("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU", StringUtil.extractSpreadsheetId("https://docs.google.com/spreadsheets/u/0/d/1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU"));
+        Assert.assertEquals("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU", StringUtil.extractSpreadsheetId("https://docs.google.com/spreadsheets/u/0/d/1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU/"));
+        Assert.assertEquals("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU", StringUtil.extractSpreadsheetId("https://docs.google.com/spreadsheets/u/0/d/1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU/edit#gid=1160173419"));
         Assert.assertEquals("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU", StringUtil.extractSpreadsheetId("1c87yUrvu-j-2Ve55NM8hYxYCkorcPm3W9VwHR_hDThU"));
     }
 }

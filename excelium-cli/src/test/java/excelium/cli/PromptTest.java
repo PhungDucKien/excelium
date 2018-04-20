@@ -30,11 +30,15 @@ import de.codeshelf.consoleui.prompt.ConfirmResult;
 import de.codeshelf.consoleui.prompt.ConsolePrompt;
 import de.codeshelf.consoleui.prompt.InputResult;
 import de.codeshelf.consoleui.prompt.ListResult;
+import excelium.model.enums.WorkbookType;
 import mockit.Expectations;
 import mockit.Mocked;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,5 +88,28 @@ public class PromptTest {
         }};
 
         Assert.assertEquals(true, Prompt.promptConfirm("Question"));
+    }
+
+    @Test
+    public void testPromptFileLocationExcel() throws Exception {
+        new Expectations() {{
+            consolePrompt.prompt((List<PromptableElementIF>) any); result = new HashMap<String, ListResult>() {{ put("", new ListResult("result")); }};
+        }};
+
+        Path basePath = Paths.get("myproject");
+        Files.createDirectories(basePath);
+
+        Assert.assertEquals("myproject/result", Prompt.promptFileLocation(WorkbookType.EXCEL, basePath,"Question", null));
+
+        Files.delete(basePath);
+    }
+
+    @Test
+    public void testPromptFileLocationSheets() throws Exception {
+        new Expectations() {{
+            consolePrompt.prompt((List<PromptableElementIF>) any); result = new HashMap<String, InputResult>() {{ put("", new InputResult("result")); }};
+        }};
+
+        Assert.assertEquals("result", Prompt.promptFileLocation(WorkbookType.SHEETS, null, null,"Question"));
     }
 }

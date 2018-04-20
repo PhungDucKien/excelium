@@ -65,4 +65,26 @@ public class PlatformTest {
         Assert.assertEquals("OTHER", listChoice[6][0]);
         Assert.assertEquals("Other", listChoice[6][1]);
     }
+
+    @Test
+    public void testIsWindows() {
+        Assert.assertTrue(Platform.WINDOWS_32.isWindows());
+        Assert.assertTrue(Platform.WINDOWS_64.isWindows());
+        Assert.assertFalse(Platform.MAC_OS.isWindows());
+        Assert.assertFalse(Platform.LINUX.isWindows());
+        Assert.assertFalse(Platform.ANDROID.isWindows());
+        Assert.assertFalse(Platform.IOS.isWindows());
+        Assert.assertFalse(Platform.OTHER.isWindows());
+    }
+
+    @Test
+    public void testIsMac() {
+        Assert.assertFalse(Platform.WINDOWS_32.isMac());
+        Assert.assertFalse(Platform.WINDOWS_64.isMac());
+        Assert.assertTrue(Platform.MAC_OS.isMac());
+        Assert.assertFalse(Platform.LINUX.isMac());
+        Assert.assertFalse(Platform.ANDROID.isMac());
+        Assert.assertFalse(Platform.IOS.isMac());
+        Assert.assertFalse(Platform.OTHER.isMac());
+    }
 }
