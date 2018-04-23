@@ -27,7 +27,6 @@ package excelium.common;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,17 +83,5 @@ public class ObjectUtilTest {
         Assert.assertEquals(2, list.size());
         Assert.assertEquals("abc", list.get(0));
         Assert.assertEquals("def", list.get(1));
-    }
-
-    @Test
-    public void testGetFirstValue() {
-        Assert.assertEquals(null, ObjectUtil.getFirstValue(null));
-        List<List<Object>> list = new ArrayList<>();
-        Assert.assertEquals(null, ObjectUtil.getFirstValue(list));
-        List<Object> childList = new ArrayList<>();
-        list.add(childList);
-        Assert.assertEquals(null, ObjectUtil.getFirstValue(list));
-        childList.add("abc");
-        Assert.assertEquals("abc", ObjectUtil.getFirstValue(list));
     }
 }

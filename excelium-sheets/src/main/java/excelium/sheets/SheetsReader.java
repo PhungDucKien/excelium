@@ -29,7 +29,7 @@ import com.google.api.services.sheets.v4.model.*;
 import excelium.common.ss.CellLocation;
 import excelium.common.ss.DateUtil;
 import excelium.common.ss.RangeLocation;
-import excelium.core.reader.DefaultTestReader;
+import excelium.core.reader.AbstractTestReader;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,7 +45,7 @@ import static excelium.common.NumberUtil.getNumericValue;
  * @author PhungDucKien
  * @since 2018.04.10
  */
-public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
+public class SheetsReader extends AbstractTestReader<Spreadsheet, Sheet> {
 
     /**
      * Spreadsheet id
@@ -69,22 +69,6 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
     }
 
     /**
-     * Gets spreadsheet.
-     *
-     * @return the spreadsheet
-     * @throws IOException the io exception
-     */
-    private Spreadsheet getSpreadsheet() throws IOException {
-        if (workbook == null) {
-            workbook = sheetsService.spreadsheets().get(spreadsheetId)
-                    .setFields("properties.title,sheets(properties(title,sheetId))")
-                    .setPrettyPrint(false)
-                    .execute();
-        }
-        return workbook;
-    }
-
-    /**
      * Gets sheet by specified name.
      *
      * @param spreadsheet Spreadsheet
@@ -102,8 +86,24 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
     }
 
     @Override
+    public Spreadsheet getWorkbook() throws IOException {
+        if (workbook == null) {
+            workbook = sheetsService.spreadsheets().get(spreadsheetId)
+                    .setFields("properties.title,sheets(properties(title,sheetId))")
+                    .setPrettyPrint(false)
+                    .execute();
+        }
+        return workbook;
+    }
+
+    @Override
     public String getWorkbookName() throws IOException {
-        return spreadsheetId + " - " + getSpreadsheet().getProperties().getTitle();
+        return spreadsheetId + " - " + getWorkbook().getProperties().getTitle();
+    }
+
+    @Override
+    public List<Sheet> listSheets() throws IOException {
+        return getWorkbook().getSheets();
     }
 
     @Override
@@ -112,13 +112,7 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
     }
 
     @Override
-    public List<Sheet> listSheets() throws IOException {
-        return getSpreadsheet().getSheets();
-    }
-
-    @Override
-    public String[] getMarkupLocations(List<Object> markups, Sheet sheet) throws IOException {
-
+    public Map<Object, String> batchFindFirstOccurrence(List<Object> values, Sheet sheet) throws IOException {
         // The data filters used to match the ranges of values to retrieve.  Ranges
         // that match any of the specified data filters will be included in the
         // response.
@@ -140,19 +134,18 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
         BatchGetValuesByDataFilterResponse response = request.execute();
         List<List<Object>> sheetValues = response.getValueRanges().get(0).getValueRange().getValues();
 
-        String[] cellLocations = new String[markups.size()];
+        Map<Object, String> cellLocations = new HashMap<>();
 
-        int i = 0;
-        for (Object markup : markups) {
+        for (Object value : values) {
             int r = 0;
             int c = 0;
 
             for (List<Object> rowValues : sheetValues) {
                 if (rowValues != null) {
                     for (Object cellValue : rowValues) {
-                        if (cellValue != null && cellValue.equals(markup)) {
+                        if (cellValue != null && cellValue.equals(value)) {
                             CellLocation cellLocation = new CellLocation(sheet.getProperties().getTitle(), r, c, false, false);
-                            cellLocations[i] = cellLocation.formatAsString();
+                            cellLocations.put(value, cellLocation.formatAsString());
                         }
                         c++;
                     }
@@ -160,14 +153,12 @@ public class SheetsReader extends DefaultTestReader<Spreadsheet, Sheet> {
                 r++;
                 c = 0;
             }
-
-            i++;
         }
         return cellLocations;
     }
 
     @Override
-    public Map<String, List<List<Object>>> getBatchRangeCellValues(String... ranges) throws IOException {
+    public Map<String, List<List<Object>>> batchGetRangeCellValues(String... ranges) throws IOException {
         List<String> rangeList = Arrays.asList(ranges);
 
         Spreadsheet spreadsheetData = sheetsService.spreadsheets().get(spreadsheetId)

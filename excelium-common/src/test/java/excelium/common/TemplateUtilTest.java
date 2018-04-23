@@ -47,6 +47,36 @@ public class TemplateUtilTest {
     }
 
     @Test
+    public void testGetMarkupLocations() throws IllegalAccessException {
+        Template template = new Template();
+        Map<Object, String> markupLocations = new HashMap<>();
+        markupLocations.put("%SYSTEM_NAME%", "configuration!A2");
+        markupLocations.put("%SYSTEM_IDENTIFIER%", "configuration!A3");
+        markupLocations.put("%FUNCTION_NAME%", "configuration!A4");
+        markupLocations.put("%FUNCTION_IDENTIFIER%", "config!A5");
+        markupLocations.put("%BASE_URL%", "config!A6");
+        markupLocations.put("%MAPPING_ITEM_NAME%", "mapping!A2");
+        markupLocations.put("%MAPPING_ITEM_DESC%", "map!A3");
+        markupLocations.put("%ACTION_NAME%", "action!A2");
+        markupLocations.put("%ACTION_DESC%", "act!A3");
+        markupLocations.put("%DATA_NAME%", "data!A2");
+        markupLocations.put("%DATA_DESC%", "dat!A3");
+        markupLocations.put("%TEST_COMMAND%", "test!A2");
+        markupLocations.put("%TEST_NAME%", "tes!A3");
+        template.setMarkupLocations(markupLocations);
+
+        Map<Object, String> predicateMarkupLocations = TemplateUtil.getMarkupLocations(template, s -> "%TEST_NAME%".equals(s));
+        Assert.assertEquals(1, predicateMarkupLocations.size());
+        Assert.assertEquals("tes!A3", predicateMarkupLocations.get("%TEST_NAME%"));
+
+        predicateMarkupLocations = TemplateUtil.getMarkupLocations(template, s -> true);
+        Assert.assertEquals(13, predicateMarkupLocations.size());
+
+        predicateMarkupLocations = TemplateUtil.getMarkupLocations(template, s -> false);
+        Assert.assertEquals(0, predicateMarkupLocations.size());
+    }
+
+    @Test
     public void testGetConfigurationMarkupLocations() throws IllegalAccessException {
         Template template = new Template();
         Map<Object, String> markupLocations = new HashMap<>();

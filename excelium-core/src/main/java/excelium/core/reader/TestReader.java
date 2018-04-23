@@ -28,42 +28,17 @@ import excelium.model.project.Template;
 import excelium.model.test.Test;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 /**
- * Reads test files.
+ * Test reader interface.
+ * Provides method that reads test files.
  *
  * @param <W> Workbook class
+ * @param <S> Sheet class
  * @author PhungDucKien
  * @since 2018.04.10
  */
-public abstract class TestReader<W> {
-
-    /**
-     * The Workbook.
-     */
-    protected W workbook;
-
-    /**
-     * Gets workbook name.
-     *
-     * @return the workbook name
-     * @throws IOException the io exception
-     */
-    public abstract String getWorkbookName() throws IOException;
-
-    /**
-     * Searches all the sheets of the workbook/spreadsheet to find the locations of the first cells
-     * that have values match the given markups.
-     * This method return the map that maps a markup to the location of the found cell.
-     * The location of the cell contains the sheet name and A1 notation.
-     *
-     * @param markups The markups to search
-     * @return Markup location map
-     * @throws IOException the io exception
-     */
-    public abstract Map<Object, String> getMarkupLocationMap(List<Object> markups) throws IOException;
+public interface TestReader<W, S> extends WorkbookReader<W, S> {
 
     /**
      * Parses test file.
@@ -72,5 +47,5 @@ public abstract class TestReader<W> {
      * @return Parsed test object
      * @throws IOException the io exception
      */
-    public abstract Test parseTest(Template template) throws IOException;
+    Test parseTest(Template template) throws IOException;
 }

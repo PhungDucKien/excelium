@@ -24,7 +24,6 @@
 
 package excelium.common;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -85,18 +84,5 @@ public class ObjectUtil {
             }
         }
         return valueList;
-    }
-
-    /**
-     * Get first value of 2-dimension list of objects
-     *
-     * @param value 2-dimension list of objects
-     * @return first value
-     */
-    public static Object getFirstValue(List<List<Object>> value) {
-        if (CollectionUtils.isNotEmpty(value) && CollectionUtils.isNotEmpty(value.get(0))) {
-            return value.get(0).get(0);
-        }
-        return null;
     }
 }

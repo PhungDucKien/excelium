@@ -40,18 +40,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static excelium.common.EnvironmentUtil.*;
-import static excelium.common.ObjectUtil.*;
+import static excelium.common.EnvironmentUtil.getAvailableMobileAppEnvironments;
+import static excelium.common.EnvironmentUtil.getAvailableMobileWebEnvironments;
+import static excelium.common.EnvironmentUtil.getAvailablePcEnvironments;
+import static excelium.common.ObjectUtil.getBooleanValue;
+import static excelium.common.ObjectUtil.getListValue;
+import static excelium.common.ObjectUtil.getStringValue;
 
 /**
- * Implements the default {@link TestReader}.
+ * Abstract test reader that implements {@link TestReader}.
  *
  * @param <W> Workbook class
  * @param <S> Sheet class
  * @author PhungDucKien
- * @since 2018.04.10
+ * @since 2018.04.23
  */
-public abstract class DefaultTestReader<W, S> extends BaseTestReader<W, S> {
+public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W, S> implements TestReader<W, S> {
 
     @Override
     public Test<W, S> parseTest(Template template) throws IOException {
@@ -101,7 +105,7 @@ public abstract class DefaultTestReader<W, S> extends BaseTestReader<W, S> {
     private void setTestConfig(Test<W, S> test, Template template) throws IOException {
         Map<Object, String> configurationMarkupLocations = TemplateUtil.getConfigurationMarkupLocations(template);
         String[] configurationLocations = configurationMarkupLocations.values().toArray(new String[0]);
-        Map<Object, Object> values = getMarkupValues(configurationMarkupLocations, getBatchCellValues(configurationLocations));
+        Map<Object, Object> values = getMarkupValues(configurationMarkupLocations, batchGetCellValues(configurationLocations));
 
         String baseUrl = getStringValue(values.get(Template.BASE_URL));
         List<Environment> environments = getEnvironments(values);

@@ -27,7 +27,7 @@ package excelium.xls;
 import excelium.common.ss.CellLocation;
 import excelium.common.ss.DateUtil;
 import excelium.common.ss.RangeLocation;
-import excelium.core.reader.DefaultTestReader;
+import excelium.core.reader.AbstractTestReader;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,7 +51,7 @@ import static excelium.common.NumberUtil.getNumericValue;
  * @author PhungDucKien
  * @since 2018.04.10
  */
-public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
+public class ExcelReader extends AbstractTestReader<Workbook, Sheet> {
 
     /**
      * Logger
@@ -81,13 +81,13 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
     }
 
     @Override
-    public String getWorkbookName() throws IOException {
-        return filePath;
+    public Workbook getWorkbook() throws IOException {
+        return workbook;
     }
 
     @Override
-    public String getSheetName(Sheet sheet) {
-        return sheet.getSheetName();
+    public String getWorkbookName() throws IOException {
+        return filePath;
     }
 
     @Override
@@ -102,46 +102,23 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
     }
 
     @Override
-    public String[] getMarkupLocations(List<Object> markups, Sheet sheet) throws IOException {
-        String[] cellLocations = new String[markups.size()];
+    public String getSheetName(Sheet sheet) {
+        return sheet.getSheetName();
+    }
 
-        int i = 0;
-        for (Object markup : markups) {
-            cellLocations[i] = getMarkupLocation(markup, sheet);
-            i++;
+    @Override
+    public Map<Object, String> batchFindFirstOccurrence(List<Object> values, Sheet sheet) throws IOException {
+        Map<Object, String> cellLocations = new HashMap<>();
+        for (Object value : values) {
+            if (StringUtils.isNotBlank(findFirstOccurrence(value, sheet))) {
+                cellLocations.put(value, findFirstOccurrence(value, sheet));
+            }
         }
         return cellLocations;
     }
 
     @Override
-    public Map<String, List<List<Object>>> getBatchRangeCellValues(String... ranges) throws IOException {
-        Map<String, List<List<Object>>> rangeCellValues = new HashMap<>();
-        for (String range : ranges) {
-            RangeLocation rangeLocation = new RangeLocation(range);
-            String sheetName = rangeLocation.getFirstCell().getSheetName();
-            Sheet sheet = workbook.getSheet(sheetName);
-            List<List<Object>> values = new ArrayList<>();
-            for (int r = rangeLocation.getFirstCell().getRow(); r <= rangeLocation.getLastCell().getRow(); r++) {
-                List<Object> rowValues = new ArrayList<>();
-                for (int c = rangeLocation.getFirstCell().getCol(); c <= rangeLocation.getLastCell().getCol(); c++) {
-                    rowValues.add(getCellValue(sheet, r, c));
-                }
-                values.add(rowValues);
-            }
-            rangeCellValues.put(rangeLocation.formatAsString(), values);
-        }
-        return rangeCellValues;
-    }
-
-    /**
-     * Searches the given sheet to find the location of the first cell that has
-     * value matches the given markup.
-     *
-     * @param markup The markup to search
-     * @param sheet  Sheet
-     * @return Cell location with sheet name. Return null if no cell found
-     */
-    private String getMarkupLocation(Object markup, Sheet sheet) {
+    public String findFirstOccurrence(Object value, Sheet sheet) {
         int firstRow = sheet.getFirstRowNum() < 0 ? 0 : sheet.getFirstRowNum();
         int lastRow = sheet.getLastRowNum() < 0 ? 0 : sheet.getLastRowNum();
 
@@ -158,7 +135,7 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
 
                 for (int j = firstCol; j <= lastCol; j++) {
                     Object cellValue = getCellValue(sheet, i, j);
-                    if (cellValue != null && cellValue.equals(markup)) {
+                    if (cellValue != null && cellValue.equals(value)) {
                         CellLocation cellLocation = new CellLocation(sheet.getSheetName(), i, j, false, false);
                         return cellLocation.formatAsString();
                     }
@@ -166,6 +143,26 @@ public class ExcelReader extends DefaultTestReader<Workbook, Sheet> {
             }
         }
         return null;
+    }
+
+    @Override
+    public Map<String, List<List<Object>>> batchGetRangeCellValues(String... ranges) throws IOException {
+        Map<String, List<List<Object>>> rangeCellValues = new HashMap<>();
+        for (String range : ranges) {
+            RangeLocation rangeLocation = new RangeLocation(range);
+            String sheetName = rangeLocation.getFirstCell().getSheetName();
+            Sheet sheet = workbook.getSheet(sheetName);
+            List<List<Object>> values = new ArrayList<>();
+            for (int r = rangeLocation.getFirstCell().getRow(); r <= rangeLocation.getLastCell().getRow(); r++) {
+                List<Object> rowValues = new ArrayList<>();
+                for (int c = rangeLocation.getFirstCell().getCol(); c <= rangeLocation.getLastCell().getCol(); c++) {
+                    rowValues.add(getCellValue(sheet, r, c));
+                }
+                values.add(rowValues);
+            }
+            rangeCellValues.put(rangeLocation.formatAsString(), values);
+        }
+        return rangeCellValues;
     }
 
     /**

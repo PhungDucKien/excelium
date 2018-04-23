@@ -30,10 +30,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Collection of template handling utilities
@@ -65,29 +63,40 @@ public class TemplateUtil {
     }
 
     /**
+     * Gets map of markups that match the given predicate and their locations.
+     *
+     * @param template  the template
+     * @param predicate the markup predicate
+     * @return the map of markups and their locations
+     */
+    public static Map<Object, String> getMarkupLocations(Template template, Predicate<String> predicate) {
+        if (template.getMarkupLocations() == null) {
+            return new HashMap<>();
+        }
+        Map<Object, String> markupLocations = new LinkedHashMap<>();
+        for (Object item : template.getMarkupLocations().keySet()) {
+            if (item instanceof String) {
+                String markup = (String) item;
+                if (predicate.test(markup)) {
+                    String location = template.getMarkupLocations().get(markup);
+                    if (StringUtils.isNotBlank(location)) {
+                        markupLocations.put(markup, location);
+                    }
+                }
+            }
+        }
+        return markupLocations;
+    }
+
+    /**
      * Gets map of configuration markups and their locations.
      *
      * @param template the template
      * @return the map of configuration markups and their locations
      */
     public static Map<Object, String> getConfigurationMarkupLocations(Template template) {
-        if (template.getMarkupLocations() == null) {
-            return new HashMap<>();
-        }
-        Map<Object, String> configurationMarkupLocations = new HashMap<>();
-        for (Object item : template.getMarkupLocations().keySet()) {
-            if (item instanceof String) {
-                String markup = (String) item;
-                if (!markup.startsWith("%MAPPING_") && !markup.startsWith("%ACTION_")
-                        && !markup.startsWith("%TEST_") && !markup.startsWith("%DATA_")) {
-                    String location = template.getMarkupLocations().get(markup);
-                    if (StringUtils.isNotBlank(location)) {
-                        configurationMarkupLocations.put(markup, location);
-                    }
-                }
-            }
-        }
-        return configurationMarkupLocations;
+        return getMarkupLocations(template,
+                s -> !StringUtils.startsWithAny(s, "%MAPPING_", "%ACTION_", "%TEST_", "%DATA_"));
     }
 
     /**

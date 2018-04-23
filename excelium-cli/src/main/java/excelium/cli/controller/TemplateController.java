@@ -79,7 +79,7 @@ public class TemplateController extends BaseController {
         Template template = new Template();
         template.setLocation(fileLocation);
         template.setName(testReader.getWorkbookName());
-        template.setMarkupLocations(testReader.getMarkupLocationMap(TemplateUtil.getMarkups()));
+        template.setMarkupLocations(testReader.batchFindFirstOccurrence(TemplateUtil.getMarkups()));
 
         String mappingSheet = TemplateUtil.getSuggestSheetForMapping(template);
         if (StringUtils.isNotBlank(mappingSheet)) {
