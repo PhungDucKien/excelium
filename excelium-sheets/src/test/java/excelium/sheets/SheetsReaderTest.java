@@ -28,6 +28,9 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.Sheet;
 import excelium.common.TemplateUtil;
 import excelium.core.reader.TestReader;
+import excelium.model.enums.Browser;
+import excelium.model.project.Template;
+import excelium.model.test.config.PcEnvironment;
 import excelium.sheets.connection.GoogleConnection;
 import excelium.sheets.connection.GoogleConnectionService;
 import org.junit.Assert;
@@ -36,8 +39,12 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static excelium.model.project.Template.*;
 
 /**
  * Tests for {@link SheetsReader}.
@@ -58,6 +65,64 @@ public class SheetsReaderTest {
         SheetsServiceProvider sheetsServiceProvider = new SheetsServiceProvider(connection);
         Sheets sheetsService = sheetsServiceProvider.createSheetsService();
         readerFactory = new SheetsReaderFactory(sheetsService);
+    }
+
+    @Test
+    public void testParseTest() throws IOException {
+        Template webTemplate = new Template();
+        webTemplate.setLocation("1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50");
+        webTemplate.setName("1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50 - Web Template");
+        webTemplate.setActionPattern("Actions");
+        webTemplate.setDataPattern("Test Data");
+        webTemplate.setMappingPattern("Mapping");
+        webTemplate.setTestPattern("*");
+        webTemplate.setIgnorePatterns(new ArrayList<String>() {{ add("Commands"); }});
+
+        Map<Object, String> markupLocations = new HashMap<>();
+        markupLocations.put(BASE_URL, "Configuration!B19");
+        markupLocations.put(USE_PC, "Configuration!B27");
+        markupLocations.put(USE_CHROME, "Configuration!B35");
+        markupLocations.put(MAPPING_PAGESET_NAME, "Mapping!B2");
+        markupLocations.put(MAPPING_PAGESET_PATH, "Mapping!C2");
+        markupLocations.put(MAPPING_PAGESET_TITLE, "Mapping!D2");
+        markupLocations.put(MAPPING_ITEM_NAME, "Mapping!E2");
+        markupLocations.put(MAPPING_ITEM_VALUE, "Mapping!F2");
+        markupLocations.put(ACTION_NO, "Actions!A3");
+        markupLocations.put(ACTION_GUTTER, "Actions!B3");
+        markupLocations.put(ACTION_CAPTURE, "Actions!C3");
+        markupLocations.put(ACTION_NAME, "Actions!E3");
+        markupLocations.put(ACTION_COMMAND, "Actions!F3");
+        markupLocations.put(ACTION_PARAM1, "Actions!G3");
+        markupLocations.put(ACTION_PARAM2, "Actions!H3");
+        markupLocations.put(ACTION_PARAM3, "Actions!I3");
+        markupLocations.put(ACTION_DATA, "Actions!J3");
+        markupLocations.put(TEST_NO, "'Test Case'!A3");
+        markupLocations.put(TEST_GUTTER, "'Test Case'!B3");
+        markupLocations.put(TEST_CAPTURE, "'Test Case'!C3");
+        markupLocations.put(TEST_NAME, "'Test Case'!E3");
+        markupLocations.put(TEST_COMMAND, "'Test Case'!F3");
+        markupLocations.put(TEST_PARAM1, "'Test Case'!G3");
+        markupLocations.put(TEST_PARAM2, "'Test Case'!H3");
+        markupLocations.put(TEST_PARAM3, "'Test Case'!I3");
+        markupLocations.put(TEST_DATA, "'Test Case'!J3");
+        markupLocations.put(DATA_NAME, "'Test Data'!A1");
+        markupLocations.put(DATA_DESC, "'Test Data'!B2");
+        markupLocations.put(DATA_TABLE_DEF, "'Test Data'!B3");
+        markupLocations.put(DATA_TABLE_DATA, "'Test Data'!B4");
+        webTemplate.setMarkupLocations(markupLocations);
+
+        TestReader sheetsReader = readerFactory.createReader("1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE");
+        excelium.model.test.Test test = sheetsReader.parseTest(webTemplate);
+
+        Assert.assertEquals("1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE - Web Test", test.getWorkbookName());
+        Assert.assertEquals("http://demo.excelium.tech", test.getConfig().getBaseUrl());
+        Assert.assertEquals(1, test.getConfig().getEnvironments().size());
+        Assert.assertEquals(Browser.CHROME, ((PcEnvironment) test.getConfig().getEnvironments().get(0)).getBrowser());
+
+        Assert.assertTrue(test.getPageSets().size() > 0);
+        Assert.assertTrue(test.getActions().size() > 0);
+        Assert.assertTrue(test.getTestSuites().size() > 0);
+        Assert.assertTrue(test.getTestData().size() > 0);
     }
 
     @Test

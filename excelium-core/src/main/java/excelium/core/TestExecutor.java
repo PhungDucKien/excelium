@@ -78,7 +78,7 @@ public class TestExecutor {
      * @param testFilter the test filter
      */
     public void execute(TestFilter testFilter) {
-        TestIterator iterator = new TestIterator(filterTestFiles(testFilter));
+        TestIterator iterator = new TestIterator(filterTestFiles(testFilter), testFilter);
         while (iterator.hasNext()) {
             try (Test test = iterator.next()) {
                 // Execute all tests of workbook
@@ -122,6 +122,11 @@ public class TestExecutor {
         List<TestFile> testFiles;
 
         /**
+         * Test filter
+         */
+        TestFilter testFilter;
+
+        /**
          * Cursor
          */
         private int cursor;
@@ -129,10 +134,12 @@ public class TestExecutor {
         /**
          * Instantiates a new Test iterator.
          *
-         * @param testFiles the test files
+         * @param testFiles  the test files
+         * @param testFilter the test filter
          */
-        TestIterator(List<TestFile> testFiles) {
+        TestIterator(List<TestFile> testFiles, TestFilter testFilter) {
             this.testFiles = testFiles;
+            this.testFilter = testFilter;
             this.cursor = 0;
         }
 
@@ -148,6 +155,7 @@ public class TestExecutor {
                     TestFile testFile = testFiles.get(cursor);
                     Template template = project.getTemplates().get(testFile.getTemplate());
                     TestReader testReader = testReaderFactory.createReader(testFile.getLocation());
+                    testReader.setTestFilter(testFilter);
                     return testReader.parseTest(template);
                 } catch (IOException e) {
                     LOG.error(e.getMessage(), e);

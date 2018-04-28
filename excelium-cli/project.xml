@@ -269,8 +269,12 @@
                         <value>Configuration!D35</value>
                     </entry>
                     <entry>
-                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_BODY%</key>
-                        <value>'Test Data'!C3</value>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DEF%</key>
+                        <value>'Test Data'!B3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DATA%</key>
+                        <value>'Test Data'!B4</value>
                     </entry>
                     <entry>
                         <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_PARAM1%</key>

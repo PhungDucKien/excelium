@@ -59,7 +59,11 @@ public class ObjectUtil {
      */
     public static boolean getBooleanValue(Object value) {
         if (value instanceof String) {
-            return BooleanUtils.toBoolean((String) value);
+            String str = (String) value;
+            if (StringUtils.equalsAnyIgnoreCase(str, "☑", "✓", "✔", "○", "●", "◯")) {
+                return true;
+            }
+            return BooleanUtils.toBoolean(str);
         } else if (value instanceof Integer) {
             return BooleanUtils.toBoolean((Integer) value);
         } else if (value instanceof Boolean) {

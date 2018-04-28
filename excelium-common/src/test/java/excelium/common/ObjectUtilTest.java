@@ -63,6 +63,12 @@ public class ObjectUtilTest {
         Assert.assertEquals(false, ObjectUtil.getBooleanValue(0));
         Assert.assertEquals(true, ObjectUtil.getBooleanValue(true));
         Assert.assertEquals(false, ObjectUtil.getBooleanValue(false));
+        Assert.assertEquals(true, ObjectUtil.getBooleanValue("☑"));
+        Assert.assertEquals(true, ObjectUtil.getBooleanValue("✓"));
+        Assert.assertEquals(true, ObjectUtil.getBooleanValue("✔"));
+        Assert.assertEquals(true, ObjectUtil.getBooleanValue("○"));
+        Assert.assertEquals(true, ObjectUtil.getBooleanValue("●"));
+        Assert.assertEquals(true, ObjectUtil.getBooleanValue("◯"));
     }
 
     @Test

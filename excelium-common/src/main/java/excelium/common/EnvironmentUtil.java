@@ -84,10 +84,11 @@ public class EnvironmentUtil {
      * @param platformVersions the platform versions
      * @param deviceNames      the device names
      * @param orientations     the orientations
+     * @param udid             the udid
      * @param browsers         the browsers
      * @return the available mobile web environments
      */
-    public static List<Environment> getAvailableMobileWebEnvironments(Platform platform, List<String> platformVersions, List<String> deviceNames, List<String> orientations, List<String> browsers) {
+    public static List<Environment> getAvailableMobileWebEnvironments(Platform platform, List<String> platformVersions, List<String> deviceNames, List<String> orientations, String udid, List<String> browsers) {
         if (CollectionUtils.isEmpty(platformVersions)) {
             platformVersions = new ArrayList<>();
             platformVersions.add("");
@@ -122,6 +123,7 @@ public class EnvironmentUtil {
                         environment.setPlatformVersion(platformVersion);
                         environment.setDeviceName(deviceName);
                         environment.setOrientation(orientation);
+                        environment.setUdid(udid);
                         environment.setBrowser(Browser.fromName(browser));
                         environments.add(environment);
                     }
@@ -138,6 +140,7 @@ public class EnvironmentUtil {
      * @param platformVersions the platform versions
      * @param deviceNames      the device names
      * @param orientations     the orientations
+     * @param udid             the udid
      * @param appPath          the app path
      * @param appActivity      the app activity
      * @param appPackage       the app package
@@ -145,8 +148,8 @@ public class EnvironmentUtil {
      * @param appWaitPackage   the app wait package
      * @return the available mobile app environments
      */
-    public static List<Environment> getAvailableMobileAppEnvironments(Platform platform, List<String> platformVersions, List<String> deviceNames, List<String> orientations, String appPath,
-                                                                      String appActivity, String appPackage, String appWaitActivity, String appWaitPackage) {
+    public static List<Environment> getAvailableMobileAppEnvironments(Platform platform, List<String> platformVersions, List<String> deviceNames, List<String> orientations, String udid,
+                                                                      String appPath, String appActivity, String appPackage, String appWaitActivity, String appWaitPackage) {
         if (CollectionUtils.isEmpty(platformVersions)) {
             platformVersions = new ArrayList<>();
             platformVersions.add("");
@@ -172,6 +175,7 @@ public class EnvironmentUtil {
                     environment.setPlatformVersion(platformVersion);
                     environment.setDeviceName(deviceName);
                     environment.setOrientation(orientation);
+                    environment.setUdid(udid);
                     environment.setAppPath(appPath);
                     environment.setAppActivity(appActivity);
                     environment.setAppPackage(appPackage);

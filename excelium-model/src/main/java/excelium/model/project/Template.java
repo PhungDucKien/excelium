@@ -369,9 +369,13 @@ public class Template {
      */
     public static final String DATA_DESC = "%DATA_DESC%";
     /**
-     * The constant DATA_BODY.
+     * The constant DATA_TABLE_DEF.
      */
-    public static final String DATA_BODY = "%DATA_BODY%";
+    public static final String DATA_TABLE_DEF = "%DATA_TABLE_DEF%";
+    /**
+     * The constant DATA_TABLE_DATA.
+     */
+    public static final String DATA_TABLE_DATA = "%DATA_TABLE_DATA%";
 
     /**
      * Template location. File path or spreadsheet ID

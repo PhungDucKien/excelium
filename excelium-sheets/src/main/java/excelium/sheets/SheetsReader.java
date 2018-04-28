@@ -196,8 +196,14 @@ public class SheetsReader extends AbstractTestReader<Spreadsheet, Sheet> {
     private Map<String, List<String>> groupRanges(String... ranges) {
         Map<String, List<String>> rangeGroup = new HashMap<>();
         for(String range : ranges) {
-            RangeLocation rangeLocation = new RangeLocation(range);
-            List<String> group = rangeGroup.computeIfAbsent(rangeLocation.getFirstCell().getSheetName(), k -> new ArrayList<>());
+            String sheetName;
+            if (range.contains("!")) {
+                RangeLocation rangeLocation = new RangeLocation(range);
+                sheetName = rangeLocation.getFirstCell().getSheetName();
+            } else {
+                sheetName = range;
+            }
+            List<String> group = rangeGroup.computeIfAbsent(sheetName, k -> new ArrayList<>());
             if (!group.contains(range)) {
                 group.add(range);
             }

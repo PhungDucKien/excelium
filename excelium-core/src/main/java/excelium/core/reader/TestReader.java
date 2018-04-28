@@ -26,6 +26,7 @@ package excelium.core.reader;
 
 import excelium.model.project.Template;
 import excelium.model.test.Test;
+import excelium.model.test.TestFilter;
 
 import java.io.IOException;
 
@@ -48,4 +49,11 @@ public interface TestReader<W, S> extends WorkbookReader<W, S> {
      * @throws IOException the io exception
      */
     Test parseTest(Template template) throws IOException;
+
+    /**
+     * Sets test filter.
+     *
+     * @param testFilter the test filter
+     */
+    void setTestFilter(TestFilter testFilter);
 }

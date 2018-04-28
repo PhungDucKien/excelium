@@ -46,6 +46,11 @@ public class TestCase {
     private String name;
 
     /**
+     * Description
+     */
+    private String description;
+
+    /**
      * Test steps
      */
     private List<TestStep> testSteps;
@@ -84,6 +89,24 @@ public class TestCase {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

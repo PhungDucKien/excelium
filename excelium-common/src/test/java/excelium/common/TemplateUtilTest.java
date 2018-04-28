@@ -43,7 +43,7 @@ public class TemplateUtilTest {
     @Test
     public void testGetMarkups() throws IllegalAccessException {
         List<Object> markupList = TemplateUtil.getMarkups();
-        Assert.assertEquals(81, markupList.size());
+        Assert.assertEquals(82, markupList.size());
     }
 
     @Test
@@ -146,8 +146,8 @@ public class TemplateUtilTest {
     public void testGetSuggestSheetForAction() throws IllegalAccessException {
         Template template = new Template();
         Map<Object, String> markupLocations = new HashMap<>();
-        markupLocations.put("%ACTION_NAME%", "action!A2");
-        markupLocations.put("%ACTION_DESC%", "act!A3");
+        markupLocations.put("%ACTION_COMMAND%", "action!A2");
+        markupLocations.put("%ACTION_NAME%", "act!A3");
         template.setMarkupLocations(markupLocations);
 
         Assert.assertEquals("action", TemplateUtil.getSuggestSheetForAction(template));

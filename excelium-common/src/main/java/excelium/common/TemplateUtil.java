@@ -142,7 +142,7 @@ public class TemplateUtil {
      * @return The suggestion of the action sheet
      */
     public static String getSuggestSheetForAction(Template template) {
-        String actionNameLoc = template.getMarkupLocations().get(Template.ACTION_NAME);
+        String actionNameLoc = template.getMarkupLocations().get(Template.ACTION_COMMAND);
         if (StringUtils.isNotBlank(actionNameLoc)) {
             CellLocation cellLocation = new CellLocation(actionNameLoc);
             return cellLocation.getSheetName();
