@@ -28,13 +28,16 @@ import com.google.api.services.sheets.v4.Sheets;
 import excelium.cli.annotation.Bean;
 import excelium.common.XmlMarshaller;
 import excelium.core.reader.TestReaderFactory;
+import excelium.core.writer.TestWriterFactory;
 import excelium.model.enums.WorkbookType;
 import excelium.model.project.Project;
 import excelium.sheets.SheetsReaderFactory;
 import excelium.sheets.SheetsServiceProvider;
+import excelium.sheets.SheetsWriterFactory;
 import excelium.sheets.connection.GoogleConnection;
 import excelium.sheets.connection.GoogleConnectionService;
 import excelium.xls.ExcelReaderFactory;
+import excelium.xls.ExcelWriterFactory;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -103,6 +106,22 @@ public class BeanFactory {
             return new SheetsReaderFactory(sheetsService);
         } else {
             return new ExcelReaderFactory();
+        }
+    }
+
+    /**
+     * Constructs test writer factory
+     *
+     * @param project       Project instance
+     * @param sheetsService Sheets service
+     * @return Excel test writer factory if project uses Excel files. Sheets test writer factory if projects uses Sheets files.
+     */
+    @Bean
+    public TestWriterFactory getTestWriterFactory(Project project, Sheets sheetsService) {
+        if (project.getWorkbookType() == WorkbookType.SHEETS) {
+            return new SheetsWriterFactory(sheetsService);
+        } else {
+            return new ExcelWriterFactory();
         }
     }
 }

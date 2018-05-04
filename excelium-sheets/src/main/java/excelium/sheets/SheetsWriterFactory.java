@@ -22,25 +22,36 @@
  * SOFTWARE.
  */
 
-package excelium.core.reader;
+package excelium.sheets;
 
-import java.io.IOException;
+import com.google.api.services.sheets.v4.Sheets;
+import com.google.api.services.sheets.v4.model.Spreadsheet;
+import excelium.core.writer.TestWriterFactory;
 
 /**
- * Creates test readers.
+ * Creates test writers for Google Sheets spreadsheets.
  *
  * @author PhungDucKien
- * @since 2018.04.10
+ * @since 2018.05.01
  */
-public abstract class TestReaderFactory<TR extends TestReader> {
+public class SheetsWriterFactory extends TestWriterFactory<Spreadsheet, SheetsWriter> {
 
     /**
-     * Creates test reader for the given file.
-     *
-     * @param fileLocation File location.
-     *                     May be the file path if the file is local system file.
-     *                     Or the spreadsheet ID or URL if the file is a remote web file.
-     * @return Test reader to access specified file
+     * Sheets service
      */
-    public abstract TR createReader(String fileLocation) throws IOException;
+    private Sheets sheetsService;
+
+    /**
+     * Instantiates a new Sheets writer factory.
+     *
+     * @param sheetsService the sheets service
+     */
+    public SheetsWriterFactory(Sheets sheetsService) {
+        this.sheetsService = sheetsService;
+    }
+
+    @Override
+    public SheetsWriter createWriter(Spreadsheet workbook, String spreadsheetId) {
+        return new SheetsWriter(sheetsService, spreadsheetId);
+    }
 }

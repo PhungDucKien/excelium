@@ -24,7 +24,6 @@
 
 package excelium.xls;
 
-import excelium.core.reader.TestReader;
 import excelium.core.reader.TestReaderFactory;
 
 import java.io.IOException;
@@ -35,10 +34,10 @@ import java.io.IOException;
  * @author PhungDucKien
  * @since 2018.04.10
  */
-public class ExcelReaderFactory extends TestReaderFactory {
+public class ExcelReaderFactory extends TestReaderFactory<ExcelReader> {
 
     @Override
-    public TestReader createReader(String filePath) throws IOException {
+    public ExcelReader createReader(String filePath) throws IOException {
         return new ExcelReader(filePath);
     }
 }

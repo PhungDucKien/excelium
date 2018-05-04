@@ -26,6 +26,8 @@ package excelium.core;
 
 import excelium.core.reader.TestReader;
 import excelium.core.reader.TestReaderFactory;
+import excelium.core.writer.TestWriter;
+import excelium.core.writer.TestWriterFactory;
 import excelium.model.project.Project;
 import excelium.model.project.Template;
 import excelium.model.project.TestFile;
@@ -62,14 +64,21 @@ public class TestExecutor {
     private TestReaderFactory testReaderFactory;
 
     /**
+     * Test writer factory
+     */
+    private TestWriterFactory testWriterFactory;
+
+    /**
      * Instantiates a new Test executor.
      *
      * @param project           the project
      * @param testReaderFactory the test reader factory
+     * @param testWriterFactory the test writer factory
      */
-    public TestExecutor(Project project, TestReaderFactory testReaderFactory) {
+    public TestExecutor(Project project, TestReaderFactory testReaderFactory, TestWriterFactory testWriterFactory) {
         this.project = project;
         this.testReaderFactory = testReaderFactory;
+        this.testWriterFactory = testWriterFactory;
     }
 
     /**
@@ -78,13 +87,19 @@ public class TestExecutor {
      * @param testFilter the test filter
      */
     public void execute(TestFilter testFilter) {
-        TestIterator iterator = new TestIterator(filterTestFiles(testFilter), testFilter);
-        while (iterator.hasNext()) {
-            try (Test test = iterator.next()) {
-                // Execute all tests of workbook
+        List<TestFile> testFiles = filterTestFiles(testFilter);
+        for (TestFile testFile : testFiles) {
+            Template template = project.getTemplates().get(testFile.getTemplate());
+            try (TestReader testReader = testReaderFactory.createReader(testFile.getLocation());
+                 TestWriter testWriter = testWriterFactory.createWriter(testReader.getWorkbook(), testFile.getLocation())) {
+
+                // Parses test
+                Test test = testReader.parseTest(template, testFilter, testWriter);
+
+                // Executes all tests of workbook
 //                TestRunner testRunner = new TestRunner(test, testWriter, screenshotService, debug, silent);
 //                testRunner.runAll();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 LOG.error(e.getMessage(), e);
             }
         }
@@ -108,63 +123,6 @@ public class TestExecutor {
             return filtered;
         } else {
             return new ArrayList<>(tests.values());
-        }
-    }
-
-    /**
-     * Test Iterator.
-     */
-    private class TestIterator implements Iterator<Test> {
-
-        /**
-         * Test files
-         */
-        List<TestFile> testFiles;
-
-        /**
-         * Test filter
-         */
-        TestFilter testFilter;
-
-        /**
-         * Cursor
-         */
-        private int cursor;
-
-        /**
-         * Instantiates a new Test iterator.
-         *
-         * @param testFiles  the test files
-         * @param testFilter the test filter
-         */
-        TestIterator(List<TestFile> testFiles, TestFilter testFilter) {
-            this.testFiles = testFiles;
-            this.testFilter = testFilter;
-            this.cursor = 0;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return this.cursor < testFiles.size();
-        }
-
-        @Override
-        public Test next() {
-            if (this.hasNext()) {
-                try {
-                    TestFile testFile = testFiles.get(cursor);
-                    Template template = project.getTemplates().get(testFile.getTemplate());
-                    TestReader testReader = testReaderFactory.createReader(testFile.getLocation());
-                    testReader.setTestFilter(testFilter);
-                    return testReader.parseTest(template);
-                } catch (IOException e) {
-                    LOG.error(e.getMessage(), e);
-                    throw new NoSuchElementException();
-                } finally {
-                    cursor++;
-                }
-            }
-            throw new NoSuchElementException();
         }
     }
 }

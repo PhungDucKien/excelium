@@ -24,6 +24,7 @@
 
 package excelium.core.reader;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ import java.util.Map;
  * @author PhungDucKien
  * @since 2018.04.23
  */
-public interface WorkbookReader<W, S> {
+public interface WorkbookReader<W, S> extends Closeable {
 
     /**
      * Gets workbook object.

@@ -51,7 +51,7 @@ public class ExcelReaderTest {
     private static ExcelReaderFactory readerFactory;
 
     @BeforeClass
-    public static void beforeClass() throws IOException {
+    public static void beforeClass() {
         readerFactory = new ExcelReaderFactory();
     }
 
@@ -70,14 +70,14 @@ public class ExcelReaderTest {
 
     @Test
     public void testListSheets() throws URISyntaxException, IOException {
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         List<Sheet> sheets = excelReader.listSheets();
         Assert.assertEquals(3, sheets.size());
     }
 
     @Test
     public void testGetSheetName() throws URISyntaxException, IOException {
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         List<Sheet> sheets = excelReader.listSheets();
         Assert.assertEquals("Sheet1", excelReader.getSheetName(sheets.get(0)));
         Assert.assertEquals("Sheet2", excelReader.getSheetName(sheets.get(1)));
@@ -87,6 +87,7 @@ public class ExcelReaderTest {
     @Test
     public void testFindFirstOccurrence() throws IllegalAccessException, IOException, URISyntaxException {
         TestReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Simple Template.xlsx").toURI().getPath());
+        Assert.assertEquals(null, excelReader.findFirstOccurrence("%TEST_COMMAND1234%"));
         Assert.assertEquals("'Test Case'!A2", excelReader.findFirstOccurrence("%TEST_COMMAND%"));
         Assert.assertEquals("'Test Case'!B2", excelReader.findFirstOccurrence("%TEST_PARAM1%"));
         Assert.assertEquals("'Test Case'!C2", excelReader.findFirstOccurrence("%TEST_PARAM2%"));
@@ -121,7 +122,7 @@ public class ExcelReaderTest {
     @Test
     public void testGetCellValue() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         Assert.assertEquals("Cell B2", excelReader.getCellValue("Sheet1!B2"));
         Assert.assertEquals("Cell C2", excelReader.getCellValue("Sheet1!C2"));
         Assert.assertEquals("Cell D2", excelReader.getCellValue("Sheet1!D2"));
@@ -144,7 +145,7 @@ public class ExcelReaderTest {
     @Test
     public void testGetRowCellValues() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
 
         List<Object> rowCellValues = excelReader.getRowCellValues("Sheet1!B2:E3");
         Assert.assertEquals("Cell B2", rowCellValues.get(0));
@@ -165,7 +166,7 @@ public class ExcelReaderTest {
     @Test
     public void testGetColumnCellValues() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
 
         List<Object> columnCellValues = excelReader.getColumnCellValues("Sheet1!B2:C7");
         Assert.assertEquals("Cell B2", columnCellValues.get(0));
@@ -184,7 +185,7 @@ public class ExcelReaderTest {
     @Test
     public void testGetRangeCellValues() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         List<List<Object>> rangeCellValue = excelReader.getRangeCellValues("Sheet1!B2:E8");
         Assert.assertEquals("Cell B2", rangeCellValue.get(0).get(0));
         Assert.assertEquals("Cell C2", rangeCellValue.get(0).get(1));
@@ -208,7 +209,7 @@ public class ExcelReaderTest {
     @Test
     public void testBatchGetCellValues() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         Map<String, Object> cellValues = excelReader.batchGetCellValues(
                 "Sheet1!B2", "Sheet1!C2", "Sheet1!D2", "Sheet1!B3", "Sheet1!C3", "Sheet1!B4", "Sheet1!C4", "Sheet1!D4", "Sheet1!E4",
                 "Sheet1!B5", "Sheet1!C5", "Sheet1!B6", "Sheet1!C6", "Sheet1!B7", "Sheet1!C7", "Sheet1!B8", "Sheet1!C8"
@@ -235,7 +236,7 @@ public class ExcelReaderTest {
     @Test
     public void testBatchGetRowCellValues() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         Map<String, List<Object>> rowCellValues = excelReader.batchGetRowCellValues("Sheet1!B2:E3", "Sheet1!B4:E5", "Sheet1!B6:E8");
         Assert.assertEquals("Cell B2", rowCellValues.get("Sheet1!B2:E3").get(0));
         Assert.assertEquals("Cell C2", rowCellValues.get("Sheet1!B2:E3").get(1));
@@ -251,7 +252,7 @@ public class ExcelReaderTest {
     @Test
     public void testBatchGetColumnCellValues() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         Map<String, List<Object>> columnCellValues = excelReader.batchGetColumnCellValues("Sheet1!B2:C7", "Sheet1!D2:E7");
         Assert.assertEquals("Cell B2", columnCellValues.get("Sheet1!B2:C7").get(0));
         Assert.assertEquals(1, columnCellValues.get("Sheet1!B2:C7").get(1));
@@ -267,7 +268,7 @@ public class ExcelReaderTest {
     @Test
     public void testBatchGetRangeCellValues() throws IOException, URISyntaxException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        ExcelReader excelReader = (ExcelReader) readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        ExcelReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
         Map<String, List<List<Object>>> rangeCellValues = excelReader.batchGetRangeCellValues(
                 "Sheet1!B2", "Sheet1!C2", "Sheet1!D2", "Sheet1!B3", "Sheet1!C3", "Sheet1!B4", "Sheet1!C4", "Sheet1!D4", "Sheet1!E4",
                 "Sheet1!B5", "Sheet1!C5", "Sheet1!B6", "Sheet1!C6", "Sheet1!B7", "Sheet1!C7", "Sheet1!B8", "Sheet1!C8"
@@ -289,5 +290,12 @@ public class ExcelReaderTest {
         Assert.assertEquals("2.2", rangeCellValues.get("Sheet1!C7").get(0).get(0));
         Assert.assertEquals("2018-01-01", format.format(rangeCellValues.get("Sheet1!B8").get(0).get(0)));
         Assert.assertEquals("2018-01-02", format.format(rangeCellValues.get("Sheet1!C8").get(0).get(0)));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testClose() throws IOException, URISyntaxException {
+        TestReader excelReader = readerFactory.createReader(ExcelReader.class.getResource("/Workbook1.xlsx").toURI().getPath());
+        excelReader.close();
+        excelReader.getCellValue("Sheet1!A1");
     }
 }

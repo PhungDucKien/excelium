@@ -22,25 +22,21 @@
  * SOFTWARE.
  */
 
-package excelium.core.reader;
+package excelium.xls;
 
-import java.io.IOException;
+import excelium.core.writer.TestWriterFactory;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
- * Creates test readers.
+ * Creates test writers for Microsoft Excel files.
  *
  * @author PhungDucKien
- * @since 2018.04.10
+ * @since 2018.05.01
  */
-public abstract class TestReaderFactory<TR extends TestReader> {
+public class ExcelWriterFactory extends TestWriterFactory<Workbook, ExcelWriter> {
 
-    /**
-     * Creates test reader for the given file.
-     *
-     * @param fileLocation File location.
-     *                     May be the file path if the file is local system file.
-     *                     Or the spreadsheet ID or URL if the file is a remote web file.
-     * @return Test reader to access specified file
-     */
-    public abstract TR createReader(String fileLocation) throws IOException;
+    @Override
+    public ExcelWriter createWriter(Workbook workbook, String filePath) {
+        return new ExcelWriter(workbook, filePath);
+    }
 }

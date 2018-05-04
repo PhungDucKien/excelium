@@ -32,8 +32,10 @@ import excelium.model.project.Project;
 import excelium.model.project.Template;
 import excelium.model.project.TestFile;
 import excelium.sheets.SheetsReaderFactory;
+import excelium.sheets.SheetsWriterFactory;
 import excelium.sheets.connection.GoogleConnection;
 import excelium.xls.ExcelReaderFactory;
+import excelium.xls.ExcelWriterFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -148,5 +150,21 @@ public class BeanFactoryTest {
         googleConnection = beanFactory.getGoogleConnection(project);
         sheets = beanFactory.getSheetsService(project, googleConnection);
         Assert.assertTrue(beanFactory.getTestReaderFactory(project, sheets) instanceof ExcelReaderFactory);
+    }
+
+    @Test
+    public void testGetTestWriterFactory() throws IOException {
+        BeanFactory beanFactory = new BeanFactory();
+        Project project = new Project();
+
+        project.setWorkbookType(WorkbookType.SHEETS);
+        GoogleConnection googleConnection = beanFactory.getGoogleConnection(project);
+        Sheets sheets = beanFactory.getSheetsService(project, googleConnection);
+        Assert.assertTrue(beanFactory.getTestWriterFactory(project, sheets) instanceof SheetsWriterFactory);
+
+        project.setWorkbookType(WorkbookType.EXCEL);
+        googleConnection = beanFactory.getGoogleConnection(project);
+        sheets = beanFactory.getSheetsService(project, googleConnection);
+        Assert.assertTrue(beanFactory.getTestWriterFactory(project, sheets) instanceof ExcelWriterFactory);
     }
 }

@@ -78,7 +78,10 @@ public class PromptTest {
             consolePrompt.prompt((List<PromptableElementIF>) any); result = new HashMap<String, ListResult>() {{ put("", new ListResult("result")); }};
         }};
 
-        Assert.assertEquals("result", Prompt.promptList("Question", new ArrayList<>()));
+        List<String> options = new ArrayList<>();
+        options.add("result");
+
+        Assert.assertEquals("result", Prompt.promptList("Question", options));
     }
 
     @Test

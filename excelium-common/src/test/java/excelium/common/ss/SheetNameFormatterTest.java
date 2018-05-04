@@ -54,6 +54,22 @@ public final class SheetNameFormatterTest extends TestCase {
         assertEquals(expectedSheetNameEncoding, SheetNameFormatter.format(rawSheetName));
     }
 
+    private static void confirmAppendFormat(String rawSheetName, String expectedSheetNameEncoding) {
+        StringBuffer stringBuffer = new StringBuffer();
+        SheetNameFormatter.appendFormat(stringBuffer, rawSheetName);
+        assertEquals(expectedSheetNameEncoding, stringBuffer.toString());
+    }
+
+    private static void confirmAppendFormatWithWorkbook(String rawWorkbookName, String rawSheetName, String expectedSheetNameEncoding) {
+        StringBuffer stringBuffer = new StringBuffer();
+        SheetNameFormatter.appendFormat(stringBuffer, rawWorkbookName, rawSheetName);
+        assertEquals(expectedSheetNameEncoding, stringBuffer.toString());
+
+        StringBuilder stringBuilder = new StringBuilder();
+        SheetNameFormatter.appendFormat(stringBuilder, rawWorkbookName, rawSheetName);
+        assertEquals(expectedSheetNameEncoding, stringBuilder.toString());
+    }
+
     /**
      * Tests main public method 'format'
      */
@@ -127,5 +143,41 @@ public final class SheetNameFormatterTest extends TestCase {
         confirmCellRange("Sheet1", 6, false);
         confirmCellRange("iV65536", 2, true);  // max cell in Excel 97-2003
         confirmCellRange("IW65537", 2, false);
+    }
+
+    public void testAppendFormat() {
+
+        confirmAppendFormat("abc", "abc");
+        confirmAppendFormat("123", "'123'");
+
+        confirmAppendFormat("my sheet", "'my sheet'"); // space
+        confirmAppendFormat("A:MEM", "'A:MEM'"); // colon
+
+        confirmAppendFormat("O'Brian", "'O''Brian'"); // single quote gets doubled
+
+
+        confirmAppendFormat("3rdTimeLucky", "'3rdTimeLucky'"); // digit in first pos
+        confirmAppendFormat("_", "_"); // plain underscore OK
+        confirmAppendFormat("my_3rd_sheet", "my_3rd_sheet"); // underscores and digits OK
+        confirmAppendFormat("A12220", "'A12220'");
+        confirmAppendFormat("TAXRETURN19980415", "TAXRETURN19980415");
+    }
+
+    public void testAppendFormatWithWorkbook() {
+
+        confirmAppendFormatWithWorkbook("Workbook", "abc", "[Workbook]abc");
+        confirmAppendFormatWithWorkbook("Workbook", "123", "'[Workbook]123'");
+
+        confirmAppendFormatWithWorkbook("Workbook", "my sheet", "'[Workbook]my sheet'"); // space
+        confirmAppendFormatWithWorkbook("Workbook", "A:MEM", "'[Workbook]A:MEM'"); // colon
+
+        confirmAppendFormatWithWorkbook("Workbook", "O'Brian", "'[Workbook]O''Brian'"); // single quote gets doubled
+
+
+        confirmAppendFormatWithWorkbook("Workbook", "3rdTimeLucky", "'[Workbook]3rdTimeLucky'"); // digit in first pos
+        confirmAppendFormatWithWorkbook("Workbook", "_", "[Workbook]_"); // plain underscore OK
+        confirmAppendFormatWithWorkbook("Workbook", "my_3rd_sheet", "[Workbook]my_3rd_sheet"); // underscores and digits OK
+        confirmAppendFormatWithWorkbook("Workbook", "A12220", "'[Workbook]A12220'");
+        confirmAppendFormatWithWorkbook("Workbook", "TAXRETURN19980415", "[Workbook]TAXRETURN19980415");
     }
 }

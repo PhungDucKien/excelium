@@ -30,6 +30,7 @@ import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
 import excelium.core.TestExecutor;
 import excelium.core.reader.TestReaderFactory;
+import excelium.core.writer.TestWriterFactory;
 import excelium.model.project.Project;
 import excelium.model.test.TestFilter;
 import org.apache.logging.log4j.LogManager;
@@ -95,6 +96,12 @@ public class TestController extends BaseController {
     private TestReaderFactory testReaderFactory;
 
     /**
+     * Test writer factory
+     */
+    @Injectable
+    private TestWriterFactory testWriterFactory;
+
+    /**
      * Executes tests.
      */
     @Command
@@ -104,7 +111,7 @@ public class TestController extends BaseController {
         testFilter.setSheets(sheets);
         testFilter.setTestCases(testCases);
 
-        TestExecutor testExecutor = new TestExecutor(project, testReaderFactory);
+        TestExecutor testExecutor = new TestExecutor(project, testReaderFactory, testWriterFactory);
         testExecutor.execute(testFilter);
     }
 }

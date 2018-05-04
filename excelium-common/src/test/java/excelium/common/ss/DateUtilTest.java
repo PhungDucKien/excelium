@@ -125,6 +125,31 @@ public class DateUtilTest {
     }
 
     @Test
+    public void getJavaCalendarUTC_InvalidValue() {
+        double dateValue = -1;
+        boolean use1904windowing = false;
+
+        assertEquals(null, DateUtil.getJavaCalendarUTC(dateValue, use1904windowing));
+    }
+
+    @Test
+    public void getJavaCalendarUTC_ValidValue() {
+        DateUtil dateUtil = new DateUtil();
+        double dateValue = 0;
+        boolean use1904windowing = false;
+
+        Calendar expCal = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+        expCal.set(1900, 0, 0, 0, 0, 0);
+        expCal.setTimeZone(TimeZone.getTimeZone("UTC"));
+        expCal.clear(Calendar.MILLISECOND);
+
+        Calendar actCal[] = {
+                dateUtil.getJavaCalendarUTC(dateValue, use1904windowing)
+        };
+        assertEquals(expCal, actCal[0]);
+    }
+
+    @Test
     public void isADateFormat() {
         // Cell content 2016-12-8 as an example
         // Cell show "12/8/2016"
@@ -152,6 +177,20 @@ public class DateUtilTest {
         assertTrue(DateUtil.isADateFormat("[DBNum2][$-804]yyyy\"\u5e74\"m\"\u6708\"d\"\u65e5\";@"));
         // Cell show "２０１６年１２月８日"
         assertTrue(DateUtil.isADateFormat("[DBNum3][$-804]yyyy\"\u5e74\"m\"\u6708\"d\"\u65e5\";@"));
+    }
+
+    @Test
+    public void isCellDateFormatted() {
+        assertTrue(DateUtil.isCellDateFormatted(43101.0, "m/d/yy"));
+        assertTrue(DateUtil.isCellDateFormatted(43101.0, "[DBNum2][$-804]yyyy\"\u5e74\"m\"\u6708\"d\"\u65e5\";@"));
+        assertFalse(DateUtil.isCellDateFormatted(43101.0, "0.0"));
+    }
+
+    @Test
+    public void isCellInternalDateFormatted() {
+        assertTrue(DateUtil.isCellInternalDateFormatted(43101.0, "m/d/yy"));
+        assertFalse(DateUtil.isCellInternalDateFormatted(43101.0, "[DBNum2][$-804]yyyy\"\u5e74\"m\"\u6708\"d\"\u65e5\";@"));
+        assertFalse(DateUtil.isCellInternalDateFormatted(43101.0, "0.0"));
     }
 
     /**
@@ -551,10 +590,35 @@ public class DateUtilTest {
         assertEquals(0.7330440, DateUtil.convertTime("17:35:35"), delta);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void convertTime_TooShort() {
+        DateUtil.convertTime("100");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void convertTime_NoSeparator() {
+        DateUtil.convertTime("1200");
+    }
+
     @Test
     public void parseDate() {
         assertEquals(createDate(2008, AUGUST, 3), DateUtil.parseYYYYMMDDDate("2008/08/03"));
         assertEquals(createDate(1994, MAY, 1), DateUtil.parseYYYYMMDDDate("1994/05/01"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void parseDate_TooShort() {
+        DateUtil.parseYYYYMMDDDate("2008/8/3");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void parseDate_NotANumber() {
+        DateUtil.parseYYYYMMDDDate("YYYY/MM/DD");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void parseDate_NotInRange() {
+        DateUtil.parseYYYYMMDDDate("2018/13/01");
     }
 
     /**

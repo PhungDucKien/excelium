@@ -69,7 +69,7 @@ public class ExcelReader extends AbstractTestReader<Workbook, Sheet> {
      * @param filePath Path of file to read
      * @throws IOException if any IOException occurs
      */
-    public ExcelReader(String filePath) throws IOException {
+    ExcelReader(String filePath) throws IOException {
         File file = Paths.get(filePath).toFile();
 
         this.filePath = filePath;

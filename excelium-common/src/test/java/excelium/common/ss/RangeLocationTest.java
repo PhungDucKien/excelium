@@ -270,4 +270,32 @@ public class RangeLocationTest extends TestCase {
         assertEquals(isRowAbs, cell.isRowAbsolute());
         assertEquals(isColAbs, cell.isColAbsolute());
     }
+
+    public void testConstructorByPairOfCellReferences() {
+        CellLocation topLeft = new CellLocation("Tabelle1!B5");
+        CellLocation botRight = new CellLocation("Tabelle1!C8");
+        RangeLocation ar = new RangeLocation(topLeft, botRight);
+        assertEquals("Tabelle1!B5:C8", ar.formatAsString());
+
+        ar = new RangeLocation(botRight, topLeft);
+        assertEquals("Tabelle1!B5:C8", ar.formatAsString());
+
+        CellLocation topRight = new CellLocation("Tabelle1!C5");
+        CellLocation botLeft = new CellLocation("Tabelle1!B8");
+        ar = new RangeLocation(topRight, botLeft);
+        assertEquals("Tabelle1!B5:C8", ar.formatAsString());
+
+        ar = new RangeLocation(botLeft, topRight);
+        assertEquals("Tabelle1!B5:C8", ar.formatAsString());
+    }
+
+    public void testToString() {
+        RangeLocation ar = new RangeLocation("'Sheet 1'!A5:B6");
+        assertEquals("excelium.common.ss.RangeLocation ['Sheet 1'!A5:B6]", ar.toString());
+    }
+
+    public void testFormatWholeColumnReference() {
+        RangeLocation ar = new RangeLocation("'Sheet 1'!C$1:D$65536");
+        assertEquals("C:D", ar.formatAsString());
+    }
 }

@@ -57,10 +57,10 @@ public class FileUtilTest {
 
         List<String> templateFiles = FileUtil.listFiles(templatePath);
         Assert.assertEquals(4, templateFiles.size());
-        Assert.assertEquals("category1/group1/File1.xlsx", templateFiles.get(0));
-        Assert.assertEquals("category1/group1/File4.xlsx", templateFiles.get(1));
-        Assert.assertEquals("category1/group2/File2.xlsx", templateFiles.get(2));
-        Assert.assertEquals("category2/group3/File3.xlsx", templateFiles.get(3));
+        Assert.assertTrue(templateFiles.contains("category1/group1/File1.xlsx"));
+        Assert.assertTrue(templateFiles.contains("category1/group1/File4.xlsx"));
+        Assert.assertTrue(templateFiles.contains("category1/group2/File2.xlsx"));
+        Assert.assertTrue(templateFiles.contains("category2/group3/File3.xlsx"));
 
         // Deletes generated files
         Files.delete(templatePath.resolve("category1").resolve("group1").resolve("File1.xlsx"));

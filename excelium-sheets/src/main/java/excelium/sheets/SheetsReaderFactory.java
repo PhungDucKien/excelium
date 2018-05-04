@@ -25,10 +25,7 @@
 package excelium.sheets;
 
 import com.google.api.services.sheets.v4.Sheets;
-import excelium.core.reader.TestReader;
 import excelium.core.reader.TestReaderFactory;
-
-import java.io.IOException;
 
 /**
  * Creates test readers for Google Sheets spreadsheets.
@@ -36,7 +33,7 @@ import java.io.IOException;
  * @author PhungDucKien
  * @since 2018.04.10
  */
-public class SheetsReaderFactory extends TestReaderFactory {
+public class SheetsReaderFactory extends TestReaderFactory<SheetsReader> {
 
     /**
      * Sheets service
@@ -53,7 +50,7 @@ public class SheetsReaderFactory extends TestReaderFactory {
     }
 
     @Override
-    public TestReader createReader(String spreadsheetId) throws IOException {
+    public SheetsReader createReader(String spreadsheetId) {
         return new SheetsReader(sheetsService, spreadsheetId);
     }
 }

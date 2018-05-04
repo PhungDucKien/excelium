@@ -22,25 +22,26 @@
  * SOFTWARE.
  */
 
-package excelium.core.reader;
+package excelium.core.writer;
 
 import java.io.IOException;
 
 /**
- * Creates test readers.
+ * Creates test writers.
  *
  * @author PhungDucKien
- * @since 2018.04.10
+ * @since 2018.05.01
  */
-public abstract class TestReaderFactory<TR extends TestReader> {
+public abstract class TestWriterFactory<W, TW extends TestWriter> {
 
     /**
-     * Creates test reader for the given file.
+     * Creates test writer for the given workbook.
      *
+     * @param workbook Workbook object
      * @param fileLocation File location.
      *                     May be the file path if the file is local system file.
      *                     Or the spreadsheet ID or URL if the file is a remote web file.
-     * @return Test reader to access specified file
+     * @return Test writer to write specified workbook
      */
-    public abstract TR createReader(String fileLocation) throws IOException;
+    public abstract TW createWriter(W workbook, String fileLocation) throws IOException;
 }

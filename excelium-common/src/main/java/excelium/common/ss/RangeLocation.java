@@ -167,8 +167,8 @@ public class RangeLocation {
                 lastColumn = botRight.getCol();
                 lastColAbs = botRight.isColAbsolute();
             }
-            _firstCell = new CellLocation(firstRow, firstColumn, firstRowAbs, firstColAbs);
-            _lastCell = new CellLocation(lastRow, lastColumn, lastRowAbs, lastColAbs);
+            _firstCell = new CellLocation(topLeft.getSheetName(), firstRow, firstColumn, firstRowAbs, firstColAbs);
+            _lastCell = new CellLocation(botRight.getSheetName(), lastRow, lastColumn, lastRowAbs, lastColAbs);
         } else {
             _firstCell = topLeft;
             _lastCell = botRight;

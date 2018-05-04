@@ -350,6 +350,7 @@ public final class CellLocationTest {
     public void testEqualsAndHashCode() {
         CellLocation ref1 = new CellLocation("'Sheet 1'!A5");
         CellLocation ref2 = new CellLocation("Sheet 1", 4, 0, false, false);
+        assertEquals("equals", ref1, ref1);
         assertEquals("equals", ref1, ref2);
         assertEquals("hash code", ref1.hashCode(), ref2.hashCode());
 
@@ -531,5 +532,10 @@ public final class CellLocationTest {
         assertEquals("isRowAbsolute is wrong", expIsRowAbs, cf.isRowAbsolute());
         assertEquals("isColAbsolute is wrong", expIsColAbs, cf.isColAbsolute());
         assertEquals("text is wrong", expText, cf.formatAsString());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSeparateRefPartsInvalid() {
+        new CellLocation("Sheet1!1A");
     }
 }

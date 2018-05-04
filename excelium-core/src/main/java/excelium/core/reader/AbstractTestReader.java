@@ -28,6 +28,7 @@ import excelium.common.ObjectUtil;
 import excelium.common.TemplateUtil;
 import excelium.common.WildcardUtil;
 import excelium.common.ss.CellLocation;
+import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.project.Template;
@@ -63,32 +64,24 @@ import static excelium.model.project.Template.*;
  */
 public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W, S> implements TestReader<W, S> {
 
-    /**
-     * Test filter
-     */
-    private TestFilter testFilter;
-
     @Override
-    public Test<W, S> parseTest(Template template) throws IOException {
+    public Test<W, S> parseTest(Template template, TestFilter testFilter, TestWriter testWriter) throws IOException {
         Test<W, S> test = new Test<>();
         test.setWorkbookName(getWorkbookName());
-        parseTest(test, template);
+        parseTest(test, template, testFilter, testWriter);
         return test;
-    }
-
-    @Override
-    public void setTestFilter(TestFilter testFilter) {
-        this.testFilter = testFilter;
     }
 
     /**
      * Parses test file.
      *
-     * @param test     Test object
-     * @param template Template object
+     * @param test       Test object
+     * @param template   Template object
+     * @param testFilter Test filter
+     * @param testWriter Test writer
      * @throws IOException if the IOException occurs
      */
-    private void parseTest(Test<W, S> test, Template template) throws IOException {
+    private void parseTest(Test<W, S> test, Template template, TestFilter testFilter, TestWriter testWriter) throws IOException {
         List<S> sheets = new ArrayList<>(listSheets());
 
         List<S> configurationSheets = filterSheets(sheets, TemplateUtil.getConfigurationSheets(template));
@@ -113,9 +106,9 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
 
         setTestConfig(test, template);
         setPageSets(test, template, mappingSheets);
-        setActions(test, template, actionSheets);
+        setActions(test, template, actionSheets, testWriter);
         setData(test, template, dataSheets);
-        setTestSuites(test, template, testSheets);
+        setTestSuites(test, template, testSheets, testFilter, testWriter);
     }
 
     /**
@@ -257,6 +250,11 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
 
     /**
      * Gets page sets of a given sheet.
+     *
+     * @param template Template
+     * @param sheet    Sheet
+     * @return Page sets of the sheet
+     * @throws IOException if the IOException occurs
      */
     private Map<String, PageSet> getPageSets(Template template, S sheet) throws IOException {
         Map<Object, String> markupLocations = TemplateUtil.getMarkupLocations(template, s -> s.startsWith("%MAPPING_"));
@@ -315,15 +313,16 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
     /**
      * Sets actions.
      *
-     * @param test     Test
-     * @param template Template
-     * @param sheets   List of sheets
+     * @param test       Test
+     * @param template   Template
+     * @param sheets     List of sheets
+     * @param testWriter Test writer
      * @throws IOException if the IOException occurs
      */
-    private void setActions(Test<W, S> test, Template template, List<S> sheets) throws IOException {
+    private void setActions(Test<W, S> test, Template template, List<S> sheets, TestWriter testWriter) throws IOException {
         Map<String, TestAction> actions = new HashMap<>();
         for (S sheet : sheets) {
-            Map<String, TestAction> sheetActions = getActions(template, sheet);
+            Map<String, TestAction> sheetActions = getActions(template, sheet, testWriter);
             actions.putAll(sheetActions);
         }
         test.setActions(actions);
@@ -331,53 +330,76 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
 
     /**
      * Gets actions of a given sheet.
+     *
+     * @param template   Template
+     * @param sheet      Sheet
+     * @param testWriter Test writer
+     * @return Actions of the sheet
+     * @throws IOException if the IOException occurs
      */
-    private Map<String, TestAction> getActions(Template template, S sheet) throws IOException {
+    private Map<String, TestAction> getActions(Template template, S sheet, TestWriter testWriter) throws IOException {
         Map<Object, String> markupLocations = TemplateUtil.getMarkupLocations(template, s -> s.startsWith("%ACTION_"));
         List<Map<Object, Object>> tableValues = getTableMarkupValues(markupLocations, getSheetName(sheet));
+        int height = getDataHeight(markupLocations);
 
         Map<String, TestAction> actionMap = new HashMap<>();
         TestAction currentTestAction;
         List<TestStep> testSteps = new ArrayList<>();
+        int actualActionNo = 1;
+
+        int index = 0;
+        CellLocation actionNoFirstLocation = new CellLocation(markupLocations.get(ACTION_NO));
         for (Map<Object, Object> itemValues : tableValues) {
             String actionCommand = getStringValue(itemValues.get(ACTION_COMMAND));
-            if (StringUtils.isBlank(actionCommand)) {
-                continue;
+            if (StringUtils.isNotBlank(actionCommand)) {
+                String actionNo = getStringValue(itemValues.get(ACTION_NO));
+                String actionGutter = getStringValue(itemValues.get(ACTION_GUTTER));
+                String actionAndroidGutter = getStringValue(itemValues.get(ACTION_ANDROID_GUTTER));
+                String actionIosGutter = getStringValue(itemValues.get(ACTION_IOS_GUTTER));
+                boolean actionCapture = getBooleanValue(itemValues.get(ACTION_CAPTURE));
+                String actionName = getStringValue(itemValues.get(ACTION_NAME));
+                String actionDesc = getStringValue(itemValues.get(ACTION_DESC));
+                String actionParam1 = getStringValue(itemValues.get(ACTION_PARAM1));
+                String actionParam2 = getStringValue(itemValues.get(ACTION_PARAM2));
+                String actionParam3 = getStringValue(itemValues.get(ACTION_PARAM3));
+                String actionData = getStringValue(itemValues.get(ACTION_DATA));
+
+                TestStep testStep = new TestStep();
+                testStep.setGutter(actionGutter);
+                testStep.setAndroidGutter(actionAndroidGutter);
+                testStep.setIosGutter(actionIosGutter);
+                testStep.setCapture(actionCapture);
+                testStep.setCommand(actionCommand);
+                testStep.setParam1(actionParam1);
+                testStep.setParam2(actionParam2);
+                testStep.setParam3(actionParam3);
+                testStep.setTestData(actionData);
+
+                if (StringUtils.isNotBlank(actionName)) {
+                    currentTestAction = new TestAction();
+                    currentTestAction.setNo(actualActionNo);
+                    currentTestAction.setName(actionName);
+                    currentTestAction.setDescription(actionDesc);
+                    actionMap.put(actionName, currentTestAction);
+
+                    if (testWriter != null && !String.valueOf(actualActionNo).equals(actionNo)) {
+                        CellLocation cellLocation = new CellLocation(getSheetName(sheet), actionNoFirstLocation.getRow() + height * index, actionNoFirstLocation.getCol(), false, false);
+                        testWriter.setCellValue(actualActionNo, cellLocation.formatAsString());
+                    }
+
+                    actualActionNo++;
+
+                    testSteps = new ArrayList<>();
+                    currentTestAction.setTestSteps(testSteps);
+                } else {
+                    if (testWriter != null && StringUtils.isNotBlank(actionNo)) {
+                        CellLocation cellLocation = new CellLocation(getSheetName(sheet), actionNoFirstLocation.getRow() + height * index, actionNoFirstLocation.getCol(), false, false);
+                        testWriter.setCellValue(null, cellLocation.formatAsString());
+                    }
+                }
+                testSteps.add(testStep);
             }
-
-            String actionNo = getStringValue(itemValues.get(ACTION_NO));
-            String actionGutter = getStringValue(itemValues.get(ACTION_GUTTER));
-            String actionAndroidGutter = getStringValue(itemValues.get(ACTION_ANDROID_GUTTER));
-            String actionIosGutter = getStringValue(itemValues.get(ACTION_IOS_GUTTER));
-            boolean actionCapture = getBooleanValue(itemValues.get(ACTION_CAPTURE));
-            String actionName = getStringValue(itemValues.get(ACTION_NAME));
-            String actionDesc = getStringValue(itemValues.get(ACTION_DESC));
-            String actionParam1 = getStringValue(itemValues.get(ACTION_PARAM1));
-            String actionParam2 = getStringValue(itemValues.get(ACTION_PARAM2));
-            String actionParam3 = getStringValue(itemValues.get(ACTION_PARAM3));
-            String actionData = getStringValue(itemValues.get(ACTION_DATA));
-
-            TestStep testStep = new TestStep();
-            testStep.setGutter(actionGutter);
-            testStep.setAndroidGutter(actionAndroidGutter);
-            testStep.setIosGutter(actionIosGutter);
-            testStep.setCapture(actionCapture);
-            testStep.setCommand(actionCommand);
-            testStep.setParam1(actionParam1);
-            testStep.setParam2(actionParam2);
-            testStep.setParam3(actionParam3);
-            testStep.setTestData(actionData);
-
-            if (StringUtils.isNotBlank(actionName)) {
-                currentTestAction = new TestAction();
-                currentTestAction.setName(actionName);
-                currentTestAction.setDescription(actionDesc);
-                actionMap.put(actionName, currentTestAction);
-
-                testSteps = new ArrayList<>();
-                currentTestAction.setTestSteps(testSteps);
-            }
-            testSteps.add(testStep);
+            index++;
         }
         return actionMap;
     }
@@ -385,15 +407,17 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
     /**
      * Sets test suites.
      *
-     * @param test     Test
-     * @param template Template
-     * @param sheets   List of sheets
+     * @param test       Test
+     * @param template   Template
+     * @param sheets     List of sheets
+     * @param testFilter Test filter
+     * @param testWriter Test writer
      * @throws IOException if the IOException occurs
      */
-    private void setTestSuites(Test<W, S> test, Template template, List<S> sheets) throws IOException {
+    private void setTestSuites(Test<W, S> test, Template template, List<S> sheets, TestFilter testFilter, TestWriter testWriter) throws IOException {
         Map<String, TestSuite<S>> testSuites = new HashMap<>();
         for (S sheet : sheets) {
-            TestSuite<S> sheetTestSuite = getTestSuite(template, sheet);
+            TestSuite<S> sheetTestSuite = getTestSuite(template, sheet, testFilter, testWriter);
             testSuites.put(getSheetName(sheet), sheetTestSuite);
         }
         test.setTestSuites(testSuites);
@@ -401,10 +425,18 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
 
     /**
      * Gets test suite of a given sheet.
+     *
+     * @param template   Template
+     * @param sheet      Sheet
+     * @param testFilter Test filter
+     * @param testWriter Test writer
+     * @return Test suite of the sheet
+     * @throws IOException if the IOException occurs
      */
-    private TestSuite<S> getTestSuite(Template template, S sheet) throws IOException {
+    private TestSuite<S> getTestSuite(Template template, S sheet, TestFilter testFilter, TestWriter testWriter) throws IOException {
         Map<Object, String> markupLocations = TemplateUtil.getMarkupLocations(template, s -> s.startsWith("%TEST_"));
         List<Map<Object, Object>> tableValues = getTableMarkupValues(markupLocations, getSheetName(sheet));
+        int height = getDataHeight(markupLocations);
 
         TestSuite<S> testSuite = new TestSuite<>();
         testSuite.setSheet(sheet);
@@ -414,49 +446,62 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
         testSuite.setTestCases(testCases);
         TestCase currentTestCase;
         List<TestStep> testSteps = new ArrayList<>();
-        int testCaseNo = 1;
+        int actualTestNo = 1;
+
+        int index = 0;
+        CellLocation testNoFirstLocation = new CellLocation(markupLocations.get(TEST_NO));
         for (Map<Object, Object> itemValues : tableValues) {
             String testCommand = getStringValue(itemValues.get(TEST_COMMAND));
-            if (StringUtils.isBlank(testCommand)) {
-                continue;
-            }
+            if (StringUtils.isNotBlank(testCommand)) {
+                String testNo = getStringValue(itemValues.get(TEST_NO));
+                String testGutter = getStringValue(itemValues.get(TEST_GUTTER));
+                String testAndroidGutter = getStringValue(itemValues.get(TEST_ANDROID_GUTTER));
+                String testIosGutter = getStringValue(itemValues.get(TEST_IOS_GUTTER));
+                boolean testCapture = getBooleanValue(itemValues.get(TEST_CAPTURE));
+                String testName = getStringValue(itemValues.get(TEST_NAME));
+                String testDesc = getStringValue(itemValues.get(TEST_DESC));
+                String testParam1 = getStringValue(itemValues.get(TEST_PARAM1));
+                String testParam2 = getStringValue(itemValues.get(TEST_PARAM2));
+                String testParam3 = getStringValue(itemValues.get(TEST_PARAM3));
+                String testData = getStringValue(itemValues.get(TEST_DATA));
 
-            String testNo = getStringValue(itemValues.get(TEST_NO));
-            String testGutter = getStringValue(itemValues.get(TEST_GUTTER));
-            String testAndroidGutter = getStringValue(itemValues.get(TEST_ANDROID_GUTTER));
-            String testIosGutter = getStringValue(itemValues.get(TEST_IOS_GUTTER));
-            boolean testCapture = getBooleanValue(itemValues.get(TEST_CAPTURE));
-            String testName = getStringValue(itemValues.get(TEST_NAME));
-            String testDesc = getStringValue(itemValues.get(TEST_DESC));
-            String testParam1 = getStringValue(itemValues.get(TEST_PARAM1));
-            String testParam2 = getStringValue(itemValues.get(TEST_PARAM2));
-            String testParam3 = getStringValue(itemValues.get(TEST_PARAM3));
-            String testData = getStringValue(itemValues.get(TEST_DATA));
+                TestStep testStep = new TestStep();
+                testStep.setGutter(testGutter);
+                testStep.setAndroidGutter(testAndroidGutter);
+                testStep.setIosGutter(testIosGutter);
+                testStep.setCapture(testCapture);
+                testStep.setCommand(testCommand);
+                testStep.setParam1(testParam1);
+                testStep.setParam2(testParam2);
+                testStep.setParam3(testParam3);
+                testStep.setTestData(testData);
 
-            TestStep testStep = new TestStep();
-            testStep.setGutter(testGutter);
-            testStep.setAndroidGutter(testAndroidGutter);
-            testStep.setIosGutter(testIosGutter);
-            testStep.setCapture(testCapture);
-            testStep.setCommand(testCommand);
-            testStep.setParam1(testParam1);
-            testStep.setParam2(testParam2);
-            testStep.setParam3(testParam3);
-            testStep.setTestData(testData);
+                if (StringUtils.isNotBlank(testName)) {
+                    currentTestCase = new TestCase();
+                    currentTestCase.setNo(actualTestNo);
+                    currentTestCase.setName(testName);
+                    currentTestCase.setDescription(testDesc);
+                    if (testFilter == null || CollectionUtils.isEmpty(testFilter.getTestCases()) || testFilter.getTestCases().contains(String.valueOf(actualTestNo))) {
+                        testCases.add(currentTestCase);
+                    }
+                    if (testWriter != null && !String.valueOf(actualTestNo).equals(testNo)) {
+                        CellLocation cellLocation = new CellLocation(getSheetName(sheet), testNoFirstLocation.getRow() + height * index, testNoFirstLocation.getCol(), false, false);
+                        testWriter.setCellValue(actualTestNo, cellLocation.formatAsString());
+                    }
 
-            if (StringUtils.isNotBlank(testName)) {
-                currentTestCase = new TestCase();
-                currentTestCase.setName(testName);
-                currentTestCase.setDescription(testDesc);
-                if (testFilter == null || CollectionUtils.isEmpty(testFilter.getTestCases()) || testFilter.getTestCases().contains(String.valueOf(testCaseNo))) {
-                    testCases.add(currentTestCase);
+                    actualTestNo++;
+
+                    testSteps = new ArrayList<>();
+                    currentTestCase.setTestSteps(testSteps);
+                } else {
+                    if (testWriter != null && StringUtils.isNotBlank(testNo)) {
+                        CellLocation cellLocation = new CellLocation(getSheetName(sheet), testNoFirstLocation.getRow() + height * index, testNoFirstLocation.getCol(), false, false);
+                        testWriter.setCellValue(null, cellLocation.formatAsString());
+                    }
                 }
-                testCaseNo++;
-
-                testSteps = new ArrayList<>();
-                currentTestCase.setTestSteps(testSteps);
+                testSteps.add(testStep);
             }
-            testSteps.add(testStep);
+            index++;
         }
         return testSuite;
     }
@@ -480,18 +525,15 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
 
     /**
      * Gets data of a given sheet.
+     *
+     * @param template Template
+     * @param sheet    Sheet
+     * @return date of the sheet
+     * @throws IOException if the IOException occurs
      */
     private Map<String, TestData> getData(Template template, S sheet) throws IOException {
         Map<Object, String> markupLocations = TemplateUtil.getMarkupLocations(template, s -> s.startsWith("%DATA_"));
-        int lowest = Integer.MAX_VALUE;
-
-        for (String markupLocation : markupLocations.values()) {
-            CellLocation cellLocation = new CellLocation(markupLocation);
-            int row = cellLocation.getRow();
-            if (row < lowest) {
-                lowest = row;
-            }
-        }
+        int lowest = getLowestMarkup(markupLocations);
 
         Map<Object, Short> columnIndexes = new HashMap<>();
         for (Object markup : markupLocations.keySet()) {
@@ -688,20 +730,8 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @return the list of item data
      */
     private List<Map<Object, Object>> getTableMarkupValues(Map<Object, String> markupLocations, String sheetName) throws IOException {
-        int lowest = Integer.MAX_VALUE;
-        int highest = Integer.MIN_VALUE;
-
-        for (String markupLocation : markupLocations.values()) {
-            CellLocation cellLocation = new CellLocation(markupLocation);
-            int row = cellLocation.getRow();
-            if (row < lowest) {
-                lowest = row;
-            }
-            if (row > highest) {
-                highest = row;
-            }
-        }
-        int height = highest - lowest + 1;
+        int lowest = getLowestMarkup(markupLocations);
+        int height = getDataHeight(markupLocations);
 
         List<String> ranges = new ArrayList<>();
         Map<Object, DataLocation> dataLocations = new HashMap<>();
@@ -774,6 +804,56 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
             itemDataList.add(itemData);
         }
         return itemDataList;
+    }
+
+    /**
+     * Get the row index of the lowest markup from the list of markup locations.
+     *
+     * @param markupLocations the list of markup locations
+     * @return the row index of the lowest markup
+     */
+    private int getLowestMarkup(Map<Object, String> markupLocations) {
+        int lowest = Integer.MAX_VALUE;
+
+        for (String markupLocation : markupLocations.values()) {
+            CellLocation cellLocation = new CellLocation(markupLocation);
+            int row = cellLocation.getRow();
+            if (row < lowest) {
+                lowest = row;
+            }
+        }
+        return lowest;
+    }
+
+    /**
+     * Get the row index of the highest markup from the list of markup locations.
+     *
+     * @param markupLocations the list of markup locations
+     * @return the row index of the highest markup
+     */
+    private int getHighestMarkup(Map<Object, String> markupLocations) {
+        int highest = Integer.MIN_VALUE;
+
+        for (String markupLocation : markupLocations.values()) {
+            CellLocation cellLocation = new CellLocation(markupLocation);
+            int row = cellLocation.getRow();
+            if (row > highest) {
+                highest = row;
+            }
+        }
+        return highest;
+    }
+
+    /**
+     * Get the data height from the list of markup locations.
+     *
+     * @param markupLocations the list of markup locations
+     * @return the data height
+     */
+    private int getDataHeight(Map<Object, String> markupLocations) {
+        int lowest = getLowestMarkup(markupLocations);
+        int highest = getHighestMarkup(markupLocations);
+        return highest - lowest + 1;
     }
 
     /**

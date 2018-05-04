@@ -28,6 +28,7 @@ import excelium.common.ss.RangeLocation;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -188,5 +189,13 @@ public abstract class AbstractWorkbookReader<W, S> implements WorkbookReader<W, 
             }
         }
         return columnValues;
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (workbook instanceof Closeable) {
+            ((Closeable) workbook).close();
+        }
+        workbook = null;
     }
 }

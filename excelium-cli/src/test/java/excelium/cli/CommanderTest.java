@@ -196,6 +196,9 @@ public class CommanderTest {
         @Injectable
         GoogleConnection myGoogleConnection;
 
+        @Injectable
+        GoogleConnection myGoogleConnection2;
+
         @Command
         public void defaultCommand() {}
     }

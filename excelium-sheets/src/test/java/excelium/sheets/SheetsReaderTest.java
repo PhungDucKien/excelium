@@ -27,7 +27,6 @@ package excelium.sheets;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.Sheet;
 import excelium.common.TemplateUtil;
-import excelium.core.reader.TestReader;
 import excelium.model.enums.Browser;
 import excelium.model.project.Template;
 import excelium.model.test.config.PcEnvironment;
@@ -59,12 +58,20 @@ public class SheetsReaderTest {
      */
     private static SheetsReaderFactory readerFactory;
 
+    private static SheetsReader sheetsReader1;
+    private static SheetsReader sheetsReader2;
+    private static SheetsReader sheetsReader3;
+
     @BeforeClass
     public static void beforeClass() throws IOException {
         GoogleConnection connection = new GoogleConnectionService();
         SheetsServiceProvider sheetsServiceProvider = new SheetsServiceProvider(connection);
         Sheets sheetsService = sheetsServiceProvider.createSheetsService();
         readerFactory = new SheetsReaderFactory(sheetsService);
+
+        sheetsReader1 = readerFactory.createReader("1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE");
+        sheetsReader2 = readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
+        sheetsReader3 = readerFactory.createReader("10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY");
     }
 
     @Test
@@ -111,8 +118,7 @@ public class SheetsReaderTest {
         markupLocations.put(DATA_TABLE_DATA, "'Test Data'!B4");
         webTemplate.setMarkupLocations(markupLocations);
 
-        TestReader sheetsReader = readerFactory.createReader("1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE");
-        excelium.model.test.Test test = sheetsReader.parseTest(webTemplate);
+        excelium.model.test.Test test = sheetsReader1.parseTest(webTemplate, null, null);
 
         Assert.assertEquals("1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE - Web Test", test.getWorkbookName());
         Assert.assertEquals("http://demo.excelium.tech", test.getConfig().getBaseUrl());
@@ -127,59 +133,54 @@ public class SheetsReaderTest {
 
     @Test
     public void testGetWorkbook() throws IOException {
-        TestReader sheetsReader = readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        Assert.assertNotNull(sheetsReader.getWorkbook());
+        Assert.assertNotNull(sheetsReader2.getWorkbook());
     }
 
     @Test
     public void testGetWorkbookName() throws IOException {
-        TestReader sheetsReader = readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        Assert.assertEquals("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q - Workbook1.xlsx", sheetsReader.getWorkbookName());
+        Assert.assertEquals("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q - Workbook1.xlsx", sheetsReader2.getWorkbookName());
     }
 
     @Test
     public void testListSheets() throws IOException {
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        List<Sheet> sheets = sheetsReader.listSheets();
+        List<Sheet> sheets = sheetsReader2.listSheets();
         Assert.assertEquals(3, sheets.size());
     }
 
     @Test
     public void testGetSheetName() throws IOException {
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        List<Sheet> sheets = sheetsReader.listSheets();
-        Assert.assertEquals("Sheet1", sheetsReader.getSheetName(sheets.get(0)));
-        Assert.assertEquals("Sheet2", sheetsReader.getSheetName(sheets.get(1)));
-        Assert.assertEquals("Sheet3", sheetsReader.getSheetName(sheets.get(2)));
+        List<Sheet> sheets = sheetsReader2.listSheets();
+        Assert.assertEquals("Sheet1", sheetsReader2.getSheetName(sheets.get(0)));
+        Assert.assertEquals("Sheet2", sheetsReader2.getSheetName(sheets.get(1)));
+        Assert.assertEquals("Sheet3", sheetsReader2.getSheetName(sheets.get(2)));
     }
 
     @Test
-    public void testFindFirstOccurrence() throws IllegalAccessException, IOException {
-        TestReader sheetsReader = readerFactory.createReader("10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY");
-        Assert.assertEquals("'Test Case'!A2", sheetsReader.findFirstOccurrence("%TEST_COMMAND%"));
-        Assert.assertEquals("'Test Case'!B2", sheetsReader.findFirstOccurrence("%TEST_PARAM1%"));
-        Assert.assertEquals("'Test Case'!C2", sheetsReader.findFirstOccurrence("%TEST_PARAM2%"));
-        Assert.assertEquals("'Test Case'!D2", sheetsReader.findFirstOccurrence("%TEST_PARAM3%"));
+    public void testFindFirstOccurrence() throws IOException {
+        Assert.assertEquals(null, sheetsReader3.findFirstOccurrence("%TEST_COMMAND1234%"));
+        Assert.assertEquals("'Test Case'!A2", sheetsReader3.findFirstOccurrence("%TEST_COMMAND%"));
+        Assert.assertEquals("'Test Case'!B2", sheetsReader3.findFirstOccurrence("%TEST_PARAM1%"));
+        Assert.assertEquals("'Test Case'!C2", sheetsReader3.findFirstOccurrence("%TEST_PARAM2%"));
+        Assert.assertEquals("'Test Case'!D2", sheetsReader3.findFirstOccurrence("%TEST_PARAM3%"));
 
-        List<Sheet> sheets = sheetsReader.listSheets();
-        Assert.assertEquals("'Test Case'!A2", sheetsReader.findFirstOccurrence("%TEST_COMMAND%", sheets.get(0)));
-        Assert.assertEquals("'Test Case'!B2", sheetsReader.findFirstOccurrence("%TEST_PARAM1%", sheets.get(0)));
-        Assert.assertEquals("'Test Case'!C2", sheetsReader.findFirstOccurrence("%TEST_PARAM2%", sheets.get(0)));
-        Assert.assertEquals("'Test Case'!D2", sheetsReader.findFirstOccurrence("%TEST_PARAM3%", sheets.get(0)));
+        List<Sheet> sheets = sheetsReader3.listSheets();
+        Assert.assertEquals("'Test Case'!A2", sheetsReader3.findFirstOccurrence("%TEST_COMMAND%", sheets.get(0)));
+        Assert.assertEquals("'Test Case'!B2", sheetsReader3.findFirstOccurrence("%TEST_PARAM1%", sheets.get(0)));
+        Assert.assertEquals("'Test Case'!C2", sheetsReader3.findFirstOccurrence("%TEST_PARAM2%", sheets.get(0)));
+        Assert.assertEquals("'Test Case'!D2", sheetsReader3.findFirstOccurrence("%TEST_PARAM3%", sheets.get(0)));
     }
 
     @Test
     public void testBatchFindFirstOccurrence() throws IllegalAccessException, IOException {
-        TestReader sheetsReader = readerFactory.createReader("10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY");
-        Map<Object, String> cellLocations = sheetsReader.batchFindFirstOccurrence(TemplateUtil.getMarkups());
+        Map<Object, String> cellLocations = sheetsReader3.batchFindFirstOccurrence(TemplateUtil.getMarkups());
         Assert.assertEquals(4, cellLocations.size());
         Assert.assertEquals("'Test Case'!A2", cellLocations.get("%TEST_COMMAND%"));
         Assert.assertEquals("'Test Case'!B2", cellLocations.get("%TEST_PARAM1%"));
         Assert.assertEquals("'Test Case'!C2", cellLocations.get("%TEST_PARAM2%"));
         Assert.assertEquals("'Test Case'!D2", cellLocations.get("%TEST_PARAM3%"));
 
-        List<Sheet> sheets = sheetsReader.listSheets();
-        cellLocations = sheetsReader.batchFindFirstOccurrence(TemplateUtil.getMarkups(), sheets.get(0));
+        List<Sheet> sheets = sheetsReader3.listSheets();
+        cellLocations = sheetsReader3.batchFindFirstOccurrence(TemplateUtil.getMarkups(), sheets.get(0));
         Assert.assertEquals(4, cellLocations.size());
         Assert.assertEquals("'Test Case'!A2", cellLocations.get("%TEST_COMMAND%"));
         Assert.assertEquals("'Test Case'!B2", cellLocations.get("%TEST_PARAM1%"));
@@ -190,43 +191,41 @@ public class SheetsReaderTest {
     @Test
     public void testGetCellValue() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        Assert.assertEquals("Cell B2", sheetsReader.getCellValue("Sheet1!B2"));
-        Assert.assertEquals("Cell C2", sheetsReader.getCellValue("Sheet1!C2"));
-        Assert.assertEquals("Cell D2", sheetsReader.getCellValue("Sheet1!D2"));
-        Assert.assertEquals(1, sheetsReader.getCellValue("Sheet1!B3"));
-        Assert.assertEquals(2, sheetsReader.getCellValue("Sheet1!C3"));
-        Assert.assertEquals(true, sheetsReader.getCellValue("Sheet1!B4"));
-        Assert.assertEquals(false, sheetsReader.getCellValue("Sheet1!C4"));
-        Assert.assertEquals(true, sheetsReader.getCellValue("Sheet1!D4"));
-        Assert.assertEquals(false, sheetsReader.getCellValue("Sheet1!E4"));
-        Assert.assertEquals(1.1, sheetsReader.getCellValue("Sheet1!B5"));
-        Assert.assertEquals(2.1, sheetsReader.getCellValue("Sheet1!C5"));
-        Assert.assertEquals("2018-01-01", format.format(sheetsReader.getCellValue("Sheet1!B6")));
-        Assert.assertEquals("2018-01-02", format.format(sheetsReader.getCellValue("Sheet1!C6")));
-        Assert.assertEquals(1, sheetsReader.getCellValue("Sheet1!B7"));
-        Assert.assertEquals("2.2", sheetsReader.getCellValue("Sheet1!C7"));
-        Assert.assertEquals("2018-01-01", format.format(sheetsReader.getCellValue("Sheet1!B8")));
-        Assert.assertEquals("2018-01-02", format.format(sheetsReader.getCellValue("Sheet1!C8")));
+        Assert.assertEquals("Cell B2", sheetsReader2.getCellValue("Sheet1!B2"));
+        Assert.assertEquals("Cell C2", sheetsReader2.getCellValue("Sheet1!C2"));
+        Assert.assertEquals("Cell D2", sheetsReader2.getCellValue("Sheet1!D2"));
+        Assert.assertEquals(1, sheetsReader2.getCellValue("Sheet1!B3"));
+        Assert.assertEquals(2, sheetsReader2.getCellValue("Sheet1!C3"));
+        Assert.assertEquals(true, sheetsReader2.getCellValue("Sheet1!B4"));
+        Assert.assertEquals(false, sheetsReader2.getCellValue("Sheet1!C4"));
+        Assert.assertEquals(true, sheetsReader2.getCellValue("Sheet1!D4"));
+        Assert.assertEquals(false, sheetsReader2.getCellValue("Sheet1!E4"));
+        Assert.assertEquals(1.1, sheetsReader2.getCellValue("Sheet1!B5"));
+        Assert.assertEquals(2.1, sheetsReader2.getCellValue("Sheet1!C5"));
+        Assert.assertEquals("2018-01-01", format.format(sheetsReader2.getCellValue("Sheet1!B6")));
+        Assert.assertEquals("2018-01-02", format.format(sheetsReader2.getCellValue("Sheet1!C6")));
+        Assert.assertEquals(1, sheetsReader2.getCellValue("Sheet1!B7"));
+        Assert.assertEquals("2.2", sheetsReader2.getCellValue("Sheet1!C7"));
+        Assert.assertEquals("2018-01-01", format.format(sheetsReader2.getCellValue("Sheet1!B8")));
+        Assert.assertEquals("2018-01-02", format.format(sheetsReader2.getCellValue("Sheet1!C8")));
     }
 
     @Test
     public void testGetRowCellValues() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
 
-        List<Object> rowCellValues = sheetsReader.getRowCellValues("Sheet1!B2:E3");
+        List<Object> rowCellValues = sheetsReader2.getRowCellValues("Sheet1!B2:E3");
         Assert.assertEquals("Cell B2", rowCellValues.get(0));
         Assert.assertEquals("Cell C2", rowCellValues.get(1));
         Assert.assertEquals("Cell D2", rowCellValues.get(2));
 
-        rowCellValues = sheetsReader.getRowCellValues("Sheet1!B4:E5");
+        rowCellValues = sheetsReader2.getRowCellValues("Sheet1!B4:E5");
         Assert.assertEquals(true, rowCellValues.get(0));
         Assert.assertEquals(false, rowCellValues.get(1));
         Assert.assertEquals(true, rowCellValues.get(2));
         Assert.assertEquals(false, rowCellValues.get(3));
 
-        rowCellValues = sheetsReader.getRowCellValues("Sheet1!B6:E8");
+        rowCellValues = sheetsReader2.getRowCellValues("Sheet1!B6:E8");
         Assert.assertEquals("2018-01-01", format.format(rowCellValues.get(0)));
         Assert.assertEquals("2018-01-02", format.format(rowCellValues.get(1)));
     }
@@ -234,9 +233,8 @@ public class SheetsReaderTest {
     @Test
     public void testGetColumnCellValues() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
 
-        List<Object> columnCellValues = sheetsReader.getColumnCellValues("Sheet1!B2:C7");
+        List<Object> columnCellValues = sheetsReader2.getColumnCellValues("Sheet1!B2:C7");
         Assert.assertEquals("Cell B2", columnCellValues.get(0));
         Assert.assertEquals(1, columnCellValues.get(1));
         Assert.assertEquals(true, columnCellValues.get(2));
@@ -244,7 +242,7 @@ public class SheetsReaderTest {
         Assert.assertEquals("2018-01-01", format.format(columnCellValues.get(4)));
         Assert.assertEquals(1, columnCellValues.get(5));
 
-        columnCellValues = sheetsReader.getColumnCellValues("Sheet1!D2:E7");
+        columnCellValues = sheetsReader2.getColumnCellValues("Sheet1!D2:E7");
         Assert.assertEquals("Cell D2", columnCellValues.get(0));
         Assert.assertEquals(null, columnCellValues.get(1));
         Assert.assertEquals(true, columnCellValues.get(2));
@@ -253,8 +251,7 @@ public class SheetsReaderTest {
     @Test
     public void testGetRangeCellValues() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        List<List<Object>> rangeCellValue = sheetsReader.getRangeCellValues("Sheet1!B2:E8");
+        List<List<Object>> rangeCellValue = sheetsReader2.getRangeCellValues("Sheet1!B2:E8");
         Assert.assertEquals("Cell B2", rangeCellValue.get(0).get(0));
         Assert.assertEquals("Cell C2", rangeCellValue.get(0).get(1));
         Assert.assertEquals("Cell D2", rangeCellValue.get(0).get(2));
@@ -277,8 +274,7 @@ public class SheetsReaderTest {
     @Test
     public void testBatchGetCellValues() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        Map<String, Object> cellValues = sheetsReader.batchGetCellValues(
+        Map<String, Object> cellValues = sheetsReader2.batchGetCellValues(
                 "Sheet1!B2", "Sheet1!C2", "Sheet1!D2", "Sheet1!B3", "Sheet1!C3", "Sheet1!B4", "Sheet1!C4", "Sheet1!D4", "Sheet1!E4",
                 "Sheet1!B5", "Sheet1!C5", "Sheet1!B6", "Sheet1!C6", "Sheet1!B7", "Sheet1!C7", "Sheet1!B8", "Sheet1!C8"
         );
@@ -304,8 +300,7 @@ public class SheetsReaderTest {
     @Test
     public void testBatchGetRowCellValues() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        Map<String, List<Object>> rowCellValues = sheetsReader.batchGetRowCellValues("Sheet1!B2:E3", "Sheet1!B4:E5", "Sheet1!B6:E8");
+        Map<String, List<Object>> rowCellValues = sheetsReader2.batchGetRowCellValues("Sheet1!B2:E3", "Sheet1!B4:E5", "Sheet1!B6:E8");
         Assert.assertEquals("Cell B2", rowCellValues.get("Sheet1!B2:E3").get(0));
         Assert.assertEquals("Cell C2", rowCellValues.get("Sheet1!B2:E3").get(1));
         Assert.assertEquals("Cell D2", rowCellValues.get("Sheet1!B2:E3").get(2));
@@ -320,8 +315,7 @@ public class SheetsReaderTest {
     @Test
     public void testBatchGetColumnCellValues() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        Map<String, List<Object>> columnCellValues = sheetsReader.batchGetColumnCellValues("Sheet1!B2:C7", "Sheet1!D2:E7");
+        Map<String, List<Object>> columnCellValues = sheetsReader2.batchGetColumnCellValues("Sheet1!B2:C7", "Sheet1!D2:E7");
         Assert.assertEquals("Cell B2", columnCellValues.get("Sheet1!B2:C7").get(0));
         Assert.assertEquals(1, columnCellValues.get("Sheet1!B2:C7").get(1));
         Assert.assertEquals(true, columnCellValues.get("Sheet1!B2:C7").get(2));
@@ -336,8 +330,7 @@ public class SheetsReaderTest {
     @Test
     public void testBatchGetRangeCellValues() throws IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SheetsReader sheetsReader = (SheetsReader) readerFactory.createReader("12-ZymkuT2--PY0drfTqWrufyszVUTIoSNpBBr232Z3Q");
-        Map<String, List<List<Object>>> rangeCellValues = sheetsReader.batchGetRangeCellValues(
+        Map<String, List<List<Object>>> rangeCellValues = sheetsReader2.batchGetRangeCellValues(
                 "Sheet1!B2", "Sheet1!C2", "Sheet1!D2", "Sheet1!B3", "Sheet1!C3", "Sheet1!B4", "Sheet1!C4", "Sheet1!D4", "Sheet1!E4",
                 "Sheet1!B5", "Sheet1!C5", "Sheet1!B6", "Sheet1!C6", "Sheet1!B7", "Sheet1!C7", "Sheet1!B8", "Sheet1!C8"
         );
