@@ -348,7 +348,10 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
         int actualActionNo = 1;
 
         int index = 0;
-        CellLocation actionNoFirstLocation = new CellLocation(markupLocations.get(ACTION_NO));
+        CellLocation actionNoFirstLocation = null;
+        if (markupLocations.containsKey(ACTION_NO)) {
+            actionNoFirstLocation = new CellLocation(markupLocations.get(ACTION_NO));
+        }
         for (Map<Object, Object> itemValues : tableValues) {
             String actionCommand = getStringValue(itemValues.get(ACTION_COMMAND));
             if (StringUtils.isNotBlank(actionCommand)) {
@@ -382,7 +385,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                     currentTestAction.setDescription(actionDesc);
                     actionMap.put(actionName, currentTestAction);
 
-                    if (testWriter != null && !String.valueOf(actualActionNo).equals(actionNo)) {
+                    if (testWriter != null && actionNoFirstLocation != null && !String.valueOf(actualActionNo).equals(actionNo)) {
                         CellLocation cellLocation = new CellLocation(getSheetName(sheet), actionNoFirstLocation.getRow() + height * index, actionNoFirstLocation.getCol(), false, false);
                         testWriter.setCellValue(actualActionNo, cellLocation.formatAsString());
                     }
@@ -392,7 +395,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                     testSteps = new ArrayList<>();
                     currentTestAction.setTestSteps(testSteps);
                 } else {
-                    if (testWriter != null && StringUtils.isNotBlank(actionNo)) {
+                    if (testWriter != null && actionNoFirstLocation != null && StringUtils.isNotBlank(actionNo)) {
                         CellLocation cellLocation = new CellLocation(getSheetName(sheet), actionNoFirstLocation.getRow() + height * index, actionNoFirstLocation.getCol(), false, false);
                         testWriter.setCellValue(null, cellLocation.formatAsString());
                     }
@@ -449,7 +452,10 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
         int actualTestNo = 1;
 
         int index = 0;
-        CellLocation testNoFirstLocation = new CellLocation(markupLocations.get(TEST_NO));
+        CellLocation testNoFirstLocation = null;
+        if (markupLocations.containsKey(TEST_NO)) {
+            testNoFirstLocation = new CellLocation(markupLocations.get(TEST_NO));
+        }
         for (Map<Object, Object> itemValues : tableValues) {
             String testCommand = getStringValue(itemValues.get(TEST_COMMAND));
             if (StringUtils.isNotBlank(testCommand)) {
@@ -484,7 +490,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                     if (testFilter == null || CollectionUtils.isEmpty(testFilter.getTestCases()) || testFilter.getTestCases().contains(String.valueOf(actualTestNo))) {
                         testCases.add(currentTestCase);
                     }
-                    if (testWriter != null && !String.valueOf(actualTestNo).equals(testNo)) {
+                    if (testWriter != null && testNoFirstLocation != null && !String.valueOf(actualTestNo).equals(testNo)) {
                         CellLocation cellLocation = new CellLocation(getSheetName(sheet), testNoFirstLocation.getRow() + height * index, testNoFirstLocation.getCol(), false, false);
                         testWriter.setCellValue(actualTestNo, cellLocation.formatAsString());
                     }
@@ -494,7 +500,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                     testSteps = new ArrayList<>();
                     currentTestCase.setTestSteps(testSteps);
                 } else {
-                    if (testWriter != null && StringUtils.isNotBlank(testNo)) {
+                    if (testWriter != null && testNoFirstLocation != null && StringUtils.isNotBlank(testNo)) {
                         CellLocation cellLocation = new CellLocation(getSheetName(sheet), testNoFirstLocation.getRow() + height * index, testNoFirstLocation.getCol(), false, false);
                         testWriter.setCellValue(null, cellLocation.formatAsString());
                     }

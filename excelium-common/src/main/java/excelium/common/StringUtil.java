@@ -53,4 +53,21 @@ public class StringUtil {
         }
         return url;
     }
+
+    /**
+     * Converts byte size to human readable format.
+     * Eg: 1000 to "1 kB", 1000000 to "1 MB" etc.
+     *
+     * @param bytes byte size
+     * @param si    decimal format
+     * @return human readable byte size
+     * @see <a href="http://programming.guide/java/formatting-byte-size-to-human-readable-format.html">Java: Formatting byte size to human readable format</a>
+     */
+    public static String humanReadableByteCount(long bytes, boolean si) {
+        int unit = si ? 1000 : 1024;
+        if (bytes < unit) return bytes + " B";
+        int exp = (int) (Math.log(bytes) / Math.log(unit));
+        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp - 1) + (si ? "" : "i");
+        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
+    }
 }

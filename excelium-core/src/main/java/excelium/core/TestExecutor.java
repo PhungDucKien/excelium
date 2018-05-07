@@ -97,8 +97,8 @@ public class TestExecutor {
                 Test test = testReader.parseTest(template, testFilter, testWriter);
 
                 // Executes all tests of workbook
-//                TestRunner testRunner = new TestRunner(test, testWriter, screenshotService, debug, silent);
-//                testRunner.runAll();
+                TestRunner testRunner = new TestRunner(test, project, testWriter);
+                testRunner.runAll();
             } catch (IOException e) {
                 LOG.error(e.getMessage(), e);
             }

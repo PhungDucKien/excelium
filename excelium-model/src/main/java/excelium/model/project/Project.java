@@ -108,6 +108,21 @@ public class Project {
     private Map<String, Template> templates;
 
     /**
+     * Appium host
+     */
+    private String appiumHost;
+
+    /**
+     * Appium port
+     */
+    private Integer appiumPort;
+
+    /**
+     * Excelium port
+     */
+    private Integer exceliumPort;
+
+    /**
      * Gets name.
      *
      * @return the name
@@ -303,6 +318,60 @@ public class Project {
      */
     public void setTemplates(Map<String, Template> templates) {
         this.templates = templates;
+    }
+
+    /**
+     * Gets appium host.
+     *
+     * @return the appium host
+     */
+    public String getAppiumHost() {
+        return appiumHost;
+    }
+
+    /**
+     * Sets appium host.
+     *
+     * @param appiumHost the appium host
+     */
+    public void setAppiumHost(String appiumHost) {
+        this.appiumHost = appiumHost;
+    }
+
+    /**
+     * Gets appium port.
+     *
+     * @return the appium port
+     */
+    public Integer getAppiumPort() {
+        return appiumPort;
+    }
+
+    /**
+     * Sets appium port.
+     *
+     * @param appiumPort the appium port
+     */
+    public void setAppiumPort(Integer appiumPort) {
+        this.appiumPort = appiumPort;
+    }
+
+    /**
+     * Gets excelium port.
+     *
+     * @return the excelium port
+     */
+    public Integer getExceliumPort() {
+        return exceliumPort;
+    }
+
+    /**
+     * Sets excelium port.
+     *
+     * @param exceliumPort the excelium port
+     */
+    public void setExceliumPort(Integer exceliumPort) {
+        this.exceliumPort = exceliumPort;
     }
 
     /**
