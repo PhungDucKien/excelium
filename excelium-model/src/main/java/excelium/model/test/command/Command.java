@@ -24,6 +24,8 @@
 
 package excelium.model.test.command;
 
+import java.util.Map;
+
 /**
  * Represents command model.
  *
@@ -38,14 +40,9 @@ public class Command {
     private String name;
 
     /**
-     * Description
+     * Descriptions
      */
-    private String description;
-
-    /**
-     * Japanese description
-     */
-    private String jaDescription;
+    private Map<String, String> descriptions;
 
     /**
      * Method
@@ -68,17 +65,17 @@ public class Command {
     private String param3;
 
     /**
-     * Is command for web only
+     * Is the command only available in web application
      */
     private boolean webOnly;
 
     /**
-     * Is command for android app only
+     * Is the command only available in Android application
      */
     private boolean androidOnly;
 
     /**
-     * Is command for iOs app only
+     * Is the command only available in iOS application
      */
     private boolean iosOnly;
 
@@ -106,39 +103,21 @@ public class Command {
     }
 
     /**
-     * Gets description.
+     * Gets descriptions.
      *
-     * @return the description
+     * @return the descriptions
      */
-    public String getDescription() {
-        return description;
+    public Map<String, String> getDescriptions() {
+        return descriptions;
     }
 
     /**
-     * Sets description.
+     * Sets descriptions.
      *
-     * @param description the description
+     * @param descriptions the descriptions
      */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * Gets ja description.
-     *
-     * @return the ja description
-     */
-    public String getJaDescription() {
-        return jaDescription;
-    }
-
-    /**
-     * Sets ja description.
-     *
-     * @param jaDescription the ja description
-     */
-    public void setJaDescription(String jaDescription) {
-        this.jaDescription = jaDescription;
+    public void setDescriptions(Map<String, String> descriptions) {
+        this.descriptions = descriptions;
     }
 
     /**

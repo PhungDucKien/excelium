@@ -85,6 +85,7 @@ public class DriverDownloaderTest {
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
+        Assert.assertTrue(Files.isExecutable(driver));
         Files.delete(driver);
     }
 
@@ -100,6 +101,7 @@ public class DriverDownloaderTest {
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
+        Assert.assertTrue(Files.isExecutable(driver));
         Files.delete(driver);
     }
 
@@ -145,6 +147,7 @@ public class DriverDownloaderTest {
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
+        Assert.assertTrue(Files.isExecutable(driver));
         Files.delete(driver);
     }
 
@@ -160,6 +163,7 @@ public class DriverDownloaderTest {
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
+        Assert.assertTrue(Files.isExecutable(driver));
         Files.delete(driver);
     }
 
@@ -205,6 +209,7 @@ public class DriverDownloaderTest {
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
+        Assert.assertTrue(Files.isExecutable(driver));
         Files.delete(driver);
     }
 
@@ -220,6 +225,7 @@ public class DriverDownloaderTest {
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
+        Assert.assertTrue(Files.isExecutable(driver));
         Files.delete(driver);
     }
 }

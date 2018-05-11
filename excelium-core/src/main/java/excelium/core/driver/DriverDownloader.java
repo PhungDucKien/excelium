@@ -69,17 +69,23 @@ class DriverDownloader {
         switch (environment.getBrowser()) {
             case CHROME:
                 downloadChromeDriver(environment.getPlatform(), driverPath);
-                return;
+                break;
             case FIREFOX:
                 downloadGeckoDriver(environment.getPlatform(), driverPath);
-                return;
+                break;
             case IE:
             case EDGE:
-                return;
+                break;
             case OPERA:
                 downloadOperaDriver(environment.getPlatform(), driverPath);
-                return;
+                break;
             case SAFARI:
+        }
+
+        // Set the driver executable
+        if (environment.getPlatform() == Platform.MAC_OS || environment.getPlatform() == Platform.LINUX) {
+            File driverFile = new File(driverPath);
+            driverFile.setExecutable(true);
         }
     }
 

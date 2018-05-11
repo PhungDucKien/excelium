@@ -75,4 +75,13 @@ public class StringUtilTest {
         Assert.assertEquals("9.2 EB", StringUtil.humanReadableByteCount(Long.MAX_VALUE, true));
         Assert.assertEquals("8.0 EiB", StringUtil.humanReadableByteCount(Long.MAX_VALUE, false));
     }
+
+    @Test
+    public void testAddSpaceToCamelCase() {
+        Assert.assertEquals("First Name", StringUtil.addSpaceToCamelCase("FirstName"));
+        Assert.assertEquals("This Is My Caps Delimited String", StringUtil.addSpaceToCamelCase("ThisIsMyCapsDelimitedString"));
+        Assert.assertEquals("IBM Make Stuff And Sell It", StringUtil.addSpaceToCamelCase("IBMMakeStuffAndSellIt"));
+        Assert.assertEquals("big ID Problem", StringUtil.addSpaceToCamelCase("bigIDProblem"));
+        Assert.assertEquals("AWS File", StringUtil.addSpaceToCamelCase("AWSFile"));
+    }
 }

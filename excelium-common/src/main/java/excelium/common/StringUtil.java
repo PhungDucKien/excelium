@@ -70,4 +70,14 @@ public class StringUtil {
         String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp - 1) + (si ? "" : "i");
         return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
+
+    /**
+     * Adds spaces to camel case.
+     *
+     * @param input the input string in camel case
+     * @return the result string
+     */
+    public static String addSpaceToCamelCase(String input) {
+        return input.replaceAll("(\\P{Ll})(\\P{Ll}\\p{Ll})","$1 $2").replaceAll("(\\p{Ll})(\\P{Ll})","$1 $2");
+    }
 }
