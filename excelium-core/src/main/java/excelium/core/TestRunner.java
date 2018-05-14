@@ -33,6 +33,7 @@ import excelium.core.writer.TestWriter;
 import excelium.model.enums.Platform;
 import excelium.model.enums.Result;
 import excelium.model.project.Project;
+import excelium.model.project.Template;
 import excelium.model.test.*;
 import excelium.model.test.action.TestAction;
 import excelium.model.test.command.Command;
@@ -49,6 +50,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -84,6 +86,11 @@ public class TestRunner<W, S> {
     private final TestWriter testWriter;
 
     /**
+     * Template
+     */
+    private final Template template;
+
+    /**
      * Current environment
      */
     private Environment environment;
@@ -114,16 +121,23 @@ public class TestRunner<W, S> {
     private TestStep testStep;
 
     /**
+     * Map of test result.
+     */
+    private Map<TestStep, Result> testStepResultMap;
+
+    /**
      * Instantiates a new Test runner.
      *
      * @param test       the test
      * @param project    the project
      * @param testWriter the test writer
+     * @param template   the template
      */
-    TestRunner(Test<W, S> test, Project project, TestWriter testWriter) {
+    TestRunner(Test<W, S> test, Project project, TestWriter testWriter, Template template) {
         this.test = test;
         this.project = project;
         this.testWriter = testWriter;
+        this.template = template;
     }
 
     /**
@@ -145,10 +159,20 @@ public class TestRunner<W, S> {
      */
     private void runEnvironment(Environment environment) throws IOException {
         setEnvironment(environment);
-        webDriver = DriverFactory.createDriver(environment, project);
-        commandMap = CommandFactory.createCommandMap(getCommandExecutors());
-        for (TestSuite<S> testSuite : test.getTestSuites().values()) {
-            runTestSuite(testSuite);
+        try {
+            webDriver = DriverFactory.createDriver(environment, project);
+            commandMap = CommandFactory.createCommandMap(getCommandExecutors());
+            testStepResultMap = new HashMap<>();
+            for (TestSuite<S> testSuite : test.getTestSuites().values()) {
+                runTestSuite(testSuite);
+            }
+        } finally {
+            testStepResultMap = null;
+            commandMap = null;
+            if (this.webDriver != null) {
+                this.webDriver.quit();
+                this.webDriver = null;
+            }
         }
     }
 
@@ -156,8 +180,9 @@ public class TestRunner<W, S> {
      * Run a test suite.
      *
      * @param testSuite the test suite
+     * @throws IOException the io exception
      */
-    private void runTestSuite(TestSuite<S> testSuite) {
+    private void runTestSuite(TestSuite<S> testSuite) throws IOException {
         setTestSuite(testSuite);
         for (TestCase testCase : testSuite.getTestCases()) {
             runTestCase(testCase);
@@ -168,8 +193,9 @@ public class TestRunner<W, S> {
      * Run a test case.
      *
      * @param testCase the test case
+     * @throws IOException the io exception
      */
-    private void runTestCase(TestCase testCase) {
+    private void runTestCase(TestCase testCase) throws IOException {
         setTestCase(testCase);
         boolean shouldContinue = true;
         for (TestStep testStep : testCase.getTestSteps()) {
@@ -187,8 +213,9 @@ public class TestRunner<W, S> {
      *
      * @param testAction the test action
      * @return Result of the action
+     * @throws IOException the io exception
      */
-    public Result runAction(TestAction testAction) {
+    public Result runAction(TestAction testAction) throws IOException {
         Result actionResult = Result.OK;
         boolean shouldContinue = true;
         for (TestStep testStep : testAction.getTestSteps()) {
@@ -208,8 +235,9 @@ public class TestRunner<W, S> {
      * @param testStep    test step
      * @param writeResult should write the result to the workbook
      * @return Result of the step
+     * @throws IOException the io exception
      */
-    private StepResult runTestStep(TestStep testStep, boolean writeResult) {
+    private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException {
         setTestStep(testStep);
         Command command = commandMap.get(testStep.getCommand());
 
@@ -220,13 +248,13 @@ public class TestRunner<W, S> {
             Result result = runCommand(command, param1, param2, param3);
 
             if (writeResult) {
-//                writeCombineTestStepResult(testStep, result);
+                writeResult(testStep, result);
             }
 
             return new StepResult(result, result == Result.OK || (result == Result.FAIL && command.getMethod().startsWith("verify")));
         } else {
             if (writeResult) {
-//                writeCombineTestStepResult(testStep, Result.ERROR);
+                writeResult(testStep, Result.ERROR);
             }
         }
         return new StepResult(Result.ERROR, false);
@@ -373,6 +401,21 @@ public class TestRunner<W, S> {
             }
         }
         return null;
+    }
+
+    /**
+     * Write test result to the workbook
+     *
+     * @param testStep  the test step
+     * @param result    the result to write
+     * @throws IOException the io exception
+     */
+    private void writeResult(TestStep testStep, Result result) throws IOException {
+        Result curResult = testStepResultMap.get(testStep);
+        if (curResult == null || (curResult == Result.OK && result != Result.OK)) {
+            testWriter.writeResult(template, testSuite.getSheetName(), testStep, result);
+            testStepResultMap.put(testStep, result);
+        }
     }
 
     /**

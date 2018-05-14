@@ -24,6 +24,16 @@
 
 package excelium.core.writer;
 
+import excelium.common.ss.CellLocation;
+import excelium.model.enums.Result;
+import excelium.model.project.Template;
+import excelium.model.test.TestStep;
+
+import java.io.IOException;
+import java.util.Date;
+
+import static excelium.model.project.Template.*;
+
 /**
  * Abstract test writer that implements {@link TestWriter}.
  *
@@ -31,4 +41,29 @@ package excelium.core.writer;
  * @since 2018.05.02
  */
 public abstract class AbstractTestWriter extends AbstractWorkbookWriter implements TestWriter {
+
+    @Override
+    public void writeResult(Template template, String sheetName, TestStep testStep, Result result) throws IOException {
+        writeValue(template, sheetName, testStep, TEST_DATE, new Date());
+        writeValue(template, sheetName, testStep, TEST_PERSON, System.getProperty("user.name"));
+        writeValue(template, sheetName, testStep, TEST_RESULT, result.getText());
+    }
+
+    /**
+     * Write value to the markup position of test step in the workbook
+     *
+     * @param template  the template of the workbook
+     * @param sheetName the sheet name
+     * @param testStep  the test step
+     * @param markup    the markup
+     * @param value     the value
+     * @throws IOException the io exception
+     */
+    private void writeValue(Template template, String sheetName, TestStep testStep, String markup, Object value) throws IOException {
+        if (template.getMarkupLocations().containsKey(markup)) {
+            CellLocation firstLocation = new CellLocation(template.getMarkupLocations().get(markup));
+            CellLocation cellLocation = new CellLocation(sheetName, firstLocation.getRow() + testStep.getRowIndex(), firstLocation.getCol(), false, false);
+            setCellValue(value, cellLocation.formatAsString());
+        }
+    }
 }

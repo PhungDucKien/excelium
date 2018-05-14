@@ -30,9 +30,8 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 import excelium.core.writer.AbstractTestWriter;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Writes Google Sheet spreadsheets.
@@ -85,9 +84,47 @@ public class SheetsWriter extends AbstractTestWriter {
 
     @Override
     public void batchSetRangeCellValues(Map<String, List<List<Object>>> values, String... ranges) throws IOException {
-        super.batchSetRangeCellValues(values, ranges);
+        super.batchSetRangeCellValues(interpretInputData(values), ranges);
         if (flushValues != null && flushValues.size() >= FLUSH_INTERVAL) {
             flush();
         }
+    }
+
+    /**
+     * Interpret input data to make sure Google Sheets understand it.
+     *
+     * @param values the input data
+     * @return the interpreted data
+     */
+    private Map<String, List<List<Object>>> interpretInputData(Map<String, List<List<Object>>> values) {
+        Map<String, List<List<Object>>> userEnterValues = new HashMap<>();
+        for (String range : values.keySet()) {
+            List<List<Object>> rangeValues = values.get(range);
+            List<List<Object>> userEnterRangeValues = new ArrayList<>();
+            for (List<Object> rowValues : rangeValues) {
+                List<Object> userEnterRowValues = new ArrayList<>();
+                for (Object colValue : rowValues) {
+                    if (colValue instanceof String) {
+                        userEnterRowValues.add(colValue);
+                    } else if (colValue instanceof Boolean) {
+                        userEnterRowValues.add(colValue);
+                    } else if (colValue instanceof Date) {
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                        userEnterRowValues.add(df.format(colValue));
+                    } else if (colValue instanceof Double) {
+                        userEnterRowValues.add(colValue);
+                    } else if (colValue instanceof Integer) {
+                        userEnterRowValues.add(Integer.valueOf((int) colValue).doubleValue());
+                    } else if (colValue instanceof Long) {
+                        userEnterRowValues.add(Long.valueOf((long) colValue).doubleValue());
+                    } else if (colValue == null) {
+                        userEnterRowValues.add("");
+                    }
+                }
+                userEnterRangeValues.add(userEnterRowValues);
+            }
+            userEnterValues.put(range, userEnterRangeValues);
+        }
+        return userEnterValues;
     }
 }

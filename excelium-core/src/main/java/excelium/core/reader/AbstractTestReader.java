@@ -377,6 +377,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                 testStep.setParam2(actionParam2);
                 testStep.setParam3(actionParam3);
                 testStep.setTestData(actionData);
+                testStep.setRowIndex(height * index);
 
                 if (StringUtils.isNotBlank(actionName)) {
                     currentTestAction = new TestAction();
@@ -481,6 +482,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                 testStep.setParam2(testParam2);
                 testStep.setParam3(testParam3);
                 testStep.setTestData(testData);
+                testStep.setRowIndex(height * index);
 
                 if (StringUtils.isNotBlank(testName)) {
                     currentTestCase = new TestCase();

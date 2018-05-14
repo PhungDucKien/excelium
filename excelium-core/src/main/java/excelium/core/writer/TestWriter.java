@@ -24,6 +24,12 @@
 
 package excelium.core.writer;
 
+import excelium.model.enums.Result;
+import excelium.model.project.Template;
+import excelium.model.test.TestStep;
+
+import java.io.IOException;
+
 /**
  * Test writer interface.
  * Provides method that writes test files.
@@ -32,4 +38,15 @@ package excelium.core.writer;
  * @since 2018.05.01
  */
 public interface TestWriter extends WorkbookWriter {
+
+    /**
+     * Write test result to the workbook
+     *
+     * @param template  the template of the workbook
+     * @param sheetName the sheet name
+     * @param testStep  the test step
+     * @param result    the result to write
+     * @throws IOException the io exception
+     */
+    void writeResult(Template template, String sheetName, TestStep testStep, Result result) throws IOException;
 }

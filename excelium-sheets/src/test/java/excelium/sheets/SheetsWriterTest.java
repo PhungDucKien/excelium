@@ -34,6 +34,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -95,10 +96,12 @@ public class SheetsWriterTest {
         sheetsWriter.setCellValue(1.1, "Sheet2!A3");
         sheetsWriter.setCellValue(1, "Sheet2!A4");
         sheetsWriter.setCellValue(1L, "Sheet2!A5");
-        sheetsWriter.setCellValue("", "Sheet2!A6");
+        sheetsWriter.setCellValue(null, "Sheet2!A6");
         sheetsWriter.setCellValue("1.1", "Sheet2!A7");
         sheetsWriter.setCellValue("1", "Sheet2!A8");
-        sheetsWriter.setCellValue("2018/01/01", "Sheet2!A9");
+        Calendar cal = Calendar.getInstance();
+        cal.set(2018, 0, 1);
+        sheetsWriter.setCellValue(cal.getTime(), "Sheet2!A9");
         sheetsWriter.setCellValue("TRUE", "Sheet2!A10");
         sheetsWriter.flush();
 
