@@ -27,6 +27,9 @@ package excelium.common;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * Tests for {@link StringUtil}.
  *
@@ -83,5 +86,14 @@ public class StringUtilTest {
         Assert.assertEquals("IBM Make Stuff And Sell It", StringUtil.addSpaceToCamelCase("IBMMakeStuffAndSellIt"));
         Assert.assertEquals("big ID Problem", StringUtil.addSpaceToCamelCase("bigIDProblem"));
         Assert.assertEquals("AWS File", StringUtil.addSpaceToCamelCase("AWSFile"));
+    }
+
+    @Test
+    public void testParseProperties() throws IOException {
+        Properties properties = StringUtil.parseProperties("  a    =    b  ;    c    =   d;   e   ; f  = ", "\\s*;");
+        Assert.assertEquals("b", properties.get("a"));
+        Assert.assertEquals("d", properties.get("c"));
+        Assert.assertEquals("", properties.get("e"));
+        Assert.assertEquals("", properties.get("f"));
     }
 }

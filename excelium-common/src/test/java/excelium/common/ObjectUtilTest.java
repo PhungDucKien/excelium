@@ -26,6 +26,7 @@ package excelium.common;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.support.Color;
 
 import java.util.List;
 
@@ -89,5 +90,16 @@ public class ObjectUtilTest {
         Assert.assertEquals(2, list.size());
         Assert.assertEquals("abc", list.get(0));
         Assert.assertEquals("def", list.get(1));
+    }
+
+    @Test
+    public void testCheckEquals() {
+        Assert.assertTrue(ObjectUtil.checkEquals(null, null));
+        Assert.assertTrue(ObjectUtil.checkEquals("#ff0000", new Color(255, 0, 0, 1)));
+        Assert.assertTrue(ObjectUtil.checkEquals("red", new Color(255, 0, 0, 1)));
+
+        Assert.assertFalse(ObjectUtil.checkEquals("abc", null));
+        Assert.assertFalse(ObjectUtil.checkEquals("#ff0001", new Color(255, 0, 0, 1)));
+        Assert.assertFalse(ObjectUtil.checkEquals("blue", new Color(255, 0, 0, 1)));
     }
 }

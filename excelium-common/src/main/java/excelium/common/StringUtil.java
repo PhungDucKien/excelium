@@ -24,6 +24,10 @@
 
 package excelium.common;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -79,5 +83,21 @@ public class StringUtil {
      */
     public static String addSpaceToCamelCase(String input) {
         return input.replaceAll("(\\P{Ll})(\\P{Ll}\\p{Ll})","$1 $2").replaceAll("(\\p{Ll})(\\P{Ll})","$1 $2");
+    }
+
+    /**
+     * Parse configuration string to properties
+     *
+     * @param input     the input string
+     * @param separator the separator
+     * @return the properties
+     * @throws IOException the io exception
+     */
+    public static Properties parseProperties(String input, String separator) throws IOException {
+        Properties properties = new Properties();
+        try (Reader reader = new StringReader(input.replaceAll(separator, "\n"))) {
+            properties.load(reader);
+        }
+        return properties;
     }
 }

@@ -26,6 +26,7 @@ package excelium.common;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.support.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,5 +89,26 @@ public class ObjectUtil {
             }
         }
         return valueList;
+    }
+
+    /**
+     * Determine that two values are equal. The expected is in string format
+     * and converted to the corresponding object type before comparing. If
+     * <code>expected</code> and <code>actual</code> are <code>null</code>,
+     * they are considered equal.
+     *
+     * @param expected the expected
+     * @param actual   the actual
+     * @return true, if the values are equal, otherwise, false
+     */
+    public static boolean checkEquals(String expected, Object actual) {
+        if (actual == null) {
+            return expected == null;
+        }
+        Class clazz = actual.getClass();
+        if (clazz.equals(Color.class)) {
+            return actual.equals(Color.fromString(expected));
+        }
+        return false;
     }
 }

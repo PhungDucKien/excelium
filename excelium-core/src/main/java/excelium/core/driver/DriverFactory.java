@@ -86,14 +86,14 @@ public class DriverFactory {
     private static final int DEFAULT_APPIUM_PORT = 4723;
 
     /**
-     * Creates web driver for an environment.
+     * Creates context aware web driver for an environment.
      *
      * @param environment the environment
      * @param project     the project
-     * @return the remote web driver
+     * @return the context aware web driver
      * @throws IOException the io exception
      */
-    public static RemoteWebDriver createDriver(Environment environment, Project project) throws IOException {
+    public static ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
         RemoteWebDriver webDriver = null;
         if (environment instanceof PcEnvironment) {
             webDriver = createPcDriver((PcEnvironment) environment, project);
@@ -101,7 +101,7 @@ public class DriverFactory {
             webDriver = createMobileDriver((MobileEnvironment) environment, project);
         }
         webDriver.manage().timeouts().implicitlyWait(WEBDRIVER_DEFAULT_IMPLICIT_WAIT, TimeUnit.MILLISECONDS);
-        return webDriver;
+        return new ContextAwareWebDriver(webDriver);
     }
 
     /**

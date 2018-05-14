@@ -24,6 +24,10 @@
 
 package excelium.common;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Collection of number handling utilities
  *
@@ -31,6 +35,11 @@ package excelium.common;
  * @since 2018.04.19
  */
 public class NumberUtil {
+
+    /**
+     * Logger
+     */
+    private static final Logger LOG = LogManager.getLogger();
 
     /**
      * Gets appropriate numeric value from a double value.
@@ -59,5 +68,46 @@ public class NumberUtil {
         } else {
             return Double.valueOf(number).longValue();
         }
+    }
+
+    /**
+     * Parse the given {@code text} into a positive {@link Integer} instance,
+     * using the corresponding {@code decode} / {@code valueOf} method.
+     * <p>Trims the input {@code String} before attempting to parse the number.
+     * <p>Supports numbers in hex format (with leading "0x", "0X", or "#") as well.
+     * If the parsed number is below 0, or any exception occurred, returns the default value.
+     *
+     * @param text         the text to convert
+     * @param defaultValue the default value
+     * @return the parsed number
+     * @see Integer#decode
+     */
+    public static int parsePositiveInteger(String text, int defaultValue) {
+        String trimmed = StringUtils.trim(text);
+        int number = -1;
+        if (StringUtils.isNotBlank(trimmed)) {
+            try {
+                number = isHexNumber(trimmed) ? Integer.decode(trimmed) : Integer.valueOf(trimmed);
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+            }
+        }
+        if (number < 0) {
+            number = defaultValue;
+        }
+        return number;
+    }
+
+    /**
+     * Determine whether the given {@code value} String indicates a hex number,
+     * i.e. needs to be passed into {@code Integer.decode} instead of
+     * {@code Integer.valueOf}, etc.
+     *
+     * @param value the value
+     * @return true if the value is a hex number, otherwise, false
+     */
+    private static boolean isHexNumber(String value) {
+        int index = (value.startsWith("-") ? 1 : 0);
+        return (value.startsWith("0x", index) || value.startsWith("0X", index) || value.startsWith("#", index));
     }
 }
