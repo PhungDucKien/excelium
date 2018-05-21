@@ -32,6 +32,7 @@ import excelium.model.locator.WebLocator;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidSelectorException;
+import org.openqa.selenium.support.ByIdOrName;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -79,7 +80,7 @@ public class ByParser {
             case XPATH:
                 return By.xpath(lc.getValue());
             case IDENTIFIER:
-                return new ByIdentifier(lc.getValue());
+                return new ByIdOrName(lc.getValue());
             case VARIABLE:
                 return new ByVariable(lc.getValue());
             default:
@@ -135,12 +136,14 @@ public class ByParser {
         } else {
             if (locator.startsWith("//")) {
                 lc.setType(WebLocatorType.XPATH);
+                lc.setValue(locator.substring(2));
             } else if (locator.startsWith("document")) {
                 lc.setType(WebLocatorType.DOM);
+                lc.setValue(locator);
             } else {
                 lc.setType(WebLocatorType.IDENTIFIER);
+                lc.setValue(locator);
             }
-            lc.setValue(locator);
         }
         return lc;
     }

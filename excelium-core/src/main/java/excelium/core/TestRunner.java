@@ -29,6 +29,7 @@ import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.executor.CommandExecutor;
+import excelium.core.report.TestReporter;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Platform;
 import excelium.model.enums.Result;
@@ -81,6 +82,11 @@ public class TestRunner<W, S> {
     private Project project;
 
     /**
+     * Test reporter
+     */
+    private TestReporter<W, S> testReporter;
+
+    /**
      * Test writer
      */
     private final TestWriter testWriter;
@@ -111,16 +117,6 @@ public class TestRunner<W, S> {
     private TestSuite<S> testSuite;
 
     /**
-     * Current test case
-     */
-    private TestCase testCase;
-
-    /**
-     * Current test step
-     */
-    private TestStep testStep;
-
-    /**
      * Map of test result.
      */
     private Map<TestStep, Result> testStepResultMap;
@@ -128,14 +124,16 @@ public class TestRunner<W, S> {
     /**
      * Instantiates a new Test runner.
      *
-     * @param test       the test
-     * @param project    the project
-     * @param testWriter the test writer
-     * @param template   the template
+     * @param test         the test
+     * @param project      the project
+     * @param testReporter the test reporter
+     * @param testWriter   the test writer
+     * @param template     the template
      */
-    TestRunner(Test<W, S> test, Project project, TestWriter testWriter, Template template) {
+    TestRunner(Test<W, S> test, Project project, TestReporter testReporter, TestWriter testWriter, Template template) {
         this.test = test;
         this.project = project;
+        this.testReporter = testReporter;
         this.testWriter = testWriter;
         this.template = template;
     }
@@ -146,6 +144,8 @@ public class TestRunner<W, S> {
      * @throws IOException the io exception
      */
     void runAll() throws IOException {
+        testReporter.startTest(test);
+        testStepResultMap = new HashMap<>();
         for (Environment environment : test.getConfig().getEnvironments()) {
             runEnvironment(environment);
         }
@@ -162,12 +162,10 @@ public class TestRunner<W, S> {
         try {
             webDriver = DriverFactory.createDriver(environment, project);
             commandMap = CommandFactory.createCommandMap(getCommandExecutors());
-            testStepResultMap = new HashMap<>();
             for (TestSuite<S> testSuite : test.getTestSuites().values()) {
                 runTestSuite(testSuite);
             }
         } finally {
-            testStepResultMap = null;
             commandMap = null;
             if (this.webDriver != null) {
                 this.webDriver.quit();
@@ -185,48 +183,36 @@ public class TestRunner<W, S> {
     private void runTestSuite(TestSuite<S> testSuite) throws IOException {
         setTestSuite(testSuite);
         for (TestCase testCase : testSuite.getTestCases()) {
-            runTestCase(testCase);
+            runTestFlow(testCase);
         }
     }
 
     /**
-     * Run a test case.
+     * Run a test flow
      *
-     * @param testCase the test case
+     * @param testFlow the test flow
+     * @return Result of the flow
      * @throws IOException the io exception
      */
-    private void runTestCase(TestCase testCase) throws IOException {
-        setTestCase(testCase);
+    private Result runTestFlow(TestFlow testFlow) throws IOException {
+        testReporter.startTestFlow(testFlow);
+        Result flowResult = Result.OK;
         boolean shouldContinue = true;
-        for (TestStep testStep : testCase.getTestSteps()) {
-            if (!shouldSkipStep(testStep, environment)) {
+        for (TestStep testStep : testFlow.getTestSteps()) {
+            if (!testStep.isSkipOn(environment)) {
                 if (shouldContinue) {
-                    StepResult stepResult = runTestStep(testStep, true);
+                    testReporter.startTestStep(testStep);
+                    StepResult stepResult = runTestStep(testStep, testFlow instanceof TestCase);
+                    testReporter.endTestStep(stepResult);
                     shouldContinue = stepResult.isShouldContinue();
+                } else {
+                    testReporter.startTestStep(testStep);
+                    testReporter.endTestStep(new StepResult(Result.SKIP));
                 }
             }
         }
-    }
-
-    /**
-     * Run a test action
-     *
-     * @param testAction the test action
-     * @return Result of the action
-     * @throws IOException the io exception
-     */
-    public Result runAction(TestAction testAction) throws IOException {
-        Result actionResult = Result.OK;
-        boolean shouldContinue = true;
-        for (TestStep testStep : testAction.getTestSteps()) {
-            if (!shouldSkipStep(testStep, environment)) {
-                if (shouldContinue) {
-                    StepResult stepResult = runTestStep(testStep, false);
-                    shouldContinue = stepResult.isShouldContinue();
-                }
-            }
-        }
-        return actionResult;
+        testReporter.endTestFlow(testFlow);
+        return flowResult;
     }
 
     /**
@@ -238,26 +224,25 @@ public class TestRunner<W, S> {
      * @throws IOException the io exception
      */
     private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException {
-        setTestStep(testStep);
         Command command = commandMap.get(testStep.getCommand());
 
         if (command != null) {
             Object param1 = getParam(command.getParam1(), testStep.getParam1());
             Object param2 = getParam(command.getParam2(), testStep.getParam2());
             Object param3 = getParam(command.getParam3(), testStep.getParam3());
-            Result result = runCommand(command, param1, param2, param3);
+            StepResult result = runCommand(command, param1, param2, param3);
 
             if (writeResult) {
-                writeResult(testStep, result);
+                writeResult(testStep, result.getResult());
             }
 
-            return new StepResult(result, result == Result.OK || (result == Result.FAIL && command.getMethod().startsWith("verify")));
-        } else {
-            if (writeResult) {
-                writeResult(testStep, Result.ERROR);
-            }
+            return result;
         }
-        return new StepResult(Result.ERROR, false);
+
+        if (writeResult) {
+            writeResult(testStep, Result.ERROR);
+        }
+        return new StepResult(Result.ERROR, false, "Command not found: " + testStep.getCommand());
     }
 
     /**
@@ -269,21 +254,20 @@ public class TestRunner<W, S> {
      * @param param3  value of parameter 3
      * @return Result of the command
      */
-    private Result runCommand(Command command, Object param1, Object param2, Object param3) {
+    private StepResult runCommand(Command command, Object param1, Object param2, Object param3) {
         try {
             command.getConsumer().accept(param1, param2, param3);
-            return Result.OK;
+            return new StepResult(Result.OK);
         } catch (InvocationTargetException e) {
             if (e.getCause() instanceof AssertFailedException) {
-                LOG.error("Assertion failed: " + e.getCause().getMessage());
-                return Result.FAIL;
+                return new StepResult(Result.FAIL, StringUtils.startsWithIgnoreCase(command.getMethod(), "verify"), "Assertion failed: " + e.getCause().getMessage());
             } else {
-                LOG.error("Invoke command error: " + command, e);
-                return Result.ERROR;
+                return new StepResult(Result.ERROR, false, "Invoke command " + command.getName() + " error: " + e.getCause().getMessage());
             }
+        } catch (AssertFailedException e) {
+            return new StepResult(Result.FAIL, StringUtils.startsWithIgnoreCase(command.getMethod(), "verify"), "Assertion failed: " + e.getMessage());
         } catch (Exception e) {
-            LOG.error("Invoke command error: " + command, e);
-            return Result.ERROR;
+            return new StepResult(Result.ERROR, false, "Invoke command " + command.getName() + " error: " + e.getMessage());
         }
     }
 
@@ -315,17 +299,15 @@ public class TestRunner<W, S> {
         }
         if (paramName.endsWith("Array")) {
             String[] items = rawValue.split("[,\n]");
-            Object[] values = new Object[items.length];
+            String[] values = new String[items.length];
             int i = 0;
             for (String item : items) {
-                values[i] = getParam(paramName.replace("Array", ""), item.trim());
+                values[i] = (String) getParam(paramName.replace("Array", ""), item.trim());
                 i++;
             }
             return values;
         }
-        if ("action".equals(paramName)) {
-            return getAction(rawValue);
-        } else if (StringUtils.endsWithIgnoreCase(paramName, "locator") ||
+        if (StringUtils.endsWithIgnoreCase(paramName, "locator") ||
                 "activity".equals(paramName) ||
                 "url".equals(paramName) ||
                 "file".equals(paramName)) {
@@ -336,24 +318,6 @@ public class TestRunner<W, S> {
             return param;
         }
         return rawValue;
-    }
-
-    /**
-     * Get the action.
-     *
-     * @param actionName action name
-     * @return the action
-     */
-    private TestAction getAction(String actionName) {
-        if (StringUtils.isBlank(actionName)) {
-            return null;
-        }
-        for (TestAction action : test.getActions().values()) {
-            if (action.getName().equals(actionName)) {
-                return action;
-            }
-        }
-        return null;
     }
 
     /**
@@ -389,8 +353,8 @@ public class TestRunner<W, S> {
             if (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment) {
                 String currentPath = webDriver.getCurrentUrl();
                 String currentTitle = webDriver.getTitle();
-                if ((StringUtils.isBlank(pageSet.getPath()) || Pattern.compile(pageSet.getPath()).matcher(currentPath).matches()) &&
-                        (StringUtils.isBlank(pageSet.getTitle()) || Pattern.compile(pageSet.getTitle()).matcher(currentTitle).matches())) {
+                if ((StringUtils.isNotBlank(pageSet.getPath()) && !Pattern.compile(pageSet.getPath()).matcher(currentPath).matches()) ||
+                        (StringUtils.isNotBlank(pageSet.getTitle()) && !Pattern.compile(pageSet.getTitle()).matcher(currentTitle).matches())) {
                     continue;
                 }
             }
@@ -401,6 +365,24 @@ public class TestRunner<W, S> {
             }
         }
         return null;
+    }
+
+    /**
+     * Run the action using the action name
+     *
+     * @param actionName action name
+     * @return the result of action execution
+     */
+    public Result runAction(String actionName) throws IOException {
+        if (StringUtils.isBlank(actionName)) {
+            return Result.ERROR;
+        }
+        for (TestAction action : test.getActions().values()) {
+            if (action.getName().equals(actionName)) {
+                return runTestFlow(action);
+            }
+        }
+        return Result.ERROR;
     }
 
     /**
@@ -419,56 +401,13 @@ public class TestRunner<W, S> {
     }
 
     /**
-     * Check whether the step should be skipped.
-     *
-     * @param testStep the test step
-     * @return true if the step should be skipped, otherwise, false
-     */
-    private boolean shouldSkipStep(TestStep testStep, Environment environment) {
-        return (isStepSkip(testStep.getGutter()) && (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment)) ||
-                (isStepSkip(testStep.getAndroidGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.ANDROID) ||
-                (isStepSkip(testStep.getIosGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.IOS);
-    }
-
-    /**
-     * Check whether the step is a debug point.
-     *
-     * @param testStep the test step
-     * @return true if the step is a debug point, otherwise, false
-     */
-    private boolean shouldDebugStep(TestStep testStep, Environment environment) {
-        return (isStepDebug(testStep.getGutter()) && (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment)) ||
-                (isStepDebug(testStep.getAndroidGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.ANDROID) ||
-                (isStepDebug(testStep.getIosGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.IOS);
-    }
-
-    /**
-     * Check whether the step gutter indicates a skip.
-     *
-     * @param stepGutter the gutter of the step
-     * @return true if the step gutter indicates a skip, otherwise, false
-     */
-    private boolean isStepSkip(String stepGutter) {
-        return StringUtils.isNotBlank(stepGutter) && !StringUtils.equalsAny(stepGutter, "D", "M");
-    }
-
-    /**
-     * Check whether the step gutter indicates a debug.
-     *
-     * @param stepGutter the gutter of the step
-     * @return true if the step gutter indicates a debug, otherwise, false
-     */
-    private boolean isStepDebug(String stepGutter) {
-        return StringUtils.isNotBlank(stepGutter) && StringUtils.equals(stepGutter, "D");
-    }
-
-    /**
      * Sets environment.
      *
      * @param environment the environment
      */
     private void setEnvironment(Environment environment) {
         this.environment = environment;
+        testReporter.startEnvironment(environment);
     }
 
     /**
@@ -478,23 +417,6 @@ public class TestRunner<W, S> {
      */
     private void setTestSuite(TestSuite<S> testSuite) {
         this.testSuite = testSuite;
-    }
-
-    /**
-     * Sets test case.
-     *
-     * @param testCase the test case
-     */
-    private void setTestCase(TestCase testCase) {
-        this.testCase = testCase;
-    }
-
-    /**
-     * Sets test step.
-     *
-     * @param testStep the test step
-     */
-    private void setTestStep(TestStep testStep) {
-        this.testStep = testStep;
+        testReporter.startTestSuite(testSuite);
     }
 }

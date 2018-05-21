@@ -45,6 +45,21 @@ public class StepResult {
     private boolean shouldContinue;
 
     /**
+     * Message
+     */
+    private String message;
+
+    /**
+     * Instantiates a new Step result.
+     *
+     * @param result the result
+     */
+    public StepResult(Result result) {
+        this.result = result;
+        this.shouldContinue = true;
+    }
+
+    /**
      * Instantiates a new Step result.
      *
      * @param result         the result
@@ -53,6 +68,19 @@ public class StepResult {
     public StepResult(Result result, boolean shouldContinue) {
         this.result = result;
         this.shouldContinue = shouldContinue;
+    }
+
+    /**
+     * Instantiates a new Step result.
+     *
+     * @param result         the result
+     * @param shouldContinue the should continue
+     * @param message        the message
+     */
+    public StepResult(Result result, boolean shouldContinue, String message) {
+        this.result = result;
+        this.shouldContinue = shouldContinue;
+        this.message = message;
     }
 
     /**
@@ -89,5 +117,23 @@ public class StepResult {
      */
     public void setShouldContinue(boolean shouldContinue) {
         this.shouldContinue = shouldContinue;
+    }
+
+    /**
+     * Gets message.
+     *
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * Sets message.
+     *
+     * @param message the message
+     */
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

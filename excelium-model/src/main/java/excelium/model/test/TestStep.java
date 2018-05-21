@@ -24,6 +24,13 @@
 
 package excelium.model.test;
 
+import excelium.model.enums.Platform;
+import excelium.model.test.config.Environment;
+import excelium.model.test.config.MobileAppEnvironment;
+import excelium.model.test.config.MobileWebEnvironment;
+import excelium.model.test.config.PcEnvironment;
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Represents test step model.
  * This model stores the data retrieved from one row.
@@ -330,5 +337,47 @@ public class TestStep {
      */
     public void setRowIndex(int rowIndex) {
         this.rowIndex = rowIndex;
+    }
+
+    /**
+     * Determine whether the step should be skipped on an environment.
+     *
+     * @return true if the step should be skipped, otherwise, false
+     */
+    public boolean isSkipOn(Environment environment) {
+        return (isStepSkip(getGutter()) && (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment)) ||
+                (isStepSkip(getAndroidGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.ANDROID) ||
+                (isStepSkip(getIosGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.IOS);
+    }
+
+    /**
+     * Determine whether the step is a debug point of an environment.
+     *
+     * @return true if the step is a debug point, otherwise, false
+     */
+    public boolean isDebugOn(Environment environment) {
+        return (isStepDebug(getGutter()) && (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment)) ||
+                (isStepDebug(getAndroidGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.ANDROID) ||
+                (isStepDebug(getIosGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.IOS);
+    }
+
+    /**
+     * Determine whether the step gutter indicates a skip.
+     *
+     * @param stepGutter the gutter of the step
+     * @return true if the step gutter indicates a skip, otherwise, false
+     */
+    private boolean isStepSkip(String stepGutter) {
+        return StringUtils.isNotBlank(stepGutter) && !StringUtils.equalsAny(stepGutter, "D", "M");
+    }
+
+    /**
+     * Determine whether the step gutter indicates a debug.
+     *
+     * @param stepGutter the gutter of the step
+     * @return true if the step gutter indicates a debug, otherwise, false
+     */
+    private boolean isStepDebug(String stepGutter) {
+        return StringUtils.isNotBlank(stepGutter) && StringUtils.equals(stepGutter, "D");
     }
 }

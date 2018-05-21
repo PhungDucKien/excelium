@@ -24,9 +24,7 @@
 
 package excelium.model.test.action;
 
-import excelium.model.test.TestStep;
-
-import java.util.List;
+import excelium.model.test.TestFlow;
 
 /**
  * Represents test action model.
@@ -35,97 +33,5 @@ import java.util.List;
  * @author PhungDucKien
  * @since 2018.03.29
  */
-public class TestAction {
-
-    /**
-     * Serial number
-     */
-    private Integer no;
-
-    /**
-     * Name
-     */
-    private String name;
-
-    /**
-     * Description
-     */
-    private String description;
-
-    /**
-     * Test steps
-     */
-    private List<TestStep> testSteps;
-
-    /**
-     * Gets no.
-     *
-     * @return the no
-     */
-    public Integer getNo() {
-        return no;
-    }
-
-    /**
-     * Sets no.
-     *
-     * @param no the no
-     */
-    public void setNo(Integer no) {
-        this.no = no;
-    }
-
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets description.
-     *
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets description.
-     *
-     * @param description the description
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * Gets test steps.
-     *
-     * @return the test steps
-     */
-    public List<TestStep> getTestSteps() {
-        return testSteps;
-    }
-
-    /**
-     * Sets test steps.
-     *
-     * @param testSteps the test steps
-     */
-    public void setTestSteps(List<TestStep> testSteps) {
-        this.testSteps = testSteps;
-    }
+public class TestAction extends TestFlow {
 }

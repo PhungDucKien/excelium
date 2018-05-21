@@ -69,7 +69,7 @@ public class CommandFactory {
         for (CommandExecutor executor : commandExecutors) {
             List<Command> commands = createCommandList(executor);
             for (Command command : commands) {
-                commandMap.put(command.getName(), command);
+                commandMap.put(command.getMethod() + "(" + countParam(command) + ")", command);
             }
         }
         return commandMap;
@@ -117,13 +117,13 @@ public class CommandFactory {
     private static List<Command> createCommandsForActions(CommandExecutor executor, Map<Method, Action> actions) {
         List<Command> commands = new ArrayList<>();
         for (Method method : actions.keySet()) {
-            String regex = "^(do)([A-Z].+)$";
+            String regex = "^(do)?([a-zA-Z].+)$";
 
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(method.getName());
 
             if (matcher.find()) {
-                String baseName = matcher.group(2);
+                String baseName = StringUtils.capitalize(matcher.group(2));
                 Action action = actions.get(method);
 
                 if (("parentLocator".equals(action.param1()) && "locator".equals(action.param2())) || ("parentLocator".equals(action.param2()) && "locator".equals(action.param3()))) {
@@ -173,7 +173,7 @@ public class CommandFactory {
             Matcher matcher = pattern.matcher(method.getName());
 
             if (matcher.find()) {
-                String baseName = matcher.group(2);
+                String baseName = StringUtils.capitalize(matcher.group(2));
                 Accessor accessor = accessors.get(method);
                 int paramCount = countParam(accessor);
                 boolean isString = "get".equals(matcher.group(1)) && String.class.equals(method.getReturnType());
@@ -360,7 +360,7 @@ public class CommandFactory {
             command.setConsumer((param1, param2, param3) -> {
                 try {
                     assertValue(executor, method, baseName, param2, param3, null, paramCount, isBool);
-                    executor.runAction((TestAction) param1);
+                    executor.runAction((String) param1);
                 } catch (AssertFailedException e) {
                     LOG.debug(e.getMessage());
                 }
@@ -371,7 +371,7 @@ public class CommandFactory {
             command.setParam3(paramCount == 2 ? paramName : "");
 
             if (action.startsWith("storePush")) {
-                command.setConsumer((param1, param2, param3) -> storePushValue(executor, method, param1, param2, param3, paramCount));
+//                command.setConsumer((param1, param2, param3) -> storePushValue(executor, method, param1, param2, param3, paramCount));
             } else if (action.startsWith("store")) {
                 command.setConsumer((param1, param2, param3) -> storeValue(executor, method, param1, param2, param3, paramCount));
             } else if (action.startsWith("verify") || action.startsWith("assert")) {
@@ -415,7 +415,7 @@ public class CommandFactory {
             command.setConsumer((param1, param2, param3) -> {
                 try {
                     assertValue(executor, method, baseName, null, param2, param3, 2, isBool);
-                    executor.runAction((TestAction) param1);
+                    executor.runAction((String) param1);
                 } catch (AssertFailedException e) {
                     LOG.debug(e.getMessage());
                 }
@@ -426,7 +426,7 @@ public class CommandFactory {
             command.setParam3("");
 
             if (action.startsWith("storePush")) {
-                command.setConsumer((param1, param2, param3) -> storePushValue(executor, method, null, param1, param2, 2));
+//                command.setConsumer((param1, param2, param3) -> storePushValue(executor, method, null, param1, param2, 2));
             } else if (action.startsWith("store")) {
                 command.setConsumer((param1, param2, param3) -> storeValue(executor, method, null, param1, param2, 2));
             } else if (action.startsWith("verify") || action.startsWith("assert")) {
@@ -676,28 +676,28 @@ public class CommandFactory {
         };
     }
 
-    /**
-     * Store push value.
-     *
-     * @param executor   the command executor
-     * @param method     the method
-     * @param param1     the parameter 1
-     * @param param2     the parameter 2
-     * @param param3     the parameter 3
-     * @param paramCount the parameter count
-     * @throws InvocationTargetException the invocation target exception
-     * @throws IllegalAccessException    the illegal access exception
-     */
-    private static void storePushValue(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException {
-        Object value = getAccessorValue(executor, method, param1, param2, paramCount);
-        if (paramCount == 0) {
-            executor.getWebDriver().pushVariable(value, (String) param1);
-        } else if (paramCount == 1) {
-            executor.getWebDriver().pushVariable(value, (String) param2);
-        } else if (paramCount == 2) {
-            executor.getWebDriver().pushVariable(value, (String) param3);
-        }
-    }
+//    /**
+//     * Store push value.
+//     *
+//     * @param executor   the command executor
+//     * @param method     the method
+//     * @param param1     the parameter 1
+//     * @param param2     the parameter 2
+//     * @param param3     the parameter 3
+//     * @param paramCount the parameter count
+//     * @throws InvocationTargetException the invocation target exception
+//     * @throws IllegalAccessException    the illegal access exception
+//     */
+//    private static void storePushValue(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException {
+//        Object value = getAccessorValue(executor, method, param1, param2, paramCount);
+//        if (paramCount == 0) {
+//            executor.getWebDriver().pushVariable(value, (String) param1);
+//        } else if (paramCount == 1) {
+//            executor.getWebDriver().pushVariable(value, (String) param2);
+//        } else if (paramCount == 2) {
+//            executor.getWebDriver().pushVariable(value, (String) param3);
+//        }
+//    }
 
     /**
      * Store value.

@@ -36,27 +36,10 @@ public class AssertFailedException extends Exception {
 
     /**
      * Instantiates a new Assert failed exception.
-     */
-    public AssertFailedException() {
-        super();
-    }
-
-    /**
-     * Instantiates a new Assert failed exception.
      *
      * @param message the message
      */
     public AssertFailedException(String message) {
         super(message);
-    }
-
-    /**
-     * Instantiates a new Assert failed exception.
-     *
-     * @param message the message
-     * @param cause   the cause
-     */
-    public AssertFailedException(String message, Throwable cause) {
-        super(message, cause);
     }
 }

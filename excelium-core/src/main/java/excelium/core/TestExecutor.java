@@ -26,6 +26,7 @@ package excelium.core;
 
 import excelium.core.reader.TestReader;
 import excelium.core.reader.TestReaderFactory;
+import excelium.core.report.TestReporter;
 import excelium.core.writer.TestWriter;
 import excelium.core.writer.TestWriterFactory;
 import excelium.model.project.Project;
@@ -96,8 +97,11 @@ public class TestExecutor {
                 // Parses test
                 Test test = testReader.parseTest(template, testFilter, testWriter);
 
+                // Test reporter
+                TestReporter testReporter = new TestReporter(System.out);
+
                 // Executes all tests of workbook
-                TestRunner testRunner = new TestRunner(test, project, testWriter, template);
+                TestRunner testRunner = new TestRunner(test, project, testReporter, testWriter, template);
                 testRunner.runAll();
             } catch (IOException e) {
                 LOG.error(e.getMessage(), e);

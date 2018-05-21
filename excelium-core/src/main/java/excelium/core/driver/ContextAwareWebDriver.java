@@ -69,7 +69,7 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
      *
      * @param webDriver the web driver
      */
-    ContextAwareWebDriver(RemoteWebDriver webDriver) {
+    public ContextAwareWebDriver(RemoteWebDriver webDriver) {
         this.webDriver = webDriver;
         this.testContext = new TestContext();
     }

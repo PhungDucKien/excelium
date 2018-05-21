@@ -77,17 +77,18 @@ public class CommandExecutor {
     /**
      * Run an action.
      *
-     * @param action the action
+     * @param actionName the action name
      * @throws Exception the exception
      */
-    public void runAction(TestAction action) throws Exception {
+    public void runAction(String actionName) throws Exception {
         if (testRunner != null) {
-            Result result = testRunner.runAction(action);
+            Result result = testRunner.runAction(actionName);
             if (result != Result.OK) {
                 throw new Exception("Action execution failed.");
             }
+        } else {
+            throw new Exception("The command executor can not run an action.");
         }
-        throw new Exception("The command executor can not run an action.");
     }
 
     /**
