@@ -35,22 +35,15 @@ import java.util.Map;
 /**
  * Represents test model.
  *
- * @param <W> Workbook class
- * @param <S> Sheet class
  * @author PhungDucKien
  * @since 2018.03.28
  */
-public class Test<W, S> {
+public class Test {
 
     /**
      * Workbook name
      */
     private String workbookName;
-
-    /**
-     * Workbook object
-     */
-    private W workbook;
 
     /**
      * Test configuration
@@ -60,7 +53,7 @@ public class Test<W, S> {
     /**
      * Map of sheet name and test suites
      */
-    private Map<String, TestSuite<S>> testSuites;
+    private Map<String, TestSuite> testSuites;
 
     /**
      * Map of page sets
@@ -101,24 +94,6 @@ public class Test<W, S> {
     }
 
     /**
-     * Gets workbook.
-     *
-     * @return the workbook
-     */
-    public W getWorkbook() {
-        return workbook;
-    }
-
-    /**
-     * Sets workbook.
-     *
-     * @param workbook the workbook
-     */
-    public void setWorkbook(W workbook) {
-        this.workbook = workbook;
-    }
-
-    /**
      * Gets config.
      *
      * @return the config
@@ -141,7 +116,7 @@ public class Test<W, S> {
      *
      * @return the test suites
      */
-    public Map<String, TestSuite<S>> getTestSuites() {
+    public Map<String, TestSuite> getTestSuites() {
         return testSuites;
     }
 
@@ -150,7 +125,7 @@ public class Test<W, S> {
      *
      * @param testSuites the test suites
      */
-    public void setTestSuites(Map<String, TestSuite<S>> testSuites) {
+    public void setTestSuites(Map<String, TestSuite> testSuites) {
         this.testSuites = testSuites;
     }
 

@@ -65,8 +65,8 @@ import static excelium.model.project.Template.*;
 public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W, S> implements TestReader<W, S> {
 
     @Override
-    public Test<W, S> parseTest(Template template, TestFilter testFilter, TestWriter testWriter) throws IOException {
-        Test<W, S> test = new Test<>();
+    public Test parseTest(Template template, TestFilter testFilter, TestWriter testWriter) throws IOException {
+        Test test = new Test();
         test.setWorkbookName(getWorkbookName());
         parseTest(test, template, testFilter, testWriter);
         return test;
@@ -81,7 +81,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @param testWriter Test writer
      * @throws IOException if the IOException occurs
      */
-    private void parseTest(Test<W, S> test, Template template, TestFilter testFilter, TestWriter testWriter) throws IOException {
+    private void parseTest(Test test, Template template, TestFilter testFilter, TestWriter testWriter) throws IOException {
         List<S> sheets = new ArrayList<>(listSheets());
 
         List<S> configurationSheets = filterSheets(sheets, TemplateUtil.getConfigurationSheets(template));
@@ -118,7 +118,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @param template Template
      * @throws IOException if the IOException occurs
      */
-    private void setTestConfig(Test<W, S> test, Template template) throws IOException {
+    private void setTestConfig(Test test, Template template) throws IOException {
         Map<Object, String> markupLocations = TemplateUtil.getConfigurationMarkupLocations(template);
         Map<Object, Object> values = getMarkupValues(markupLocations);
 
@@ -231,7 +231,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @param sheets   List of sheets
      * @throws IOException if the IOException occurs
      */
-    private void setPageSets(Test<W, S> test, Template template, List<S> sheets) throws IOException {
+    private void setPageSets(Test test, Template template, List<S> sheets) throws IOException {
         Map<String, PageSet> pageSets = new HashMap<>();
         for (S sheet : sheets) {
             Map<String, PageSet> sheetPageSets = getPageSets(template, sheet);
@@ -319,7 +319,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @param testWriter Test writer
      * @throws IOException if the IOException occurs
      */
-    private void setActions(Test<W, S> test, Template template, List<S> sheets, TestWriter testWriter) throws IOException {
+    private void setActions(Test test, Template template, List<S> sheets, TestWriter testWriter) throws IOException {
         Map<String, TestAction> actions = new HashMap<>();
         for (S sheet : sheets) {
             Map<String, TestAction> sheetActions = getActions(template, sheet, testWriter);
@@ -363,11 +363,11 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @param testWriter Test writer
      * @throws IOException if the IOException occurs
      */
-    private void setTestSuites(Test<W, S> test, Template template, List<S> sheets, TestFilter testFilter, TestWriter testWriter) throws IOException {
-        Map<String, TestSuite<S>> testSuites = new HashMap<>();
+    private void setTestSuites(Test test, Template template, List<S> sheets, TestFilter testFilter, TestWriter testWriter) throws IOException {
+        Map<String, TestSuite> testSuites = new HashMap<>();
         for (S sheet : sheets) {
-            TestSuite<S> sheetTestSuite = getTestSuite(template, sheet, testFilter, testWriter);
-            testSuites.put(getSheetName(sheet), sheetTestSuite);
+            TestSuite testSuite = getTestSuite(template, sheet, testFilter, testWriter);
+            testSuites.put(getSheetName(sheet), testSuite);
         }
         test.setTestSuites(testSuites);
     }
@@ -382,9 +382,8 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @return Test suite of the sheet
      * @throws IOException if the IOException occurs
      */
-    private TestSuite<S> getTestSuite(Template template, S sheet, TestFilter testFilter, TestWriter testWriter) throws IOException {
-        TestSuite<S> testSuite = new TestSuite<>();
-        testSuite.setSheet(sheet);
+    private TestSuite getTestSuite(Template template, S sheet, TestFilter testFilter, TestWriter testWriter) throws IOException {
+        TestSuite testSuite = new TestSuite();
         testSuite.setSheetName(getSheetName(sheet));
 
         List<TestCase> testCases = new ArrayList<>();
@@ -494,7 +493,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @param sheets   List of sheets
      * @throws IOException if the IOException occurs
      */
-    private void setData(Test<W, S> test, Template template, List<S> sheets) throws IOException {
+    private void setData(Test test, Template template, List<S> sheets) throws IOException {
         Map<String, TestData> data = new HashMap<>();
         for (S sheet : sheets) {
             Map<String, TestData> sheetData = getData(template, sheet);

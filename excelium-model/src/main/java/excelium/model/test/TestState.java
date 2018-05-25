@@ -29,17 +29,15 @@ import excelium.model.test.config.Environment;
 /**
  * Represents the state of test execution.
  *
- * @param <W> Workbook class
- * @param <S> Sheet class
  * @author PhungDucKien
  * @since 2018.05.14
  */
-public class TestState<W, S> {
+public class TestState {
 
     /**
      * The Test.
      */
-    private Test<W, S> test;
+    private Test test;
 
     /**
      * The Test total count.
@@ -151,7 +149,7 @@ public class TestState<W, S> {
      *
      * @return the test
      */
-    public Test<W, S> getTest() {
+    public Test getTest() {
         return test;
     }
 
@@ -160,7 +158,7 @@ public class TestState<W, S> {
      *
      * @param test the test
      */
-    public void setTest(Test<W, S> test) {
+    public void setTest(Test test) {
         this.test = test;
     }
 

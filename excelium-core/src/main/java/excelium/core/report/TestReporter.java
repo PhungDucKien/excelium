@@ -32,35 +32,31 @@ import org.apache.commons.lang3.StringUtils;
 import org.fusesource.jansi.Ansi;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.rightPad;
 
 /**
  * A console-based Test state reporter
  *
- * @param <W> Workbook class
- * @param <S> Sheet class
  * @author PhungDucKien
  * @since 2018.05.14
  */
-public class TestReporter<W, S> {
+public class TestReporter {
 
     /**
      * State
      */
-    private TestState<W, S> testState;
-
-    /**
-     * Stack of test flows
-     */
-    private List<TestFlow> flowStack;
+    private TestState testState;
 
     /**
      * Console stream
      */
     private PrintStream consoleStream;
+
+    /**
+     * Padding to the flow
+     */
+    private int flowPadding;
 
     /**
      * Instantiates a new Test reporter.
@@ -70,8 +66,7 @@ public class TestReporter<W, S> {
     public TestReporter(PrintStream consoleStream) {
         this.consoleStream = consoleStream;
 
-        testState = new TestState<>();
-        flowStack = new ArrayList<>();
+        testState = new TestState();
         consoleStream.println();
     }
 
@@ -80,7 +75,7 @@ public class TestReporter<W, S> {
      *
      * @param test the test
      */
-    public void startTest(Test<W, S> test) {
+    public void startTest(Test test) {
         testState.setTest(test);
         resetTestCount(test);
 
@@ -106,7 +101,7 @@ public class TestReporter<W, S> {
      *
      * @param testSuite the test suite
      */
-    public void startTestSuite(TestSuite<S> testSuite) {
+    public void startTestSuite(TestSuite testSuite) {
         resetSuiteCount(testSuite, testState.getEnvironment());
 
         printFixLine("Sheet: " + testSuite.getSheetName(), 4);
@@ -122,20 +117,17 @@ public class TestReporter<W, S> {
         if (testFlow instanceof TestCase) {
             resetCaseCount((TestCase) testFlow, testState.getEnvironment());
         }
-        flowStack.add(testFlow);
+        flowPadding += 2;
 
-        printFixLine(testFlow.getName(), 4 + flowStack.size() * 2);
+        printFixLine(testFlow.getName(), 4 + flowPadding);
         printCounts();
     }
 
     /**
      * Notify that a test flow is finished.
-     *
-     * @param testFlow the test flow
      */
-    public void endTestFlow(TestFlow testFlow) {
-        flowStack.remove(testFlow);
-        printCounts();
+    public void endTestFlow() {
+        flowPadding -= 2;
     }
 
     /**
@@ -147,7 +139,7 @@ public class TestReporter<W, S> {
         printFixLine(rightPad(testStep.getCommand(), 30) +
                 (StringUtils.isNotBlank(testStep.getParam1()) ? "  " + rightPad(testStep.getParam1(), 30) : "") +
                 (StringUtils.isNotBlank(testStep.getParam2()) ? "  " + rightPad(testStep.getParam2(), 30) : "") +
-                (StringUtils.isNotBlank(testStep.getParam3()) ? "  " + rightPad(testStep.getParam3(), 30) : ""), 6 + flowStack.size() * 2);
+                (StringUtils.isNotBlank(testStep.getParam3()) ? "  " + rightPad(testStep.getParam3(), 30) : ""), 6 + flowPadding);
         printCounts();
     }
 
@@ -172,7 +164,7 @@ public class TestReporter<W, S> {
         }
         if (result.getResult() != Result.OK) {
             printFixLine(rightPad(result.getResult().name(), 5) +
-                    (StringUtils.isNotBlank(result.getMessage()) ? "  " + result.getMessage() : ""), 8 + flowStack.size() * 2);
+                    (StringUtils.isNotBlank(result.getMessage()) ? "  " + result.getMessage() : ""), 8 + flowPadding);
         }
         printCounts();
     }
@@ -230,7 +222,7 @@ public class TestReporter<W, S> {
      *
      * @param test the test
      */
-    private void resetTestCount(Test<W, S> test) {
+    private void resetTestCount(Test test) {
         testState.setTestTotalCount(countTestStep(test));
         testState.setTestExecutedCount(0);
         testState.setTestErrorCount(0);
@@ -246,7 +238,7 @@ public class TestReporter<W, S> {
      * @param environment the environment
      * @param test        the test
      */
-    private void resetEnvironmentCount(Environment environment, Test<W, S> test) {
+    private void resetEnvironmentCount(Environment environment, Test test) {
         testState.setEnvironmentTotalCount(countTestStep(test, environment));
         testState.setEnvironmentExecutedCount(0);
         testState.setEnvironmentErrorCount(0);
@@ -262,7 +254,7 @@ public class TestReporter<W, S> {
      * @param suite       the suite
      * @param environment the environment
      */
-    private void resetSuiteCount(TestSuite<S> suite, Environment environment) {
+    private void resetSuiteCount(TestSuite suite, Environment environment) {
         testState.setSuiteTotalCount(countTestStep(suite, environment));
         testState.setSuiteExecutedCount(0);
         testState.setSuiteErrorCount(0);
@@ -292,7 +284,7 @@ public class TestReporter<W, S> {
      * @param test the test
      * @return the long
      */
-    private long countTestStep(Test<W, S> test) {
+    private long countTestStep(Test test) {
         if (test == null || CollectionUtils.isEmpty(test.getConfig().getEnvironments())) {
             return 0;
         }
@@ -310,12 +302,12 @@ public class TestReporter<W, S> {
      * @param environment the environment
      * @return the long
      */
-    private long countTestStep(Test<W, S> test, Environment environment) {
+    private long countTestStep(Test test, Environment environment) {
         if (test == null || test.getTestSuites().isEmpty()) {
             return 0;
         }
         int environmentTotalCount = 0;
-        for (TestSuite<S> suite : test.getTestSuites().values()) {
+        for (TestSuite suite : test.getTestSuites().values()) {
             environmentTotalCount += countTestStep(suite, environment);
         }
         return environmentTotalCount;
@@ -328,7 +320,7 @@ public class TestReporter<W, S> {
      * @param environment the environment
      * @return the long
      */
-    private long countTestStep(TestSuite<S> suite, Environment environment) {
+    private long countTestStep(TestSuite suite, Environment environment) {
         if (suite == null || CollectionUtils.isEmpty(suite.getTestCases())) {
             return 0;
         }

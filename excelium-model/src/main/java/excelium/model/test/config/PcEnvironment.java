@@ -25,6 +25,7 @@
 package excelium.model.test.config;
 
 import excelium.model.enums.Browser;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Represents environment model for PC web application.
@@ -101,5 +102,14 @@ public class PcEnvironment extends Environment {
      */
     public void setResolution(String resolution) {
         this.resolution = resolution;
+    }
+
+    @Override
+    public String getKey() {
+        if (StringUtils.isBlank(getResolution()) || getResolution().equalsIgnoreCase("Ignored")) {
+            return getBrowser().getText();
+        } else {
+            return getBrowser().getText() + "-" + getResolution();
+        }
     }
 }

@@ -342,6 +342,7 @@ public class TestStep {
     /**
      * Determine whether the step should be skipped on an environment.
      *
+     * @param environment the environment
      * @return true if the step should be skipped, otherwise, false
      */
     public boolean isSkipOn(Environment environment) {
@@ -353,6 +354,7 @@ public class TestStep {
     /**
      * Determine whether the step is a debug point of an environment.
      *
+     * @param environment the environment
      * @return true if the step is a debug point, otherwise, false
      */
     public boolean isDebugOn(Environment environment) {

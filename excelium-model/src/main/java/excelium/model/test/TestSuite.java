@@ -30,21 +30,15 @@ import java.util.List;
  * Represents test suite model.
  * Typically, a test suite is a collection of test cases contained in one sheet.
  *
- * @param <S> Sheet class
  * @author PhungDucKien
  * @since 2018.03.30
  */
-public class TestSuite<S> {
+public class TestSuite {
 
     /**
      * Sheet name
      */
     private String sheetName;
-
-    /**
-     * Sheet object
-     */
-    private S sheet;
 
     /**
      * Test cases
@@ -67,24 +61,6 @@ public class TestSuite<S> {
      */
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;
-    }
-
-    /**
-     * Gets sheet.
-     *
-     * @return the sheet
-     */
-    public S getSheet() {
-        return sheet;
-    }
-
-    /**
-     * Sets sheet.
-     *
-     * @param sheet the sheet
-     */
-    public void setSheet(S sheet) {
-        this.sheet = sheet;
     }
 
     /**

@@ -38,22 +38,6 @@ import java.util.Map;
 public class Template {
 
     /**
-     * The constant SYSTEM_NAME.
-     */
-    public static final String SYSTEM_NAME = "%SYSTEM_NAME%";
-    /**
-     * The constant SYSTEM_IDENTIFIER.
-     */
-    public static final String SYSTEM_IDENTIFIER = "%SYSTEM_IDENTIFIER%";
-    /**
-     * The constant FUNCTION_NAME.
-     */
-    public static final String FUNCTION_NAME = "%FUNCTION_NAME%";
-    /**
-     * The constant FUNCTION_IDENTIFIER.
-     */
-    public static final String FUNCTION_IDENTIFIER = "%FUNCTION_IDENTIFIER%";
-    /**
      * The constant BASE_URL.
      */
     public static final String BASE_URL = "%BASE_URL%";

@@ -79,4 +79,13 @@ public class Environment {
     public void setPlatformVersion(String platformVersion) {
         this.platformVersion = platformVersion;
     }
+
+    /**
+     * Gets environment unique key.
+     *
+     * @return the key
+     */
+    public String getKey() {
+        return platform.getText() + "-" + platformVersion;
+    }
 }

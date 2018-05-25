@@ -43,7 +43,7 @@ public class TemplateUtilTest {
     @Test
     public void testGetMarkups() throws IllegalAccessException {
         List<Object> markupList = TemplateUtil.getMarkups();
-        Assert.assertEquals(82, markupList.size());
+        Assert.assertEquals(78, markupList.size());
     }
 
     @Test

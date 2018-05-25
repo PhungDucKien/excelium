@@ -146,4 +146,9 @@ public class MobileAppEnvironment extends MobileEnvironment {
     public void setAppWaitPackage(String appWaitPackage) {
         this.appWaitPackage = appWaitPackage;
     }
+
+    @Override
+    public String getKey() {
+        return super.getKey() + "-" + getDeviceName() + "-" + getOrientation();
+    }
 }

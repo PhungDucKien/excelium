@@ -79,4 +79,9 @@ public class MobileWebEnvironment extends MobileEnvironment {
     public void setBrowserVersion(String browserVersion) {
         this.browserVersion = browserVersion;
     }
+
+    @Override
+    public String getKey() {
+        return super.getKey() + "-" + getDeviceName() + "-" + getOrientation() + "-" + getBrowser().getText();
+    }
 }

@@ -90,22 +90,22 @@ public class TestReporterTest {
 
         testReporter.startTest(test);
         testReporter.startEnvironment(environment);
-        TestSuite testSuite = (TestSuite) test.getTestSuites().values().iterator().next();
+        TestSuite testSuite = test.getTestSuites().values().iterator().next();
         testReporter.startTestSuite(testSuite);
-        TestCase testCase1 = (TestCase) testSuite.getTestCases().get(0);
+        TestCase testCase1 = testSuite.getTestCases().get(0);
         testReporter.startTestFlow(testCase1);
-        TestCase testCase2 = (TestCase) testSuite.getTestCases().get(1);
+        TestCase testCase2 = testSuite.getTestCases().get(1);
         testReporter.startTestFlow(testCase2);
-        TestCase testCase3 = (TestCase) testSuite.getTestCases().get(2);
+        TestCase testCase3 = testSuite.getTestCases().get(2);
         testReporter.startTestFlow(testCase3);
         for (int i = 0; i < testCase1.getTestSteps().size(); i++) {
             Thread.sleep(1000);
             testReporter.startTestStep(testCase3.getTestSteps().get(i));
             testReporter.endTestStep(new StepResult(i % 2 == 0 ? Result.OK : Result.FAIL, true, i % 2 == 0 ? null : "Verification failed!"));
         }
-        testReporter.endTestFlow(testCase3);
-        testReporter.endTestFlow(testCase2);
-        testReporter.endTestFlow(testCase1);
+        testReporter.endTestFlow();
+        testReporter.endTestFlow();
+        testReporter.endTestFlow();
 
         new Verifications() {{
             consoleStream.println("      Test Case 1");

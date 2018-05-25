@@ -30,6 +30,7 @@ import excelium.core.driver.DriverFactory;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.executor.CommandExecutor;
 import excelium.core.report.TestReporter;
+import excelium.core.screenshot.ScreenshotService;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Platform;
 import excelium.model.enums.Result;
@@ -45,8 +46,6 @@ import excelium.model.test.config.PcEnvironment;
 import excelium.model.test.item.Item;
 import excelium.model.test.item.PageSet;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -59,22 +58,15 @@ import java.util.regex.Pattern;
 /**
  * Executes all tests of a workbook test file
  *
- * @param <W> Workbook class
- * @param <S> Sheet class
  * @author PhungDucKien
  * @since 2018.05.05
  */
-public class TestRunner<W, S> {
-
-    /**
-     * Logger
-     */
-    private static final Logger LOG = LogManager.getLogger();
+public class TestRunner {
 
     /**
      * Test object
      */
-    private final Test<W, S> test;
+    private final Test test;
 
     /**
      * Project instance
@@ -84,7 +76,7 @@ public class TestRunner<W, S> {
     /**
      * Test reporter
      */
-    private TestReporter<W, S> testReporter;
+    private TestReporter testReporter;
 
     /**
      * Test writer
@@ -95,6 +87,11 @@ public class TestRunner<W, S> {
      * Template
      */
     private final Template template;
+
+    /**
+     * Screenshot service
+     */
+    private final ScreenshotService screenshotService;
 
     /**
      * Current environment
@@ -114,7 +111,17 @@ public class TestRunner<W, S> {
     /**
      * Current test suite
      */
-    private TestSuite<S> testSuite;
+    private TestSuite testSuite;
+
+    /**
+     * Stack of test flows
+     */
+    private List<TestFlow> testFlows;
+
+    /**
+     * Current test step
+     */
+    private TestStep testStep;
 
     /**
      * Map of test result.
@@ -130,12 +137,13 @@ public class TestRunner<W, S> {
      * @param testWriter   the test writer
      * @param template     the template
      */
-    TestRunner(Test<W, S> test, Project project, TestReporter testReporter, TestWriter testWriter, Template template) {
+    TestRunner(Test test, Project project, TestReporter testReporter, TestWriter testWriter, Template template) {
         this.test = test;
         this.project = project;
         this.testReporter = testReporter;
         this.testWriter = testWriter;
         this.template = template;
+        this.screenshotService = new ScreenshotService(this, project);
     }
 
     /**
@@ -146,6 +154,7 @@ public class TestRunner<W, S> {
     void runAll() throws IOException {
         testReporter.startTest(test);
         testStepResultMap = new HashMap<>();
+        testFlows = new ArrayList<>();
         for (Environment environment : test.getConfig().getEnvironments()) {
             runEnvironment(environment);
         }
@@ -162,7 +171,7 @@ public class TestRunner<W, S> {
         try {
             webDriver = DriverFactory.createDriver(environment, project);
             commandMap = CommandFactory.createCommandMap(getCommandExecutors());
-            for (TestSuite<S> testSuite : test.getTestSuites().values()) {
+            for (TestSuite testSuite : test.getTestSuites().values()) {
                 runTestSuite(testSuite);
             }
         } finally {
@@ -180,7 +189,7 @@ public class TestRunner<W, S> {
      * @param testSuite the test suite
      * @throws IOException the io exception
      */
-    private void runTestSuite(TestSuite<S> testSuite) throws IOException {
+    private void runTestSuite(TestSuite testSuite) throws IOException {
         setTestSuite(testSuite);
         for (TestCase testCase : testSuite.getTestCases()) {
             runTestFlow(testCase);
@@ -195,23 +204,28 @@ public class TestRunner<W, S> {
      * @throws IOException the io exception
      */
     private Result runTestFlow(TestFlow testFlow) throws IOException {
-        testReporter.startTestFlow(testFlow);
         Result flowResult = Result.OK;
-        boolean shouldContinue = true;
-        for (TestStep testStep : testFlow.getTestSteps()) {
-            if (!testStep.isSkipOn(environment)) {
-                if (shouldContinue) {
-                    testReporter.startTestStep(testStep);
-                    StepResult stepResult = runTestStep(testStep, testFlow instanceof TestCase);
-                    testReporter.endTestStep(stepResult);
-                    shouldContinue = stepResult.isShouldContinue();
-                } else {
-                    testReporter.startTestStep(testStep);
-                    testReporter.endTestStep(new StepResult(Result.SKIP));
+        try {
+            testFlows.add(testFlow);
+            testReporter.startTestFlow(testFlow);
+            boolean shouldContinue = true;
+            for (TestStep testStep : testFlow.getTestSteps()) {
+                if (!testStep.isSkipOn(environment)) {
+                    if (shouldContinue) {
+                        testReporter.startTestStep(testStep);
+                        StepResult stepResult = runTestStep(testStep, testFlow instanceof TestCase);
+                        testReporter.endTestStep(stepResult);
+                        shouldContinue = stepResult.isShouldContinue();
+                    } else {
+                        testReporter.startTestStep(testStep);
+                        testReporter.endTestStep(new StepResult(Result.SKIP));
+                    }
                 }
             }
+        } finally {
+            testReporter.endTestFlow();
+            testFlows.remove(testFlow);
         }
-        testReporter.endTestFlow(testFlow);
         return flowResult;
     }
 
@@ -224,6 +238,7 @@ public class TestRunner<W, S> {
      * @throws IOException the io exception
      */
     private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException {
+        this.testStep = testStep;
         Command command = commandMap.get(testStep.getCommand());
 
         if (command != null) {
@@ -234,6 +249,10 @@ public class TestRunner<W, S> {
 
             if (writeResult) {
                 writeResult(testStep, result.getResult());
+            }
+
+            if (testStep.isCapture()) {
+                screenshotService.captureEntirePage(webDriver);
             }
 
             return result;
@@ -372,6 +391,7 @@ public class TestRunner<W, S> {
      *
      * @param actionName action name
      * @return the result of action execution
+     * @throws IOException the io exception
      */
     public Result runAction(String actionName) throws IOException {
         if (StringUtils.isBlank(actionName)) {
@@ -415,8 +435,53 @@ public class TestRunner<W, S> {
      *
      * @param testSuite the test suite
      */
-    private void setTestSuite(TestSuite<S> testSuite) {
+    private void setTestSuite(TestSuite testSuite) {
         this.testSuite = testSuite;
         testReporter.startTestSuite(testSuite);
+    }
+
+    /**
+     * Gets environment.
+     *
+     * @return the environment
+     */
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    /**
+     * Gets test.
+     *
+     * @return the test
+     */
+    public Test getTest() {
+        return test;
+    }
+
+    /**
+     * Gets test suite.
+     *
+     * @return the test suite
+     */
+    public TestSuite getTestSuite() {
+        return testSuite;
+    }
+
+    /**
+     * Gets test flows.
+     *
+     * @return the test flows
+     */
+    public List<TestFlow> getTestFlows() {
+        return testFlows;
+    }
+
+    /**
+     * Gets test step.
+     *
+     * @return the test step
+     */
+    public TestStep getTestStep() {
+        return testStep;
     }
 }
