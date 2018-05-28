@@ -22,64 +22,24 @@
  * SOFTWARE.
  */
 
-package excelium.model.test.data;
+package excelium.model.enums;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
- * Represents column model.
+ * Tests for {@link WriteMode}.
  *
  * @author PhungDucKien
- * @since 2018.03.30
+ * @since 2018.05.26
  */
-public class Column {
+public class WriteModeTest {
 
-    /**
-     * Column name
-     */
-    private String name;
-
-    /**
-     * Column data type
-     */
-    private String type;
-
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Sets type.
-     *
-     * @param type the type
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+    @Test
+    public void testFromName() {
+        Assert.assertEquals(WriteMode.APPEND, WriteMode.fromName("APPEND"));
+        Assert.assertEquals(WriteMode.REPLACE, WriteMode.fromName("REPLACE"));
+        Assert.assertEquals(WriteMode.REMOVE, WriteMode.fromName("REMOVE"));
+        Assert.assertEquals(WriteMode.TRUNCATE, WriteMode.fromName("TRUNCATE"));
     }
 }

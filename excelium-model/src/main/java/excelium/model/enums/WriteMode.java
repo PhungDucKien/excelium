@@ -22,64 +22,48 @@
  * SOFTWARE.
  */
 
-package excelium.model.test.data;
+package excelium.model.enums;
 
 /**
- * Represents column model.
+ * Represents mode of test data writing.
  *
  * @author PhungDucKien
- * @since 2018.03.30
+ * @since 2018.05.25
  */
-public class Column {
-
+public enum WriteMode {
     /**
-     * Column name
+     * Append write mode.
+     * Inserts and updates records without effecting others.
      */
-    private String name;
-
+    APPEND,
     /**
-     * Column data type
+     * Replace write mode.
+     * Truncates the table before inserting records.
      */
-    private String type;
-
+    REPLACE,
     /**
-     * Gets name.
-     *
-     * @return the name
+     * Remove write mode.
+     * Removes records without effecting others.
      */
-    public String getName() {
-        return name;
-    }
+    REMOVE,
+    /**
+     * Truncate write mode.
+     * Truncates the table.
+     */
+    TRUNCATE;
 
     /**
-     * Sets name.
+     * From name write mode.
      *
      * @param name the name
+     * @return the write mode
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Sets type.
-     *
-     * @param type the type
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+    public static WriteMode fromName(String name) {
+        for (WriteMode w : WriteMode.values()) {
+            if (w.name().equalsIgnoreCase(name)) {
+                return w;
+            }
+        }
+        return APPEND;
     }
 }

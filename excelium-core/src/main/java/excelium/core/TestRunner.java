@@ -25,6 +25,7 @@
 package excelium.core;
 
 import excelium.core.command.CommandFactory;
+import excelium.core.database.DatabaseService;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.exception.AssertFailedException;
@@ -49,6 +50,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +89,11 @@ public class TestRunner {
      * Template
      */
     private final Template template;
+
+    /**
+     * Database service
+     */
+    private final DatabaseService databaseService;
 
     /**
      * Screenshot service
@@ -143,6 +150,7 @@ public class TestRunner {
         this.testReporter = testReporter;
         this.testWriter = testWriter;
         this.template = template;
+        this.databaseService = new DatabaseService(project);
         this.screenshotService = new ScreenshotService(this, project);
     }
 
@@ -151,7 +159,7 @@ public class TestRunner {
      *
      * @throws IOException the io exception
      */
-    void runAll() throws IOException {
+    void runAll() throws IOException, SQLException, ClassNotFoundException {
         testReporter.startTest(test);
         testStepResultMap = new HashMap<>();
         testFlows = new ArrayList<>();
@@ -166,7 +174,7 @@ public class TestRunner {
      * @param environment the environment
      * @throws IOException the io exception
      */
-    private void runEnvironment(Environment environment) throws IOException {
+    private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException {
         setEnvironment(environment);
         try {
             webDriver = DriverFactory.createDriver(environment, project);
@@ -189,7 +197,7 @@ public class TestRunner {
      * @param testSuite the test suite
      * @throws IOException the io exception
      */
-    private void runTestSuite(TestSuite testSuite) throws IOException {
+    private void runTestSuite(TestSuite testSuite) throws IOException, SQLException, ClassNotFoundException {
         setTestSuite(testSuite);
         for (TestCase testCase : testSuite.getTestCases()) {
             runTestFlow(testCase);
@@ -203,7 +211,7 @@ public class TestRunner {
      * @return Result of the flow
      * @throws IOException the io exception
      */
-    private Result runTestFlow(TestFlow testFlow) throws IOException {
+    private Result runTestFlow(TestFlow testFlow) throws IOException, SQLException, ClassNotFoundException {
         Result flowResult = Result.OK;
         try {
             testFlows.add(testFlow);
@@ -237,11 +245,15 @@ public class TestRunner {
      * @return Result of the step
      * @throws IOException the io exception
      */
-    private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException {
+    private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException, SQLException, ClassNotFoundException {
         this.testStep = testStep;
         Command command = commandMap.get(testStep.getCommand());
 
         if (command != null) {
+            if (StringUtils.isNotBlank(testStep.getTestData())) {
+                databaseService.createTestData(test.getTestData().get(testStep.getTestData()).getTableData());
+            }
+
             Object param1 = getParam(command.getParam1(), testStep.getParam1());
             Object param2 = getParam(command.getParam2(), testStep.getParam2());
             Object param3 = getParam(command.getParam3(), testStep.getParam3());
@@ -393,7 +405,7 @@ public class TestRunner {
      * @return the result of action execution
      * @throws IOException the io exception
      */
-    public Result runAction(String actionName) throws IOException {
+    public Result runAction(String actionName) throws IOException, SQLException, ClassNotFoundException {
         if (StringUtils.isBlank(actionName)) {
             return Result.ERROR;
         }

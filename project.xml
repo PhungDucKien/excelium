@@ -209,6 +209,10 @@
                         <value>Configuration!B37</value>
                     </entry>
                     <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DATA%</key>
+                        <value>'Test Data'!B4</value>
+                    </entry>
+                    <entry>
                         <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_GUTTER%</key>
                         <value>Actions!B3</value>
                     </entry>
@@ -227,6 +231,10 @@
                     <entry>
                         <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%USE_FIREFOX%</key>
                         <value>Configuration!C35</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DEF%</key>
+                        <value>'Test Data'!B3</value>
                     </entry>
                     <entry>
                         <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_DEVICE_NAME%</key>
@@ -269,14 +277,6 @@
                         <value>Configuration!D35</value>
                     </entry>
                     <entry>
-                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DEF%</key>
-                        <value>'Test Data'!B3</value>
-                    </entry>
-                    <entry>
-                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DATA%</key>
-                        <value>'Test Data'!B4</value>
-                    </entry>
-                    <entry>
                         <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_PARAM1%</key>
                         <value>Actions!G3</value>
                     </entry>
@@ -306,4 +306,29 @@
             </value>
         </entry>
     </templates>
+    <dataSources>
+        <entry>
+            <key>mysql</key>
+            <value>
+                <driverClass>com.mysql.jdbc.Driver</driverClass>
+                <name>mysql</name>
+                <password>123456</password>
+                <type>MYSQL</type>
+                <url>jdbc:mysql://localhost:3306/exceliumdb</url>
+                <userName>root</userName>
+            </value>
+        </entry>
+        <entry>
+            <key>postgres</key>
+            <value>
+                <driverClass>org.postgresql.Driver</driverClass>
+                <name>postgres</name>
+                <password>123456</password>
+                <type>POSTGRESQL</type>
+                <url>jdbc:postgresql://localhost:5432/exceliumdb</url>
+                <userName>postgres</userName>
+            </value>
+        </entry>
+    </dataSources>
+    <defaultDataSource>mysql</defaultDataSource>
 </project>

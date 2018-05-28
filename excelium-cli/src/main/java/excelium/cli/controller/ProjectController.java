@@ -42,7 +42,7 @@ import java.nio.file.Paths;
 import static excelium.cli.Prompt.*;
 
 /**
- * Provides commands for controlling Project.
+ * Provides commands for controlling project.
  *
  * @author PhungDucKien
  * @since 2018.04.10

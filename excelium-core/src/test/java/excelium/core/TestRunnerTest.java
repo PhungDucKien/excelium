@@ -54,6 +54,7 @@ import org.junit.Assert;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +80,7 @@ public class TestRunnerTest {
     private PrintStream consoleStream;
 
     @org.junit.Test
-    public void testRunAll() throws IOException {
+    public void testRunAll() throws IOException, SQLException, ClassNotFoundException {
         AtomicInteger runCount = new AtomicInteger();
         Map<String, Command> commandMap = new HashMap<>();
         Command command = new Command();
@@ -170,7 +171,7 @@ public class TestRunnerTest {
     }
 
     @org.junit.Test
-    public void testRunAll_NotFoundCommand() throws IOException {
+    public void testRunAll_NotFoundCommand() throws IOException, SQLException, ClassNotFoundException {
         Map<String, Command> commandMap = new HashMap<>();
 
         new MockUp<DriverFactory>() {
@@ -228,7 +229,7 @@ public class TestRunnerTest {
     }
 
     @org.junit.Test
-    public void testRunAll_ActionCommand() throws IOException {
+    public void testRunAll_ActionCommand() throws IOException, SQLException, ClassNotFoundException {
         AtomicInteger runCount = new AtomicInteger();
         Map<String, Command> commandMap = new HashMap<>();
         Command command = new Command();
@@ -334,7 +335,7 @@ public class TestRunnerTest {
     }
 
     @org.junit.Test
-    public void testRunAll_ActionNotFound() throws IOException {
+    public void testRunAll_ActionNotFound() throws IOException, SQLException, ClassNotFoundException {
         AtomicInteger runCount = new AtomicInteger();
         Map<String, Command> commandMap = new HashMap<>();
         Command command = new Command();
@@ -439,7 +440,7 @@ public class TestRunnerTest {
     }
 
     @org.junit.Test
-    public void testRunAll_ParamArray() throws IOException {
+    public void testRunAll_ParamArray() throws IOException, SQLException, ClassNotFoundException {
         AtomicReference<String[]> param = new AtomicReference<>();
         Map<String, Command> commandMap = new HashMap<>();
         Command command = new Command();
@@ -527,7 +528,7 @@ public class TestRunnerTest {
     }
 
     @org.junit.Test
-    public void testRunAll_AssertFailed() throws IOException {
+    public void testRunAll_AssertFailed() throws IOException, SQLException, ClassNotFoundException {
         AtomicInteger runCount = new AtomicInteger();
         Map<String, Command> commandMap = new HashMap<>();
         Command command = new Command();
@@ -857,7 +858,7 @@ public class TestRunnerTest {
     }
 
     @org.junit.Test
-    public void testRunAll_ItemValue() throws IOException {
+    public void testRunAll_ItemValue() throws IOException, SQLException, ClassNotFoundException {
         AtomicReference<String> param = new AtomicReference<>();
         Map<String, Command> commandMap = new HashMap<>();
         Command command = new Command();

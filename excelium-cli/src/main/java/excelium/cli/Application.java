@@ -24,10 +24,7 @@
 
 package excelium.cli;
 
-import excelium.cli.controller.ProjectController;
-import excelium.cli.controller.TemplateController;
-import excelium.cli.controller.TestController;
-import excelium.cli.controller.TestFileController;
+import excelium.cli.controller.*;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.lang.reflect.InvocationTargetException;
@@ -66,7 +63,8 @@ public class Application {
                 TestController.class,
                 ProjectController.class,
                 TemplateController.class,
-                TestFileController.class
+                TestFileController.class,
+                DataSourceController.class
         );
 
         // Registers bean factory

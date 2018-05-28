@@ -108,6 +108,16 @@ public class Project {
     private Map<String, Template> templates;
 
     /**
+     * Data sources
+     */
+    private Map<String, DataSource> dataSources;
+
+    /**
+     * Default data source
+     */
+    private String defaultDataSource;
+
+    /**
      * Appium host
      */
     private String appiumHost;
@@ -321,6 +331,42 @@ public class Project {
     }
 
     /**
+     * Gets data sources.
+     *
+     * @return the data sources
+     */
+    public Map<String, DataSource> getDataSources() {
+        return dataSources;
+    }
+
+    /**
+     * Sets data sources.
+     *
+     * @param dataSources the data sources
+     */
+    public void setDataSources(Map<String, DataSource> dataSources) {
+        this.dataSources = dataSources;
+    }
+
+    /**
+     * Gets default data source.
+     *
+     * @return the default data source
+     */
+    public String getDefaultDataSource() {
+        return defaultDataSource;
+    }
+
+    /**
+     * Sets default data source.
+     *
+     * @param defaultDataSource the default data source
+     */
+    public void setDefaultDataSource(String defaultDataSource) {
+        this.defaultDataSource = defaultDataSource;
+    }
+
+    /**
      * Gets appium host.
      *
      * @return the appium host
@@ -409,6 +455,23 @@ public class Project {
     }
 
     /**
+     * Get data source list choice.
+     *
+     * @return the data source list choice
+     */
+    public String[][] getDataSourceListChoice() {
+        if (dataSources != null) {
+            String[][] listChoice = new String[dataSources.size()][2];
+            int i = 0;
+            for (DataSource d : dataSources.values()) {
+                listChoice[i++] = new String[]{d.getName(), d.getName()};
+            }
+            return listChoice;
+        }
+        return null;
+    }
+
+    /**
      * Add test.
      *
      * @param test the test
@@ -430,5 +493,17 @@ public class Project {
             templates = new LinkedHashMap<>();
         }
         templates.put(template.getLocation(), template);
+    }
+
+    /**
+     * Add data source.
+     *
+     * @param dataSource the data source
+     */
+    public void addDataSource(DataSource dataSource) {
+        if (dataSources == null) {
+            dataSources = new LinkedHashMap<>();
+        }
+        dataSources.put(dataSource.getName(), dataSource);
     }
 }

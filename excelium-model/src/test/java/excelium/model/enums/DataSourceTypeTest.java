@@ -22,64 +22,38 @@
  * SOFTWARE.
  */
 
-package excelium.model.test.data;
+package excelium.model.enums;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
- * Represents column model.
+ * Tests for {@link DataSourceType}.
  *
  * @author PhungDucKien
- * @since 2018.03.30
+ * @since 2018.05.26
  */
-public class Column {
+public class DataSourceTypeTest {
 
-    /**
-     * Column name
-     */
-    private String name;
-
-    /**
-     * Column data type
-     */
-    private String type;
-
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
+    @Test
+    public void testFromName() {
+        Assert.assertEquals(DataSourceType.MYSQL, DataSourceType.fromName("MySQL"));
+        Assert.assertEquals(DataSourceType.POSTGRESQL, DataSourceType.fromName("PostgreSQL"));
     }
 
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
+    @Test
+    public void testGetListChoice() {
+        String[][] listChoice = DataSourceType.getListChoice();
+        Assert.assertEquals(2, listChoice.length);
+        Assert.assertEquals("MYSQL", listChoice[0][0]);
+        Assert.assertEquals("MySQL", listChoice[0][1]);
+        Assert.assertEquals("POSTGRESQL", listChoice[1][0]);
+        Assert.assertEquals("PostgreSQL", listChoice[1][1]);
     }
 
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Sets type.
-     *
-     * @param type the type
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+    @Test
+    public void testGetUrl() {
+        Assert.assertEquals("jdbc:mysql://localhost:1234/dbname", DataSourceType.MYSQL.getUrl("localhost", "1234", "dbname"));
+        Assert.assertEquals("jdbc:postgresql://localhost:1234/dbname", DataSourceType.POSTGRESQL.getUrl("localhost", "1234", "dbname"));
     }
 }

@@ -42,7 +42,7 @@ import java.nio.file.Paths;
 import static excelium.cli.Prompt.*;
 
 /**
- * Provides commands for controlling Template.
+ * Provides commands for controlling template.
  *
  * @author PhungDucKien
  * @since 2018.04.11

@@ -38,8 +38,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Executes project's tests.
@@ -103,7 +104,7 @@ public class TestExecutor {
                 // Executes all tests of workbook
                 TestRunner testRunner = new TestRunner(test, project, testReporter, testWriter, template);
                 testRunner.runAll();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
             }
         }

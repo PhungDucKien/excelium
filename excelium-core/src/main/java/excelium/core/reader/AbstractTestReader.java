@@ -31,6 +31,7 @@ import excelium.common.ss.CellLocation;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
+import excelium.model.enums.WriteMode;
 import excelium.model.project.Template;
 import excelium.model.test.*;
 import excelium.model.test.action.TestAction;
@@ -529,7 +530,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
         TestData testData = null;
         List<TableData> tableDataList = null;
         TableData tableData = null;
-        List<Map<Column, Object>> rowDataList = null;
+        List<Map<String, Object>> rowDataList = null;
         for (int r = 0; r < values.size(); r++) {
             if (r < lowest) {
                 continue;
@@ -576,6 +577,9 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                         case "primary":
                             tableData.setPrimaryKeys(Arrays.asList(keyVal[1].split(",")));
                             break;
+                        case "mode":
+                            tableData.setMode(WriteMode.fromName(keyVal[1]));
+                            break;
                     }
                 }
                 tableDataList.add(tableData);
@@ -611,7 +615,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                 tableData.setRowData(rowDataList);
             } else if (testData != null && tableData != null && StringUtils.isNotBlank(dataTableData) && !StringUtils.startsWithIgnoreCase(dataTableData.trim(), "TABLE") && CollectionUtils.isNotEmpty(tableData.getColumns())) {
                 // Data row
-                Map<Column, Object> rowData = new HashMap<>();
+                Map<String, Object> rowData = new HashMap<>();
                 for (int i = 0; i < tableData.getColumns().size(); i++) {
                     Object cellValue = null;
                     if (i < rowValue.size() - columnIndexes.get(DATA_TABLE_DATA)) {
@@ -619,9 +623,9 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                     }
                     Column column = tableData.getColumns().get(i);
                     if (cellValue != null && !"NULL".equals(cellValue)) {
-                        rowData.put(column, cellValue);
+                        rowData.put(column.getName(), cellValue);
                     } else {
-                        rowData.put(column, null);
+                        rowData.put(column.getName(), null);
                     }
                 }
                 rowDataList.add(rowData);

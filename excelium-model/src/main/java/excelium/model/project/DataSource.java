@@ -22,45 +22,47 @@
  * SOFTWARE.
  */
 
-package excelium.model.test.data;
+package excelium.model.project;
 
-import excelium.model.enums.WriteMode;
-
-import java.util.List;
-import java.util.Map;
+import excelium.model.enums.DataSourceType;
 
 /**
- * Represents table data model.
+ * Represents data source model.
  *
  * @author PhungDucKien
- * @since 2018.03.30
+ * @since 2018.05.25
  */
-public class TableData {
+public class DataSource {
 
     /**
-     * Table name
+     * Name
      */
     private String name;
 
     /**
-     * Write mode
+     * Type
      */
-    private WriteMode mode;
+    private DataSourceType type;
 
     /**
-     * List of primary keys
+     * The Url.
      */
-    private List<String> primaryKeys;
+    private String url;
 
     /**
-     * List of columns
+     * The Driver class.
      */
-    private List<Column> columns;
+    private String driverClass;
 
     /**
-     * Row data
+     * The User name.
      */
-    private List<Map<String, Object>> rowData;
+    private String userName;
+
+    /**
+     * The Password.
+     */
+    private String password;
 
     /**
      * Gets name.
@@ -81,74 +83,92 @@ public class TableData {
     }
 
     /**
-     * Gets mode.
+     * Gets type.
      *
-     * @return the mode
+     * @return the type
      */
-    public WriteMode getMode() {
-        return mode;
+    public DataSourceType getType() {
+        return type;
     }
 
     /**
-     * Sets mode.
+     * Sets type.
      *
-     * @param mode the mode
+     * @param type the type
      */
-    public void setMode(WriteMode mode) {
-        this.mode = mode;
+    public void setType(DataSourceType type) {
+        this.type = type;
     }
 
     /**
-     * Gets primary keys.
+     * Gets url.
      *
-     * @return the primary keys
+     * @return the url
      */
-    public List<String> getPrimaryKeys() {
-        return primaryKeys;
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * Sets primary keys.
+     * Sets url.
      *
-     * @param primaryKeys the primary keys
+     * @param url the url
      */
-    public void setPrimaryKeys(List<String> primaryKeys) {
-        this.primaryKeys = primaryKeys;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
-     * Gets columns.
+     * Gets driver class.
      *
-     * @return the columns
+     * @return the driver class
      */
-    public List<Column> getColumns() {
-        return columns;
+    public String getDriverClass() {
+        return driverClass;
     }
 
     /**
-     * Sets columns.
+     * Sets driver class.
      *
-     * @param columns the columns
+     * @param driverClass the driver class
      */
-    public void setColumns(List<Column> columns) {
-        this.columns = columns;
+    public void setDriverClass(String driverClass) {
+        this.driverClass = driverClass;
     }
 
     /**
-     * Gets row data.
+     * Gets user name.
      *
-     * @return the row data
+     * @return the user name
      */
-    public List<Map<String, Object>> getRowData() {
-        return rowData;
+    public String getUserName() {
+        return userName;
     }
 
     /**
-     * Sets row data.
+     * Sets user name.
      *
-     * @param rowData the row data
+     * @param userName the user name
      */
-    public void setRowData(List<Map<String, Object>> rowData) {
-        this.rowData = rowData;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
