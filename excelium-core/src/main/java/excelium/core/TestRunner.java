@@ -30,6 +30,7 @@ import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.executor.CommandExecutor;
+import excelium.core.executor.ExecutorProviderService;
 import excelium.core.report.TestReporter;
 import excelium.core.screenshot.ScreenshotService;
 import excelium.core.writer.TestWriter;
@@ -46,15 +47,13 @@ import excelium.model.test.config.MobileWebEnvironment;
 import excelium.model.test.config.PcEnvironment;
 import excelium.model.test.item.Item;
 import excelium.model.test.item.PageSet;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -136,6 +135,16 @@ public class TestRunner {
     private Map<TestStep, Result> testStepResultMap;
 
     /**
+     * Web command executor classes
+     */
+    private List<Class<? extends CommandExecutor>> webCommandExecutorClasses;
+
+    /**
+     * Mobile command executor classes
+     */
+    private List<Class<? extends CommandExecutor>> mobileCommandExecutorClasses;
+
+    /**
      * Instantiates a new Test runner.
      *
      * @param test         the test
@@ -144,7 +153,7 @@ public class TestRunner {
      * @param testWriter   the test writer
      * @param template     the template
      */
-    TestRunner(Test test, Project project, TestReporter testReporter, TestWriter testWriter, Template template) {
+    public TestRunner(Test test, Project project, TestReporter testReporter, TestWriter testWriter, Template template) {
         this.test = test;
         this.project = project;
         this.testReporter = testReporter;
@@ -157,12 +166,20 @@ public class TestRunner {
     /**
      * Run all tests on all environments.
      *
-     * @throws IOException the io exception
+     * @throws IOException               the io exception
+     * @throws SQLException              the sql exception
+     * @throws ClassNotFoundException    the class not found exception
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws InstantiationException    the instantiation exception
+     * @throws IllegalAccessException    the illegal access exception
+     * @throws InvocationTargetException the invocation target exception
      */
-    void runAll() throws IOException, SQLException, ClassNotFoundException {
+    public void runAll() throws IOException, SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         testReporter.startTest(test);
         testStepResultMap = new HashMap<>();
         testFlows = new ArrayList<>();
+        webCommandExecutorClasses = new ArrayList<>();
+        mobileCommandExecutorClasses = new ArrayList<>();
         for (Environment environment : test.getConfig().getEnvironments()) {
             runEnvironment(environment);
         }
@@ -174,13 +191,15 @@ public class TestRunner {
      * @param environment the environment
      * @throws IOException the io exception
      */
-    private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException {
+    private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         setEnvironment(environment);
         try {
             webDriver = DriverFactory.createDriver(environment, project);
             commandMap = CommandFactory.createCommandMap(getCommandExecutors());
-            for (TestSuite testSuite : test.getTestSuites().values()) {
-                runTestSuite(testSuite);
+            if (test.getTestSuites() != null) {
+                for (TestSuite testSuite : test.getTestSuites().values()) {
+                    runTestSuite(testSuite);
+                }
             }
         } finally {
             commandMap = null;
@@ -306,15 +325,49 @@ public class TestRunner {
      * Get the list of command executors of current environment
      *
      * @return the list of command executors
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws IllegalAccessException    the illegal access exception
+     * @throws InvocationTargetException the invocation target exception
+     * @throws InstantiationException    the instantiation exception
      */
-    private List<CommandExecutor> getCommandExecutors() {
+    private List<CommandExecutor> getCommandExecutors() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         List<CommandExecutor> commandExecutors = new ArrayList<>();
 
-        if (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment) {
-//            commandExecutors.add(new WebCommandExecutor(this.webDriver, this));
+        boolean forWeb = environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment;
+        List<Class<? extends CommandExecutor>> cached = forWeb ? webCommandExecutorClasses : mobileCommandExecutorClasses;
+
+        if (CollectionUtils.isEmpty(cached)) {
+            cached.addAll(getCommandExecutorClasses(forWeb));
+        }
+        for (Class<? extends CommandExecutor> clazz : cached) {
+            CommandExecutor commandExecutor = clazz.getConstructor(ContextAwareWebDriver.class, TestRunner.class).newInstance(this.webDriver, this);
+            commandExecutors.add(commandExecutor);
         }
 
         return commandExecutors;
+    }
+
+    /**
+     * Gets command executor classes.
+     *
+     * @param forWeb the for web
+     * @return the command executor classes
+     */
+    private List<Class<? extends CommandExecutor>> getCommandExecutorClasses(boolean forWeb) {
+        List<Class<? extends CommandExecutor>> classes = new ArrayList<>();
+        ServiceLoader<ExecutorProviderService> serviceLoader = ServiceLoader.load(ExecutorProviderService.class);
+        for (ExecutorProviderService service : serviceLoader) {
+            List<Class<? extends CommandExecutor>> providedClasses;
+            if (forWeb) {
+                providedClasses = service.getWebExecutorClasses();
+            } else {
+                providedClasses = service.getMobileExecutorClasses();
+            }
+            if (CollectionUtils.isNotEmpty(providedClasses)) {
+                classes.addAll(providedClasses);
+            }
+        }
+        return classes;
     }
 
     /**
@@ -403,7 +456,9 @@ public class TestRunner {
      *
      * @param actionName action name
      * @return the result of action execution
-     * @throws IOException the io exception
+     * @throws IOException            the io exception
+     * @throws SQLException           the sql exception
+     * @throws ClassNotFoundException the class not found exception
      */
     public Result runAction(String actionName) throws IOException, SQLException, ClassNotFoundException {
         if (StringUtils.isBlank(actionName)) {

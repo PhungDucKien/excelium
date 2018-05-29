@@ -285,7 +285,7 @@ public class TestReporter {
      * @return the long
      */
     private long countTestStep(Test test) {
-        if (test == null || CollectionUtils.isEmpty(test.getConfig().getEnvironments())) {
+        if (test == null || test.getConfig() == null || CollectionUtils.isEmpty(test.getConfig().getEnvironments())) {
             return 0;
         }
         int testTotalCount = 0;
@@ -303,7 +303,7 @@ public class TestReporter {
      * @return the long
      */
     private long countTestStep(Test test, Environment environment) {
-        if (test == null || test.getTestSuites().isEmpty()) {
+        if (test == null || test.getTestSuites() == null || test.getTestSuites().isEmpty()) {
             return 0;
         }
         int environmentTotalCount = 0;
