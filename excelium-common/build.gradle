@@ -1,5 +1,5 @@
 dependencies {
     compile project(':excelium-model')
 
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.11.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.12.0'
 }

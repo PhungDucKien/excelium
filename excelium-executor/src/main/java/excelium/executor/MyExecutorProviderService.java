@@ -26,6 +26,7 @@ package excelium.executor;
 
 import excelium.core.executor.CommandExecutor;
 import excelium.core.executor.ExecutorProviderService;
+import excelium.executor.web.CookieCommandExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class MyExecutorProviderService implements ExecutorProviderService {
     @Override
     public List<Class<? extends CommandExecutor>> getWebExecutorClasses() {
         List<Class<? extends CommandExecutor>> classes = new ArrayList<>();
+        classes.add(CookieCommandExecutor.class);
         return classes;
     }
 
