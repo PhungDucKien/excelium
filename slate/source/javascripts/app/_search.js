@@ -74,7 +74,12 @@
         searchResults.empty();
         $.each(results, function (index, result) {
           var elem = document.getElementById(result.ref);
-          searchResults.append("<li><a href='#" + result.ref + "'>" + $(elem).text() + "</a></li>");
+          var category = result.ref.startsWith("web") ? "Web" : (result.ref.startsWith("mobile") ? "Mb" : null);
+          if (category) {
+            searchResults.append("<li><a href='#" + result.ref + "'>" + $(elem).text() + "</a><div class='" + category.toLowerCase() + "-search-category'>" + category + "</div></li>");
+          } else {
+            searchResults.append("<li><a href='#" + result.ref + "'>" + $(elem).text() + "</a></li>");
+          }
         });
         highlight.call(searchInput);
       } else {

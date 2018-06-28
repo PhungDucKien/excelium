@@ -121,6 +121,8 @@ html, body {
     li {
       margin: 1em $nav-padding;
       line-height: 1;
+      padding-right: 40px;
+      position: relative;
     }
 
     a {
@@ -130,6 +132,28 @@ html, body {
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    .web-search-category {
+      background-color: #0073b7;
+      border-radius: .25em;
+      padding: .2em .6em .3em;
+      font-size: 90%;
+      position: absolute;
+      right: 0px;
+      top: 8px;
+      transform: translate(0,-8px);
+    }
+
+    .mb-search-category {
+      background-color: #dd4b39;
+      border-radius: .25em;
+      padding: .2em .9em .3em;
+      font-size: 90%;
+      position: absolute;
+      right: 0px;
+      top: 8px;
+      transform: translate(0,-8px);
     }
   }
 
