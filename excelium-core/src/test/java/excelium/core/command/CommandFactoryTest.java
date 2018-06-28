@@ -68,50 +68,32 @@ public class CommandFactoryTest {
 
         Assert.assertEquals(9, commandMap.size());
         Assert.assertEquals("locator", commandMap.get("click(1)").getParam1());
-        Assert.assertEquals("Click #1", commandMap.get("click(1)").getDescriptions().get("english"));
-        Assert.assertEquals("#1をクリック", commandMap.get("click(1)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("parentLocator", commandMap.get("click(2)").getParam1());
         Assert.assertEquals("locator", commandMap.get("click(2)").getParam2());
-        Assert.assertEquals("Click #1's #2", commandMap.get("click(2)").getDescriptions().get("english"));
-        Assert.assertEquals("#1 の #2をクリック", commandMap.get("click(2)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("text", commandMap.get("input(2)").getParam1());
         Assert.assertEquals("locator", commandMap.get("input(2)").getParam2());
-        Assert.assertEquals("Input #1 into #2", commandMap.get("input(2)").getDescriptions().get("english"));
-        Assert.assertEquals("#2に#1を入力", commandMap.get("input(2)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("text", commandMap.get("input(3)").getParam1());
         Assert.assertEquals("parentLocator", commandMap.get("input(3)").getParam2());
         Assert.assertEquals("locator", commandMap.get("input(3)").getParam3());
-        Assert.assertEquals("Input #1 into #2's #3", commandMap.get("input(3)").getDescriptions().get("english"));
-        Assert.assertEquals("#2 の #3に#1を入力", commandMap.get("input(3)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("", commandMap.get("close(0)").getParam1());
-        Assert.assertEquals("Close", commandMap.get("close(0)").getDescriptions().get("english"));
-        Assert.assertEquals("クーロズ", commandMap.get("close(0)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("text", commandMap.get("verifyText(2)").getParam1());
         Assert.assertEquals("locator", commandMap.get("verifyText(2)").getParam2());
-        Assert.assertEquals("Verify that #2 text equals #1", commandMap.get("verifyText(2)").getDescriptions().get("english"));
-        Assert.assertEquals("#2のテキストが#1を比較", commandMap.get("verifyText(2)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("text", commandMap.get("verifyText(3)").getParam1());
         Assert.assertEquals("parentLocator", commandMap.get("verifyText(3)").getParam2());
         Assert.assertEquals("locator", commandMap.get("verifyText(3)").getParam3());
-        Assert.assertEquals("Verify that #2's #3 text equals #1", commandMap.get("verifyText(3)").getDescriptions().get("english"));
-        Assert.assertEquals("#2 の #3のテキストが#1を比較", commandMap.get("verifyText(3)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("text", commandMap.get("assertText(2)").getParam1());
         Assert.assertEquals("locator", commandMap.get("assertText(2)").getParam2());
-        Assert.assertEquals("Assert that #2 text equals #1. (If not, stop test case.)", commandMap.get("assertText(2)").getDescriptions().get("english"));
-        Assert.assertEquals("#2のテキストが#1を比較（※違う場合はテストを中断）", commandMap.get("assertText(2)").getDescriptions().get("japanese"));
 
         Assert.assertEquals("text", commandMap.get("assertText(3)").getParam1());
         Assert.assertEquals("parentLocator", commandMap.get("assertText(3)").getParam2());
         Assert.assertEquals("locator", commandMap.get("assertText(3)").getParam3());
-        Assert.assertEquals("Assert that #2's #3 text equals #1. (If not, stop test case.)", commandMap.get("assertText(3)").getDescriptions().get("english"));
-        Assert.assertEquals("#2 の #3のテキストが#1を比較（※違う場合はテストを中断）", commandMap.get("assertText(3)").getDescriptions().get("japanese"));
 
         commandMap.get("click(1)").getConsumer().accept("id=1", null, null);
         new Verifications() {{
@@ -426,34 +408,22 @@ public class CommandFactoryTest {
             super(webDriver, testRunner);
         }
 
-        @Action(desc = {
-                @Description(lang = Language.ENGLISH, value = "Close"),
-                @Description(lang = Language.JAPANESE, value = "クーロズ")
-        })
+        @Action
         public void close() throws Exception {
             triConsumer.accept(null, null, null);
         }
 
-        @Action(desc = {
-                @Description(lang = Language.ENGLISH, value = "Click #1's #2"),
-                @Description(lang = Language.JAPANESE, value = "#1 の #2をクリック")
-        }, param1 = "parentLocator", param2 = "locator")
+        @Action(param1 = "parentLocator", param2 = "locator")
         public void click(String parentLocator, String locator) throws Exception {
             triConsumer.accept(parentLocator, locator, null);
         }
 
-        @Action(desc = {
-                @Description(lang = Language.ENGLISH, value = "Input #1 into #2's #3"),
-                @Description(lang = Language.JAPANESE, value = "#2 の #3に#1を入力")
-        }, param1 = "text", param2 = "parentLocator", param3 = "locator")
+        @Action(param1 = "text", param2 = "parentLocator", param3 = "locator")
         public void input(String text, String parentLocator, String locator) throws Exception {
             triConsumer.accept(text, parentLocator, locator);
         }
 
-        @Action(desc = {
-                @Description(lang = Language.ENGLISH, value = "Verify that #2's #3 text equals #1"),
-                @Description(lang = Language.JAPANESE, value = "#2 の #3のテキストが#1を比較")
-        }, param1 = "text", param2 = "parentLocator", param3 = "locator")
+        @Action(param1 = "text", param2 = "parentLocator", param3 = "locator")
         public void verifyText(String text, String parentLocator, String locator) throws Exception {
             triConsumer.accept(text, parentLocator, locator);
         }
@@ -465,28 +435,19 @@ public class CommandFactoryTest {
             super(webDriver, testRunner);
         }
 
-        @Accessor(desc = {
-                @Description(lang = Language.ENGLISH, value = "URL"),
-                @Description(lang = Language.JAPANESE, value = "URL")
-        })
+        @Accessor
         public String getUrl() throws Exception {
             triConsumer.accept(null, null, null);
             return "OK";
         }
 
-        @Accessor(desc = {
-                @Description(lang = Language.ENGLISH, value = "Text"),
-                @Description(lang = Language.JAPANESE, value = "Text")
-        }, param1 = "parentLocator", param2 = "locator")
+        @Accessor(param1 = "parentLocator", param2 = "locator")
         public String getText(String parentLocator, String locator) throws Exception {
             triConsumer.accept(parentLocator, locator, null);
             return "OK";
         }
 
-        @Accessor(desc = {
-                @Description(lang = Language.ENGLISH, value = "Color"),
-                @Description(lang = Language.JAPANESE, value = "Color")
-        }, param1 = "parentLocator", param2 = "locator")
+        @Accessor(param1 = "parentLocator", param2 = "locator")
         public Color getColor(String parentLocator, String locator) throws Exception {
             triConsumer.accept(parentLocator, locator, null);
             return Color.fromString("black");

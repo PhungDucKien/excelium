@@ -22,23 +22,36 @@
  * SOFTWARE.
  */
 
-package excelium.core.command;
+package excelium.doclet.service;
+
+import java.io.File;
+import java.io.Writer;
+import java.util.Map;
 
 /**
- * Represents a command description.
+ * Provides an interface to services for executing template engine against a template file and data model.
  *
  * @author PhungDucKien
- * @since 2018.05.07
+ * @since 2018.06.27
  */
-public @interface Description {
+public interface TemplateService {
 
     /**
-     * Language
+     * Process a template against the supplied data model and write to the file.
+     *
+     * @param template Template
+     * @param objects  Object model to process template against
+     * @param out      File to write to
      */
-    Language lang();
+    void processTemplate(String template, Map<String, Object> objects, File out);
 
     /**
-     * Value
+     * Process a template against the supplied data model and write to the out.
+     *
+     * @param template Template
+     * @param objects  Object model to process template against
+     * @param out      Writer object to send output to
+     * @throws Exception the exception
      */
-    String value();
+    void processTemplate(String template, Map<String, Object> objects, Writer out) throws Exception;
 }

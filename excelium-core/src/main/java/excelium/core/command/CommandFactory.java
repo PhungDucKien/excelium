@@ -24,11 +24,16 @@
 
 package excelium.core.command;
 
+import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.executor.CommandExecutor;
-import excelium.model.test.action.TestAction;
+import excelium.core.executor.ExecutorProviderService;
 import excelium.model.test.command.Command;
+import excelium.model.test.config.Environment;
+import excelium.model.test.config.MobileWebEnvironment;
+import excelium.model.test.config.PcEnvironment;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,6 +64,26 @@ public class CommandFactory {
     private static final Logger LOG = LogManager.getLogger();
 
     /**
+     * Web command executor classes
+     */
+    private static List<Class<? extends CommandExecutor>> webCommandExecutorClasses = new ArrayList<>();
+
+    /**
+     * Mobile command executor classes
+     */
+    private static List<Class<? extends CommandExecutor>> mobileCommandExecutorClasses = new ArrayList<>();
+
+    /**
+     * Creates the map of commands from the list of command executors.
+     *
+     * @return the map of commands
+     */
+    public static Map<String, Command> createCommandMap(Environment environment, ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<CommandExecutor> commandExecutors = getCommandExecutors(environment, webDriver, baseUrl, testRunner);
+        return createCommandMap(commandExecutors);
+    }
+
+    /**
      * Creates the map of commands from the list of command executors.
      *
      * @param commandExecutors the list of command executors
@@ -73,6 +98,56 @@ public class CommandFactory {
             }
         }
         return commandMap;
+    }
+
+    /**
+     * Get the list of command executors of current environment
+     *
+     * @return the list of command executors
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws IllegalAccessException    the illegal access exception
+     * @throws InvocationTargetException the invocation target exception
+     * @throws InstantiationException    the instantiation exception
+     */
+    private static List<CommandExecutor> getCommandExecutors(Environment environment, ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        List<CommandExecutor> commandExecutors = new ArrayList<>();
+
+        boolean forWeb = environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment;
+        List<Class<? extends CommandExecutor>> cached = forWeb ? webCommandExecutorClasses : mobileCommandExecutorClasses;
+
+        if (CollectionUtils.isEmpty(cached)) {
+            cached.addAll(getCommandExecutorClasses(forWeb));
+        }
+        for (Class<? extends CommandExecutor> clazz : cached) {
+            CommandExecutor commandExecutor = clazz.getConstructor(ContextAwareWebDriver.class, String.class, TestRunner.class)
+                    .newInstance(webDriver, baseUrl, testRunner);
+            commandExecutors.add(commandExecutor);
+        }
+
+        return commandExecutors;
+    }
+
+    /**
+     * Gets command executor classes.
+     *
+     * @param forWeb the for web
+     * @return the command executor classes
+     */
+    private static List<Class<? extends CommandExecutor>> getCommandExecutorClasses(boolean forWeb) {
+        List<Class<? extends CommandExecutor>> classes = new ArrayList<>();
+        ServiceLoader<ExecutorProviderService> serviceLoader = ServiceLoader.load(ExecutorProviderService.class);
+        for (ExecutorProviderService service : serviceLoader) {
+            List<Class<? extends CommandExecutor>> providedClasses;
+            if (forWeb) {
+                providedClasses = service.getWebExecutorClasses();
+            } else {
+                providedClasses = service.getMobileExecutorClasses();
+            }
+            if (CollectionUtils.isNotEmpty(providedClasses)) {
+                classes.addAll(providedClasses);
+            }
+        }
+        return classes;
     }
 
     /**
@@ -278,7 +353,7 @@ public class CommandFactory {
         command.setWebOnly(action.webOnly());
         command.setAndroidOnly(action.androidOnly());
         command.setIosOnly(action.iosOnly());
-        setActionDesc(command, action);
+        command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
         command.setConsumer((param1, param2, param3) -> {
             if (paramCount == 0) {
                 method.invoke(executor);
@@ -331,7 +406,7 @@ public class CommandFactory {
         command.setWebOnly(action.webOnly());
         command.setAndroidOnly(action.androidOnly());
         command.setIosOnly(action.iosOnly());
-        setActionDesc(command, action);
+        command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
 
         return command;
     }
@@ -386,7 +461,7 @@ public class CommandFactory {
         command.setWebOnly(accessor.webOnly());
         command.setAndroidOnly(accessor.androidOnly());
         command.setIosOnly(accessor.iosOnly());
-        setAccessorDesc(command, accessor);
+        command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
 
         return command;
     }
@@ -441,7 +516,7 @@ public class CommandFactory {
         command.setWebOnly(accessor.webOnly());
         command.setAndroidOnly(accessor.androidOnly());
         command.setIosOnly(accessor.iosOnly());
-        setAccessorDesc(command, accessor);
+        command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
 
         return command;
     }
@@ -478,118 +553,6 @@ public class CommandFactory {
             return webDriver.isIOS();
         }
         return true;
-    }
-
-    /**
-     * Sets command description for action
-     *
-     * @param command the command
-     * @param action  the action
-     */
-    private static void setActionDesc(Command command, Action action) {
-        Map<String, String> commandDescriptions = new HashMap<>();
-        Description[] descriptions = action.desc();
-        for (Description description : descriptions) {
-            Language language = description.lang();
-            String desc = removeParentLocatorDescription(description.value(), language, command, action.param1(), action.param2(), action.param3());
-            if (command.getMethod().startsWith("assert")) {
-                desc = language.getAssertMessage(desc);
-            }
-            commandDescriptions.put(language.name().toLowerCase(), desc);
-        }
-        command.setDescriptions(commandDescriptions);
-    }
-
-    /**
-     * Sets command description for accessor
-     *
-     * @param command  the command
-     * @param accessor the accessor
-     */
-    private static void setAccessorDesc(Command command, Accessor accessor) {
-        int paramCount = countParam(command);
-        boolean paramAdded = false;
-        if ("variable".equals(command.getParam3()) || "text".equals(command.getParam3())) {
-            paramAdded = true;
-        } else if (StringUtils.isBlank(command.getParam3()) && ("variable".equals(command.getParam2()) || "text".equals(command.getParam2()))) {
-            paramAdded = true;
-        } else if (StringUtils.isBlank(command.getParam2()) && ("variable".equals(command.getParam1()) || "text".equals(command.getParam1()))) {
-            paramAdded = true;
-        }
-        Map<String, String> commandDescriptions = new HashMap<>();
-        Description[] descriptions = accessor.desc();
-        for (Description description : descriptions) {
-            Language language = description.lang();
-            String desc = removeParentLocatorDescription(description.value(), language, command, accessor.param1(), accessor.param2(), null);
-            String verb;
-            if (command.getMethod().contains("NotContain")) {
-                verb = language.getNotContainVerb();
-            } else if (command.getMethod().contains("Contain")) {
-                verb = language.getContainVerb();
-            } else if (command.getMethod().contains("Not")) {
-                verb = language.getNotToBeVerb();
-                if (!paramAdded) {
-                    desc = desc.replaceFirst(language.getToBeVerb(), language.getNotToBeVerb());
-                }
-            } else {
-                verb = language.getToBeVerb();
-            }
-            if (command.getMethod().startsWith("storePush")) {
-                desc = language.getPushMessage(desc, "#" + paramCount);
-            } else if (command.getMethod().startsWith("store")) {
-                desc = language.getStoreMessage(desc, "#" + paramCount);
-            } else if (command.getMethod().startsWith("wait")) {
-                if (paramAdded) {
-                    desc = language.getWaitMessage(desc, verb, "#" + paramCount);
-                } else {
-                    desc = language.getWaitMessage(desc, null, null);
-                }
-            } else if (command.getMethod().startsWith("execute")) {
-                desc = desc.replaceAll("#2", "#3").replaceAll("#1", "#2");
-                desc = desc.replaceAll("#2", "#3").replaceAll("#1", "#2");
-                if (paramAdded) {
-                    desc = language.getExecuteMessage(desc, verb, "#" + paramCount);
-                } else {
-                    desc = language.getExecuteMessage(desc, null, null);
-                }
-            } else if (StringUtils.startsWithAny(command.getMethod(), "verify", "assert")) {
-                if (paramAdded) {
-                    desc = language.getVerifyMessage(desc, verb, "#" + paramCount);
-                } else {
-                    desc = language.getVerifyMessage(desc, null, null);
-                }
-                if (command.getMethod().startsWith("assert")) {
-                    desc = language.getAssertMessage(desc);
-                }
-            }
-            commandDescriptions.put(language.name().toLowerCase(), desc);
-        }
-        command.setDescriptions(commandDescriptions);
-    }
-
-    /**
-     * Removes parentLocator's description if the command does not contain parentLocator parameter.
-     * <p>
-     * Eg, "#1 of #2 equals to #3" -> "#1 equals to #2"
-     *
-     * @param desc     the description
-     * @param language the language
-     * @param command  the command
-     * @param param1   the parameter 1 name of the annotation
-     * @param param2   the parameter 2 name of the annotation
-     * @param param3   the parameter 3 name of the annotation
-     * @return the result description
-     */
-    private static String removeParentLocatorDescription(String desc, Language language, Command command, String param1, String param2, String param3) {
-        boolean containParentLocator = false;
-        if ("parentLocator".equals(command.getParam1())) containParentLocator = true;
-        if ("parentLocator".equals(command.getParam2())) containParentLocator = true;
-        if ("parentLocator".equals(param1) && "locator".equals(param2) && !containParentLocator) {
-            desc = desc.replace(language.getPossessiveNoun("#1", "#2"), "#1").replace("#3", "#2");
-        } else if ("parentLocator".equals(param2) && "locator".equals(param3) && !containParentLocator) {
-            desc = desc.replace(language.getPossessiveNoun("#2", "#3"), "#2");
-        }
-        return desc;
     }
 
     /**

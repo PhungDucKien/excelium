@@ -135,16 +135,6 @@ public class TestRunner {
     private Map<TestStep, Result> testStepResultMap;
 
     /**
-     * Web command executor classes
-     */
-    private List<Class<? extends CommandExecutor>> webCommandExecutorClasses;
-
-    /**
-     * Mobile command executor classes
-     */
-    private List<Class<? extends CommandExecutor>> mobileCommandExecutorClasses;
-
-    /**
      * Instantiates a new Test runner.
      *
      * @param test         the test
@@ -178,8 +168,6 @@ public class TestRunner {
         testReporter.startTest(test);
         testStepResultMap = new HashMap<>();
         testFlows = new ArrayList<>();
-        webCommandExecutorClasses = new ArrayList<>();
-        mobileCommandExecutorClasses = new ArrayList<>();
         for (Environment environment : test.getConfig().getEnvironments()) {
             runEnvironment(environment);
         }
@@ -195,7 +183,8 @@ public class TestRunner {
         setEnvironment(environment);
         try {
             webDriver = DriverFactory.createDriver(environment, project);
-            commandMap = CommandFactory.createCommandMap(getCommandExecutors());
+            String baseUrl = test.getConfig() != null ? test.getConfig().getBaseUrl() : null;
+            commandMap = CommandFactory.createCommandMap(environment, webDriver, baseUrl, this);
             if (test.getTestSuites() != null) {
                 for (TestSuite testSuite : test.getTestSuites().values()) {
                     runTestSuite(testSuite);
@@ -319,55 +308,6 @@ public class TestRunner {
         } catch (Exception e) {
             return new StepResult(Result.ERROR, false, "Invoke command " + command.getName() + " error: " + e.getMessage());
         }
-    }
-
-    /**
-     * Get the list of command executors of current environment
-     *
-     * @return the list of command executors
-     * @throws NoSuchMethodException     the no such method exception
-     * @throws IllegalAccessException    the illegal access exception
-     * @throws InvocationTargetException the invocation target exception
-     * @throws InstantiationException    the instantiation exception
-     */
-    private List<CommandExecutor> getCommandExecutors() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        List<CommandExecutor> commandExecutors = new ArrayList<>();
-
-        boolean forWeb = environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment;
-        List<Class<? extends CommandExecutor>> cached = forWeb ? webCommandExecutorClasses : mobileCommandExecutorClasses;
-
-        if (CollectionUtils.isEmpty(cached)) {
-            cached.addAll(getCommandExecutorClasses(forWeb));
-        }
-        for (Class<? extends CommandExecutor> clazz : cached) {
-            CommandExecutor commandExecutor = clazz.getConstructor(ContextAwareWebDriver.class, TestRunner.class).newInstance(this.webDriver, this);
-            commandExecutors.add(commandExecutor);
-        }
-
-        return commandExecutors;
-    }
-
-    /**
-     * Gets command executor classes.
-     *
-     * @param forWeb the for web
-     * @return the command executor classes
-     */
-    private List<Class<? extends CommandExecutor>> getCommandExecutorClasses(boolean forWeb) {
-        List<Class<? extends CommandExecutor>> classes = new ArrayList<>();
-        ServiceLoader<ExecutorProviderService> serviceLoader = ServiceLoader.load(ExecutorProviderService.class);
-        for (ExecutorProviderService service : serviceLoader) {
-            List<Class<? extends CommandExecutor>> providedClasses;
-            if (forWeb) {
-                providedClasses = service.getWebExecutorClasses();
-            } else {
-                providedClasses = service.getMobileExecutorClasses();
-            }
-            if (CollectionUtils.isNotEmpty(providedClasses)) {
-                classes.addAll(providedClasses);
-            }
-        }
-        return classes;
     }
 
     /**

@@ -28,7 +28,6 @@ import excelium.common.NumberUtil;
 import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.enums.Result;
-import excelium.model.test.action.TestAction;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -50,6 +49,11 @@ public class CommandExecutor {
     protected final ContextAwareWebDriver webDriver;
 
     /**
+     * Base URL
+     */
+    protected final String baseUrl;
+
+    /**
      * Test runner
      */
     private final TestRunner testRunner;
@@ -60,7 +64,17 @@ public class CommandExecutor {
      * @param webDriver the web driver
      */
     public CommandExecutor(ContextAwareWebDriver webDriver) {
-        this(webDriver, null);
+        this(webDriver, null, null);
+    }
+
+    /**
+     * Instantiates a new Command executor.
+     *
+     * @param webDriver the web driver
+     * @param baseUrl   the base URL
+     */
+    public CommandExecutor(ContextAwareWebDriver webDriver, String baseUrl) {
+        this(webDriver, baseUrl, null);
     }
 
     /**
@@ -70,7 +84,19 @@ public class CommandExecutor {
      * @param testRunner the test runner
      */
     public CommandExecutor(ContextAwareWebDriver webDriver, TestRunner testRunner) {
+        this(webDriver, null, testRunner);
+    }
+
+    /**
+     * Instantiates a new Command executor.
+     *
+     * @param webDriver  the web driver
+     * @param baseUrl    the base URL
+     * @param testRunner the test runner
+     */
+    public CommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) {
         this.webDriver = webDriver;
+        this.baseUrl = baseUrl;
         this.testRunner = testRunner;
     }
 

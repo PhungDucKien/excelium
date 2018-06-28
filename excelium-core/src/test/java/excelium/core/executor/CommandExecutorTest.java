@@ -69,7 +69,7 @@ public class CommandExecutorTest {
 
     @Test(expected = Exception.class)
     public void testRunAction_TestRunnerNull() throws Exception {
-        CommandExecutor executor = new CommandExecutor(webDriver, null);
+        CommandExecutor executor = new CommandExecutor(webDriver);
         executor.runAction(null);
     }
 }

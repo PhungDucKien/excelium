@@ -56,11 +56,6 @@ public @interface Action {
     String param3() default "";
 
     /**
-     * Descriptions
-     */
-    Description[] desc();
-
-    /**
      * Is the command only available in web application
      */
     boolean webOnly() default false;

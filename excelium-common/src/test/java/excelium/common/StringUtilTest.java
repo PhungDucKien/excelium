@@ -96,4 +96,14 @@ public class StringUtilTest {
         Assert.assertEquals("", properties.get("e"));
         Assert.assertEquals("", properties.get("f"));
     }
+
+    @Test
+    public void testGetFirstSentence() {
+        Assert.assertEquals("This is the first sentence", StringUtil.getFirstSentence("This is the first sentence"));
+        Assert.assertEquals("This is the first sentence.", StringUtil.getFirstSentence("This is the first sentence."));
+        Assert.assertEquals("This is the first sentence.This is the second sentence.", StringUtil.getFirstSentence("This is the first sentence.This is the second sentence."));
+        Assert.assertEquals("This is the first sentence.", StringUtil.getFirstSentence("This is the first sentence. This is the second sentence."));
+        Assert.assertEquals("This is first (e.g. 1st) sentence.", StringUtil.getFirstSentence("This is first (e.g. 1st) sentence. And the second one."));
+        Assert.assertEquals("I need this domain.com!", StringUtil.getFirstSentence("I need this domain.com! Another sentence. And another sentence."));
+    }
 }

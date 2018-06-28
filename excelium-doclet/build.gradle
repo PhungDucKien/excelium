@@ -1,0 +1,18 @@
+dependencies {
+    compile project(':excelium-executor')
+
+    compile files(org.gradle.internal.jvm.Jvm.current().toolsJar)
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
+}
+
+task cleanDoc(type: Delete) {
+    delete = file('build/docs')
+}
+
+task doc(type: Javadoc, dependsOn: ['classes', 'cleanDoc']) {
+    source = project(":excelium-executor").sourceSets.main.java.srcDirs
+    destinationDir = file('../slate/source/includes')
+    classpath = sourceSets.main.compileClasspath
+    options.docletpath = (sourceSets.main.output + sourceSets.main.compileClasspath) as List
+    options.doclet = "excelium.doclet.MyDoclet"
+}

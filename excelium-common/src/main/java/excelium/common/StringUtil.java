@@ -40,6 +40,11 @@ import java.util.regex.Pattern;
 public class StringUtil {
 
     /**
+     * Get first sentence regex
+     */
+    private static final String GET_FIRST_SENTENCE_REGEX = "^(.*?[.!?])(?:\\s|$)(?!.*\\))";
+
+    /**
      * Extract spreadsheet id from a spreadsheet url.
      *
      * @param url the spreadsheet url
@@ -99,5 +104,27 @@ public class StringUtil {
             properties.load(reader);
         }
         return properties;
+    }
+
+    /**
+     * Returns the first sentence of the input string.
+     * The sentence ends with ends with "." or "!" or "?" and is followed by a white space character or the end of the line.
+     * E.g:
+     * 'This is first (e.g. 1st) sentence. And the second one.' returns 'This is first (e.g. 1st) sentence.'
+     * 'I need this domain.com! Another sentence. And another sentence.' returns 'I need this domain.com!'
+     *
+     * @param input the input string
+     * @return the first sentence
+     */
+    public static String getFirstSentence(String input) {
+        Pattern p = Pattern.compile(GET_FIRST_SENTENCE_REGEX);
+        Matcher m = p.matcher(input);
+        String firstSentence;
+        if (m.find()) {
+            firstSentence = m.group(1);
+        } else {
+            firstSentence = input;
+        }
+        return firstSentence;
     }
 }

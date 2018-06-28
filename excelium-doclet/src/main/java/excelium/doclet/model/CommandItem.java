@@ -22,17 +22,15 @@
  * SOFTWARE.
  */
 
-package excelium.model.test.command;
-
-import java.util.Map;
+package excelium.doclet.model;
 
 /**
- * Represents command model.
+ * Command item data model.
  *
  * @author PhungDucKien
- * @since 2018.03.30
+ * @since 2018.06.27
  */
-public class Command {
+public class CommandItem {
 
     /**
      * Name
@@ -58,31 +56,6 @@ public class Command {
      * Parameter 3
      */
     private String param3;
-
-    /**
-     * Is the command only available in web application
-     */
-    private boolean webOnly;
-
-    /**
-     * Is the command only available in Android application
-     */
-    private boolean androidOnly;
-
-    /**
-     * Is the command only available in iOS application
-     */
-    private boolean iosOnly;
-
-    /**
-     * Source method key. Used for API document generating
-     */
-    private String sourceMethodKey;
-
-    /**
-     * Consumer that executed when command is called.
-     */
-    private TriConsumer<Object, Object, Object> consumer;
 
     /**
      * Gets name.
@@ -172,95 +145,5 @@ public class Command {
      */
     public void setParam3(String param3) {
         this.param3 = param3;
-    }
-
-    /**
-     * Is web only boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isWebOnly() {
-        return webOnly;
-    }
-
-    /**
-     * Sets web only.
-     *
-     * @param webOnly the web only
-     */
-    public void setWebOnly(boolean webOnly) {
-        this.webOnly = webOnly;
-    }
-
-    /**
-     * Is android only boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isAndroidOnly() {
-        return androidOnly;
-    }
-
-    /**
-     * Sets android only.
-     *
-     * @param androidOnly the android only
-     */
-    public void setAndroidOnly(boolean androidOnly) {
-        this.androidOnly = androidOnly;
-    }
-
-    /**
-     * Is ios only boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isIosOnly() {
-        return iosOnly;
-    }
-
-    /**
-     * Sets ios only.
-     *
-     * @param iosOnly the ios only
-     */
-    public void setIosOnly(boolean iosOnly) {
-        this.iosOnly = iosOnly;
-    }
-
-    /**
-     * Gets source method key.
-     *
-     * @return the source method key
-     */
-    public String getSourceMethodKey() {
-        return sourceMethodKey;
-    }
-
-    /**
-     * Sets source method key.
-     *
-     * @param sourceMethodKey the source method key
-     */
-    public void setSourceMethodKey(String sourceMethodKey) {
-        this.sourceMethodKey = sourceMethodKey;
-    }
-
-    /**
-     * Gets consumer.
-     *
-     * @return the consumer
-     */
-    public TriConsumer<Object, Object, Object> getConsumer() {
-        return consumer;
-    }
-
-    /**
-     * Sets consumer.
-     *
-     * @param consumer the consumer
-     */
-    public void setConsumer(TriConsumer<Object, Object, Object> consumer) {
-        this.consumer = consumer;
     }
 }

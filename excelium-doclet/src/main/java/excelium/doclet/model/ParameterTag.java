@@ -22,46 +22,76 @@
  * SOFTWARE.
  */
 
-package excelium.core.command;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+package excelium.doclet.model;
 
 /**
- * Represents an accessor command.
+ * Parameter tag data model.
  *
  * @author PhungDucKien
- * @since 2018.05.07
+ * @since 2018.06.28
  */
-@Retention(RUNTIME)
-@Target(value = METHOD)
-public @interface Accessor {
+public class ParameterTag {
 
     /**
-     * Parameter 1
+     * Name
      */
-    String param1() default "";
+    private String name;
 
     /**
-     * Parameter 2
+     * Comment
      */
-    String param2() default "";
+    private String comment;
 
     /**
-     * Is the command only available in web application
+     * Instantiates a new Parameter tag.
      */
-    boolean webOnly() default false;
+    public ParameterTag() {
+    }
 
     /**
-     * Is the command only available in Android application
+     * Instantiates a new Parameter tag.
+     *
+     * @param name    the name
+     * @param comment the comment
      */
-    boolean androidOnly() default false;
+    public ParameterTag(String name, String comment) {
+        this.name = name;
+        this.comment = comment;
+    }
 
     /**
-     * Is the command only available in iOS application
+     * Gets name.
+     *
+     * @return the name
      */
-    boolean iosOnly() default false;
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets comment.
+     *
+     * @return the comment
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * Sets comment.
+     *
+     * @param comment the comment
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }
