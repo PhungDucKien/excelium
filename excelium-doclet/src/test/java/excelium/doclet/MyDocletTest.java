@@ -38,6 +38,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -189,5 +191,26 @@ public class MyDocletTest {
                 FileUtils.checksumCRC32(new File(MyDocletTest.class.getClassLoader().getResource("_web_api.md").getPath())));
         Assert.assertEquals(FileUtils.checksumCRC32(new File("build/docs/_mobile_api.md")),
                 FileUtils.checksumCRC32(new File(MyDocletTest.class.getClassLoader().getResource("_mobile_api.md").getPath())));
+    }
+
+    @Test
+    public void testGetSubject() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = MyDoclet.class.getDeclaredMethod("getSubject", String.class);
+        method.setAccessible(true);
+
+        Assert.assertEquals("all cookies of the current page under test", method.invoke(null, "Return all cookies of the current page under test."));
+        Assert.assertEquals("all cookies of the current page under test", method.invoke(null, "Returns all cookies of the current page under test."));
+        Assert.assertEquals("all cookies of the current page under test", method.invoke(null, "Get all cookies of the current page under test."));
+        Assert.assertEquals("all cookies of the current page under test", method.invoke(null, "Gets all cookies of the current page under test."));
+
+        Assert.assertEquals("the value of the cookie with the specified name", method.invoke(null, "Returns the value of the cookie with the specified name, or throws an error if the cookie is not present."));
+        Assert.assertEquals("the value of the cookie with the specified name", method.invoke(null, "Return the value of the cookie with the specified name, or throws an error if the cookie is not present."));
+        Assert.assertEquals("the value of the cookie with the specified name", method.invoke(null, "Gets the value of the cookie with the specified name, or throws an error if the cookie is not present."));
+        Assert.assertEquals("the value of the cookie with the specified name", method.invoke(null, "Get the value of the cookie with the specified name, or throws an error if the cookie is not present."));
+        Assert.assertEquals("the value of the cookie with the specified name", method.invoke(null, "Returns the value of the cookie with the specified name, or throw an error if the cookie is not present."));
+        Assert.assertEquals("the value of the cookie with the specified name", method.invoke(null, "Return the value of the cookie with the specified name, or throw an error if the cookie is not present."));
+
+        Assert.assertEquals("a cookie with the specified name is present", method.invoke(null, "Returns true if a cookie with the specified name is present, or false otherwise."));
+        Assert.assertEquals("a cookie with the specified name is present", method.invoke(null, "Return true if a cookie with the specified name is present, or false otherwise."));
     }
 }

@@ -47,8 +47,8 @@ public class LanguageTest {
 
     @Test
     public void testGetWaitMessage() {
-        Assert.assertEquals("Waits for subject equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.", Language.ENGLISH.getWaitMessage("subject", Language.ENGLISH.getToBeVerb()));
-        Assert.assertEquals("Waits for subject not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.", Language.ENGLISH.getWaitMessage("subject", Language.ENGLISH.getNotToBeVerb()));
+        Assert.assertEquals("Waits for subject equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.", Language.ENGLISH.getWaitMessage("subject", Language.ENGLISH.getEqualVerb()));
+        Assert.assertEquals("Waits for subject not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.", Language.ENGLISH.getWaitMessage("subject", Language.ENGLISH.getNotEqualVerb()));
         Assert.assertEquals("Waits for subject contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.", Language.ENGLISH.getWaitMessage("subject", Language.ENGLISH.getContainVerb()));
         Assert.assertEquals("Waits for subject not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.", Language.ENGLISH.getWaitMessage("subject", Language.ENGLISH.getNotContainVerb()));
 
@@ -57,8 +57,8 @@ public class LanguageTest {
 
     @Test
     public void testGetExecuteMessage() {
-        Assert.assertEquals("Executes an action if subject equals to the given value.", Language.ENGLISH.getExecuteMessage("subject", Language.ENGLISH.getToBeVerb()));
-        Assert.assertEquals("Executes an action if subject not equal to the given value.", Language.ENGLISH.getExecuteMessage("subject", Language.ENGLISH.getNotToBeVerb()));
+        Assert.assertEquals("Executes an action if subject equals to the given value.", Language.ENGLISH.getExecuteMessage("subject", Language.ENGLISH.getEqualVerb()));
+        Assert.assertEquals("Executes an action if subject not equal to the given value.", Language.ENGLISH.getExecuteMessage("subject", Language.ENGLISH.getNotEqualVerb()));
         Assert.assertEquals("Executes an action if subject contains the given value.", Language.ENGLISH.getExecuteMessage("subject", Language.ENGLISH.getContainVerb()));
         Assert.assertEquals("Executes an action if subject not contain the given value.", Language.ENGLISH.getExecuteMessage("subject", Language.ENGLISH.getNotContainVerb()));
 
@@ -67,8 +67,8 @@ public class LanguageTest {
 
     @Test
     public void testGetVerifyMessage() {
-        Assert.assertEquals("Verifies that subject equals to the given value. When the verify fails, the test will continue execution, logging the failure.", Language.ENGLISH.getVerifyMessage("subject", Language.ENGLISH.getToBeVerb()));
-        Assert.assertEquals("Verifies that subject not equal to the given value. When the verify fails, the test will continue execution, logging the failure.", Language.ENGLISH.getVerifyMessage("subject", Language.ENGLISH.getNotToBeVerb()));
+        Assert.assertEquals("Verifies that subject equals to the given value. When the verify fails, the test will continue execution, logging the failure.", Language.ENGLISH.getVerifyMessage("subject", Language.ENGLISH.getEqualVerb()));
+        Assert.assertEquals("Verifies that subject not equal to the given value. When the verify fails, the test will continue execution, logging the failure.", Language.ENGLISH.getVerifyMessage("subject", Language.ENGLISH.getNotEqualVerb()));
         Assert.assertEquals("Verifies that subject contains the given value. When the verify fails, the test will continue execution, logging the failure.", Language.ENGLISH.getVerifyMessage("subject", Language.ENGLISH.getContainVerb()));
         Assert.assertEquals("Verifies that subject not contain the given value. When the verify fails, the test will continue execution, logging the failure.", Language.ENGLISH.getVerifyMessage("subject", Language.ENGLISH.getNotContainVerb()));
 
@@ -77,8 +77,8 @@ public class LanguageTest {
 
     @Test
     public void testGetAssertMessage() {
-        Assert.assertEquals("Asserts that subject equals to the given value. When the assert fails, the test is aborted.", Language.ENGLISH.getAssertMessage("subject", Language.ENGLISH.getToBeVerb()));
-        Assert.assertEquals("Asserts that subject not equal to the given value. When the assert fails, the test is aborted.", Language.ENGLISH.getAssertMessage("subject", Language.ENGLISH.getNotToBeVerb()));
+        Assert.assertEquals("Asserts that subject equals to the given value. When the assert fails, the test is aborted.", Language.ENGLISH.getAssertMessage("subject", Language.ENGLISH.getEqualVerb()));
+        Assert.assertEquals("Asserts that subject not equal to the given value. When the assert fails, the test is aborted.", Language.ENGLISH.getAssertMessage("subject", Language.ENGLISH.getNotEqualVerb()));
         Assert.assertEquals("Asserts that subject contains the given value. When the assert fails, the test is aborted.", Language.ENGLISH.getAssertMessage("subject", Language.ENGLISH.getContainVerb()));
         Assert.assertEquals("Asserts that subject not contain the given value. When the assert fails, the test is aborted.", Language.ENGLISH.getAssertMessage("subject", Language.ENGLISH.getNotContainVerb()));
 

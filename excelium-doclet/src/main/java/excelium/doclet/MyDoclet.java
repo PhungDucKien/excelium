@@ -47,6 +47,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A doclet that generates markdown API documentation.
@@ -139,6 +141,114 @@ public class MyDoclet extends Standard {
     }
 
     /**
+     * Returns the list of methods that are annotated with either @{@link Action} or @{@link Accessor}.
+     *
+     * @param root the root
+     * @return the list of methods that are annotated with either @{@link Action} or @{@link Accessor}.
+     */
+    private static Map<String, MethodDoc> getCommandMethodDocs(RootDoc root) {
+        Map<String, MethodDoc> commandMethodDocs = new HashMap<>();
+        for (ClassDoc classDoc : root.classes()) {
+            MethodDoc[] methodDocs = classDoc.methods();
+            for (MethodDoc methodDoc : methodDocs) {
+                if (containsCommandAnnotations(methodDoc)) {
+                    commandMethodDocs.put(methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
+                }
+            }
+        }
+        return commandMethodDocs;
+    }
+
+    /**
+     * Get the list of Excelium commands
+     *
+     * @param isWeb true for Web, false for Mobile
+     * @return the list of Excelium commands
+     */
+    private static Map<String, Command> getCommandMap(boolean isWeb) {
+        try {
+            if (isWeb) {
+                PcEnvironment environment = new PcEnvironment();
+                environment.setPlatform(Platform.WINDOWS_64);
+                environment.setBrowser(Browser.CHROME);
+                return CommandFactory.createCommandMap(environment, new ContextAwareWebDriver(new StubWebDriver()), null, null);
+            } else {
+                MobileAppEnvironment environment = new MobileAppEnvironment();
+                environment.setPlatform(Platform.ANDROID);
+                return CommandFactory.createCommandMap(environment, new ContextAwareWebDriver(new StubWebDriver()), null, null);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Returns the command description from the method comment.
+     *
+     * @param command   the command
+     * @param methodDoc the method
+     * @return the command description
+     */
+    private static String getCommandDescription(Command command, MethodDoc methodDoc) {
+        String commentText = methodDoc.commentText();
+        commentText = commentText
+                .replaceAll("\\n[ ]+", " ") // Removes the leading space characters
+                .replaceAll("\\n", "\n\n"); // Allows markdown to display paragraphs
+        if (containsActionAnnotation(methodDoc)) {
+            return commentText;
+        } else if (containsAccessorAnnotation(methodDoc)) {
+            return getAccessorDescription(command, commentText, Language.ENGLISH);
+        }
+        return null;
+    }
+
+    /**
+     * Returns the accessor command description from the comment.
+     *
+     * @param command     the command
+     * @param commentText the comment
+     * @param language    the language
+     * @return the accessor command description
+     */
+    private static String getAccessorDescription(Command command, String commentText, Language language) {
+        String firstSentence = StringUtil.getFirstSentence(commentText);
+        String remaining = commentText.replace(firstSentence, "");
+        String subject = getSubject(firstSentence);
+
+        String verb = null;
+        if (command.getMethod().contains("NotContain")) {
+            verb = language.getNotContainVerb();
+        } else if (command.getMethod().contains("Contain")) {
+            verb = language.getContainVerb();
+        } else if (command.getMethod().contains("Not")) {
+            if (isParamAdded("variable", command) || isParamAdded("text", command)) {
+                verb = language.getNotEqualVerb();
+            } else {
+                subject = subject.replaceFirst(language.getToBeVerb(), language.getNotToBeVerb());
+            }
+        } else {
+            if (isParamAdded("variable", command) || isParamAdded("text", command)) {
+                verb = language.getEqualVerb();
+            }
+        }
+
+        if (command.getMethod().startsWith("storePush")) {
+            return language.getPushMessage(subject) + remaining;
+        } else if (command.getMethod().startsWith("store")) {
+            return language.getStoreMessage(subject) + remaining;
+        } else if (command.getMethod().startsWith("waitFor")) {
+            return language.getWaitMessage(subject, verb) + remaining;
+        } else if (command.getMethod().startsWith("executeIf")) {
+            return language.getExecuteMessage(subject, verb) + remaining;
+        } else if (command.getMethod().startsWith("verify")) {
+            return language.getVerifyMessage(subject, verb) + remaining;
+        } else if (command.getMethod().startsWith("assert")) {
+            return language.getAssertMessage(subject, verb) + remaining;
+        }
+        return null;
+    }
+
+    /**
      * Returns the description of parameters from the method comment.
      *
      * @param command   the command
@@ -180,67 +290,6 @@ public class MyDoclet extends Standard {
     }
 
     /**
-     * Returns the command description from the method comment.
-     *
-     * @param command   the command
-     * @param methodDoc the method
-     * @return the command description
-     */
-    private static String getCommandDescription(Command command, MethodDoc methodDoc) {
-        String commentText = methodDoc.commentText();
-        commentText = commentText
-                .replaceAll("\\n[ ]+", " ") // Removes the leading space characters
-                .replaceAll("\\n", "\n\n"); // Allows markdown to display paragraphs
-        if (containsActionAnnotation(methodDoc)) {
-            return commentText;
-        } else if (containsAccessorAnnotation(methodDoc)) {
-            return getAccessorDescription(command, commentText, Language.ENGLISH);
-        }
-        return null;
-    }
-
-    /**
-     * Returns the accessor command description from the comment.
-     *
-     * @param command     the command
-     * @param commentText the comment
-     * @param language    the language
-     * @return the accessor command description
-     */
-    private static String getAccessorDescription(Command command, String commentText, Language language) {
-        String verb = null;
-        if (isParamAdded("variable", command) || isParamAdded("text", command)) {
-            if (command.getMethod().contains("NotContain")) {
-                verb = language.getNotContainVerb();
-            } else if (command.getMethod().contains("Contain")) {
-                verb = language.getContainVerb();
-            } else if (command.getMethod().contains("Not")) {
-                verb = language.getNotToBeVerb();
-            } else {
-                verb = language.getToBeVerb();
-            }
-        }
-
-        String firstSentence = StringUtil.getFirstSentence(commentText);
-        String remaining = commentText.replace(firstSentence, "");
-        String noun = firstSentence.substring(0, firstSentence.length() - 1).replaceAll("(?:Return|Get)s?\\s+", "");
-        if (command.getMethod().startsWith("storePush")) {
-            return language.getPushMessage(noun) + remaining;
-        } else if (command.getMethod().startsWith("store")) {
-            return language.getStoreMessage(noun) + remaining;
-        } else if (command.getMethod().startsWith("waitFor")) {
-            return language.getWaitMessage(noun, verb) + remaining;
-        } else if (command.getMethod().startsWith("executeIf")) {
-            return language.getExecuteMessage(noun, verb) + remaining;
-        } else if (command.getMethod().startsWith("verify")) {
-            return language.getVerifyMessage(noun, verb) + remaining;
-        } else if (command.getMethod().startsWith("assert")) {
-            return language.getAssertMessage(noun, verb) + remaining;
-        }
-        return null;
-    }
-
-    /**
      * Determines whether the parameter with the given name is added by command factories.
      *
      * @return true if the parameter is added, false otherwise
@@ -277,48 +326,6 @@ public class MyDoclet extends Standard {
         }
 
         return command.getMethod() + "(" + StringUtils.join(commandParams, ", ") + ")";
-    }
-
-    /**
-     * Get the list of Excelium commands
-     *
-     * @param isWeb true for Web, false for Mobile
-     * @return the list of Excelium commands
-     */
-    private static Map<String, Command> getCommandMap(boolean isWeb) {
-        try {
-            if (isWeb) {
-                PcEnvironment environment = new PcEnvironment();
-                environment.setPlatform(Platform.WINDOWS_64);
-                environment.setBrowser(Browser.CHROME);
-                return CommandFactory.createCommandMap(environment, new ContextAwareWebDriver(new StubWebDriver()), null, null);
-            } else {
-                MobileAppEnvironment environment = new MobileAppEnvironment();
-                environment.setPlatform(Platform.ANDROID);
-                return CommandFactory.createCommandMap(environment, new ContextAwareWebDriver(new StubWebDriver()), null, null);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Returns the list of methods that are annotated with either @{@link Action} or @{@link Accessor}.
-     *
-     * @param root the root
-     * @return the list of methods that are annotated with either @{@link Action} or @{@link Accessor}.
-     */
-    private static Map<String, MethodDoc> getCommandMethodDocs(RootDoc root) {
-        Map<String, MethodDoc> commandMethodDocs = new HashMap<>();
-        for (ClassDoc classDoc : root.classes()) {
-            MethodDoc[] methodDocs = classDoc.methods();
-            for (MethodDoc methodDoc : methodDocs) {
-                if (containsCommandAnnotations(methodDoc)) {
-                    commandMethodDocs.put(methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
-                }
-            }
-        }
-        return commandMethodDocs;
     }
 
     /**
@@ -388,6 +395,24 @@ public class MyDoclet extends Standard {
             return dOption[1];
         }
         return ".";
+    }
+
+    /**
+     * Returns the subject of the javadoc comment
+     *
+     * @param comment the comment
+     * @return the subject
+     */
+    private static String getSubject(String comment) {
+        if (StringUtils.endsWithAny(comment, ".", "!", "?")) {
+            comment = comment.substring(0, comment.length() - 1);
+        }
+        Pattern pattern = Pattern.compile("(?:Return|Get)s?\\s+(?:true if\\s+)?((?:(?!(, or false|, or throws?)).)*)");
+        Matcher matcher = pattern.matcher(comment);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return comment;
     }
 
     /**

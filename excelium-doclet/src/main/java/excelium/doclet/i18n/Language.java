@@ -40,11 +40,21 @@ public enum Language {
     ENGLISH {
         @Override
         public String getToBeVerb() {
-            return "equals to";
+            return "is";
         }
 
         @Override
         public String getNotToBeVerb() {
+            return "is not";
+        }
+
+        @Override
+        public String getEqualVerb() {
+            return "equals to";
+        }
+
+        @Override
+        public String getNotEqualVerb() {
             return "not equal to";
         }
 
@@ -118,6 +128,20 @@ public enum Language {
      * @return the not to be verb
      */
     public abstract String getNotToBeVerb();
+
+    /**
+     * Gets the equal verb (present tense).
+     *
+     * @return the equal verb
+     */
+    public abstract String getEqualVerb();
+
+    /**
+     * Gets the not equal verb (present tense).
+     *
+     * @return the not equal verb
+     */
+    public abstract String getNotEqualVerb();
 
     /**
      * Gets the contain verb (present tense).
