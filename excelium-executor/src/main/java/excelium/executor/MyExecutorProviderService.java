@@ -24,11 +24,13 @@
 
 package excelium.executor;
 
-import excelium.core.executor.CommandExecutor;
-import excelium.core.executor.ExecutorProviderService;
-import excelium.executor.web.CookieCommandExecutor;
+import excelium.core.CommandExecutor;
+import excelium.core.service.ExecutorProviderService;
+import excelium.executor.mobile.ActivityCommandExecutor;
+import excelium.executor.web.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,13 +43,47 @@ public class MyExecutorProviderService implements ExecutorProviderService {
 
     @Override
     public List<Class<? extends CommandExecutor>> getWebExecutorClasses() {
-        List<Class<? extends CommandExecutor>> classes = new ArrayList<>();
-        classes.add(CookieCommandExecutor.class);
-        return classes;
+        return new ArrayList<>(Arrays.asList(
+                // Web
+                WindowCommandExecutor.class,
+                PageCommandExecutor.class,
+                WebElementCommandExecutor.class,
+                EventCommandExecutor.class,
+                TableCommandExecutor.class,
+                AlertCommandExecutor.class,
+                CookieCommandExecutor.class,
+
+                // Common
+                NavigateCommandExecutor.class,
+                AttributeCommandExecutor.class,
+                StoreCommandExecutor.class,
+                ExecuteCommandExecutor.class,
+                WaitCommandExecutor.class,
+                DatabaseCommandExecutor.class,
+                CollectionCommandExecutor.class,
+                DateCommandExecutor.class,
+                EvalCommandExecutor.class,
+                DebugCommandExecutor.class
+        ));
     }
 
     @Override
     public List<Class<? extends CommandExecutor>> getMobileExecutorClasses() {
-        return null;
+        return new ArrayList<>(Arrays.asList(
+                // Mobile
+                ActivityCommandExecutor.class,
+
+                // Common
+                NavigateCommandExecutor.class,
+                AttributeCommandExecutor.class,
+                StoreCommandExecutor.class,
+                ExecuteCommandExecutor.class,
+                WaitCommandExecutor.class,
+                DatabaseCommandExecutor.class,
+                CollectionCommandExecutor.class,
+                DateCommandExecutor.class,
+                EvalCommandExecutor.class,
+                DebugCommandExecutor.class
+        ));
     }
 }
