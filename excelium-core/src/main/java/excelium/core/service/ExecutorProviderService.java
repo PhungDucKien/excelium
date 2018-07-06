@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
-package excelium.core.executor;
+package excelium.core.service;
+
+import excelium.core.CommandExecutor;
 
 import java.util.List;
 
