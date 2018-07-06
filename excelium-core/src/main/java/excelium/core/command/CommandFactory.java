@@ -226,18 +226,26 @@ public class CommandFactory {
         List<Command> verifyNotCommands = new ArrayList<>();
         List<Command> verifyContainCommands = new ArrayList<>();
         List<Command> verifyNotContainCommands = new ArrayList<>();
+        List<Command> verifyMatchCommands = new ArrayList<>();
+        List<Command> verifyNotMatchCommands = new ArrayList<>();
         List<Command> assertCommands = new ArrayList<>();
         List<Command> assertNotCommands = new ArrayList<>();
         List<Command> assertContainCommands = new ArrayList<>();
         List<Command> assertNotContainCommands = new ArrayList<>();
+        List<Command> assertMatchCommands = new ArrayList<>();
+        List<Command> assertNotMatchCommands = new ArrayList<>();
         List<Command> waitCommands = new ArrayList<>();
         List<Command> waitNotCommands = new ArrayList<>();
         List<Command> waitContainCommands = new ArrayList<>();
         List<Command> waitNotContainCommands = new ArrayList<>();
+        List<Command> waitMatchCommands = new ArrayList<>();
+        List<Command> waitNotMatchCommands = new ArrayList<>();
         List<Command> executeCommands = new ArrayList<>();
         List<Command> executeNotCommands = new ArrayList<>();
         List<Command> executeContainCommands = new ArrayList<>();
         List<Command> executeNotContainCommands = new ArrayList<>();
+        List<Command> executeMatchCommands = new ArrayList<>();
+        List<Command> executeNotMatchCommands = new ArrayList<>();
         for (Method method : accessors.keySet()) {
             String regex = "^(get|is)([A-Z].+)$";
 
@@ -272,18 +280,26 @@ public class CommandFactory {
 
                     if (isString) {
                         if (accessor.verifyCmd()) {
-                            verifyContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
-                            verifyNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
-                            assertContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
-                            assertNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
+//                            verifyContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
+//                            verifyNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
+//                            assertContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
+//                            assertNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
+                            verifyMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", baseName + "Match", isBool));
+                            verifyNotMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Match"), isBool));
+                            assertMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", baseName + "Match", isBool));
+                            assertNotMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Match"), isBool));
                         }
                         if (accessor.waitCmd()) {
-                            waitContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Contain", isBool));
-                            waitNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Contain"), isBool));
+//                            waitContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Contain", isBool));
+//                            waitNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Contain"), isBool));
+                            waitMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Match", isBool));
+                            waitNotMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Match"), isBool));
                         }
                         if (accessor.executeCmd()) {
-                            executeContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Contain", isBool));
-                            executeNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Contain"), isBool));
+//                            executeContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Contain", isBool));
+//                            executeNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Contain"), isBool));
+                            executeMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Match", isBool));
+                            executeNotMatchCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Match"), isBool));
                         }
                     }
                 }
@@ -309,18 +325,26 @@ public class CommandFactory {
 
                 if (isString) {
                     if (accessor.verifyCmd()) {
-                        verifyContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
-                        verifyNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
-                        assertContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
-                        assertNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
+//                        verifyContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
+//                        verifyNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
+//                        assertContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
+//                        assertNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
+                        verifyMatchCommands.add(createCommandForAccessor(executor, method, accessor, "verify", baseName + "Match", isBool));
+                        verifyNotMatchCommands.add(createCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Match"), isBool));
+                        assertMatchCommands.add(createCommandForAccessor(executor, method, accessor, "assert", baseName + "Match", isBool));
+                        assertNotMatchCommands.add(createCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Match"), isBool));
                     }
                     if (!"variable".equals(accessor.param1()) && accessor.waitCmd()) {
-                        waitContainCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Contain", isBool));
-                        waitNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Contain"), isBool));
+//                        waitContainCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Contain", isBool));
+//                        waitNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Contain"), isBool));
+                        waitMatchCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Match", isBool));
+                        waitNotMatchCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Match"), isBool));
                     }
                     if (paramCount < 2 && accessor.executeCmd()) {
-                        executeContainCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Contain", isBool));
-                        executeNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Contain"), isBool));
+//                        executeContainCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Contain", isBool));
+//                        executeNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Contain"), isBool));
+                        executeMatchCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Match", isBool));
+                        executeNotMatchCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Match"), isBool));
                     }
                 }
             }
@@ -331,18 +355,26 @@ public class CommandFactory {
         commands.addAll(verifyNotCommands);
         commands.addAll(verifyContainCommands);
         commands.addAll(verifyNotContainCommands);
+        commands.addAll(verifyMatchCommands);
+        commands.addAll(verifyNotMatchCommands);
         commands.addAll(assertCommands);
         commands.addAll(assertNotCommands);
         commands.addAll(assertContainCommands);
         commands.addAll(assertNotContainCommands);
+        commands.addAll(assertMatchCommands);
+        commands.addAll(assertNotMatchCommands);
         commands.addAll(waitCommands);
         commands.addAll(waitNotCommands);
         commands.addAll(waitContainCommands);
         commands.addAll(waitNotContainCommands);
+        commands.addAll(waitMatchCommands);
+        commands.addAll(waitNotMatchCommands);
         commands.addAll(executeCommands);
         commands.addAll(executeNotCommands);
         commands.addAll(executeContainCommands);
         commands.addAll(executeNotContainCommands);
+        commands.addAll(executeMatchCommands);
+        commands.addAll(executeNotMatchCommands);
 
         return commands;
     }
@@ -576,7 +608,7 @@ public class CommandFactory {
      * @return inverted name
      */
     private static String invertPredicateName(String baseName) {
-        String verbs = "Present|Contain";
+        String verbs = "Present|Contain|Match";
         String regex = "^((?:(?!(?:" + verbs + ")).)+)(" + verbs + ")(.*)$";
 
         Pattern pattern = Pattern.compile(regex);
@@ -719,6 +751,10 @@ public class CommandFactory {
             assertStringNotContain(executor, method, param1, param2, param3, paramCount);
         } else if (baseName.contains("Contain") && !baseName.contains("ContainElement")) {
             assertStringContains(executor, method, param1, param2, param3, paramCount);
+        } else if (baseName.contains("NotMatch")) {
+            assertStringNotMatch(executor, method, param1, param2, param3, paramCount);
+        } else if (baseName.contains("Match")) {
+            assertStringMatches(executor, method, param1, param2, param3, paramCount);
         } else if (baseName.contains("Not")) {
             assertValueNotToBe(executor, method, param1, param2, param3, paramCount, isBool);
         } else {
@@ -889,6 +925,70 @@ public class CommandFactory {
         } else if (paramCount == 2) {
             if (value.contains(executor.normalizeText((String) param3)))
                 throw new AssertFailedException("Actual text '" + value + "' did contain '" + param3 + "'");
+        } else {
+            throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
+        }
+    }
+
+    /**
+     * Assert string matches a given pattern.
+     *
+     * @param executor   the command executor
+     * @param method     the method
+     * @param param1     the parameter 1
+     * @param param2     the parameter 2
+     * @param param3     the parameter 3
+     * @param paramCount the parameter count
+     * @throws InvocationTargetException the invocation target exception
+     * @throws IllegalAccessException    the illegal access exception
+     * @throws AssertFailedException     the assert failed exception
+     */
+    private static void assertStringMatches(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException, AssertFailedException {
+        String value = (String) getAccessorValue(executor, method, param1, param2, paramCount);
+        if (value == null) {
+            throw new AssertFailedException("Actual value is null.");
+        }
+        if (paramCount == 0) {
+            if (!value.matches(executor.normalizeText((String) param1)))
+                throw new AssertFailedException("Actual text '" + value + "' did not match '" + param1 + "'");
+        } else if (paramCount == 1) {
+            if (!value.matches(executor.normalizeText((String) param2)))
+                throw new AssertFailedException("Actual text '" + value + "' did not match '" + param2 + "'");
+        } else if (paramCount == 2) {
+            if (!value.matches(executor.normalizeText((String) param3)))
+                throw new AssertFailedException("Actual text '" + value + "' did not match '" + param3 + "'");
+        } else {
+            throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
+        }
+    }
+
+    /**
+     * Assert string not match a given pattern.
+     *
+     * @param executor   the command executor
+     * @param method     the method
+     * @param param1     the parameter 1
+     * @param param2     the parameter 2
+     * @param param3     the parameter 3
+     * @param paramCount the parameter count
+     * @throws InvocationTargetException the invocation target exception
+     * @throws IllegalAccessException    the illegal access exception
+     * @throws AssertFailedException     the assert failed exception
+     */
+    private static void assertStringNotMatch(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException, AssertFailedException {
+        String value = (String) getAccessorValue(executor, method, param1, param2, paramCount);
+        if (value == null) {
+            throw new AssertFailedException("Actual value is null.");
+        }
+        if (paramCount == 0) {
+            if (value.matches(executor.normalizeText((String) param1)))
+                throw new AssertFailedException("Actual text '" + value + "' did match '" + param1 + "'");
+        } else if (paramCount == 1) {
+            if (value.matches(executor.normalizeText((String) param2)))
+                throw new AssertFailedException("Actual text '" + value + "' did match '" + param2 + "'");
+        } else if (paramCount == 2) {
+            if (value.matches(executor.normalizeText((String) param3)))
+                throw new AssertFailedException("Actual text '" + value + "' did match '" + param3 + "'");
         } else {
             throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
         }

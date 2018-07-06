@@ -5,8 +5,8 @@
 No | Command | Method | Param 1 | Param 2 | Param 3
 --------- | --------- | --------- | --------- | --------- | ---------
 1 | Assert Attribute | assertAttribute | locator | name | text
-2 | Assert Attribute Contain | assertAttributeContain | locator | name | text
-3 | Assert Attribute Not Contain | assertAttributeNotContain | locator | name | text
+2 | Assert Attribute Match | assertAttributeMatch | locator | name | text
+3 | Assert Attribute Not Match | assertAttributeNotMatch | locator | name | text
 4 | Assert Background Color | assertBackgroundColor | locator | text | 
 5 | Assert Background Color | assertBackgroundColor | parentLocator | locator | text
 6 | Assert Border Color | assertBorderColor | locator | text | 
@@ -35,36 +35,36 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 29 | Assert Element Width | assertElementWidth | parentLocator | locator | text
 30 | Assert Eval | assertEval | expression | text | 
 31 | Assert Eval Script | assertEvalScript | script | text | 
-32 | Assert Eval Script Contain | assertEvalScriptContain | script | text | 
-33 | Assert Eval Script Not Contain | assertEvalScriptNotContain | script | text | 
+32 | Assert Eval Script Match | assertEvalScriptMatch | script | text | 
+33 | Assert Eval Script Not Match | assertEvalScriptNotMatch | script | text | 
 34 | Assert Exists In Database | assertExistsInDatabase | sql |  | 
 35 | Assert Expression | assertExpression | expression | text | 
-36 | Assert Expression Contain | assertExpressionContain | expression | text | 
-37 | Assert Expression Not Contain | assertExpressionNotContain | expression | text | 
+36 | Assert Expression Match | assertExpressionMatch | expression | text | 
+37 | Assert Expression Not Match | assertExpressionNotMatch | expression | text | 
 38 | Assert Font Family | assertFontFamily | locator | text | 
 39 | Assert Font Family | assertFontFamily | parentLocator | locator | text
-40 | Assert Font Family Contain | assertFontFamilyContain | locator | text | 
-41 | Assert Font Family Contain | assertFontFamilyContain | parentLocator | locator | text
-42 | Assert Font Family Not Contain | assertFontFamilyNotContain | locator | text | 
-43 | Assert Font Family Not Contain | assertFontFamilyNotContain | parentLocator | locator | text
+40 | Assert Font Family Match | assertFontFamilyMatch | locator | text | 
+41 | Assert Font Family Match | assertFontFamilyMatch | parentLocator | locator | text
+42 | Assert Font Family Not Match | assertFontFamilyNotMatch | locator | text | 
+43 | Assert Font Family Not Match | assertFontFamilyNotMatch | parentLocator | locator | text
 44 | Assert Font Size | assertFontSize | locator | text | 
 45 | Assert Font Size | assertFontSize | parentLocator | locator | text
-46 | Assert Font Size Contain | assertFontSizeContain | locator | text | 
-47 | Assert Font Size Contain | assertFontSizeContain | parentLocator | locator | text
-48 | Assert Font Size Not Contain | assertFontSizeNotContain | locator | text | 
-49 | Assert Font Size Not Contain | assertFontSizeNotContain | parentLocator | locator | text
+46 | Assert Font Size Match | assertFontSizeMatch | locator | text | 
+47 | Assert Font Size Match | assertFontSizeMatch | parentLocator | locator | text
+48 | Assert Font Size Not Match | assertFontSizeNotMatch | locator | text | 
+49 | Assert Font Size Not Match | assertFontSizeNotMatch | parentLocator | locator | text
 50 | Assert Font Style | assertFontStyle | locator | text | 
 51 | Assert Font Style | assertFontStyle | parentLocator | locator | text
-52 | Assert Font Style Contain | assertFontStyleContain | locator | text | 
-53 | Assert Font Style Contain | assertFontStyleContain | parentLocator | locator | text
-54 | Assert Font Style Not Contain | assertFontStyleNotContain | locator | text | 
-55 | Assert Font Style Not Contain | assertFontStyleNotContain | parentLocator | locator | text
+52 | Assert Font Style Match | assertFontStyleMatch | locator | text | 
+53 | Assert Font Style Match | assertFontStyleMatch | parentLocator | locator | text
+54 | Assert Font Style Not Match | assertFontStyleNotMatch | locator | text | 
+55 | Assert Font Style Not Match | assertFontStyleNotMatch | parentLocator | locator | text
 56 | Assert Font Weight | assertFontWeight | locator | text | 
 57 | Assert Font Weight | assertFontWeight | parentLocator | locator | text
-58 | Assert Font Weight Contain | assertFontWeightContain | locator | text | 
-59 | Assert Font Weight Contain | assertFontWeightContain | parentLocator | locator | text
-60 | Assert Font Weight Not Contain | assertFontWeightNotContain | locator | text | 
-61 | Assert Font Weight Not Contain | assertFontWeightNotContain | parentLocator | locator | text
+58 | Assert Font Weight Match | assertFontWeightMatch | locator | text | 
+59 | Assert Font Weight Match | assertFontWeightMatch | parentLocator | locator | text
+60 | Assert Font Weight Not Match | assertFontWeightNotMatch | locator | text | 
+61 | Assert Font Weight Not Match | assertFontWeightNotMatch | parentLocator | locator | text
 62 | Assert Integer List Order Asc | assertIntegerListOrderAsc | locator |  | 
 63 | Assert Integer List Order Asc | assertIntegerListOrderAsc | parentLocator | locator | 
 64 | Assert Integer List Order Desc | assertIntegerListOrderDesc | locator |  | 
@@ -138,65 +138,65 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 132 | Assert Row Count Less Than | assertRowCountLessThan | sql | count | 
 133 | Assert Selected Id | assertSelectedId | locator | text | 
 134 | Assert Selected Id | assertSelectedId | parentLocator | locator | text
-135 | Assert Selected Id Contain | assertSelectedIdContain | locator | text | 
-136 | Assert Selected Id Contain | assertSelectedIdContain | parentLocator | locator | text
-137 | Assert Selected Id Not Contain | assertSelectedIdNotContain | locator | text | 
-138 | Assert Selected Id Not Contain | assertSelectedIdNotContain | parentLocator | locator | text
+135 | Assert Selected Id Match | assertSelectedIdMatch | locator | text | 
+136 | Assert Selected Id Match | assertSelectedIdMatch | parentLocator | locator | text
+137 | Assert Selected Id Not Match | assertSelectedIdNotMatch | locator | text | 
+138 | Assert Selected Id Not Match | assertSelectedIdNotMatch | parentLocator | locator | text
 139 | Assert Selected Index | assertSelectedIndex | locator | text | 
 140 | Assert Selected Index | assertSelectedIndex | parentLocator | locator | text
-141 | Assert Selected Index Contain | assertSelectedIndexContain | locator | text | 
-142 | Assert Selected Index Contain | assertSelectedIndexContain | parentLocator | locator | text
-143 | Assert Selected Index Not Contain | assertSelectedIndexNotContain | locator | text | 
-144 | Assert Selected Index Not Contain | assertSelectedIndexNotContain | parentLocator | locator | text
+141 | Assert Selected Index Match | assertSelectedIndexMatch | locator | text | 
+142 | Assert Selected Index Match | assertSelectedIndexMatch | parentLocator | locator | text
+143 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | locator | text | 
+144 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | parentLocator | locator | text
 145 | Assert Selected Label | assertSelectedLabel | locator | text | 
 146 | Assert Selected Label | assertSelectedLabel | parentLocator | locator | text
-147 | Assert Selected Label Contain | assertSelectedLabelContain | locator | text | 
-148 | Assert Selected Label Contain | assertSelectedLabelContain | parentLocator | locator | text
-149 | Assert Selected Label Not Contain | assertSelectedLabelNotContain | locator | text | 
-150 | Assert Selected Label Not Contain | assertSelectedLabelNotContain | parentLocator | locator | text
+147 | Assert Selected Label Match | assertSelectedLabelMatch | locator | text | 
+148 | Assert Selected Label Match | assertSelectedLabelMatch | parentLocator | locator | text
+149 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | locator | text | 
+150 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | parentLocator | locator | text
 151 | Assert Selected Value | assertSelectedValue | locator | text | 
 152 | Assert Selected Value | assertSelectedValue | parentLocator | locator | text
-153 | Assert Selected Value Contain | assertSelectedValueContain | locator | text | 
-154 | Assert Selected Value Contain | assertSelectedValueContain | parentLocator | locator | text
-155 | Assert Selected Value Not Contain | assertSelectedValueNotContain | locator | text | 
-156 | Assert Selected Value Not Contain | assertSelectedValueNotContain | parentLocator | locator | text
+153 | Assert Selected Value Match | assertSelectedValueMatch | locator | text | 
+154 | Assert Selected Value Match | assertSelectedValueMatch | parentLocator | locator | text
+155 | Assert Selected Value Not Match | assertSelectedValueNotMatch | locator | text | 
+156 | Assert Selected Value Not Match | assertSelectedValueNotMatch | parentLocator | locator | text
 157 | Assert Something Selected | assertSomethingSelected | locator |  | 
 158 | Assert Something Selected | assertSomethingSelected | parentLocator | locator | 
 159 | Assert Text | assertText | locator | text | 
 160 | Assert Text | assertText | parentLocator | locator | text
 161 | Assert Text Alignment | assertTextAlignment | locator | text | 
 162 | Assert Text Alignment | assertTextAlignment | parentLocator | locator | text
-163 | Assert Text Alignment Contain | assertTextAlignmentContain | locator | text | 
-164 | Assert Text Alignment Contain | assertTextAlignmentContain | parentLocator | locator | text
-165 | Assert Text Alignment Not Contain | assertTextAlignmentNotContain | locator | text | 
-166 | Assert Text Alignment Not Contain | assertTextAlignmentNotContain | parentLocator | locator | text
-167 | Assert Text Contain | assertTextContain | locator | text | 
-168 | Assert Text Contain | assertTextContain | parentLocator | locator | text
-169 | Assert Text Decoration | assertTextDecoration | locator | text | 
-170 | Assert Text Decoration | assertTextDecoration | parentLocator | locator | text
-171 | Assert Text Decoration Contain | assertTextDecorationContain | locator | text | 
-172 | Assert Text Decoration Contain | assertTextDecorationContain | parentLocator | locator | text
-173 | Assert Text Decoration Not Contain | assertTextDecorationNotContain | locator | text | 
-174 | Assert Text Decoration Not Contain | assertTextDecorationNotContain | parentLocator | locator | text
-175 | Assert Text Empty | assertTextEmpty | locator |  | 
-176 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
-177 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
-178 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
-179 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
-180 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
-181 | Assert Text Not Contain | assertTextNotContain | locator | text | 
-182 | Assert Text Not Contain | assertTextNotContain | parentLocator | locator | text
+163 | Assert Text Alignment Match | assertTextAlignmentMatch | locator | text | 
+164 | Assert Text Alignment Match | assertTextAlignmentMatch | parentLocator | locator | text
+165 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | locator | text | 
+166 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | parentLocator | locator | text
+167 | Assert Text Decoration | assertTextDecoration | locator | text | 
+168 | Assert Text Decoration | assertTextDecoration | parentLocator | locator | text
+169 | Assert Text Decoration Match | assertTextDecorationMatch | locator | text | 
+170 | Assert Text Decoration Match | assertTextDecorationMatch | parentLocator | locator | text
+171 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | locator | text | 
+172 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | parentLocator | locator | text
+173 | Assert Text Empty | assertTextEmpty | locator |  | 
+174 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
+175 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
+176 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
+177 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
+178 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
+179 | Assert Text Match | assertTextMatch | locator | text | 
+180 | Assert Text Match | assertTextMatch | parentLocator | locator | text
+181 | Assert Text Not Match | assertTextNotMatch | locator | text | 
+182 | Assert Text Not Match | assertTextNotMatch | parentLocator | locator | text
 183 | Assert Value | assertValue | locator | text | 
 184 | Assert Value | assertValue | parentLocator | locator | text
-185 | Assert Value Contain | assertValueContain | locator | text | 
-186 | Assert Value Contain | assertValueContain | parentLocator | locator | text
-187 | Assert Value Empty | assertValueEmpty | locator |  | 
-188 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
-189 | Assert Value Not Contain | assertValueNotContain | locator | text | 
-190 | Assert Value Not Contain | assertValueNotContain | parentLocator | locator | text
+185 | Assert Value Empty | assertValueEmpty | locator |  | 
+186 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
+187 | Assert Value Match | assertValueMatch | locator | text | 
+188 | Assert Value Match | assertValueMatch | parentLocator | locator | text
+189 | Assert Value Not Match | assertValueNotMatch | locator | text | 
+190 | Assert Value Not Match | assertValueNotMatch | parentLocator | locator | text
 191 | Assert Variable | assertVariable | variable | text | 
-192 | Assert Variable Contain | assertVariableContain | variable | text | 
-193 | Assert Variable Not Contain | assertVariableNotContain | variable | text | 
+192 | Assert Variable Match | assertVariableMatch | variable | text | 
+193 | Assert Variable Not Match | assertVariableNotMatch | variable | text | 
 194 | Assert Visible | assertVisible | locator |  | 
 195 | Assert Visible | assertVisible | parentLocator | locator | 
 196 | Echo | echo | message |  | 
@@ -208,12 +208,12 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 202 | Execute If Editable | executeIfEditable | action | parentLocator | locator
 203 | Execute If Eval | executeIfEval | action | expression | text
 204 | Execute If Eval Script | executeIfEvalScript | action | script | text
-205 | Execute If Eval Script Contain | executeIfEvalScriptContain | action | script | text
-206 | Execute If Eval Script Not Contain | executeIfEvalScriptNotContain | action | script | text
+205 | Execute If Eval Script Match | executeIfEvalScriptMatch | action | script | text
+206 | Execute If Eval Script Not Match | executeIfEvalScriptNotMatch | action | script | text
 207 | Execute If Exists In Database | executeIfExistsInDatabase | action | sql | 
 208 | Execute If Expression | executeIfExpression | action | expression | text
-209 | Execute If Expression Contain | executeIfExpressionContain | action | expression | text
-210 | Execute If Expression Not Contain | executeIfExpressionNotContain | action | expression | text
+209 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
+210 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
 211 | Execute If List Contain | executeIfListContain | action | variable | text
 212 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
 213 | Execute If Not Checked | executeIfNotChecked | action | locator | 
@@ -240,32 +240,32 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 234 | Execute If Not Visible | executeIfNotVisible | action | locator | 
 235 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
 236 | Execute If Selected Id | executeIfSelectedId | action | locator | text
-237 | Execute If Selected Id Contain | executeIfSelectedIdContain | action | locator | text
-238 | Execute If Selected Id Not Contain | executeIfSelectedIdNotContain | action | locator | text
+237 | Execute If Selected Id Match | executeIfSelectedIdMatch | action | locator | text
+238 | Execute If Selected Id Not Match | executeIfSelectedIdNotMatch | action | locator | text
 239 | Execute If Selected Index | executeIfSelectedIndex | action | locator | text
-240 | Execute If Selected Index Contain | executeIfSelectedIndexContain | action | locator | text
-241 | Execute If Selected Index Not Contain | executeIfSelectedIndexNotContain | action | locator | text
+240 | Execute If Selected Index Match | executeIfSelectedIndexMatch | action | locator | text
+241 | Execute If Selected Index Not Match | executeIfSelectedIndexNotMatch | action | locator | text
 242 | Execute If Selected Label | executeIfSelectedLabel | action | locator | text
-243 | Execute If Selected Label Contain | executeIfSelectedLabelContain | action | locator | text
-244 | Execute If Selected Label Not Contain | executeIfSelectedLabelNotContain | action | locator | text
+243 | Execute If Selected Label Match | executeIfSelectedLabelMatch | action | locator | text
+244 | Execute If Selected Label Not Match | executeIfSelectedLabelNotMatch | action | locator | text
 245 | Execute If Selected Value | executeIfSelectedValue | action | locator | text
-246 | Execute If Selected Value Contain | executeIfSelectedValueContain | action | locator | text
-247 | Execute If Selected Value Not Contain | executeIfSelectedValueNotContain | action | locator | text
+246 | Execute If Selected Value Match | executeIfSelectedValueMatch | action | locator | text
+247 | Execute If Selected Value Not Match | executeIfSelectedValueNotMatch | action | locator | text
 248 | Execute If Something Selected | executeIfSomethingSelected | action | locator | 
 249 | Execute If Something Selected | executeIfSomethingSelected | action | parentLocator | locator
 250 | Execute If Text | executeIfText | action | locator | text
-251 | Execute If Text Contain | executeIfTextContain | action | locator | text
-252 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
-253 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
-254 | Execute If Text Not Contain | executeIfTextNotContain | action | locator | text
+251 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
+252 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
+253 | Execute If Text Match | executeIfTextMatch | action | locator | text
+254 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
 255 | Execute If Value | executeIfValue | action | locator | text
-256 | Execute If Value Contain | executeIfValueContain | action | locator | text
-257 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
-258 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
-259 | Execute If Value Not Contain | executeIfValueNotContain | action | locator | text
+256 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
+257 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
+258 | Execute If Value Match | executeIfValueMatch | action | locator | text
+259 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
 260 | Execute If Variable | executeIfVariable | action | variable | text
-261 | Execute If Variable Contain | executeIfVariableContain | action | variable | text
-262 | Execute If Variable Not Contain | executeIfVariableNotContain | action | variable | text
+261 | Execute If Variable Match | executeIfVariableMatch | action | variable | text
+262 | Execute If Variable Not Match | executeIfVariableNotMatch | action | variable | text
 263 | Execute If Visible | executeIfVisible | action | locator | 
 264 | Execute If Visible | executeIfVisible | action | parentLocator | locator
 265 | Execute Loop | executeLoop | action | times | 
@@ -307,8 +307,8 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 301 | Store Value | storeValue | locator | variable | 
 302 | Store Value | storeValue | parentLocator | locator | variable
 303 | Verify Attribute | verifyAttribute | locator | name | text
-304 | Verify Attribute Contain | verifyAttributeContain | locator | name | text
-305 | Verify Attribute Not Contain | verifyAttributeNotContain | locator | name | text
+304 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
+305 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
 306 | Verify Background Color | verifyBackgroundColor | locator | text | 
 307 | Verify Background Color | verifyBackgroundColor | parentLocator | locator | text
 308 | Verify Border Color | verifyBorderColor | locator | text | 
@@ -337,36 +337,36 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 331 | Verify Element Width | verifyElementWidth | parentLocator | locator | text
 332 | Verify Eval | verifyEval | expression | text | 
 333 | Verify Eval Script | verifyEvalScript | script | text | 
-334 | Verify Eval Script Contain | verifyEvalScriptContain | script | text | 
-335 | Verify Eval Script Not Contain | verifyEvalScriptNotContain | script | text | 
+334 | Verify Eval Script Match | verifyEvalScriptMatch | script | text | 
+335 | Verify Eval Script Not Match | verifyEvalScriptNotMatch | script | text | 
 336 | Verify Exists In Database | verifyExistsInDatabase | sql |  | 
 337 | Verify Expression | verifyExpression | expression | text | 
-338 | Verify Expression Contain | verifyExpressionContain | expression | text | 
-339 | Verify Expression Not Contain | verifyExpressionNotContain | expression | text | 
+338 | Verify Expression Match | verifyExpressionMatch | expression | text | 
+339 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
 340 | Verify Font Family | verifyFontFamily | locator | text | 
 341 | Verify Font Family | verifyFontFamily | parentLocator | locator | text
-342 | Verify Font Family Contain | verifyFontFamilyContain | locator | text | 
-343 | Verify Font Family Contain | verifyFontFamilyContain | parentLocator | locator | text
-344 | Verify Font Family Not Contain | verifyFontFamilyNotContain | locator | text | 
-345 | Verify Font Family Not Contain | verifyFontFamilyNotContain | parentLocator | locator | text
+342 | Verify Font Family Match | verifyFontFamilyMatch | locator | text | 
+343 | Verify Font Family Match | verifyFontFamilyMatch | parentLocator | locator | text
+344 | Verify Font Family Not Match | verifyFontFamilyNotMatch | locator | text | 
+345 | Verify Font Family Not Match | verifyFontFamilyNotMatch | parentLocator | locator | text
 346 | Verify Font Size | verifyFontSize | locator | text | 
 347 | Verify Font Size | verifyFontSize | parentLocator | locator | text
-348 | Verify Font Size Contain | verifyFontSizeContain | locator | text | 
-349 | Verify Font Size Contain | verifyFontSizeContain | parentLocator | locator | text
-350 | Verify Font Size Not Contain | verifyFontSizeNotContain | locator | text | 
-351 | Verify Font Size Not Contain | verifyFontSizeNotContain | parentLocator | locator | text
+348 | Verify Font Size Match | verifyFontSizeMatch | locator | text | 
+349 | Verify Font Size Match | verifyFontSizeMatch | parentLocator | locator | text
+350 | Verify Font Size Not Match | verifyFontSizeNotMatch | locator | text | 
+351 | Verify Font Size Not Match | verifyFontSizeNotMatch | parentLocator | locator | text
 352 | Verify Font Style | verifyFontStyle | locator | text | 
 353 | Verify Font Style | verifyFontStyle | parentLocator | locator | text
-354 | Verify Font Style Contain | verifyFontStyleContain | locator | text | 
-355 | Verify Font Style Contain | verifyFontStyleContain | parentLocator | locator | text
-356 | Verify Font Style Not Contain | verifyFontStyleNotContain | locator | text | 
-357 | Verify Font Style Not Contain | verifyFontStyleNotContain | parentLocator | locator | text
+354 | Verify Font Style Match | verifyFontStyleMatch | locator | text | 
+355 | Verify Font Style Match | verifyFontStyleMatch | parentLocator | locator | text
+356 | Verify Font Style Not Match | verifyFontStyleNotMatch | locator | text | 
+357 | Verify Font Style Not Match | verifyFontStyleNotMatch | parentLocator | locator | text
 358 | Verify Font Weight | verifyFontWeight | locator | text | 
 359 | Verify Font Weight | verifyFontWeight | parentLocator | locator | text
-360 | Verify Font Weight Contain | verifyFontWeightContain | locator | text | 
-361 | Verify Font Weight Contain | verifyFontWeightContain | parentLocator | locator | text
-362 | Verify Font Weight Not Contain | verifyFontWeightNotContain | locator | text | 
-363 | Verify Font Weight Not Contain | verifyFontWeightNotContain | parentLocator | locator | text
+360 | Verify Font Weight Match | verifyFontWeightMatch | locator | text | 
+361 | Verify Font Weight Match | verifyFontWeightMatch | parentLocator | locator | text
+362 | Verify Font Weight Not Match | verifyFontWeightNotMatch | locator | text | 
+363 | Verify Font Weight Not Match | verifyFontWeightNotMatch | parentLocator | locator | text
 364 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
 365 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
 366 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
@@ -440,65 +440,65 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 434 | Verify Row Count Less Than | verifyRowCountLessThan | sql | count | 
 435 | Verify Selected Id | verifySelectedId | locator | text | 
 436 | Verify Selected Id | verifySelectedId | parentLocator | locator | text
-437 | Verify Selected Id Contain | verifySelectedIdContain | locator | text | 
-438 | Verify Selected Id Contain | verifySelectedIdContain | parentLocator | locator | text
-439 | Verify Selected Id Not Contain | verifySelectedIdNotContain | locator | text | 
-440 | Verify Selected Id Not Contain | verifySelectedIdNotContain | parentLocator | locator | text
+437 | Verify Selected Id Match | verifySelectedIdMatch | locator | text | 
+438 | Verify Selected Id Match | verifySelectedIdMatch | parentLocator | locator | text
+439 | Verify Selected Id Not Match | verifySelectedIdNotMatch | locator | text | 
+440 | Verify Selected Id Not Match | verifySelectedIdNotMatch | parentLocator | locator | text
 441 | Verify Selected Index | verifySelectedIndex | locator | text | 
 442 | Verify Selected Index | verifySelectedIndex | parentLocator | locator | text
-443 | Verify Selected Index Contain | verifySelectedIndexContain | locator | text | 
-444 | Verify Selected Index Contain | verifySelectedIndexContain | parentLocator | locator | text
-445 | Verify Selected Index Not Contain | verifySelectedIndexNotContain | locator | text | 
-446 | Verify Selected Index Not Contain | verifySelectedIndexNotContain | parentLocator | locator | text
+443 | Verify Selected Index Match | verifySelectedIndexMatch | locator | text | 
+444 | Verify Selected Index Match | verifySelectedIndexMatch | parentLocator | locator | text
+445 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | locator | text | 
+446 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | parentLocator | locator | text
 447 | Verify Selected Label | verifySelectedLabel | locator | text | 
 448 | Verify Selected Label | verifySelectedLabel | parentLocator | locator | text
-449 | Verify Selected Label Contain | verifySelectedLabelContain | locator | text | 
-450 | Verify Selected Label Contain | verifySelectedLabelContain | parentLocator | locator | text
-451 | Verify Selected Label Not Contain | verifySelectedLabelNotContain | locator | text | 
-452 | Verify Selected Label Not Contain | verifySelectedLabelNotContain | parentLocator | locator | text
+449 | Verify Selected Label Match | verifySelectedLabelMatch | locator | text | 
+450 | Verify Selected Label Match | verifySelectedLabelMatch | parentLocator | locator | text
+451 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | locator | text | 
+452 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | parentLocator | locator | text
 453 | Verify Selected Value | verifySelectedValue | locator | text | 
 454 | Verify Selected Value | verifySelectedValue | parentLocator | locator | text
-455 | Verify Selected Value Contain | verifySelectedValueContain | locator | text | 
-456 | Verify Selected Value Contain | verifySelectedValueContain | parentLocator | locator | text
-457 | Verify Selected Value Not Contain | verifySelectedValueNotContain | locator | text | 
-458 | Verify Selected Value Not Contain | verifySelectedValueNotContain | parentLocator | locator | text
+455 | Verify Selected Value Match | verifySelectedValueMatch | locator | text | 
+456 | Verify Selected Value Match | verifySelectedValueMatch | parentLocator | locator | text
+457 | Verify Selected Value Not Match | verifySelectedValueNotMatch | locator | text | 
+458 | Verify Selected Value Not Match | verifySelectedValueNotMatch | parentLocator | locator | text
 459 | Verify Something Selected | verifySomethingSelected | locator |  | 
 460 | Verify Something Selected | verifySomethingSelected | parentLocator | locator | 
 461 | Verify Text | verifyText | locator | text | 
 462 | Verify Text | verifyText | parentLocator | locator | text
 463 | Verify Text Alignment | verifyTextAlignment | locator | text | 
 464 | Verify Text Alignment | verifyTextAlignment | parentLocator | locator | text
-465 | Verify Text Alignment Contain | verifyTextAlignmentContain | locator | text | 
-466 | Verify Text Alignment Contain | verifyTextAlignmentContain | parentLocator | locator | text
-467 | Verify Text Alignment Not Contain | verifyTextAlignmentNotContain | locator | text | 
-468 | Verify Text Alignment Not Contain | verifyTextAlignmentNotContain | parentLocator | locator | text
-469 | Verify Text Contain | verifyTextContain | locator | text | 
-470 | Verify Text Contain | verifyTextContain | parentLocator | locator | text
-471 | Verify Text Decoration | verifyTextDecoration | locator | text | 
-472 | Verify Text Decoration | verifyTextDecoration | parentLocator | locator | text
-473 | Verify Text Decoration Contain | verifyTextDecorationContain | locator | text | 
-474 | Verify Text Decoration Contain | verifyTextDecorationContain | parentLocator | locator | text
-475 | Verify Text Decoration Not Contain | verifyTextDecorationNotContain | locator | text | 
-476 | Verify Text Decoration Not Contain | verifyTextDecorationNotContain | parentLocator | locator | text
-477 | Verify Text Empty | verifyTextEmpty | locator |  | 
-478 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
-479 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
-480 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
-481 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
-482 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
-483 | Verify Text Not Contain | verifyTextNotContain | locator | text | 
-484 | Verify Text Not Contain | verifyTextNotContain | parentLocator | locator | text
+465 | Verify Text Alignment Match | verifyTextAlignmentMatch | locator | text | 
+466 | Verify Text Alignment Match | verifyTextAlignmentMatch | parentLocator | locator | text
+467 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | locator | text | 
+468 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | parentLocator | locator | text
+469 | Verify Text Decoration | verifyTextDecoration | locator | text | 
+470 | Verify Text Decoration | verifyTextDecoration | parentLocator | locator | text
+471 | Verify Text Decoration Match | verifyTextDecorationMatch | locator | text | 
+472 | Verify Text Decoration Match | verifyTextDecorationMatch | parentLocator | locator | text
+473 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | locator | text | 
+474 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | parentLocator | locator | text
+475 | Verify Text Empty | verifyTextEmpty | locator |  | 
+476 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
+477 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
+478 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
+479 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
+480 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
+481 | Verify Text Match | verifyTextMatch | locator | text | 
+482 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
+483 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
+484 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
 485 | Verify Value | verifyValue | locator | text | 
 486 | Verify Value | verifyValue | parentLocator | locator | text
-487 | Verify Value Contain | verifyValueContain | locator | text | 
-488 | Verify Value Contain | verifyValueContain | parentLocator | locator | text
-489 | Verify Value Empty | verifyValueEmpty | locator |  | 
-490 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
-491 | Verify Value Not Contain | verifyValueNotContain | locator | text | 
-492 | Verify Value Not Contain | verifyValueNotContain | parentLocator | locator | text
+487 | Verify Value Empty | verifyValueEmpty | locator |  | 
+488 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
+489 | Verify Value Match | verifyValueMatch | locator | text | 
+490 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
+491 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
+492 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
 493 | Verify Variable | verifyVariable | variable | text | 
-494 | Verify Variable Contain | verifyVariableContain | variable | text | 
-495 | Verify Variable Not Contain | verifyVariableNotContain | variable | text | 
+494 | Verify Variable Match | verifyVariableMatch | variable | text | 
+495 | Verify Variable Not Match | verifyVariableNotMatch | variable | text | 
 496 | Verify Visible | verifyVisible | locator |  | 
 497 | Verify Visible | verifyVisible | parentLocator | locator | 
 498 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
@@ -510,8 +510,8 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 504 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
 505 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
 506 | Wait For Attribute | waitForAttribute | locator | name | text
-507 | Wait For Attribute Contain | waitForAttributeContain | locator | name | text
-508 | Wait For Attribute Not Contain | waitForAttributeNotContain | locator | name | text
+507 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
+508 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
 509 | Wait For Checked | waitForChecked | locator |  | 
 510 | Wait For Checked | waitForChecked | parentLocator | locator | 
 511 | Wait For Condition | waitForCondition | script | timeout | 
@@ -519,12 +519,12 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 513 | Wait For Editable | waitForEditable | parentLocator | locator | 
 514 | Wait For Eval | waitForEval | expression | text | 
 515 | Wait For Eval Script | waitForEvalScript | script | text | 
-516 | Wait For Eval Script Contain | waitForEvalScriptContain | script | text | 
-517 | Wait For Eval Script Not Contain | waitForEvalScriptNotContain | script | text | 
+516 | Wait For Eval Script Match | waitForEvalScriptMatch | script | text | 
+517 | Wait For Eval Script Not Match | waitForEvalScriptNotMatch | script | text | 
 518 | Wait For Exists In Database | waitForExistsInDatabase | sql |  | 
 519 | Wait For Expression | waitForExpression | expression | text | 
-520 | Wait For Expression Contain | waitForExpressionContain | expression | text | 
-521 | Wait For Expression Not Contain | waitForExpressionNotContain | expression | text | 
+520 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
+521 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
 522 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
 523 | Wait For Not Checked | waitForNotChecked | locator |  | 
 524 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
@@ -556,46 +556,46 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 550 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
 551 | Wait For Selected Id | waitForSelectedId | locator | text | 
 552 | Wait For Selected Id | waitForSelectedId | parentLocator | locator | text
-553 | Wait For Selected Id Contain | waitForSelectedIdContain | locator | text | 
-554 | Wait For Selected Id Contain | waitForSelectedIdContain | parentLocator | locator | text
-555 | Wait For Selected Id Not Contain | waitForSelectedIdNotContain | locator | text | 
-556 | Wait For Selected Id Not Contain | waitForSelectedIdNotContain | parentLocator | locator | text
+553 | Wait For Selected Id Match | waitForSelectedIdMatch | locator | text | 
+554 | Wait For Selected Id Match | waitForSelectedIdMatch | parentLocator | locator | text
+555 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | locator | text | 
+556 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | parentLocator | locator | text
 557 | Wait For Selected Index | waitForSelectedIndex | locator | text | 
 558 | Wait For Selected Index | waitForSelectedIndex | parentLocator | locator | text
-559 | Wait For Selected Index Contain | waitForSelectedIndexContain | locator | text | 
-560 | Wait For Selected Index Contain | waitForSelectedIndexContain | parentLocator | locator | text
-561 | Wait For Selected Index Not Contain | waitForSelectedIndexNotContain | locator | text | 
-562 | Wait For Selected Index Not Contain | waitForSelectedIndexNotContain | parentLocator | locator | text
+559 | Wait For Selected Index Match | waitForSelectedIndexMatch | locator | text | 
+560 | Wait For Selected Index Match | waitForSelectedIndexMatch | parentLocator | locator | text
+561 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | locator | text | 
+562 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | parentLocator | locator | text
 563 | Wait For Selected Label | waitForSelectedLabel | locator | text | 
 564 | Wait For Selected Label | waitForSelectedLabel | parentLocator | locator | text
-565 | Wait For Selected Label Contain | waitForSelectedLabelContain | locator | text | 
-566 | Wait For Selected Label Contain | waitForSelectedLabelContain | parentLocator | locator | text
-567 | Wait For Selected Label Not Contain | waitForSelectedLabelNotContain | locator | text | 
-568 | Wait For Selected Label Not Contain | waitForSelectedLabelNotContain | parentLocator | locator | text
+565 | Wait For Selected Label Match | waitForSelectedLabelMatch | locator | text | 
+566 | Wait For Selected Label Match | waitForSelectedLabelMatch | parentLocator | locator | text
+567 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | locator | text | 
+568 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | parentLocator | locator | text
 569 | Wait For Selected Value | waitForSelectedValue | locator | text | 
 570 | Wait For Selected Value | waitForSelectedValue | parentLocator | locator | text
-571 | Wait For Selected Value Contain | waitForSelectedValueContain | locator | text | 
-572 | Wait For Selected Value Contain | waitForSelectedValueContain | parentLocator | locator | text
-573 | Wait For Selected Value Not Contain | waitForSelectedValueNotContain | locator | text | 
-574 | Wait For Selected Value Not Contain | waitForSelectedValueNotContain | parentLocator | locator | text
+571 | Wait For Selected Value Match | waitForSelectedValueMatch | locator | text | 
+572 | Wait For Selected Value Match | waitForSelectedValueMatch | parentLocator | locator | text
+573 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | locator | text | 
+574 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | parentLocator | locator | text
 575 | Wait For Something Selected | waitForSomethingSelected | locator |  | 
 576 | Wait For Something Selected | waitForSomethingSelected | parentLocator | locator | 
 577 | Wait For Text | waitForText | locator | text | 
 578 | Wait For Text | waitForText | parentLocator | locator | text
-579 | Wait For Text Contain | waitForTextContain | locator | text | 
-580 | Wait For Text Contain | waitForTextContain | parentLocator | locator | text
-581 | Wait For Text Empty | waitForTextEmpty | locator |  | 
-582 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
-583 | Wait For Text Not Contain | waitForTextNotContain | locator | text | 
-584 | Wait For Text Not Contain | waitForTextNotContain | parentLocator | locator | text
+579 | Wait For Text Empty | waitForTextEmpty | locator |  | 
+580 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
+581 | Wait For Text Match | waitForTextMatch | locator | text | 
+582 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
+583 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
+584 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
 585 | Wait For Value | waitForValue | locator | text | 
 586 | Wait For Value | waitForValue | parentLocator | locator | text
-587 | Wait For Value Contain | waitForValueContain | locator | text | 
-588 | Wait For Value Contain | waitForValueContain | parentLocator | locator | text
-589 | Wait For Value Empty | waitForValueEmpty | locator |  | 
-590 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
-591 | Wait For Value Not Contain | waitForValueNotContain | locator | text | 
-592 | Wait For Value Not Contain | waitForValueNotContain | parentLocator | locator | text
+587 | Wait For Value Empty | waitForValueEmpty | locator |  | 
+588 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
+589 | Wait For Value Match | waitForValueMatch | locator | text | 
+590 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
+591 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
+592 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
 593 | Wait For Visible | waitForVisible | locator |  | 
 594 | Wait For Visible | waitForVisible | parentLocator | locator | 
 
@@ -631,9 +631,9 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
-## Assert Attribute Contain
+## Assert Attribute Match
 
-Asserts that the value of the given attribute of the element contains the given value. When the assert fails, the test is aborted. Will return the current value, even if this has been modified after the page has been loaded.
+Asserts that the value of the given attribute of the element matches the given value. When the assert fails, the test is aborted. Will return the current value, even if this has been modified after the page has been loaded.
 
  <p>More exactly, this method will return the value of the property with the given name, if it exists. If it does not, then the value of the attribute with the given name is returned. If neither exists, null is returned.
 
@@ -652,7 +652,7 @@ Asserts that the value of the given attribute of the element contains the given 
 ### Usage
 
 `
-assertAttributeContain(locator, name, text)
+assertAttributeMatch(locator, name, text)
 `
 
 ### Parameters
@@ -663,9 +663,9 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
-## Assert Attribute Not Contain
+## Assert Attribute Not Match
 
-Asserts that the value of the given attribute of the element not contain the given value. When the assert fails, the test is aborted. Will return the current value, even if this has been modified after the page has been loaded.
+Asserts that the value of the given attribute of the element not match the given value. When the assert fails, the test is aborted. Will return the current value, even if this has been modified after the page has been loaded.
 
  <p>More exactly, this method will return the value of the property with the given name, if it exists. If it does not, then the value of the attribute with the given name is returned. If neither exists, null is returned.
 
@@ -684,7 +684,7 @@ Asserts that the value of the given attribute of the element not contain the giv
 ### Usage
 
 `
-assertAttributeNotContain(locator, name, text)
+assertAttributeNotMatch(locator, name, text)
 `
 
 ### Parameters
@@ -1017,16 +1017,16 @@ Parameter | Description
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Assert Eval Script Contain
+## Assert Eval Script Match
 
-Asserts that the result of evaluating the specified JavaScript snippet contains the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
+Asserts that the result of evaluating the specified JavaScript snippet matches the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-assertEvalScriptContain(script, text)
+assertEvalScriptMatch(script, text)
 `
 
 ### Parameters
@@ -1036,16 +1036,16 @@ Parameter | Description
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Assert Eval Script Not Contain
+## Assert Eval Script Not Match
 
-Asserts that the result of evaluating the specified JavaScript snippet not contain the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
+Asserts that the result of evaluating the specified JavaScript snippet not match the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-assertEvalScriptNotContain(script, text)
+assertEvalScriptNotMatch(script, text)
 `
 
 ### Parameters
@@ -1090,16 +1090,16 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
-## Assert Expression Contain
+## Assert Expression Match
 
-Asserts that the specified expression contains the given value. When the assert fails, the test is aborted.
+Asserts that the specified expression matches the given value. When the assert fails, the test is aborted.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-assertExpressionContain(expression, text)
+assertExpressionMatch(expression, text)
 `
 
 ### Parameters
@@ -1109,16 +1109,16 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
-## Assert Expression Not Contain
+## Assert Expression Not Match
 
-Asserts that the specified expression not contain the given value. When the assert fails, the test is aborted.
+Asserts that the specified expression not match the given value. When the assert fails, the test is aborted.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-assertExpressionNotContain(expression, text)
+assertExpressionNotMatch(expression, text)
 `
 
 ### Parameters
@@ -1150,18 +1150,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Family Contain
+## Assert Font Family Match
 
-Asserts that the font family of the specified element contains the given value. When the assert fails, the test is aborted.
+Asserts that the font family of the specified element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontFamilyContain(locator, text)
+assertFontFamilyMatch(locator, text)
 `
 
 `
-assertFontFamilyContain(parentLocator, locator, text)
+assertFontFamilyMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1172,18 +1172,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Family Not Contain
+## Assert Font Family Not Match
 
-Asserts that the font family of the specified element not contain the given value. When the assert fails, the test is aborted.
+Asserts that the font family of the specified element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontFamilyNotContain(locator, text)
+assertFontFamilyNotMatch(locator, text)
 `
 
 `
-assertFontFamilyNotContain(parentLocator, locator, text)
+assertFontFamilyNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1216,18 +1216,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Size Contain
+## Assert Font Size Match
 
-Asserts that the font size of the specified element contains the given value. When the assert fails, the test is aborted.
+Asserts that the font size of the specified element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontSizeContain(locator, text)
+assertFontSizeMatch(locator, text)
 `
 
 `
-assertFontSizeContain(parentLocator, locator, text)
+assertFontSizeMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1238,18 +1238,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Size Not Contain
+## Assert Font Size Not Match
 
-Asserts that the font size of the specified element not contain the given value. When the assert fails, the test is aborted.
+Asserts that the font size of the specified element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontSizeNotContain(locator, text)
+assertFontSizeNotMatch(locator, text)
 `
 
 `
-assertFontSizeNotContain(parentLocator, locator, text)
+assertFontSizeNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1282,18 +1282,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Style Contain
+## Assert Font Style Match
 
-Asserts that the font style of the specified element contains the given value. When the assert fails, the test is aborted.
+Asserts that the font style of the specified element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontStyleContain(locator, text)
+assertFontStyleMatch(locator, text)
 `
 
 `
-assertFontStyleContain(parentLocator, locator, text)
+assertFontStyleMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1304,18 +1304,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Style Not Contain
+## Assert Font Style Not Match
 
-Asserts that the font style of the specified element not contain the given value. When the assert fails, the test is aborted.
+Asserts that the font style of the specified element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontStyleNotContain(locator, text)
+assertFontStyleNotMatch(locator, text)
 `
 
 `
-assertFontStyleNotContain(parentLocator, locator, text)
+assertFontStyleNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1348,18 +1348,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Weight Contain
+## Assert Font Weight Match
 
-Asserts that the font weight of the specified element contains the given value. When the assert fails, the test is aborted.
+Asserts that the font weight of the specified element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontWeightContain(locator, text)
+assertFontWeightMatch(locator, text)
 `
 
 `
-assertFontWeightContain(parentLocator, locator, text)
+assertFontWeightMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1370,18 +1370,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Font Weight Not Contain
+## Assert Font Weight Not Match
 
-Asserts that the font weight of the specified element not contain the given value. When the assert fails, the test is aborted.
+Asserts that the font weight of the specified element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertFontWeightNotContain(locator, text)
+assertFontWeightNotMatch(locator, text)
 `
 
 `
-assertFontWeightNotContain(parentLocator, locator, text)
+assertFontWeightNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2285,18 +2285,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Id Contain
+## Assert Selected Id Match
 
-Asserts that option element ID for selected option in the specified select element contains the given value. When the assert fails, the test is aborted.
+Asserts that option element ID for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedIdContain(locator, text)
+assertSelectedIdMatch(locator, text)
 `
 
 `
-assertSelectedIdContain(parentLocator, locator, text)
+assertSelectedIdMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2307,18 +2307,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Id Not Contain
+## Assert Selected Id Not Match
 
-Asserts that option element ID for selected option in the specified select element not contain the given value. When the assert fails, the test is aborted.
+Asserts that option element ID for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedIdNotContain(locator, text)
+assertSelectedIdNotMatch(locator, text)
 `
 
 `
-assertSelectedIdNotContain(parentLocator, locator, text)
+assertSelectedIdNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2351,18 +2351,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Index Contain
+## Assert Selected Index Match
 
-Asserts that option index (option number, starting at 0) for selected option in the specified select element contains the given value. When the assert fails, the test is aborted.
+Asserts that option index (option number, starting at 0) for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedIndexContain(locator, text)
+assertSelectedIndexMatch(locator, text)
 `
 
 `
-assertSelectedIndexContain(parentLocator, locator, text)
+assertSelectedIndexMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2373,18 +2373,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Index Not Contain
+## Assert Selected Index Not Match
 
-Asserts that option index (option number, starting at 0) for selected option in the specified select element not contain the given value. When the assert fails, the test is aborted.
+Asserts that option index (option number, starting at 0) for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedIndexNotContain(locator, text)
+assertSelectedIndexNotMatch(locator, text)
 `
 
 `
-assertSelectedIndexNotContain(parentLocator, locator, text)
+assertSelectedIndexNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2417,18 +2417,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Label Contain
+## Assert Selected Label Match
 
-Asserts that option label (visible text) for selected option in the specified select element contains the given value. When the assert fails, the test is aborted.
+Asserts that option label (visible text) for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedLabelContain(locator, text)
+assertSelectedLabelMatch(locator, text)
 `
 
 `
-assertSelectedLabelContain(parentLocator, locator, text)
+assertSelectedLabelMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2439,18 +2439,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Label Not Contain
+## Assert Selected Label Not Match
 
-Asserts that option label (visible text) for selected option in the specified select element not contain the given value. When the assert fails, the test is aborted.
+Asserts that option label (visible text) for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedLabelNotContain(locator, text)
+assertSelectedLabelNotMatch(locator, text)
 `
 
 `
-assertSelectedLabelNotContain(parentLocator, locator, text)
+assertSelectedLabelNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2483,18 +2483,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Value Contain
+## Assert Selected Value Match
 
-Asserts that option value (value attribute) for selected option in the specified select element contains the given value. When the assert fails, the test is aborted.
+Asserts that option value (value attribute) for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedValueContain(locator, text)
+assertSelectedValueMatch(locator, text)
 `
 
 `
-assertSelectedValueContain(parentLocator, locator, text)
+assertSelectedValueMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2505,18 +2505,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Assert Selected Value Not Contain
+## Assert Selected Value Not Match
 
-Asserts that option value (value attribute) for selected option in the specified select element not contain the given value. When the assert fails, the test is aborted.
+Asserts that option value (value attribute) for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertSelectedValueNotContain(locator, text)
+assertSelectedValueNotMatch(locator, text)
 `
 
 `
-assertSelectedValueNotContain(parentLocator, locator, text)
+assertSelectedValueNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2592,18 +2592,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Text Alignment Contain
+## Assert Text Alignment Match
 
-Asserts that the text alignment of the specified element contains the given value. When the assert fails, the test is aborted.
+Asserts that the text alignment of the specified element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertTextAlignmentContain(locator, text)
+assertTextAlignmentMatch(locator, text)
 `
 
 `
-assertTextAlignmentContain(parentLocator, locator, text)
+assertTextAlignmentMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2614,18 +2614,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Text Alignment Not Contain
+## Assert Text Alignment Not Match
 
-Asserts that the text alignment of the specified element not contain the given value. When the assert fails, the test is aborted.
+Asserts that the text alignment of the specified element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertTextAlignmentNotContain(locator, text)
+assertTextAlignmentNotMatch(locator, text)
 `
 
 `
-assertTextAlignmentNotContain(parentLocator, locator, text)
+assertTextAlignmentNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2634,28 +2634,6 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
-text | the value to match with the result
-
-## Assert Text Contain
-
-Asserts that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user contains the given value. When the assert fails, the test is aborted.
-
-### Usage
-
-`
-assertTextContain(locator, text)
-`
-
-`
-assertTextContain(parentLocator, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-parentLocator | an element locator of parent element
-locator | an element locator
 text | the value to match with the result
 
 ## Assert Text Decoration
@@ -2680,18 +2658,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Text Decoration Contain
+## Assert Text Decoration Match
 
-Asserts that the text decoration of the specified element contains the given value. When the assert fails, the test is aborted.
+Asserts that the text decoration of the specified element matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertTextDecorationContain(locator, text)
+assertTextDecorationMatch(locator, text)
 `
 
 `
-assertTextDecorationContain(parentLocator, locator, text)
+assertTextDecorationMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2702,18 +2680,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Assert Text Decoration Not Contain
+## Assert Text Decoration Not Match
 
-Asserts that the text decoration of the specified element not contain the given value. When the assert fails, the test is aborted.
+Asserts that the text decoration of the specified element not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertTextDecorationNotContain(locator, text)
+assertTextDecorationNotMatch(locator, text)
 `
 
 `
-assertTextDecorationNotContain(parentLocator, locator, text)
+assertTextDecorationNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2787,18 +2765,40 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 
-## Assert Text Not Contain
+## Assert Text Match
 
-Asserts that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not contain the given value. When the assert fails, the test is aborted.
+Asserts that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertTextNotContain(locator, text)
+assertTextMatch(locator, text)
 `
 
 `
-assertTextNotContain(parentLocator, locator, text)
+assertTextMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Assert Text Not Match
+
+Asserts that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTextNotMatch(locator, text)
+`
+
+`
+assertTextNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2831,28 +2831,6 @@ parentLocator | an element locator of parent element
 locator | an element locator
 text | the value to match with the result
 
-## Assert Value Contain
-
-Asserts that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) contains the given value. When the assert fails, the test is aborted. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
-
-### Usage
-
-`
-assertValueContain(locator, text)
-`
-
-`
-assertValueContain(parentLocator, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-parentLocator | an element locator of parent element
-locator | an element locator
-text | the value to match with the result
-
 ## Assert Value Empty
 
 Asserts that the (whitespace-trimmed) value of an input field is empty. When the assert fails, the test is aborted.
@@ -2874,18 +2852,40 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
-## Assert Value Not Contain
+## Assert Value Match
 
-Asserts that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not contain the given value. When the assert fails, the test is aborted. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+Asserts that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) matches the given value. When the assert fails, the test is aborted. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
 
 ### Usage
 
 `
-assertValueNotContain(locator, text)
+assertValueMatch(locator, text)
 `
 
 `
-assertValueNotContain(parentLocator, locator, text)
+assertValueMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Assert Value Not Match
+
+Asserts that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not match the given value. When the assert fails, the test is aborted. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+
+### Usage
+
+`
+assertValueNotMatch(locator, text)
+`
+
+`
+assertValueNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2913,14 +2913,14 @@ Parameter | Description
 variable | the variable
 text | the value to match with the result
 
-## Assert Variable Contain
+## Assert Variable Match
 
-Asserts that the specified variable value contains the given value. When the assert fails, the test is aborted.
+Asserts that the specified variable value matches the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertVariableContain(variable, text)
+assertVariableMatch(variable, text)
 `
 
 ### Parameters
@@ -2930,14 +2930,14 @@ Parameter | Description
 variable | the variable
 text | the value to match with the result
 
-## Assert Variable Not Contain
+## Assert Variable Not Match
 
-Asserts that the specified variable value not contain the given value. When the assert fails, the test is aborted.
+Asserts that the specified variable value not match the given value. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertVariableNotContain(variable, text)
+assertVariableNotMatch(variable, text)
 `
 
 ### Parameters
@@ -3100,16 +3100,16 @@ action | the name of the action to execute
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Execute If Eval Script Contain
+## Execute If Eval Script Match
 
-Executes an action if the result of evaluating the specified JavaScript snippet contains the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
+Executes an action if the result of evaluating the specified JavaScript snippet matches the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-executeIfEvalScriptContain(action, script, text)
+executeIfEvalScriptMatch(action, script, text)
 `
 
 ### Parameters
@@ -3120,16 +3120,16 @@ action | the name of the action to execute
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Execute If Eval Script Not Contain
+## Execute If Eval Script Not Match
 
-Executes an action if the result of evaluating the specified JavaScript snippet not contain the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
+Executes an action if the result of evaluating the specified JavaScript snippet not match the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-executeIfEvalScriptNotContain(action, script, text)
+executeIfEvalScriptNotMatch(action, script, text)
 `
 
 ### Parameters
@@ -3177,16 +3177,16 @@ action | the name of the action to execute
 expression | the value to return
 text | the value to match with the result
 
-## Execute If Expression Contain
+## Execute If Expression Match
 
-Executes an action if the specified expression contains the given value.
+Executes an action if the specified expression matches the given value.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-executeIfExpressionContain(action, expression, text)
+executeIfExpressionMatch(action, expression, text)
 `
 
 ### Parameters
@@ -3197,16 +3197,16 @@ action | the name of the action to execute
 expression | the value to return
 text | the value to match with the result
 
-## Execute If Expression Not Contain
+## Execute If Expression Not Match
 
-Executes an action if the specified expression not contain the given value.
+Executes an action if the specified expression not match the given value.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-executeIfExpressionNotContain(action, expression, text)
+executeIfExpressionNotMatch(action, expression, text)
 `
 
 ### Parameters
@@ -3613,14 +3613,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Id Contain
+## Execute If Selected Id Match
 
-Executes an action if option element ID for selected option in the specified select element contains the given value.
+Executes an action if option element ID for selected option in the specified select element matches the given value.
 
 ### Usage
 
 `
-executeIfSelectedIdContain(action, locator, text)
+executeIfSelectedIdMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3632,14 +3632,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Id Not Contain
+## Execute If Selected Id Not Match
 
-Executes an action if option element ID for selected option in the specified select element not contain the given value.
+Executes an action if option element ID for selected option in the specified select element not match the given value.
 
 ### Usage
 
 `
-executeIfSelectedIdNotContain(action, locator, text)
+executeIfSelectedIdNotMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3670,14 +3670,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Index Contain
+## Execute If Selected Index Match
 
-Executes an action if option index (option number, starting at 0) for selected option in the specified select element contains the given value.
+Executes an action if option index (option number, starting at 0) for selected option in the specified select element matches the given value.
 
 ### Usage
 
 `
-executeIfSelectedIndexContain(action, locator, text)
+executeIfSelectedIndexMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3689,14 +3689,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Index Not Contain
+## Execute If Selected Index Not Match
 
-Executes an action if option index (option number, starting at 0) for selected option in the specified select element not contain the given value.
+Executes an action if option index (option number, starting at 0) for selected option in the specified select element not match the given value.
 
 ### Usage
 
 `
-executeIfSelectedIndexNotContain(action, locator, text)
+executeIfSelectedIndexNotMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3727,14 +3727,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Label Contain
+## Execute If Selected Label Match
 
-Executes an action if option label (visible text) for selected option in the specified select element contains the given value.
+Executes an action if option label (visible text) for selected option in the specified select element matches the given value.
 
 ### Usage
 
 `
-executeIfSelectedLabelContain(action, locator, text)
+executeIfSelectedLabelMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3746,14 +3746,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Label Not Contain
+## Execute If Selected Label Not Match
 
-Executes an action if option label (visible text) for selected option in the specified select element not contain the given value.
+Executes an action if option label (visible text) for selected option in the specified select element not match the given value.
 
 ### Usage
 
 `
-executeIfSelectedLabelNotContain(action, locator, text)
+executeIfSelectedLabelNotMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3784,14 +3784,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Value Contain
+## Execute If Selected Value Match
 
-Executes an action if option value (value attribute) for selected option in the specified select element contains the given value.
+Executes an action if option value (value attribute) for selected option in the specified select element matches the given value.
 
 ### Usage
 
 `
-executeIfSelectedValueContain(action, locator, text)
+executeIfSelectedValueMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3803,14 +3803,14 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Execute If Selected Value Not Contain
+## Execute If Selected Value Not Match
 
-Executes an action if option value (value attribute) for selected option in the specified select element not contain the given value.
+Executes an action if option value (value attribute) for selected option in the specified select element not match the given value.
 
 ### Usage
 
 `
-executeIfSelectedValueNotContain(action, locator, text)
+executeIfSelectedValueNotMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3863,25 +3863,6 @@ parentLocator | an element locator of parent element
 locator | an element locator
 text | the value to match with the result
 
-## Execute If Text Contain
-
-Executes an action if the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user contains the given value.
-
-### Usage
-
-`
-executeIfTextContain(action, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-action | the name of the action to execute
-parentLocator | an element locator of parent element
-locator | an element locator
-text | the value to match with the result
-
 ## Execute If Text Empty
 
 Executes an action if the text of an element is empty.
@@ -3904,14 +3885,33 @@ action | the name of the action to execute
 parentLocator | an element locator of parent element
 locator | an element locator
 
-## Execute If Text Not Contain
+## Execute If Text Match
 
-Executes an action if the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not contain the given value.
+Executes an action if the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user matches the given value.
 
 ### Usage
 
 `
-executeIfTextNotContain(action, locator, text)
+executeIfTextMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Execute If Text Not Match
+
+Executes an action if the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not match the given value.
+
+### Usage
+
+`
+executeIfTextNotMatch(action, locator, text)
 `
 
 ### Parameters
@@ -3931,25 +3931,6 @@ Executes an action if the (whitespace-trimmed) value of an input field (or anyth
 
 `
 executeIfValue(action, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-action | the name of the action to execute
-parentLocator | an element locator of parent element
-locator | an element locator
-text | the value to match with the result
-
-## Execute If Value Contain
-
-Executes an action if the (whitespace-trimmed) value of an input field (or anything else with a value parameter) contains the given value. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
-
-### Usage
-
-`
-executeIfValueContain(action, locator, text)
 `
 
 ### Parameters
@@ -3983,14 +3964,33 @@ action | the name of the action to execute
 parentLocator | an element locator of parent element
 locator | an element locator
 
-## Execute If Value Not Contain
+## Execute If Value Match
 
-Executes an action if the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not contain the given value. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+Executes an action if the (whitespace-trimmed) value of an input field (or anything else with a value parameter) matches the given value. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
 
 ### Usage
 
 `
-executeIfValueNotContain(action, locator, text)
+executeIfValueMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Execute If Value Not Match
+
+Executes an action if the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not match the given value. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+
+### Usage
+
+`
+executeIfValueNotMatch(action, locator, text)
 `
 
 ### Parameters
@@ -4020,14 +4020,14 @@ action | the name of the action to execute
 variable | the variable
 text | the value to match with the result
 
-## Execute If Variable Contain
+## Execute If Variable Match
 
-Executes an action if the specified variable value contains the given value.
+Executes an action if the specified variable value matches the given value.
 
 ### Usage
 
 `
-executeIfVariableContain(action, variable, text)
+executeIfVariableMatch(action, variable, text)
 `
 
 ### Parameters
@@ -4038,14 +4038,14 @@ action | the name of the action to execute
 variable | the variable
 text | the value to match with the result
 
-## Execute If Variable Not Contain
+## Execute If Variable Not Match
 
-Executes an action if the specified variable value not contain the given value.
+Executes an action if the specified variable value not match the given value.
 
 ### Usage
 
 `
-executeIfVariableNotContain(action, variable, text)
+executeIfVariableNotMatch(action, variable, text)
 `
 
 ### Parameters
@@ -4622,9 +4622,9 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
-## Verify Attribute Contain
+## Verify Attribute Match
 
-Verifies that the value of the given attribute of the element contains the given value. When the verify fails, the test will continue execution, logging the failure. Will return the current value, even if this has been modified after the page has been loaded.
+Verifies that the value of the given attribute of the element matches the given value. When the verify fails, the test will continue execution, logging the failure. Will return the current value, even if this has been modified after the page has been loaded.
 
  <p>More exactly, this method will return the value of the property with the given name, if it exists. If it does not, then the value of the attribute with the given name is returned. If neither exists, null is returned.
 
@@ -4643,7 +4643,7 @@ Verifies that the value of the given attribute of the element contains the given
 ### Usage
 
 `
-verifyAttributeContain(locator, name, text)
+verifyAttributeMatch(locator, name, text)
 `
 
 ### Parameters
@@ -4654,9 +4654,9 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
-## Verify Attribute Not Contain
+## Verify Attribute Not Match
 
-Verifies that the value of the given attribute of the element not contain the given value. When the verify fails, the test will continue execution, logging the failure. Will return the current value, even if this has been modified after the page has been loaded.
+Verifies that the value of the given attribute of the element not match the given value. When the verify fails, the test will continue execution, logging the failure. Will return the current value, even if this has been modified after the page has been loaded.
 
  <p>More exactly, this method will return the value of the property with the given name, if it exists. If it does not, then the value of the attribute with the given name is returned. If neither exists, null is returned.
 
@@ -4675,7 +4675,7 @@ Verifies that the value of the given attribute of the element not contain the gi
 ### Usage
 
 `
-verifyAttributeNotContain(locator, name, text)
+verifyAttributeNotMatch(locator, name, text)
 `
 
 ### Parameters
@@ -5008,16 +5008,16 @@ Parameter | Description
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Verify Eval Script Contain
+## Verify Eval Script Match
 
-Verifies that the result of evaluating the specified JavaScript snippet contains the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
+Verifies that the result of evaluating the specified JavaScript snippet matches the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-verifyEvalScriptContain(script, text)
+verifyEvalScriptMatch(script, text)
 `
 
 ### Parameters
@@ -5027,16 +5027,16 @@ Parameter | Description
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Verify Eval Script Not Contain
+## Verify Eval Script Not Match
 
-Verifies that the result of evaluating the specified JavaScript snippet not contain the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
+Verifies that the result of evaluating the specified JavaScript snippet not match the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-verifyEvalScriptNotContain(script, text)
+verifyEvalScriptNotMatch(script, text)
 `
 
 ### Parameters
@@ -5081,16 +5081,16 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
-## Verify Expression Contain
+## Verify Expression Match
 
-Verifies that the specified expression contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the specified expression matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-verifyExpressionContain(expression, text)
+verifyExpressionMatch(expression, text)
 `
 
 ### Parameters
@@ -5100,16 +5100,16 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
-## Verify Expression Not Contain
+## Verify Expression Not Match
 
-Verifies that the specified expression not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the specified expression not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-verifyExpressionNotContain(expression, text)
+verifyExpressionNotMatch(expression, text)
 `
 
 ### Parameters
@@ -5141,18 +5141,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Family Contain
+## Verify Font Family Match
 
-Verifies that the font family of the specified element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font family of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontFamilyContain(locator, text)
+verifyFontFamilyMatch(locator, text)
 `
 
 `
-verifyFontFamilyContain(parentLocator, locator, text)
+verifyFontFamilyMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5163,18 +5163,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Family Not Contain
+## Verify Font Family Not Match
 
-Verifies that the font family of the specified element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font family of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontFamilyNotContain(locator, text)
+verifyFontFamilyNotMatch(locator, text)
 `
 
 `
-verifyFontFamilyNotContain(parentLocator, locator, text)
+verifyFontFamilyNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5207,18 +5207,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Size Contain
+## Verify Font Size Match
 
-Verifies that the font size of the specified element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font size of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontSizeContain(locator, text)
+verifyFontSizeMatch(locator, text)
 `
 
 `
-verifyFontSizeContain(parentLocator, locator, text)
+verifyFontSizeMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5229,18 +5229,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Size Not Contain
+## Verify Font Size Not Match
 
-Verifies that the font size of the specified element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font size of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontSizeNotContain(locator, text)
+verifyFontSizeNotMatch(locator, text)
 `
 
 `
-verifyFontSizeNotContain(parentLocator, locator, text)
+verifyFontSizeNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5273,18 +5273,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Style Contain
+## Verify Font Style Match
 
-Verifies that the font style of the specified element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font style of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontStyleContain(locator, text)
+verifyFontStyleMatch(locator, text)
 `
 
 `
-verifyFontStyleContain(parentLocator, locator, text)
+verifyFontStyleMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5295,18 +5295,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Style Not Contain
+## Verify Font Style Not Match
 
-Verifies that the font style of the specified element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font style of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontStyleNotContain(locator, text)
+verifyFontStyleNotMatch(locator, text)
 `
 
 `
-verifyFontStyleNotContain(parentLocator, locator, text)
+verifyFontStyleNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5339,18 +5339,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Weight Contain
+## Verify Font Weight Match
 
-Verifies that the font weight of the specified element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font weight of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontWeightContain(locator, text)
+verifyFontWeightMatch(locator, text)
 `
 
 `
-verifyFontWeightContain(parentLocator, locator, text)
+verifyFontWeightMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5361,18 +5361,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Font Weight Not Contain
+## Verify Font Weight Not Match
 
-Verifies that the font weight of the specified element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the font weight of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyFontWeightNotContain(locator, text)
+verifyFontWeightNotMatch(locator, text)
 `
 
 `
-verifyFontWeightNotContain(parentLocator, locator, text)
+verifyFontWeightNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6276,18 +6276,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Id Contain
+## Verify Selected Id Match
 
-Verifies that option element ID for selected option in the specified select element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option element ID for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedIdContain(locator, text)
+verifySelectedIdMatch(locator, text)
 `
 
 `
-verifySelectedIdContain(parentLocator, locator, text)
+verifySelectedIdMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6298,18 +6298,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Id Not Contain
+## Verify Selected Id Not Match
 
-Verifies that option element ID for selected option in the specified select element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option element ID for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedIdNotContain(locator, text)
+verifySelectedIdNotMatch(locator, text)
 `
 
 `
-verifySelectedIdNotContain(parentLocator, locator, text)
+verifySelectedIdNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6342,18 +6342,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Index Contain
+## Verify Selected Index Match
 
-Verifies that option index (option number, starting at 0) for selected option in the specified select element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option index (option number, starting at 0) for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedIndexContain(locator, text)
+verifySelectedIndexMatch(locator, text)
 `
 
 `
-verifySelectedIndexContain(parentLocator, locator, text)
+verifySelectedIndexMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6364,18 +6364,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Index Not Contain
+## Verify Selected Index Not Match
 
-Verifies that option index (option number, starting at 0) for selected option in the specified select element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option index (option number, starting at 0) for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedIndexNotContain(locator, text)
+verifySelectedIndexNotMatch(locator, text)
 `
 
 `
-verifySelectedIndexNotContain(parentLocator, locator, text)
+verifySelectedIndexNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6408,18 +6408,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Label Contain
+## Verify Selected Label Match
 
-Verifies that option label (visible text) for selected option in the specified select element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option label (visible text) for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedLabelContain(locator, text)
+verifySelectedLabelMatch(locator, text)
 `
 
 `
-verifySelectedLabelContain(parentLocator, locator, text)
+verifySelectedLabelMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6430,18 +6430,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Label Not Contain
+## Verify Selected Label Not Match
 
-Verifies that option label (visible text) for selected option in the specified select element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option label (visible text) for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedLabelNotContain(locator, text)
+verifySelectedLabelNotMatch(locator, text)
 `
 
 `
-verifySelectedLabelNotContain(parentLocator, locator, text)
+verifySelectedLabelNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6474,18 +6474,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Value Contain
+## Verify Selected Value Match
 
-Verifies that option value (value attribute) for selected option in the specified select element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option value (value attribute) for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedValueContain(locator, text)
+verifySelectedValueMatch(locator, text)
 `
 
 `
-verifySelectedValueContain(parentLocator, locator, text)
+verifySelectedValueMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6496,18 +6496,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Verify Selected Value Not Contain
+## Verify Selected Value Not Match
 
-Verifies that option value (value attribute) for selected option in the specified select element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that option value (value attribute) for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifySelectedValueNotContain(locator, text)
+verifySelectedValueNotMatch(locator, text)
 `
 
 `
-verifySelectedValueNotContain(parentLocator, locator, text)
+verifySelectedValueNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6583,18 +6583,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Text Alignment Contain
+## Verify Text Alignment Match
 
-Verifies that the text alignment of the specified element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the text alignment of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyTextAlignmentContain(locator, text)
+verifyTextAlignmentMatch(locator, text)
 `
 
 `
-verifyTextAlignmentContain(parentLocator, locator, text)
+verifyTextAlignmentMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6605,18 +6605,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Text Alignment Not Contain
+## Verify Text Alignment Not Match
 
-Verifies that the text alignment of the specified element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the text alignment of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyTextAlignmentNotContain(locator, text)
+verifyTextAlignmentNotMatch(locator, text)
 `
 
 `
-verifyTextAlignmentNotContain(parentLocator, locator, text)
+verifyTextAlignmentNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6625,28 +6625,6 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
-text | the value to match with the result
-
-## Verify Text Contain
-
-Verifies that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user contains the given value. When the verify fails, the test will continue execution, logging the failure.
-
-### Usage
-
-`
-verifyTextContain(locator, text)
-`
-
-`
-verifyTextContain(parentLocator, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-parentLocator | an element locator of parent element
-locator | an element locator
 text | the value to match with the result
 
 ## Verify Text Decoration
@@ -6671,18 +6649,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Text Decoration Contain
+## Verify Text Decoration Match
 
-Verifies that the text decoration of the specified element contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the text decoration of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyTextDecorationContain(locator, text)
+verifyTextDecorationMatch(locator, text)
 `
 
 `
-verifyTextDecorationContain(parentLocator, locator, text)
+verifyTextDecorationMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6693,18 +6671,18 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
-## Verify Text Decoration Not Contain
+## Verify Text Decoration Not Match
 
-Verifies that the text decoration of the specified element not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the text decoration of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyTextDecorationNotContain(locator, text)
+verifyTextDecorationNotMatch(locator, text)
 `
 
 `
-verifyTextDecorationNotContain(parentLocator, locator, text)
+verifyTextDecorationNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6778,18 +6756,40 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 
-## Verify Text Not Contain
+## Verify Text Match
 
-Verifies that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyTextNotContain(locator, text)
+verifyTextMatch(locator, text)
 `
 
 `
-verifyTextNotContain(parentLocator, locator, text)
+verifyTextMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Verify Text Not Match
+
+Verifies that the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTextNotMatch(locator, text)
+`
+
+`
+verifyTextNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6822,28 +6822,6 @@ parentLocator | an element locator of parent element
 locator | an element locator
 text | the value to match with the result
 
-## Verify Value Contain
-
-Verifies that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) contains the given value. When the verify fails, the test will continue execution, logging the failure. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
-
-### Usage
-
-`
-verifyValueContain(locator, text)
-`
-
-`
-verifyValueContain(parentLocator, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-parentLocator | an element locator of parent element
-locator | an element locator
-text | the value to match with the result
-
 ## Verify Value Empty
 
 Verifies that the (whitespace-trimmed) value of an input field is empty. When the verify fails, the test will continue execution, logging the failure.
@@ -6865,18 +6843,40 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
-## Verify Value Not Contain
+## Verify Value Match
 
-Verifies that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not contain the given value. When the verify fails, the test will continue execution, logging the failure. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+Verifies that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) matches the given value. When the verify fails, the test will continue execution, logging the failure. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
 
 ### Usage
 
 `
-verifyValueNotContain(locator, text)
+verifyValueMatch(locator, text)
 `
 
 `
-verifyValueNotContain(parentLocator, locator, text)
+verifyValueMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Verify Value Not Match
+
+Verifies that the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not match the given value. When the verify fails, the test will continue execution, logging the failure. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+
+### Usage
+
+`
+verifyValueNotMatch(locator, text)
+`
+
+`
+verifyValueNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6904,14 +6904,14 @@ Parameter | Description
 variable | the variable
 text | the value to match with the result
 
-## Verify Variable Contain
+## Verify Variable Match
 
-Verifies that the specified variable value contains the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the specified variable value matches the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyVariableContain(variable, text)
+verifyVariableMatch(variable, text)
 `
 
 ### Parameters
@@ -6921,14 +6921,14 @@ Parameter | Description
 variable | the variable
 text | the value to match with the result
 
-## Verify Variable Not Contain
+## Verify Variable Not Match
 
-Verifies that the specified variable value not contain the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the specified variable value not match the given value. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyVariableNotContain(variable, text)
+verifyVariableNotMatch(variable, text)
 `
 
 ### Parameters
@@ -7119,9 +7119,9 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
-## Wait For Attribute Contain
+## Wait For Attribute Match
 
-Waits for the value of the given attribute of the element contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. Will return the current value, even if this has been modified after the page has been loaded.
+Waits for the value of the given attribute of the element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. Will return the current value, even if this has been modified after the page has been loaded.
 
  <p>More exactly, this method will return the value of the property with the given name, if it exists. If it does not, then the value of the attribute with the given name is returned. If neither exists, null is returned.
 
@@ -7140,7 +7140,7 @@ Waits for the value of the given attribute of the element contains the given val
 ### Usage
 
 `
-waitForAttributeContain(locator, name, text)
+waitForAttributeMatch(locator, name, text)
 `
 
 ### Parameters
@@ -7151,9 +7151,9 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
-## Wait For Attribute Not Contain
+## Wait For Attribute Not Match
 
-Waits for the value of the given attribute of the element not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. Will return the current value, even if this has been modified after the page has been loaded.
+Waits for the value of the given attribute of the element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. Will return the current value, even if this has been modified after the page has been loaded.
 
  <p>More exactly, this method will return the value of the property with the given name, if it exists. If it does not, then the value of the attribute with the given name is returned. If neither exists, null is returned.
 
@@ -7172,7 +7172,7 @@ Waits for the value of the given attribute of the element not contain the given 
 ### Usage
 
 `
-waitForAttributeNotContain(locator, name, text)
+waitForAttributeNotMatch(locator, name, text)
 `
 
 ### Parameters
@@ -7280,16 +7280,16 @@ Parameter | Description
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Wait For Eval Script Contain
+## Wait For Eval Script Match
 
-Waits for the result of evaluating the specified JavaScript snippet contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
+Waits for the result of evaluating the specified JavaScript snippet matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-waitForEvalScriptContain(script, text)
+waitForEvalScriptMatch(script, text)
 `
 
 ### Parameters
@@ -7299,16 +7299,16 @@ Parameter | Description
 script | the JavaScript snippet to run
 text | the value to match with the result
 
-## Wait For Eval Script Not Contain
+## Wait For Eval Script Not Match
 
-Waits for the result of evaluating the specified JavaScript snippet not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
+Waits for the result of evaluating the specified JavaScript snippet not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
 
  <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
 
 ### Usage
 
 `
-waitForEvalScriptNotContain(script, text)
+waitForEvalScriptNotMatch(script, text)
 `
 
 ### Parameters
@@ -7353,16 +7353,16 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
-## Wait For Expression Contain
+## Wait For Expression Match
 
-Waits for the specified expression contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for the specified expression matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-waitForExpressionContain(expression, text)
+waitForExpressionMatch(expression, text)
 `
 
 ### Parameters
@@ -7372,16 +7372,16 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
-## Wait For Expression Not Contain
+## Wait For Expression Not Match
 
-Waits for the specified expression not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for the specified expression not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
  <p> This is useful because of JavaScript preprocessing. It is used to generate commands like assertExpression and waitForExpression. </p>
 
 ### Usage
 
 `
-waitForExpressionNotContain(expression, text)
+waitForExpressionNotMatch(expression, text)
 `
 
 ### Parameters
@@ -7774,18 +7774,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Id Contain
+## Wait For Selected Id Match
 
-Waits for option element ID for selected option in the specified select element contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option element ID for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedIdContain(locator, text)
+waitForSelectedIdMatch(locator, text)
 `
 
 `
-waitForSelectedIdContain(parentLocator, locator, text)
+waitForSelectedIdMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -7796,18 +7796,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Id Not Contain
+## Wait For Selected Id Not Match
 
-Waits for option element ID for selected option in the specified select element not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option element ID for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedIdNotContain(locator, text)
+waitForSelectedIdNotMatch(locator, text)
 `
 
 `
-waitForSelectedIdNotContain(parentLocator, locator, text)
+waitForSelectedIdNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -7840,18 +7840,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Index Contain
+## Wait For Selected Index Match
 
-Waits for option index (option number, starting at 0) for selected option in the specified select element contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option index (option number, starting at 0) for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedIndexContain(locator, text)
+waitForSelectedIndexMatch(locator, text)
 `
 
 `
-waitForSelectedIndexContain(parentLocator, locator, text)
+waitForSelectedIndexMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -7862,18 +7862,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Index Not Contain
+## Wait For Selected Index Not Match
 
-Waits for option index (option number, starting at 0) for selected option in the specified select element not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option index (option number, starting at 0) for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedIndexNotContain(locator, text)
+waitForSelectedIndexNotMatch(locator, text)
 `
 
 `
-waitForSelectedIndexNotContain(parentLocator, locator, text)
+waitForSelectedIndexNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -7906,18 +7906,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Label Contain
+## Wait For Selected Label Match
 
-Waits for option label (visible text) for selected option in the specified select element contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option label (visible text) for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedLabelContain(locator, text)
+waitForSelectedLabelMatch(locator, text)
 `
 
 `
-waitForSelectedLabelContain(parentLocator, locator, text)
+waitForSelectedLabelMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -7928,18 +7928,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Label Not Contain
+## Wait For Selected Label Not Match
 
-Waits for option label (visible text) for selected option in the specified select element not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option label (visible text) for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedLabelNotContain(locator, text)
+waitForSelectedLabelNotMatch(locator, text)
 `
 
 `
-waitForSelectedLabelNotContain(parentLocator, locator, text)
+waitForSelectedLabelNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -7972,18 +7972,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Value Contain
+## Wait For Selected Value Match
 
-Waits for option value (value attribute) for selected option in the specified select element contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option value (value attribute) for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedValueContain(locator, text)
+waitForSelectedValueMatch(locator, text)
 `
 
 `
-waitForSelectedValueContain(parentLocator, locator, text)
+waitForSelectedValueMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -7994,18 +7994,18 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
-## Wait For Selected Value Not Contain
+## Wait For Selected Value Not Match
 
-Waits for option value (value attribute) for selected option in the specified select element not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for option value (value attribute) for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForSelectedValueNotContain(locator, text)
+waitForSelectedValueNotMatch(locator, text)
 `
 
 `
-waitForSelectedValueNotContain(parentLocator, locator, text)
+waitForSelectedValueNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -8059,28 +8059,6 @@ parentLocator | an element locator of parent element
 locator | an element locator
 text | the value to match with the result
 
-## Wait For Text Contain
-
-Waits for the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
-
-### Usage
-
-`
-waitForTextContain(locator, text)
-`
-
-`
-waitForTextContain(parentLocator, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-parentLocator | an element locator of parent element
-locator | an element locator
-text | the value to match with the result
-
 ## Wait For Text Empty
 
 Waits for the text of an element is empty. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
@@ -8102,18 +8080,40 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
-## Wait For Text Not Contain
+## Wait For Text Match
 
-Waits for the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForTextNotContain(locator, text)
+waitForTextMatch(locator, text)
 `
 
 `
-waitForTextNotContain(parentLocator, locator, text)
+waitForTextMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Wait For Text Not Match
+
+Waits for the text of an element. This works for any element that contains text. This command uses either the textContent (Mozilla-like browsers) or the innerText (IE-like browsers) of the element, which is the rendered text shown to the user not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForTextNotMatch(locator, text)
+`
+
+`
+waitForTextNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -8146,28 +8146,6 @@ parentLocator | an element locator of parent element
 locator | an element locator
 text | the value to match with the result
 
-## Wait For Value Contain
-
-Waits for the (whitespace-trimmed) value of an input field (or anything else with a value parameter) contains the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
-
-### Usage
-
-`
-waitForValueContain(locator, text)
-`
-
-`
-waitForValueContain(parentLocator, locator, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-parentLocator | an element locator of parent element
-locator | an element locator
-text | the value to match with the result
-
 ## Wait For Value Empty
 
 Waits for the (whitespace-trimmed) value of an input field is empty. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
@@ -8189,18 +8167,40 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
-## Wait For Value Not Contain
+## Wait For Value Match
 
-Waits for the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not contain the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+Waits for the (whitespace-trimmed) value of an input field (or anything else with a value parameter) matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
 
 ### Usage
 
 `
-waitForValueNotContain(locator, text)
+waitForValueMatch(locator, text)
 `
 
 `
-waitForValueNotContain(parentLocator, locator, text)
+waitForValueMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Wait For Value Not Match
+
+Waits for the (whitespace-trimmed) value of an input field (or anything else with a value parameter) not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
+
+### Usage
+
+`
+waitForValueNotMatch(locator, text)
+`
+
+`
+waitForValueNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters

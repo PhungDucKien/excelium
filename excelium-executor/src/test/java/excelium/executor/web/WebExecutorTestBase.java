@@ -26,7 +26,6 @@ package excelium.executor.web;
 
 import excelium.common.PlatformDetector;
 import excelium.core.CommandExecutor;
-import excelium.core.Excelium;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.executor.WebExcelium;
@@ -49,7 +48,7 @@ import java.nio.file.Paths;
  */
 public class WebExecutorTestBase {
 
-    private static ContextAwareWebDriver webDriver;
+    protected static ContextAwareWebDriver webDriver;
 
     protected static WebExcelium selenium;
 

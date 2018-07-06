@@ -212,6 +212,10 @@ public class MyDoclet extends Standard {
             verb = language.getNotContainVerb();
         } else if (command.getMethod().contains("Contain")) {
             verb = language.getContainVerb();
+        } else if (command.getMethod().contains("NotMatch")) {
+            verb = language.getNotMatchVerb();
+        } else if (command.getMethod().contains("Match")) {
+            verb = language.getMatchVerb();
         } else if (command.getMethod().contains("Not")) {
             if (isParamAdded("variable", command) || isParamAdded("text", command)) {
                 verb = language.getNotEqualVerb();

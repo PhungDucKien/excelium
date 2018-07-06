@@ -69,6 +69,16 @@ public enum Language {
         }
 
         @Override
+        public String getMatchVerb() {
+            return "matches";
+        }
+
+        @Override
+        public String getNotMatchVerb() {
+            return "not match";
+        }
+
+        @Override
         public String getPushMessage(String subject) {
             return "Stores " + subject + " in an array variable for later access.";
         }
@@ -156,6 +166,20 @@ public enum Language {
      * @return the not contain verb
      */
     public abstract String getNotContainVerb();
+
+    /**
+     * Gets the match verb (present tense).
+     *
+     * @return the match verb
+     */
+    public abstract String getMatchVerb();
+
+    /**
+     * Gets the not match verb (present tense).
+     *
+     * @return the not match verb
+     */
+    public abstract String getNotMatchVerb();
 
     /**
      * Gets the push command description

@@ -92,12 +92,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertAlert", text, null, null);
     }
 
-    public void assertAlertContain(String text) throws Throwable {
-        runCommand("assertAlertContain", text, null, null);
+    public void assertAlertMatch(String text) throws Throwable {
+        runCommand("assertAlertMatch", text, null, null);
     }
 
-    public void assertAlertNotContain(String text) throws Throwable {
-        runCommand("assertAlertNotContain", text, null, null);
+    public void assertAlertNotMatch(String text) throws Throwable {
+        runCommand("assertAlertNotMatch", text, null, null);
     }
 
     public void assertAlertNotPresent() throws Throwable {
@@ -112,12 +112,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertAttribute", locator, name, text);
     }
 
-    public void assertAttributeContain(String locator, String name, String text) throws Throwable {
-        runCommand("assertAttributeContain", locator, name, text);
+    public void assertAttributeMatch(String locator, String name, String text) throws Throwable {
+        runCommand("assertAttributeMatch", locator, name, text);
     }
 
-    public void assertAttributeNotContain(String locator, String name, String text) throws Throwable {
-        runCommand("assertAttributeNotContain", locator, name, text);
+    public void assertAttributeNotMatch(String locator, String name, String text) throws Throwable {
+        runCommand("assertAttributeNotMatch", locator, name, text);
     }
 
     public void assertBackgroundColor(String locator, String text) throws Throwable {
@@ -132,12 +132,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertBodyText", text, null, null);
     }
 
-    public void assertBodyTextContain(String text) throws Throwable {
-        runCommand("assertBodyTextContain", text, null, null);
+    public void assertBodyTextMatch(String text) throws Throwable {
+        runCommand("assertBodyTextMatch", text, null, null);
     }
 
-    public void assertBodyTextNotContain(String text) throws Throwable {
-        runCommand("assertBodyTextNotContain", text, null, null);
+    public void assertBodyTextNotMatch(String text) throws Throwable {
+        runCommand("assertBodyTextNotMatch", text, null, null);
     }
 
     public void assertBorderColor(String locator, String text) throws Throwable {
@@ -168,12 +168,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertConfirmation", text, null, null);
     }
 
-    public void assertConfirmationContain(String text) throws Throwable {
-        runCommand("assertConfirmationContain", text, null, null);
+    public void assertConfirmationMatch(String text) throws Throwable {
+        runCommand("assertConfirmationMatch", text, null, null);
     }
 
-    public void assertConfirmationNotContain(String text) throws Throwable {
-        runCommand("assertConfirmationNotContain", text, null, null);
+    public void assertConfirmationNotMatch(String text) throws Throwable {
+        runCommand("assertConfirmationNotMatch", text, null, null);
     }
 
     public void assertConfirmationNotPresent() throws Throwable {
@@ -192,20 +192,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertCookieByName", name, text, null);
     }
 
-    public void assertCookieByNameContain(String name, String text) throws Throwable {
-        runCommand("assertCookieByNameContain", name, text, null);
+    public void assertCookieByNameMatch(String name, String text) throws Throwable {
+        runCommand("assertCookieByNameMatch", name, text, null);
     }
 
-    public void assertCookieByNameNotContain(String name, String text) throws Throwable {
-        runCommand("assertCookieByNameNotContain", name, text, null);
+    public void assertCookieByNameNotMatch(String name, String text) throws Throwable {
+        runCommand("assertCookieByNameNotMatch", name, text, null);
     }
 
-    public void assertCookieContain(String text) throws Throwable {
-        runCommand("assertCookieContain", text, null, null);
+    public void assertCookieMatch(String text) throws Throwable {
+        runCommand("assertCookieMatch", text, null, null);
     }
 
-    public void assertCookieNotContain(String text) throws Throwable {
-        runCommand("assertCookieNotContain", text, null, null);
+    public void assertCookieNotMatch(String text) throws Throwable {
+        runCommand("assertCookieNotMatch", text, null, null);
     }
 
     public void assertCookieNotPresent(String name) throws Throwable {
@@ -316,12 +316,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertEvalScript", script, text, null);
     }
 
-    public void assertEvalScriptContain(String script, String text) throws Throwable {
-        runCommand("assertEvalScriptContain", script, text, null);
+    public void assertEvalScriptMatch(String script, String text) throws Throwable {
+        runCommand("assertEvalScriptMatch", script, text, null);
     }
 
-    public void assertEvalScriptNotContain(String script, String text) throws Throwable {
-        runCommand("assertEvalScriptNotContain", script, text, null);
+    public void assertEvalScriptNotMatch(String script, String text) throws Throwable {
+        runCommand("assertEvalScriptNotMatch", script, text, null);
     }
 
     public void assertExistsInDatabase(String sql) throws Throwable {
@@ -332,12 +332,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertExpression", expression, text, null);
     }
 
-    public void assertExpressionContain(String expression, String text) throws Throwable {
-        runCommand("assertExpressionContain", expression, text, null);
+    public void assertExpressionMatch(String expression, String text) throws Throwable {
+        runCommand("assertExpressionMatch", expression, text, null);
     }
 
-    public void assertExpressionNotContain(String expression, String text) throws Throwable {
-        runCommand("assertExpressionNotContain", expression, text, null);
+    public void assertExpressionNotMatch(String expression, String text) throws Throwable {
+        runCommand("assertExpressionNotMatch", expression, text, null);
     }
 
     public void assertFontFamily(String locator, String text) throws Throwable {
@@ -348,20 +348,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertFontFamily", parentLocator, locator, text);
     }
 
-    public void assertFontFamilyContain(String locator, String text) throws Throwable {
-        runCommand("assertFontFamilyContain", locator, text, null);
+    public void assertFontFamilyMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontFamilyMatch", locator, text, null);
     }
 
-    public void assertFontFamilyContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontFamilyContain", parentLocator, locator, text);
+    public void assertFontFamilyMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontFamilyMatch", parentLocator, locator, text);
     }
 
-    public void assertFontFamilyNotContain(String locator, String text) throws Throwable {
-        runCommand("assertFontFamilyNotContain", locator, text, null);
+    public void assertFontFamilyNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontFamilyNotMatch", locator, text, null);
     }
 
-    public void assertFontFamilyNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontFamilyNotContain", parentLocator, locator, text);
+    public void assertFontFamilyNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontFamilyNotMatch", parentLocator, locator, text);
     }
 
     public void assertFontSize(String locator, String text) throws Throwable {
@@ -372,20 +372,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertFontSize", parentLocator, locator, text);
     }
 
-    public void assertFontSizeContain(String locator, String text) throws Throwable {
-        runCommand("assertFontSizeContain", locator, text, null);
+    public void assertFontSizeMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontSizeMatch", locator, text, null);
     }
 
-    public void assertFontSizeContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontSizeContain", parentLocator, locator, text);
+    public void assertFontSizeMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontSizeMatch", parentLocator, locator, text);
     }
 
-    public void assertFontSizeNotContain(String locator, String text) throws Throwable {
-        runCommand("assertFontSizeNotContain", locator, text, null);
+    public void assertFontSizeNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontSizeNotMatch", locator, text, null);
     }
 
-    public void assertFontSizeNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontSizeNotContain", parentLocator, locator, text);
+    public void assertFontSizeNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontSizeNotMatch", parentLocator, locator, text);
     }
 
     public void assertFontStyle(String locator, String text) throws Throwable {
@@ -396,20 +396,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertFontStyle", parentLocator, locator, text);
     }
 
-    public void assertFontStyleContain(String locator, String text) throws Throwable {
-        runCommand("assertFontStyleContain", locator, text, null);
+    public void assertFontStyleMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontStyleMatch", locator, text, null);
     }
 
-    public void assertFontStyleContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontStyleContain", parentLocator, locator, text);
+    public void assertFontStyleMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontStyleMatch", parentLocator, locator, text);
     }
 
-    public void assertFontStyleNotContain(String locator, String text) throws Throwable {
-        runCommand("assertFontStyleNotContain", locator, text, null);
+    public void assertFontStyleNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontStyleNotMatch", locator, text, null);
     }
 
-    public void assertFontStyleNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontStyleNotContain", parentLocator, locator, text);
+    public void assertFontStyleNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontStyleNotMatch", parentLocator, locator, text);
     }
 
     public void assertFontWeight(String locator, String text) throws Throwable {
@@ -420,32 +420,32 @@ public class WebExcelium extends Excelium {
         runCommand("assertFontWeight", parentLocator, locator, text);
     }
 
-    public void assertFontWeightContain(String locator, String text) throws Throwable {
-        runCommand("assertFontWeightContain", locator, text, null);
+    public void assertFontWeightMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontWeightMatch", locator, text, null);
     }
 
-    public void assertFontWeightContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontWeightContain", parentLocator, locator, text);
+    public void assertFontWeightMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontWeightMatch", parentLocator, locator, text);
     }
 
-    public void assertFontWeightNotContain(String locator, String text) throws Throwable {
-        runCommand("assertFontWeightNotContain", locator, text, null);
+    public void assertFontWeightNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertFontWeightNotMatch", locator, text, null);
     }
 
-    public void assertFontWeightNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertFontWeightNotContain", parentLocator, locator, text);
+    public void assertFontWeightNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertFontWeightNotMatch", parentLocator, locator, text);
     }
 
     public void assertHtmlSource(String text) throws Throwable {
         runCommand("assertHtmlSource", text, null, null);
     }
 
-    public void assertHtmlSourceContain(String text) throws Throwable {
-        runCommand("assertHtmlSourceContain", text, null, null);
+    public void assertHtmlSourceMatch(String text) throws Throwable {
+        runCommand("assertHtmlSourceMatch", text, null, null);
     }
 
-    public void assertHtmlSourceNotContain(String text) throws Throwable {
-        runCommand("assertHtmlSourceNotContain", text, null, null);
+    public void assertHtmlSourceNotMatch(String text) throws Throwable {
+        runCommand("assertHtmlSourceNotMatch", text, null, null);
     }
 
     public void assertIntegerListOrderAsc(String locator) throws Throwable {
@@ -484,12 +484,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertLocation", text, null, null);
     }
 
-    public void assertLocationContain(String text) throws Throwable {
-        runCommand("assertLocationContain", text, null, null);
+    public void assertLocationMatch(String text) throws Throwable {
+        runCommand("assertLocationMatch", text, null, null);
     }
 
-    public void assertLocationNotContain(String text) throws Throwable {
-        runCommand("assertLocationNotContain", text, null, null);
+    public void assertLocationNotMatch(String text) throws Throwable {
+        runCommand("assertLocationNotMatch", text, null, null);
     }
 
     public void assertNotAlert(String text) throws Throwable {
@@ -792,12 +792,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertPrompt", text, null, null);
     }
 
-    public void assertPromptContain(String text) throws Throwable {
-        runCommand("assertPromptContain", text, null, null);
+    public void assertPromptMatch(String text) throws Throwable {
+        runCommand("assertPromptMatch", text, null, null);
     }
 
-    public void assertPromptNotContain(String text) throws Throwable {
-        runCommand("assertPromptNotContain", text, null, null);
+    public void assertPromptNotMatch(String text) throws Throwable {
+        runCommand("assertPromptNotMatch", text, null, null);
     }
 
     public void assertPromptNotPresent() throws Throwable {
@@ -828,20 +828,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertSelectedId", parentLocator, locator, text);
     }
 
-    public void assertSelectedIdContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedIdContain", locator, text, null);
+    public void assertSelectedIdMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdMatch", locator, text, null);
     }
 
-    public void assertSelectedIdContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedIdContain", parentLocator, locator, text);
+    public void assertSelectedIdMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdMatch", parentLocator, locator, text);
     }
 
-    public void assertSelectedIdNotContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedIdNotContain", locator, text, null);
+    public void assertSelectedIdNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdNotMatch", locator, text, null);
     }
 
-    public void assertSelectedIdNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedIdNotContain", parentLocator, locator, text);
+    public void assertSelectedIdNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdNotMatch", parentLocator, locator, text);
     }
 
     public void assertSelectedIndex(String locator, String text) throws Throwable {
@@ -852,20 +852,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertSelectedIndex", parentLocator, locator, text);
     }
 
-    public void assertSelectedIndexContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedIndexContain", locator, text, null);
+    public void assertSelectedIndexMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexMatch", locator, text, null);
     }
 
-    public void assertSelectedIndexContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedIndexContain", parentLocator, locator, text);
+    public void assertSelectedIndexMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexMatch", parentLocator, locator, text);
     }
 
-    public void assertSelectedIndexNotContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedIndexNotContain", locator, text, null);
+    public void assertSelectedIndexNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexNotMatch", locator, text, null);
     }
 
-    public void assertSelectedIndexNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedIndexNotContain", parentLocator, locator, text);
+    public void assertSelectedIndexNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexNotMatch", parentLocator, locator, text);
     }
 
     public void assertSelectedLabel(String locator, String text) throws Throwable {
@@ -876,20 +876,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertSelectedLabel", parentLocator, locator, text);
     }
 
-    public void assertSelectedLabelContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedLabelContain", locator, text, null);
+    public void assertSelectedLabelMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelMatch", locator, text, null);
     }
 
-    public void assertSelectedLabelContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedLabelContain", parentLocator, locator, text);
+    public void assertSelectedLabelMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelMatch", parentLocator, locator, text);
     }
 
-    public void assertSelectedLabelNotContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedLabelNotContain", locator, text, null);
+    public void assertSelectedLabelNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelNotMatch", locator, text, null);
     }
 
-    public void assertSelectedLabelNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedLabelNotContain", parentLocator, locator, text);
+    public void assertSelectedLabelNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelNotMatch", parentLocator, locator, text);
     }
 
     public void assertSelectedValue(String locator, String text) throws Throwable {
@@ -900,20 +900,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertSelectedValue", parentLocator, locator, text);
     }
 
-    public void assertSelectedValueContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedValueContain", locator, text, null);
+    public void assertSelectedValueMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedValueMatch", locator, text, null);
     }
 
-    public void assertSelectedValueContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedValueContain", parentLocator, locator, text);
+    public void assertSelectedValueMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedValueMatch", parentLocator, locator, text);
     }
 
-    public void assertSelectedValueNotContain(String locator, String text) throws Throwable {
-        runCommand("assertSelectedValueNotContain", locator, text, null);
+    public void assertSelectedValueNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedValueNotMatch", locator, text, null);
     }
 
-    public void assertSelectedValueNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertSelectedValueNotContain", parentLocator, locator, text);
+    public void assertSelectedValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedValueNotMatch", parentLocator, locator, text);
     }
 
     public void assertSomethingSelected(String locator) throws Throwable {
@@ -928,12 +928,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertTable", locator, cellAddress, text);
     }
 
-    public void assertTableContain(String locator, String cellAddress, String text) throws Throwable {
-        runCommand("assertTableContain", locator, cellAddress, text);
+    public void assertTableMatch(String locator, String cellAddress, String text) throws Throwable {
+        runCommand("assertTableMatch", locator, cellAddress, text);
     }
 
-    public void assertTableNotContain(String locator, String cellAddress, String text) throws Throwable {
-        runCommand("assertTableNotContain", locator, cellAddress, text);
+    public void assertTableNotMatch(String locator, String cellAddress, String text) throws Throwable {
+        runCommand("assertTableNotMatch", locator, cellAddress, text);
     }
 
     public void assertText(String locator, String text) throws Throwable {
@@ -952,28 +952,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertTextAlignment", parentLocator, locator, text);
     }
 
-    public void assertTextAlignmentContain(String locator, String text) throws Throwable {
-        runCommand("assertTextAlignmentContain", locator, text, null);
+    public void assertTextAlignmentMatch(String locator, String text) throws Throwable {
+        runCommand("assertTextAlignmentMatch", locator, text, null);
     }
 
-    public void assertTextAlignmentContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertTextAlignmentContain", parentLocator, locator, text);
+    public void assertTextAlignmentMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTextAlignmentMatch", parentLocator, locator, text);
     }
 
-    public void assertTextAlignmentNotContain(String locator, String text) throws Throwable {
-        runCommand("assertTextAlignmentNotContain", locator, text, null);
+    public void assertTextAlignmentNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertTextAlignmentNotMatch", locator, text, null);
     }
 
-    public void assertTextAlignmentNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertTextAlignmentNotContain", parentLocator, locator, text);
-    }
-
-    public void assertTextContain(String locator, String text) throws Throwable {
-        runCommand("assertTextContain", locator, text, null);
-    }
-
-    public void assertTextContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertTextContain", parentLocator, locator, text);
+    public void assertTextAlignmentNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTextAlignmentNotMatch", parentLocator, locator, text);
     }
 
     public void assertTextDecoration(String locator, String text) throws Throwable {
@@ -984,20 +976,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertTextDecoration", parentLocator, locator, text);
     }
 
-    public void assertTextDecorationContain(String locator, String text) throws Throwable {
-        runCommand("assertTextDecorationContain", locator, text, null);
+    public void assertTextDecorationMatch(String locator, String text) throws Throwable {
+        runCommand("assertTextDecorationMatch", locator, text, null);
     }
 
-    public void assertTextDecorationContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertTextDecorationContain", parentLocator, locator, text);
+    public void assertTextDecorationMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTextDecorationMatch", parentLocator, locator, text);
     }
 
-    public void assertTextDecorationNotContain(String locator, String text) throws Throwable {
-        runCommand("assertTextDecorationNotContain", locator, text, null);
+    public void assertTextDecorationNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertTextDecorationNotMatch", locator, text, null);
     }
 
-    public void assertTextDecorationNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertTextDecorationNotContain", parentLocator, locator, text);
+    public void assertTextDecorationNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTextDecorationNotMatch", parentLocator, locator, text);
     }
 
     public void assertTextEmpty(String locator) throws Throwable {
@@ -1024,12 +1016,20 @@ public class WebExcelium extends Excelium {
         runCommand("assertTextListOrderDesc", parentLocator, locator, null);
     }
 
-    public void assertTextNotContain(String locator, String text) throws Throwable {
-        runCommand("assertTextNotContain", locator, text, null);
+    public void assertTextMatch(String locator, String text) throws Throwable {
+        runCommand("assertTextMatch", locator, text, null);
     }
 
-    public void assertTextNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertTextNotContain", parentLocator, locator, text);
+    public void assertTextMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTextMatch", parentLocator, locator, text);
+    }
+
+    public void assertTextNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertTextNotMatch", locator, text, null);
+    }
+
+    public void assertTextNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTextNotMatch", parentLocator, locator, text);
     }
 
     public void assertTextNotPresent(String pattern) throws Throwable {
@@ -1044,12 +1044,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertTitle", text, null, null);
     }
 
-    public void assertTitleContain(String text) throws Throwable {
-        runCommand("assertTitleContain", text, null, null);
+    public void assertTitleMatch(String text) throws Throwable {
+        runCommand("assertTitleMatch", text, null, null);
     }
 
-    public void assertTitleNotContain(String text) throws Throwable {
-        runCommand("assertTitleNotContain", text, null, null);
+    public void assertTitleNotMatch(String text) throws Throwable {
+        runCommand("assertTitleNotMatch", text, null, null);
     }
 
     public void assertValue(String locator, String text) throws Throwable {
@@ -1060,14 +1060,6 @@ public class WebExcelium extends Excelium {
         runCommand("assertValue", parentLocator, locator, text);
     }
 
-    public void assertValueContain(String locator, String text) throws Throwable {
-        runCommand("assertValueContain", locator, text, null);
-    }
-
-    public void assertValueContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertValueContain", parentLocator, locator, text);
-    }
-
     public void assertValueEmpty(String locator) throws Throwable {
         runCommand("assertValueEmpty", locator, null, null);
     }
@@ -1076,24 +1068,32 @@ public class WebExcelium extends Excelium {
         runCommand("assertValueEmpty", parentLocator, locator, null);
     }
 
-    public void assertValueNotContain(String locator, String text) throws Throwable {
-        runCommand("assertValueNotContain", locator, text, null);
+    public void assertValueMatch(String locator, String text) throws Throwable {
+        runCommand("assertValueMatch", locator, text, null);
     }
 
-    public void assertValueNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("assertValueNotContain", parentLocator, locator, text);
+    public void assertValueMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertValueMatch", parentLocator, locator, text);
+    }
+
+    public void assertValueNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertValueNotMatch", locator, text, null);
+    }
+
+    public void assertValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertValueNotMatch", parentLocator, locator, text);
     }
 
     public void assertVariable(String variable, String text) throws Throwable {
         runCommand("assertVariable", variable, text, null);
     }
 
-    public void assertVariableContain(String variable, String text) throws Throwable {
-        runCommand("assertVariableContain", variable, text, null);
+    public void assertVariableMatch(String variable, String text) throws Throwable {
+        runCommand("assertVariableMatch", variable, text, null);
     }
 
-    public void assertVariableNotContain(String variable, String text) throws Throwable {
-        runCommand("assertVariableNotContain", variable, text, null);
+    public void assertVariableNotMatch(String variable, String text) throws Throwable {
+        runCommand("assertVariableNotMatch", variable, text, null);
     }
 
     public void assertVisible(String locator) throws Throwable {
@@ -1260,12 +1260,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfAlert", action, text, null);
     }
 
-    public void executeIfAlertContain(String action, String text) throws Throwable {
-        runCommand("executeIfAlertContain", action, text, null);
+    public void executeIfAlertMatch(String action, String text) throws Throwable {
+        runCommand("executeIfAlertMatch", action, text, null);
     }
 
-    public void executeIfAlertNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfAlertNotContain", action, text, null);
+    public void executeIfAlertNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfAlertNotMatch", action, text, null);
     }
 
     public void executeIfAlertNotPresent(String action) throws Throwable {
@@ -1280,12 +1280,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfBodyText", action, text, null);
     }
 
-    public void executeIfBodyTextContain(String action, String text) throws Throwable {
-        runCommand("executeIfBodyTextContain", action, text, null);
+    public void executeIfBodyTextMatch(String action, String text) throws Throwable {
+        runCommand("executeIfBodyTextMatch", action, text, null);
     }
 
-    public void executeIfBodyTextNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfBodyTextNotContain", action, text, null);
+    public void executeIfBodyTextNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfBodyTextNotMatch", action, text, null);
     }
 
     public void executeIfChecked(String action, String locator) throws Throwable {
@@ -1300,12 +1300,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfConfirmation", action, text, null);
     }
 
-    public void executeIfConfirmationContain(String action, String text) throws Throwable {
-        runCommand("executeIfConfirmationContain", action, text, null);
+    public void executeIfConfirmationMatch(String action, String text) throws Throwable {
+        runCommand("executeIfConfirmationMatch", action, text, null);
     }
 
-    public void executeIfConfirmationNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfConfirmationNotContain", action, text, null);
+    public void executeIfConfirmationNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfConfirmationNotMatch", action, text, null);
     }
 
     public void executeIfConfirmationNotPresent(String action) throws Throwable {
@@ -1324,20 +1324,20 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfCookieByName", action, name, text);
     }
 
-    public void executeIfCookieByNameContain(String action, String name, String text) throws Throwable {
-        runCommand("executeIfCookieByNameContain", action, name, text);
+    public void executeIfCookieByNameMatch(String action, String name, String text) throws Throwable {
+        runCommand("executeIfCookieByNameMatch", action, name, text);
     }
 
-    public void executeIfCookieByNameNotContain(String action, String name, String text) throws Throwable {
-        runCommand("executeIfCookieByNameNotContain", action, name, text);
+    public void executeIfCookieByNameNotMatch(String action, String name, String text) throws Throwable {
+        runCommand("executeIfCookieByNameNotMatch", action, name, text);
     }
 
-    public void executeIfCookieContain(String action, String text) throws Throwable {
-        runCommand("executeIfCookieContain", action, text, null);
+    public void executeIfCookieMatch(String action, String text) throws Throwable {
+        runCommand("executeIfCookieMatch", action, text, null);
     }
 
-    public void executeIfCookieNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfCookieNotContain", action, text, null);
+    public void executeIfCookieNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfCookieNotMatch", action, text, null);
     }
 
     public void executeIfCookieNotPresent(String action, String name) throws Throwable {
@@ -1380,12 +1380,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfEvalScript", action, script, text);
     }
 
-    public void executeIfEvalScriptContain(String action, String script, String text) throws Throwable {
-        runCommand("executeIfEvalScriptContain", action, script, text);
+    public void executeIfEvalScriptMatch(String action, String script, String text) throws Throwable {
+        runCommand("executeIfEvalScriptMatch", action, script, text);
     }
 
-    public void executeIfEvalScriptNotContain(String action, String script, String text) throws Throwable {
-        runCommand("executeIfEvalScriptNotContain", action, script, text);
+    public void executeIfEvalScriptNotMatch(String action, String script, String text) throws Throwable {
+        runCommand("executeIfEvalScriptNotMatch", action, script, text);
     }
 
     public void executeIfExistsInDatabase(String action, String sql) throws Throwable {
@@ -1396,24 +1396,24 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfExpression", action, expression, text);
     }
 
-    public void executeIfExpressionContain(String action, String expression, String text) throws Throwable {
-        runCommand("executeIfExpressionContain", action, expression, text);
+    public void executeIfExpressionMatch(String action, String expression, String text) throws Throwable {
+        runCommand("executeIfExpressionMatch", action, expression, text);
     }
 
-    public void executeIfExpressionNotContain(String action, String expression, String text) throws Throwable {
-        runCommand("executeIfExpressionNotContain", action, expression, text);
+    public void executeIfExpressionNotMatch(String action, String expression, String text) throws Throwable {
+        runCommand("executeIfExpressionNotMatch", action, expression, text);
     }
 
     public void executeIfHtmlSource(String action, String text) throws Throwable {
         runCommand("executeIfHtmlSource", action, text, null);
     }
 
-    public void executeIfHtmlSourceContain(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSourceContain", action, text, null);
+    public void executeIfHtmlSourceMatch(String action, String text) throws Throwable {
+        runCommand("executeIfHtmlSourceMatch", action, text, null);
     }
 
-    public void executeIfHtmlSourceNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSourceNotContain", action, text, null);
+    public void executeIfHtmlSourceNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfHtmlSourceNotMatch", action, text, null);
     }
 
     public void executeIfListContain(String action, String variable, String text) throws Throwable {
@@ -1428,12 +1428,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfLocation", action, text, null);
     }
 
-    public void executeIfLocationContain(String action, String text) throws Throwable {
-        runCommand("executeIfLocationContain", action, text, null);
+    public void executeIfLocationMatch(String action, String text) throws Throwable {
+        runCommand("executeIfLocationMatch", action, text, null);
     }
 
-    public void executeIfLocationNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfLocationNotContain", action, text, null);
+    public void executeIfLocationNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfLocationNotMatch", action, text, null);
     }
 
     public void executeIfNotAlert(String action, String text) throws Throwable {
@@ -1568,12 +1568,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfPrompt", action, text, null);
     }
 
-    public void executeIfPromptContain(String action, String text) throws Throwable {
-        runCommand("executeIfPromptContain", action, text, null);
+    public void executeIfPromptMatch(String action, String text) throws Throwable {
+        runCommand("executeIfPromptMatch", action, text, null);
     }
 
-    public void executeIfPromptNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfPromptNotContain", action, text, null);
+    public void executeIfPromptNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfPromptNotMatch", action, text, null);
     }
 
     public void executeIfPromptNotPresent(String action) throws Throwable {
@@ -1588,48 +1588,48 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfSelectedId", action, locator, text);
     }
 
-    public void executeIfSelectedIdContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedIdContain", action, locator, text);
+    public void executeIfSelectedIdMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedIdMatch", action, locator, text);
     }
 
-    public void executeIfSelectedIdNotContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedIdNotContain", action, locator, text);
+    public void executeIfSelectedIdNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedIdNotMatch", action, locator, text);
     }
 
     public void executeIfSelectedIndex(String action, String locator, String text) throws Throwable {
         runCommand("executeIfSelectedIndex", action, locator, text);
     }
 
-    public void executeIfSelectedIndexContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedIndexContain", action, locator, text);
+    public void executeIfSelectedIndexMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedIndexMatch", action, locator, text);
     }
 
-    public void executeIfSelectedIndexNotContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedIndexNotContain", action, locator, text);
+    public void executeIfSelectedIndexNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedIndexNotMatch", action, locator, text);
     }
 
     public void executeIfSelectedLabel(String action, String locator, String text) throws Throwable {
         runCommand("executeIfSelectedLabel", action, locator, text);
     }
 
-    public void executeIfSelectedLabelContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedLabelContain", action, locator, text);
+    public void executeIfSelectedLabelMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedLabelMatch", action, locator, text);
     }
 
-    public void executeIfSelectedLabelNotContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedLabelNotContain", action, locator, text);
+    public void executeIfSelectedLabelNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedLabelNotMatch", action, locator, text);
     }
 
     public void executeIfSelectedValue(String action, String locator, String text) throws Throwable {
         runCommand("executeIfSelectedValue", action, locator, text);
     }
 
-    public void executeIfSelectedValueContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedValueContain", action, locator, text);
+    public void executeIfSelectedValueMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedValueMatch", action, locator, text);
     }
 
-    public void executeIfSelectedValueNotContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfSelectedValueNotContain", action, locator, text);
+    public void executeIfSelectedValueNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfSelectedValueNotMatch", action, locator, text);
     }
 
     public void executeIfSomethingSelected(String action, String locator) throws Throwable {
@@ -1644,10 +1644,6 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfText", action, locator, text);
     }
 
-    public void executeIfTextContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfTextContain", action, locator, text);
-    }
-
     public void executeIfTextEmpty(String action, String locator) throws Throwable {
         runCommand("executeIfTextEmpty", action, locator, null);
     }
@@ -1656,8 +1652,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfTextEmpty", action, parentLocator, locator);
     }
 
-    public void executeIfTextNotContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfTextNotContain", action, locator, text);
+    public void executeIfTextMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfTextMatch", action, locator, text);
+    }
+
+    public void executeIfTextNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfTextNotMatch", action, locator, text);
     }
 
     public void executeIfTextNotPresent(String action, String pattern) throws Throwable {
@@ -1672,20 +1672,16 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfTitle", action, text, null);
     }
 
-    public void executeIfTitleContain(String action, String text) throws Throwable {
-        runCommand("executeIfTitleContain", action, text, null);
+    public void executeIfTitleMatch(String action, String text) throws Throwable {
+        runCommand("executeIfTitleMatch", action, text, null);
     }
 
-    public void executeIfTitleNotContain(String action, String text) throws Throwable {
-        runCommand("executeIfTitleNotContain", action, text, null);
+    public void executeIfTitleNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfTitleNotMatch", action, text, null);
     }
 
     public void executeIfValue(String action, String locator, String text) throws Throwable {
         runCommand("executeIfValue", action, locator, text);
-    }
-
-    public void executeIfValueContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfValueContain", action, locator, text);
     }
 
     public void executeIfValueEmpty(String action, String locator) throws Throwable {
@@ -1696,20 +1692,24 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfValueEmpty", action, parentLocator, locator);
     }
 
-    public void executeIfValueNotContain(String action, String locator, String text) throws Throwable {
-        runCommand("executeIfValueNotContain", action, locator, text);
+    public void executeIfValueMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfValueMatch", action, locator, text);
+    }
+
+    public void executeIfValueNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfValueNotMatch", action, locator, text);
     }
 
     public void executeIfVariable(String action, String variable, String text) throws Throwable {
         runCommand("executeIfVariable", action, variable, text);
     }
 
-    public void executeIfVariableContain(String action, String variable, String text) throws Throwable {
-        runCommand("executeIfVariableContain", action, variable, text);
+    public void executeIfVariableMatch(String action, String variable, String text) throws Throwable {
+        runCommand("executeIfVariableMatch", action, variable, text);
     }
 
-    public void executeIfVariableNotContain(String action, String variable, String text) throws Throwable {
-        runCommand("executeIfVariableNotContain", action, variable, text);
+    public void executeIfVariableNotMatch(String action, String variable, String text) throws Throwable {
+        runCommand("executeIfVariableNotMatch", action, variable, text);
     }
 
     public void executeIfVisible(String action, String locator) throws Throwable {
@@ -1768,6 +1768,10 @@ public class WebExcelium extends Excelium {
         runCommand("keyDown", parentLocator, locator, keySequence);
     }
 
+    public void keyPress(String keycode) throws Throwable {
+        runCommand("keyPress", keycode, null, null);
+    }
+
     public void keyPress(String locator, String keySequence) throws Throwable {
         runCommand("keyPress", locator, keySequence, null);
     }
@@ -1776,8 +1780,8 @@ public class WebExcelium extends Excelium {
         runCommand("keyPress", parentLocator, locator, keySequence);
     }
 
-    public void keyPress(String keycode) throws Throwable {
-        runCommand("keyPress", keycode, null, null);
+    public void keyUp(String keycode) throws Throwable {
+        runCommand("keyUp", keycode, null, null);
     }
 
     public void keyUp(String locator, String keySequence) throws Throwable {
@@ -1786,10 +1790,6 @@ public class WebExcelium extends Excelium {
 
     public void keyUp(String parentLocator, String locator, String keySequence) throws Throwable {
         runCommand("keyUp", parentLocator, locator, keySequence);
-    }
-
-    public void keyUp(String keycode) throws Throwable {
-        runCommand("keyUp", keycode, null, null);
     }
 
     public void metaKeyDown() throws Throwable {
@@ -2244,12 +2244,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyAlert", text, null, null);
     }
 
-    public void verifyAlertContain(String text) throws Throwable {
-        runCommand("verifyAlertContain", text, null, null);
+    public void verifyAlertMatch(String text) throws Throwable {
+        runCommand("verifyAlertMatch", text, null, null);
     }
 
-    public void verifyAlertNotContain(String text) throws Throwable {
-        runCommand("verifyAlertNotContain", text, null, null);
+    public void verifyAlertNotMatch(String text) throws Throwable {
+        runCommand("verifyAlertNotMatch", text, null, null);
     }
 
     public void verifyAlertNotPresent() throws Throwable {
@@ -2264,12 +2264,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyAttribute", locator, name, text);
     }
 
-    public void verifyAttributeContain(String locator, String name, String text) throws Throwable {
-        runCommand("verifyAttributeContain", locator, name, text);
+    public void verifyAttributeMatch(String locator, String name, String text) throws Throwable {
+        runCommand("verifyAttributeMatch", locator, name, text);
     }
 
-    public void verifyAttributeNotContain(String locator, String name, String text) throws Throwable {
-        runCommand("verifyAttributeNotContain", locator, name, text);
+    public void verifyAttributeNotMatch(String locator, String name, String text) throws Throwable {
+        runCommand("verifyAttributeNotMatch", locator, name, text);
     }
 
     public void verifyBackgroundColor(String locator, String text) throws Throwable {
@@ -2284,12 +2284,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyBodyText", text, null, null);
     }
 
-    public void verifyBodyTextContain(String text) throws Throwable {
-        runCommand("verifyBodyTextContain", text, null, null);
+    public void verifyBodyTextMatch(String text) throws Throwable {
+        runCommand("verifyBodyTextMatch", text, null, null);
     }
 
-    public void verifyBodyTextNotContain(String text) throws Throwable {
-        runCommand("verifyBodyTextNotContain", text, null, null);
+    public void verifyBodyTextNotMatch(String text) throws Throwable {
+        runCommand("verifyBodyTextNotMatch", text, null, null);
     }
 
     public void verifyBorderColor(String locator, String text) throws Throwable {
@@ -2320,12 +2320,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyConfirmation", text, null, null);
     }
 
-    public void verifyConfirmationContain(String text) throws Throwable {
-        runCommand("verifyConfirmationContain", text, null, null);
+    public void verifyConfirmationMatch(String text) throws Throwable {
+        runCommand("verifyConfirmationMatch", text, null, null);
     }
 
-    public void verifyConfirmationNotContain(String text) throws Throwable {
-        runCommand("verifyConfirmationNotContain", text, null, null);
+    public void verifyConfirmationNotMatch(String text) throws Throwable {
+        runCommand("verifyConfirmationNotMatch", text, null, null);
     }
 
     public void verifyConfirmationNotPresent() throws Throwable {
@@ -2344,20 +2344,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifyCookieByName", name, text, null);
     }
 
-    public void verifyCookieByNameContain(String name, String text) throws Throwable {
-        runCommand("verifyCookieByNameContain", name, text, null);
+    public void verifyCookieByNameMatch(String name, String text) throws Throwable {
+        runCommand("verifyCookieByNameMatch", name, text, null);
     }
 
-    public void verifyCookieByNameNotContain(String name, String text) throws Throwable {
-        runCommand("verifyCookieByNameNotContain", name, text, null);
+    public void verifyCookieByNameNotMatch(String name, String text) throws Throwable {
+        runCommand("verifyCookieByNameNotMatch", name, text, null);
     }
 
-    public void verifyCookieContain(String text) throws Throwable {
-        runCommand("verifyCookieContain", text, null, null);
+    public void verifyCookieMatch(String text) throws Throwable {
+        runCommand("verifyCookieMatch", text, null, null);
     }
 
-    public void verifyCookieNotContain(String text) throws Throwable {
-        runCommand("verifyCookieNotContain", text, null, null);
+    public void verifyCookieNotMatch(String text) throws Throwable {
+        runCommand("verifyCookieNotMatch", text, null, null);
     }
 
     public void verifyCookieNotPresent(String name) throws Throwable {
@@ -2468,12 +2468,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyEvalScript", script, text, null);
     }
 
-    public void verifyEvalScriptContain(String script, String text) throws Throwable {
-        runCommand("verifyEvalScriptContain", script, text, null);
+    public void verifyEvalScriptMatch(String script, String text) throws Throwable {
+        runCommand("verifyEvalScriptMatch", script, text, null);
     }
 
-    public void verifyEvalScriptNotContain(String script, String text) throws Throwable {
-        runCommand("verifyEvalScriptNotContain", script, text, null);
+    public void verifyEvalScriptNotMatch(String script, String text) throws Throwable {
+        runCommand("verifyEvalScriptNotMatch", script, text, null);
     }
 
     public void verifyExistsInDatabase(String sql) throws Throwable {
@@ -2484,12 +2484,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyExpression", expression, text, null);
     }
 
-    public void verifyExpressionContain(String expression, String text) throws Throwable {
-        runCommand("verifyExpressionContain", expression, text, null);
+    public void verifyExpressionMatch(String expression, String text) throws Throwable {
+        runCommand("verifyExpressionMatch", expression, text, null);
     }
 
-    public void verifyExpressionNotContain(String expression, String text) throws Throwable {
-        runCommand("verifyExpressionNotContain", expression, text, null);
+    public void verifyExpressionNotMatch(String expression, String text) throws Throwable {
+        runCommand("verifyExpressionNotMatch", expression, text, null);
     }
 
     public void verifyFontFamily(String locator, String text) throws Throwable {
@@ -2500,20 +2500,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifyFontFamily", parentLocator, locator, text);
     }
 
-    public void verifyFontFamilyContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontFamilyContain", locator, text, null);
+    public void verifyFontFamilyMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontFamilyMatch", locator, text, null);
     }
 
-    public void verifyFontFamilyContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontFamilyContain", parentLocator, locator, text);
+    public void verifyFontFamilyMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontFamilyMatch", parentLocator, locator, text);
     }
 
-    public void verifyFontFamilyNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontFamilyNotContain", locator, text, null);
+    public void verifyFontFamilyNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontFamilyNotMatch", locator, text, null);
     }
 
-    public void verifyFontFamilyNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontFamilyNotContain", parentLocator, locator, text);
+    public void verifyFontFamilyNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontFamilyNotMatch", parentLocator, locator, text);
     }
 
     public void verifyFontSize(String locator, String text) throws Throwable {
@@ -2524,20 +2524,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifyFontSize", parentLocator, locator, text);
     }
 
-    public void verifyFontSizeContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontSizeContain", locator, text, null);
+    public void verifyFontSizeMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontSizeMatch", locator, text, null);
     }
 
-    public void verifyFontSizeContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontSizeContain", parentLocator, locator, text);
+    public void verifyFontSizeMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontSizeMatch", parentLocator, locator, text);
     }
 
-    public void verifyFontSizeNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontSizeNotContain", locator, text, null);
+    public void verifyFontSizeNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontSizeNotMatch", locator, text, null);
     }
 
-    public void verifyFontSizeNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontSizeNotContain", parentLocator, locator, text);
+    public void verifyFontSizeNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontSizeNotMatch", parentLocator, locator, text);
     }
 
     public void verifyFontStyle(String locator, String text) throws Throwable {
@@ -2548,20 +2548,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifyFontStyle", parentLocator, locator, text);
     }
 
-    public void verifyFontStyleContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontStyleContain", locator, text, null);
+    public void verifyFontStyleMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontStyleMatch", locator, text, null);
     }
 
-    public void verifyFontStyleContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontStyleContain", parentLocator, locator, text);
+    public void verifyFontStyleMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontStyleMatch", parentLocator, locator, text);
     }
 
-    public void verifyFontStyleNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontStyleNotContain", locator, text, null);
+    public void verifyFontStyleNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontStyleNotMatch", locator, text, null);
     }
 
-    public void verifyFontStyleNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontStyleNotContain", parentLocator, locator, text);
+    public void verifyFontStyleNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontStyleNotMatch", parentLocator, locator, text);
     }
 
     public void verifyFontWeight(String locator, String text) throws Throwable {
@@ -2572,32 +2572,32 @@ public class WebExcelium extends Excelium {
         runCommand("verifyFontWeight", parentLocator, locator, text);
     }
 
-    public void verifyFontWeightContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontWeightContain", locator, text, null);
+    public void verifyFontWeightMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontWeightMatch", locator, text, null);
     }
 
-    public void verifyFontWeightContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontWeightContain", parentLocator, locator, text);
+    public void verifyFontWeightMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontWeightMatch", parentLocator, locator, text);
     }
 
-    public void verifyFontWeightNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyFontWeightNotContain", locator, text, null);
+    public void verifyFontWeightNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyFontWeightNotMatch", locator, text, null);
     }
 
-    public void verifyFontWeightNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyFontWeightNotContain", parentLocator, locator, text);
+    public void verifyFontWeightNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyFontWeightNotMatch", parentLocator, locator, text);
     }
 
     public void verifyHtmlSource(String text) throws Throwable {
         runCommand("verifyHtmlSource", text, null, null);
     }
 
-    public void verifyHtmlSourceContain(String text) throws Throwable {
-        runCommand("verifyHtmlSourceContain", text, null, null);
+    public void verifyHtmlSourceMatch(String text) throws Throwable {
+        runCommand("verifyHtmlSourceMatch", text, null, null);
     }
 
-    public void verifyHtmlSourceNotContain(String text) throws Throwable {
-        runCommand("verifyHtmlSourceNotContain", text, null, null);
+    public void verifyHtmlSourceNotMatch(String text) throws Throwable {
+        runCommand("verifyHtmlSourceNotMatch", text, null, null);
     }
 
     public void verifyIntegerListOrderAsc(String locator) throws Throwable {
@@ -2636,12 +2636,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyLocation", text, null, null);
     }
 
-    public void verifyLocationContain(String text) throws Throwable {
-        runCommand("verifyLocationContain", text, null, null);
+    public void verifyLocationMatch(String text) throws Throwable {
+        runCommand("verifyLocationMatch", text, null, null);
     }
 
-    public void verifyLocationNotContain(String text) throws Throwable {
-        runCommand("verifyLocationNotContain", text, null, null);
+    public void verifyLocationNotMatch(String text) throws Throwable {
+        runCommand("verifyLocationNotMatch", text, null, null);
     }
 
     public void verifyNotAlert(String text) throws Throwable {
@@ -2944,12 +2944,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyPrompt", text, null, null);
     }
 
-    public void verifyPromptContain(String text) throws Throwable {
-        runCommand("verifyPromptContain", text, null, null);
+    public void verifyPromptMatch(String text) throws Throwable {
+        runCommand("verifyPromptMatch", text, null, null);
     }
 
-    public void verifyPromptNotContain(String text) throws Throwable {
-        runCommand("verifyPromptNotContain", text, null, null);
+    public void verifyPromptNotMatch(String text) throws Throwable {
+        runCommand("verifyPromptNotMatch", text, null, null);
     }
 
     public void verifyPromptNotPresent() throws Throwable {
@@ -2980,20 +2980,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifySelectedId", parentLocator, locator, text);
     }
 
-    public void verifySelectedIdContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedIdContain", locator, text, null);
+    public void verifySelectedIdMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdMatch", locator, text, null);
     }
 
-    public void verifySelectedIdContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedIdContain", parentLocator, locator, text);
+    public void verifySelectedIdMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdMatch", parentLocator, locator, text);
     }
 
-    public void verifySelectedIdNotContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedIdNotContain", locator, text, null);
+    public void verifySelectedIdNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdNotMatch", locator, text, null);
     }
 
-    public void verifySelectedIdNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedIdNotContain", parentLocator, locator, text);
+    public void verifySelectedIdNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdNotMatch", parentLocator, locator, text);
     }
 
     public void verifySelectedIndex(String locator, String text) throws Throwable {
@@ -3004,20 +3004,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifySelectedIndex", parentLocator, locator, text);
     }
 
-    public void verifySelectedIndexContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedIndexContain", locator, text, null);
+    public void verifySelectedIndexMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexMatch", locator, text, null);
     }
 
-    public void verifySelectedIndexContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedIndexContain", parentLocator, locator, text);
+    public void verifySelectedIndexMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexMatch", parentLocator, locator, text);
     }
 
-    public void verifySelectedIndexNotContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedIndexNotContain", locator, text, null);
+    public void verifySelectedIndexNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexNotMatch", locator, text, null);
     }
 
-    public void verifySelectedIndexNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedIndexNotContain", parentLocator, locator, text);
+    public void verifySelectedIndexNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexNotMatch", parentLocator, locator, text);
     }
 
     public void verifySelectedLabel(String locator, String text) throws Throwable {
@@ -3028,20 +3028,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifySelectedLabel", parentLocator, locator, text);
     }
 
-    public void verifySelectedLabelContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedLabelContain", locator, text, null);
+    public void verifySelectedLabelMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelMatch", locator, text, null);
     }
 
-    public void verifySelectedLabelContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedLabelContain", parentLocator, locator, text);
+    public void verifySelectedLabelMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelMatch", parentLocator, locator, text);
     }
 
-    public void verifySelectedLabelNotContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedLabelNotContain", locator, text, null);
+    public void verifySelectedLabelNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelNotMatch", locator, text, null);
     }
 
-    public void verifySelectedLabelNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedLabelNotContain", parentLocator, locator, text);
+    public void verifySelectedLabelNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelNotMatch", parentLocator, locator, text);
     }
 
     public void verifySelectedValue(String locator, String text) throws Throwable {
@@ -3052,20 +3052,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifySelectedValue", parentLocator, locator, text);
     }
 
-    public void verifySelectedValueContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedValueContain", locator, text, null);
+    public void verifySelectedValueMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedValueMatch", locator, text, null);
     }
 
-    public void verifySelectedValueContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedValueContain", parentLocator, locator, text);
+    public void verifySelectedValueMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedValueMatch", parentLocator, locator, text);
     }
 
-    public void verifySelectedValueNotContain(String locator, String text) throws Throwable {
-        runCommand("verifySelectedValueNotContain", locator, text, null);
+    public void verifySelectedValueNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedValueNotMatch", locator, text, null);
     }
 
-    public void verifySelectedValueNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifySelectedValueNotContain", parentLocator, locator, text);
+    public void verifySelectedValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedValueNotMatch", parentLocator, locator, text);
     }
 
     public void verifySomethingSelected(String locator) throws Throwable {
@@ -3080,12 +3080,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyTable", locator, cellAddress, text);
     }
 
-    public void verifyTableContain(String locator, String cellAddress, String text) throws Throwable {
-        runCommand("verifyTableContain", locator, cellAddress, text);
+    public void verifyTableMatch(String locator, String cellAddress, String text) throws Throwable {
+        runCommand("verifyTableMatch", locator, cellAddress, text);
     }
 
-    public void verifyTableNotContain(String locator, String cellAddress, String text) throws Throwable {
-        runCommand("verifyTableNotContain", locator, cellAddress, text);
+    public void verifyTableNotMatch(String locator, String cellAddress, String text) throws Throwable {
+        runCommand("verifyTableNotMatch", locator, cellAddress, text);
     }
 
     public void verifyText(String locator, String text) throws Throwable {
@@ -3104,28 +3104,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifyTextAlignment", parentLocator, locator, text);
     }
 
-    public void verifyTextAlignmentContain(String locator, String text) throws Throwable {
-        runCommand("verifyTextAlignmentContain", locator, text, null);
+    public void verifyTextAlignmentMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTextAlignmentMatch", locator, text, null);
     }
 
-    public void verifyTextAlignmentContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyTextAlignmentContain", parentLocator, locator, text);
+    public void verifyTextAlignmentMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTextAlignmentMatch", parentLocator, locator, text);
     }
 
-    public void verifyTextAlignmentNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyTextAlignmentNotContain", locator, text, null);
+    public void verifyTextAlignmentNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTextAlignmentNotMatch", locator, text, null);
     }
 
-    public void verifyTextAlignmentNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyTextAlignmentNotContain", parentLocator, locator, text);
-    }
-
-    public void verifyTextContain(String locator, String text) throws Throwable {
-        runCommand("verifyTextContain", locator, text, null);
-    }
-
-    public void verifyTextContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyTextContain", parentLocator, locator, text);
+    public void verifyTextAlignmentNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTextAlignmentNotMatch", parentLocator, locator, text);
     }
 
     public void verifyTextDecoration(String locator, String text) throws Throwable {
@@ -3136,20 +3128,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifyTextDecoration", parentLocator, locator, text);
     }
 
-    public void verifyTextDecorationContain(String locator, String text) throws Throwable {
-        runCommand("verifyTextDecorationContain", locator, text, null);
+    public void verifyTextDecorationMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTextDecorationMatch", locator, text, null);
     }
 
-    public void verifyTextDecorationContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyTextDecorationContain", parentLocator, locator, text);
+    public void verifyTextDecorationMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTextDecorationMatch", parentLocator, locator, text);
     }
 
-    public void verifyTextDecorationNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyTextDecorationNotContain", locator, text, null);
+    public void verifyTextDecorationNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTextDecorationNotMatch", locator, text, null);
     }
 
-    public void verifyTextDecorationNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyTextDecorationNotContain", parentLocator, locator, text);
+    public void verifyTextDecorationNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTextDecorationNotMatch", parentLocator, locator, text);
     }
 
     public void verifyTextEmpty(String locator) throws Throwable {
@@ -3176,12 +3168,20 @@ public class WebExcelium extends Excelium {
         runCommand("verifyTextListOrderDesc", parentLocator, locator, null);
     }
 
-    public void verifyTextNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyTextNotContain", locator, text, null);
+    public void verifyTextMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTextMatch", locator, text, null);
     }
 
-    public void verifyTextNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyTextNotContain", parentLocator, locator, text);
+    public void verifyTextMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTextMatch", parentLocator, locator, text);
+    }
+
+    public void verifyTextNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTextNotMatch", locator, text, null);
+    }
+
+    public void verifyTextNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTextNotMatch", parentLocator, locator, text);
     }
 
     public void verifyTextNotPresent(String pattern) throws Throwable {
@@ -3196,12 +3196,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyTitle", text, null, null);
     }
 
-    public void verifyTitleContain(String text) throws Throwable {
-        runCommand("verifyTitleContain", text, null, null);
+    public void verifyTitleMatch(String text) throws Throwable {
+        runCommand("verifyTitleMatch", text, null, null);
     }
 
-    public void verifyTitleNotContain(String text) throws Throwable {
-        runCommand("verifyTitleNotContain", text, null, null);
+    public void verifyTitleNotMatch(String text) throws Throwable {
+        runCommand("verifyTitleNotMatch", text, null, null);
     }
 
     public void verifyValue(String locator, String text) throws Throwable {
@@ -3212,14 +3212,6 @@ public class WebExcelium extends Excelium {
         runCommand("verifyValue", parentLocator, locator, text);
     }
 
-    public void verifyValueContain(String locator, String text) throws Throwable {
-        runCommand("verifyValueContain", locator, text, null);
-    }
-
-    public void verifyValueContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyValueContain", parentLocator, locator, text);
-    }
-
     public void verifyValueEmpty(String locator) throws Throwable {
         runCommand("verifyValueEmpty", locator, null, null);
     }
@@ -3228,24 +3220,32 @@ public class WebExcelium extends Excelium {
         runCommand("verifyValueEmpty", parentLocator, locator, null);
     }
 
-    public void verifyValueNotContain(String locator, String text) throws Throwable {
-        runCommand("verifyValueNotContain", locator, text, null);
+    public void verifyValueMatch(String locator, String text) throws Throwable {
+        runCommand("verifyValueMatch", locator, text, null);
     }
 
-    public void verifyValueNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("verifyValueNotContain", parentLocator, locator, text);
+    public void verifyValueMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyValueMatch", parentLocator, locator, text);
+    }
+
+    public void verifyValueNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyValueNotMatch", locator, text, null);
+    }
+
+    public void verifyValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyValueNotMatch", parentLocator, locator, text);
     }
 
     public void verifyVariable(String variable, String text) throws Throwable {
         runCommand("verifyVariable", variable, text, null);
     }
 
-    public void verifyVariableContain(String variable, String text) throws Throwable {
-        runCommand("verifyVariableContain", variable, text, null);
+    public void verifyVariableMatch(String variable, String text) throws Throwable {
+        runCommand("verifyVariableMatch", variable, text, null);
     }
 
-    public void verifyVariableNotContain(String variable, String text) throws Throwable {
-        runCommand("verifyVariableNotContain", variable, text, null);
+    public void verifyVariableNotMatch(String variable, String text) throws Throwable {
+        runCommand("verifyVariableNotMatch", variable, text, null);
     }
 
     public void verifyVisible(String locator) throws Throwable {
@@ -3264,12 +3264,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForAlert", text, null, null);
     }
 
-    public void waitForAlertContain(String text) throws Throwable {
-        runCommand("waitForAlertContain", text, null, null);
+    public void waitForAlertMatch(String text) throws Throwable {
+        runCommand("waitForAlertMatch", text, null, null);
     }
 
-    public void waitForAlertNotContain(String text) throws Throwable {
-        runCommand("waitForAlertNotContain", text, null, null);
+    public void waitForAlertNotMatch(String text) throws Throwable {
+        runCommand("waitForAlertNotMatch", text, null, null);
     }
 
     public void waitForAlertNotPresent() throws Throwable {
@@ -3316,24 +3316,24 @@ public class WebExcelium extends Excelium {
         runCommand("waitForAttribute", locator, name, text);
     }
 
-    public void waitForAttributeContain(String locator, String name, String text) throws Throwable {
-        runCommand("waitForAttributeContain", locator, name, text);
+    public void waitForAttributeMatch(String locator, String name, String text) throws Throwable {
+        runCommand("waitForAttributeMatch", locator, name, text);
     }
 
-    public void waitForAttributeNotContain(String locator, String name, String text) throws Throwable {
-        runCommand("waitForAttributeNotContain", locator, name, text);
+    public void waitForAttributeNotMatch(String locator, String name, String text) throws Throwable {
+        runCommand("waitForAttributeNotMatch", locator, name, text);
     }
 
     public void waitForBodyText(String text) throws Throwable {
         runCommand("waitForBodyText", text, null, null);
     }
 
-    public void waitForBodyTextContain(String text) throws Throwable {
-        runCommand("waitForBodyTextContain", text, null, null);
+    public void waitForBodyTextMatch(String text) throws Throwable {
+        runCommand("waitForBodyTextMatch", text, null, null);
     }
 
-    public void waitForBodyTextNotContain(String text) throws Throwable {
-        runCommand("waitForBodyTextNotContain", text, null, null);
+    public void waitForBodyTextNotMatch(String text) throws Throwable {
+        runCommand("waitForBodyTextNotMatch", text, null, null);
     }
 
     public void waitForChecked(String locator) throws Throwable {
@@ -3352,12 +3352,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForConfirmation", text, null, null);
     }
 
-    public void waitForConfirmationContain(String text) throws Throwable {
-        runCommand("waitForConfirmationContain", text, null, null);
+    public void waitForConfirmationMatch(String text) throws Throwable {
+        runCommand("waitForConfirmationMatch", text, null, null);
     }
 
-    public void waitForConfirmationNotContain(String text) throws Throwable {
-        runCommand("waitForConfirmationNotContain", text, null, null);
+    public void waitForConfirmationNotMatch(String text) throws Throwable {
+        runCommand("waitForConfirmationNotMatch", text, null, null);
     }
 
     public void waitForConfirmationNotPresent() throws Throwable {
@@ -3376,20 +3376,20 @@ public class WebExcelium extends Excelium {
         runCommand("waitForCookieByName", name, text, null);
     }
 
-    public void waitForCookieByNameContain(String name, String text) throws Throwable {
-        runCommand("waitForCookieByNameContain", name, text, null);
+    public void waitForCookieByNameMatch(String name, String text) throws Throwable {
+        runCommand("waitForCookieByNameMatch", name, text, null);
     }
 
-    public void waitForCookieByNameNotContain(String name, String text) throws Throwable {
-        runCommand("waitForCookieByNameNotContain", name, text, null);
+    public void waitForCookieByNameNotMatch(String name, String text) throws Throwable {
+        runCommand("waitForCookieByNameNotMatch", name, text, null);
     }
 
-    public void waitForCookieContain(String text) throws Throwable {
-        runCommand("waitForCookieContain", text, null, null);
+    public void waitForCookieMatch(String text) throws Throwable {
+        runCommand("waitForCookieMatch", text, null, null);
     }
 
-    public void waitForCookieNotContain(String text) throws Throwable {
-        runCommand("waitForCookieNotContain", text, null, null);
+    public void waitForCookieNotMatch(String text) throws Throwable {
+        runCommand("waitForCookieNotMatch", text, null, null);
     }
 
     public void waitForCookieNotPresent(String name) throws Throwable {
@@ -3432,12 +3432,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForEvalScript", script, text, null);
     }
 
-    public void waitForEvalScriptContain(String script, String text) throws Throwable {
-        runCommand("waitForEvalScriptContain", script, text, null);
+    public void waitForEvalScriptMatch(String script, String text) throws Throwable {
+        runCommand("waitForEvalScriptMatch", script, text, null);
     }
 
-    public void waitForEvalScriptNotContain(String script, String text) throws Throwable {
-        runCommand("waitForEvalScriptNotContain", script, text, null);
+    public void waitForEvalScriptNotMatch(String script, String text) throws Throwable {
+        runCommand("waitForEvalScriptNotMatch", script, text, null);
     }
 
     public void waitForExistsInDatabase(String sql) throws Throwable {
@@ -3448,36 +3448,36 @@ public class WebExcelium extends Excelium {
         runCommand("waitForExpression", expression, text, null);
     }
 
-    public void waitForExpressionContain(String expression, String text) throws Throwable {
-        runCommand("waitForExpressionContain", expression, text, null);
+    public void waitForExpressionMatch(String expression, String text) throws Throwable {
+        runCommand("waitForExpressionMatch", expression, text, null);
     }
 
-    public void waitForExpressionNotContain(String expression, String text) throws Throwable {
-        runCommand("waitForExpressionNotContain", expression, text, null);
+    public void waitForExpressionNotMatch(String expression, String text) throws Throwable {
+        runCommand("waitForExpressionNotMatch", expression, text, null);
     }
 
     public void waitForHtmlSource(String text) throws Throwable {
         runCommand("waitForHtmlSource", text, null, null);
     }
 
-    public void waitForHtmlSourceContain(String text) throws Throwable {
-        runCommand("waitForHtmlSourceContain", text, null, null);
+    public void waitForHtmlSourceMatch(String text) throws Throwable {
+        runCommand("waitForHtmlSourceMatch", text, null, null);
     }
 
-    public void waitForHtmlSourceNotContain(String text) throws Throwable {
-        runCommand("waitForHtmlSourceNotContain", text, null, null);
+    public void waitForHtmlSourceNotMatch(String text) throws Throwable {
+        runCommand("waitForHtmlSourceNotMatch", text, null, null);
     }
 
     public void waitForLocation(String text) throws Throwable {
         runCommand("waitForLocation", text, null, null);
     }
 
-    public void waitForLocationContain(String text) throws Throwable {
-        runCommand("waitForLocationContain", text, null, null);
+    public void waitForLocationMatch(String text) throws Throwable {
+        runCommand("waitForLocationMatch", text, null, null);
     }
 
-    public void waitForLocationNotContain(String text) throws Throwable {
-        runCommand("waitForLocationNotContain", text, null, null);
+    public void waitForLocationNotMatch(String text) throws Throwable {
+        runCommand("waitForLocationNotMatch", text, null, null);
     }
 
     public void waitForNotAlert(String text) throws Throwable {
@@ -3648,12 +3648,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForPrompt", text, null, null);
     }
 
-    public void waitForPromptContain(String text) throws Throwable {
-        runCommand("waitForPromptContain", text, null, null);
+    public void waitForPromptMatch(String text) throws Throwable {
+        runCommand("waitForPromptMatch", text, null, null);
     }
 
-    public void waitForPromptNotContain(String text) throws Throwable {
-        runCommand("waitForPromptNotContain", text, null, null);
+    public void waitForPromptNotMatch(String text) throws Throwable {
+        runCommand("waitForPromptNotMatch", text, null, null);
     }
 
     public void waitForPromptNotPresent() throws Throwable {
@@ -3672,20 +3672,20 @@ public class WebExcelium extends Excelium {
         runCommand("waitForSelectedId", parentLocator, locator, text);
     }
 
-    public void waitForSelectedIdContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIdContain", locator, text, null);
+    public void waitForSelectedIdMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIdMatch", locator, text, null);
     }
 
-    public void waitForSelectedIdContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIdContain", parentLocator, locator, text);
+    public void waitForSelectedIdMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIdMatch", parentLocator, locator, text);
     }
 
-    public void waitForSelectedIdNotContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIdNotContain", locator, text, null);
+    public void waitForSelectedIdNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIdNotMatch", locator, text, null);
     }
 
-    public void waitForSelectedIdNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIdNotContain", parentLocator, locator, text);
+    public void waitForSelectedIdNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIdNotMatch", parentLocator, locator, text);
     }
 
     public void waitForSelectedIndex(String locator, String text) throws Throwable {
@@ -3696,20 +3696,20 @@ public class WebExcelium extends Excelium {
         runCommand("waitForSelectedIndex", parentLocator, locator, text);
     }
 
-    public void waitForSelectedIndexContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIndexContain", locator, text, null);
+    public void waitForSelectedIndexMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIndexMatch", locator, text, null);
     }
 
-    public void waitForSelectedIndexContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIndexContain", parentLocator, locator, text);
+    public void waitForSelectedIndexMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIndexMatch", parentLocator, locator, text);
     }
 
-    public void waitForSelectedIndexNotContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIndexNotContain", locator, text, null);
+    public void waitForSelectedIndexNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIndexNotMatch", locator, text, null);
     }
 
-    public void waitForSelectedIndexNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedIndexNotContain", parentLocator, locator, text);
+    public void waitForSelectedIndexNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedIndexNotMatch", parentLocator, locator, text);
     }
 
     public void waitForSelectedLabel(String locator, String text) throws Throwable {
@@ -3720,20 +3720,20 @@ public class WebExcelium extends Excelium {
         runCommand("waitForSelectedLabel", parentLocator, locator, text);
     }
 
-    public void waitForSelectedLabelContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedLabelContain", locator, text, null);
+    public void waitForSelectedLabelMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedLabelMatch", locator, text, null);
     }
 
-    public void waitForSelectedLabelContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedLabelContain", parentLocator, locator, text);
+    public void waitForSelectedLabelMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedLabelMatch", parentLocator, locator, text);
     }
 
-    public void waitForSelectedLabelNotContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedLabelNotContain", locator, text, null);
+    public void waitForSelectedLabelNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedLabelNotMatch", locator, text, null);
     }
 
-    public void waitForSelectedLabelNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedLabelNotContain", parentLocator, locator, text);
+    public void waitForSelectedLabelNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedLabelNotMatch", parentLocator, locator, text);
     }
 
     public void waitForSelectedValue(String locator, String text) throws Throwable {
@@ -3744,20 +3744,20 @@ public class WebExcelium extends Excelium {
         runCommand("waitForSelectedValue", parentLocator, locator, text);
     }
 
-    public void waitForSelectedValueContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedValueContain", locator, text, null);
+    public void waitForSelectedValueMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedValueMatch", locator, text, null);
     }
 
-    public void waitForSelectedValueContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedValueContain", parentLocator, locator, text);
+    public void waitForSelectedValueMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedValueMatch", parentLocator, locator, text);
     }
 
-    public void waitForSelectedValueNotContain(String locator, String text) throws Throwable {
-        runCommand("waitForSelectedValueNotContain", locator, text, null);
+    public void waitForSelectedValueNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForSelectedValueNotMatch", locator, text, null);
     }
 
-    public void waitForSelectedValueNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForSelectedValueNotContain", parentLocator, locator, text);
+    public void waitForSelectedValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForSelectedValueNotMatch", parentLocator, locator, text);
     }
 
     public void waitForSomethingSelected(String locator) throws Throwable {
@@ -3772,12 +3772,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForTable", locator, cellAddress, text);
     }
 
-    public void waitForTableContain(String locator, String cellAddress, String text) throws Throwable {
-        runCommand("waitForTableContain", locator, cellAddress, text);
+    public void waitForTableMatch(String locator, String cellAddress, String text) throws Throwable {
+        runCommand("waitForTableMatch", locator, cellAddress, text);
     }
 
-    public void waitForTableNotContain(String locator, String cellAddress, String text) throws Throwable {
-        runCommand("waitForTableNotContain", locator, cellAddress, text);
+    public void waitForTableNotMatch(String locator, String cellAddress, String text) throws Throwable {
+        runCommand("waitForTableNotMatch", locator, cellAddress, text);
     }
 
     public void waitForText(String locator, String text) throws Throwable {
@@ -3788,14 +3788,6 @@ public class WebExcelium extends Excelium {
         runCommand("waitForText", parentLocator, locator, text);
     }
 
-    public void waitForTextContain(String locator, String text) throws Throwable {
-        runCommand("waitForTextContain", locator, text, null);
-    }
-
-    public void waitForTextContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForTextContain", parentLocator, locator, text);
-    }
-
     public void waitForTextEmpty(String locator) throws Throwable {
         runCommand("waitForTextEmpty", locator, null, null);
     }
@@ -3804,12 +3796,20 @@ public class WebExcelium extends Excelium {
         runCommand("waitForTextEmpty", parentLocator, locator, null);
     }
 
-    public void waitForTextNotContain(String locator, String text) throws Throwable {
-        runCommand("waitForTextNotContain", locator, text, null);
+    public void waitForTextMatch(String locator, String text) throws Throwable {
+        runCommand("waitForTextMatch", locator, text, null);
     }
 
-    public void waitForTextNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForTextNotContain", parentLocator, locator, text);
+    public void waitForTextMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForTextMatch", parentLocator, locator, text);
+    }
+
+    public void waitForTextNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForTextNotMatch", locator, text, null);
+    }
+
+    public void waitForTextNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForTextNotMatch", parentLocator, locator, text);
     }
 
     public void waitForTextNotPresent(String pattern) throws Throwable {
@@ -3824,12 +3824,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForTitle", text, null, null);
     }
 
-    public void waitForTitleContain(String text) throws Throwable {
-        runCommand("waitForTitleContain", text, null, null);
+    public void waitForTitleMatch(String text) throws Throwable {
+        runCommand("waitForTitleMatch", text, null, null);
     }
 
-    public void waitForTitleNotContain(String text) throws Throwable {
-        runCommand("waitForTitleNotContain", text, null, null);
+    public void waitForTitleNotMatch(String text) throws Throwable {
+        runCommand("waitForTitleNotMatch", text, null, null);
     }
 
     public void waitForValue(String locator, String text) throws Throwable {
@@ -3840,14 +3840,6 @@ public class WebExcelium extends Excelium {
         runCommand("waitForValue", parentLocator, locator, text);
     }
 
-    public void waitForValueContain(String locator, String text) throws Throwable {
-        runCommand("waitForValueContain", locator, text, null);
-    }
-
-    public void waitForValueContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForValueContain", parentLocator, locator, text);
-    }
-
     public void waitForValueEmpty(String locator) throws Throwable {
         runCommand("waitForValueEmpty", locator, null, null);
     }
@@ -3856,12 +3848,20 @@ public class WebExcelium extends Excelium {
         runCommand("waitForValueEmpty", parentLocator, locator, null);
     }
 
-    public void waitForValueNotContain(String locator, String text) throws Throwable {
-        runCommand("waitForValueNotContain", locator, text, null);
+    public void waitForValueMatch(String locator, String text) throws Throwable {
+        runCommand("waitForValueMatch", locator, text, null);
     }
 
-    public void waitForValueNotContain(String parentLocator, String locator, String text) throws Throwable {
-        runCommand("waitForValueNotContain", parentLocator, locator, text);
+    public void waitForValueMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForValueMatch", parentLocator, locator, text);
+    }
+
+    public void waitForValueNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForValueNotMatch", locator, text, null);
+    }
+
+    public void waitForValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForValueNotMatch", parentLocator, locator, text);
     }
 
     public void waitForVisible(String locator) throws Throwable {
