@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 
-package excelium.core.executor;
+package excelium.core;
 
-import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.model.enums.Result;
 import mockit.Expectations;
 import mockit.Mocked;
 import org.junit.Test;
@@ -43,14 +41,14 @@ public class CommandExecutorTest {
     private ContextAwareWebDriver webDriver;
 
     @Mocked
-    private TestRunner testRunner;
+    private Excelium excelium;
 
     @Test
     public void testRunAction_OK() throws Exception {
-        CommandExecutor executor = new CommandExecutor(webDriver, testRunner);
+        CommandExecutor executor = new CommandExecutor(webDriver, null, excelium, null);
 
         new Expectations() {{
-            testRunner.runAction((String) any); result = Result.OK;
+            excelium.runAction((String) any);
         }};
 
         executor.runAction(null);
@@ -58,18 +56,18 @@ public class CommandExecutorTest {
 
     @Test(expected = Exception.class)
     public void testRunAction_NG() throws Exception {
-        CommandExecutor executor = new CommandExecutor(webDriver, testRunner);
+        CommandExecutor executor = new CommandExecutor(webDriver, null, excelium, null);
 
         new Expectations() {{
-            testRunner.runAction((String) any); result = Result.ERROR;
+            excelium.runAction((String) any); result = new Exception();
         }};
 
         executor.runAction(null);
     }
 
     @Test(expected = Exception.class)
-    public void testRunAction_TestRunnerNull() throws Exception {
-        CommandExecutor executor = new CommandExecutor(webDriver);
+    public void testRunAction_ExceliumNull() throws Exception {
+        CommandExecutor executor = new CommandExecutor(webDriver, null, null, null);
         executor.runAction(null);
     }
 }

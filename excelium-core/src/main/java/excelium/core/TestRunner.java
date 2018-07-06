@@ -24,13 +24,10 @@
 
 package excelium.core;
 
-import excelium.core.command.CommandFactory;
 import excelium.core.database.DatabaseService;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.exception.AssertFailedException;
-import excelium.core.executor.CommandExecutor;
-import excelium.core.executor.ExecutorProviderService;
 import excelium.core.report.TestReporter;
 import excelium.core.screenshot.ScreenshotService;
 import excelium.core.writer.TestWriter;
@@ -47,13 +44,16 @@ import excelium.model.test.config.MobileWebEnvironment;
 import excelium.model.test.config.PcEnvironment;
 import excelium.model.test.item.Item;
 import excelium.model.test.item.PageSet;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -110,11 +110,6 @@ public class TestRunner {
     private ContextAwareWebDriver webDriver;
 
     /**
-     * Current command map of environment
-     */
-    private Map<String, Command> commandMap;
-
-    /**
      * Current test suite
      */
     private TestSuite testSuite;
@@ -135,6 +130,11 @@ public class TestRunner {
     private Map<TestStep, Result> testStepResultMap;
 
     /**
+     * Excelium object
+     */
+    private Excelium excelium;
+
+    /**
      * Instantiates a new Test runner.
      *
      * @param test         the test
@@ -150,7 +150,7 @@ public class TestRunner {
         this.testWriter = testWriter;
         this.template = template;
         this.databaseService = new DatabaseService(project);
-        this.screenshotService = new ScreenshotService(this, project);
+        this.screenshotService = new ScreenshotService(this);
     }
 
     /**
@@ -177,24 +177,29 @@ public class TestRunner {
      * Run all tests on an environment.
      *
      * @param environment the environment
-     * @throws IOException the io exception
+     * @throws IOException               the io exception
+     * @throws SQLException              the sql exception
+     * @throws ClassNotFoundException    the class not found exception
+     * @throws InvocationTargetException the invocation target exception
+     * @throws NoSuchMethodException     the no such method exception
+     * @throws InstantiationException    the instantiation exception
+     * @throws IllegalAccessException    the illegal access exception
      */
     private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         setEnvironment(environment);
         try {
             webDriver = DriverFactory.createDriver(environment, project);
-            String baseUrl = test.getConfig() != null ? test.getConfig().getBaseUrl() : null;
-            commandMap = CommandFactory.createCommandMap(environment, webDriver, baseUrl, this);
             if (test.getTestSuites() != null) {
+                initializeExcelium(webDriver);
                 for (TestSuite testSuite : test.getTestSuites().values()) {
                     runTestSuite(testSuite);
                 }
             }
         } finally {
-            commandMap = null;
-            if (this.webDriver != null) {
-                this.webDriver.quit();
-                this.webDriver = null;
+            excelium = null;
+            if (webDriver != null) {
+                webDriver.quit();
+                webDriver = null;
             }
         }
     }
@@ -255,7 +260,8 @@ public class TestRunner {
      */
     private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException, SQLException, ClassNotFoundException {
         this.testStep = testStep;
-        Command command = commandMap.get(testStep.getCommand());
+        String methodName = StringUtils.uncapitalize(StringUtils.remove(WordUtils.capitalizeFully(testStep.getCommand()), " "));
+        Command command = excelium.getCommandMap().get(methodName + "(" + countParam(testStep) + ")");
 
         if (command != null) {
             if (StringUtils.isNotBlank(testStep.getTestData())) {
@@ -265,7 +271,7 @@ public class TestRunner {
             Object param1 = getParam(command.getParam1(), testStep.getParam1());
             Object param2 = getParam(command.getParam2(), testStep.getParam2());
             Object param3 = getParam(command.getParam3(), testStep.getParam3());
-            StepResult result = runCommand(command, param1, param2, param3);
+            StepResult result = runCommand(methodName, param1, param2, param3);
 
             if (writeResult) {
                 writeResult(testStep, result.getResult());
@@ -287,26 +293,38 @@ public class TestRunner {
     /**
      * Run the command.
      *
-     * @param command the command
+     * @param methodName the method name
      * @param param1  value of parameter 1
      * @param param2  value of parameter 2
      * @param param3  value of parameter 3
      * @return Result of the command
      */
-    private StepResult runCommand(Command command, Object param1, Object param2, Object param3) {
+    private StepResult runCommand(String methodName, Object param1, Object param2, Object param3) {
         try {
-            command.getConsumer().accept(param1, param2, param3);
+            excelium.runCommand(methodName, param1, param2, param3);
             return new StepResult(Result.OK);
-        } catch (InvocationTargetException e) {
-            if (e.getCause() instanceof AssertFailedException) {
-                return new StepResult(Result.FAIL, StringUtils.startsWithIgnoreCase(command.getMethod(), "verify"), "Assertion failed: " + e.getCause().getMessage());
-            } else {
-                return new StepResult(Result.ERROR, false, "Invoke command " + command.getName() + " error: " + e.getCause().getMessage());
-            }
         } catch (AssertFailedException e) {
-            return new StepResult(Result.FAIL, StringUtils.startsWithIgnoreCase(command.getMethod(), "verify"), "Assertion failed: " + e.getMessage());
-        } catch (Exception e) {
-            return new StepResult(Result.ERROR, false, "Invoke command " + command.getName() + " error: " + e.getMessage());
+            return new StepResult(Result.FAIL, StringUtils.startsWithIgnoreCase(methodName, "verify"), "Assertion failed: " + e.getMessage());
+        } catch (Throwable e) {
+            return new StepResult(Result.ERROR, false, "Invoke command " + methodName + " error: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Initialize Excelium object.
+     *
+     * @param webDriver the web driver
+     */
+    private void initializeExcelium(ContextAwareWebDriver webDriver) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        String baseUrl = test.getConfig() != null ? test.getConfig().getBaseUrl() : null;
+        excelium = new Excelium(webDriver, baseUrl, project);
+
+        if (test.getActions() != null && !test.getActions().isEmpty()) {
+            for (TestAction action : test.getActions().values()) {
+                excelium.addAction(action.getName(),  (input) -> {
+                    runTestFlow(action);
+                });
+            }
         }
     }
 
@@ -335,11 +353,7 @@ public class TestRunner {
                 "activity".equals(paramName) ||
                 "url".equals(paramName) ||
                 "file".equals(paramName)) {
-            String param = getItemValue(rawValue);
-            if ("url".equals(paramName) && param.startsWith("/")) {
-                param = test.getConfig().getBaseUrl() + param;
-            }
-            return param;
+            return getItemValue(rawValue);
         }
         return rawValue;
     }
@@ -392,27 +406,6 @@ public class TestRunner {
     }
 
     /**
-     * Run the action using the action name
-     *
-     * @param actionName action name
-     * @return the result of action execution
-     * @throws IOException            the io exception
-     * @throws SQLException           the sql exception
-     * @throws ClassNotFoundException the class not found exception
-     */
-    public Result runAction(String actionName) throws IOException, SQLException, ClassNotFoundException {
-        if (StringUtils.isBlank(actionName)) {
-            return Result.ERROR;
-        }
-        for (TestAction action : test.getActions().values()) {
-            if (action.getName().equals(actionName)) {
-                return runTestFlow(action);
-            }
-        }
-        return Result.ERROR;
-    }
-
-    /**
      * Write test result to the workbook
      *
      * @param testStep  the test step
@@ -425,6 +418,20 @@ public class TestRunner {
             testWriter.writeResult(template, testSuite.getSheetName(), testStep, result);
             testStepResultMap.put(testStep, result);
         }
+    }
+
+    /**
+     * Count the number of parameters of the test step.
+     *
+     * @param testStep the test step
+     * @return the number of parameters
+     */
+    private static int countParam(TestStep testStep) {
+        int count = 0;
+        if (StringUtils.isNotBlank(testStep.getParam1())) count++;
+        if (StringUtils.isNotBlank(testStep.getParam2())) count++;
+        if (StringUtils.isNotBlank(testStep.getParam3())) count++;
+        return count;
     }
 
     /**
@@ -445,6 +452,15 @@ public class TestRunner {
     private void setTestSuite(TestSuite testSuite) {
         this.testSuite = testSuite;
         testReporter.startTestSuite(testSuite);
+    }
+
+    /**
+     * Gets project.
+     *
+     * @return the project
+     */
+    public Project getProject() {
+        return project;
     }
 
     /**

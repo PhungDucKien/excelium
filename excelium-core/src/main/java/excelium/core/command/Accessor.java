@@ -64,4 +64,24 @@ public @interface Accessor {
      * Is the command only available in iOS application
      */
     boolean iosOnly() default false;
+
+    /**
+     * True if you want to generate store command, false otherwise
+     */
+    boolean storeCmd() default true;
+
+    /**
+     * True if you want to generate assert/verify command, false otherwise
+     */
+    boolean verifyCmd() default true;
+
+    /**
+     * True if you want to generate wait command, false otherwise
+     */
+    boolean waitCmd() default true;
+
+    /**
+     * True if you want to generate execute command, false otherwise
+     */
+    boolean executeCmd() default true;
 }

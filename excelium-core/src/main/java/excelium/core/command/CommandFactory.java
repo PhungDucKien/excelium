@@ -24,15 +24,13 @@
 
 package excelium.core.command;
 
-import excelium.core.TestRunner;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.exception.AssertFailedException;
-import excelium.core.executor.CommandExecutor;
-import excelium.core.executor.ExecutorProviderService;
+import excelium.core.service.ExecutorProviderService;
+import excelium.model.project.Project;
 import excelium.model.test.command.Command;
-import excelium.model.test.config.Environment;
-import excelium.model.test.config.MobileWebEnvironment;
-import excelium.model.test.config.PcEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -78,8 +76,8 @@ public class CommandFactory {
      *
      * @return the map of commands
      */
-    public static Map<String, Command> createCommandMap(Environment environment, ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        List<CommandExecutor> commandExecutors = getCommandExecutors(environment, webDriver, baseUrl, testRunner);
+    public static Map<String, Command> createCommandMap(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean forWeb) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<CommandExecutor> commandExecutors = getCommandExecutors(webDriver, baseUrl, excelium, project, forWeb);
         return createCommandMap(commandExecutors);
     }
 
@@ -109,18 +107,17 @@ public class CommandFactory {
      * @throws InvocationTargetException the invocation target exception
      * @throws InstantiationException    the instantiation exception
      */
-    private static List<CommandExecutor> getCommandExecutors(Environment environment, ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    private static List<CommandExecutor> getCommandExecutors(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean forWeb) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         List<CommandExecutor> commandExecutors = new ArrayList<>();
 
-        boolean forWeb = environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment;
         List<Class<? extends CommandExecutor>> cached = forWeb ? webCommandExecutorClasses : mobileCommandExecutorClasses;
 
         if (CollectionUtils.isEmpty(cached)) {
             cached.addAll(getCommandExecutorClasses(forWeb));
         }
         for (Class<? extends CommandExecutor> clazz : cached) {
-            CommandExecutor commandExecutor = clazz.getConstructor(ContextAwareWebDriver.class, String.class, TestRunner.class)
-                    .newInstance(webDriver, baseUrl, testRunner);
+            CommandExecutor commandExecutor = clazz.getConstructor(ContextAwareWebDriver.class, String.class, Excelium.class, Project.class)
+                    .newInstance(webDriver, baseUrl, excelium, project);
             commandExecutors.add(commandExecutor);
         }
 
@@ -192,13 +189,13 @@ public class CommandFactory {
     private static List<Command> createCommandsForActions(CommandExecutor executor, Map<Method, Action> actions) {
         List<Command> commands = new ArrayList<>();
         for (Method method : actions.keySet()) {
-            String regex = "^(do)?([a-zA-Z].+)$";
+            String regex = "^([a-zA-Z].+)$";
 
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(method.getName());
 
             if (matcher.find()) {
-                String baseName = StringUtils.capitalize(matcher.group(2));
+                String baseName = StringUtils.capitalize(matcher.group(1));
                 Action action = actions.get(method);
 
                 if (("parentLocator".equals(action.param1()) && "locator".equals(action.param2())) || ("parentLocator".equals(action.param2()) && "locator".equals(action.param3()))) {
@@ -255,56 +252,73 @@ public class CommandFactory {
                 boolean isBool = "is".equals(matcher.group(1));
 
                 if ("parentLocator".equals(accessor.param1()) && "locator".equals(accessor.param2())) {
-                    verifyCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", baseName, isBool));
-                    verifyNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName), isBool));
-                    assertCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", baseName, isBool));
-                    assertNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName), isBool));
-                    if (!isBool) {
+                    if (accessor.verifyCmd()) {
+                        verifyCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", baseName, isBool));
+                        verifyNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName), isBool));
+                        assertCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", baseName, isBool));
+                        assertNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName), isBool));
+                    }
+                    if (!isBool && accessor.storeCmd()) {
                         storeCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "store", baseName, false));
                     }
-                    waitCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", baseName, isBool));
-                    waitNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName), isBool));
-                    executeCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", baseName, isBool));
-                    executeNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName), isBool));
+                    if (accessor.waitCmd()) {
+                        waitCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", baseName, isBool));
+                        waitNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName), isBool));
+                    }
+                    if (accessor.executeCmd()) {
+                        executeCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", baseName, isBool));
+                        executeNotCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName), isBool));
+                    }
 
                     if (isString) {
-                        verifyContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
-                        verifyNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
-                        assertContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
-                        assertNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
-                        waitContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Contain", isBool));
-                        waitNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Contain"), isBool));
-                        executeContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Contain", isBool));
-                        executeNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Contain"), isBool));
+                        if (accessor.verifyCmd()) {
+                            verifyContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
+                            verifyNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
+                            assertContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
+                            assertNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
+                        }
+                        if (accessor.waitCmd()) {
+                            waitContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Contain", isBool));
+                            waitNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Contain"), isBool));
+                        }
+                        if (accessor.executeCmd()) {
+                            executeContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Contain", isBool));
+                            executeNotContainCommands.add(createLocatorCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Contain"), isBool));
+                        }
                     }
                 }
-
-                verifyCommands.add(createCommandForAccessor(executor, method, accessor, "verify", baseName, isBool));
-                verifyNotCommands.add(createCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName), isBool));
-                assertCommands.add(createCommandForAccessor(executor, method, accessor, "assert", baseName, isBool));
-                assertNotCommands.add(createCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName), isBool));
+                if (accessor.verifyCmd()) {
+                    verifyCommands.add(createCommandForAccessor(executor, method, accessor, "verify", baseName, isBool));
+                    verifyNotCommands.add(createCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName), isBool));
+                    assertCommands.add(createCommandForAccessor(executor, method, accessor, "assert", baseName, isBool));
+                    assertNotCommands.add(createCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName), isBool));
+                }
                 if (!"variable".equals(accessor.param1())) {
-                    if (!isBool) {
+                    if (!isBool && accessor.storeCmd()) {
                         storeCommands.add(createCommandForAccessor(executor, method, accessor, "store", baseName, false));
                     }
-                    waitCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", baseName, isBool));
-                    waitNotCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName), isBool));
+                    if (accessor.waitCmd()) {
+                        waitCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", baseName, isBool));
+                        waitNotCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName), isBool));
+                    }
                 }
-                if (isBool || paramCount < 2) {
+                if ((isBool || paramCount < 2) && accessor.executeCmd()) {
                     executeCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", baseName, isBool));
                     executeNotCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName), isBool));
                 }
 
                 if (isString) {
-                    verifyContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
-                    verifyNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
-                    assertContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
-                    assertNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
-                    if (!"variable".equals(accessor.param1())) {
+                    if (accessor.verifyCmd()) {
+                        verifyContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", baseName + "Contain", isBool));
+                        verifyNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "verify", invertPredicateName(baseName + "Contain"), isBool));
+                        assertContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", baseName + "Contain", isBool));
+                        assertNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "assert", invertPredicateName(baseName + "Contain"), isBool));
+                    }
+                    if (!"variable".equals(accessor.param1()) && accessor.waitCmd()) {
                         waitContainCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", baseName + "Contain", isBool));
                         waitNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "waitFor", invertPredicateName(baseName + "Contain"), isBool));
                     }
-                    if (paramCount < 2) {
+                    if (paramCount < 2 && accessor.executeCmd()) {
                         executeContainCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", baseName + "Contain", isBool));
                         executeNotContainCommands.add(createCommandForAccessor(executor, method, accessor, "executeIf", invertPredicateName(baseName + "Contain"), isBool));
                     }

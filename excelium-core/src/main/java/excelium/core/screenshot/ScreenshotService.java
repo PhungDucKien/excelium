@@ -27,7 +27,6 @@ package excelium.core.screenshot;
 import com.google.common.io.Files;
 import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.model.project.Project;
 import excelium.model.test.Test;
 import excelium.model.test.TestFlow;
 import excelium.model.test.TestStep;
@@ -35,6 +34,7 @@ import excelium.model.test.TestSuite;
 import excelium.model.test.config.Environment;
 import excelium.model.test.config.MobileAppEnvironment;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -47,6 +47,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.yandex.qatools.ashot.util.InnerScript.execute;
 
@@ -74,11 +76,6 @@ public class ScreenshotService {
     private final TestRunner testRunner;
 
     /**
-     * Project
-     */
-    private final Project project;
-
-    /**
      * Screenshot taker
      */
     private final AShot screenshotTaker;
@@ -92,11 +89,9 @@ public class ScreenshotService {
      * Instantiates a new Screenshot service.
      *
      * @param testRunner the test runner
-     * @param project    the project
      */
-    public ScreenshotService(TestRunner testRunner, Project project) {
+    public ScreenshotService(TestRunner testRunner) {
         this.testRunner = testRunner;
-        this.project = project;
 
         screenshotTaker = new AShot();
     }
@@ -136,7 +131,7 @@ public class ScreenshotService {
     private void captureAppPage(ContextAwareWebDriver webDriver) {
         try {
             File srcFile = webDriver.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(srcFile, new File(getScreenshotImagePath()));
+            FileUtils.copyFile(srcFile, getScreenshotImageFile());
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -151,7 +146,7 @@ public class ScreenshotService {
         try {
             setShootingStrategy(webDriver);
             Screenshot screenshot = screenshotTaker.takeScreenshot(webDriver);
-            writeImage(screenshot.getImage(), getScreenshotImagePath());
+            writeImage(screenshot.getImage(), getScreenshotImageFile());
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -167,45 +162,45 @@ public class ScreenshotService {
         try {
             setShootingStrategy(webDriver);
             Screenshot screenshot = screenshotTaker.takeScreenshot(webDriver, element);
-            writeImage(screenshot.getImage(), getScreenshotImagePath());
+            writeImage(screenshot.getImage(), getScreenshotImageFile());
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
     }
 
     /**
-     * Gets the path to save the screenshot to.
+     * Gets the file to save the screenshot to.
      *
-     * @return the screenshot image path
+     * @return the screenshot image file
      */
-    private String getScreenshotImagePath() {
+    private File getScreenshotImageFile() {
         Environment environment = testRunner.getEnvironment();
         Test test = testRunner.getTest();
         TestSuite testSuite = testRunner.getTestSuite();
         TestStep testStep = testRunner.getTestStep();
 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (TestFlow testFlow : testRunner.getTestFlows()) {
-            stringBuilder.append(testFlow.getNo() + "-");
-        }
-        stringBuilder.append(testStep.getNo()).append(".png");
+        List<Integer> flowNos = testRunner.getTestFlows().stream().map(TestFlow::getNo).collect(Collectors.toList());
+        String flowNo = StringUtils.join(flowNos, ".");
 
-        return this.project.getScreenshotPath()
+        String fileName = flowNo +
+                "-" +
+                testStep.getNo() +
+                ".png";
+        return this.testRunner.getProject().getScreenshotPath()
                 .resolve(environment.getKey())
                 .resolve(test.getWorkbookName())
                 .resolve(testSuite.getSheetName())
-                .resolve(stringBuilder.toString()).toString();
+                .resolve(fileName).toFile();
     }
 
     /**
      * Writes the buffered image to disk.
      *
      * @param image     the buffered image
-     * @param imagePath the image path
+     * @param imageFile the image file
      * @throws IOException if the IOException occurs
      */
-    private void writeImage(BufferedImage image, String imagePath) throws IOException {
-        File imageFile = new File(imagePath);
+    private void writeImage(BufferedImage image, File imageFile) throws IOException {
         // Create parent dirs
         Files.createParentDirs(imageFile);
         ImageIO.write(image, "png", imageFile);

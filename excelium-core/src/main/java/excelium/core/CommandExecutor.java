@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-package excelium.core.executor;
+package excelium.core;
 
 import excelium.common.NumberUtil;
-import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.model.enums.Result;
+import excelium.model.project.Project;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 /**
  * Base class for command executors.
@@ -39,9 +40,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CommandExecutor {
 
     /**
-     * Default timeout (in seconds) for web driver
+     * Default timeout (in milliseconds) for web driver
      */
-    private static final int WEBDRIVER_DEFAULT_TIMEOUT = 120;
+    private static final int WEBDRIVER_DEFAULT_TIMEOUT = 120000;
 
     /**
      * Web driver
@@ -54,50 +55,28 @@ public class CommandExecutor {
     protected final String baseUrl;
 
     /**
-     * Test runner
+     * Excelium object
      */
-    private final TestRunner testRunner;
+    protected final Excelium excelium;
+
+    /**
+     * Project instance
+     */
+    protected final Project project;
 
     /**
      * Instantiates a new Command executor.
      *
      * @param webDriver the web driver
+     * @param baseUrl   the base url
+     * @param excelium  the excelium
+     * @param project   the project
      */
-    public CommandExecutor(ContextAwareWebDriver webDriver) {
-        this(webDriver, null, null);
-    }
-
-    /**
-     * Instantiates a new Command executor.
-     *
-     * @param webDriver the web driver
-     * @param baseUrl   the base URL
-     */
-    public CommandExecutor(ContextAwareWebDriver webDriver, String baseUrl) {
-        this(webDriver, baseUrl, null);
-    }
-
-    /**
-     * Instantiates a new Command executor.
-     *
-     * @param webDriver  the web driver
-     * @param testRunner the test runner
-     */
-    public CommandExecutor(ContextAwareWebDriver webDriver, TestRunner testRunner) {
-        this(webDriver, null, testRunner);
-    }
-
-    /**
-     * Instantiates a new Command executor.
-     *
-     * @param webDriver  the web driver
-     * @param baseUrl    the base URL
-     * @param testRunner the test runner
-     */
-    public CommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) {
+    public CommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
         this.webDriver = webDriver;
         this.baseUrl = baseUrl;
-        this.testRunner = testRunner;
+        this.excelium = excelium;
+        this.project = project;
     }
 
     /**
@@ -107,11 +86,8 @@ public class CommandExecutor {
      * @throws Exception the exception
      */
     public void runAction(String actionName) throws Exception {
-        if (testRunner != null) {
-            Result result = testRunner.runAction(actionName);
-            if (result != Result.OK) {
-                throw new Exception("Action execution failed.");
-            }
+        if (excelium != null) {
+            excelium.runAction(actionName);
         } else {
             throw new Exception("The command executor can not run an action.");
         }
@@ -125,7 +101,7 @@ public class CommandExecutor {
      */
     public String normalizeText(String text) {
         text = text.replace("\r\n", "\n");
-        if (!this.webDriver.isWeb()) {
+        if (!webDriver.isWeb()) {
             text = text.replace("\n", "&#10;");
         }
         return webDriver.evalTemplate(text);
@@ -137,17 +113,22 @@ public class CommandExecutor {
      * @return the web driver wait
      */
     public WebDriverWait createWebDriverWait() {
-        return new WebDriverWait(webDriver, WEBDRIVER_DEFAULT_TIMEOUT);
+        WebDriverWait wait = new WebDriverWait(webDriver, 0);
+        wait.withTimeout(Duration.ofMillis(WEBDRIVER_DEFAULT_TIMEOUT));
+        return wait;
     }
 
     /**
      * Create web driver wait with the custom timeout.
      *
-     * @param timeOutInSeconds The timeout in seconds when an expectation is called
+     * @param timeOutInMilliseconds The timeout in milliseconds when an expectation is called
      * @return the web driver wait
      */
-    public WebDriverWait createWebDriverWait(String timeOutInSeconds) {
-        return new WebDriverWait(webDriver, NumberUtil.parsePositiveInteger(timeOutInSeconds, WEBDRIVER_DEFAULT_TIMEOUT));
+    public WebDriverWait createWebDriverWait(String timeOutInMilliseconds) {
+        long timeout = toInteger(timeOutInMilliseconds, WEBDRIVER_DEFAULT_TIMEOUT);
+        WebDriverWait wait = new WebDriverWait(webDriver, 0);
+        wait.withTimeout(Duration.ofMillis(timeout));
+        return wait;
     }
 
     /**
@@ -157,5 +138,30 @@ public class CommandExecutor {
      */
     public ContextAwareWebDriver getWebDriver() {
         return webDriver;
+    }
+
+    /**
+     * Get the absolute URL from the given URL.
+     *
+     * @param url the URL
+     * @return the absolute URL
+     */
+    protected String getAbsoluteUrl(String url) {
+        return !url.contains("://") ?
+                baseUrl + (!url.startsWith("/") ? "/" : "") + url :
+                url;
+    }
+
+    /**
+     * Parse the given {@code text} into a positive {@link Integer} instance.
+     *
+     * @param value the text value
+     * @param defaultValue the default value
+     * @return an integer
+     */
+    protected int toInteger(String value, int defaultValue) {
+        // Of course, a non-breaking space doesn't count as whitespace.
+        value = value.replace('\u00A0',' ').trim();
+        return NumberUtil.parsePositiveInteger(value, defaultValue);
     }
 }

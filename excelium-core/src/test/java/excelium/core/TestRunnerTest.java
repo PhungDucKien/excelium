@@ -28,7 +28,6 @@ import excelium.core.command.CommandFactory;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.exception.AssertFailedException;
-import excelium.core.executor.CommandExecutor;
 import excelium.core.report.TestReporter;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
@@ -86,11 +85,11 @@ public class TestRunnerTest {
         command.setParam1("locator");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("click", String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1);
             runCount.getAndIncrement();
         });
-        commandMap.put("Click", command);
+        commandMap.put("click(1)", command);
 
         new MockUp<DriverFactory>() {
             @Mock
@@ -196,7 +195,7 @@ public class TestRunnerTest {
         TestStep testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("NotFoundCommand");
+        testStep.setCommand("Not Found Command");
         testStep.setParam1("button1");
         testSteps.add(testStep);
         testCase.setTestSteps(testSteps);
@@ -223,7 +222,7 @@ public class TestRunnerTest {
         testRunner.runAll();
 
         new Verifications() {{
-            consoleStream.println("          ERROR  Command not found: NotFoundCommand");
+            consoleStream.println("          ERROR  Command not found: Not Found Command");
         }};
     }
 
@@ -235,11 +234,11 @@ public class TestRunnerTest {
         command.setParam1("locator");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("click", String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1);
             runCount.getAndIncrement();
         });
-        commandMap.put("Click", command);
+        commandMap.put("click(1)", command);
 
         new MockUp<DriverFactory>() {
             @Mock
@@ -264,7 +263,7 @@ public class TestRunnerTest {
         TestStep testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("RunAction");
+        testStep.setCommand("Run Action");
         testStep.setParam1("action1");
         testSteps.add(testStep);
         testCase.setTestSteps(testSteps);
@@ -318,11 +317,12 @@ public class TestRunnerTest {
         command = new Command();
         command.setParam1("action");
         command.setConsumer((param1, param2, param3) -> {
+            Excelium excelium = Deencapsulation.getField(testRunner, "excelium");
             Method method = MyCommandExecutor.class.getMethod("runAction", String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null, testRunner);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, excelium, null);
             method.invoke(executor, param1);
         });
-        commandMap.put("RunAction", command);
+        commandMap.put("runAction(1)", command);
 
         testRunner.runAll();
 
@@ -341,11 +341,11 @@ public class TestRunnerTest {
         command.setParam1("locator");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("click", String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1);
             runCount.getAndIncrement();
         });
-        commandMap.put("Click", command);
+        commandMap.put("click(1)", command);
 
         new MockUp<DriverFactory>() {
             @Mock
@@ -370,7 +370,7 @@ public class TestRunnerTest {
         TestStep testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("RunAction");
+        testStep.setCommand("Run Action");
         testStep.setParam1("action2");
         testSteps.add(testStep);
         testCase.setTestSteps(testSteps);
@@ -422,19 +422,20 @@ public class TestRunnerTest {
         TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
 
         command = new Command();
-        command.setName("RunAction");
+        command.setName("Run Action");
         command.setParam1("action");
         command.setConsumer((param1, param2, param3) -> {
+            Excelium excelium = Deencapsulation.getField(testRunner, "excelium");
             Method method = MyCommandExecutor.class.getMethod("runAction", String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null, testRunner);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, excelium, null);
             method.invoke(executor, param1);
         });
-        commandMap.put("RunAction", command);
+        commandMap.put("runAction(1)", command);
 
         testRunner.runAll();
 
         new Verifications() {{
-            consoleStream.println("          ERROR  Invoke command RunAction error: Action execution failed.");
+            consoleStream.println("          ERROR  Invoke command runAction error: Action not found: action2");
         }};
     }
 
@@ -446,11 +447,11 @@ public class TestRunnerTest {
         command.setParam1("locatorArray");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("clickArray", String[].class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1);
             param.set((String[]) param1);
         });
-        commandMap.put("ClickArray", command);
+        commandMap.put("clickArray(1)", command);
 
         new MockUp<DriverFactory>() {
             @Mock
@@ -475,7 +476,7 @@ public class TestRunnerTest {
         TestStep testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("ClickArray");
+        testStep.setCommand("Click Array");
         testStep.setParam1("button1,button2,id3=id3");
         testSteps.add(testStep);
         testCase.setTestSteps(testSteps);
@@ -539,7 +540,7 @@ public class TestRunnerTest {
                 throw new AssertFailedException("Assertion Failed");
             }
         });
-        commandMap.put("VerifyAccessor", command);
+        commandMap.put("verifyAccessor(2)", command);
 
         command = new Command();
         command.setMethod("Verify");
@@ -547,10 +548,10 @@ public class TestRunnerTest {
         command.setParam2("text");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("verifyText", String.class, String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1, param2);
         });
-        commandMap.put("Verify", command);
+        commandMap.put("verify(2)", command);
 
         command = new Command();
         command.setMethod("AssertAccessor");
@@ -561,7 +562,7 @@ public class TestRunnerTest {
                 throw new AssertFailedException("Assertion Failed");
             }
         });
-        commandMap.put("AssertAccessor", command);
+        commandMap.put("assertAccessor(2)", command);
 
         command = new Command();
         command.setMethod("Assert");
@@ -569,10 +570,10 @@ public class TestRunnerTest {
         command.setParam2("text");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("assertText", String.class, String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1, param2);
         });
-        commandMap.put("Assert", command);
+        commandMap.put("assert(2)", command);
 
         command = new Command();
         command.setMethod("ErrorAccessor");
@@ -581,7 +582,7 @@ public class TestRunnerTest {
         command.setConsumer((param1, param2, param3) -> {
             throw new Exception();
         });
-        commandMap.put("ErrorAccessor", command);
+        commandMap.put("errorAccessor(2)", command);
 
         command = new Command();
         command.setMethod("Error");
@@ -589,20 +590,20 @@ public class TestRunnerTest {
         command.setParam2("text");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("error", String.class, String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1, param2);
         });
-        commandMap.put("Error", command);
+        commandMap.put("error(2)", command);
 
         command = new Command();
         command.setParam1("locator");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("click", String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1);
             runCount.getAndIncrement();
         });
-        commandMap.put("Click", command);
+        commandMap.put("click(1)", command);
 
         new MockUp<DriverFactory>() {
             @Mock
@@ -667,7 +668,7 @@ public class TestRunnerTest {
         testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("AssertAccessor");
+        testStep.setCommand("Assert Accessor");
         testStep.setParam1("button1");
         testStep.setParam2("OK");
         testSteps.add(testStep);
@@ -687,7 +688,7 @@ public class TestRunnerTest {
         testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("AssertAccessor");
+        testStep.setCommand("Assert Accessor");
         testStep.setParam1("button1");
         testStep.setParam2("NG");
         testSteps.add(testStep);
@@ -747,7 +748,7 @@ public class TestRunnerTest {
         testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("VerifyAccessor");
+        testStep.setCommand("Verify Accessor");
         testStep.setParam1("button1");
         testStep.setParam2("OK");
         testSteps.add(testStep);
@@ -767,7 +768,7 @@ public class TestRunnerTest {
         testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("VerifyAccessor");
+        testStep.setCommand("Verify Accessor");
         testStep.setParam1("button1");
         testStep.setParam2("NG");
         testSteps.add(testStep);
@@ -787,7 +788,7 @@ public class TestRunnerTest {
         testStep = new TestStep();
         testStep.setNo(1);
         testStep.setName("Test Step");
-        testStep.setCommand("ErrorAccessor");
+        testStep.setCommand("Error Accessor");
         testStep.setParam1("button1");
         testStep.setParam2("OK");
         testSteps.add(testStep);
@@ -864,11 +865,11 @@ public class TestRunnerTest {
         command.setParam1("locator");
         command.setConsumer((param1, param2, param3) -> {
             Method method = MyCommandExecutor.class.getMethod("click", String.class);
-            MyCommandExecutor executor = new MyCommandExecutor(null);
+            MyCommandExecutor executor = new MyCommandExecutor(null, null, null, null);
             method.invoke(executor, param1);
             param.set((String) param1);
         });
-        commandMap.put("Click", command);
+        commandMap.put("click(1)", command);
 
         new MockUp<DriverFactory>() {
             @Mock
@@ -990,12 +991,8 @@ public class TestRunnerTest {
 
     public static class MyCommandExecutor extends CommandExecutor {
 
-        public MyCommandExecutor(ContextAwareWebDriver webDriver) {
-            super(webDriver);
-        }
-
-        public MyCommandExecutor(ContextAwareWebDriver webDriver, TestRunner testRunner) {
-            super(webDriver, testRunner);
+        public MyCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
+            super(webDriver, baseUrl, excelium, project);
         }
 
         public void click(String locator) {

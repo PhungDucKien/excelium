@@ -24,11 +24,11 @@
 
 package excelium.core.command;
 
-import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
+import excelium.core.Excelium;
 import excelium.core.exception.AssertFailedException;
-import excelium.core.executor.CommandExecutor;
-import excelium.model.enums.Result;
+import excelium.core.CommandExecutor;
+import excelium.model.project.Project;
 import excelium.model.test.command.Command;
 import excelium.model.test.command.TriConsumer;
 import mockit.Expectations;
@@ -57,12 +57,12 @@ public class CommandFactoryTest {
     private TriConsumer triConsumer;
 
     @Mocked
-    private TestRunner testRunner;
+    private Excelium excelium;
 
     @Test
     public void testCreateActionCommandMap() throws Exception {
         List<CommandExecutor> commandExecutors = new ArrayList<>();
-        commandExecutors.add(new MyActionCommandExecutor(null, testRunner));
+        commandExecutors.add(new MyActionCommandExecutor(null, null, excelium, null));
 
         Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors);
 
@@ -133,13 +133,14 @@ public class CommandFactoryTest {
 
     @Test
     public void testCreateAccessorCommandMap() throws Exception {
-        new Expectations() {{
-            testRunner.runAction(anyString); result = Result.OK;
-        }};
-
         ContextAwareWebDriver webDriver = new ContextAwareWebDriver(null);
         List<CommandExecutor> commandExecutors = new ArrayList<>();
-        commandExecutors.add(new MyAccessorCommandExecutor(webDriver, testRunner));
+        CommandExecutor executor = new MyAccessorCommandExecutor(webDriver, null, excelium, null);
+        commandExecutors.add(executor);
+
+        new Expectations() {{
+            executor.runAction(anyString);
+        }};
 
         Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors);
 
@@ -191,42 +192,42 @@ public class CommandFactoryTest {
 
         commandMap.get("executeIfUrl(2)").getConsumer().accept("action1", "OK", null);
         new Verifications() {{
-            testRunner.runAction("action1");
+            executor.runAction("action1");
         }};
 
         commandMap.get("executeIfUrl(2)").getConsumer().accept("action2", "NG", null);
         new Verifications() {{
-            testRunner.runAction("action2"); times = 0;
+            executor.runAction("action2"); times = 0;
         }};
 
         commandMap.get("executeIfNotUrl(2)").getConsumer().accept("action3", "NG", null);
         new Verifications() {{
-            testRunner.runAction("action3");
+            executor.runAction("action3");
         }};
 
         commandMap.get("executeIfNotUrl(2)").getConsumer().accept("action4", "OK", null);
         new Verifications() {{
-            testRunner.runAction("action4"); times = 0;
+            executor.runAction("action4"); times = 0;
         }};
 
         commandMap.get("executeIfUrlContain(2)").getConsumer().accept("action5", "O", null);
         new Verifications() {{
-            testRunner.runAction("action5");
+            executor.runAction("action5");
         }};
 
         commandMap.get("executeIfUrlContain(2)").getConsumer().accept("action6", "N", null);
         new Verifications() {{
-            testRunner.runAction("action6"); times = 0;
+            executor.runAction("action6"); times = 0;
         }};
 
         commandMap.get("executeIfUrlNotContain(2)").getConsumer().accept("action7", "N", null);
         new Verifications() {{
-            testRunner.runAction("action7");
+            executor.runAction("action7");
         }};
 
         commandMap.get("executeIfUrlNotContain(2)").getConsumer().accept("action8", "O", null);
         new Verifications() {{
-            testRunner.runAction("action8"); times = 0;
+            executor.runAction("action8"); times = 0;
         }};
 
         // Parent locator and locator test
@@ -319,42 +320,42 @@ public class CommandFactoryTest {
 
         commandMap.get("executeIfText(3)").getConsumer().accept("textAction1", "locator","OK");
         new Verifications() {{
-            testRunner.runAction("textAction1");
+            executor.runAction("textAction1");
         }};
 
         commandMap.get("executeIfText(3)").getConsumer().accept("textAction2", "locator","NG");
         new Verifications() {{
-            testRunner.runAction("textAction2"); times = 0;
+            executor.runAction("textAction2"); times = 0;
         }};
 
         commandMap.get("executeIfNotText(3)").getConsumer().accept("textAction3", "locator","NG");
         new Verifications() {{
-            testRunner.runAction("textAction3");
+            executor.runAction("textAction3");
         }};
 
         commandMap.get("executeIfNotText(3)").getConsumer().accept("textAction4", "locator","OK");
         new Verifications() {{
-            testRunner.runAction("textAction4"); times = 0;
+            executor.runAction("textAction4"); times = 0;
         }};
 
         commandMap.get("executeIfTextContain(3)").getConsumer().accept("textAction5", "locator","O");
         new Verifications() {{
-            testRunner.runAction("textAction5");
+            executor.runAction("textAction5");
         }};
 
         commandMap.get("executeIfTextContain(3)").getConsumer().accept("textAction6", "locator","N");
         new Verifications() {{
-            testRunner.runAction("textAction6"); times = 0;
+            executor.runAction("textAction6"); times = 0;
         }};
 
         commandMap.get("executeIfTextNotContain(3)").getConsumer().accept("textAction7", "locator","N");
         new Verifications() {{
-            testRunner.runAction("textAction7");
+            executor.runAction("textAction7");
         }};
 
         commandMap.get("executeIfTextNotContain(3)").getConsumer().accept("textAction8", "locator","O");
         new Verifications() {{
-            testRunner.runAction("textAction8"); times = 0;
+            executor.runAction("textAction8"); times = 0;
         }};
 
         // Color compare
@@ -404,8 +405,8 @@ public class CommandFactoryTest {
     }
 
         public class MyActionCommandExecutor extends CommandExecutor {
-        public MyActionCommandExecutor(ContextAwareWebDriver webDriver, TestRunner testRunner) {
-            super(webDriver, testRunner);
+        public MyActionCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
+            super(webDriver, baseUrl, excelium, project);
         }
 
         @Action
@@ -431,8 +432,8 @@ public class CommandFactoryTest {
 
     public class MyAccessorCommandExecutor extends CommandExecutor {
 
-        public MyAccessorCommandExecutor(ContextAwareWebDriver webDriver, TestRunner testRunner) {
-            super(webDriver, testRunner);
+        public MyAccessorCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
+            super(webDriver, baseUrl, excelium, project);
         }
 
         @Accessor

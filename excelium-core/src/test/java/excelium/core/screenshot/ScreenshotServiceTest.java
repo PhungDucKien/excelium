@@ -93,12 +93,16 @@ public class ScreenshotServiceTest {
         Environment environment = new PcEnvironment();
         ((PcEnvironment) environment).setBrowser(Browser.CHROME);
 
+        Project project = new Project();
+        project.setScreenshotPath(Paths.get("dump"));
+
         new Expectations() {{
             testRunner.getTest(); result = test;
             testRunner.getTestSuite(); result = testSuite;
             testRunner.getTestFlows(); result = testFlows;
             testRunner.getTestStep(); result = testStep;
             testRunner.getEnvironment(); result = environment;
+            testRunner.getProject(); result = project;
 
             aShot.takeScreenshot((WebDriver) any); result = screenshot;
             screenshot.getImage(); result = new BufferedImage(100, 100, TYPE_INT_RGB);
@@ -106,14 +110,10 @@ public class ScreenshotServiceTest {
             webDriver.executeScript(anyString, null); result = 1;
         }};
 
-        Project project = new Project();
-        project.setScreenshotPath(Paths.get("dump"));
-
-        ScreenshotService screenshotService = new ScreenshotService(testRunner, project);
+        ScreenshotService screenshotService = new ScreenshotService(testRunner);
         screenshotService.captureEntirePage(webDriver);
 
-        Path imagePath = Paths.get("dump/Chrome/Workbook1/Sheet1/1-3-5-10.png");
-        System.out.println(imagePath.toString());
+        Path imagePath = Paths.get("dump/Chrome/Workbook1/Sheet1/1.3.5-10.png");
         Assert.assertTrue(Files.exists(imagePath));
 
         new Verifications() {{
