@@ -24,6 +24,8 @@
 
 package excelium.core.driver;
 
+import com.thoughtworks.selenium.webdriven.JavascriptLibrary;
+import com.thoughtworks.selenium.webdriven.commands.KeyState;
 import excelium.core.context.TestContext;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -33,6 +35,7 @@ import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.jexl3.JxltEngine;
 import org.openqa.selenium.*;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.interactions.Sequence;
@@ -65,6 +68,16 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
     private TestContext testContext;
 
     /**
+     * Javascript library
+     */
+    private final JavascriptLibrary javascriptLibrary;
+
+    /**
+     * Key state
+     */
+    private final KeyState keyState;
+
+    /**
      * Instantiates a new ContextAwareWebDriver.
      *
      * @param webDriver the web driver
@@ -72,6 +85,8 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
     public ContextAwareWebDriver(RemoteWebDriver webDriver) {
         this.webDriver = webDriver;
         this.testContext = new TestContext();
+        this.javascriptLibrary = new JavascriptLibrary();
+        this.keyState = new KeyState();
     }
 
     /**
@@ -81,6 +96,15 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
      */
     public boolean isWeb() {
         return !(webDriver instanceof AppiumDriver) || ((AppiumDriver) webDriver).isBrowser();
+    }
+
+    /**
+     * Determine whether the web driver is Internet Explorer driver.
+     *
+     * @return true if the web driver is Internet Explorer driver
+     */
+    public boolean isIE() {
+        return webDriver instanceof InternetExplorerDriver;
     }
 
     /**
@@ -179,7 +203,7 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
      */
     public WebElement findElement(String locator) throws NoSuchElementException {
         By by = parseBy(locator, this);
-        return this.webDriver.findElement(by);
+        return webDriver.findElement(by);
     }
 
     /**
@@ -191,7 +215,7 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
      */
     public List<WebElement> findElements(String locator) throws NoSuchElementException {
         By by = parseBy(locator, this);
-        return this.webDriver.findElements(by);
+        return webDriver.findElements(by);
     }
 
     /**
@@ -208,7 +232,7 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
         }
         By parentBy = parseBy(parentLocator, this);
         By by = parseBy(locator, this);
-        WebElement parentElement = this.webDriver.findElement(parentBy);
+        WebElement parentElement = webDriver.findElement(parentBy);
         return parentElement.findElement(by);
     }
 
@@ -226,12 +250,114 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
         }
         By parentBy = parseBy(parentLocator, this);
         By by = parseBy(locator, this);
-        List<WebElement> parentElements = this.webDriver.findElements(parentBy);
+        List<WebElement> parentElements = webDriver.findElements(parentBy);
         List<WebElement> elements = new ArrayList<>();
         for (WebElement parentElement : parentElements) {
             elements.addAll(parentElement.findElements(by));
         }
         return elements;
+    }
+
+    /**
+     * Gets the text of an element.
+     *
+     * @param element an element
+     * @return the text of the element
+     */
+    public String getElementText(WebElement element) {
+        if (isWeb()) {
+            String getText = javascriptLibrary.getSeleniumScript("getText.js");
+            try {
+                return (String) webDriver.executeScript(
+                        "return (" + getText + ")(arguments[0]);", element);
+            } catch (WebDriverException e) {
+                // TODO(simon): remove fall back for IE driver
+                return element.getText();
+            }
+        } else {
+            return element.getText();
+        }
+    }
+
+    /**
+     * Gets javascript library.
+     *
+     * @return the javascript library
+     */
+    public JavascriptLibrary getJavascriptLibrary() {
+        return javascriptLibrary;
+    }
+
+    /**
+     * Is meta key down boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isMetaKeyDown() {
+        return keyState.metaKeyDown;
+    }
+
+    /**
+     * Sets meta key down.
+     *
+     * @param metaKeyDown the meta key down
+     */
+    public void setMetaKeyDown(boolean metaKeyDown) {
+        keyState.metaKeyDown = metaKeyDown;
+    }
+
+    /**
+     * Is alt key down boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isAltKeyDown() {
+        return keyState.altKeyDown;
+    }
+
+    /**
+     * Sets alt key down.
+     *
+     * @param altKeyDown the alt key down
+     */
+    public void setAltKeyDown(boolean altKeyDown) {
+        keyState.altKeyDown = altKeyDown;
+    }
+
+    /**
+     * Is control key down boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isControlKeyDown() {
+        return keyState.controlKeyDown;
+    }
+
+    /**
+     * Sets control key down.
+     *
+     * @param controlKeyDown the control key down
+     */
+    public void setControlKeyDown(boolean controlKeyDown) {
+        keyState.controlKeyDown = controlKeyDown;
+    }
+
+    /**
+     * Is shift key down boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isShiftKeyDown() {
+        return keyState.shiftKeyDown;
+    }
+
+    /**
+     * Sets shift key down.
+     *
+     * @param shiftKeyDown the shift key down
+     */
+    public void setShiftKeyDown(boolean shiftKeyDown) {
+        keyState.shiftKeyDown = shiftKeyDown;
     }
 
     @Override
