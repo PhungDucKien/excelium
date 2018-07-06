@@ -71,9 +71,9 @@ import java.util.concurrent.TimeUnit;
 public class DriverFactory {
 
     /**
-     * Default implicit wait (in seconds) for web driver
+     * Default implicit wait (in milliseconds) for web driver
      */
-    private static final int WEBDRIVER_DEFAULT_IMPLICIT_WAIT = 1;
+    private static final int WEBDRIVER_DEFAULT_IMPLICIT_WAIT = 1000;
 
     /**
      * Default Appium host
@@ -100,7 +100,7 @@ public class DriverFactory {
         } else if (environment instanceof MobileEnvironment) {
             webDriver = createMobileDriver((MobileEnvironment) environment, project);
         }
-        webDriver.manage().timeouts().implicitlyWait(WEBDRIVER_DEFAULT_IMPLICIT_WAIT, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(WEBDRIVER_DEFAULT_IMPLICIT_WAIT, TimeUnit.MILLISECONDS);
         return new ContextAwareWebDriver(webDriver);
     }
 
