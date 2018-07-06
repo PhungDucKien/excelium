@@ -35,6 +35,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Defines an object that runs Excelium commands.
@@ -43,6 +45,11 @@ import java.util.Map;
  * @since 2018.07.05
  */
 public class Excelium {
+
+    /**
+     * Web driver
+     */
+    protected final ContextAwareWebDriver webDriver;
 
     /**
      * The command map
@@ -66,6 +73,7 @@ public class Excelium {
      * @throws InvocationTargetException the invocation target exception
      */
     public Excelium(ContextAwareWebDriver webDriver, String baseUrl, Project project) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        this.webDriver = webDriver;
         this.actions = new HashMap<>();
         this.commandMap = CommandFactory.createCommandMap(webDriver, baseUrl, this, project, webDriver.isWeb());
     }
@@ -83,6 +91,9 @@ public class Excelium {
         Command command = commandMap.get(methodName + "(" + countParam(param1, param2, param3) + ")");
         if (command != null) {
             try {
+                param1 = param1 instanceof String ? preprocessParameter((String) param1) : param1;
+                param2 = param2 instanceof String ? preprocessParameter((String) param2) : param2;
+                param3 = param3 instanceof String ? preprocessParameter((String) param3) : param3;
                 command.getConsumer().accept(param1, param2, param3);
             } catch (InvocationTargetException e) {
                 throw e.getCause();
@@ -104,6 +115,19 @@ public class Excelium {
         } else {
             throw new ActionNotFoundException("Action not found: " + actionName);
         }
+    }
+
+    /**
+     * Evaluate a parameter, performing evaluation and variable substitution.
+     * If the string matches the pattern "exp{ ... }", evaluate the string between the braces.
+     */
+    private String preprocessParameter(String value) {
+        Matcher match = Pattern.compile("^exp\\{((.|\\r?\\n)+)\\}$").matcher(value);
+        if (match.find()) {
+            Object result = webDriver.evalExp(match.group(1));
+            return result == null ? null : result.toString();
+        }
+        return webDriver.evalTemplate(value);
     }
 
     /**

@@ -104,7 +104,7 @@ public class CommandExecutor {
         if (!webDriver.isWeb()) {
             text = text.replace("\n", "&#10;");
         }
-        return webDriver.evalTemplate(text);
+        return text;
     }
 
     /**
