@@ -25,11 +25,11 @@
 package excelium.doclet;
 
 import com.sun.javadoc.*;
-import excelium.core.TestRunner;
 import excelium.core.command.CommandFactory;
 import excelium.core.driver.ContextAwareWebDriver;
+import excelium.core.Excelium;
+import excelium.model.project.Project;
 import excelium.model.test.command.Command;
-import excelium.model.test.config.Environment;
 import mockit.*;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
@@ -130,7 +130,7 @@ public class MyDocletTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            Map<String, Command> createCommandMap(Environment environment, ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) {
+            Map<String, Command> createCommandMap(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean forWeb) {
                 Map<String, Command> commandMap = new HashMap<>();
 
                 Command command = new Command();

@@ -2,14 +2,14 @@
 
 ## Command Table
 
-Command | Method | Param 1 | Param 2 | Param 3
---------- | --------- | --------- | --------- | ---------
-Assert Value | assertValue | locator | text | 
-Execute Action | executeAction | action |  | 
-Execute If Value | executeIfValue |  | locator | text
-Store Value | storeValue | locator | variable | 
-Verify Value | verifyValue | locator | text | 
-Wait For Value | waitForValue | locator | text | 
+No | Command | Method | Param 1 | Param 2 | Param 3
+--------- | --------- | --------- | --------- | --------- | ---------
+1 | Assert Value | assertValue | locator | text | 
+2 | Execute Action | executeAction | action |  | 
+3 | Execute If Value | executeIfValue |  | locator | text
+4 | Store Value | storeValue | locator | variable | 
+5 | Verify Value | verifyValue | locator | text | 
+6 | Wait For Value | waitForValue | locator | text | 
 
 ## Assert Value
 

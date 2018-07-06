@@ -2,11 +2,11 @@
 
 ## Command Table
 
-Command | Method | Param 1 | Param 2 | Param 3
---------- | --------- | --------- | --------- | ---------
+No | Command | Method | Param 1 | Param 2 | Param 3
+--------- | --------- | --------- | --------- | --------- | ---------
 <#list items>
 <#items as command>
-${command.getName()} | ${command.getMethod()} | ${(command.getParam1())!} | ${(command.getParam2())!} | ${(command.getParam3())!}
+${command?index + 1} | ${command.getName()} | ${command.getMethod()} | ${(command.getParam1())!} | ${(command.getParam2())!} | ${(command.getParam3())!}
 </#items>
 </#list>
 

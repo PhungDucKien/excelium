@@ -37,11 +37,7 @@ import excelium.doclet.model.CommandItem;
 import excelium.doclet.model.ParameterTag;
 import excelium.doclet.service.FreeMarkerTemplateService;
 import excelium.doclet.service.TemplateService;
-import excelium.model.enums.Browser;
-import excelium.model.enums.Platform;
 import excelium.model.test.command.Command;
-import excelium.model.test.config.MobileAppEnvironment;
-import excelium.model.test.config.PcEnvironment;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -138,6 +134,11 @@ public class MyDoclet extends Standard {
 
         File outputFile = new File(destinationDir, isWeb ? "_web_api.md" : "_mobile_api.md");
         templateService.processTemplate("api.ftl", input, outputFile);
+
+        // Generate Excelium API classes
+        File javaFile = new File("../excelium-executor/src/main/java/excelium/executor/" +
+                (isWeb ? "WebExcelium.java" : "MobileExcelium.java"));
+        templateService.processTemplate("java.ftl", input, javaFile);
     }
 
     /**
@@ -167,16 +168,7 @@ public class MyDoclet extends Standard {
      */
     private static Map<String, Command> getCommandMap(boolean isWeb) {
         try {
-            if (isWeb) {
-                PcEnvironment environment = new PcEnvironment();
-                environment.setPlatform(Platform.WINDOWS_64);
-                environment.setBrowser(Browser.CHROME);
-                return CommandFactory.createCommandMap(environment, new ContextAwareWebDriver(new StubWebDriver()), null, null);
-            } else {
-                MobileAppEnvironment environment = new MobileAppEnvironment();
-                environment.setPlatform(Platform.ANDROID);
-                return CommandFactory.createCommandMap(environment, new ContextAwareWebDriver(new StubWebDriver()), null, null);
-            }
+            return CommandFactory.createCommandMap(new ContextAwareWebDriver(new StubWebDriver()), null, null, null, isWeb);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -339,6 +331,12 @@ public class MyDoclet extends Standard {
         for (AnnotationDesc annotationDesc : annotationDescs) {
             if (annotationDesc.annotationType().qualifiedName().equals(Action.class.getName()) ||
                     annotationDesc.annotationType().qualifiedName().equals(Accessor.class.getName())) {
+                int paramNum = methodDoc.parameters().length;
+                if (paramNum != countParam(annotationDesc)) {
+                    System.err.println("WARNING: Number of method arguments does not match the number of annotation parameters. Method: " + methodDoc.name());
+                } else if (paramNum != methodDoc.paramTags().length) {
+                    System.err.println("WARNING: Number of method arguments does not match the number of @param tag. Method: " + methodDoc.name());
+                }
                 return true;
             }
         }
@@ -407,12 +405,28 @@ public class MyDoclet extends Standard {
         if (StringUtils.endsWithAny(comment, ".", "!", "?")) {
             comment = comment.substring(0, comment.length() - 1);
         }
-        Pattern pattern = Pattern.compile("(?:Return|Get)s?\\s+(?:true if\\s+)?((?:(?!(, or false|, or throws?)).)*)");
+        Pattern pattern = Pattern.compile("(?:Return|Get|Retrieve|Determine|Check)s?\\s+(?:(?:true if|if|whether)\\s+)?((?:(?!(, or false|, or fail|, or throws?)).)*)");
         Matcher matcher = pattern.matcher(comment);
         if (matcher.find()) {
             return matcher.group(1);
         }
         return comment;
+    }
+
+    /**
+     * Count the number of parameters of the AnnotationDesc.
+     *
+     * @param annotationDesc the AnnotationDesc
+     * @return the number of parameters
+     */
+    private static int countParam(AnnotationDesc annotationDesc) {
+        int count = 0;
+        for (AnnotationDesc.ElementValuePair valuePair : annotationDesc.elementValues()) {
+            if (valuePair.element().name().startsWith("param") && StringUtils.isNotBlank(valuePair.value().toString())) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
