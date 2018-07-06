@@ -25,11 +25,12 @@
 package excelium.executor.web;
 
 import com.thoughtworks.selenium.SeleniumException;
-import excelium.core.TestRunner;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.executor.CommandExecutor;
+import excelium.core.Excelium;
+import excelium.core.CommandExecutor;
+import excelium.model.project.Project;
 import org.openqa.selenium.Cookie;
 
 import java.net.MalformedURLException;
@@ -39,7 +40,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Cookie related command executor.
+ * Represents a class which contains commands for controlling cookies.
  *
  * @author PhungDucKien
  * @since 2018.06.27
@@ -54,12 +55,13 @@ public class CookieCommandExecutor extends CommandExecutor {
     /**
      * Instantiates a new Cookie command executor.
      *
-     * @param webDriver  the web driver
-     * @param baseUrl    the base url
-     * @param testRunner the test runner
+     * @param webDriver the web driver
+     * @param baseUrl   the base url
+     * @param excelium  the excelium
+     * @param project   the project
      */
-    public CookieCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, TestRunner testRunner) {
-        super(webDriver, baseUrl, testRunner);
+    public CookieCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
+        super(webDriver, baseUrl, excelium, project);
     }
 
     /**
