@@ -127,7 +127,7 @@ public class ByParser {
      * @return Web locator
      */
     private static WebLocator parseWebLocator(String locator) {
-        Pattern p = Pattern.compile("^((?:(?!=).)+)=(.+)$");
+        Pattern p = Pattern.compile("^([A-Za-z_]+)=(.+)$");
         Matcher m = p.matcher(locator);
         WebLocator lc = new WebLocator();
         if (m.find()) {
@@ -136,14 +136,12 @@ public class ByParser {
         } else {
             if (locator.startsWith("//")) {
                 lc.setType(WebLocatorType.XPATH);
-                lc.setValue(locator.substring(2));
             } else if (locator.startsWith("document")) {
                 lc.setType(WebLocatorType.DOM);
-                lc.setValue(locator);
             } else {
                 lc.setType(WebLocatorType.IDENTIFIER);
-                lc.setValue(locator);
             }
+            lc.setValue(locator);
         }
         return lc;
     }
@@ -155,7 +153,7 @@ public class ByParser {
      * @return Mobile locator
      */
     private static MobileLocator parseMobileLocator(String locator) {
-        Pattern p = Pattern.compile("^((?:(?!=).)+)=(.+)$");
+        Pattern p = Pattern.compile("^([A-Za-z_]+)=(.+)$");
         Matcher m = p.matcher(locator);
         MobileLocator lc = new MobileLocator();
         if (m.find()) {

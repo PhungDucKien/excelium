@@ -66,9 +66,9 @@ public class ByParserTest {
         Assert.assertTrue(by instanceof By.ByLinkText);
         Assert.assertEquals("By.linkText: link", by.toString());
 
-        by = ByParser.parseBy("xpath=xpath", webDriver);
+        by = ByParser.parseBy("xpath=//xpath", webDriver);
         Assert.assertTrue(by instanceof By.ByXPath);
-        Assert.assertEquals("By.xpath: xpath", by.toString());
+        Assert.assertEquals("By.xpath: //xpath", by.toString());
 
         by = ByParser.parseBy("identifier=identifier", webDriver);
         Assert.assertTrue(by instanceof ByIdOrName);
@@ -80,7 +80,7 @@ public class ByParserTest {
 
         by = ByParser.parseBy("//xpath", webDriver);
         Assert.assertTrue(by instanceof By.ByXPath);
-        Assert.assertEquals("By.xpath: xpath", by.toString());
+        Assert.assertEquals("By.xpath: //xpath", by.toString());
 
         by = ByParser.parseBy("identifier", webDriver);
         Assert.assertTrue(by instanceof ByIdOrName);
