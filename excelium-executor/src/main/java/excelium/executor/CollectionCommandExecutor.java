@@ -68,9 +68,17 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * @return true if the specified text pattern appears in the specified variable list value, or false otherwise
      */
     @Accessor(param1 = "variable", param2 = "text")
-    public boolean isListContain(String variable, String text) {
-        List list = (List) this.webDriver.getVariable(variable);
-        return list != null && list.contains(normalizeText(text));
+    public boolean isListContain(String variable, String text) throws Exception {
+        Object value = this.webDriver.getVariable(variable);
+        List list;
+        if (value.getClass().isArray()) {
+            list = Arrays.asList((String[]) value);
+        } else if (value instanceof List) {
+            list = (List) value;
+        } else {
+            throw new Exception("The variable must be a List or an Array");
+        }
+        return list.contains(normalizeText(text));
     }
 
     /**
