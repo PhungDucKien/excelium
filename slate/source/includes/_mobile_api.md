@@ -108,496 +108,572 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 102 | Assert Not Font Style | assertNotFontStyle | parentLocator | locator | text
 103 | Assert Not Font Weight | assertNotFontWeight | locator | text | 
 104 | Assert Not Font Weight | assertNotFontWeight | parentLocator | locator | text
-105 | Assert Not Selected Id | assertNotSelectedId | locator | text | 
-106 | Assert Not Selected Id | assertNotSelectedId | parentLocator | locator | text
-107 | Assert Not Selected Index | assertNotSelectedIndex | locator | text | 
-108 | Assert Not Selected Index | assertNotSelectedIndex | parentLocator | locator | text
-109 | Assert Not Selected Label | assertNotSelectedLabel | locator | text | 
-110 | Assert Not Selected Label | assertNotSelectedLabel | parentLocator | locator | text
-111 | Assert Not Selected Value | assertNotSelectedValue | locator | text | 
-112 | Assert Not Selected Value | assertNotSelectedValue | parentLocator | locator | text
-113 | Assert Not Something Selected | assertNotSomethingSelected | locator |  | 
-114 | Assert Not Something Selected | assertNotSomethingSelected | parentLocator | locator | 
-115 | Assert Not Text | assertNotText | locator | text | 
-116 | Assert Not Text | assertNotText | parentLocator | locator | text
-117 | Assert Not Text Alignment | assertNotTextAlignment | locator | text | 
-118 | Assert Not Text Alignment | assertNotTextAlignment | parentLocator | locator | text
-119 | Assert Not Text Decoration | assertNotTextDecoration | locator | text | 
-120 | Assert Not Text Decoration | assertNotTextDecoration | parentLocator | locator | text
-121 | Assert Not Text Empty | assertNotTextEmpty | locator |  | 
-122 | Assert Not Text Empty | assertNotTextEmpty | parentLocator | locator | 
-123 | Assert Not Value | assertNotValue | locator | text | 
-124 | Assert Not Value | assertNotValue | parentLocator | locator | text
-125 | Assert Not Value Empty | assertNotValueEmpty | locator |  | 
-126 | Assert Not Value Empty | assertNotValueEmpty | parentLocator | locator | 
-127 | Assert Not Variable | assertNotVariable | variable | text | 
-128 | Assert Not Visible | assertNotVisible | locator |  | 
-129 | Assert Not Visible | assertNotVisible | parentLocator | locator | 
-130 | Assert Row Count | assertRowCount | sql | count | 
-131 | Assert Row Count Greater Than | assertRowCountGreaterThan | sql | count | 
-132 | Assert Row Count Less Than | assertRowCountLessThan | sql | count | 
-133 | Assert Selected Id | assertSelectedId | locator | text | 
-134 | Assert Selected Id | assertSelectedId | parentLocator | locator | text
-135 | Assert Selected Id Match | assertSelectedIdMatch | locator | text | 
-136 | Assert Selected Id Match | assertSelectedIdMatch | parentLocator | locator | text
-137 | Assert Selected Id Not Match | assertSelectedIdNotMatch | locator | text | 
-138 | Assert Selected Id Not Match | assertSelectedIdNotMatch | parentLocator | locator | text
-139 | Assert Selected Index | assertSelectedIndex | locator | text | 
-140 | Assert Selected Index | assertSelectedIndex | parentLocator | locator | text
-141 | Assert Selected Index Match | assertSelectedIndexMatch | locator | text | 
-142 | Assert Selected Index Match | assertSelectedIndexMatch | parentLocator | locator | text
-143 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | locator | text | 
-144 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | parentLocator | locator | text
-145 | Assert Selected Label | assertSelectedLabel | locator | text | 
-146 | Assert Selected Label | assertSelectedLabel | parentLocator | locator | text
-147 | Assert Selected Label Match | assertSelectedLabelMatch | locator | text | 
-148 | Assert Selected Label Match | assertSelectedLabelMatch | parentLocator | locator | text
-149 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | locator | text | 
-150 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | parentLocator | locator | text
-151 | Assert Selected Value | assertSelectedValue | locator | text | 
-152 | Assert Selected Value | assertSelectedValue | parentLocator | locator | text
-153 | Assert Selected Value Match | assertSelectedValueMatch | locator | text | 
-154 | Assert Selected Value Match | assertSelectedValueMatch | parentLocator | locator | text
-155 | Assert Selected Value Not Match | assertSelectedValueNotMatch | locator | text | 
-156 | Assert Selected Value Not Match | assertSelectedValueNotMatch | parentLocator | locator | text
-157 | Assert Something Selected | assertSomethingSelected | locator |  | 
-158 | Assert Something Selected | assertSomethingSelected | parentLocator | locator | 
-159 | Assert Text | assertText | locator | text | 
-160 | Assert Text | assertText | parentLocator | locator | text
-161 | Assert Text Alignment | assertTextAlignment | locator | text | 
-162 | Assert Text Alignment | assertTextAlignment | parentLocator | locator | text
-163 | Assert Text Alignment Match | assertTextAlignmentMatch | locator | text | 
-164 | Assert Text Alignment Match | assertTextAlignmentMatch | parentLocator | locator | text
-165 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | locator | text | 
-166 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | parentLocator | locator | text
-167 | Assert Text Decoration | assertTextDecoration | locator | text | 
-168 | Assert Text Decoration | assertTextDecoration | parentLocator | locator | text
-169 | Assert Text Decoration Match | assertTextDecorationMatch | locator | text | 
-170 | Assert Text Decoration Match | assertTextDecorationMatch | parentLocator | locator | text
-171 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | locator | text | 
-172 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | parentLocator | locator | text
-173 | Assert Text Empty | assertTextEmpty | locator |  | 
-174 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
-175 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
-176 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
-177 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
-178 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
-179 | Assert Text Match | assertTextMatch | locator | text | 
-180 | Assert Text Match | assertTextMatch | parentLocator | locator | text
-181 | Assert Text Not Match | assertTextNotMatch | locator | text | 
-182 | Assert Text Not Match | assertTextNotMatch | parentLocator | locator | text
-183 | Assert Value | assertValue | locator | text | 
-184 | Assert Value | assertValue | parentLocator | locator | text
-185 | Assert Value Empty | assertValueEmpty | locator |  | 
-186 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
-187 | Assert Value Match | assertValueMatch | locator | text | 
-188 | Assert Value Match | assertValueMatch | parentLocator | locator | text
-189 | Assert Value Not Match | assertValueNotMatch | locator | text | 
-190 | Assert Value Not Match | assertValueNotMatch | parentLocator | locator | text
-191 | Assert Variable | assertVariable | variable | text | 
-192 | Assert Variable Match | assertVariableMatch | variable | text | 
-193 | Assert Variable Not Match | assertVariableNotMatch | variable | text | 
-194 | Assert Visible | assertVisible | locator |  | 
-195 | Assert Visible | assertVisible | parentLocator | locator | 
-196 | Echo | echo | message |  | 
-197 | Execute | execute | action |  | 
-198 | Execute Each | executeEach | action | locator | variable
-199 | Execute If Checked | executeIfChecked | action | locator | 
-200 | Execute If Checked | executeIfChecked | action | parentLocator | locator
-201 | Execute If Editable | executeIfEditable | action | locator | 
-202 | Execute If Editable | executeIfEditable | action | parentLocator | locator
-203 | Execute If Eval | executeIfEval | action | expression | text
-204 | Execute If Eval Script | executeIfEvalScript | action | script | text
-205 | Execute If Eval Script Match | executeIfEvalScriptMatch | action | script | text
-206 | Execute If Eval Script Not Match | executeIfEvalScriptNotMatch | action | script | text
-207 | Execute If Exists In Database | executeIfExistsInDatabase | action | sql | 
-208 | Execute If Expression | executeIfExpression | action | expression | text
-209 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
-210 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
-211 | Execute If List Contain | executeIfListContain | action | variable | text
-212 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
-213 | Execute If Not Checked | executeIfNotChecked | action | locator | 
-214 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
-215 | Execute If Not Editable | executeIfNotEditable | action | locator | 
-216 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
-217 | Execute If Not Eval | executeIfNotEval | action | expression | text
-218 | Execute If Not Eval Script | executeIfNotEvalScript | action | script | text
-219 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | sql | 
-220 | Execute If Not Expression | executeIfNotExpression | action | expression | text
-221 | Execute If Not Selected Id | executeIfNotSelectedId | action | locator | text
-222 | Execute If Not Selected Index | executeIfNotSelectedIndex | action | locator | text
-223 | Execute If Not Selected Label | executeIfNotSelectedLabel | action | locator | text
-224 | Execute If Not Selected Value | executeIfNotSelectedValue | action | locator | text
-225 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | locator | 
-226 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | parentLocator | locator
-227 | Execute If Not Text | executeIfNotText | action | locator | text
-228 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
-229 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
-230 | Execute If Not Value | executeIfNotValue | action | locator | text
-231 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
-232 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
-233 | Execute If Not Variable | executeIfNotVariable | action | variable | text
-234 | Execute If Not Visible | executeIfNotVisible | action | locator | 
-235 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
-236 | Execute If Selected Id | executeIfSelectedId | action | locator | text
-237 | Execute If Selected Id Match | executeIfSelectedIdMatch | action | locator | text
-238 | Execute If Selected Id Not Match | executeIfSelectedIdNotMatch | action | locator | text
-239 | Execute If Selected Index | executeIfSelectedIndex | action | locator | text
-240 | Execute If Selected Index Match | executeIfSelectedIndexMatch | action | locator | text
-241 | Execute If Selected Index Not Match | executeIfSelectedIndexNotMatch | action | locator | text
-242 | Execute If Selected Label | executeIfSelectedLabel | action | locator | text
-243 | Execute If Selected Label Match | executeIfSelectedLabelMatch | action | locator | text
-244 | Execute If Selected Label Not Match | executeIfSelectedLabelNotMatch | action | locator | text
-245 | Execute If Selected Value | executeIfSelectedValue | action | locator | text
-246 | Execute If Selected Value Match | executeIfSelectedValueMatch | action | locator | text
-247 | Execute If Selected Value Not Match | executeIfSelectedValueNotMatch | action | locator | text
-248 | Execute If Something Selected | executeIfSomethingSelected | action | locator | 
-249 | Execute If Something Selected | executeIfSomethingSelected | action | parentLocator | locator
-250 | Execute If Text | executeIfText | action | locator | text
-251 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
-252 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
-253 | Execute If Text Match | executeIfTextMatch | action | locator | text
-254 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
-255 | Execute If Value | executeIfValue | action | locator | text
-256 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
-257 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
-258 | Execute If Value Match | executeIfValueMatch | action | locator | text
-259 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
-260 | Execute If Variable | executeIfVariable | action | variable | text
-261 | Execute If Variable Match | executeIfVariableMatch | action | variable | text
-262 | Execute If Variable Not Match | executeIfVariableNotMatch | action | variable | text
-263 | Execute If Visible | executeIfVisible | action | locator | 
-264 | Execute If Visible | executeIfVisible | action | parentLocator | locator
-265 | Execute Loop | executeLoop | action | times | 
-266 | Go Back | goBack |  |  | 
-267 | Go Forward | goForward |  |  | 
-268 | Highlight | highlight | locator |  | 
-269 | Highlight | highlight | parentLocator | locator | 
-270 | Pause | pause | waitTime |  | 
-271 | Refresh | refresh |  |  | 
-272 | Run Script | runScript | script |  | 
-273 | Set Timeout | setTimeout | timeout |  | 
-274 | Store | store | text | variable | 
-275 | Store Attribute | storeAttribute | locator | name | variable
-276 | Store Current Date | storeCurrentDate | variable |  | 
-277 | Store Eval | storeEval | expression | variable | 
-278 | Store Eval Script | storeEvalScript | script | variable | 
-279 | Store Expression | storeExpression | expression | variable | 
-280 | Store Push | storePush | text | variable | 
-281 | Store Select Options | storeSelectOptions | locator | variable | 
-282 | Store Select Options | storeSelectOptions | parentLocator | locator | variable
-283 | Store Selected Id | storeSelectedId | locator | variable | 
-284 | Store Selected Id | storeSelectedId | parentLocator | locator | variable
-285 | Store Selected Ids | storeSelectedIds | locator | variable | 
-286 | Store Selected Ids | storeSelectedIds | parentLocator | locator | variable
-287 | Store Selected Index | storeSelectedIndex | locator | variable | 
-288 | Store Selected Index | storeSelectedIndex | parentLocator | locator | variable
-289 | Store Selected Indexes | storeSelectedIndexes | locator | variable | 
-290 | Store Selected Indexes | storeSelectedIndexes | parentLocator | locator | variable
-291 | Store Selected Label | storeSelectedLabel | locator | variable | 
-292 | Store Selected Label | storeSelectedLabel | parentLocator | locator | variable
-293 | Store Selected Labels | storeSelectedLabels | locator | variable | 
-294 | Store Selected Labels | storeSelectedLabels | parentLocator | locator | variable
-295 | Store Selected Value | storeSelectedValue | locator | variable | 
-296 | Store Selected Value | storeSelectedValue | parentLocator | locator | variable
-297 | Store Selected Values | storeSelectedValues | locator | variable | 
-298 | Store Selected Values | storeSelectedValues | parentLocator | locator | variable
-299 | Store Text | storeText | locator | variable | 
-300 | Store Text | storeText | parentLocator | locator | variable
-301 | Store Value | storeValue | locator | variable | 
-302 | Store Value | storeValue | parentLocator | locator | variable
-303 | Verify Attribute | verifyAttribute | locator | name | text
-304 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
-305 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
-306 | Verify Background Color | verifyBackgroundColor | locator | text | 
-307 | Verify Background Color | verifyBackgroundColor | parentLocator | locator | text
-308 | Verify Border Color | verifyBorderColor | locator | text | 
-309 | Verify Border Color | verifyBorderColor | parentLocator | locator | text
-310 | Verify Checked | verifyChecked | locator |  | 
-311 | Verify Checked | verifyChecked | parentLocator | locator | 
-312 | Verify Color | verifyColor | locator | text | 
-313 | Verify Color | verifyColor | parentLocator | locator | text
-314 | Verify Cursor Position | verifyCursorPosition | locator | text | 
-315 | Verify Cursor Position | verifyCursorPosition | parentLocator | locator | text
-316 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
-317 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
-318 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
-319 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
-320 | Verify Editable | verifyEditable | locator |  | 
-321 | Verify Editable | verifyEditable | parentLocator | locator | 
-322 | Verify Element Height | verifyElementHeight | locator | text | 
-323 | Verify Element Height | verifyElementHeight | parentLocator | locator | text
-324 | Verify Element Index | verifyElementIndex | locator | text | 
-325 | Verify Element Index | verifyElementIndex | parentLocator | locator | text
-326 | Verify Element Position Left | verifyElementPositionLeft | locator | text | 
-327 | Verify Element Position Left | verifyElementPositionLeft | parentLocator | locator | text
-328 | Verify Element Position Top | verifyElementPositionTop | locator | text | 
-329 | Verify Element Position Top | verifyElementPositionTop | parentLocator | locator | text
-330 | Verify Element Width | verifyElementWidth | locator | text | 
-331 | Verify Element Width | verifyElementWidth | parentLocator | locator | text
-332 | Verify Eval | verifyEval | expression | text | 
-333 | Verify Eval Script | verifyEvalScript | script | text | 
-334 | Verify Eval Script Match | verifyEvalScriptMatch | script | text | 
-335 | Verify Eval Script Not Match | verifyEvalScriptNotMatch | script | text | 
-336 | Verify Exists In Database | verifyExistsInDatabase | sql |  | 
-337 | Verify Expression | verifyExpression | expression | text | 
-338 | Verify Expression Match | verifyExpressionMatch | expression | text | 
-339 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
-340 | Verify Font Family | verifyFontFamily | locator | text | 
-341 | Verify Font Family | verifyFontFamily | parentLocator | locator | text
-342 | Verify Font Family Match | verifyFontFamilyMatch | locator | text | 
-343 | Verify Font Family Match | verifyFontFamilyMatch | parentLocator | locator | text
-344 | Verify Font Family Not Match | verifyFontFamilyNotMatch | locator | text | 
-345 | Verify Font Family Not Match | verifyFontFamilyNotMatch | parentLocator | locator | text
-346 | Verify Font Size | verifyFontSize | locator | text | 
-347 | Verify Font Size | verifyFontSize | parentLocator | locator | text
-348 | Verify Font Size Match | verifyFontSizeMatch | locator | text | 
-349 | Verify Font Size Match | verifyFontSizeMatch | parentLocator | locator | text
-350 | Verify Font Size Not Match | verifyFontSizeNotMatch | locator | text | 
-351 | Verify Font Size Not Match | verifyFontSizeNotMatch | parentLocator | locator | text
-352 | Verify Font Style | verifyFontStyle | locator | text | 
-353 | Verify Font Style | verifyFontStyle | parentLocator | locator | text
-354 | Verify Font Style Match | verifyFontStyleMatch | locator | text | 
-355 | Verify Font Style Match | verifyFontStyleMatch | parentLocator | locator | text
-356 | Verify Font Style Not Match | verifyFontStyleNotMatch | locator | text | 
-357 | Verify Font Style Not Match | verifyFontStyleNotMatch | parentLocator | locator | text
-358 | Verify Font Weight | verifyFontWeight | locator | text | 
-359 | Verify Font Weight | verifyFontWeight | parentLocator | locator | text
-360 | Verify Font Weight Match | verifyFontWeightMatch | locator | text | 
-361 | Verify Font Weight Match | verifyFontWeightMatch | parentLocator | locator | text
-362 | Verify Font Weight Not Match | verifyFontWeightNotMatch | locator | text | 
-363 | Verify Font Weight Not Match | verifyFontWeightNotMatch | parentLocator | locator | text
-364 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
-365 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
-366 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
-367 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
-368 | Verify List Contain | verifyListContain | variable | text | 
-369 | Verify List Not Contain | verifyListNotContain | variable | text | 
-370 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
-371 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
-372 | Verify Not Attribute | verifyNotAttribute | locator | name | text
-373 | Verify Not Background Color | verifyNotBackgroundColor | locator | text | 
-374 | Verify Not Background Color | verifyNotBackgroundColor | parentLocator | locator | text
-375 | Verify Not Border Color | verifyNotBorderColor | locator | text | 
-376 | Verify Not Border Color | verifyNotBorderColor | parentLocator | locator | text
-377 | Verify Not Checked | verifyNotChecked | locator |  | 
-378 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
-379 | Verify Not Color | verifyNotColor | locator | text | 
-380 | Verify Not Color | verifyNotColor | parentLocator | locator | text
-381 | Verify Not Cursor Position | verifyNotCursorPosition | locator | text | 
-382 | Verify Not Cursor Position | verifyNotCursorPosition | parentLocator | locator | text
-383 | Verify Not Editable | verifyNotEditable | locator |  | 
-384 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
-385 | Verify Not Element Height | verifyNotElementHeight | locator | text | 
-386 | Verify Not Element Height | verifyNotElementHeight | parentLocator | locator | text
-387 | Verify Not Element Index | verifyNotElementIndex | locator | text | 
-388 | Verify Not Element Index | verifyNotElementIndex | parentLocator | locator | text
-389 | Verify Not Element Position Left | verifyNotElementPositionLeft | locator | text | 
-390 | Verify Not Element Position Left | verifyNotElementPositionLeft | parentLocator | locator | text
-391 | Verify Not Element Position Top | verifyNotElementPositionTop | locator | text | 
-392 | Verify Not Element Position Top | verifyNotElementPositionTop | parentLocator | locator | text
-393 | Verify Not Element Width | verifyNotElementWidth | locator | text | 
-394 | Verify Not Element Width | verifyNotElementWidth | parentLocator | locator | text
-395 | Verify Not Eval | verifyNotEval | expression | text | 
-396 | Verify Not Eval Script | verifyNotEvalScript | script | text | 
-397 | Verify Not Exists In Database | verifyNotExistsInDatabase | sql |  | 
-398 | Verify Not Expression | verifyNotExpression | expression | text | 
-399 | Verify Not Font Family | verifyNotFontFamily | locator | text | 
-400 | Verify Not Font Family | verifyNotFontFamily | parentLocator | locator | text
-401 | Verify Not Font Size | verifyNotFontSize | locator | text | 
-402 | Verify Not Font Size | verifyNotFontSize | parentLocator | locator | text
-403 | Verify Not Font Style | verifyNotFontStyle | locator | text | 
-404 | Verify Not Font Style | verifyNotFontStyle | parentLocator | locator | text
-405 | Verify Not Font Weight | verifyNotFontWeight | locator | text | 
-406 | Verify Not Font Weight | verifyNotFontWeight | parentLocator | locator | text
-407 | Verify Not Selected Id | verifyNotSelectedId | locator | text | 
-408 | Verify Not Selected Id | verifyNotSelectedId | parentLocator | locator | text
-409 | Verify Not Selected Index | verifyNotSelectedIndex | locator | text | 
-410 | Verify Not Selected Index | verifyNotSelectedIndex | parentLocator | locator | text
-411 | Verify Not Selected Label | verifyNotSelectedLabel | locator | text | 
-412 | Verify Not Selected Label | verifyNotSelectedLabel | parentLocator | locator | text
-413 | Verify Not Selected Value | verifyNotSelectedValue | locator | text | 
-414 | Verify Not Selected Value | verifyNotSelectedValue | parentLocator | locator | text
-415 | Verify Not Something Selected | verifyNotSomethingSelected | locator |  | 
-416 | Verify Not Something Selected | verifyNotSomethingSelected | parentLocator | locator | 
-417 | Verify Not Text | verifyNotText | locator | text | 
-418 | Verify Not Text | verifyNotText | parentLocator | locator | text
-419 | Verify Not Text Alignment | verifyNotTextAlignment | locator | text | 
-420 | Verify Not Text Alignment | verifyNotTextAlignment | parentLocator | locator | text
-421 | Verify Not Text Decoration | verifyNotTextDecoration | locator | text | 
-422 | Verify Not Text Decoration | verifyNotTextDecoration | parentLocator | locator | text
-423 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
-424 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
-425 | Verify Not Value | verifyNotValue | locator | text | 
-426 | Verify Not Value | verifyNotValue | parentLocator | locator | text
-427 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
-428 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
-429 | Verify Not Variable | verifyNotVariable | variable | text | 
-430 | Verify Not Visible | verifyNotVisible | locator |  | 
-431 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
-432 | Verify Row Count | verifyRowCount | sql | count | 
-433 | Verify Row Count Greater Than | verifyRowCountGreaterThan | sql | count | 
-434 | Verify Row Count Less Than | verifyRowCountLessThan | sql | count | 
-435 | Verify Selected Id | verifySelectedId | locator | text | 
-436 | Verify Selected Id | verifySelectedId | parentLocator | locator | text
-437 | Verify Selected Id Match | verifySelectedIdMatch | locator | text | 
-438 | Verify Selected Id Match | verifySelectedIdMatch | parentLocator | locator | text
-439 | Verify Selected Id Not Match | verifySelectedIdNotMatch | locator | text | 
-440 | Verify Selected Id Not Match | verifySelectedIdNotMatch | parentLocator | locator | text
-441 | Verify Selected Index | verifySelectedIndex | locator | text | 
-442 | Verify Selected Index | verifySelectedIndex | parentLocator | locator | text
-443 | Verify Selected Index Match | verifySelectedIndexMatch | locator | text | 
-444 | Verify Selected Index Match | verifySelectedIndexMatch | parentLocator | locator | text
-445 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | locator | text | 
-446 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | parentLocator | locator | text
-447 | Verify Selected Label | verifySelectedLabel | locator | text | 
-448 | Verify Selected Label | verifySelectedLabel | parentLocator | locator | text
-449 | Verify Selected Label Match | verifySelectedLabelMatch | locator | text | 
-450 | Verify Selected Label Match | verifySelectedLabelMatch | parentLocator | locator | text
-451 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | locator | text | 
-452 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | parentLocator | locator | text
-453 | Verify Selected Value | verifySelectedValue | locator | text | 
-454 | Verify Selected Value | verifySelectedValue | parentLocator | locator | text
-455 | Verify Selected Value Match | verifySelectedValueMatch | locator | text | 
-456 | Verify Selected Value Match | verifySelectedValueMatch | parentLocator | locator | text
-457 | Verify Selected Value Not Match | verifySelectedValueNotMatch | locator | text | 
-458 | Verify Selected Value Not Match | verifySelectedValueNotMatch | parentLocator | locator | text
-459 | Verify Something Selected | verifySomethingSelected | locator |  | 
-460 | Verify Something Selected | verifySomethingSelected | parentLocator | locator | 
-461 | Verify Text | verifyText | locator | text | 
-462 | Verify Text | verifyText | parentLocator | locator | text
-463 | Verify Text Alignment | verifyTextAlignment | locator | text | 
-464 | Verify Text Alignment | verifyTextAlignment | parentLocator | locator | text
-465 | Verify Text Alignment Match | verifyTextAlignmentMatch | locator | text | 
-466 | Verify Text Alignment Match | verifyTextAlignmentMatch | parentLocator | locator | text
-467 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | locator | text | 
-468 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | parentLocator | locator | text
-469 | Verify Text Decoration | verifyTextDecoration | locator | text | 
-470 | Verify Text Decoration | verifyTextDecoration | parentLocator | locator | text
-471 | Verify Text Decoration Match | verifyTextDecorationMatch | locator | text | 
-472 | Verify Text Decoration Match | verifyTextDecorationMatch | parentLocator | locator | text
-473 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | locator | text | 
-474 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | parentLocator | locator | text
-475 | Verify Text Empty | verifyTextEmpty | locator |  | 
-476 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
-477 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
-478 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
-479 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
-480 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
-481 | Verify Text Match | verifyTextMatch | locator | text | 
-482 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
-483 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
-484 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
-485 | Verify Value | verifyValue | locator | text | 
-486 | Verify Value | verifyValue | parentLocator | locator | text
-487 | Verify Value Empty | verifyValueEmpty | locator |  | 
-488 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
-489 | Verify Value Match | verifyValueMatch | locator | text | 
-490 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
-491 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
-492 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
-493 | Verify Variable | verifyVariable | variable | text | 
-494 | Verify Variable Match | verifyVariableMatch | variable | text | 
-495 | Verify Variable Not Match | verifyVariableNotMatch | variable | text | 
-496 | Verify Visible | verifyVisible | locator |  | 
-497 | Verify Visible | verifyVisible | parentLocator | locator | 
-498 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
-499 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
-500 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
-501 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
-502 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
-503 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
-504 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
-505 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
-506 | Wait For Attribute | waitForAttribute | locator | name | text
-507 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
-508 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
-509 | Wait For Checked | waitForChecked | locator |  | 
-510 | Wait For Checked | waitForChecked | parentLocator | locator | 
-511 | Wait For Condition | waitForCondition | script | timeout | 
-512 | Wait For Editable | waitForEditable | locator |  | 
-513 | Wait For Editable | waitForEditable | parentLocator | locator | 
-514 | Wait For Eval | waitForEval | expression | text | 
-515 | Wait For Eval Script | waitForEvalScript | script | text | 
-516 | Wait For Eval Script Match | waitForEvalScriptMatch | script | text | 
-517 | Wait For Eval Script Not Match | waitForEvalScriptNotMatch | script | text | 
-518 | Wait For Exists In Database | waitForExistsInDatabase | sql |  | 
-519 | Wait For Expression | waitForExpression | expression | text | 
-520 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
-521 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
-522 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
-523 | Wait For Not Checked | waitForNotChecked | locator |  | 
-524 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
-525 | Wait For Not Editable | waitForNotEditable | locator |  | 
-526 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
-527 | Wait For Not Eval | waitForNotEval | expression | text | 
-528 | Wait For Not Eval Script | waitForNotEvalScript | script | text | 
-529 | Wait For Not Exists In Database | waitForNotExistsInDatabase | sql |  | 
-530 | Wait For Not Expression | waitForNotExpression | expression | text | 
-531 | Wait For Not Selected Id | waitForNotSelectedId | locator | text | 
-532 | Wait For Not Selected Id | waitForNotSelectedId | parentLocator | locator | text
-533 | Wait For Not Selected Index | waitForNotSelectedIndex | locator | text | 
-534 | Wait For Not Selected Index | waitForNotSelectedIndex | parentLocator | locator | text
-535 | Wait For Not Selected Label | waitForNotSelectedLabel | locator | text | 
-536 | Wait For Not Selected Label | waitForNotSelectedLabel | parentLocator | locator | text
-537 | Wait For Not Selected Value | waitForNotSelectedValue | locator | text | 
-538 | Wait For Not Selected Value | waitForNotSelectedValue | parentLocator | locator | text
-539 | Wait For Not Something Selected | waitForNotSomethingSelected | locator |  | 
-540 | Wait For Not Something Selected | waitForNotSomethingSelected | parentLocator | locator | 
-541 | Wait For Not Text | waitForNotText | locator | text | 
-542 | Wait For Not Text | waitForNotText | parentLocator | locator | text
-543 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
-544 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
-545 | Wait For Not Value | waitForNotValue | locator | text | 
-546 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
-547 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
-548 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
-549 | Wait For Not Visible | waitForNotVisible | locator |  | 
-550 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
-551 | Wait For Selected Id | waitForSelectedId | locator | text | 
-552 | Wait For Selected Id | waitForSelectedId | parentLocator | locator | text
-553 | Wait For Selected Id Match | waitForSelectedIdMatch | locator | text | 
-554 | Wait For Selected Id Match | waitForSelectedIdMatch | parentLocator | locator | text
-555 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | locator | text | 
-556 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | parentLocator | locator | text
-557 | Wait For Selected Index | waitForSelectedIndex | locator | text | 
-558 | Wait For Selected Index | waitForSelectedIndex | parentLocator | locator | text
-559 | Wait For Selected Index Match | waitForSelectedIndexMatch | locator | text | 
-560 | Wait For Selected Index Match | waitForSelectedIndexMatch | parentLocator | locator | text
-561 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | locator | text | 
-562 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | parentLocator | locator | text
-563 | Wait For Selected Label | waitForSelectedLabel | locator | text | 
-564 | Wait For Selected Label | waitForSelectedLabel | parentLocator | locator | text
-565 | Wait For Selected Label Match | waitForSelectedLabelMatch | locator | text | 
-566 | Wait For Selected Label Match | waitForSelectedLabelMatch | parentLocator | locator | text
-567 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | locator | text | 
-568 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | parentLocator | locator | text
-569 | Wait For Selected Value | waitForSelectedValue | locator | text | 
-570 | Wait For Selected Value | waitForSelectedValue | parentLocator | locator | text
-571 | Wait For Selected Value Match | waitForSelectedValueMatch | locator | text | 
-572 | Wait For Selected Value Match | waitForSelectedValueMatch | parentLocator | locator | text
-573 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | locator | text | 
-574 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | parentLocator | locator | text
-575 | Wait For Something Selected | waitForSomethingSelected | locator |  | 
-576 | Wait For Something Selected | waitForSomethingSelected | parentLocator | locator | 
-577 | Wait For Text | waitForText | locator | text | 
-578 | Wait For Text | waitForText | parentLocator | locator | text
-579 | Wait For Text Empty | waitForTextEmpty | locator |  | 
-580 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
-581 | Wait For Text Match | waitForTextMatch | locator | text | 
-582 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
-583 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
-584 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
-585 | Wait For Value | waitForValue | locator | text | 
-586 | Wait For Value | waitForValue | parentLocator | locator | text
-587 | Wait For Value Empty | waitForValueEmpty | locator |  | 
-588 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
-589 | Wait For Value Match | waitForValueMatch | locator | text | 
-590 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
-591 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
-592 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
-593 | Wait For Visible | waitForVisible | locator |  | 
-594 | Wait For Visible | waitForVisible | parentLocator | locator | 
+105 | Assert Not Select Options | assertNotSelectOptions | locator | text | 
+106 | Assert Not Select Options | assertNotSelectOptions | parentLocator | locator | text
+107 | Assert Not Selected Id | assertNotSelectedId | locator | text | 
+108 | Assert Not Selected Id | assertNotSelectedId | parentLocator | locator | text
+109 | Assert Not Selected Ids | assertNotSelectedIds | locator | text | 
+110 | Assert Not Selected Ids | assertNotSelectedIds | parentLocator | locator | text
+111 | Assert Not Selected Index | assertNotSelectedIndex | locator | text | 
+112 | Assert Not Selected Index | assertNotSelectedIndex | parentLocator | locator | text
+113 | Assert Not Selected Indexes | assertNotSelectedIndexes | locator | text | 
+114 | Assert Not Selected Indexes | assertNotSelectedIndexes | parentLocator | locator | text
+115 | Assert Not Selected Label | assertNotSelectedLabel | locator | text | 
+116 | Assert Not Selected Label | assertNotSelectedLabel | parentLocator | locator | text
+117 | Assert Not Selected Labels | assertNotSelectedLabels | locator | text | 
+118 | Assert Not Selected Labels | assertNotSelectedLabels | parentLocator | locator | text
+119 | Assert Not Selected Value | assertNotSelectedValue | locator | text | 
+120 | Assert Not Selected Value | assertNotSelectedValue | parentLocator | locator | text
+121 | Assert Not Selected Values | assertNotSelectedValues | locator | text | 
+122 | Assert Not Selected Values | assertNotSelectedValues | parentLocator | locator | text
+123 | Assert Not Something Selected | assertNotSomethingSelected | locator |  | 
+124 | Assert Not Something Selected | assertNotSomethingSelected | parentLocator | locator | 
+125 | Assert Not Text | assertNotText | locator | text | 
+126 | Assert Not Text | assertNotText | parentLocator | locator | text
+127 | Assert Not Text Alignment | assertNotTextAlignment | locator | text | 
+128 | Assert Not Text Alignment | assertNotTextAlignment | parentLocator | locator | text
+129 | Assert Not Text Decoration | assertNotTextDecoration | locator | text | 
+130 | Assert Not Text Decoration | assertNotTextDecoration | parentLocator | locator | text
+131 | Assert Not Text Empty | assertNotTextEmpty | locator |  | 
+132 | Assert Not Text Empty | assertNotTextEmpty | parentLocator | locator | 
+133 | Assert Not Value | assertNotValue | locator | text | 
+134 | Assert Not Value | assertNotValue | parentLocator | locator | text
+135 | Assert Not Value Empty | assertNotValueEmpty | locator |  | 
+136 | Assert Not Value Empty | assertNotValueEmpty | parentLocator | locator | 
+137 | Assert Not Variable | assertNotVariable | variable | text | 
+138 | Assert Not Visible | assertNotVisible | locator |  | 
+139 | Assert Not Visible | assertNotVisible | parentLocator | locator | 
+140 | Assert Row Count | assertRowCount | sql | count | 
+141 | Assert Row Count Greater Than | assertRowCountGreaterThan | sql | count | 
+142 | Assert Row Count Less Than | assertRowCountLessThan | sql | count | 
+143 | Assert Select Options | assertSelectOptions | locator | text | 
+144 | Assert Select Options | assertSelectOptions | parentLocator | locator | text
+145 | Assert Select Options Match | assertSelectOptionsMatch | locator | text | 
+146 | Assert Select Options Match | assertSelectOptionsMatch | parentLocator | locator | text
+147 | Assert Select Options Not Match | assertSelectOptionsNotMatch | locator | text | 
+148 | Assert Select Options Not Match | assertSelectOptionsNotMatch | parentLocator | locator | text
+149 | Assert Selected Id | assertSelectedId | locator | text | 
+150 | Assert Selected Id | assertSelectedId | parentLocator | locator | text
+151 | Assert Selected Id Match | assertSelectedIdMatch | locator | text | 
+152 | Assert Selected Id Match | assertSelectedIdMatch | parentLocator | locator | text
+153 | Assert Selected Id Not Match | assertSelectedIdNotMatch | locator | text | 
+154 | Assert Selected Id Not Match | assertSelectedIdNotMatch | parentLocator | locator | text
+155 | Assert Selected Ids | assertSelectedIds | locator | text | 
+156 | Assert Selected Ids | assertSelectedIds | parentLocator | locator | text
+157 | Assert Selected Ids Match | assertSelectedIdsMatch | locator | text | 
+158 | Assert Selected Ids Match | assertSelectedIdsMatch | parentLocator | locator | text
+159 | Assert Selected Ids Not Match | assertSelectedIdsNotMatch | locator | text | 
+160 | Assert Selected Ids Not Match | assertSelectedIdsNotMatch | parentLocator | locator | text
+161 | Assert Selected Index | assertSelectedIndex | locator | text | 
+162 | Assert Selected Index | assertSelectedIndex | parentLocator | locator | text
+163 | Assert Selected Index Match | assertSelectedIndexMatch | locator | text | 
+164 | Assert Selected Index Match | assertSelectedIndexMatch | parentLocator | locator | text
+165 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | locator | text | 
+166 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | parentLocator | locator | text
+167 | Assert Selected Indexes | assertSelectedIndexes | locator | text | 
+168 | Assert Selected Indexes | assertSelectedIndexes | parentLocator | locator | text
+169 | Assert Selected Indexes Match | assertSelectedIndexesMatch | locator | text | 
+170 | Assert Selected Indexes Match | assertSelectedIndexesMatch | parentLocator | locator | text
+171 | Assert Selected Indexes Not Match | assertSelectedIndexesNotMatch | locator | text | 
+172 | Assert Selected Indexes Not Match | assertSelectedIndexesNotMatch | parentLocator | locator | text
+173 | Assert Selected Label | assertSelectedLabel | locator | text | 
+174 | Assert Selected Label | assertSelectedLabel | parentLocator | locator | text
+175 | Assert Selected Label Match | assertSelectedLabelMatch | locator | text | 
+176 | Assert Selected Label Match | assertSelectedLabelMatch | parentLocator | locator | text
+177 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | locator | text | 
+178 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | parentLocator | locator | text
+179 | Assert Selected Labels | assertSelectedLabels | locator | text | 
+180 | Assert Selected Labels | assertSelectedLabels | parentLocator | locator | text
+181 | Assert Selected Labels Match | assertSelectedLabelsMatch | locator | text | 
+182 | Assert Selected Labels Match | assertSelectedLabelsMatch | parentLocator | locator | text
+183 | Assert Selected Labels Not Match | assertSelectedLabelsNotMatch | locator | text | 
+184 | Assert Selected Labels Not Match | assertSelectedLabelsNotMatch | parentLocator | locator | text
+185 | Assert Selected Value | assertSelectedValue | locator | text | 
+186 | Assert Selected Value | assertSelectedValue | parentLocator | locator | text
+187 | Assert Selected Value Match | assertSelectedValueMatch | locator | text | 
+188 | Assert Selected Value Match | assertSelectedValueMatch | parentLocator | locator | text
+189 | Assert Selected Value Not Match | assertSelectedValueNotMatch | locator | text | 
+190 | Assert Selected Value Not Match | assertSelectedValueNotMatch | parentLocator | locator | text
+191 | Assert Selected Values | assertSelectedValues | locator | text | 
+192 | Assert Selected Values | assertSelectedValues | parentLocator | locator | text
+193 | Assert Selected Values Match | assertSelectedValuesMatch | locator | text | 
+194 | Assert Selected Values Match | assertSelectedValuesMatch | parentLocator | locator | text
+195 | Assert Selected Values Not Match | assertSelectedValuesNotMatch | locator | text | 
+196 | Assert Selected Values Not Match | assertSelectedValuesNotMatch | parentLocator | locator | text
+197 | Assert Something Selected | assertSomethingSelected | locator |  | 
+198 | Assert Something Selected | assertSomethingSelected | parentLocator | locator | 
+199 | Assert Text | assertText | locator | text | 
+200 | Assert Text | assertText | parentLocator | locator | text
+201 | Assert Text Alignment | assertTextAlignment | locator | text | 
+202 | Assert Text Alignment | assertTextAlignment | parentLocator | locator | text
+203 | Assert Text Alignment Match | assertTextAlignmentMatch | locator | text | 
+204 | Assert Text Alignment Match | assertTextAlignmentMatch | parentLocator | locator | text
+205 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | locator | text | 
+206 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | parentLocator | locator | text
+207 | Assert Text Decoration | assertTextDecoration | locator | text | 
+208 | Assert Text Decoration | assertTextDecoration | parentLocator | locator | text
+209 | Assert Text Decoration Match | assertTextDecorationMatch | locator | text | 
+210 | Assert Text Decoration Match | assertTextDecorationMatch | parentLocator | locator | text
+211 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | locator | text | 
+212 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | parentLocator | locator | text
+213 | Assert Text Empty | assertTextEmpty | locator |  | 
+214 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
+215 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
+216 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
+217 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
+218 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
+219 | Assert Text Match | assertTextMatch | locator | text | 
+220 | Assert Text Match | assertTextMatch | parentLocator | locator | text
+221 | Assert Text Not Match | assertTextNotMatch | locator | text | 
+222 | Assert Text Not Match | assertTextNotMatch | parentLocator | locator | text
+223 | Assert Value | assertValue | locator | text | 
+224 | Assert Value | assertValue | parentLocator | locator | text
+225 | Assert Value Empty | assertValueEmpty | locator |  | 
+226 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
+227 | Assert Value Match | assertValueMatch | locator | text | 
+228 | Assert Value Match | assertValueMatch | parentLocator | locator | text
+229 | Assert Value Not Match | assertValueNotMatch | locator | text | 
+230 | Assert Value Not Match | assertValueNotMatch | parentLocator | locator | text
+231 | Assert Variable | assertVariable | variable | text | 
+232 | Assert Visible | assertVisible | locator |  | 
+233 | Assert Visible | assertVisible | parentLocator | locator | 
+234 | Echo | echo | message |  | 
+235 | Execute | execute | action |  | 
+236 | Execute Each | executeEach | action | locator | variable
+237 | Execute If Checked | executeIfChecked | action | locator | 
+238 | Execute If Checked | executeIfChecked | action | parentLocator | locator
+239 | Execute If Editable | executeIfEditable | action | locator | 
+240 | Execute If Editable | executeIfEditable | action | parentLocator | locator
+241 | Execute If Eval | executeIfEval | action | expression | text
+242 | Execute If Eval Script | executeIfEvalScript | action | script | text
+243 | Execute If Eval Script Match | executeIfEvalScriptMatch | action | script | text
+244 | Execute If Eval Script Not Match | executeIfEvalScriptNotMatch | action | script | text
+245 | Execute If Exists In Database | executeIfExistsInDatabase | action | sql | 
+246 | Execute If Expression | executeIfExpression | action | expression | text
+247 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
+248 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
+249 | Execute If List Contain | executeIfListContain | action | variable | text
+250 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
+251 | Execute If Not Checked | executeIfNotChecked | action | locator | 
+252 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
+253 | Execute If Not Editable | executeIfNotEditable | action | locator | 
+254 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
+255 | Execute If Not Eval | executeIfNotEval | action | expression | text
+256 | Execute If Not Eval Script | executeIfNotEvalScript | action | script | text
+257 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | sql | 
+258 | Execute If Not Expression | executeIfNotExpression | action | expression | text
+259 | Execute If Not Selected Id | executeIfNotSelectedId | action | locator | text
+260 | Execute If Not Selected Index | executeIfNotSelectedIndex | action | locator | text
+261 | Execute If Not Selected Label | executeIfNotSelectedLabel | action | locator | text
+262 | Execute If Not Selected Value | executeIfNotSelectedValue | action | locator | text
+263 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | locator | 
+264 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | parentLocator | locator
+265 | Execute If Not Text | executeIfNotText | action | locator | text
+266 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
+267 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
+268 | Execute If Not Value | executeIfNotValue | action | locator | text
+269 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
+270 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
+271 | Execute If Not Variable | executeIfNotVariable | action | variable | text
+272 | Execute If Not Visible | executeIfNotVisible | action | locator | 
+273 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
+274 | Execute If Selected Id | executeIfSelectedId | action | locator | text
+275 | Execute If Selected Id Match | executeIfSelectedIdMatch | action | locator | text
+276 | Execute If Selected Id Not Match | executeIfSelectedIdNotMatch | action | locator | text
+277 | Execute If Selected Index | executeIfSelectedIndex | action | locator | text
+278 | Execute If Selected Index Match | executeIfSelectedIndexMatch | action | locator | text
+279 | Execute If Selected Index Not Match | executeIfSelectedIndexNotMatch | action | locator | text
+280 | Execute If Selected Label | executeIfSelectedLabel | action | locator | text
+281 | Execute If Selected Label Match | executeIfSelectedLabelMatch | action | locator | text
+282 | Execute If Selected Label Not Match | executeIfSelectedLabelNotMatch | action | locator | text
+283 | Execute If Selected Value | executeIfSelectedValue | action | locator | text
+284 | Execute If Selected Value Match | executeIfSelectedValueMatch | action | locator | text
+285 | Execute If Selected Value Not Match | executeIfSelectedValueNotMatch | action | locator | text
+286 | Execute If Something Selected | executeIfSomethingSelected | action | locator | 
+287 | Execute If Something Selected | executeIfSomethingSelected | action | parentLocator | locator
+288 | Execute If Text | executeIfText | action | locator | text
+289 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
+290 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
+291 | Execute If Text Match | executeIfTextMatch | action | locator | text
+292 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
+293 | Execute If Value | executeIfValue | action | locator | text
+294 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
+295 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
+296 | Execute If Value Match | executeIfValueMatch | action | locator | text
+297 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
+298 | Execute If Variable | executeIfVariable | action | variable | text
+299 | Execute If Visible | executeIfVisible | action | locator | 
+300 | Execute If Visible | executeIfVisible | action | parentLocator | locator
+301 | Execute Loop | executeLoop | action | times | 
+302 | Go Back | goBack |  |  | 
+303 | Go Forward | goForward |  |  | 
+304 | Highlight | highlight | locator |  | 
+305 | Highlight | highlight | parentLocator | locator | 
+306 | Pause | pause | waitTime |  | 
+307 | Refresh | refresh |  |  | 
+308 | Run Script | runScript | script |  | 
+309 | Set Timeout | setTimeout | timeout |  | 
+310 | Store | store | text | variable | 
+311 | Store Attribute | storeAttribute | locator | name | variable
+312 | Store Current Date | storeCurrentDate | variable |  | 
+313 | Store Cursor Position | storeCursorPosition | locator | variable | 
+314 | Store Cursor Position | storeCursorPosition | parentLocator | locator | variable
+315 | Store Eval | storeEval | expression | variable | 
+316 | Store Eval Script | storeEvalScript | script | variable | 
+317 | Store Expression | storeExpression | expression | variable | 
+318 | Store Push | storePush | text | variable | 
+319 | Store Select Options | storeSelectOptions | locator | variable | 
+320 | Store Select Options | storeSelectOptions | parentLocator | locator | variable
+321 | Store Selected Id | storeSelectedId | locator | variable | 
+322 | Store Selected Id | storeSelectedId | parentLocator | locator | variable
+323 | Store Selected Ids | storeSelectedIds | locator | variable | 
+324 | Store Selected Ids | storeSelectedIds | parentLocator | locator | variable
+325 | Store Selected Index | storeSelectedIndex | locator | variable | 
+326 | Store Selected Index | storeSelectedIndex | parentLocator | locator | variable
+327 | Store Selected Indexes | storeSelectedIndexes | locator | variable | 
+328 | Store Selected Indexes | storeSelectedIndexes | parentLocator | locator | variable
+329 | Store Selected Label | storeSelectedLabel | locator | variable | 
+330 | Store Selected Label | storeSelectedLabel | parentLocator | locator | variable
+331 | Store Selected Labels | storeSelectedLabels | locator | variable | 
+332 | Store Selected Labels | storeSelectedLabels | parentLocator | locator | variable
+333 | Store Selected Value | storeSelectedValue | locator | variable | 
+334 | Store Selected Value | storeSelectedValue | parentLocator | locator | variable
+335 | Store Selected Values | storeSelectedValues | locator | variable | 
+336 | Store Selected Values | storeSelectedValues | parentLocator | locator | variable
+337 | Store Text | storeText | locator | variable | 
+338 | Store Text | storeText | parentLocator | locator | variable
+339 | Store Value | storeValue | locator | variable | 
+340 | Store Value | storeValue | parentLocator | locator | variable
+341 | Verify Attribute | verifyAttribute | locator | name | text
+342 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
+343 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
+344 | Verify Background Color | verifyBackgroundColor | locator | text | 
+345 | Verify Background Color | verifyBackgroundColor | parentLocator | locator | text
+346 | Verify Border Color | verifyBorderColor | locator | text | 
+347 | Verify Border Color | verifyBorderColor | parentLocator | locator | text
+348 | Verify Checked | verifyChecked | locator |  | 
+349 | Verify Checked | verifyChecked | parentLocator | locator | 
+350 | Verify Color | verifyColor | locator | text | 
+351 | Verify Color | verifyColor | parentLocator | locator | text
+352 | Verify Cursor Position | verifyCursorPosition | locator | text | 
+353 | Verify Cursor Position | verifyCursorPosition | parentLocator | locator | text
+354 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
+355 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
+356 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
+357 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
+358 | Verify Editable | verifyEditable | locator |  | 
+359 | Verify Editable | verifyEditable | parentLocator | locator | 
+360 | Verify Element Height | verifyElementHeight | locator | text | 
+361 | Verify Element Height | verifyElementHeight | parentLocator | locator | text
+362 | Verify Element Index | verifyElementIndex | locator | text | 
+363 | Verify Element Index | verifyElementIndex | parentLocator | locator | text
+364 | Verify Element Position Left | verifyElementPositionLeft | locator | text | 
+365 | Verify Element Position Left | verifyElementPositionLeft | parentLocator | locator | text
+366 | Verify Element Position Top | verifyElementPositionTop | locator | text | 
+367 | Verify Element Position Top | verifyElementPositionTop | parentLocator | locator | text
+368 | Verify Element Width | verifyElementWidth | locator | text | 
+369 | Verify Element Width | verifyElementWidth | parentLocator | locator | text
+370 | Verify Eval | verifyEval | expression | text | 
+371 | Verify Eval Script | verifyEvalScript | script | text | 
+372 | Verify Eval Script Match | verifyEvalScriptMatch | script | text | 
+373 | Verify Eval Script Not Match | verifyEvalScriptNotMatch | script | text | 
+374 | Verify Exists In Database | verifyExistsInDatabase | sql |  | 
+375 | Verify Expression | verifyExpression | expression | text | 
+376 | Verify Expression Match | verifyExpressionMatch | expression | text | 
+377 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
+378 | Verify Font Family | verifyFontFamily | locator | text | 
+379 | Verify Font Family | verifyFontFamily | parentLocator | locator | text
+380 | Verify Font Family Match | verifyFontFamilyMatch | locator | text | 
+381 | Verify Font Family Match | verifyFontFamilyMatch | parentLocator | locator | text
+382 | Verify Font Family Not Match | verifyFontFamilyNotMatch | locator | text | 
+383 | Verify Font Family Not Match | verifyFontFamilyNotMatch | parentLocator | locator | text
+384 | Verify Font Size | verifyFontSize | locator | text | 
+385 | Verify Font Size | verifyFontSize | parentLocator | locator | text
+386 | Verify Font Size Match | verifyFontSizeMatch | locator | text | 
+387 | Verify Font Size Match | verifyFontSizeMatch | parentLocator | locator | text
+388 | Verify Font Size Not Match | verifyFontSizeNotMatch | locator | text | 
+389 | Verify Font Size Not Match | verifyFontSizeNotMatch | parentLocator | locator | text
+390 | Verify Font Style | verifyFontStyle | locator | text | 
+391 | Verify Font Style | verifyFontStyle | parentLocator | locator | text
+392 | Verify Font Style Match | verifyFontStyleMatch | locator | text | 
+393 | Verify Font Style Match | verifyFontStyleMatch | parentLocator | locator | text
+394 | Verify Font Style Not Match | verifyFontStyleNotMatch | locator | text | 
+395 | Verify Font Style Not Match | verifyFontStyleNotMatch | parentLocator | locator | text
+396 | Verify Font Weight | verifyFontWeight | locator | text | 
+397 | Verify Font Weight | verifyFontWeight | parentLocator | locator | text
+398 | Verify Font Weight Match | verifyFontWeightMatch | locator | text | 
+399 | Verify Font Weight Match | verifyFontWeightMatch | parentLocator | locator | text
+400 | Verify Font Weight Not Match | verifyFontWeightNotMatch | locator | text | 
+401 | Verify Font Weight Not Match | verifyFontWeightNotMatch | parentLocator | locator | text
+402 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
+403 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
+404 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
+405 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
+406 | Verify List Contain | verifyListContain | variable | text | 
+407 | Verify List Not Contain | verifyListNotContain | variable | text | 
+408 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
+409 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
+410 | Verify Not Attribute | verifyNotAttribute | locator | name | text
+411 | Verify Not Background Color | verifyNotBackgroundColor | locator | text | 
+412 | Verify Not Background Color | verifyNotBackgroundColor | parentLocator | locator | text
+413 | Verify Not Border Color | verifyNotBorderColor | locator | text | 
+414 | Verify Not Border Color | verifyNotBorderColor | parentLocator | locator | text
+415 | Verify Not Checked | verifyNotChecked | locator |  | 
+416 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
+417 | Verify Not Color | verifyNotColor | locator | text | 
+418 | Verify Not Color | verifyNotColor | parentLocator | locator | text
+419 | Verify Not Cursor Position | verifyNotCursorPosition | locator | text | 
+420 | Verify Not Cursor Position | verifyNotCursorPosition | parentLocator | locator | text
+421 | Verify Not Editable | verifyNotEditable | locator |  | 
+422 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
+423 | Verify Not Element Height | verifyNotElementHeight | locator | text | 
+424 | Verify Not Element Height | verifyNotElementHeight | parentLocator | locator | text
+425 | Verify Not Element Index | verifyNotElementIndex | locator | text | 
+426 | Verify Not Element Index | verifyNotElementIndex | parentLocator | locator | text
+427 | Verify Not Element Position Left | verifyNotElementPositionLeft | locator | text | 
+428 | Verify Not Element Position Left | verifyNotElementPositionLeft | parentLocator | locator | text
+429 | Verify Not Element Position Top | verifyNotElementPositionTop | locator | text | 
+430 | Verify Not Element Position Top | verifyNotElementPositionTop | parentLocator | locator | text
+431 | Verify Not Element Width | verifyNotElementWidth | locator | text | 
+432 | Verify Not Element Width | verifyNotElementWidth | parentLocator | locator | text
+433 | Verify Not Eval | verifyNotEval | expression | text | 
+434 | Verify Not Eval Script | verifyNotEvalScript | script | text | 
+435 | Verify Not Exists In Database | verifyNotExistsInDatabase | sql |  | 
+436 | Verify Not Expression | verifyNotExpression | expression | text | 
+437 | Verify Not Font Family | verifyNotFontFamily | locator | text | 
+438 | Verify Not Font Family | verifyNotFontFamily | parentLocator | locator | text
+439 | Verify Not Font Size | verifyNotFontSize | locator | text | 
+440 | Verify Not Font Size | verifyNotFontSize | parentLocator | locator | text
+441 | Verify Not Font Style | verifyNotFontStyle | locator | text | 
+442 | Verify Not Font Style | verifyNotFontStyle | parentLocator | locator | text
+443 | Verify Not Font Weight | verifyNotFontWeight | locator | text | 
+444 | Verify Not Font Weight | verifyNotFontWeight | parentLocator | locator | text
+445 | Verify Not Select Options | verifyNotSelectOptions | locator | text | 
+446 | Verify Not Select Options | verifyNotSelectOptions | parentLocator | locator | text
+447 | Verify Not Selected Id | verifyNotSelectedId | locator | text | 
+448 | Verify Not Selected Id | verifyNotSelectedId | parentLocator | locator | text
+449 | Verify Not Selected Ids | verifyNotSelectedIds | locator | text | 
+450 | Verify Not Selected Ids | verifyNotSelectedIds | parentLocator | locator | text
+451 | Verify Not Selected Index | verifyNotSelectedIndex | locator | text | 
+452 | Verify Not Selected Index | verifyNotSelectedIndex | parentLocator | locator | text
+453 | Verify Not Selected Indexes | verifyNotSelectedIndexes | locator | text | 
+454 | Verify Not Selected Indexes | verifyNotSelectedIndexes | parentLocator | locator | text
+455 | Verify Not Selected Label | verifyNotSelectedLabel | locator | text | 
+456 | Verify Not Selected Label | verifyNotSelectedLabel | parentLocator | locator | text
+457 | Verify Not Selected Labels | verifyNotSelectedLabels | locator | text | 
+458 | Verify Not Selected Labels | verifyNotSelectedLabels | parentLocator | locator | text
+459 | Verify Not Selected Value | verifyNotSelectedValue | locator | text | 
+460 | Verify Not Selected Value | verifyNotSelectedValue | parentLocator | locator | text
+461 | Verify Not Selected Values | verifyNotSelectedValues | locator | text | 
+462 | Verify Not Selected Values | verifyNotSelectedValues | parentLocator | locator | text
+463 | Verify Not Something Selected | verifyNotSomethingSelected | locator |  | 
+464 | Verify Not Something Selected | verifyNotSomethingSelected | parentLocator | locator | 
+465 | Verify Not Text | verifyNotText | locator | text | 
+466 | Verify Not Text | verifyNotText | parentLocator | locator | text
+467 | Verify Not Text Alignment | verifyNotTextAlignment | locator | text | 
+468 | Verify Not Text Alignment | verifyNotTextAlignment | parentLocator | locator | text
+469 | Verify Not Text Decoration | verifyNotTextDecoration | locator | text | 
+470 | Verify Not Text Decoration | verifyNotTextDecoration | parentLocator | locator | text
+471 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
+472 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
+473 | Verify Not Value | verifyNotValue | locator | text | 
+474 | Verify Not Value | verifyNotValue | parentLocator | locator | text
+475 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
+476 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
+477 | Verify Not Variable | verifyNotVariable | variable | text | 
+478 | Verify Not Visible | verifyNotVisible | locator |  | 
+479 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
+480 | Verify Row Count | verifyRowCount | sql | count | 
+481 | Verify Row Count Greater Than | verifyRowCountGreaterThan | sql | count | 
+482 | Verify Row Count Less Than | verifyRowCountLessThan | sql | count | 
+483 | Verify Select Options | verifySelectOptions | locator | text | 
+484 | Verify Select Options | verifySelectOptions | parentLocator | locator | text
+485 | Verify Select Options Match | verifySelectOptionsMatch | locator | text | 
+486 | Verify Select Options Match | verifySelectOptionsMatch | parentLocator | locator | text
+487 | Verify Select Options Not Match | verifySelectOptionsNotMatch | locator | text | 
+488 | Verify Select Options Not Match | verifySelectOptionsNotMatch | parentLocator | locator | text
+489 | Verify Selected Id | verifySelectedId | locator | text | 
+490 | Verify Selected Id | verifySelectedId | parentLocator | locator | text
+491 | Verify Selected Id Match | verifySelectedIdMatch | locator | text | 
+492 | Verify Selected Id Match | verifySelectedIdMatch | parentLocator | locator | text
+493 | Verify Selected Id Not Match | verifySelectedIdNotMatch | locator | text | 
+494 | Verify Selected Id Not Match | verifySelectedIdNotMatch | parentLocator | locator | text
+495 | Verify Selected Ids | verifySelectedIds | locator | text | 
+496 | Verify Selected Ids | verifySelectedIds | parentLocator | locator | text
+497 | Verify Selected Ids Match | verifySelectedIdsMatch | locator | text | 
+498 | Verify Selected Ids Match | verifySelectedIdsMatch | parentLocator | locator | text
+499 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | locator | text | 
+500 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | parentLocator | locator | text
+501 | Verify Selected Index | verifySelectedIndex | locator | text | 
+502 | Verify Selected Index | verifySelectedIndex | parentLocator | locator | text
+503 | Verify Selected Index Match | verifySelectedIndexMatch | locator | text | 
+504 | Verify Selected Index Match | verifySelectedIndexMatch | parentLocator | locator | text
+505 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | locator | text | 
+506 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | parentLocator | locator | text
+507 | Verify Selected Indexes | verifySelectedIndexes | locator | text | 
+508 | Verify Selected Indexes | verifySelectedIndexes | parentLocator | locator | text
+509 | Verify Selected Indexes Match | verifySelectedIndexesMatch | locator | text | 
+510 | Verify Selected Indexes Match | verifySelectedIndexesMatch | parentLocator | locator | text
+511 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | locator | text | 
+512 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | parentLocator | locator | text
+513 | Verify Selected Label | verifySelectedLabel | locator | text | 
+514 | Verify Selected Label | verifySelectedLabel | parentLocator | locator | text
+515 | Verify Selected Label Match | verifySelectedLabelMatch | locator | text | 
+516 | Verify Selected Label Match | verifySelectedLabelMatch | parentLocator | locator | text
+517 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | locator | text | 
+518 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | parentLocator | locator | text
+519 | Verify Selected Labels | verifySelectedLabels | locator | text | 
+520 | Verify Selected Labels | verifySelectedLabels | parentLocator | locator | text
+521 | Verify Selected Labels Match | verifySelectedLabelsMatch | locator | text | 
+522 | Verify Selected Labels Match | verifySelectedLabelsMatch | parentLocator | locator | text
+523 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | locator | text | 
+524 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | parentLocator | locator | text
+525 | Verify Selected Value | verifySelectedValue | locator | text | 
+526 | Verify Selected Value | verifySelectedValue | parentLocator | locator | text
+527 | Verify Selected Value Match | verifySelectedValueMatch | locator | text | 
+528 | Verify Selected Value Match | verifySelectedValueMatch | parentLocator | locator | text
+529 | Verify Selected Value Not Match | verifySelectedValueNotMatch | locator | text | 
+530 | Verify Selected Value Not Match | verifySelectedValueNotMatch | parentLocator | locator | text
+531 | Verify Selected Values | verifySelectedValues | locator | text | 
+532 | Verify Selected Values | verifySelectedValues | parentLocator | locator | text
+533 | Verify Selected Values Match | verifySelectedValuesMatch | locator | text | 
+534 | Verify Selected Values Match | verifySelectedValuesMatch | parentLocator | locator | text
+535 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | locator | text | 
+536 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | parentLocator | locator | text
+537 | Verify Something Selected | verifySomethingSelected | locator |  | 
+538 | Verify Something Selected | verifySomethingSelected | parentLocator | locator | 
+539 | Verify Text | verifyText | locator | text | 
+540 | Verify Text | verifyText | parentLocator | locator | text
+541 | Verify Text Alignment | verifyTextAlignment | locator | text | 
+542 | Verify Text Alignment | verifyTextAlignment | parentLocator | locator | text
+543 | Verify Text Alignment Match | verifyTextAlignmentMatch | locator | text | 
+544 | Verify Text Alignment Match | verifyTextAlignmentMatch | parentLocator | locator | text
+545 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | locator | text | 
+546 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | parentLocator | locator | text
+547 | Verify Text Decoration | verifyTextDecoration | locator | text | 
+548 | Verify Text Decoration | verifyTextDecoration | parentLocator | locator | text
+549 | Verify Text Decoration Match | verifyTextDecorationMatch | locator | text | 
+550 | Verify Text Decoration Match | verifyTextDecorationMatch | parentLocator | locator | text
+551 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | locator | text | 
+552 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | parentLocator | locator | text
+553 | Verify Text Empty | verifyTextEmpty | locator |  | 
+554 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
+555 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
+556 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
+557 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
+558 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
+559 | Verify Text Match | verifyTextMatch | locator | text | 
+560 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
+561 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
+562 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
+563 | Verify Value | verifyValue | locator | text | 
+564 | Verify Value | verifyValue | parentLocator | locator | text
+565 | Verify Value Empty | verifyValueEmpty | locator |  | 
+566 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
+567 | Verify Value Match | verifyValueMatch | locator | text | 
+568 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
+569 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
+570 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
+571 | Verify Variable | verifyVariable | variable | text | 
+572 | Verify Visible | verifyVisible | locator |  | 
+573 | Verify Visible | verifyVisible | parentLocator | locator | 
+574 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
+575 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
+576 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
+577 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
+578 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
+579 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
+580 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
+581 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
+582 | Wait For Attribute | waitForAttribute | locator | name | text
+583 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
+584 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
+585 | Wait For Checked | waitForChecked | locator |  | 
+586 | Wait For Checked | waitForChecked | parentLocator | locator | 
+587 | Wait For Condition | waitForCondition | script | timeout | 
+588 | Wait For Editable | waitForEditable | locator |  | 
+589 | Wait For Editable | waitForEditable | parentLocator | locator | 
+590 | Wait For Eval | waitForEval | expression | text | 
+591 | Wait For Eval Script | waitForEvalScript | script | text | 
+592 | Wait For Eval Script Match | waitForEvalScriptMatch | script | text | 
+593 | Wait For Eval Script Not Match | waitForEvalScriptNotMatch | script | text | 
+594 | Wait For Exists In Database | waitForExistsInDatabase | sql |  | 
+595 | Wait For Expression | waitForExpression | expression | text | 
+596 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
+597 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
+598 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
+599 | Wait For Not Checked | waitForNotChecked | locator |  | 
+600 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
+601 | Wait For Not Editable | waitForNotEditable | locator |  | 
+602 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
+603 | Wait For Not Eval | waitForNotEval | expression | text | 
+604 | Wait For Not Eval Script | waitForNotEvalScript | script | text | 
+605 | Wait For Not Exists In Database | waitForNotExistsInDatabase | sql |  | 
+606 | Wait For Not Expression | waitForNotExpression | expression | text | 
+607 | Wait For Not Selected Id | waitForNotSelectedId | locator | text | 
+608 | Wait For Not Selected Id | waitForNotSelectedId | parentLocator | locator | text
+609 | Wait For Not Selected Index | waitForNotSelectedIndex | locator | text | 
+610 | Wait For Not Selected Index | waitForNotSelectedIndex | parentLocator | locator | text
+611 | Wait For Not Selected Label | waitForNotSelectedLabel | locator | text | 
+612 | Wait For Not Selected Label | waitForNotSelectedLabel | parentLocator | locator | text
+613 | Wait For Not Selected Value | waitForNotSelectedValue | locator | text | 
+614 | Wait For Not Selected Value | waitForNotSelectedValue | parentLocator | locator | text
+615 | Wait For Not Something Selected | waitForNotSomethingSelected | locator |  | 
+616 | Wait For Not Something Selected | waitForNotSomethingSelected | parentLocator | locator | 
+617 | Wait For Not Text | waitForNotText | locator | text | 
+618 | Wait For Not Text | waitForNotText | parentLocator | locator | text
+619 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
+620 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
+621 | Wait For Not Value | waitForNotValue | locator | text | 
+622 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
+623 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
+624 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
+625 | Wait For Not Visible | waitForNotVisible | locator |  | 
+626 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
+627 | Wait For Selected Id | waitForSelectedId | locator | text | 
+628 | Wait For Selected Id | waitForSelectedId | parentLocator | locator | text
+629 | Wait For Selected Id Match | waitForSelectedIdMatch | locator | text | 
+630 | Wait For Selected Id Match | waitForSelectedIdMatch | parentLocator | locator | text
+631 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | locator | text | 
+632 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | parentLocator | locator | text
+633 | Wait For Selected Index | waitForSelectedIndex | locator | text | 
+634 | Wait For Selected Index | waitForSelectedIndex | parentLocator | locator | text
+635 | Wait For Selected Index Match | waitForSelectedIndexMatch | locator | text | 
+636 | Wait For Selected Index Match | waitForSelectedIndexMatch | parentLocator | locator | text
+637 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | locator | text | 
+638 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | parentLocator | locator | text
+639 | Wait For Selected Label | waitForSelectedLabel | locator | text | 
+640 | Wait For Selected Label | waitForSelectedLabel | parentLocator | locator | text
+641 | Wait For Selected Label Match | waitForSelectedLabelMatch | locator | text | 
+642 | Wait For Selected Label Match | waitForSelectedLabelMatch | parentLocator | locator | text
+643 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | locator | text | 
+644 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | parentLocator | locator | text
+645 | Wait For Selected Value | waitForSelectedValue | locator | text | 
+646 | Wait For Selected Value | waitForSelectedValue | parentLocator | locator | text
+647 | Wait For Selected Value Match | waitForSelectedValueMatch | locator | text | 
+648 | Wait For Selected Value Match | waitForSelectedValueMatch | parentLocator | locator | text
+649 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | locator | text | 
+650 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | parentLocator | locator | text
+651 | Wait For Something Selected | waitForSomethingSelected | locator |  | 
+652 | Wait For Something Selected | waitForSomethingSelected | parentLocator | locator | 
+653 | Wait For Text | waitForText | locator | text | 
+654 | Wait For Text | waitForText | parentLocator | locator | text
+655 | Wait For Text Empty | waitForTextEmpty | locator |  | 
+656 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
+657 | Wait For Text Match | waitForTextMatch | locator | text | 
+658 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
+659 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
+660 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
+661 | Wait For Value | waitForValue | locator | text | 
+662 | Wait For Value | waitForValue | parentLocator | locator | text
+663 | Wait For Value Empty | waitForValueEmpty | locator |  | 
+664 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
+665 | Wait For Value Match | waitForValueMatch | locator | text | 
+666 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
+667 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
+668 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
+669 | Wait For Visible | waitForVisible | locator |  | 
+670 | Wait For Visible | waitForVisible | parentLocator | locator | 
 
 ## Assert Attribute
 
@@ -1935,6 +2011,28 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
+## Assert Not Select Options
+
+Asserts that all option labels in the specified select drop-down not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectOptions(locator, text)
+`
+
+`
+assertNotSelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Assert Not Selected Id
 
 Asserts that option element ID for selected option in the specified select element not equal to the given value. When the assert fails, the test is aborted.
@@ -1947,6 +2045,28 @@ assertNotSelectedId(locator, text)
 
 `
 assertNotSelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Ids
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedIds(locator, text)
+`
+
+`
+assertNotSelectedIds(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -1979,6 +2099,28 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Assert Not Selected Indexes
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedIndexes(locator, text)
+`
+
+`
+assertNotSelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Assert Not Selected Label
 
 Asserts that option label (visible text) for selected option in the specified select element not equal to the given value. When the assert fails, the test is aborted.
@@ -2001,6 +2143,28 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Assert Not Selected Labels
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedLabels(locator, text)
+`
+
+`
+assertNotSelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Assert Not Selected Value
 
 Asserts that option value (value attribute) for selected option in the specified select element not equal to the given value. When the assert fails, the test is aborted.
@@ -2013,6 +2177,28 @@ assertNotSelectedValue(locator, text)
 
 `
 assertNotSelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Values
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedValues(locator, text)
+`
+
+`
+assertNotSelectedValues(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2263,6 +2449,72 @@ Parameter | Description
 sql | the sql
 count | the count
 
+## Assert Select Options
+
+Asserts that all option labels in the specified select drop-down equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectOptions(locator, text)
+`
+
+`
+assertSelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Select Options Match
+
+Asserts that all option labels in the specified select drop-down matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectOptionsMatch(locator, text)
+`
+
+`
+assertSelectOptionsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Select Options Not Match
+
+Asserts that all option labels in the specified select drop-down not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectOptionsNotMatch(locator, text)
+`
+
+`
+assertSelectOptionsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Assert Selected Id
 
 Asserts that option element ID for selected option in the specified select element equals to the given value. When the assert fails, the test is aborted.
@@ -2319,6 +2571,72 @@ assertSelectedIdNotMatch(locator, text)
 
 `
 assertSelectedIdNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Ids
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIds(locator, text)
+`
+
+`
+assertSelectedIds(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Ids Match
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIdsMatch(locator, text)
+`
+
+`
+assertSelectedIdsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Ids Not Match
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIdsNotMatch(locator, text)
+`
+
+`
+assertSelectedIdsNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2395,6 +2713,72 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Assert Selected Indexes
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexes(locator, text)
+`
+
+`
+assertSelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Indexes Match
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexesMatch(locator, text)
+`
+
+`
+assertSelectedIndexesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Indexes Not Match
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexesNotMatch(locator, text)
+`
+
+`
+assertSelectedIndexesNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Assert Selected Label
 
 Asserts that option label (visible text) for selected option in the specified select element equals to the given value. When the assert fails, the test is aborted.
@@ -2461,6 +2845,72 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Assert Selected Labels
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabels(locator, text)
+`
+
+`
+assertSelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Labels Match
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabelsMatch(locator, text)
+`
+
+`
+assertSelectedLabelsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Labels Not Match
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabelsNotMatch(locator, text)
+`
+
+`
+assertSelectedLabelsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Assert Selected Value
 
 Asserts that option value (value attribute) for selected option in the specified select element equals to the given value. When the assert fails, the test is aborted.
@@ -2517,6 +2967,72 @@ assertSelectedValueNotMatch(locator, text)
 
 `
 assertSelectedValueNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Values
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValues(locator, text)
+`
+
+`
+assertSelectedValues(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Values Match
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValuesMatch(locator, text)
+`
+
+`
+assertSelectedValuesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Values Not Match
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValuesNotMatch(locator, text)
+`
+
+`
+assertSelectedValuesNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -2904,40 +3420,6 @@ Asserts that the specified variable value equals to the given value. When the as
 
 `
 assertVariable(variable, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-variable | the variable
-text | the value to match with the result
-
-## Assert Variable Match
-
-Asserts that the specified variable value matches the given value. When the assert fails, the test is aborted.
-
-### Usage
-
-`
-assertVariableMatch(variable, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-variable | the variable
-text | the value to match with the result
-
-## Assert Variable Not Match
-
-Asserts that the specified variable value not match the given value. When the assert fails, the test is aborted.
-
-### Usage
-
-`
-assertVariableNotMatch(variable, text)
 `
 
 ### Parameters
@@ -4020,42 +4502,6 @@ action | the name of the action to execute
 variable | the variable
 text | the value to match with the result
 
-## Execute If Variable Match
-
-Executes an action if the specified variable value matches the given value.
-
-### Usage
-
-`
-executeIfVariableMatch(action, variable, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-action | the name of the action to execute
-variable | the variable
-text | the value to match with the result
-
-## Execute If Variable Not Match
-
-Executes an action if the specified variable value not match the given value.
-
-### Usage
-
-`
-executeIfVariableNotMatch(action, variable, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-action | the name of the action to execute
-variable | the variable
-text | the value to match with the result
-
 ## Execute If Visible
 
 Executes an action if the specified element is visible. An element can be rendered invisible by setting the CSS "visibility" property to "hidden", or the "display" property to "none", either for the element itself or one if its ancestors. This method will fail if the element is not present.
@@ -4274,6 +4720,30 @@ storeCurrentDate(variable)
 
 Parameter | Description
 --------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store Cursor Position
+
+Stores the text cursor position in the given input element or textarea in a variable for later access. Beware, this may not work perfectly on all browsers.
+
+ <p> Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to return the position of the last location of the cursor, even though the cursor is now gone from the page. This is filed as <a href="http://jira.openqa.org/browse/SEL-243">SEL-243</a>. </p> This method will fail if the specified element isn't an input element or textarea, or there is no cursor in the element.
+
+### Usage
+
+`
+storeCursorPosition(locator, variable)
+`
+
+`
+storeCursorPosition(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an input element or textarea
 variable | the name of a variable in which the result is to be stored
 
 ## Store Eval
@@ -5926,6 +6396,28 @@ parentLocator | an element locator of parent element
 locator | an element locator pointing to an element
 text | the value to match with the result
 
+## Verify Not Select Options
+
+Verifies that all option labels in the specified select drop-down not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectOptions(locator, text)
+`
+
+`
+verifyNotSelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Verify Not Selected Id
 
 Verifies that option element ID for selected option in the specified select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
@@ -5938,6 +6430,28 @@ verifyNotSelectedId(locator, text)
 
 `
 verifyNotSelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Ids
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedIds(locator, text)
+`
+
+`
+verifyNotSelectedIds(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -5970,6 +6484,28 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Verify Not Selected Indexes
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedIndexes(locator, text)
+`
+
+`
+verifyNotSelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Verify Not Selected Label
 
 Verifies that option label (visible text) for selected option in the specified select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
@@ -5992,6 +6528,28 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Verify Not Selected Labels
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedLabels(locator, text)
+`
+
+`
+verifyNotSelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Verify Not Selected Value
 
 Verifies that option value (value attribute) for selected option in the specified select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
@@ -6004,6 +6562,28 @@ verifyNotSelectedValue(locator, text)
 
 `
 verifyNotSelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Values
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedValues(locator, text)
+`
+
+`
+verifyNotSelectedValues(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6254,6 +6834,72 @@ Parameter | Description
 sql | the sql
 count | the count
 
+## Verify Select Options
+
+Verifies that all option labels in the specified select drop-down equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectOptions(locator, text)
+`
+
+`
+verifySelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Select Options Match
+
+Verifies that all option labels in the specified select drop-down matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectOptionsMatch(locator, text)
+`
+
+`
+verifySelectOptionsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Select Options Not Match
+
+Verifies that all option labels in the specified select drop-down not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectOptionsNotMatch(locator, text)
+`
+
+`
+verifySelectOptionsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Verify Selected Id
 
 Verifies that option element ID for selected option in the specified select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
@@ -6310,6 +6956,72 @@ verifySelectedIdNotMatch(locator, text)
 
 `
 verifySelectedIdNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Ids
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIds(locator, text)
+`
+
+`
+verifySelectedIds(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Ids Match
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIdsMatch(locator, text)
+`
+
+`
+verifySelectedIdsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Ids Not Match
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIdsNotMatch(locator, text)
+`
+
+`
+verifySelectedIdsNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6386,6 +7098,72 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Verify Selected Indexes
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexes(locator, text)
+`
+
+`
+verifySelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Indexes Match
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexesMatch(locator, text)
+`
+
+`
+verifySelectedIndexesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Indexes Not Match
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexesNotMatch(locator, text)
+`
+
+`
+verifySelectedIndexesNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Verify Selected Label
 
 Verifies that option label (visible text) for selected option in the specified select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
@@ -6452,6 +7230,72 @@ parentLocator | an element locator of parent element
 locator | an element locator identifying a drop-down menu
 text | the value to match with the result
 
+## Verify Selected Labels
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabels(locator, text)
+`
+
+`
+verifySelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Labels Match
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabelsMatch(locator, text)
+`
+
+`
+verifySelectedLabelsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Labels Not Match
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabelsNotMatch(locator, text)
+`
+
+`
+verifySelectedLabelsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
 ## Verify Selected Value
 
 Verifies that option value (value attribute) for selected option in the specified select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
@@ -6508,6 +7352,72 @@ verifySelectedValueNotMatch(locator, text)
 
 `
 verifySelectedValueNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Values
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValues(locator, text)
+`
+
+`
+verifySelectedValues(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Values Match
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValuesMatch(locator, text)
+`
+
+`
+verifySelectedValuesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Values Not Match
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValuesNotMatch(locator, text)
+`
+
+`
+verifySelectedValuesNotMatch(parentLocator, locator, text)
 `
 
 ### Parameters
@@ -6895,40 +7805,6 @@ Verifies that the specified variable value equals to the given value. When the v
 
 `
 verifyVariable(variable, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-variable | the variable
-text | the value to match with the result
-
-## Verify Variable Match
-
-Verifies that the specified variable value matches the given value. When the verify fails, the test will continue execution, logging the failure.
-
-### Usage
-
-`
-verifyVariableMatch(variable, text)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-variable | the variable
-text | the value to match with the result
-
-## Verify Variable Not Match
-
-Verifies that the specified variable value not match the given value. When the verify fails, the test will continue execution, logging the failure.
-
-### Usage
-
-`
-verifyVariableNotMatch(variable, text)
 `
 
 ### Parameters

@@ -452,12 +452,28 @@ public class MobileExcelium extends Excelium {
         runCommand("assertNotFontWeight", parentLocator, locator, text);
     }
 
+    public void assertNotSelectOptions(String locator, String text) throws Throwable {
+        runCommand("assertNotSelectOptions", locator, text, null);
+    }
+
+    public void assertNotSelectOptions(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertNotSelectOptions", parentLocator, locator, text);
+    }
+
     public void assertNotSelectedId(String locator, String text) throws Throwable {
         runCommand("assertNotSelectedId", locator, text, null);
     }
 
     public void assertNotSelectedId(String parentLocator, String locator, String text) throws Throwable {
         runCommand("assertNotSelectedId", parentLocator, locator, text);
+    }
+
+    public void assertNotSelectedIds(String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedIds", locator, text, null);
+    }
+
+    public void assertNotSelectedIds(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedIds", parentLocator, locator, text);
     }
 
     public void assertNotSelectedIndex(String locator, String text) throws Throwable {
@@ -468,6 +484,14 @@ public class MobileExcelium extends Excelium {
         runCommand("assertNotSelectedIndex", parentLocator, locator, text);
     }
 
+    public void assertNotSelectedIndexes(String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedIndexes", locator, text, null);
+    }
+
+    public void assertNotSelectedIndexes(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedIndexes", parentLocator, locator, text);
+    }
+
     public void assertNotSelectedLabel(String locator, String text) throws Throwable {
         runCommand("assertNotSelectedLabel", locator, text, null);
     }
@@ -476,12 +500,28 @@ public class MobileExcelium extends Excelium {
         runCommand("assertNotSelectedLabel", parentLocator, locator, text);
     }
 
+    public void assertNotSelectedLabels(String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedLabels", locator, text, null);
+    }
+
+    public void assertNotSelectedLabels(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedLabels", parentLocator, locator, text);
+    }
+
     public void assertNotSelectedValue(String locator, String text) throws Throwable {
         runCommand("assertNotSelectedValue", locator, text, null);
     }
 
     public void assertNotSelectedValue(String parentLocator, String locator, String text) throws Throwable {
         runCommand("assertNotSelectedValue", parentLocator, locator, text);
+    }
+
+    public void assertNotSelectedValues(String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedValues", locator, text, null);
+    }
+
+    public void assertNotSelectedValues(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertNotSelectedValues", parentLocator, locator, text);
     }
 
     public void assertNotSomethingSelected(String locator) throws Throwable {
@@ -564,6 +604,30 @@ public class MobileExcelium extends Excelium {
         runCommand("assertRowCountLessThan", sql, count, null);
     }
 
+    public void assertSelectOptions(String locator, String text) throws Throwable {
+        runCommand("assertSelectOptions", locator, text, null);
+    }
+
+    public void assertSelectOptions(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectOptions", parentLocator, locator, text);
+    }
+
+    public void assertSelectOptionsMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectOptionsMatch", locator, text, null);
+    }
+
+    public void assertSelectOptionsMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectOptionsMatch", parentLocator, locator, text);
+    }
+
+    public void assertSelectOptionsNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectOptionsNotMatch", locator, text, null);
+    }
+
+    public void assertSelectOptionsNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectOptionsNotMatch", parentLocator, locator, text);
+    }
+
     public void assertSelectedId(String locator, String text) throws Throwable {
         runCommand("assertSelectedId", locator, text, null);
     }
@@ -586,6 +650,30 @@ public class MobileExcelium extends Excelium {
 
     public void assertSelectedIdNotMatch(String parentLocator, String locator, String text) throws Throwable {
         runCommand("assertSelectedIdNotMatch", parentLocator, locator, text);
+    }
+
+    public void assertSelectedIds(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIds", locator, text, null);
+    }
+
+    public void assertSelectedIds(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIds", parentLocator, locator, text);
+    }
+
+    public void assertSelectedIdsMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdsMatch", locator, text, null);
+    }
+
+    public void assertSelectedIdsMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdsMatch", parentLocator, locator, text);
+    }
+
+    public void assertSelectedIdsNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdsNotMatch", locator, text, null);
+    }
+
+    public void assertSelectedIdsNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIdsNotMatch", parentLocator, locator, text);
     }
 
     public void assertSelectedIndex(String locator, String text) throws Throwable {
@@ -612,6 +700,30 @@ public class MobileExcelium extends Excelium {
         runCommand("assertSelectedIndexNotMatch", parentLocator, locator, text);
     }
 
+    public void assertSelectedIndexes(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexes", locator, text, null);
+    }
+
+    public void assertSelectedIndexes(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexes", parentLocator, locator, text);
+    }
+
+    public void assertSelectedIndexesMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexesMatch", locator, text, null);
+    }
+
+    public void assertSelectedIndexesMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexesMatch", parentLocator, locator, text);
+    }
+
+    public void assertSelectedIndexesNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexesNotMatch", locator, text, null);
+    }
+
+    public void assertSelectedIndexesNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedIndexesNotMatch", parentLocator, locator, text);
+    }
+
     public void assertSelectedLabel(String locator, String text) throws Throwable {
         runCommand("assertSelectedLabel", locator, text, null);
     }
@@ -636,6 +748,30 @@ public class MobileExcelium extends Excelium {
         runCommand("assertSelectedLabelNotMatch", parentLocator, locator, text);
     }
 
+    public void assertSelectedLabels(String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabels", locator, text, null);
+    }
+
+    public void assertSelectedLabels(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabels", parentLocator, locator, text);
+    }
+
+    public void assertSelectedLabelsMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelsMatch", locator, text, null);
+    }
+
+    public void assertSelectedLabelsMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelsMatch", parentLocator, locator, text);
+    }
+
+    public void assertSelectedLabelsNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelsNotMatch", locator, text, null);
+    }
+
+    public void assertSelectedLabelsNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedLabelsNotMatch", parentLocator, locator, text);
+    }
+
     public void assertSelectedValue(String locator, String text) throws Throwable {
         runCommand("assertSelectedValue", locator, text, null);
     }
@@ -658,6 +794,30 @@ public class MobileExcelium extends Excelium {
 
     public void assertSelectedValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
         runCommand("assertSelectedValueNotMatch", parentLocator, locator, text);
+    }
+
+    public void assertSelectedValues(String locator, String text) throws Throwable {
+        runCommand("assertSelectedValues", locator, text, null);
+    }
+
+    public void assertSelectedValues(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedValues", parentLocator, locator, text);
+    }
+
+    public void assertSelectedValuesMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedValuesMatch", locator, text, null);
+    }
+
+    public void assertSelectedValuesMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedValuesMatch", parentLocator, locator, text);
+    }
+
+    public void assertSelectedValuesNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertSelectedValuesNotMatch", locator, text, null);
+    }
+
+    public void assertSelectedValuesNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertSelectedValuesNotMatch", parentLocator, locator, text);
     }
 
     public void assertSomethingSelected(String locator) throws Throwable {
@@ -798,14 +958,6 @@ public class MobileExcelium extends Excelium {
 
     public void assertVariable(String variable, String text) throws Throwable {
         runCommand("assertVariable", variable, text, null);
-    }
-
-    public void assertVariableMatch(String variable, String text) throws Throwable {
-        runCommand("assertVariableMatch", variable, text, null);
-    }
-
-    public void assertVariableNotMatch(String variable, String text) throws Throwable {
-        runCommand("assertVariableNotMatch", variable, text, null);
     }
 
     public void assertVisible(String locator) throws Throwable {
@@ -1076,14 +1228,6 @@ public class MobileExcelium extends Excelium {
         runCommand("executeIfVariable", action, variable, text);
     }
 
-    public void executeIfVariableMatch(String action, String variable, String text) throws Throwable {
-        runCommand("executeIfVariableMatch", action, variable, text);
-    }
-
-    public void executeIfVariableNotMatch(String action, String variable, String text) throws Throwable {
-        runCommand("executeIfVariableNotMatch", action, variable, text);
-    }
-
     public void executeIfVisible(String action, String locator) throws Throwable {
         runCommand("executeIfVisible", action, locator, null);
     }
@@ -1138,6 +1282,14 @@ public class MobileExcelium extends Excelium {
 
     public void storeCurrentDate(String variable) throws Throwable {
         runCommand("storeCurrentDate", variable, null, null);
+    }
+
+    public void storeCursorPosition(String locator, String variable) throws Throwable {
+        runCommand("storeCursorPosition", locator, variable, null);
+    }
+
+    public void storeCursorPosition(String parentLocator, String locator, String variable) throws Throwable {
+        runCommand("storeCursorPosition", parentLocator, locator, variable);
     }
 
     public void storeEval(String expression, String variable) throws Throwable {
@@ -1660,12 +1812,28 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyNotFontWeight", parentLocator, locator, text);
     }
 
+    public void verifyNotSelectOptions(String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectOptions", locator, text, null);
+    }
+
+    public void verifyNotSelectOptions(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectOptions", parentLocator, locator, text);
+    }
+
     public void verifyNotSelectedId(String locator, String text) throws Throwable {
         runCommand("verifyNotSelectedId", locator, text, null);
     }
 
     public void verifyNotSelectedId(String parentLocator, String locator, String text) throws Throwable {
         runCommand("verifyNotSelectedId", parentLocator, locator, text);
+    }
+
+    public void verifyNotSelectedIds(String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedIds", locator, text, null);
+    }
+
+    public void verifyNotSelectedIds(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedIds", parentLocator, locator, text);
     }
 
     public void verifyNotSelectedIndex(String locator, String text) throws Throwable {
@@ -1676,6 +1844,14 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyNotSelectedIndex", parentLocator, locator, text);
     }
 
+    public void verifyNotSelectedIndexes(String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedIndexes", locator, text, null);
+    }
+
+    public void verifyNotSelectedIndexes(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedIndexes", parentLocator, locator, text);
+    }
+
     public void verifyNotSelectedLabel(String locator, String text) throws Throwable {
         runCommand("verifyNotSelectedLabel", locator, text, null);
     }
@@ -1684,12 +1860,28 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyNotSelectedLabel", parentLocator, locator, text);
     }
 
+    public void verifyNotSelectedLabels(String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedLabels", locator, text, null);
+    }
+
+    public void verifyNotSelectedLabels(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedLabels", parentLocator, locator, text);
+    }
+
     public void verifyNotSelectedValue(String locator, String text) throws Throwable {
         runCommand("verifyNotSelectedValue", locator, text, null);
     }
 
     public void verifyNotSelectedValue(String parentLocator, String locator, String text) throws Throwable {
         runCommand("verifyNotSelectedValue", parentLocator, locator, text);
+    }
+
+    public void verifyNotSelectedValues(String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedValues", locator, text, null);
+    }
+
+    public void verifyNotSelectedValues(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyNotSelectedValues", parentLocator, locator, text);
     }
 
     public void verifyNotSomethingSelected(String locator) throws Throwable {
@@ -1772,6 +1964,30 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyRowCountLessThan", sql, count, null);
     }
 
+    public void verifySelectOptions(String locator, String text) throws Throwable {
+        runCommand("verifySelectOptions", locator, text, null);
+    }
+
+    public void verifySelectOptions(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectOptions", parentLocator, locator, text);
+    }
+
+    public void verifySelectOptionsMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectOptionsMatch", locator, text, null);
+    }
+
+    public void verifySelectOptionsMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectOptionsMatch", parentLocator, locator, text);
+    }
+
+    public void verifySelectOptionsNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectOptionsNotMatch", locator, text, null);
+    }
+
+    public void verifySelectOptionsNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectOptionsNotMatch", parentLocator, locator, text);
+    }
+
     public void verifySelectedId(String locator, String text) throws Throwable {
         runCommand("verifySelectedId", locator, text, null);
     }
@@ -1794,6 +2010,30 @@ public class MobileExcelium extends Excelium {
 
     public void verifySelectedIdNotMatch(String parentLocator, String locator, String text) throws Throwable {
         runCommand("verifySelectedIdNotMatch", parentLocator, locator, text);
+    }
+
+    public void verifySelectedIds(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIds", locator, text, null);
+    }
+
+    public void verifySelectedIds(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIds", parentLocator, locator, text);
+    }
+
+    public void verifySelectedIdsMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdsMatch", locator, text, null);
+    }
+
+    public void verifySelectedIdsMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdsMatch", parentLocator, locator, text);
+    }
+
+    public void verifySelectedIdsNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdsNotMatch", locator, text, null);
+    }
+
+    public void verifySelectedIdsNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIdsNotMatch", parentLocator, locator, text);
     }
 
     public void verifySelectedIndex(String locator, String text) throws Throwable {
@@ -1820,6 +2060,30 @@ public class MobileExcelium extends Excelium {
         runCommand("verifySelectedIndexNotMatch", parentLocator, locator, text);
     }
 
+    public void verifySelectedIndexes(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexes", locator, text, null);
+    }
+
+    public void verifySelectedIndexes(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexes", parentLocator, locator, text);
+    }
+
+    public void verifySelectedIndexesMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexesMatch", locator, text, null);
+    }
+
+    public void verifySelectedIndexesMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexesMatch", parentLocator, locator, text);
+    }
+
+    public void verifySelectedIndexesNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexesNotMatch", locator, text, null);
+    }
+
+    public void verifySelectedIndexesNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedIndexesNotMatch", parentLocator, locator, text);
+    }
+
     public void verifySelectedLabel(String locator, String text) throws Throwable {
         runCommand("verifySelectedLabel", locator, text, null);
     }
@@ -1844,6 +2108,30 @@ public class MobileExcelium extends Excelium {
         runCommand("verifySelectedLabelNotMatch", parentLocator, locator, text);
     }
 
+    public void verifySelectedLabels(String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabels", locator, text, null);
+    }
+
+    public void verifySelectedLabels(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabels", parentLocator, locator, text);
+    }
+
+    public void verifySelectedLabelsMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelsMatch", locator, text, null);
+    }
+
+    public void verifySelectedLabelsMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelsMatch", parentLocator, locator, text);
+    }
+
+    public void verifySelectedLabelsNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelsNotMatch", locator, text, null);
+    }
+
+    public void verifySelectedLabelsNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedLabelsNotMatch", parentLocator, locator, text);
+    }
+
     public void verifySelectedValue(String locator, String text) throws Throwable {
         runCommand("verifySelectedValue", locator, text, null);
     }
@@ -1866,6 +2154,30 @@ public class MobileExcelium extends Excelium {
 
     public void verifySelectedValueNotMatch(String parentLocator, String locator, String text) throws Throwable {
         runCommand("verifySelectedValueNotMatch", parentLocator, locator, text);
+    }
+
+    public void verifySelectedValues(String locator, String text) throws Throwable {
+        runCommand("verifySelectedValues", locator, text, null);
+    }
+
+    public void verifySelectedValues(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedValues", parentLocator, locator, text);
+    }
+
+    public void verifySelectedValuesMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedValuesMatch", locator, text, null);
+    }
+
+    public void verifySelectedValuesMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedValuesMatch", parentLocator, locator, text);
+    }
+
+    public void verifySelectedValuesNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifySelectedValuesNotMatch", locator, text, null);
+    }
+
+    public void verifySelectedValuesNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifySelectedValuesNotMatch", parentLocator, locator, text);
     }
 
     public void verifySomethingSelected(String locator) throws Throwable {
@@ -2006,14 +2318,6 @@ public class MobileExcelium extends Excelium {
 
     public void verifyVariable(String variable, String text) throws Throwable {
         runCommand("verifyVariable", variable, text, null);
-    }
-
-    public void verifyVariableMatch(String variable, String text) throws Throwable {
-        runCommand("verifyVariableMatch", variable, text, null);
-    }
-
-    public void verifyVariableNotMatch(String variable, String text) throws Throwable {
-        runCommand("verifyVariableNotMatch", variable, text, null);
     }
 
     public void verifyVisible(String locator) throws Throwable {
