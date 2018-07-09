@@ -169,26 +169,26 @@ public class CommandFactoryTest {
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyUrlContain(1)").getConsumer().accept("O", null, null);
+        commandMap.get("verifyUrlMatch(1)").getConsumer().accept("^O", null, null);
 
         try {
-            commandMap.get("verifyUrlContain(1)").getConsumer().accept("N", null, null);
+            commandMap.get("verifyUrlMatch(1)").getConsumer().accept("O$", null, null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyUrlNotContain(1)").getConsumer().accept("N", null, null);
+        commandMap.get("verifyUrlNotMatch(1)").getConsumer().accept("^N", null, null);
 
         try {
-            commandMap.get("verifyUrlNotContain(1)").getConsumer().accept("O", null, null);
+            commandMap.get("verifyUrlNotMatch(1)").getConsumer().accept("^O", null, null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
         commandMap.get("waitForUrl(1)").getConsumer().accept("OK", null, null);
         commandMap.get("waitForNotUrl(1)").getConsumer().accept("NG", null, null);
-        commandMap.get("waitForUrlContain(1)").getConsumer().accept("O", null, null);
-        commandMap.get("waitForUrlNotContain(1)").getConsumer().accept("N", null, null);
+        commandMap.get("waitForUrlMatch(1)").getConsumer().accept("^O", null, null);
+        commandMap.get("waitForUrlNotMatch(1)").getConsumer().accept("O$", null, null);
 
         commandMap.get("executeIfUrl(2)").getConsumer().accept("action1", "OK", null);
         new Verifications() {{
@@ -210,22 +210,22 @@ public class CommandFactoryTest {
             executor.runAction("action4"); times = 0;
         }};
 
-        commandMap.get("executeIfUrlContain(2)").getConsumer().accept("action5", "O", null);
+        commandMap.get("executeIfUrlMatch(2)").getConsumer().accept("action5", "^O", null);
         new Verifications() {{
             executor.runAction("action5");
         }};
 
-        commandMap.get("executeIfUrlContain(2)").getConsumer().accept("action6", "N", null);
+        commandMap.get("executeIfUrlMatch(2)").getConsumer().accept("action6", "O$", null);
         new Verifications() {{
             executor.runAction("action6"); times = 0;
         }};
 
-        commandMap.get("executeIfUrlNotContain(2)").getConsumer().accept("action7", "N", null);
+        commandMap.get("executeIfUrlNotMatch(2)").getConsumer().accept("action7", "^N", null);
         new Verifications() {{
             executor.runAction("action7");
         }};
 
-        commandMap.get("executeIfUrlNotContain(2)").getConsumer().accept("action8", "O", null);
+        commandMap.get("executeIfUrlNotMatch(2)").getConsumer().accept("action8", "^O", null);
         new Verifications() {{
             executor.runAction("action8"); times = 0;
         }};
@@ -253,26 +253,26 @@ public class CommandFactoryTest {
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextContain(3)").getConsumer().accept("parentLocator", "locator","O");
+        commandMap.get("verifyTextMatch(3)").getConsumer().accept("parentLocator", "locator","^O");
 
         try {
-            commandMap.get("verifyTextContain(3)").getConsumer().accept("parentLocator", "locator","N");
+            commandMap.get("verifyTextMatch(3)").getConsumer().accept("parentLocator", "locator","O$");
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextNotContain(3)").getConsumer().accept("parentLocator", "locator","N");
+        commandMap.get("verifyTextNotMatch(3)").getConsumer().accept("parentLocator", "locator","^N");
 
         try {
-            commandMap.get("verifyTextNotContain(3)").getConsumer().accept("parentLocator", "locator","O");
+            commandMap.get("verifyTextNotMatch(3)").getConsumer().accept("parentLocator", "locator","^O");
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
         commandMap.get("waitForText(3)").getConsumer().accept("parentLocator", "locator","OK");
         commandMap.get("waitForNotText(3)").getConsumer().accept("parentLocator", "locator","NG");
-        commandMap.get("waitForTextContain(3)").getConsumer().accept("parentLocator", "locator","O");
-        commandMap.get("waitForTextNotContain(3)").getConsumer().accept("parentLocator", "locator","N");
+        commandMap.get("waitForTextMatch(3)").getConsumer().accept("parentLocator", "locator","^O");
+        commandMap.get("waitForTextNotMatch(3)").getConsumer().accept("parentLocator", "locator","O$");
 
         // Locator only
         commandMap.get("storeText(2)").getConsumer().accept("locator", "var3", null);
@@ -297,26 +297,26 @@ public class CommandFactoryTest {
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextContain(2)").getConsumer().accept("locator","O", null);
+        commandMap.get("verifyTextMatch(2)").getConsumer().accept("locator","^O", null);
 
         try {
-            commandMap.get("verifyTextContain(2)").getConsumer().accept("locator","N", null);
+            commandMap.get("verifyTextMatch(2)").getConsumer().accept("locator","O$", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextNotContain(2)").getConsumer().accept("locator","N", null);
+        commandMap.get("verifyTextNotMatch(2)").getConsumer().accept("locator","^N", null);
 
         try {
-            commandMap.get("verifyTextNotContain(2)").getConsumer().accept("locator","O", null);
+            commandMap.get("verifyTextNotMatch(2)").getConsumer().accept("locator","^O", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
         commandMap.get("waitForText(2)").getConsumer().accept("locator","OK", null);
         commandMap.get("waitForNotText(2)").getConsumer().accept("locator","NG", null);
-        commandMap.get("waitForTextContain(2)").getConsumer().accept("locator","O", null);
-        commandMap.get("waitForTextNotContain(2)").getConsumer().accept("locator","N", null);
+        commandMap.get("waitForTextMatch(2)").getConsumer().accept("locator","^O", null);
+        commandMap.get("waitForTextNotMatch(2)").getConsumer().accept("locator","O$", null);
 
         commandMap.get("executeIfText(3)").getConsumer().accept("textAction1", "locator","OK");
         new Verifications() {{
@@ -338,22 +338,22 @@ public class CommandFactoryTest {
             executor.runAction("textAction4"); times = 0;
         }};
 
-        commandMap.get("executeIfTextContain(3)").getConsumer().accept("textAction5", "locator","O");
+        commandMap.get("executeIfTextMatch(3)").getConsumer().accept("textAction5", "locator","^O");
         new Verifications() {{
             executor.runAction("textAction5");
         }};
 
-        commandMap.get("executeIfTextContain(3)").getConsumer().accept("textAction6", "locator","N");
+        commandMap.get("executeIfTextMatch(3)").getConsumer().accept("textAction6", "locator","O$");
         new Verifications() {{
             executor.runAction("textAction6"); times = 0;
         }};
 
-        commandMap.get("executeIfTextNotContain(3)").getConsumer().accept("textAction7", "locator","N");
+        commandMap.get("executeIfTextNotMatch(3)").getConsumer().accept("textAction7", "locator","^N");
         new Verifications() {{
             executor.runAction("textAction7");
         }};
 
-        commandMap.get("executeIfTextNotContain(3)").getConsumer().accept("textAction8", "locator","O");
+        commandMap.get("executeIfTextNotMatch(3)").getConsumer().accept("textAction8", "locator","^O");
         new Verifications() {{
             executor.runAction("textAction8"); times = 0;
         }};

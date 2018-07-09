@@ -254,6 +254,11 @@ public class TestRunnerTest {
             }
         };
 
+        new Expectations() {{
+            webDriver.evalTemplate("action1"); result = "action1";
+            webDriver.evalTemplate("id=id"); result = "id=id";
+        }};
+
         Test test = new Test();
         Map<String, TestSuite> testSuiteMap = new HashMap<>();
         TestSuite testSuite = new TestSuite();
@@ -361,6 +366,10 @@ public class TestRunnerTest {
             }
         };
 
+        new Expectations() {{
+            webDriver.evalTemplate("action2"); result = "action2";
+        }};
+
         Test test = new Test();
         Map<String, TestSuite> testSuiteMap = new HashMap<>();
         TestSuite testSuite = new TestSuite();
@@ -466,6 +475,12 @@ public class TestRunnerTest {
                 return commandMap;
             }
         };
+
+        new Expectations() {{
+            webDriver.evalTemplate("id=id"); result = "id=id";
+            webDriver.evalTemplate("id2=id2"); result = "id2=id2";
+            webDriver.evalTemplate("id3=id3"); result = "id3=id3";
+        }};
 
         Test test = new Test();
         Map<String, TestSuite> testSuiteMap = new HashMap<>();
@@ -618,6 +633,12 @@ public class TestRunnerTest {
                 return commandMap;
             }
         };
+
+        new Expectations() {{
+            webDriver.evalTemplate("id=id"); result = "id=id";
+            webDriver.evalTemplate("OK"); result = "OK";
+            webDriver.evalTemplate("NG"); result = "NG";
+        }};
 
         Test test = new Test();
         Map<String, TestSuite> testSuiteMap = new HashMap<>();
@@ -884,6 +905,12 @@ public class TestRunnerTest {
                 return commandMap;
             }
         };
+
+        new Expectations() {{
+            webDriver.evalTemplate("id=id"); result = "id=id";
+            webDriver.evalTemplate("androidId=androidId"); result = "androidId=androidId";
+            webDriver.evalTemplate("iOSId=iOSId"); result = "iOSId=iOSId";
+        }};
 
         Test test = new Test();
         Map<String, TestSuite> testSuiteMap = new HashMap<>();
