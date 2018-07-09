@@ -25,17 +25,20 @@
 package excelium.executor.web;
 
 import com.thoughtworks.selenium.SeleniumException;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.executor.web.support.OptionSelector;
 import excelium.model.project.Project;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.function.BiFunction;
 
 /**
  * Represents a class which contains commands for controlling web elements.
@@ -456,7 +459,35 @@ public class WebElementCommandExecutor extends CommandExecutor {
         int yDelta = Integer.parseInt(parts[1].trim());
 
         WebElement element = webDriver.findElement(parentLocator, locator);
-        new Actions(webDriver).dragAndDropBy(element, xDelta, yDelta).perform();
+        Point clientStartXY = element.getLocation();
+        int clientStartX = clientStartXY.getX();
+        int clientStartY = clientStartXY.getY();
+
+        int clientFinishX = ((clientStartX + xDelta) < 0) ? 0 : (clientStartX + xDelta);
+        int clientFinishY = ((clientStartY + yDelta) < 0) ? 0 : (clientStartY + yDelta);
+
+        int mouseSpeed = 10;
+        BiFunction<Integer, Integer, Integer> move = (current, dest) -> {
+            if (current.equals(dest)) return 0;
+            if (Math.abs(current - dest) < mouseSpeed) return dest - current;
+            return (current < dest) ? mouseSpeed : - mouseSpeed;
+        };
+
+        int clientX = clientStartX;
+        int clientY = clientStartY;
+
+        Actions actions = new Actions(webDriver).clickAndHold(element);
+
+        while ((clientX != clientFinishX) || (clientY != clientFinishY)) {
+            int deltaX = move.apply(clientX, clientFinishX);
+            int deltaY = move.apply(clientY, clientFinishY);
+            clientX += deltaX;
+            clientY += deltaY;
+            actions.moveByOffset(deltaX, deltaY);
+        }
+
+        actions.release();
+        actions.perform();
     }
 
     /**
@@ -486,7 +517,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "position")
     public void setCursorPosition(String parentLocator, String locator, String position) {
         WebElement element = webDriver.findElement(parentLocator, locator);
-        long index = toInteger(position, 0);
+        long index = toInteger(position, -1);
 
         String setPosition = webDriver.getJavascriptLibrary().getSeleniumScript("setCursorPosition.js");
 
