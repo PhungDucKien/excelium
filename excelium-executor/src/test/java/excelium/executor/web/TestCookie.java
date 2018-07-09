@@ -1,0 +1,68 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Excelium
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package excelium.executor.web;
+
+import org.junit.Test;
+
+public class TestCookie extends WebExecutorTestBase {
+  @Test
+  public void testCookie() throws Throwable {
+    String base = "/tests/html";
+    System.out.println(base);
+    selenium.open(base + "/path1/cookie1.html");
+    selenium.deleteAllVisibleCookies();
+    selenium.assertCookie("");
+    selenium.open(base + "/path2/cookie2.html");
+    selenium.deleteAllVisibleCookies();
+    selenium.assertCookie("");
+    selenium.open(base + "/path1/cookie1.html");
+    selenium.createCookie("addedCookieForPath1=new value1", "");
+    selenium.createCookie("addedCookieForPath2=new value2", "path=" + base + "/path2/, max_age=60");
+    selenium.open(base + "/path1/cookie1.html");
+    selenium.verifyCookieMatch("addedCookieForPath1=new value1");
+    selenium.assertCookiePresent("addedCookieForPath1");
+    selenium.verifyCookieByName("addedCookieForPath1", "new value1");
+    selenium.verifyCookieNotPresent("testCookie");
+    selenium.verifyCookieNotPresent("addedCookieForPath2");
+    selenium.deleteCookie("addedCookieForPath1");
+    selenium.verifyCookie("");
+    selenium.open(base + "/path2/cookie2.html");
+    selenium.verifyCookieByName("addedCookieForPath2", "new value2");
+    selenium.verifyCookieNotPresent("addedCookieForPath1");
+    selenium.deleteCookie("addedCookieForPath2");
+    selenium.verifyCookie("");
+    selenium.createCookie("testCookieWithSameName=new value1", "path=/");
+    selenium.createCookie("testCookieWithSameName=new value2", "path=" + base + "/path2/");
+    selenium.open(base + "/path1/cookie1.html");
+    selenium.verifyCookieByName("testCookieWithSameName", "new value1");
+    selenium.open(base + "/path2/cookie2.html");
+    selenium.verifyCookieMatch("testCookieWithSameName=new value1");
+    selenium.verifyCookieMatch("testCookieWithSameName=new value2");
+    selenium.deleteCookie("testCookieWithSameName");
+    selenium.open(base + "/path2/cookie2.html");
+    selenium.verifyCookieNotPresent("testCookieWithSameName");
+    selenium.verifyCookieNotMatch("testCookieWithSameName=new value2");
+  }
+}
