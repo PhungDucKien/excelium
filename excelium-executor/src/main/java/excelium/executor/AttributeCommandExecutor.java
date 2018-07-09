@@ -330,7 +330,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option IDs in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
     public String[] getSelectedIds(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "id");
     }
@@ -343,7 +343,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option indexes in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
     public String[] getSelectedIndexes(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "index");
     }
@@ -356,7 +356,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option labels in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
     public String[] getSelectedLabels(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "text");
     }
@@ -369,7 +369,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option values in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
     public String[] getSelectedValues(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "value");
     }
@@ -381,7 +381,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all option labels in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
     public String[] getSelectOptions(String parentLocator, String locator) {
         OptionSelector selector = new OptionSelector(webDriver, parentLocator, locator);
 
@@ -670,7 +670,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      *        textarea
      * @return the numerical position of the cursor in the field
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
     public Number getCursorPosition(String parentLocator, String locator) {
         // All supported browsers apparently support "document.selection". Let's use that and the
         // relevant snippet of code from the original selenium core to implement this. What could
@@ -680,18 +680,32 @@ public class AttributeCommandExecutor extends CommandExecutor {
 
         return (Number) webDriver.executeScript(
                 Joiner.on("\n").join(
-                        "try {",
-                        "  var selectRange = document.selection.createRange().duplicate();",
-                        "  var elementRange = arguments[0].createTextRange();",
-                        "  selectRange.move('character', 0)",
-                        "  elementRange.move('character', 0);",
-                        "  var inRange1 = selectRange.inRange(elementRange);",
-                        "  var inRange2 = elementRange.inRange(selectRange);",
-                        "  elementRange.setEndPoint('EndToEnd', selectRange);",
-                        "} catch (e) {",
-                        "  throw Error('There is no cursor on this page!');",
-                        "}",
-                        "return String(elementRange.text).replace(/\r/g,' ').length;"),
+                        "var element = arguments[0];",
+                                "var doc = document;",
+                                "var win = window;",
+                                "if( doc.selection && !browserVersion.isOpera){",
+                                "    try {",
+                                "        var selectRange = doc.selection.createRange().duplicate();",
+                                "        var elementRange = element.createTextRange();",
+                                "        selectRange.move('character',0);",
+                                "        elementRange.move('character',0);",
+                                "        var inRange1 = selectRange.inRange(elementRange);",
+                                "        var inRange2 = elementRange.inRange(selectRange);",
+                                "        elementRange.setEndPoint('EndToEnd', selectRange);",
+                                "    } catch (e) {",
+                                "        throw Error('There is no cursor on this page!');",
+                                "    }",
+                                "    var answer = String(elementRange.text).replace(/\\\\r/g,'').length;",
+                                "    return answer;",
+                                "} else {",
+                                "    if (typeof(element.selectionStart) != 'undefined') {",
+                                "        if (win.getSelection && typeof(win.getSelection().rangeCount) != undefined && win.getSelection().rangeCount == 0) {",
+                                "            throw Error('There is no cursor on this page!');",
+                                "        }",
+                                "        return element.selectionStart;",
+                                "    }",
+                                "}",
+                                "throw Error('Couldn\\\'t detect cursor position on this browser!');"),
                 element);
     }
 }
