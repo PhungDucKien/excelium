@@ -22,68 +22,50 @@
  * SOFTWARE.
  */
 
-package excelium.model.enums;
+package excelium.core.by;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.FindsByXPath;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Represents type of web locator.
+ * Mechanism used to locate elements within a document by using alt attribute.
  *
  * @author PhungDucKien
- * @since 2018.03.27
+ * @since 2018.07.08
  */
-public enum WebLocatorType {
-    /**
-     * Identifier web locator type.
-     */
-    IDENTIFIER,
-    /**
-     * Id web locator type.
-     */
-    ID,
-    /**
-     * Name web locator type.
-     */
-    NAME,
-    /**
-     * Link web locator type.
-     */
-    LINK,
-    /**
-     * Css web locator type.
-     */
-    CSS,
-    /**
-     * Alt web locator type.
-     */
-    ALT,
-    /**
-     * Dom web locator type.
-     */
-    DOM,
-    /**
-     * Xpath web locator type.
-     */
-    XPATH,
-    /**
-     * Class web locator type.
-     */
-    CLASS,
-    /**
-     * Variable web locator type.
-     */
-    VARIABLE;
+public class ByAlt extends By implements Serializable {
 
     /**
-     * From name web locator type.
-     *
-     * @param name the name
-     * @return the web locator type
+     * The alt value
      */
-    public static WebLocatorType fromName(String name) {
-        for (WebLocatorType t : WebLocatorType.values()) {
-            if (t.name().equalsIgnoreCase(name)) {
-                return t;
-            }
-        }
-        return null;
+    private final String alt;
+
+    /**
+     * Instantiates a new ByAlt.
+     *
+     * @param alt the alt value
+     */
+    ByAlt(String alt) {
+        this.alt = alt;
+    }
+
+    @Override
+    public List<WebElement> findElements(SearchContext context) {
+        return ((FindsByXPath) context).findElementsByXPath(".//*[@alt = '" + alt + "']");
+    }
+
+    @Override
+    public WebElement findElement(SearchContext context) {
+        return ((FindsByXPath) context).findElementByXPath(".//*[@alt = '" + alt + "']");
+    }
+
+    @Override
+    public String toString() {
+        return "By.alt: " + alt;
     }
 }

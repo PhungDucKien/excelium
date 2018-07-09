@@ -22,68 +22,55 @@
  * SOFTWARE.
  */
 
-package excelium.model.enums;
+package excelium.core.by;
+
+import com.thoughtworks.selenium.webdriven.ElementFinder;
+import com.thoughtworks.selenium.webdriven.JavascriptLibrary;
+import org.openqa.selenium.*;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Represents type of web locator.
+ * Mechanism used to locate elements within a document by using Javascript snippets.
  *
  * @author PhungDucKien
- * @since 2018.03.27
+ * @since 2018.07.08
  */
-public enum WebLocatorType {
-    /**
-     * Identifier web locator type.
-     */
-    IDENTIFIER,
-    /**
-     * Id web locator type.
-     */
-    ID,
-    /**
-     * Name web locator type.
-     */
-    NAME,
-    /**
-     * Link web locator type.
-     */
-    LINK,
-    /**
-     * Css web locator type.
-     */
-    CSS,
-    /**
-     * Alt web locator type.
-     */
-    ALT,
-    /**
-     * Dom web locator type.
-     */
-    DOM,
-    /**
-     * Xpath web locator type.
-     */
-    XPATH,
-    /**
-     * Class web locator type.
-     */
-    CLASS,
-    /**
-     * Variable web locator type.
-     */
-    VARIABLE;
+public class ByDom extends By implements Serializable {
 
     /**
-     * From name web locator type.
-     *
-     * @param name the name
-     * @return the web locator type
+     * The script
      */
-    public static WebLocatorType fromName(String name) {
-        for (WebLocatorType t : WebLocatorType.values()) {
-            if (t.name().equalsIgnoreCase(name)) {
-                return t;
-            }
-        }
-        return null;
+    private final String script;
+
+    /**
+     * Element finder by DOM
+     */
+    private final ElementFinder elementFinder;
+
+    /**
+     * Instantiates a new ByDom.
+     *
+     * @param script the script
+     */
+    ByDom(String script) {
+        this.script = script;
+        this.elementFinder = new ElementFinder(new JavascriptLibrary());
+    }
+
+    @Override
+    public List<WebElement> findElements(SearchContext context) {
+        throw new RuntimeException("Not supported operation.");
+    }
+
+    @Override
+    public WebElement findElement(SearchContext context) {
+        return elementFinder.findElement((WebDriver) context, "dom=" + script);
+    }
+
+    @Override
+    public String toString() {
+        return "By.dom: " + script;
     }
 }

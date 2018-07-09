@@ -74,15 +74,24 @@ public class ByParser {
             case NAME:
                 return By.name(lc.getValue());
             case CSS:
-                return By.cssSelector(lc.getValue());
+                return new ByCss(lc.getValue());
             case LINK:
                 return By.linkText(lc.getValue());
             case XPATH:
+                if (lc.getValue().endsWith("/")) {
+                    return By.xpath(lc.getValue().substring(0, lc.getValue().length() - 1));
+                }
                 return By.xpath(lc.getValue());
             case IDENTIFIER:
                 return new ByIdOrName(lc.getValue());
+            case CLASS:
+                return By.className(lc.getValue());
+            case ALT:
+                return new ByAlt(lc.getValue());
             case VARIABLE:
                 return new ByVariable(lc.getValue());
+            case DOM:
+                return new ByDom(lc.getValue());
             default:
                 break;
         }
@@ -107,6 +116,9 @@ public class ByParser {
             case NAME:
                 return MobileBy.name(lc.getValue());
             case XPATH:
+                if (lc.getValue().endsWith("/")) {
+                    return MobileBy.xpath(lc.getValue().substring(0, lc.getValue().length() - 1));
+                }
                 return MobileBy.xpath(lc.getValue());
             case ANDROID_UIAUTOMATOR:
                 return MobileBy.AndroidUIAutomator(lc.getValue());
@@ -127,7 +139,7 @@ public class ByParser {
      * @return Web locator
      */
     private static WebLocator parseWebLocator(String locator) {
-        Pattern p = Pattern.compile("^([A-Za-z_]+)=(.+)$");
+        Pattern p = Pattern.compile("^([A-Za-z_]+)=([\\S\\s]+)");
         Matcher m = p.matcher(locator);
         WebLocator lc = new WebLocator();
         if (m.find()) {
@@ -153,7 +165,7 @@ public class ByParser {
      * @return Mobile locator
      */
     private static MobileLocator parseMobileLocator(String locator) {
-        Pattern p = Pattern.compile("^([A-Za-z_]+)=(.+)$");
+        Pattern p = Pattern.compile("^([A-Za-z_]+)=([\\S\\s]+)");
         Matcher m = p.matcher(locator);
         MobileLocator lc = new MobileLocator();
         if (m.find()) {
