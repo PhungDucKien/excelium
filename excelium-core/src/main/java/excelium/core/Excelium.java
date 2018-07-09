@@ -91,9 +91,9 @@ public class Excelium {
         Command command = commandMap.get(methodName + "(" + countParam(param1, param2, param3) + ")");
         if (command != null) {
             try {
-                param1 = param1 instanceof String ? preprocessParameter((String) param1) : param1;
-                param2 = param2 instanceof String ? preprocessParameter((String) param2) : param2;
-                param3 = param3 instanceof String ? preprocessParameter((String) param3) : param3;
+                param1 = preprocessParameter(param1);
+                param2 = preprocessParameter(param2);
+                param3 = preprocessParameter(param3);
                 command.getConsumer().accept(param1, param2, param3);
             } catch (InvocationTargetException e) {
                 throw e.getCause();
@@ -118,16 +118,40 @@ public class Excelium {
     }
 
     /**
-     * Evaluate a parameter, performing evaluation and variable substitution.
+     * Preprocesses parameter value.
+     *
+     * @param paramValue parameter value
+     * @return processed value
+     */
+    private Object preprocessParameter(Object paramValue) {
+        if (paramValue instanceof String) {
+            return preprocessStringParameter((String) paramValue);
+        }
+        if (paramValue != null && paramValue.getClass().equals(String[].class)) {
+            String[] value = new String[((String[])paramValue).length];
+            for (int i = 0; i < ((String[])paramValue).length; i++) {
+                value[i] = preprocessStringParameter(((String[])paramValue)[i]);
+            }
+            return value;
+        }
+        return paramValue;
+    }
+
+    /**
+     * Evaluate a string parameter, performing evaluation and variable substitution.
      * If the string matches the pattern "exp{ ... }", evaluate the string between the braces.
      */
-    private String preprocessParameter(String value) {
+    private String preprocessStringParameter(String value) {
         Matcher match = Pattern.compile("^exp\\{((.|\\r?\\n)+)\\}$").matcher(value);
         if (match.find()) {
             Object result = webDriver.evalExp(match.group(1));
             return result == null ? null : result.toString();
         }
-        return webDriver.evalTemplate(value);
+        try {
+            return webDriver.evalTemplate(value);
+        } catch (Exception e) {
+            return value;
+        }
     }
 
     /**
