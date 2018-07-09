@@ -1364,6 +1364,14 @@ public class WebExcelium extends Excelium {
         runCommand("assignId", parentLocator, locator, identifier);
     }
 
+    public void attachFile(String locator, String filePath) throws Throwable {
+        runCommand("attachFile", locator, filePath, null);
+    }
+
+    public void attachFile(String parentLocator, String locator, String filePath) throws Throwable {
+        runCommand("attachFile", parentLocator, locator, filePath);
+    }
+
     public void blur(String locator) throws Throwable {
         runCommand("blur", locator, null, null);
     }
@@ -1996,6 +2004,10 @@ public class WebExcelium extends Excelium {
         runCommand("highlight", parentLocator, locator, null);
     }
 
+    public void keyDown(String keycode) throws Throwable {
+        runCommand("keyDown", keycode, null, null);
+    }
+
     public void keyDown(String locator, String keySequence) throws Throwable {
         runCommand("keyDown", locator, keySequence, null);
     }
@@ -2004,8 +2016,8 @@ public class WebExcelium extends Excelium {
         runCommand("keyDown", parentLocator, locator, keySequence);
     }
 
-    public void keyDown(String keycode) throws Throwable {
-        runCommand("keyDown", keycode, null, null);
+    public void keyPress(String keycode) throws Throwable {
+        runCommand("keyPress", keycode, null, null);
     }
 
     public void keyPress(String locator, String keySequence) throws Throwable {
@@ -2016,20 +2028,16 @@ public class WebExcelium extends Excelium {
         runCommand("keyPress", parentLocator, locator, keySequence);
     }
 
-    public void keyPress(String keycode) throws Throwable {
-        runCommand("keyPress", keycode, null, null);
-    }
-
-    public void keyUp(String keycode) throws Throwable {
-        runCommand("keyUp", keycode, null, null);
-    }
-
     public void keyUp(String locator, String keySequence) throws Throwable {
         runCommand("keyUp", locator, keySequence, null);
     }
 
     public void keyUp(String parentLocator, String locator, String keySequence) throws Throwable {
         runCommand("keyUp", parentLocator, locator, keySequence);
+    }
+
+    public void keyUp(String keycode) throws Throwable {
+        runCommand("keyUp", keycode, null, null);
     }
 
     public void metaKeyDown() throws Throwable {

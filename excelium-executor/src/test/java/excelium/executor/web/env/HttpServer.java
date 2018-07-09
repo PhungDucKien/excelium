@@ -24,12 +24,15 @@
 
 package excelium.executor.web.env;
 
+ import excelium.executor.web.env.servlet.UploadServlet;
 import org.seleniumhq.jetty9.server.Connector;
 import org.seleniumhq.jetty9.server.Server;
 import org.seleniumhq.jetty9.server.ServerConnector;
 import org.seleniumhq.jetty9.server.handler.ContextHandler;
 import org.seleniumhq.jetty9.server.handler.HandlerList;
 import org.seleniumhq.jetty9.server.handler.ResourceHandler;
+import org.seleniumhq.jetty9.servlet.ServletContextHandler;
+import org.seleniumhq.jetty9.servlet.ServletHolder;
 import org.seleniumhq.jetty9.util.resource.Resource;
 
 import java.util.Arrays;
@@ -69,6 +72,11 @@ public class HttpServer {
         testHandler.setDirectoriesListed(true);
         context.setHandler(testHandler);
         handlers.addHandler(context);
+
+        ServletContextHandler servletContext = new ServletContextHandler();
+        servletContext.setContextPath("/common");
+        servletContext.addServlet(new ServletHolder(new UploadServlet()), "/upload");
+        handlers.addHandler(servletContext);
 
         server.setHandler(handlers);
         server.start();
