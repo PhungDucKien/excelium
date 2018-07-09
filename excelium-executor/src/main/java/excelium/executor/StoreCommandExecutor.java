@@ -80,7 +80,7 @@ public class StoreCommandExecutor extends CommandExecutor {
      * @return the specified variable value
      */
     @Accessor(param1 = "variable")
-    public String getVariable(String variable) {
-        return (String) this.webDriver.getVariable(variable);
+    public Object getVariable(String variable) {
+        return this.webDriver.getVariable(variable);
     }
 }

@@ -101,5 +101,11 @@ public class ObjectUtilTest {
         Assert.assertFalse(ObjectUtil.checkEquals("abc", null));
         Assert.assertFalse(ObjectUtil.checkEquals("#ff0001", new Color(255, 0, 0, 1)));
         Assert.assertFalse(ObjectUtil.checkEquals("blue", new Color(255, 0, 0, 1)));
+
+        Assert.assertTrue(ObjectUtil.checkEquals("1", 1));
+        Assert.assertTrue(ObjectUtil.checkEquals("1", 1L));
+        Assert.assertTrue(ObjectUtil.checkEquals("1", 1.0));
+        Assert.assertTrue(ObjectUtil.checkEquals("true", true));
+        Assert.assertTrue(ObjectUtil.checkEquals("false", false));
     }
 }

@@ -109,6 +109,28 @@ public class ObjectUtil {
         if (clazz.equals(Color.class)) {
             return actual.equals(Color.fromString(expected));
         }
-        return false;
+        if (clazz.equals(Byte.class)) {
+            return actual.equals(Byte.parseByte(expected));
+        }
+        if (clazz.equals(Short.class)) {
+            return actual.equals(Short.parseShort(expected));
+        }
+        if (clazz.equals(Integer.class)) {
+            return actual.equals(Integer.parseInt(expected));
+        }
+        if (clazz.equals(Long.class)) {
+            return actual.equals(Long.parseLong(expected));
+        }
+        if (clazz.equals(Float.class)) {
+            return actual.equals(Float.parseFloat(expected));
+        }
+        if (clazz.equals(Double.class)) {
+            return actual.equals(Double.parseDouble(expected));
+        }
+        if (clazz.equals(Boolean.class)) {
+            return actual.equals(Boolean.parseBoolean(expected));
+        }
+        // Compares as string
+        return actual.toString().equals(expected);
     }
 }
