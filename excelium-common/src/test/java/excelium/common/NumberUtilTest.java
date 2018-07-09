@@ -54,6 +54,16 @@ public class NumberUtilTest {
     }
 
     @Test
+    public void testParseInteger() {
+        Assert.assertEquals(1234, NumberUtil.parseInteger("1234", 0));
+        Assert.assertEquals(0, NumberUtil.parseInteger("0", 1));
+        Assert.assertEquals(-1, NumberUtil.parseInteger("-1", 1));
+        Assert.assertEquals(255, NumberUtil.parseInteger("#ff", 0));
+        Assert.assertEquals(255, NumberUtil.parseInteger("0xff", 0));
+        Assert.assertEquals(255, NumberUtil.parseInteger("0Xff", 0));
+    }
+
+    @Test
     public void testParsePositiveInteger() {
         Assert.assertEquals(1234, NumberUtil.parsePositiveInteger("1234", 0));
         Assert.assertEquals(0, NumberUtil.parsePositiveInteger("0", 1));

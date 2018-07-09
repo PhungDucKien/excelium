@@ -83,17 +83,34 @@ public class NumberUtil {
      * @see Integer#decode
      */
     public static int parsePositiveInteger(String text, int defaultValue) {
+        int number = parseInteger(text, -1);
+        if (number < 0) {
+            number = defaultValue;
+        }
+        return number;
+    }
+
+    /**
+     * Parse the given {@code text} into an {@link Integer} instance,
+     * using the corresponding {@code decode} / {@code valueOf} method.
+     * <p>Trims the input {@code String} before attempting to parse the number.
+     * <p>Supports numbers in hex format (with leading "0x", "0X", or "#") as well.
+     * If the parsed number is below 0, or any exception occurred, returns the default value.
+     *
+     * @param text         the text to convert
+     * @param defaultValue the default value
+     * @return the parsed number
+     * @see Integer#decode
+     */
+    public static int parseInteger(String text, int defaultValue) {
         String trimmed = StringUtils.trim(text);
-        int number = -1;
+        int number = defaultValue;
         if (StringUtils.isNotBlank(trimmed)) {
             try {
                 number = isHexNumber(trimmed) ? Integer.decode(trimmed) : Integer.valueOf(trimmed);
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
             }
-        }
-        if (number < 0) {
-            number = defaultValue;
         }
         return number;
     }

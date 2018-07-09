@@ -125,7 +125,7 @@ public class CommandExecutor {
      * @return the web driver wait
      */
     public WebDriverWait createWebDriverWait(String timeOutInMilliseconds) {
-        long timeout = toInteger(timeOutInMilliseconds, WEBDRIVER_DEFAULT_TIMEOUT);
+        long timeout = toPositiveInteger(timeOutInMilliseconds, WEBDRIVER_DEFAULT_TIMEOUT);
         WebDriverWait wait = new WebDriverWait(webDriver, 0);
         wait.withTimeout(Duration.ofMillis(timeout));
         return wait;
@@ -159,9 +159,22 @@ public class CommandExecutor {
      * @param defaultValue the default value
      * @return an integer
      */
-    protected int toInteger(String value, int defaultValue) {
+    protected int toPositiveInteger(String value, int defaultValue) {
         // Of course, a non-breaking space doesn't count as whitespace.
         value = value.replace('\u00A0',' ').trim();
         return NumberUtil.parsePositiveInteger(value, defaultValue);
+    }
+
+    /**
+     * Parse the given {@code text} into an {@link Integer} instance.
+     *
+     * @param value the text value
+     * @param defaultValue the default value
+     * @return an integer
+     */
+    protected int toInteger(String value, int defaultValue) {
+        // Of course, a non-breaking space doesn't count as whitespace.
+        value = value.replace('\u00A0',' ').trim();
+        return NumberUtil.parseInteger(value, defaultValue);
     }
 }
