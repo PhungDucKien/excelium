@@ -167,7 +167,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the IDs of all buttons on the page
      */
-    @Accessor(verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(waitCmd = false, executeCmd = false)
     public String[] getAllButtons() {
         List<WebElement> allInputs = webDriver.findElements(By.xpath("//input"));
         List<String> ids = new ArrayList<>();
@@ -190,7 +190,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the IDs of all links on the page
      */
-    @Accessor(verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(waitCmd = false, executeCmd = false)
     public String[] getAllLinks() {
         List<WebElement> allLinks = webDriver.findElements(By.xpath("//a"));
         List<String> links = new ArrayList<>();
@@ -211,7 +211,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the IDs of all field on the page
      */
-    @Accessor(verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(waitCmd = false, executeCmd = false)
     public String[] getAllFields() {
         List<WebElement> allInputs = webDriver.findElements(By.xpath("//input"));
         List<String> ids = new ArrayList<>();

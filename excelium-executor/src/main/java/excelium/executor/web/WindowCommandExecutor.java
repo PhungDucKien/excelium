@@ -212,11 +212,6 @@ public class WindowCommandExecutor extends CommandExecutor {
      * select the top frame, use "relative=top". You can also select a frame by its 0-based index
      * number; select the first frame with "index=0", or the third frame with "index=2".
      *
-     * <p>
-     * You may also use a DOM expression to identify the frame you want directly, like this:
-     * <code>dom=frames["main"].frames["subframe"]</code>
-     * </p>
-     *
      * @param locator       an element locator identifying a frame or iframe
      */
     @Action(param1 = "locator")
@@ -298,7 +293,7 @@ public class WindowCommandExecutor extends CommandExecutor {
      * @param attributeName name of an attribute on the windows
      * @return the set of values of this attribute from all known windows.
      */
-    @Accessor(param1 = "attributeName", verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "attributeName", waitCmd = false, executeCmd = false)
     public String[] getAttributeFromAllWindows(String attributeName) {
         String current = webDriver.getWindowHandle();
 
@@ -320,7 +315,7 @@ public class WindowCommandExecutor extends CommandExecutor {
      *
      * @return the names of all windows that the browser knows about.
      */
-    @Accessor(verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(waitCmd = false, executeCmd = false)
     public String[] getAllWindowNames() {
         String current = webDriver.getWindowHandle();
 
@@ -340,7 +335,7 @@ public class WindowCommandExecutor extends CommandExecutor {
      *
      * @return the titles of all windows that the browser knows about.
      */
-    @Accessor(verifyCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(waitCmd = false, executeCmd = false)
     public String[] getAllWindowTitles() {
         String current = webDriver.getWindowHandle();
 

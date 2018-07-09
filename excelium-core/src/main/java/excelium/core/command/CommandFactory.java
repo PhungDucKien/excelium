@@ -256,7 +256,7 @@ public class CommandFactory {
                 String baseName = StringUtils.capitalize(matcher.group(2));
                 Accessor accessor = accessors.get(method);
                 int paramCount = countParam(accessor);
-                boolean isString = "get".equals(matcher.group(1)) && String.class.equals(method.getReturnType());
+                boolean isString = "get".equals(matcher.group(1)) && (String.class.equals(method.getReturnType()) || String[].class.equals(method.getReturnType()));
                 boolean isBool = "is".equals(matcher.group(1));
 
                 if ("parentLocator".equals(accessor.param1()) && "locator".equals(accessor.param2())) {
@@ -784,16 +784,17 @@ public class CommandFactory {
         if (isBool) {
             if (!(Boolean) value) throw new AssertFailedException("Actual value is FALSE.");
         } else {
-            if (value instanceof String) {
+            if (value instanceof String || value.getClass().equals(String[].class)) {
+                String actual = getStringValue(value);
                 if (paramCount == 0) {
-                    if (!value.equals(executor.normalizeText((String) param1)))
-                        throw new AssertFailedException("Actual text '" + value + "' did not match '" + param1 + "'");
+                    if (!actual.equals(executor.normalizeText((String) param1)))
+                        throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param1 + "'");
                 } else if (paramCount == 1) {
-                    if (!value.equals(executor.normalizeText((String) param2)))
-                        throw new AssertFailedException("Actual text '" + value + "' did not match '" + param2 + "'");
+                    if (!actual.equals(executor.normalizeText((String) param2)))
+                        throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param2 + "'");
                 } else if (paramCount == 2) {
-                    if (!value.equals(executor.normalizeText((String) param3)))
-                        throw new AssertFailedException("Actual text '" + value + "' did not match '" + param3 + "'");
+                    if (!actual.equals(executor.normalizeText((String) param3)))
+                        throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param3 + "'");
                 } else {
                     throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
                 }
@@ -836,16 +837,17 @@ public class CommandFactory {
         if (isBool) {
             if ((Boolean) value) throw new AssertFailedException("Actual value is TRUE.");
         } else {
-            if (value instanceof String) {
+            if (value instanceof String || value.getClass().equals(String[].class)) {
+                String actual = getStringValue(value);
                 if (paramCount == 0) {
-                    if (value.equals(executor.normalizeText((String) param1)))
-                        throw new AssertFailedException("Actual text '" + value + "' did match '" + param1 + "'");
+                    if (actual.equals(executor.normalizeText((String) param1)))
+                        throw new AssertFailedException("Actual text '" + actual + "' did match '" + param1 + "'");
                 } else if (paramCount == 1) {
-                    if (value.equals(executor.normalizeText((String) param2)))
-                        throw new AssertFailedException("Actual text '" + value + "' did match '" + param2 + "'");
+                    if (actual.equals(executor.normalizeText((String) param2)))
+                        throw new AssertFailedException("Actual text '" + actual + "' did match '" + param2 + "'");
                 } else if (paramCount == 2) {
-                    if (value.equals(executor.normalizeText((String) param3)))
-                        throw new AssertFailedException("Actual text '" + value + "' did match '" + param3 + "'");
+                    if (actual.equals(executor.normalizeText((String) param3)))
+                        throw new AssertFailedException("Actual text '" + actual + "' did match '" + param3 + "'");
                 } else {
                     throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
                 }
@@ -880,19 +882,20 @@ public class CommandFactory {
      * @throws AssertFailedException     the assert failed exception
      */
     private static void assertStringContains(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException, AssertFailedException {
-        String value = (String) getAccessorValue(executor, method, param1, param2, paramCount);
+        Object value = getAccessorValue(executor, method, param1, param2, paramCount);
         if (value == null) {
             throw new AssertFailedException("Actual value is null.");
         }
+        String actual = getStringValue(value);
         if (paramCount == 0) {
-            if (!value.contains(executor.normalizeText((String) param1)))
-                throw new AssertFailedException("Actual text '" + value + "' did not contain '" + param1 + "'");
+            if (!actual.contains(executor.normalizeText((String) param1)))
+                throw new AssertFailedException("Actual text '" + actual + "' did not contain '" + param1 + "'");
         } else if (paramCount == 1) {
-            if (!value.contains(executor.normalizeText((String) param2)))
-                throw new AssertFailedException("Actual text '" + value + "' did not contain '" + param2 + "'");
+            if (!actual.contains(executor.normalizeText((String) param2)))
+                throw new AssertFailedException("Actual text '" + actual + "' did not contain '" + param2 + "'");
         } else if (paramCount == 2) {
-            if (!value.contains(executor.normalizeText((String) param3)))
-                throw new AssertFailedException("Actual text '" + value + "' did not contain '" + param3 + "'");
+            if (!actual.contains(executor.normalizeText((String) param3)))
+                throw new AssertFailedException("Actual text '" + actual + "' did not contain '" + param3 + "'");
         } else {
             throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
         }
@@ -912,19 +915,20 @@ public class CommandFactory {
      * @throws AssertFailedException     the assert failed exception
      */
     private static void assertStringNotContain(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException, AssertFailedException {
-        String value = (String) getAccessorValue(executor, method, param1, param2, paramCount);
+        Object value = getAccessorValue(executor, method, param1, param2, paramCount);
         if (value == null) {
             throw new AssertFailedException("Actual value is null.");
         }
+        String actual = getStringValue(value);
         if (paramCount == 0) {
-            if (value.contains(executor.normalizeText((String) param1)))
-                throw new AssertFailedException("Actual text '" + value + "' did contain '" + param1 + "'");
+            if (actual.contains(executor.normalizeText((String) param1)))
+                throw new AssertFailedException("Actual text '" + actual + "' did contain '" + param1 + "'");
         } else if (paramCount == 1) {
-            if (value.contains(executor.normalizeText((String) param2)))
-                throw new AssertFailedException("Actual text '" + value + "' did contain '" + param2 + "'");
+            if (actual.contains(executor.normalizeText((String) param2)))
+                throw new AssertFailedException("Actual text '" + actual + "' did contain '" + param2 + "'");
         } else if (paramCount == 2) {
-            if (value.contains(executor.normalizeText((String) param3)))
-                throw new AssertFailedException("Actual text '" + value + "' did contain '" + param3 + "'");
+            if (actual.contains(executor.normalizeText((String) param3)))
+                throw new AssertFailedException("Actual text '" + actual + "' did contain '" + param3 + "'");
         } else {
             throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
         }
@@ -944,19 +948,20 @@ public class CommandFactory {
      * @throws AssertFailedException     the assert failed exception
      */
     private static void assertStringMatches(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException, AssertFailedException {
-        String value = (String) getAccessorValue(executor, method, param1, param2, paramCount);
+        Object value = getAccessorValue(executor, method, param1, param2, paramCount);
         if (value == null) {
             throw new AssertFailedException("Actual value is null.");
         }
+        String actual = getStringValue(value);
         if (paramCount == 0) {
-            if (!value.matches(executor.normalizeText((String) param1)))
-                throw new AssertFailedException("Actual text '" + value + "' did not match '" + param1 + "'");
+            if (!Pattern.compile(executor.normalizeText((String) param1)).matcher(actual).find())
+                throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param1 + "'");
         } else if (paramCount == 1) {
-            if (!value.matches(executor.normalizeText((String) param2)))
-                throw new AssertFailedException("Actual text '" + value + "' did not match '" + param2 + "'");
+            if (!Pattern.compile(executor.normalizeText((String) param2)).matcher(actual).find())
+                throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param2 + "'");
         } else if (paramCount == 2) {
-            if (!value.matches(executor.normalizeText((String) param3)))
-                throw new AssertFailedException("Actual text '" + value + "' did not match '" + param3 + "'");
+            if (!Pattern.compile(executor.normalizeText((String) param3)).matcher(actual).find())
+                throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param3 + "'");
         } else {
             throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
         }
@@ -976,19 +981,20 @@ public class CommandFactory {
      * @throws AssertFailedException     the assert failed exception
      */
     private static void assertStringNotMatch(CommandExecutor executor, Method method, Object param1, Object param2, Object param3, int paramCount) throws InvocationTargetException, IllegalAccessException, AssertFailedException {
-        String value = (String) getAccessorValue(executor, method, param1, param2, paramCount);
+        Object value = getAccessorValue(executor, method, param1, param2, paramCount);
         if (value == null) {
             throw new AssertFailedException("Actual value is null.");
         }
+        String actual = getStringValue(value);
         if (paramCount == 0) {
-            if (value.matches(executor.normalizeText((String) param1)))
-                throw new AssertFailedException("Actual text '" + value + "' did match '" + param1 + "'");
+            if (Pattern.compile(executor.normalizeText((String) param1)).matcher(actual).find())
+                throw new AssertFailedException("Actual text '" + actual + "' did match '" + param1 + "'");
         } else if (paramCount == 1) {
-            if (value.matches(executor.normalizeText((String) param2)))
-                throw new AssertFailedException("Actual text '" + value + "' did match '" + param2 + "'");
+            if (Pattern.compile(executor.normalizeText((String) param2)).matcher(actual).find())
+                throw new AssertFailedException("Actual text '" + actual + "' did match '" + param2 + "'");
         } else if (paramCount == 2) {
-            if (value.matches(executor.normalizeText((String) param3)))
-                throw new AssertFailedException("Actual text '" + value + "' did match '" + param3 + "'");
+            if (Pattern.compile(executor.normalizeText((String) param3)).matcher(actual).find())
+                throw new AssertFailedException("Actual text '" + actual + "' did match '" + param3 + "'");
         } else {
             throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
         }
@@ -1015,5 +1021,20 @@ public class CommandFactory {
             return method.invoke(executor, param1, param2);
         }
         return null;
+    }
+
+    /**
+     * Returns the string representation of a value.
+     * If the given value is in string array format, join the element delimited by new line character.
+     *
+     * @param value the value object
+     * @return the string representation
+     */
+    private static String getStringValue(Object value) {
+        if (value instanceof String) {
+            return (String) value;
+        } else {
+            return StringUtils.join((String[]) value, "\n");
+        }
     }
 }
