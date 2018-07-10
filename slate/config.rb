@@ -14,10 +14,10 @@ set :markdown,
     renderer: NestingUniqueHeadCounter
 
 # Assets
-set :css_dir, 'stylesheets'
-set :js_dir, 'javascripts'
-set :images_dir, 'images'
-set :fonts_dir, 'fonts'
+set :css_dir, 'current/stylesheets'
+set :js_dir, 'current/javascripts'
+set :images_dir, 'current/images'
+set :fonts_dir, 'current/fonts'
 
 # Activate the syntax highlighter
 activate :syntax

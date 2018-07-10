@@ -6,7 +6,7 @@ allprojects {
 
 subprojects {
     group 'excelium'
-    version '1.0-SNAPSHOT'
+    version '0.1.0-SNAPSHOT'
 
     apply plugin: 'java'
 
@@ -35,4 +35,9 @@ task "doc-server"(type: Exec) {
 task "doc-build"(type: Exec, dependsOn: [':excelium-doclet:doc-generate']) {
     workingDir './slate'
     commandLine '/usr/local/bin/bundle', 'exec', 'middleman', 'build'
+}
+
+task "doc-publish"(type: Exec) {
+    workingDir './slate'
+    commandLine './deploy.sh'
 }
