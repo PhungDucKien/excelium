@@ -2028,16 +2028,16 @@ public class WebExcelium extends Excelium {
         runCommand("keyPress", parentLocator, locator, keySequence);
     }
 
+    public void keyUp(String keycode) throws Throwable {
+        runCommand("keyUp", keycode, null, null);
+    }
+
     public void keyUp(String locator, String keySequence) throws Throwable {
         runCommand("keyUp", locator, keySequence, null);
     }
 
     public void keyUp(String parentLocator, String locator, String keySequence) throws Throwable {
         runCommand("keyUp", parentLocator, locator, keySequence);
-    }
-
-    public void keyUp(String keycode) throws Throwable {
-        runCommand("keyUp", keycode, null, null);
     }
 
     public void metaKeyDown() throws Throwable {
@@ -2116,12 +2116,12 @@ public class WebExcelium extends Excelium {
         runCommand("open", url, null, null);
     }
 
-    public void openWindow(String url, String windowID) throws Throwable {
-        runCommand("openWindow", url, windowID, null);
-    }
-
     public void openWindow(String url) throws Throwable {
         runCommand("openWindow", url, null, null);
+    }
+
+    public void openWindow(String url, String windowID) throws Throwable {
+        runCommand("openWindow", url, windowID, null);
     }
 
     public void pause(String waitTime) throws Throwable {

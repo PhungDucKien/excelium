@@ -502,9 +502,9 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 496 | Key Press | keyPress | keycode |  | 
 497 | Key Press | keyPress | locator | keySequence | 
 498 | Key Press | keyPress | parentLocator | locator | keySequence
-499 | Key Up | keyUp | locator | keySequence | 
-500 | Key Up | keyUp | parentLocator | locator | keySequence
-501 | Key Up | keyUp | keycode |  | 
+499 | Key Up | keyUp | keycode |  | 
+500 | Key Up | keyUp | locator | keySequence | 
+501 | Key Up | keyUp | parentLocator | locator | keySequence
 502 | Meta Key Down | metaKeyDown |  |  | 
 503 | Meta Key Up | metaKeyUp |  |  | 
 504 | Mouse Down | mouseDown | locator |  | 
@@ -524,8 +524,8 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 518 | Mouse Up At | mouseUpAt | locator | coordString | 
 519 | Mouse Up At | mouseUpAt | parentLocator | locator | coordString
 520 | Open | open | url |  | 
-521 | Open Window | openWindow | url | windowID | 
-522 | Open Window | openWindow | url |  | 
+521 | Open Window | openWindow | url |  | 
+522 | Open Window | openWindow | url | windowID | 
 523 | Pause | pause | waitTime |  | 
 524 | Refresh | refresh |  |  | 
 525 | Remove All Selections | removeAllSelections | locator |  | 
@@ -5439,7 +5439,7 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
-filePath | a path or and URL pointing to the specified file.
+filePath | a path or a URL pointing to the specified file.
 
 ## Blur
 
@@ -7865,6 +7865,22 @@ locator | an element locator
 
 ## Key Down
 
+Simulates a user pressing a key (without releasing it yet) by sending a native operating system keystroke. This function uses the java.awt.Robot class to send a keystroke; this more accurately simulates typing a key on the keyboard. It does not honor settings from the shiftKeyDown, controlKeyDown, altKeyDown and metaKeyDown commands, and does not target any particular HTML element. To send a keystroke to a particular element, focus on the element first before running this command.
+
+### Usage
+
+`
+keyDown(keycode)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+keycode | an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
+
+## Key Down
+
 Simulates a user pressing a key (without releasing it yet).
 
 ### Usage
@@ -7884,22 +7900,6 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 keySequence | Either be a string( "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: " w", "\119".
-
-## Key Down
-
-Simulates a user pressing a key (without releasing it yet) by sending a native operating system keystroke. This function uses the java.awt.Robot class to send a keystroke; this more accurately simulates typing a key on the keyboard. It does not honor settings from the shiftKeyDown, controlKeyDown, altKeyDown and metaKeyDown commands, and does not target any particular HTML element. To send a keystroke to a particular element, focus on the element first before running this command.
-
-### Usage
-
-`
-keyDown(keycode)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-keycode | an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
 
 ## Key Press
 
@@ -7941,6 +7941,22 @@ keySequence | Either be a string( "\" followed by the numeric keycode  of the ke
 
 ## Key Up
 
+Simulates a user releasing a key by sending a native operating system keystroke. This function uses the java.awt.Robot class to send a keystroke; this more accurately simulates typing a key on the keyboard. It does not honor settings from the shiftKeyDown, controlKeyDown, altKeyDown and metaKeyDown commands, and does not target any particular HTML element. To send a keystroke to a particular element, focus on the element first before running this command.
+
+### Usage
+
+`
+keyUp(keycode)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+keycode | an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
+
+## Key Up
+
 Simulates a user releasing a key.
 
 ### Usage
@@ -7960,22 +7976,6 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 keySequence | Either be a string( "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: " w", "\119".
-
-## Key Up
-
-Simulates a user releasing a key by sending a native operating system keystroke. This function uses the java.awt.Robot class to send a keystroke; this more accurately simulates typing a key on the keyboard. It does not honor settings from the shiftKeyDown, controlKeyDown, altKeyDown and metaKeyDown commands, and does not target any particular HTML element. To send a keystroke to a particular element, focus on the element first before running this command.
-
-### Usage
-
-`
-keyUp(keycode)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-keycode | an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
 
 ## Meta Key Down
 
@@ -8198,6 +8198,22 @@ url | the URL to open; may be relative or absolute
 
 ## Open Window
 
+Opens a popup window. This accepts both relative and absolute URLs. <p> The "openWindow" command selects the window after the window is opened. (the "selectWindow" command is implicitly invoked)
+
+### Usage
+
+`
+openWindow(url)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+url | the URL to open; may be relative or absolute
+
+## Open Window
+
 Opens a popup window (if a window with that ID isn't already open). <p> The "openWindow" command selects the window after the window is opened. (the "selectWindow" command is implicitly invoked)
 
  <aside class="notice"> In some cases, Selenium will be unable to intercept a call to window.open (if the call occurs during or before the "onLoad" event, for example). In those cases, you can force Selenium to notice the open window's name by using the Selenium openWindow command, using an empty (blank) url, like this: openWindow("", "myFunnyWindow").</aside>
@@ -8214,22 +8230,6 @@ Parameter | Description
 --------- | -----------
 url | the URL to open, which can be blank
 windowID | the JavaScript window ID of the window to select
-
-## Open Window
-
-Opens a popup window. This accepts both relative and absolute URLs. <p> The "openWindow" command selects the window after the window is opened. (the "selectWindow" command is implicitly invoked)
-
-### Usage
-
-`
-openWindow(url)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-url | the URL to open; may be relative or absolute
 
 ## Pause
 

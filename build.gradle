@@ -26,3 +26,13 @@ subprojects {
         testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 }
+
+task "doc-server"(type: Exec) {
+    workingDir './slate'
+    commandLine '/usr/local/bin/bundle', 'exec', 'middleman', 'server'
+}
+
+task "doc-build"(type: Exec, dependsOn: [':excelium-doclet:doc-generate']) {
+    workingDir './slate'
+    commandLine '/usr/local/bin/bundle', 'exec', 'middleman', 'build'
+}
