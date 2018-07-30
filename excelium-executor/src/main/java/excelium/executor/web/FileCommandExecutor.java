@@ -26,9 +26,10 @@ package excelium.executor.web;
 
 import com.google.common.io.Resources;
 import com.thoughtworks.selenium.SeleniumException;
-import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
 import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
+import excelium.core.command.Action;
+import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.io.TemporaryFilesystem;
@@ -64,14 +65,11 @@ public class FileCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator an element locator
-     * @param fileLocator a URL pointing to the specified file. Before the file can be set in the
-     *        input field (fieldLocator), Selenium RC may need to transfer the file to the local
-     *        machine before attaching the file in a web page form. This is common in selenium grid
-     *        configurations where the RC server driving the browser is not the same machine that
-     *        started the test. Supported Browsers: Firefox ("*chrome") only.
+     * @param filePath a path or a URL pointing to the specified file.
      */
-    public void attachFile(String parentLocator, String locator, String value) {
-        File file = downloadFile(value);
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "filePath")
+    public void attachFile(String parentLocator, String locator, String filePath) {
+        File file = downloadFile(filePath);
 
         WebElement element = webDriver.findElement(parentLocator, locator);
         element.clear();
@@ -97,7 +95,11 @@ public class FileCommandExecutor extends CommandExecutor {
         try {
             return new URL(name);
         } catch (MalformedURLException e) {
-            throw new SeleniumException("Malformed URL: " + name);
+            try {
+                return project.getFilePath().resolve(name).toUri().toURL();
+            } catch (MalformedURLException e1) {
+                throw new SeleniumException("Malformed URL: " + name);
+            }
         }
     }
 }

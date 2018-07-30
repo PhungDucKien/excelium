@@ -59,8 +59,8 @@ public class ByParserTest {
         Assert.assertEquals("By.name: name", by.toString());
 
         by = ByParser.parseBy("css=css", webDriver);
-        Assert.assertTrue(by instanceof By.ByCssSelector);
-        Assert.assertEquals("By.cssSelector: css", by.toString());
+        Assert.assertTrue(by instanceof ByCss);
+        Assert.assertEquals("By.css: css", by.toString());
 
         by = ByParser.parseBy("link=link", webDriver);
         Assert.assertTrue(by instanceof By.ByLinkText);

@@ -57,8 +57,8 @@ public class TestAttachFile extends WebExecutorTestBase {
 
   @Test
   public void testAttachFile() throws Throwable {
-    selenium.open("/common/upload.html");
-//    selenium.attachFile("upload", testFile.toURI().toURL().toString());
+    selenium.open("/tests/html/upload.html");
+    selenium.attachFile("upload", testFile.toURI().toURL().toString());
     selenium.click("go");
     selenium.waitForPageToLoad("30000");
     selenium.selectFrame("upload_target");
@@ -67,9 +67,9 @@ public class TestAttachFile extends WebExecutorTestBase {
 
   @Test
   public void testAttachNonExistingFile() throws Throwable {
-    selenium.open("/common/upload.html");
+    selenium.open("/tests/html/upload.html");
     try {
-//      selenium.attachFile("upload", testFile.toURI().toURL().toString() + "-missing");
+      selenium.attachFile("upload", testFile.toURI().toURL().toString() + "-missing");
     } catch (SeleniumException expected) {
       assertTrue(expected.getCause() instanceof IOException);
       return;

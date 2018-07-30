@@ -101,7 +101,7 @@ public class MyDoclet extends Standard {
             commandItems.add(item);
         }
 
-        commandItems.sort(Comparator.comparing(CommandItem::getName));
+        commandItems.sort(Comparator.comparing(c -> c.getName() + " " + countParam(c)));
 
         Map<String, CommandDetail> commandDetailMap = new HashMap<>();
         for (Command command : commandMap.values()) {
@@ -125,7 +125,7 @@ public class MyDoclet extends Standard {
         }
 
         List<CommandDetail> commandDetails = new ArrayList<>(commandDetailMap.values());
-        commandDetails.sort(Comparator.comparing(CommandDetail::getName));
+        commandDetails.sort(Comparator.comparing(d -> d.getName() + " " + d.getParameterTags().size()));
 
         Map<String, Object> input = new HashMap<>();
         input.put("items", commandItems);
@@ -430,6 +430,20 @@ public class MyDoclet extends Standard {
                 count++;
             }
         }
+        return count;
+    }
+
+    /**
+     * Count the number of parameters of the command item.
+     *
+     * @param commandItem the command item
+     * @return the number of parameters
+     */
+    private static int countParam(CommandItem commandItem) {
+        int count = 0;
+        if (StringUtils.isNotBlank(commandItem.getParam1())) count++;
+        if (StringUtils.isNotBlank(commandItem.getParam2())) count++;
+        if (StringUtils.isNotBlank(commandItem.getParam3())) count++;
         return count;
     }
 

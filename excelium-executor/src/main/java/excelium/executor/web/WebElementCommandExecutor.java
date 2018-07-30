@@ -38,6 +38,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
 import java.util.function.BiFunction;
 
 /**
@@ -89,7 +90,9 @@ public class WebElementCommandExecutor extends CommandExecutor {
             element.sendKeys(valueToUse);
         } else {
             if (elementType != null && "file".equals(elementType.toLowerCase())) {
-                element.sendKeys(valueToUse);
+                File file = project.getFilePath().resolve(valueToUse).toFile();
+                element.clear();
+                element.sendKeys(file.getAbsolutePath());
             } else {
                 String type = "return (" + webDriver.getJavascriptLibrary().getSeleniumScript("type.js") + ").apply(null, arguments);";
                 webDriver.executeScript(type, element, valueToUse);
