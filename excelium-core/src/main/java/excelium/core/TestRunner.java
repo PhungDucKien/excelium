@@ -24,6 +24,7 @@
 
 package excelium.core;
 
+import excelium.common.WildcardUtil;
 import excelium.core.database.DatabaseService;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
@@ -54,7 +55,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * Executes all tests of a workbook test file
@@ -387,12 +387,18 @@ public class TestRunner {
      */
     private Item getItem(String itemName) {
         Map<String, PageSet> pageSets = test.getPageSets();
+        String baseUrl = test.getConfig() != null ? test.getConfig().getBaseUrl() : null;
+
         for (PageSet pageSet : pageSets.values()) {
             if (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment) {
                 String currentPath = webDriver.getCurrentUrl();
                 String currentTitle = webDriver.getTitle();
-                if ((StringUtils.isNotBlank(pageSet.getPath()) && !Pattern.compile(pageSet.getPath()).matcher(currentPath).matches()) ||
-                        (StringUtils.isNotBlank(pageSet.getTitle()) && !Pattern.compile(pageSet.getTitle()).matcher(currentTitle).matches())) {
+
+                String pageSetPath = baseUrl != null && !pageSet.getPath().contains("://") ?
+                        baseUrl + (!pageSet.getPath().startsWith("/") ? "/" : "") + pageSet.getPath() :
+                        pageSet.getPath();
+                if ((StringUtils.isNotBlank(pageSet.getPath()) && !WildcardUtil.isMatch(currentPath, pageSetPath)) ||
+                        (StringUtils.isNotBlank(pageSet.getTitle()) && !WildcardUtil.isMatch(currentTitle, pageSet.getTitle()))) {
                     continue;
                 }
             }

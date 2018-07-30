@@ -147,7 +147,7 @@ public class CommandExecutor {
      * @return the absolute URL
      */
     protected String getAbsoluteUrl(String url) {
-        return !url.contains("://") ?
+        return baseUrl != null && !url.contains("://") ?
                 baseUrl + (!url.startsWith("/") ? "/" : "") + url :
                 url;
     }
