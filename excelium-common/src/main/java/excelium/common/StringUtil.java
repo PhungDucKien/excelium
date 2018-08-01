@@ -127,4 +127,25 @@ public class StringUtil {
         }
         return firstSentence;
     }
+
+    /**
+     * Returns the name with the number of parameters. The name can be parameterized by declaring
+     * parameter names surrounded by square brackets.
+     *
+     * For instance, "Button [param1, param2]" takes param1 and param2 as its parameters.
+     *
+     * This method converts "Button [param1, param2]" into "Button [2]"
+     *
+     * @param name the name with parameters
+     * @return the name with the number of parameters
+     */
+    public static String getNameWithNumberOfParams(String name) {
+        Pattern p = Pattern.compile("\\b[^()]+\\[(.*)\\]$");
+        Matcher m = p.matcher(name);
+        if (m.find()) {
+            String params = m.group(1);
+            return name.substring(0, m.start(1)) + params.split(",").length + name.substring(m.end(1));
+        }
+        return name;
+    }
 }

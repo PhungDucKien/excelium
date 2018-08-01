@@ -34,9 +34,7 @@ package excelium.core;
 public interface Action {
 
     /**
-     * Performs this action on the given arguments.
-     *
-     * @param kwargs the arguments
+     * Performs this action.
      */
-    void perform(String kwargs) throws Exception;
+    void perform() throws Exception;
 }

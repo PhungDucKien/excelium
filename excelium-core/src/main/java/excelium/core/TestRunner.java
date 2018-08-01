@@ -24,6 +24,7 @@
 
 package excelium.core;
 
+import excelium.common.StringUtil;
 import excelium.common.WildcardUtil;
 import excelium.core.database.DatabaseService;
 import excelium.core.driver.ContextAwareWebDriver;
@@ -55,6 +56,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Executes all tests of a workbook test file
@@ -321,9 +324,7 @@ public class TestRunner {
 
         if (test.getActions() != null && !test.getActions().isEmpty()) {
             for (TestAction action : test.getActions().values()) {
-                excelium.addAction(action.getName(),  (input) -> {
-                    runTestFlow(action);
-                });
+                excelium.addAction(action.getName(),  () -> runTestFlow(action));
             }
         }
     }
@@ -375,6 +376,22 @@ public class TestRunner {
             } else {
                 itemValue = item.getValue();
             }
+
+            // Set parameters if any
+            Pattern p = Pattern.compile("\\b[^()]+\\[(.*)\\]$");
+            Matcher paramMatcher = p.matcher(item.getName());
+            Matcher valueMatcher = p.matcher(rawValue);
+            if (paramMatcher.find() && valueMatcher.find()) {
+                String[] params = paramMatcher.group(1).split(",");
+                String[] values = valueMatcher.group(1).split(",");
+
+                int i = 0;
+                for (String param : params) {
+                    String value = values[i];
+                    itemValue = itemValue.replace("${" + param + "}", value);
+                    i++;
+                }
+            }
         }
         return itemValue;
     }
@@ -387,23 +404,19 @@ public class TestRunner {
      */
     private Item getItem(String itemName) {
         Map<String, PageSet> pageSets = test.getPageSets();
-        String baseUrl = test.getConfig() != null ? test.getConfig().getBaseUrl() : null;
-
+        itemName = StringUtil.getNameWithNumberOfParams(itemName).trim();
         for (PageSet pageSet : pageSets.values()) {
             if (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment) {
                 String currentPath = webDriver.getCurrentUrl();
                 String currentTitle = webDriver.getTitle();
-
-                String pageSetPath = baseUrl != null && !pageSet.getPath().contains("://") ?
-                        baseUrl + (!pageSet.getPath().startsWith("/") ? "/" : "") + pageSet.getPath() :
-                        pageSet.getPath();
-                if ((StringUtils.isNotBlank(pageSet.getPath()) && !WildcardUtil.isMatch(currentPath, pageSetPath)) ||
+                if ((StringUtils.isNotBlank(pageSet.getPath()) && !WildcardUtil.isMatch(currentPath, getAbsoluteUrl(pageSet.getPath()))) ||
                         (StringUtils.isNotBlank(pageSet.getTitle()) && !WildcardUtil.isMatch(currentTitle, pageSet.getTitle()))) {
                     continue;
                 }
             }
             for (Item pageSetItem : pageSet.getItems().values()) {
-                if (pageSetItem.getName().equals(itemName)) {
+                String pageSetItemName = StringUtil.getNameWithNumberOfParams(pageSetItem.getName()).trim();
+                if (pageSetItemName.equals(itemName)) {
                     return pageSetItem;
                 }
             }
@@ -424,6 +437,20 @@ public class TestRunner {
             testWriter.writeResult(template, testSuite.getSheetName(), testStep, result);
             testStepResultMap.put(testStep, result);
         }
+    }
+
+    /**
+     * Get the absolute URL from the given URL.
+     *
+     * @param url the URL
+     * @return the absolute URL
+     */
+    private String getAbsoluteUrl(String url) {
+        String baseUrl = test.getConfig() != null ? test.getConfig().getBaseUrl() : null;
+
+        return baseUrl != null && !url.contains("://") ?
+                baseUrl + (!url.startsWith("/") ? "/" : "") + url :
+                url;
     }
 
     /**

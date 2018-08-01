@@ -24,6 +24,7 @@
 
 package excelium.core;
 
+import excelium.common.StringUtil;
 import excelium.core.command.CommandFactory;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.exception.ActionNotFoundException;
@@ -110,11 +111,40 @@ public class Excelium {
      * @throws Exception if an error occurred
      */
     void runAction(String actionName) throws Exception {
-        if (actions.containsKey(actionName)) {
-            actions.get(actionName).perform(null);
-        } else {
-            throw new ActionNotFoundException("Action not found: " + actionName);
+        String actionNameWithNumberOfParams = StringUtil.getNameWithNumberOfParams(actionName).trim();
+        for (String key : actions.keySet()) {
+            if (StringUtil.getNameWithNumberOfParams(key).trim().equals(actionNameWithNumberOfParams)) {
+                // Set parameters if any
+                Pattern p = Pattern.compile("\\b[^()]+\\[(.*)\\]$");
+                Matcher paramMatcher = p.matcher(key);
+                Matcher valueMatcher = p.matcher(actionName);
+                if (paramMatcher.find() && valueMatcher.find()) {
+                    String[] params = paramMatcher.group(1).split(",");
+                    String[] values = valueMatcher.group(1).split(",");
+
+                    Map<String, Object> before = new HashMap<>();
+
+                    int i = 0;
+                    for (String param : params) {
+                        String value = values[i];
+                        before.put(param, webDriver.getVariable(param));
+                        webDriver.setVariable(value, param);
+                        i++;
+                    }
+
+                    actions.get(key).perform();
+
+                    // Restores variable
+                    for (String param : before.keySet()) {
+                        webDriver.setVariable(before.get(param), param);
+                    }
+                } else {
+                    actions.get(key).perform();
+                }
+                return;
+            }
         }
+        throw new ActionNotFoundException("Action not found: " + actionName);
     }
 
     /**
