@@ -79,7 +79,7 @@ public class TestReporter {
         testState.setTest(test);
         resetTestCount(test);
 
-        printFixLine("Workbook: " + test.getWorkbookName(), 0);
+        printFixLine("Workbook: " + test.getWorkbookName(), 0, true, Ansi.Color.BLACK);
         printCounts();
     }
 
@@ -92,7 +92,7 @@ public class TestReporter {
         testState.setEnvironment(environment);
         resetEnvironmentCount(environment, testState.getTest());
 
-        printFixLine(testState.getEnvironment().toString(), 2);
+        printFixLine("Environment: " + testState.getEnvironment().getKey(), 2, true, Ansi.Color.BLACK);
         printCounts();
     }
 
@@ -104,7 +104,7 @@ public class TestReporter {
     public void startTestSuite(TestSuite testSuite) {
         resetSuiteCount(testSuite, testState.getEnvironment());
 
-        printFixLine("Sheet: " + testSuite.getSheetName(), 4);
+        printFixLine("Sheet: " + testSuite.getSheetName(), 4, true, Ansi.Color.BLACK);
         printCounts();
     }
 
@@ -119,7 +119,7 @@ public class TestReporter {
         }
         flowPadding += 2;
 
-        printFixLine(testFlow.getName(), 4 + flowPadding);
+        printFixLine(testFlow.getName(), 4 + flowPadding, false, Ansi.Color.BLACK);
         printCounts();
     }
 
@@ -139,7 +139,7 @@ public class TestReporter {
         printFixLine(rightPad(testStep.getCommand(), 30) +
                 (StringUtils.isNotBlank(testStep.getParam1()) ? "  " + rightPad(testStep.getParam1(), 30) : "") +
                 (StringUtils.isNotBlank(testStep.getParam2()) ? "  " + rightPad(testStep.getParam2(), 30) : "") +
-                (StringUtils.isNotBlank(testStep.getParam3()) ? "  " + rightPad(testStep.getParam3(), 30) : ""), 6 + flowPadding);
+                (StringUtils.isNotBlank(testStep.getParam3()) ? "  " + rightPad(testStep.getParam3(), 30) : ""), 6 + flowPadding, false, Ansi.Color.BLACK);
         printCounts();
     }
 
@@ -150,21 +150,24 @@ public class TestReporter {
      * @param result the result
      */
     public void endTestStep(StepResult result) {
-        increaseExecutedCount(1);
-        switch (result.getResult()) {
-            case ERROR:
-                increaseErrorCount(1);
-                break;
-            case FAIL:
-                increaseFailedCount(1);
-                break;
-            case SKIP:
-                increaseSkippedCount(1);
-                break;
+        if (flowPadding == 2) {
+            // Changes the counts for main steps
+            increaseExecutedCount(1);
+            switch (result.getResult()) {
+                case ERROR:
+                    increaseErrorCount(1);
+                    break;
+                case FAIL:
+                    increaseFailedCount(1);
+                    break;
+                case SKIP:
+                    increaseSkippedCount(1);
+                    break;
+            }
         }
         if (result.getResult() != Result.OK) {
             printFixLine(rightPad(result.getResult().name(), 5) +
-                    (StringUtils.isNotBlank(result.getMessage()) ? "  " + result.getMessage() : ""), 8 + flowPadding);
+                    (StringUtils.isNotBlank(result.getMessage()) ? "  " + result.getMessage() : ""), 8 + flowPadding, false, Ansi.Color.RED);
         }
         printCounts();
     }
@@ -361,9 +364,13 @@ public class TestReporter {
      * @param text    the text
      * @param padding the padding
      */
-    private void printFixLine(String text, int padding) {
+    private void printFixLine(String text, int padding, boolean bold, Ansi.Color color) {
         consoleStream.print(Ansi.ansi().cursorUp(1).eraseLine());
-        consoleStream.println(rightPad("", padding) + text);
+        if (bold) {
+            consoleStream.println(Ansi.ansi().bold().fg(color).a(rightPad("", padding) + text).reset());
+        } else {
+            consoleStream.println(Ansi.ansi().fg(color).a(rightPad("", padding) + text).reset());
+        }
         consoleStream.println();
     }
 
