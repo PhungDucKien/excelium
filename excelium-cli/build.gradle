@@ -37,6 +37,25 @@ task dist(type: Zip, dependsOn: ['cleanDist', 'build']) {
     baseName = 'excelium'
 }
 
+task cleanInstall(type: Copy) {
+    delete 'build/install/excelium/bin', 'build/install/excelium/lib'
+}
+
+task install(type: Copy, dependsOn: ['cleanInstall', 'build']) {
+    from('build/libs') {
+        include '*.jar'
+        into 'lib'
+    }
+    from(configurations.runtime) {
+        into 'lib'
+    }
+    from('build/scripts') {
+        into 'bin'
+    }
+
+    destinationDir = file('build/install/excelium')
+}
+
 startScripts {
     doLast {
         unixScript.text = unixScript.text.replace('APP_HOME_PLACEHOLDER', '\$APP_HOME')
