@@ -46,4 +46,7 @@ task "doc-publish"(type: Exec) {
     commandLine './deploy.sh'
 }
 
-afterReleaseBuild.dependsOn dist,"doc-publish"
+task build(dependsOn: [":excelium-cli:dist"]) {
+}
+
+afterReleaseBuild.dependsOn "doc-build","doc-publish"
