@@ -10,7 +10,6 @@ allprojects {
 
 subprojects {
     group 'excelium'
-    version '${version}'
 
     apply plugin: 'java'
 
