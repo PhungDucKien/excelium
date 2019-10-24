@@ -380,6 +380,14 @@ public class WebExcelium extends Excelium {
         runCommand("assertElementWidth", parentLocator, locator, text);
     }
 
+    public void assertEnabled(String locator) throws Throwable {
+        runCommand("assertEnabled", locator, null, null);
+    }
+
+    public void assertEnabled(String parentLocator, String locator) throws Throwable {
+        runCommand("assertEnabled", parentLocator, locator, null);
+    }
+
     public void assertEval(String expression, String text) throws Throwable {
         runCommand("assertEval", expression, text, null);
     }
@@ -410,6 +418,18 @@ public class WebExcelium extends Excelium {
 
     public void assertExpressionNotMatch(String expression, String text) throws Throwable {
         runCommand("assertExpressionNotMatch", expression, text, null);
+    }
+
+    public void assertFileContainLine(String filePattern, String charset, String text) throws Throwable {
+        runCommand("assertFileContainLine", filePattern, charset, text);
+    }
+
+    public void assertFileDownloaded(String filePattern) throws Throwable {
+        runCommand("assertFileDownloaded", filePattern, null, null);
+    }
+
+    public void assertFileFirstLine(String filePattern, String charset, String text) throws Throwable {
+        runCommand("assertFileFirstLine", filePattern, charset, text);
     }
 
     public void assertFontFamily(String locator, String text) throws Throwable {
@@ -704,6 +724,14 @@ public class WebExcelium extends Excelium {
         runCommand("assertNotElementWidth", parentLocator, locator, text);
     }
 
+    public void assertNotEnabled(String locator) throws Throwable {
+        runCommand("assertNotEnabled", locator, null, null);
+    }
+
+    public void assertNotEnabled(String parentLocator, String locator) throws Throwable {
+        runCommand("assertNotEnabled", parentLocator, locator, null);
+    }
+
     public void assertNotEval(String expression, String text) throws Throwable {
         runCommand("assertNotEval", expression, text, null);
     }
@@ -718,6 +746,10 @@ public class WebExcelium extends Excelium {
 
     public void assertNotExpression(String expression, String text) throws Throwable {
         runCommand("assertNotExpression", expression, text, null);
+    }
+
+    public void assertNotFileDownloaded(String filePattern) throws Throwable {
+        runCommand("assertNotFileDownloaded", filePattern, null, null);
     }
 
     public void assertNotFontFamily(String locator, String text) throws Throwable {
@@ -766,6 +798,14 @@ public class WebExcelium extends Excelium {
 
     public void assertNotPrompt(String text) throws Throwable {
         runCommand("assertNotPrompt", text, null, null);
+    }
+
+    public void assertNotQR(String locator, String text) throws Throwable {
+        runCommand("assertNotQR", locator, text, null);
+    }
+
+    public void assertNotQR(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertNotQR", parentLocator, locator, text);
     }
 
     public void assertNotSelectOptions(String locator, String text) throws Throwable {
@@ -942,6 +982,30 @@ public class WebExcelium extends Excelium {
 
     public void assertPromptPresent() throws Throwable {
         runCommand("assertPromptPresent", null, null, null);
+    }
+
+    public void assertQR(String locator, String text) throws Throwable {
+        runCommand("assertQR", locator, text, null);
+    }
+
+    public void assertQR(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertQR", parentLocator, locator, text);
+    }
+
+    public void assertQRMatch(String locator, String text) throws Throwable {
+        runCommand("assertQRMatch", locator, text, null);
+    }
+
+    public void assertQRMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertQRMatch", parentLocator, locator, text);
+    }
+
+    public void assertQRNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertQRNotMatch", locator, text, null);
+    }
+
+    public void assertQRNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertQRNotMatch", parentLocator, locator, text);
     }
 
     public void assertRowCount(String sql, String count) throws Throwable {
@@ -1380,6 +1444,14 @@ public class WebExcelium extends Excelium {
         runCommand("blur", parentLocator, locator, null);
     }
 
+    public void captureElementScreenshot(String locator) throws Throwable {
+        runCommand("captureElementScreenshot", locator, null, null);
+    }
+
+    public void captureElementScreenshot(String parentLocator, String locator) throws Throwable {
+        runCommand("captureElementScreenshot", parentLocator, locator, null);
+    }
+
     public void check(String locator) throws Throwable {
         runCommand("check", locator, null, null);
     }
@@ -1466,6 +1538,10 @@ public class WebExcelium extends Excelium {
 
     public void deleteCookie(String name) throws Throwable {
         runCommand("deleteCookie", name, null, null);
+    }
+
+    public void deleteDownloadedFile(String filePattern) throws Throwable {
+        runCommand("deleteDownloadedFile", filePattern, null, null);
     }
 
     public void deselectPopUp() throws Throwable {
@@ -1628,6 +1704,14 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfElementPresent", action, parentLocator, locator);
     }
 
+    public void executeIfEnabled(String action, String locator) throws Throwable {
+        runCommand("executeIfEnabled", action, locator, null);
+    }
+
+    public void executeIfEnabled(String action, String parentLocator, String locator) throws Throwable {
+        runCommand("executeIfEnabled", action, parentLocator, locator);
+    }
+
     public void executeIfEval(String action, String expression, String text) throws Throwable {
         runCommand("executeIfEval", action, expression, text);
     }
@@ -1658,6 +1742,10 @@ public class WebExcelium extends Excelium {
 
     public void executeIfExpressionNotMatch(String action, String expression, String text) throws Throwable {
         runCommand("executeIfExpressionNotMatch", action, expression, text);
+    }
+
+    public void executeIfFileDownloaded(String action, String filePattern) throws Throwable {
+        runCommand("executeIfFileDownloaded", action, filePattern, null);
     }
 
     public void executeIfHtmlSource(String action, String text) throws Throwable {
@@ -1728,6 +1816,14 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfNotEditable", action, parentLocator, locator);
     }
 
+    public void executeIfNotEnabled(String action, String locator) throws Throwable {
+        runCommand("executeIfNotEnabled", action, locator, null);
+    }
+
+    public void executeIfNotEnabled(String action, String parentLocator, String locator) throws Throwable {
+        runCommand("executeIfNotEnabled", action, parentLocator, locator);
+    }
+
     public void executeIfNotEval(String action, String expression, String text) throws Throwable {
         runCommand("executeIfNotEval", action, expression, text);
     }
@@ -1744,6 +1840,10 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfNotExpression", action, expression, text);
     }
 
+    public void executeIfNotFileDownloaded(String action, String filePattern) throws Throwable {
+        runCommand("executeIfNotFileDownloaded", action, filePattern, null);
+    }
+
     public void executeIfNotHtmlSource(String action, String text) throws Throwable {
         runCommand("executeIfNotHtmlSource", action, text, null);
     }
@@ -1754,6 +1854,10 @@ public class WebExcelium extends Excelium {
 
     public void executeIfNotPrompt(String action, String text) throws Throwable {
         runCommand("executeIfNotPrompt", action, text, null);
+    }
+
+    public void executeIfNotQR(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfNotQR", action, locator, text);
     }
 
     public void executeIfNotSelectedId(String action, String locator, String text) throws Throwable {
@@ -1838,6 +1942,18 @@ public class WebExcelium extends Excelium {
 
     public void executeIfPromptPresent(String action) throws Throwable {
         runCommand("executeIfPromptPresent", action, null, null);
+    }
+
+    public void executeIfQR(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfQR", action, locator, text);
+    }
+
+    public void executeIfQRMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfQRMatch", action, locator, text);
+    }
+
+    public void executeIfQRNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfQRNotMatch", action, locator, text);
     }
 
     public void executeIfSelectedId(String action, String locator, String text) throws Throwable {
@@ -2360,6 +2476,14 @@ public class WebExcelium extends Excelium {
         runCommand("storePush", text, variable, null);
     }
 
+    public void storeQR(String locator, String variable) throws Throwable {
+        runCommand("storeQR", locator, variable, null);
+    }
+
+    public void storeQR(String parentLocator, String locator, String variable) throws Throwable {
+        runCommand("storeQR", parentLocator, locator, variable);
+    }
+
     public void storeSelectOptions(String locator, String variable) throws Throwable {
         runCommand("storeSelectOptions", locator, variable, null);
     }
@@ -2788,6 +2912,14 @@ public class WebExcelium extends Excelium {
         runCommand("verifyElementWidth", parentLocator, locator, text);
     }
 
+    public void verifyEnabled(String locator) throws Throwable {
+        runCommand("verifyEnabled", locator, null, null);
+    }
+
+    public void verifyEnabled(String parentLocator, String locator) throws Throwable {
+        runCommand("verifyEnabled", parentLocator, locator, null);
+    }
+
     public void verifyEval(String expression, String text) throws Throwable {
         runCommand("verifyEval", expression, text, null);
     }
@@ -2818,6 +2950,18 @@ public class WebExcelium extends Excelium {
 
     public void verifyExpressionNotMatch(String expression, String text) throws Throwable {
         runCommand("verifyExpressionNotMatch", expression, text, null);
+    }
+
+    public void verifyFileContainLine(String filePattern, String charset, String text) throws Throwable {
+        runCommand("verifyFileContainLine", filePattern, charset, text);
+    }
+
+    public void verifyFileDownloaded(String filePattern) throws Throwable {
+        runCommand("verifyFileDownloaded", filePattern, null, null);
+    }
+
+    public void verifyFileFirstLine(String filePattern, String charset, String text) throws Throwable {
+        runCommand("verifyFileFirstLine", filePattern, charset, text);
     }
 
     public void verifyFontFamily(String locator, String text) throws Throwable {
@@ -3112,6 +3256,14 @@ public class WebExcelium extends Excelium {
         runCommand("verifyNotElementWidth", parentLocator, locator, text);
     }
 
+    public void verifyNotEnabled(String locator) throws Throwable {
+        runCommand("verifyNotEnabled", locator, null, null);
+    }
+
+    public void verifyNotEnabled(String parentLocator, String locator) throws Throwable {
+        runCommand("verifyNotEnabled", parentLocator, locator, null);
+    }
+
     public void verifyNotEval(String expression, String text) throws Throwable {
         runCommand("verifyNotEval", expression, text, null);
     }
@@ -3126,6 +3278,10 @@ public class WebExcelium extends Excelium {
 
     public void verifyNotExpression(String expression, String text) throws Throwable {
         runCommand("verifyNotExpression", expression, text, null);
+    }
+
+    public void verifyNotFileDownloaded(String filePattern) throws Throwable {
+        runCommand("verifyNotFileDownloaded", filePattern, null, null);
     }
 
     public void verifyNotFontFamily(String locator, String text) throws Throwable {
@@ -3174,6 +3330,14 @@ public class WebExcelium extends Excelium {
 
     public void verifyNotPrompt(String text) throws Throwable {
         runCommand("verifyNotPrompt", text, null, null);
+    }
+
+    public void verifyNotQR(String locator, String text) throws Throwable {
+        runCommand("verifyNotQR", locator, text, null);
+    }
+
+    public void verifyNotQR(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyNotQR", parentLocator, locator, text);
     }
 
     public void verifyNotSelectOptions(String locator, String text) throws Throwable {
@@ -3350,6 +3514,30 @@ public class WebExcelium extends Excelium {
 
     public void verifyPromptPresent() throws Throwable {
         runCommand("verifyPromptPresent", null, null, null);
+    }
+
+    public void verifyQR(String locator, String text) throws Throwable {
+        runCommand("verifyQR", locator, text, null);
+    }
+
+    public void verifyQR(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyQR", parentLocator, locator, text);
+    }
+
+    public void verifyQRMatch(String locator, String text) throws Throwable {
+        runCommand("verifyQRMatch", locator, text, null);
+    }
+
+    public void verifyQRMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyQRMatch", parentLocator, locator, text);
+    }
+
+    public void verifyQRNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyQRNotMatch", locator, text, null);
+    }
+
+    public void verifyQRNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyQRNotMatch", parentLocator, locator, text);
     }
 
     public void verifyRowCount(String sql, String count) throws Throwable {
@@ -3928,6 +4116,14 @@ public class WebExcelium extends Excelium {
         runCommand("waitForElementPresent", parentLocator, locator, null);
     }
 
+    public void waitForEnabled(String locator) throws Throwable {
+        runCommand("waitForEnabled", locator, null, null);
+    }
+
+    public void waitForEnabled(String parentLocator, String locator) throws Throwable {
+        runCommand("waitForEnabled", parentLocator, locator, null);
+    }
+
     public void waitForEval(String expression, String text) throws Throwable {
         runCommand("waitForEval", expression, text, null);
     }
@@ -3958,6 +4154,10 @@ public class WebExcelium extends Excelium {
 
     public void waitForExpressionNotMatch(String expression, String text) throws Throwable {
         runCommand("waitForExpressionNotMatch", expression, text, null);
+    }
+
+    public void waitForFileDownloaded(String filePattern) throws Throwable {
+        runCommand("waitForFileDownloaded", filePattern, null, null);
     }
 
     public void waitForHtmlSource(String text) throws Throwable {
@@ -4024,6 +4224,14 @@ public class WebExcelium extends Excelium {
         runCommand("waitForNotEditable", parentLocator, locator, null);
     }
 
+    public void waitForNotEnabled(String locator) throws Throwable {
+        runCommand("waitForNotEnabled", locator, null, null);
+    }
+
+    public void waitForNotEnabled(String parentLocator, String locator) throws Throwable {
+        runCommand("waitForNotEnabled", parentLocator, locator, null);
+    }
+
     public void waitForNotEval(String expression, String text) throws Throwable {
         runCommand("waitForNotEval", expression, text, null);
     }
@@ -4040,6 +4248,10 @@ public class WebExcelium extends Excelium {
         runCommand("waitForNotExpression", expression, text, null);
     }
 
+    public void waitForNotFileDownloaded(String filePattern) throws Throwable {
+        runCommand("waitForNotFileDownloaded", filePattern, null, null);
+    }
+
     public void waitForNotHtmlSource(String text) throws Throwable {
         runCommand("waitForNotHtmlSource", text, null, null);
     }
@@ -4050,6 +4262,14 @@ public class WebExcelium extends Excelium {
 
     public void waitForNotPrompt(String text) throws Throwable {
         runCommand("waitForNotPrompt", text, null, null);
+    }
+
+    public void waitForNotQR(String locator, String text) throws Throwable {
+        runCommand("waitForNotQR", locator, text, null);
+    }
+
+    public void waitForNotQR(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForNotQR", parentLocator, locator, text);
     }
 
     public void waitForNotSelectedId(String locator, String text) throws Throwable {
@@ -4166,6 +4386,30 @@ public class WebExcelium extends Excelium {
 
     public void waitForPromptPresent() throws Throwable {
         runCommand("waitForPromptPresent", null, null, null);
+    }
+
+    public void waitForQR(String locator, String text) throws Throwable {
+        runCommand("waitForQR", locator, text, null);
+    }
+
+    public void waitForQR(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForQR", parentLocator, locator, text);
+    }
+
+    public void waitForQRMatch(String locator, String text) throws Throwable {
+        runCommand("waitForQRMatch", locator, text, null);
+    }
+
+    public void waitForQRMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForQRMatch", parentLocator, locator, text);
+    }
+
+    public void waitForQRNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForQRNotMatch", locator, text, null);
+    }
+
+    public void waitForQRNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForQRNotMatch", parentLocator, locator, text);
     }
 
     public void waitForSelectedId(String locator, String text) throws Throwable {

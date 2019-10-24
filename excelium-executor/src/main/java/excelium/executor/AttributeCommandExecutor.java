@@ -25,6 +25,9 @@
 package excelium.executor;
 
 import com.google.common.base.Joiner;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import com.thoughtworks.selenium.SeleniumException;
 import excelium.core.command.Accessor;
 import excelium.core.driver.ContextAwareWebDriver;
@@ -32,6 +35,7 @@ import excelium.core.Excelium;
 import excelium.core.CommandExecutor;
 import excelium.executor.web.support.OptionSelector;
 import excelium.model.project.Project;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -39,6 +43,11 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -243,6 +252,19 @@ public class AttributeCommandExecutor extends CommandExecutor {
         }
 
         return element.isEnabled() && acceptableTagName && "".equals(readonly);
+    }
+
+    /**
+     * Gets whether an element is enabled. Fails if the specified element
+     * doesn't exist.
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @return true if the element is enabled, false otherwise
+     */
+    @Accessor(param1 = "parentLocator", param2 = "locator")
+    public boolean isEnabled(String parentLocator, String locator) {
+        return webDriver.findElement(parentLocator, locator).isEnabled();
     }
 
     /**
@@ -707,5 +729,44 @@ public class AttributeCommandExecutor extends CommandExecutor {
                                 "}",
                                 "throw Error('Couldn\\\'t detect cursor position on this browser!');"),
                 element);
+    }
+
+    /**
+     * Gets the QR code's value from the image tag source encoded in Base64 format.
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @return the QR code's value
+     */
+    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    public String getQR(String parentLocator, String locator) throws IOException, NotFoundException {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+
+        String qrCode = element.getAttribute("src");
+        if (qrCode.startsWith("data:")) {
+            qrCode = qrCode.split(",")[1];
+            return decodeQRCode(qrCode);
+        } else {
+            return decodeQRCode(new URL(qrCode));
+        }
+    }
+
+    private static String decodeQRCode(URL qrCodeImage) throws IOException, NotFoundException {
+        BufferedImage bufferedImage = ImageIO.read(qrCodeImage);
+        LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+
+        Result result = new MultiFormatReader().decode(bitmap);
+        return result.getText();
+    }
+
+    private static String decodeQRCode(String base64QRCode) throws IOException, NotFoundException {
+        byte[] decoded = Base64.decodeBase64(base64QRCode);
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(decoded));
+        LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+
+        Result result = new MultiFormatReader().decode(bitmap);
+        return result.getText();
     }
 }

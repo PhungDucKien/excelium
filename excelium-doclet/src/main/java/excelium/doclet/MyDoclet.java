@@ -168,7 +168,7 @@ public class MyDoclet extends Standard {
      */
     private static Map<String, Command> getCommandMap(boolean isWeb) {
         try {
-            return CommandFactory.createCommandMap(new ContextAwareWebDriver(new StubWebDriver()), null, null, null, isWeb);
+            return CommandFactory.createCommandMap(new ContextAwareWebDriver(new StubWebDriver(), null), null, null, null, isWeb);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

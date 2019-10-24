@@ -24,6 +24,7 @@
 
 package excelium.core.driver;
 
+import excelium.core.screenshot.ScreenshotService;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
@@ -90,10 +91,11 @@ public class DriverFactory {
      *
      * @param environment the environment
      * @param project     the project
+     * @param screenshotService     the screenshot service
      * @return the context aware web driver
      * @throws IOException the io exception
      */
-    public static ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+    public static ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
         RemoteWebDriver webDriver = null;
         if (environment instanceof PcEnvironment) {
             webDriver = createPcDriver((PcEnvironment) environment, project);
@@ -101,7 +103,7 @@ public class DriverFactory {
             webDriver = createMobileDriver((MobileEnvironment) environment, project);
         }
         webDriver.manage().timeouts().implicitlyWait(WEBDRIVER_DEFAULT_IMPLICIT_WAIT, TimeUnit.MILLISECONDS);
-        return new ContextAwareWebDriver(webDriver);
+        return new ContextAwareWebDriver(webDriver, screenshotService);
     }
 
     /**

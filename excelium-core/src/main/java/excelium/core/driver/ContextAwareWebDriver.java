@@ -27,6 +27,7 @@ package excelium.core.driver;
 import com.thoughtworks.selenium.webdriven.JavascriptLibrary;
 import com.thoughtworks.selenium.webdriven.commands.KeyState;
 import excelium.core.context.TestContext;
+import excelium.core.screenshot.ScreenshotService;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -78,15 +79,22 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
     private final KeyState keyState;
 
     /**
+     * Screenshot service
+     */
+    private final ScreenshotService screenshotService;
+
+    /**
      * Instantiates a new ContextAwareWebDriver.
      *
      * @param webDriver the web driver
+     * @param screenshotService the screenshot service
      */
-    public ContextAwareWebDriver(RemoteWebDriver webDriver) {
+    public ContextAwareWebDriver(RemoteWebDriver webDriver, ScreenshotService screenshotService) {
         this.webDriver = webDriver;
         this.testContext = new TestContext();
         this.javascriptLibrary = new JavascriptLibrary();
         this.keyState = new KeyState();
+        this.screenshotService = screenshotService;
     }
 
     /**
@@ -358,6 +366,15 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
      */
     public void setShiftKeyDown(boolean shiftKeyDown) {
         keyState.shiftKeyDown = shiftKeyDown;
+    }
+
+    /**
+     * Gets screenshot service.
+     *
+     * @return the screenshot service
+     */
+    public ScreenshotService getScreenshotService() {
+        return screenshotService;
     }
 
     @Override

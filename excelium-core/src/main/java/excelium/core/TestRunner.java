@@ -191,7 +191,7 @@ public class TestRunner {
     private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         setEnvironment(environment);
         try {
-            webDriver = DriverFactory.createDriver(environment, project);
+            webDriver = DriverFactory.createDriver(environment, project, screenshotService);
             if (test.getTestSuites() != null) {
                 initializeExcelium(webDriver);
                 for (TestSuite testSuite : test.getTestSuites().values()) {

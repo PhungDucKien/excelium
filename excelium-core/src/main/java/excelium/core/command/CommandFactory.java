@@ -78,7 +78,7 @@ public class CommandFactory {
      */
     public static Map<String, Command> createCommandMap(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean forWeb) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<CommandExecutor> commandExecutors = getCommandExecutors(webDriver, baseUrl, excelium, project, forWeb);
-        return createCommandMap(commandExecutors);
+        return createCommandMap(commandExecutors, forWeb);
     }
 
     /**
@@ -87,10 +87,10 @@ public class CommandFactory {
      * @param commandExecutors the list of command executors
      * @return the map of commands
      */
-    public static Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+    public static Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
         Map<String, Command> commandMap = new LinkedHashMap<>();
         for (CommandExecutor executor : commandExecutors) {
-            List<Command> commands = createCommandList(executor);
+            List<Command> commands = createCommandList(executor, forWeb);
             for (Command command : commands) {
                 commandMap.put(command.getMethod() + "(" + countParam(command) + ")", command);
             }
@@ -153,21 +153,21 @@ public class CommandFactory {
      * @param executor the command executor
      * @return the list of commands
      */
-    private static List<Command> createCommandList(CommandExecutor executor) {
+    private static List<Command> createCommandList(CommandExecutor executor, boolean forWeb) {
         Map<Method, Action> actions = new LinkedHashMap<>();
         Map<Method, Accessor> accessors = new LinkedHashMap<>();
         for (Method method : executor.getClass().getDeclaredMethods()) {
             if (Modifier.isPublic(method.getModifiers())) {
                 Action action = method.getAnnotation(Action.class);
                 if (action != null) {
-                    if (isCommandAvailable(action, executor.getWebDriver())) {
+                    if (isCommandAvailable(action, executor.getWebDriver(), forWeb)) {
                         actions.put(method, action);
                     }
                 }
 
                 Accessor accessor = method.getAnnotation(Accessor.class);
                 if (accessor != null) {
-                    if (isCommandAvailable(accessor, executor.getWebDriver())) {
+                    if (isCommandAvailable(accessor, executor.getWebDriver(), forWeb)) {
                         accessors.put(method, accessor);
                     }
                 }
@@ -574,7 +574,7 @@ public class CommandFactory {
      * @param webDriver  the context aware web driver
      * @return true if the command is available, otherwise, false
      */
-    private static boolean isCommandAvailable(Object annotation, ContextAwareWebDriver webDriver) {
+    private static boolean isCommandAvailable(Object annotation, ContextAwareWebDriver webDriver, boolean forWeb) {
         boolean webOnly = false;
         boolean androidOnly = false;
         boolean iosOnly = false;
@@ -590,7 +590,7 @@ public class CommandFactory {
             iosOnly = accessor.iosOnly();
         }
         if (webOnly) {
-            return webDriver.isWeb();
+            return webDriver.isWeb() && forWeb;
         }
         if (androidOnly) {
             return webDriver.isAndroid();

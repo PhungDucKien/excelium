@@ -26,10 +26,13 @@ package excelium.executor.web;
 
 import com.google.common.io.Resources;
 import com.thoughtworks.selenium.SeleniumException;
+import excelium.common.WildcardUtil;
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
+import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
+import excelium.core.exception.AssertFailedException;
 import excelium.model.project.Project;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.io.TemporaryFilesystem;
@@ -39,6 +42,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * File related command executor.
@@ -64,8 +72,8 @@ public class FileCommandExecutor extends CommandExecutor {
      * Sets a file input (upload) field to the file listed in fileLocator
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator
-     * @param filePath a path or a URL pointing to the specified file.
+     * @param locator       an element locator
+     * @param filePath      a path or a URL pointing to the specified file.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "filePath")
     public void attachFile(String parentLocator, String locator, String filePath) {
@@ -74,6 +82,85 @@ public class FileCommandExecutor extends CommandExecutor {
         WebElement element = webDriver.findElement(parentLocator, locator);
         element.clear();
         element.sendKeys(file.getAbsolutePath());
+    }
+
+    /**
+     * Determines whether a file is downloaded by browser.
+     *
+     * @param filePattern the file name pattern
+     * @return true if a file is downloaded, false otherwise
+     */
+    @Accessor(param1 = "filePattern")
+    public boolean isFileDownloaded(String filePattern) throws IOException {
+        long matchCount = Files.walk(project.getDownloadPath())
+                .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
+                .count();
+        return matchCount > 0;
+    }
+
+    /**
+     * Verifies the first line of the file equals to the given text.
+     * This method is useful for testing CSV file's header.
+     *
+     * @param filePattern the file name pattern
+     * @param charset     the charset
+     * @param text        the text to compare
+     * @throws AssertFailedException if the first line of the file doesn't equal to the given text
+     */
+    @Action(param1 = "filePattern", param2 = "charset", param3 = "text")
+    public void verifyFileFirstLine(String filePattern, String charset, String text) throws Exception {
+        Optional<Path> filePath = Files.walk(project.getDownloadPath())
+                .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
+                .findFirst();
+
+        if (filePath.isPresent()) {
+            Stream<String> lines = Files.lines(filePath.get(), Charset.forName(charset));
+            String header = lines.findFirst().get().replace("\uFEFF", "");
+            if (!header.equals(text)) {
+                throw new AssertFailedException("Actual header '" + header + "' did not match '" + text + "'");
+            }
+        }
+    }
+
+    /**
+     * Verifies the contents of the file contains the given text.
+     * This method is useful for testing CSV file's contents.
+     *
+     * @param filePattern the file name pattern
+     * @param charset     the charset
+     * @param text        the text to compare
+     * @throws AssertFailedException if the contents of the file doesn't contain the given text
+     */
+    @Action(param1 = "filePattern", param2 = "charset", param3 = "text")
+    public void verifyFileContainLine(String filePattern, String charset, String text) throws Exception {
+        Optional<Path> filePath = Files.walk(project.getDownloadPath())
+                .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
+                .findFirst();
+
+        if (filePath.isPresent()) {
+            Stream<String> lines = Files.lines(filePath.get(), Charset.forName(charset));
+            if (lines.noneMatch(l -> l.replace("\uFEFF", "").equals(text))) {
+                throw new AssertFailedException("Actual file did not contain '" + text + "'");
+            }
+        }
+    }
+
+    /**
+     * Deletes downloaded files.
+     *
+     * @param filePattern the file name pattern
+     */
+    @Action(param1 = "filePattern")
+    public void deleteDownloadedFile(String filePattern) throws Exception {
+        Files.walk(project.getDownloadPath())
+                .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
+                .forEach(path -> {
+                    try {
+                        Files.deleteIfExists(path);
+                    } catch (IOException e) {
+                        throw new SeleniumException("Can't delete downloaded file: " + path.getFileName(), e);
+                    }
+                });
     }
 
     private File downloadFile(String name) {
