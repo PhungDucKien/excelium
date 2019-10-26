@@ -66,7 +66,7 @@ public class WebExecutorTestBase {
 
         Project project = new Project();
         project.setDownloadPath(Paths.get("download"));
-        webDriver = DriverFactory.createDriver(environment, project);
+        webDriver = DriverFactory.createDriver(environment, project, null);
         selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), null);
     }
 
