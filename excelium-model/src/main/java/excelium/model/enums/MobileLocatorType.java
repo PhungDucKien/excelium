@@ -52,10 +52,6 @@ public enum MobileLocatorType {
      */
     XPATH,
     /**
-     * Ios uiautomation mobile locator type.
-     */
-    IOS_UIAUTOMATION,
-    /**
      * Android uiautomator mobile locator type.
      */
     ANDROID_UIAUTOMATOR,

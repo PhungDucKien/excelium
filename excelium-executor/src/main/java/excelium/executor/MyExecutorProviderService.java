@@ -26,7 +26,7 @@ package excelium.executor;
 
 import excelium.core.CommandExecutor;
 import excelium.core.service.ExecutorProviderService;
-import excelium.executor.mobile.ActivityCommandExecutor;
+import excelium.executor.mobile.*;
 import excelium.executor.web.*;
 
 import java.util.ArrayList;
@@ -73,7 +73,12 @@ public class MyExecutorProviderService implements ExecutorProviderService {
     public List<Class<? extends CommandExecutor>> getMobileExecutorClasses() {
         return new ArrayList<>(Arrays.asList(
                 // Mobile
-                ActivityCommandExecutor.class,
+                SessionCommandExecutor.class,
+                IOSAlertCommandExecutor.class,
+                DeviceCommandExecutor.class,
+                MobilePageCommandExecutor.class,
+                MobileElementCommandExecutor.class,
+                InteractionCommandExecutor.class,
 
                 // Common
                 NavigateCommandExecutor.class,

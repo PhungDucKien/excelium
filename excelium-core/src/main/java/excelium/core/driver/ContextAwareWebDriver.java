@@ -86,7 +86,7 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
     /**
      * Instantiates a new ContextAwareWebDriver.
      *
-     * @param webDriver the web driver
+     * @param webDriver         the web driver
      * @param screenshotService the screenshot service
      */
     public ContextAwareWebDriver(RemoteWebDriver webDriver, ScreenshotService screenshotService) {
@@ -95,6 +95,22 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
         this.javascriptLibrary = new JavascriptLibrary();
         this.keyState = new KeyState();
         this.screenshotService = screenshotService;
+    }
+
+    public RemoteWebDriver getWebDriver() {
+        return webDriver;
+    }
+
+    public AppiumDriver getAppiumDriver() {
+        return (AppiumDriver) webDriver;
+    }
+
+    public AndroidDriver getAndroidDriver() {
+        return (AndroidDriver) webDriver;
+    }
+
+    public IOSDriver getIOSDriver() {
+        return (IOSDriver) webDriver;
     }
 
     /**

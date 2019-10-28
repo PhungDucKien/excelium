@@ -24,10 +24,10 @@
 
 package excelium.executor;
 
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 
 /**
@@ -61,7 +61,7 @@ public class NavigateCommandExecutor extends CommandExecutor {
     /**
      * Simulates the user clicking the "back" button on their browser.
      */
-    @Action
+    @Action(webOnly = true)
     public void goBack() {
         webDriver.navigate().back();
     }

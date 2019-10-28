@@ -122,8 +122,6 @@ public class ByParser {
                 return MobileBy.xpath(lc.getValue());
             case ANDROID_UIAUTOMATOR:
                 return MobileBy.AndroidUIAutomator(lc.getValue());
-            case IOS_UIAUTOMATION:
-                return MobileBy.IosUIAutomation(lc.getValue());
             case VARIABLE:
                 return new ByVariable(lc.getValue());
             default:
