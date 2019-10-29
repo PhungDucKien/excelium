@@ -64,7 +64,7 @@ public class CommandFactoryTest {
         List<CommandExecutor> commandExecutors = new ArrayList<>();
         commandExecutors.add(new MyActionCommandExecutor(null, null, excelium, null));
 
-        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors);
+        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors, true);
 
         Assert.assertEquals(9, commandMap.size());
         Assert.assertEquals("locator", commandMap.get("click(1)").getParam1());
@@ -133,7 +133,7 @@ public class CommandFactoryTest {
 
     @Test
     public void testCreateAccessorCommandMap() throws Exception {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(null, null);
         List<CommandExecutor> commandExecutors = new ArrayList<>();
         CommandExecutor executor = new MyAccessorCommandExecutor(webDriver, null, excelium, null);
         commandExecutors.add(executor);
@@ -142,7 +142,7 @@ public class CommandFactoryTest {
             executor.runAction(anyString);
         }};
 
-        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors);
+        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors, true);
 
         Assert.assertEquals(63, commandMap.size());
 

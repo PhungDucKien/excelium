@@ -107,7 +107,7 @@ public class ScreenshotServiceTest {
             aShot.takeScreenshot((WebDriver) any); result = screenshot;
             screenshot.getImage(); result = new BufferedImage(100, 100, TYPE_INT_RGB);
 
-            webDriver.executeScript(anyString, null); result = 1;
+            webDriver.executeScript(anyString); result = 1;
         }};
 
         ScreenshotService screenshotService = new ScreenshotService(testRunner);

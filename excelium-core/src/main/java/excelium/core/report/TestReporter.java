@@ -367,9 +367,9 @@ public class TestReporter {
     private void printFixLine(String text, int padding, boolean bold, Ansi.Color color) {
         consoleStream.print(Ansi.ansi().cursorUp(1).eraseLine());
         if (bold) {
-            consoleStream.println(Ansi.ansi().bold().fg(color).a(rightPad("", padding) + text).reset());
+            consoleStream.println(Ansi.ansi().bold().fg(color).a(rightPad("", padding) + text).reset().toString());
         } else {
-            consoleStream.println(Ansi.ansi().fg(color).a(rightPad("", padding) + text).reset());
+            consoleStream.println(Ansi.ansi().fg(color).a(rightPad("", padding) + text).reset().toString());
         }
         consoleStream.println();
     }

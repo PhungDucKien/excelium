@@ -117,10 +117,6 @@ public class ByParserTest {
         Assert.assertTrue(by instanceof MobileBy.ByAndroidUIAutomator);
         Assert.assertEquals("By.AndroidUIAutomator: android_uiautomator", by.toString());
 
-        by = ByParser.parseBy("ios_uiautomation=ios_uiautomation", webDriver);
-        Assert.assertTrue(by instanceof MobileBy.ByIosUIAutomation);
-        Assert.assertEquals("By.IosUIAutomation: ios_uiautomation", by.toString());
-
         by = ByParser.parseBy("variable=variable", webDriver);
         Assert.assertTrue(by instanceof ByVariable);
         Assert.assertEquals("By.variable: variable", by.toString());

@@ -112,7 +112,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof ChromeDriver);
 
@@ -145,7 +145,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof FirefoxDriver);
 
@@ -171,7 +171,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof InternetExplorerDriver);
 
@@ -197,7 +197,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof EdgeDriver);
 
@@ -223,7 +223,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof SafariDriver);
 
@@ -255,7 +255,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof OperaDriver);
 
@@ -278,7 +278,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.ANDROID);
         environment.setAppPath("test.apk");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof AndroidDriver);
 
@@ -300,7 +300,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.ANDROID);
         environment.setBrowser(Browser.CHROME);
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof AndroidDriver);
 
@@ -323,7 +323,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.IOS);
         environment.setAppPath("test.ipa");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof IOSDriver);
 
@@ -345,7 +345,7 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.IOS);
         environment.setBrowser(Browser.SAFARI);
 
-        WebDriver driver = DriverFactory.createDriver(environment, project);
+        WebDriver driver = DriverFactory.createDriver(environment, project, null);
         WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
         Assert.assertTrue(innerDriver instanceof IOSDriver);
 

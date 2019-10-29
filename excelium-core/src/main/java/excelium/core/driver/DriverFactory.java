@@ -408,7 +408,9 @@ public class DriverFactory {
      */
     private static void setWindowSize(RemoteWebDriver webDriver, PcEnvironment environment) {
         String resolution = environment.getResolution();
-        String[] dimensions = resolution.split("x");
-        webDriver.manage().window().setSize(new Dimension(Integer.parseInt(dimensions[0]), Integer.parseInt(dimensions[1])));
+        if (StringUtils.isNotBlank(resolution)) {
+            String[] dimensions = resolution.split("x");
+            webDriver.manage().window().setSize(new Dimension(Integer.parseInt(dimensions[0]), Integer.parseInt(dimensions[1])));
+        }
     }
 }

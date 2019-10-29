@@ -310,7 +310,7 @@
         <entry>
             <key>mysql</key>
             <value>
-                <driverClass>com.mysql.jdbc.Driver</driverClass>
+                <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
                 <name>mysql</name>
                 <password>123456</password>
                 <type>MYSQL</type>

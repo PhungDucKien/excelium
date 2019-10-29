@@ -208,9 +208,6 @@ public class DatabaseService {
             Properties connectionProps = new Properties();
             connectionProps.put("user", dataSource.getUserName());
             connectionProps.put("password", dataSource.getPassword());
-            if (driverClassName.contains("mysql")) {
-                connectionProps.put("logger", "com.mysql.jdbc.log.Slf4JLogger");
-            }
 
             Class.forName(driverClassName);
             return DriverManager.getConnection(dataSource.getUrl(), connectionProps);

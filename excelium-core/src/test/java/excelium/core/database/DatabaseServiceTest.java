@@ -60,14 +60,14 @@ public class DatabaseServiceTest {
         mysqlDataSource.setDriverClass(DataSourceType.MYSQL.getDriverClass());
         mysqlDataSource.setUrl(DataSourceType.MYSQL.getUrl("localhost", "3306", "exceliumdb"));
         mysqlDataSource.setUserName("root");
-        mysqlDataSource.setPassword("123456");
+        mysqlDataSource.setPassword("Root@1234");
 
         postgresDataSource = new DataSource();
         postgresDataSource.setType(DataSourceType.POSTGRESQL);
         postgresDataSource.setDriverClass(DataSourceType.POSTGRESQL.getDriverClass());
         postgresDataSource.setUrl(DataSourceType.POSTGRESQL.getUrl("localhost", "5432", "exceliumdb"));
         postgresDataSource.setUserName("postgres");
-        postgresDataSource.setPassword("123456");
+        postgresDataSource.setPassword("Root@1234");
     }
 
     @Test

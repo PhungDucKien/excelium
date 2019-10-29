@@ -69,13 +69,24 @@ public class MyDoclet extends Standard {
      * @return the result
      */
     public static boolean start(RootDoc root) {
+        return start(root, true);
+    }
+
+    /**
+     * Starts document generation.
+     *
+     * @param root            the root
+     * @param generateClasses generate Excelium classes
+     * @return the result
+     */
+    public static boolean start(RootDoc root, boolean generateClasses) {
         templateService = new FreeMarkerTemplateService();
 
         String destinationDir = getDestinationDir(root);
         Map<String, MethodDoc> commandMethodDocs = getCommandMethodDocs(root);
 
-        generateDoc(true, destinationDir, commandMethodDocs);
-        generateDoc(false, destinationDir, commandMethodDocs);
+        generateDoc(true, destinationDir, commandMethodDocs, generateClasses);
+        generateDoc(false, destinationDir, commandMethodDocs, generateClasses);
 
         return true;
     }
@@ -86,8 +97,9 @@ public class MyDoclet extends Standard {
      * @param isWeb             true for Web, false for Mobile
      * @param destinationDir    the destination directory
      * @param commandMethodDocs the list of methods that are annotated with either @{@link Action} or @{@link Accessor}
+     * @param generateClasses   generate Excelium classes
      */
-    private static void generateDoc(boolean isWeb, String destinationDir, Map<String, MethodDoc> commandMethodDocs) {
+    private static void generateDoc(boolean isWeb, String destinationDir, Map<String, MethodDoc> commandMethodDocs, boolean generateClasses) {
         Map<String, Command> commandMap = getCommandMap(isWeb);
 
         List<CommandItem> commandItems = new ArrayList<>();
@@ -135,10 +147,12 @@ public class MyDoclet extends Standard {
         File outputFile = new File(destinationDir, isWeb ? "_web_api.md" : "_mobile_api.md");
         templateService.processTemplate("api.ftl", input, outputFile);
 
-        // Generate Excelium API classes
-        File javaFile = new File("../excelium-executor/src/main/java/excelium/executor/" +
-                (isWeb ? "WebExcelium.java" : "MobileExcelium.java"));
-        templateService.processTemplate("java.ftl", input, javaFile);
+        if (generateClasses) {
+            // Generate Excelium API classes
+            File javaFile = new File("../excelium-executor/src/main/java/excelium/executor/" +
+                    (isWeb ? "WebExcelium.java" : "MobileExcelium.java"));
+            templateService.processTemplate("java.ftl", input, javaFile);
+        }
     }
 
     /**
@@ -451,7 +465,8 @@ public class MyDoclet extends Standard {
      * A stub web driver that does nothing.
      */
     private static class StubWebDriver extends RemoteWebDriver {
-        StubWebDriver() {}
+        StubWebDriver() {
+        }
 
         @Override
         public String getWindowHandle() {

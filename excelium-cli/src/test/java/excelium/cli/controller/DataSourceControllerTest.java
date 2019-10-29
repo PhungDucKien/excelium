@@ -86,7 +86,7 @@ public class DataSourceControllerTest {
         Assert.assertEquals(1, project.getDataSources().size());
         Assert.assertEquals("default", project.getDefaultDataSource());
         Assert.assertEquals(DataSourceType.MYSQL, project.getDataSources().get("default").getType());
-        Assert.assertEquals("com.mysql.jdbc.Driver", project.getDataSources().get("default").getDriverClass());
+        Assert.assertEquals("com.mysql.cj.jdbc.Driver", project.getDataSources().get("default").getDriverClass());
         Assert.assertEquals("jdbc:mysql://localhost:3306/dbname", project.getDataSources().get("default").getUrl());
         Assert.assertEquals("user", project.getDataSources().get("default").getUserName());
         Assert.assertEquals("passwd", project.getDataSources().get("default").getPassword());
@@ -125,7 +125,7 @@ public class DataSourceControllerTest {
         Assert.assertEquals(2, project.getDataSources().size());
         Assert.assertEquals("default", project.getDefaultDataSource());
         Assert.assertEquals(DataSourceType.MYSQL, project.getDataSources().get("default").getType());
-        Assert.assertEquals("com.mysql.jdbc.Driver", project.getDataSources().get("default").getDriverClass());
+        Assert.assertEquals("com.mysql.cj.jdbc.Driver", project.getDataSources().get("default").getDriverClass());
         Assert.assertEquals("jdbc:mysql://localhost:3306/dbname", project.getDataSources().get("default").getUrl());
         Assert.assertEquals("user", project.getDataSources().get("default").getUserName());
         Assert.assertEquals("passwd", project.getDataSources().get("default").getPassword());

@@ -29,6 +29,7 @@ import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.report.TestReporter;
+import excelium.core.screenshot.ScreenshotService;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
@@ -59,6 +60,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static org.fusesource.jansi.AnsiRenderer.render;
 
 /**
  * Tests for {@link TestRunner}.
@@ -93,14 +96,14 @@ public class TestRunnerTest {
 
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
                 return commandMap;
             }
         };
@@ -174,14 +177,14 @@ public class TestRunnerTest {
 
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
                 return commandMap;
             }
         };
@@ -222,7 +225,7 @@ public class TestRunnerTest {
         testRunner.runAll();
 
         new Verifications() {{
-            consoleStream.println("          ERROR  Command not found: Not Found Command");
+            consoleStream.println(render("@|red           ERROR  Command not found: Not Found Command|@"));
         }};
     }
 
@@ -242,14 +245,14 @@ public class TestRunnerTest {
 
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
                 return commandMap;
             }
         };
@@ -354,14 +357,14 @@ public class TestRunnerTest {
 
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
                 return commandMap;
             }
         };
@@ -444,7 +447,7 @@ public class TestRunnerTest {
         testRunner.runAll();
 
         new Verifications() {{
-            consoleStream.println("          ERROR  Invoke command runAction error: Action not found: action2");
+            consoleStream.println(render("@|red           ERROR  Invoke command runAction error: Action not found: action2|@"));
         }};
     }
 
@@ -464,14 +467,14 @@ public class TestRunnerTest {
 
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
                 return commandMap;
             }
         };
@@ -622,14 +625,14 @@ public class TestRunnerTest {
 
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
                 return commandMap;
             }
         };
@@ -894,14 +897,14 @@ public class TestRunnerTest {
 
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
                 return commandMap;
             }
         };

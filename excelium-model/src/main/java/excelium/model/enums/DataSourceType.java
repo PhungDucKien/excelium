@@ -34,7 +34,7 @@ public enum DataSourceType {
     /**
      * MySQL
      */
-    MYSQL("MySQL", "com.mysql.jdbc.Driver", "jdbc:mysql://<host>:<port>/<db>", 3306),
+    MYSQL("MySQL", "com.mysql.cj.jdbc.Driver", "jdbc:mysql://<host>:<port>/<db>", 3306),
     /**
      * PostgreSQL
      */

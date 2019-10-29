@@ -28,6 +28,7 @@ import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.report.TestReporter;
+import excelium.core.screenshot.ScreenshotService;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
 import excelium.model.project.Project;
@@ -61,7 +62,7 @@ public class MyExecutorProviderServiceTest {
     public void testGetWebExecutorClasses() throws Exception {
         new MockUp<DriverFactory>() {
             @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project) throws IOException {
+            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
                 return webDriver;
             }
         };

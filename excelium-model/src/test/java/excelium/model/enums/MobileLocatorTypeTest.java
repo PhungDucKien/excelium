@@ -42,7 +42,6 @@ public class MobileLocatorTypeTest {
         Assert.assertEquals(MobileLocatorType.ID, MobileLocatorType.fromName("ID"));
         Assert.assertEquals(MobileLocatorType.NAME, MobileLocatorType.fromName("NAME"));
         Assert.assertEquals(MobileLocatorType.XPATH, MobileLocatorType.fromName("XPATH"));
-        Assert.assertEquals(MobileLocatorType.IOS_UIAUTOMATION, MobileLocatorType.fromName("IOS_UIAUTOMATION"));
         Assert.assertEquals(MobileLocatorType.ANDROID_UIAUTOMATOR, MobileLocatorType.fromName("ANDROID_UIAUTOMATOR"));
         Assert.assertEquals(MobileLocatorType.VARIABLE, MobileLocatorType.fromName("VARIABLE"));
     }

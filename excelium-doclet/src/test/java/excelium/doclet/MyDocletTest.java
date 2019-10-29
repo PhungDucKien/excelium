@@ -88,7 +88,6 @@ public class MyDocletTest {
         Files.delete(Paths.get("build/docs/_web_api.md"));
         Files.delete(Paths.get("build/docs/_mobile_api.md"));
         Files.delete(Paths.get("build/docs"));
-        Files.delete(Paths.get("build"));
     }
 
     @Test
@@ -185,7 +184,7 @@ public class MyDocletTest {
             }
         };
 
-        MyDoclet.start(rootDoc);
+        MyDoclet.start(rootDoc, false);
 
         Assert.assertEquals(FileUtils.checksumCRC32(new File("build/docs/_web_api.md")),
                 FileUtils.checksumCRC32(new File(MyDocletTest.class.getClassLoader().getResource("_web_api.md").getPath())));
