@@ -60,7 +60,7 @@ public class TestAttachFile extends WebExecutorTestBase {
     selenium.open("/tests/html/upload.html");
     selenium.attachFile("upload", testFile.toURI().toURL().toString());
     selenium.click("go");
-    selenium.waitForPageToLoad("30000");
+    selenium.waitForTextEmpty("id=upload_label");
     selenium.selectFrame("upload_target");
     selenium.assertText("//body", LOREM_IPSUM_TEXT);
   }
