@@ -41,7 +41,7 @@ public class TestPrompt extends WebExecutorTestBase {
     selenium.answerPrompt("no");
     selenium.verifyTitle("Test Prompt");
     selenium.click("promptAndLeave");
-    selenium.waitForPageToLoad("30000");
+    selenium.waitForPromptPresent();
     selenium.verifyPromptMatch("^[\\s\\S]*'yes'[\\s\\S]*$");
     selenium.answerPrompt("yes");
     selenium.verifyTitle("Dummy Page");

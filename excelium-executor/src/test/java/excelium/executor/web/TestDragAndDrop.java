@@ -30,9 +30,9 @@ public class TestDragAndDrop extends WebExecutorTestBase {
   @Test
   public void testDragAndDrop() throws Throwable {
     selenium.open("../tests/html/slider/example.html");
-    selenium.dragAndDrop("id=slider01", "800,0");
+    selenium.dragAndDrop("id=slider01", "135,0");
     selenium.assertValue("id=output1", "20");
-    selenium.dragAndDrop("id=slider01", "-800,0");
+    selenium.dragAndDrop("id=slider01", "-135,0");
     selenium.assertValue("id=output1", "0");
   }
 }

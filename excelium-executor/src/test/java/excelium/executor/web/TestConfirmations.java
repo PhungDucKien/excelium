@@ -73,7 +73,6 @@ public class TestConfirmations extends WebExecutorTestBase {
       fail("expected failure");
     } catch (Throwable e) {
     }
-    selenium.chooseOkConfirmation();
     selenium.waitForPageToLoad("30000");
   }
 }

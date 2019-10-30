@@ -49,10 +49,10 @@ public class TestType extends WebExecutorTestBase {
     selenium.type("password", "testUserPassword");
     selenium.verifyValue("password", "testUserPassword");
     if (isAbleToUpdateFileElements()) {
-      File tempFile = File.createTempFile("example", "upload");
+      File tempFile = new File("file/example_upload");
       tempFile.deleteOnExit();
       Files.write("I like cheese", tempFile, StandardCharsets.UTF_8);
-      selenium.type("file", tempFile.getAbsolutePath());
+      selenium.type("file", tempFile.getName());
       selenium.click("submitButton");
       selenium.waitForPageToLoad("30000");
       selenium.verifyTextPresent("Welcome, TestUser!");

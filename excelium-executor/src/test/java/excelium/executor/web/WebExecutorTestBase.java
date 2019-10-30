@@ -38,6 +38,7 @@ import org.junit.BeforeClass;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
@@ -66,8 +67,10 @@ public class WebExecutorTestBase {
 
         Project project = new Project();
         project.setDownloadPath(Paths.get("download"));
+        project.setFilePath(Paths.get("file"));
+        Files.createDirectories(Paths.get("file"));
         webDriver = DriverFactory.createDriver(environment, project, null);
-        selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), null);
+        selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
     }
 
     @AfterClass

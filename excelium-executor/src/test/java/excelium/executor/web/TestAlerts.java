@@ -91,6 +91,5 @@ public class TestAlerts extends WebExecutorTestBase {
       fail("expected failure");
     } catch (Throwable e) {
     }
-    selenium.chooseOkAlert();
   }
 }

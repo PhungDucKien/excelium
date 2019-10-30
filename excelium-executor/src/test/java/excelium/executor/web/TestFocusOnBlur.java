@@ -34,6 +34,7 @@ public class TestFocusOnBlur extends WebExecutorTestBase {
     selenium.fireEvent("testInput", "blur");
     selenium.verifyAlert("Bad value");
     selenium.chooseOkAlert();
+    selenium.chooseOkAlert();
     selenium.type("testInput", "somethingelse");
   }
 }

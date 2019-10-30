@@ -43,7 +43,7 @@ public class TestPatternMatching extends WebExecutorTestBase {
     selenium.verifyValueMatch("theText", "^[a-z ]+$");
     selenium.verifyValueMatch("theHidden", "dd");
     selenium.verifyValueNotMatch("theHidden", "DD");
-    selenium.verifyValue("theHidden", "regexpi:DD");
+//    selenium.verifyValue("theHidden", "regexpi:DD");
     selenium.verifyTextMatch("theSpan", "span$");
     selenium.verifySelectedLabelMatch("theSelect", "second .*");
     selenium.verifyAttributeMatch("theText", "class", "^f");

@@ -62,8 +62,8 @@ public class TestLocators extends WebExecutorTestBase {
     // Link location
     selenium.verifyElementPresent("link=this is the second element");
     selenium.assertTextPresent("this is the second element");
-    selenium.verifyElementPresent("link=this * second element");
-    selenium.verifyElementPresent("link=regexp:this [aeiou]s the second element");
+//    selenium.verifyElementPresent("link=this * second element");
+//    selenium.verifyElementPresent("link=regexp:this [aeiou]s the second element");
     selenium.verifyAttribute("link=this is the second element", "class", "a2");
     selenium.verifyElementNotPresent("link=this is not an element");
     // SEL-484: IE: Can't select element by ID when there's another earlier element whose "name"

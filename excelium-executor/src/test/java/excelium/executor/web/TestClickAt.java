@@ -54,7 +54,7 @@ public class TestClickAt extends WebExecutorTestBase {
     selenium.verifyTitle("Click Page Target");
     selenium.click("previousPage");
     selenium.waitForPageToLoad("30000");
-    selenium.clickAt("linkWithEnclosedImage", "600,5");
+    selenium.clickAt("linkWithEnclosedImage", "300,5");
     selenium.waitForPageToLoad("30000");
     selenium.verifyTitle("Click Page Target");
     selenium.click("previousPage");
@@ -67,7 +67,7 @@ public class TestClickAt extends WebExecutorTestBase {
     // Pixel count is 0-based, not 1-based. In addition, current implementation
     // of Utils.getLocation adds 3 pixels to the x offset. Until that's fixed,
     // do not attempt to click at the edge of the image.
-    selenium.clickAt("enclosedImage", "640,40");
+    selenium.clickAt("enclosedImage", "320,20");
     selenium.waitForPageToLoad("30000");
     selenium.verifyTitle("Click Page Target");
     selenium.click("previousPage");
@@ -77,7 +77,7 @@ public class TestClickAt extends WebExecutorTestBase {
     selenium.verifyTitle("Click Page Target");
     selenium.click("previousPage");
     selenium.waitForPageToLoad("30000");
-    selenium.clickAt("extraEnclosedImage", "643,40");
+    selenium.clickAt("extraEnclosedImage", "321,20");
     selenium.waitForPageToLoad("30000");
     selenium.verifyTitle("Click Page Target");
     selenium.click("previousPage");
@@ -101,10 +101,10 @@ public class TestClickAt extends WebExecutorTestBase {
 
     if (isUsingNativeEvents()) {
       // Click outside the element and make sure we don't pass to the next page.
-      selenium.clickAt("linkWithEnclosedImage", "650,0");
+      selenium.clickAt("linkWithEnclosedImage", "325,0");
       selenium.waitForPageToLoad("30000");
       selenium.verifyTitle("Click Page 1");
-      selenium.clickAt("linkWithEnclosedImage", "660,20");
+      selenium.clickAt("linkWithEnclosedImage", "330,20");
       selenium.waitForPageToLoad("30000");
       selenium.verifyTitle("Click Page 1");
       selenium.setTimeout("5000");
