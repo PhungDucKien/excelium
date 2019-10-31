@@ -31,12 +31,14 @@ import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.command.CommandFactory;
 import excelium.core.driver.ContextAwareWebDriver;
+import excelium.core.service.ExecutorProviderService;
 import excelium.doclet.i18n.Language;
 import excelium.doclet.model.CommandDetail;
 import excelium.doclet.model.CommandItem;
 import excelium.doclet.model.ParameterTag;
 import excelium.doclet.service.FreeMarkerTemplateService;
 import excelium.doclet.service.TemplateService;
+import excelium.executor.MyExecutorProviderService;
 import excelium.model.test.command.Command;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -45,6 +47,7 @@ import java.io.File;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * A doclet that generates markdown API documentation.
@@ -123,7 +126,10 @@ public class MyDoclet extends Standard {
                 commandDetail.setName(command.getName());
                 commandDetail.setMethod(command.getMethod());
 
-                MethodDoc methodDoc = commandMethodDocs.get(command.getSourceMethodKey());
+                MethodDoc methodDoc = commandMethodDocs.get((isWeb ? "web." : "mobile.") + command.getSourceMethodKey());
+                if (methodDoc == null) {
+                    methodDoc = commandMethodDocs.get(command.getSourceMethodKey());
+                }
                 if (methodDoc != null) {
                     commandDetail.setDescription(getCommandDescription(command, methodDoc));
                     commandDetail.setParameterTags(getParameterTags(command, methodDoc));
@@ -167,11 +173,34 @@ public class MyDoclet extends Standard {
             MethodDoc[] methodDocs = classDoc.methods();
             for (MethodDoc methodDoc : methodDocs) {
                 if (containsCommandAnnotations(methodDoc)) {
-                    commandMethodDocs.put(methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
+                    if (isCommonClass(classDoc.name())) {
+                        commandMethodDocs.put(methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
+                    } else {
+                        commandMethodDocs.put((isWebClass(classDoc.name()) ? "web." : "mobile.") + methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
+                    }
                 }
             }
         }
         return commandMethodDocs;
+    }
+
+    private static boolean isCommonClass(String className) {
+        ExecutorProviderService providerService = new MyExecutorProviderService();
+        List<String> webClasses = providerService.getWebExecutorClasses().stream().map(Class::getSimpleName).collect(Collectors.toList());
+        List<String> mobileClasses = providerService.getMobileExecutorClasses().stream().map(Class::getSimpleName).collect(Collectors.toList());
+
+        webClasses.retainAll(mobileClasses);
+
+        if (webClasses.contains(className)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isWebClass(String className) {
+        ExecutorProviderService providerService = new MyExecutorProviderService();
+        List<String> webClasses = providerService.getWebExecutorClasses().stream().map(Class::getSimpleName).collect(Collectors.toList());
+        return webClasses.contains(className);
     }
 
     /**

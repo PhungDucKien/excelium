@@ -36,6 +36,10 @@ public class MobileExcelium extends Excelium {
         super(webDriver, baseUrl, project);
     }
 
+    public void activateApp() throws Throwable {
+        runCommand("activateApp", null, null, null);
+    }
+
     public void assertAttribute(String locator, String name, String text) throws Throwable {
         runCommand("assertAttribute", locator, name, text);
     }
@@ -78,6 +82,22 @@ public class MobileExcelium extends Excelium {
 
     public void assertEditable(String parentLocator, String locator) throws Throwable {
         runCommand("assertEditable", parentLocator, locator, null);
+    }
+
+    public void assertElementNotPresent(String locator) throws Throwable {
+        runCommand("assertElementNotPresent", locator, null, null);
+    }
+
+    public void assertElementNotPresent(String parentLocator, String locator) throws Throwable {
+        runCommand("assertElementNotPresent", parentLocator, locator, null);
+    }
+
+    public void assertElementPresent(String locator) throws Throwable {
+        runCommand("assertElementPresent", locator, null, null);
+    }
+
+    public void assertElementPresent(String parentLocator, String locator) throws Throwable {
+        runCommand("assertElementPresent", parentLocator, locator, null);
     }
 
     public void assertEnabled(String locator) throws Throwable {
@@ -180,6 +200,10 @@ public class MobileExcelium extends Excelium {
         runCommand("assertNotExpression", expression, text, null);
     }
 
+    public void assertNotPageSource(String text) throws Throwable {
+        runCommand("assertNotPageSource", text, null, null);
+    }
+
     public void assertNotText(String locator, String text) throws Throwable {
         runCommand("assertNotText", locator, text, null);
     }
@@ -222,6 +246,18 @@ public class MobileExcelium extends Excelium {
 
     public void assertNotVisible(String parentLocator, String locator) throws Throwable {
         runCommand("assertNotVisible", parentLocator, locator, null);
+    }
+
+    public void assertPageSource(String text) throws Throwable {
+        runCommand("assertPageSource", text, null, null);
+    }
+
+    public void assertPageSourceMatch(String text) throws Throwable {
+        runCommand("assertPageSourceMatch", text, null, null);
+    }
+
+    public void assertPageSourceNotMatch(String text) throws Throwable {
+        runCommand("assertPageSourceNotMatch", text, null, null);
     }
 
     public void assertRowCount(String sql, String count) throws Throwable {
@@ -284,6 +320,14 @@ public class MobileExcelium extends Excelium {
         runCommand("assertTextNotMatch", parentLocator, locator, text);
     }
 
+    public void assertTextNotPresent(String text) throws Throwable {
+        runCommand("assertTextNotPresent", text, null, null);
+    }
+
+    public void assertTextPresent(String text) throws Throwable {
+        runCommand("assertTextPresent", text, null, null);
+    }
+
     public void assertValue(String locator, String text) throws Throwable {
         runCommand("assertValue", locator, text, null);
     }
@@ -328,6 +372,46 @@ public class MobileExcelium extends Excelium {
         runCommand("assertVisible", parentLocator, locator, null);
     }
 
+    public void clear(String locator) throws Throwable {
+        runCommand("clear", locator, null, null);
+    }
+
+    public void clear(String parentLocator, String locator) throws Throwable {
+        runCommand("clear", parentLocator, locator, null);
+    }
+
+    public void click(String locator) throws Throwable {
+        runCommand("click", locator, null, null);
+    }
+
+    public void click(String parentLocator, String locator) throws Throwable {
+        runCommand("click", parentLocator, locator, null);
+    }
+
+    public void clickButton(String indexOrText) throws Throwable {
+        runCommand("clickButton", indexOrText, null, null);
+    }
+
+    public void clickText(String indexOrText) throws Throwable {
+        runCommand("clickText", indexOrText, null, null);
+    }
+
+    public void closeApp() throws Throwable {
+        runCommand("closeApp", null, null, null);
+    }
+
+    public void doubleTap(String locator) throws Throwable {
+        runCommand("doubleTap", locator, null, null);
+    }
+
+    public void doubleTap(String parentLocator, String locator) throws Throwable {
+        runCommand("doubleTap", parentLocator, locator, null);
+    }
+
+    public void doubleTapAt(String coordinate) throws Throwable {
+        runCommand("doubleTapAt", coordinate, null, null);
+    }
+
     public void echo(String message) throws Throwable {
         runCommand("echo", message, null, null);
     }
@@ -354,6 +438,22 @@ public class MobileExcelium extends Excelium {
 
     public void executeIfEditable(String action, String parentLocator, String locator) throws Throwable {
         runCommand("executeIfEditable", action, parentLocator, locator);
+    }
+
+    public void executeIfElementNotPresent(String action, String locator) throws Throwable {
+        runCommand("executeIfElementNotPresent", action, locator, null);
+    }
+
+    public void executeIfElementNotPresent(String action, String parentLocator, String locator) throws Throwable {
+        runCommand("executeIfElementNotPresent", action, parentLocator, locator);
+    }
+
+    public void executeIfElementPresent(String action, String locator) throws Throwable {
+        runCommand("executeIfElementPresent", action, locator, null);
+    }
+
+    public void executeIfElementPresent(String action, String parentLocator, String locator) throws Throwable {
+        runCommand("executeIfElementPresent", action, parentLocator, locator);
     }
 
     public void executeIfEnabled(String action, String locator) throws Throwable {
@@ -428,6 +528,10 @@ public class MobileExcelium extends Excelium {
         runCommand("executeIfNotExpression", action, expression, text);
     }
 
+    public void executeIfNotPageSource(String action, String text) throws Throwable {
+        runCommand("executeIfNotPageSource", action, text, null);
+    }
+
     public void executeIfNotText(String action, String locator, String text) throws Throwable {
         runCommand("executeIfNotText", action, locator, text);
     }
@@ -464,6 +568,18 @@ public class MobileExcelium extends Excelium {
         runCommand("executeIfNotVisible", action, parentLocator, locator);
     }
 
+    public void executeIfPageSource(String action, String text) throws Throwable {
+        runCommand("executeIfPageSource", action, text, null);
+    }
+
+    public void executeIfPageSourceMatch(String action, String text) throws Throwable {
+        runCommand("executeIfPageSourceMatch", action, text, null);
+    }
+
+    public void executeIfPageSourceNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfPageSourceNotMatch", action, text, null);
+    }
+
     public void executeIfText(String action, String locator, String text) throws Throwable {
         runCommand("executeIfText", action, locator, text);
     }
@@ -482,6 +598,14 @@ public class MobileExcelium extends Excelium {
 
     public void executeIfTextNotMatch(String action, String locator, String text) throws Throwable {
         runCommand("executeIfTextNotMatch", action, locator, text);
+    }
+
+    public void executeIfTextNotPresent(String action, String text) throws Throwable {
+        runCommand("executeIfTextNotPresent", action, text, null);
+    }
+
+    public void executeIfTextPresent(String action, String text) throws Throwable {
+        runCommand("executeIfTextPresent", action, text, null);
     }
 
     public void executeIfValue(String action, String locator, String text) throws Throwable {
@@ -520,12 +644,80 @@ public class MobileExcelium extends Excelium {
         runCommand("executeLoop", action, times, null);
     }
 
-    public void goBack() throws Throwable {
-        runCommand("goBack", null, null, null);
+    public void hideKeyboard() throws Throwable {
+        runCommand("hideKeyboard", null, null, null);
+    }
+
+    public void landscape() throws Throwable {
+        runCommand("landscape", null, null, null);
+    }
+
+    public void launchApp() throws Throwable {
+        runCommand("launchApp", null, null, null);
+    }
+
+    public void lock() throws Throwable {
+        runCommand("lock", null, null, null);
+    }
+
+    public void longPress(String locator) throws Throwable {
+        runCommand("longPress", locator, null, null);
+    }
+
+    public void longPress(String parentLocator, String locator) throws Throwable {
+        runCommand("longPress", parentLocator, locator, null);
+    }
+
+    public void longPressAt(String coordinate) throws Throwable {
+        runCommand("longPressAt", coordinate, null, null);
     }
 
     public void pause(String waitTime) throws Throwable {
         runCommand("pause", waitTime, null, null);
+    }
+
+    public void portrait() throws Throwable {
+        runCommand("portrait", null, null, null);
+    }
+
+    public void reloadApp() throws Throwable {
+        runCommand("reloadApp", null, null, null);
+    }
+
+    public void resetApp() throws Throwable {
+        runCommand("resetApp", null, null, null);
+    }
+
+    public void rotate() throws Throwable {
+        runCommand("rotate", null, null, null);
+    }
+
+    public void runAppInBackground(String secs) throws Throwable {
+        runCommand("runAppInBackground", secs, null, null);
+    }
+
+    public void scrollDownTo(String locator) throws Throwable {
+        runCommand("scrollDownTo", locator, null, null);
+    }
+
+    public void scrollDownTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollDownTo", parentLocator, locator, null);
+    }
+
+    public void scrollUpTo(String locator) throws Throwable {
+        runCommand("scrollUpTo", locator, null, null);
+    }
+
+    public void scrollUpTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollUpTo", parentLocator, locator, null);
+    }
+
+    public void setClipboard() throws Throwable {
+        runCommand("setClipboard", null, null, null);
+    }
+
+    public void setGeolocation() throws Throwable {
+        runCommand("setGeolocation", null, null, null);
     }
 
     public void setTimeout(String timeout) throws Throwable {
@@ -552,6 +744,10 @@ public class MobileExcelium extends Excelium {
         runCommand("storeExpression", expression, variable, null);
     }
 
+    public void storePageSource(String variable) throws Throwable {
+        runCommand("storePageSource", variable, null, null);
+    }
+
     public void storePush(String text, String variable) throws Throwable {
         runCommand("storePush", text, variable, null);
     }
@@ -570,6 +766,38 @@ public class MobileExcelium extends Excelium {
 
     public void storeValue(String parentLocator, String locator, String variable) throws Throwable {
         runCommand("storeValue", parentLocator, locator, variable);
+    }
+
+    public void swipeLeft() throws Throwable {
+        runCommand("swipeLeft", null, null, null);
+    }
+
+    public void swipeRight() throws Throwable {
+        runCommand("swipeRight", null, null, null);
+    }
+
+    public void tap(String locator) throws Throwable {
+        runCommand("tap", locator, null, null);
+    }
+
+    public void tap(String parentLocator, String locator) throws Throwable {
+        runCommand("tap", parentLocator, locator, null);
+    }
+
+    public void tapAt(String coordinate) throws Throwable {
+        runCommand("tapAt", coordinate, null, null);
+    }
+
+    public void terminateApp() throws Throwable {
+        runCommand("terminateApp", null, null, null);
+    }
+
+    public void type(String locator, String value) throws Throwable {
+        runCommand("type", locator, value, null);
+    }
+
+    public void type(String parentLocator, String locator, String value) throws Throwable {
+        runCommand("type", parentLocator, locator, value);
     }
 
     public void verifyAttribute(String locator, String name, String text) throws Throwable {
@@ -614,6 +842,22 @@ public class MobileExcelium extends Excelium {
 
     public void verifyEditable(String parentLocator, String locator) throws Throwable {
         runCommand("verifyEditable", parentLocator, locator, null);
+    }
+
+    public void verifyElementNotPresent(String locator) throws Throwable {
+        runCommand("verifyElementNotPresent", locator, null, null);
+    }
+
+    public void verifyElementNotPresent(String parentLocator, String locator) throws Throwable {
+        runCommand("verifyElementNotPresent", parentLocator, locator, null);
+    }
+
+    public void verifyElementPresent(String locator) throws Throwable {
+        runCommand("verifyElementPresent", locator, null, null);
+    }
+
+    public void verifyElementPresent(String parentLocator, String locator) throws Throwable {
+        runCommand("verifyElementPresent", parentLocator, locator, null);
     }
 
     public void verifyEnabled(String locator) throws Throwable {
@@ -716,6 +960,10 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyNotExpression", expression, text, null);
     }
 
+    public void verifyNotPageSource(String text) throws Throwable {
+        runCommand("verifyNotPageSource", text, null, null);
+    }
+
     public void verifyNotText(String locator, String text) throws Throwable {
         runCommand("verifyNotText", locator, text, null);
     }
@@ -758,6 +1006,18 @@ public class MobileExcelium extends Excelium {
 
     public void verifyNotVisible(String parentLocator, String locator) throws Throwable {
         runCommand("verifyNotVisible", parentLocator, locator, null);
+    }
+
+    public void verifyPageSource(String text) throws Throwable {
+        runCommand("verifyPageSource", text, null, null);
+    }
+
+    public void verifyPageSourceMatch(String text) throws Throwable {
+        runCommand("verifyPageSourceMatch", text, null, null);
+    }
+
+    public void verifyPageSourceNotMatch(String text) throws Throwable {
+        runCommand("verifyPageSourceNotMatch", text, null, null);
     }
 
     public void verifyRowCount(String sql, String count) throws Throwable {
@@ -818,6 +1078,14 @@ public class MobileExcelium extends Excelium {
 
     public void verifyTextNotMatch(String parentLocator, String locator, String text) throws Throwable {
         runCommand("verifyTextNotMatch", parentLocator, locator, text);
+    }
+
+    public void verifyTextNotPresent(String text) throws Throwable {
+        runCommand("verifyTextNotPresent", text, null, null);
+    }
+
+    public void verifyTextPresent(String text) throws Throwable {
+        runCommand("verifyTextPresent", text, null, null);
     }
 
     public void verifyValue(String locator, String text) throws Throwable {
@@ -924,6 +1192,22 @@ public class MobileExcelium extends Excelium {
         runCommand("waitForEditable", parentLocator, locator, null);
     }
 
+    public void waitForElementNotPresent(String locator) throws Throwable {
+        runCommand("waitForElementNotPresent", locator, null, null);
+    }
+
+    public void waitForElementNotPresent(String parentLocator, String locator) throws Throwable {
+        runCommand("waitForElementNotPresent", parentLocator, locator, null);
+    }
+
+    public void waitForElementPresent(String locator) throws Throwable {
+        runCommand("waitForElementPresent", locator, null, null);
+    }
+
+    public void waitForElementPresent(String parentLocator, String locator) throws Throwable {
+        runCommand("waitForElementPresent", parentLocator, locator, null);
+    }
+
     public void waitForEnabled(String locator) throws Throwable {
         runCommand("waitForEnabled", locator, null, null);
     }
@@ -992,6 +1276,10 @@ public class MobileExcelium extends Excelium {
         runCommand("waitForNotExpression", expression, text, null);
     }
 
+    public void waitForNotPageSource(String text) throws Throwable {
+        runCommand("waitForNotPageSource", text, null, null);
+    }
+
     public void waitForNotText(String locator, String text) throws Throwable {
         runCommand("waitForNotText", locator, text, null);
     }
@@ -1032,6 +1320,18 @@ public class MobileExcelium extends Excelium {
         runCommand("waitForNotVisible", parentLocator, locator, null);
     }
 
+    public void waitForPageSource(String text) throws Throwable {
+        runCommand("waitForPageSource", text, null, null);
+    }
+
+    public void waitForPageSourceMatch(String text) throws Throwable {
+        runCommand("waitForPageSourceMatch", text, null, null);
+    }
+
+    public void waitForPageSourceNotMatch(String text) throws Throwable {
+        runCommand("waitForPageSourceNotMatch", text, null, null);
+    }
+
     public void waitForText(String locator, String text) throws Throwable {
         runCommand("waitForText", locator, text, null);
     }
@@ -1062,6 +1362,14 @@ public class MobileExcelium extends Excelium {
 
     public void waitForTextNotMatch(String parentLocator, String locator, String text) throws Throwable {
         runCommand("waitForTextNotMatch", parentLocator, locator, text);
+    }
+
+    public void waitForTextNotPresent(String text) throws Throwable {
+        runCommand("waitForTextNotPresent", text, null, null);
+    }
+
+    public void waitForTextPresent(String text) throws Throwable {
+        runCommand("waitForTextPresent", text, null, null);
     }
 
     public void waitForValue(String locator, String text) throws Throwable {
