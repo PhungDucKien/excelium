@@ -146,10 +146,11 @@ public class EnvironmentUtil {
      * @param appPackage       the app package
      * @param appWaitActivity  the app wait activity
      * @param appWaitPackage   the app wait package
+     * @param bundleId         the bundle ID
      * @return the available mobile app environments
      */
     public static List<Environment> getAvailableMobileAppEnvironments(Platform platform, List<String> platformVersions, List<String> deviceNames, List<String> orientations, String udid,
-                                                                      String appPath, String appActivity, String appPackage, String appWaitActivity, String appWaitPackage) {
+                                                                      String appPath, String appActivity, String appPackage, String appWaitActivity, String appWaitPackage, String bundleId) {
         if (CollectionUtils.isEmpty(platformVersions)) {
             platformVersions = new ArrayList<>();
             platformVersions.add("");
@@ -181,6 +182,7 @@ public class EnvironmentUtil {
                     environment.setAppPackage(appPackage);
                     environment.setAppWaitActivity(appWaitActivity);
                     environment.setAppWaitPackage(appWaitPackage);
+                    environment.setBundleId(bundleId);
                     environments.add(environment);
                 }
             }

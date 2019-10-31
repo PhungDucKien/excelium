@@ -32,9 +32,7 @@ import excelium.model.test.config.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.appium.java_client.remote.MobilePlatform;
+import io.appium.java_client.remote.*;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
@@ -89,9 +87,9 @@ public class DriverFactory {
     /**
      * Creates context aware web driver for an environment.
      *
-     * @param environment the environment
-     * @param project     the project
-     * @param screenshotService     the screenshot service
+     * @param environment       the environment
+     * @param project           the project
+     * @param screenshotService the screenshot service
      * @return the context aware web driver
      * @throws IOException the io exception
      */
@@ -283,15 +281,18 @@ public class DriverFactory {
         if (StringUtils.isNotBlank(environment.getDeviceName())) {
             desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, environment.getDeviceName());
         }
+        desiredCapabilities.setCapability(MobileCapabilityType.UDID, environment.getUdid());
         if (environment instanceof MobileWebEnvironment) {
             desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, ((MobileWebEnvironment) environment).getBrowser().getText());
         } else if (environment instanceof MobileAppEnvironment) {
             String appPath = ((MobileAppEnvironment) environment).getAppPath();
-            if (!StringUtils.startsWith(appPath, "http")) {
-                File appFile = project.getAppPath().resolve(appPath).toFile();
-                desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
-            } else {
-                desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
+            if (StringUtils.isNotBlank(appPath)) {
+                if (StringUtils.startsWith(appPath, "http") || StringUtils.startsWith(appPath, "/")) {
+                    desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
+                } else {
+                    File appFile = project.getAppPath().resolve(appPath).toFile();
+                    desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
+                }
             }
             desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
             desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
@@ -331,19 +332,33 @@ public class DriverFactory {
         if (StringUtils.isNotBlank(environment.getDeviceName())) {
             desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, environment.getDeviceName());
         }
+        desiredCapabilities.setCapability(MobileCapabilityType.UDID, environment.getUdid());
         if (environment instanceof MobileWebEnvironment) {
             desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, ((MobileWebEnvironment) environment).getBrowser().getText());
         } else if (environment instanceof MobileAppEnvironment) {
             String appPath = ((MobileAppEnvironment) environment).getAppPath();
-            if (!StringUtils.startsWith(appPath, "http")) {
-                File appFile = project.getAppPath().resolve(appPath).toFile();
-                desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
-            } else {
-                desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
+            if (StringUtils.isNotBlank(appPath)) {
+                if (StringUtils.startsWith(appPath, "http") || StringUtils.startsWith(appPath, "/")) {
+                    desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
+                } else {
+                    File appFile = project.getAppPath().resolve(appPath).toFile();
+                    desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
+                }
             }
             desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
             desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
+
+            if (StringUtils.isNotBlank(((MobileAppEnvironment) environment).getBundleId())) {
+                desiredCapabilities.setCapability(IOSMobileCapabilityType.BUNDLE_ID, ((MobileAppEnvironment) environment).getBundleId());
+            }
         }
+        // For iOS 9.3 or higher
+        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
+
+        // For testing on real devices
+        String xcodeConfigFilePath = System.getProperty("user.home") + File.separator + ".xcconfig";
+        desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_CONFIG_FILE, xcodeConfigFilePath);
+        desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, System.getenv("UPDATE_WDA_BUNDLEID"));
 
         return new IOSDriver(getAppiumAddress(project), desiredCapabilities);
     }

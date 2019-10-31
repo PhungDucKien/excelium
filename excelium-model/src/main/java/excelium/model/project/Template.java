@@ -195,6 +195,10 @@ public class Template {
      * The constant IOS_APP.
      */
     public static final String IOS_APP = "%IOS_APP%";
+    /**
+     * The constant IOS_BUNDLE_ID.
+     */
+    public static final String IOS_BUNDLE_ID = "%IOS_BUNDLE_ID%";
 
     /**
      * The constant MAPPING_PAGESET_NAME.

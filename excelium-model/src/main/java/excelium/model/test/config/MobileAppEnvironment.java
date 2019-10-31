@@ -58,6 +58,11 @@ public class MobileAppEnvironment extends MobileEnvironment {
     private String appWaitPackage;
 
     /**
+     * Bundle ID
+     */
+    private String bundleId;
+
+    /**
      * Gets app path.
      *
      * @return the app path
@@ -145,6 +150,24 @@ public class MobileAppEnvironment extends MobileEnvironment {
      */
     public void setAppWaitPackage(String appWaitPackage) {
         this.appWaitPackage = appWaitPackage;
+    }
+
+    /**
+     * Gets bundle ID.
+     *
+     * @return the bundle ID
+     */
+    public String getBundleId() {
+        return bundleId;
+    }
+
+    /**
+     * Sets bundle ID.
+     *
+     * @param bundleId the bundle ID
+     */
+    public void setBundleId(String bundleId) {
+        this.bundleId = bundleId;
     }
 
     @Override

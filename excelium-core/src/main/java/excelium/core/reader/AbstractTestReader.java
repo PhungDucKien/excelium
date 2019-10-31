@@ -188,6 +188,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
         String androidAppPackage = getStringValue(configurationValues.get(ANDROID_APP_PACKAGE));
         String androidAppWaitActivity = getStringValue(configurationValues.get(ANDROID_APP_WAIT_ACTIVITY));
         String androidAppWaitPackage = getStringValue(configurationValues.get(ANDROID_APP_WAIT_PACKAGE));
+        String bundleId = getStringValue(configurationValues.get(IOS_BUNDLE_ID));
 
         List<Environment> environments = new ArrayList<>();
         if (pcEnabled) {
@@ -207,7 +208,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
 
         if (androidEnabled) {
             if (CollectionUtils.isEmpty(androidBrowsers)) {
-                environments.addAll(getAvailableMobileAppEnvironments(Platform.ANDROID, androidVersions, androidDevices, androidOrientations, androidUdid, androidApkPath, androidAppActivity, androidAppPackage, androidAppWaitActivity, androidAppWaitPackage));
+                environments.addAll(getAvailableMobileAppEnvironments(Platform.ANDROID, androidVersions, androidDevices, androidOrientations, androidUdid, androidApkPath, androidAppActivity, androidAppPackage, androidAppWaitActivity, androidAppWaitPackage, null));
             } else {
                 environments.addAll(getAvailableMobileWebEnvironments(Platform.ANDROID, androidVersions, androidDevices, androidOrientations, androidUdid, androidBrowsers));
             }
@@ -215,7 +216,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
 
         if (iOsEnabled) {
             if (CollectionUtils.isEmpty(iOsBrowsers)) {
-                environments.addAll(getAvailableMobileAppEnvironments(Platform.IOS, iOsVersions, iOsDevices, iOsOrientations, iOsUdid, iOsIpaPath, null, null, null, null));
+                environments.addAll(getAvailableMobileAppEnvironments(Platform.IOS, iOsVersions, iOsDevices, iOsOrientations, iOsUdid, iOsIpaPath, null, null, null, null, bundleId));
             } else {
                 environments.addAll(getAvailableMobileWebEnvironments(Platform.IOS, iOsVersions, iOsDevices, iOsOrientations, iOsUdid, iOsBrowsers));
             }

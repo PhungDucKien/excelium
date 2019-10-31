@@ -1,0 +1,64 @@
+{
+  "name": "ios-uicatalog",
+  "version": "3.5.0",
+  "description": "Apple iOS UIKitCatalog app",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "scripts": {
+    "clean": "rm -rf node_modules && rm -f package-lock.json && npm install",
+    "build": "npm run build:ios12 && npm run build:ios13",
+    "build:ios12": "cd UICatalog && gulp install",
+    "build:ios13": "cd UIKitCatalog && gulp install",
+    "install": "npm run build:ios12 && npm run build:ios13",
+    "test": "gulp once",
+    "watch": "gulp watch",
+    "lint": "gulp lint",
+    "lint:fix": "gulp lint --fix",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "precommit-test": "gulp lint"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "precommit-test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appium/ios-uicatalog.git"
+  },
+  "keywords": [
+    "appium",
+    "ios",
+    "uicatalog",
+    "uicatalog"
+  ],
+  "os": [
+    "darwin"
+  ],
+  "files": [
+    "gulpfile.js",
+    "index.js",
+    "uikitcatalog-info.md",
+    "UICatalog/gulpfile.js",
+    "UICatalog/uicatalog-info.md",
+    "UICatalog/UICatalog",
+    "UICatalog/UICatalog.xcodeproj",
+    "UIKitCatalog/gulpfile.js",
+    "UIKitCatalog/uicatalog-info.md",
+    "UIKitCatalog/Configuration",
+    "UIKitCatalog/UIKitCatalog",
+    "UIKitCatalog/UIKitCatalog.xcodeproj"
+  ],
+  "author": "",
+  "homepage": "https://github.com/appium/ios-uicatalog",
+  "dependencies": {
+    "appium-gulp-plugins": "^4.2.0",
+    "appium-xcode": "^3.9.0",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2"
+  },
+  "devDependencies": {
+    "ajv": "^6.5.3",
+    "eslint-config-appium": "^4.2.0",
+    "pre-commit": "^1.2.2"
+  }
+}
