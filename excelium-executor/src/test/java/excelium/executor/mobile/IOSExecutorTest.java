@@ -82,5 +82,39 @@ public class IOSExecutorTest {
     public void testAlert() throws Throwable {
         selenium.click("Alert Views");
         selenium.assertElementPresent("Simple");
+
+        selenium.click("Simple");
+        selenium.waitForAlertPresent();
+        selenium.assertAlertMatch("^.*A Short Title Is Best.*$");
+        selenium.chooseOkAlert();
+
+        selenium.click("Okay / Cancel");
+        selenium.waitForConfirmationPresent();
+        selenium.assertConfirmationMatch("^.*A Short Title Is Best.*$");
+        selenium.chooseOkConfirmation();
+
+        selenium.click("Other");
+        selenium.waitForConfirmationPresent();
+        selenium.assertConfirmationMatch("^.*A Short Title Is Best.*$");
+        selenium.chooseOkConfirmation();
+
+        selenium.click("Text Entry");
+        selenium.waitForPromptPresent();
+        selenium.type("class=XCUIElementTypeTextField", "hello world");
+        selenium.assertText("class=XCUIElementTypeTextField", "hello world");
+        selenium.answerPrompt("");
+
+        selenium.click("Secure Text Entry");
+        selenium.waitForPromptPresent();
+        selenium.type("class=XCUIElementTypeSecureTextField", "hello world");
+        selenium.assertText("class=XCUIElementTypeSecureTextField", "•••••••••••");
+        selenium.answerPrompt("");
+
+        try {
+            selenium.chooseOkAlert();
+        } catch (Exception e) {
+        }
+
+        selenium.goBack();
     }
 }
