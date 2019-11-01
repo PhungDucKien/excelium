@@ -61,7 +61,7 @@ public class NavigateCommandExecutor extends CommandExecutor {
     /**
      * Simulates the user clicking the "back" button on their browser.
      */
-    @Action(webOnly = true)
+    @Action
     public void goBack() {
         webDriver.navigate().back();
     }

@@ -31,6 +31,7 @@ import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 
@@ -202,7 +203,9 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
         }
         Alert alert = webDriver.switchTo().alert();
         if (alert != null) {
-            alert.sendKeys(answer);
+            if (StringUtils.isNotBlank(answer)) {
+                alert.sendKeys(answer);
+            }
             alert.accept();
         }
     }
