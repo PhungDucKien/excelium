@@ -79,7 +79,7 @@ public class TestReporter {
         testState.setTest(test);
         resetTestCount(test);
 
-        printFixLine("Workbook: " + test.getWorkbookName(), 0, true, Ansi.Color.BLACK);
+        printFixLine("Workbook: " + test.getWorkbookName(), 0, true, null);
         printCounts();
     }
 
@@ -92,7 +92,7 @@ public class TestReporter {
         testState.setEnvironment(environment);
         resetEnvironmentCount(environment, testState.getTest());
 
-        printFixLine("Environment: " + testState.getEnvironment().getKey(), 2, true, Ansi.Color.BLACK);
+        printFixLine("Environment: " + testState.getEnvironment().getKey(), 2, true, null);
         printCounts();
     }
 
@@ -104,7 +104,7 @@ public class TestReporter {
     public void startTestSuite(TestSuite testSuite) {
         resetSuiteCount(testSuite, testState.getEnvironment());
 
-        printFixLine("Sheet: " + testSuite.getSheetName(), 4, true, Ansi.Color.BLACK);
+        printFixLine("Sheet: " + testSuite.getSheetName(), 4, true, null);
         printCounts();
     }
 
@@ -119,7 +119,7 @@ public class TestReporter {
         }
         flowPadding += 2;
 
-        printFixLine(testFlow.getName(), 4 + flowPadding, false, Ansi.Color.BLACK);
+        printFixLine(testFlow.getName(), 4 + flowPadding, false, null);
         printCounts();
     }
 
@@ -139,7 +139,7 @@ public class TestReporter {
         printFixLine(rightPad(testStep.getCommand(), 30) +
                 (StringUtils.isNotBlank(testStep.getParam1()) ? "  " + rightPad(testStep.getParam1(), 30) : "") +
                 (StringUtils.isNotBlank(testStep.getParam2()) ? "  " + rightPad(testStep.getParam2(), 30) : "") +
-                (StringUtils.isNotBlank(testStep.getParam3()) ? "  " + rightPad(testStep.getParam3(), 30) : ""), 6 + flowPadding, false, Ansi.Color.BLACK);
+                (StringUtils.isNotBlank(testStep.getParam3()) ? "  " + rightPad(testStep.getParam3(), 30) : ""), 6 + flowPadding, false, null);
         printCounts();
     }
 
@@ -366,11 +366,14 @@ public class TestReporter {
      */
     private void printFixLine(String text, int padding, boolean bold, Ansi.Color color) {
         consoleStream.print(Ansi.ansi().cursorUp(1).eraseLine());
+        Ansi ansi = Ansi.ansi();
         if (bold) {
-            consoleStream.println(Ansi.ansi().bold().fg(color).a(rightPad("", padding) + text).reset().toString());
-        } else {
-            consoleStream.println(Ansi.ansi().fg(color).a(rightPad("", padding) + text).reset().toString());
+            ansi = ansi.bold();
         }
+        if (color != null) {
+            ansi = ansi.fg(color);
+        }
+        consoleStream.println(ansi.a(rightPad("", padding) + text).reset().toString());
         consoleStream.println();
     }
 

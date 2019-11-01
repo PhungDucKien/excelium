@@ -28,6 +28,7 @@ import excelium.cli.controller.*;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.LogManager;
 
 /**
  * Excelium Command Line Application.
@@ -52,6 +53,8 @@ public class Application {
      * @throws InvocationTargetException the invocation target exception
      */
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, InvocationTargetException {
+        LogManager.getLogManager().reset();
+
         AnsiConsole.systemInstall();
 
         // Creates commander instance
