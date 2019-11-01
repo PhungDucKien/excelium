@@ -32,12 +32,12 @@ subprojects {
 
 task "doc-server"(type: Exec) {
     workingDir './slate'
-    commandLine '/usr/local/bin/bundle', 'exec', 'middleman', 'server'
+    commandLine '/usr/local/opt/ruby/bin/bundle', 'exec', 'middleman', 'server'
 }
 
 task "doc-build"(type: Exec, dependsOn: [':excelium-doclet:doc-generate']) {
     workingDir './slate'
-    commandLine '/usr/local/bin/bundle', 'exec', 'middleman', 'build'
+    commandLine '/usr/local/opt/ruby/bin/bundle', 'exec', 'middleman', 'build'
 }
 
 task "doc-publish"(type: Exec) {
