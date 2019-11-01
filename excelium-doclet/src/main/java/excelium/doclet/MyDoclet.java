@@ -211,7 +211,7 @@ public class MyDoclet extends Standard {
      */
     private static Map<String, Command> getCommandMap(boolean isWeb) {
         try {
-            return CommandFactory.createCommandMap(new ContextAwareWebDriver(new StubWebDriver(), null), null, null, null, isWeb);
+            return CommandFactory.createCommandMap(isWeb ? new StubWebContextAwareWebDriver() : new StubMobileContextAwareWebDriver(), null, null, null, isWeb);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -488,6 +488,48 @@ public class MyDoclet extends Standard {
         if (StringUtils.isNotBlank(commandItem.getParam2())) count++;
         if (StringUtils.isNotBlank(commandItem.getParam3())) count++;
         return count;
+    }
+
+    private static class StubWebContextAwareWebDriver extends ContextAwareWebDriver {
+        public StubWebContextAwareWebDriver() {
+            super(new StubWebDriver(), null);
+        }
+
+        @Override
+        public boolean isWeb() {
+            return true;
+        }
+
+        @Override
+        public boolean isAndroid() {
+            return false;
+        }
+
+        @Override
+        public boolean isIOS() {
+            return false;
+        }
+    }
+
+    private static class StubMobileContextAwareWebDriver extends ContextAwareWebDriver {
+        public StubMobileContextAwareWebDriver() {
+            super(new StubWebDriver(), null);
+        }
+
+        @Override
+        public boolean isWeb() {
+            return false;
+        }
+
+        @Override
+        public boolean isAndroid() {
+            return true;
+        }
+
+        @Override
+        public boolean isIOS() {
+            return true;
+        }
     }
 
     /**

@@ -78,7 +78,7 @@ public class CommandFactory {
      */
     public static Map<String, Command> createCommandMap(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean forWeb) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<CommandExecutor> commandExecutors = getCommandExecutors(webDriver, baseUrl, excelium, project, forWeb);
-        return createCommandMap(commandExecutors, forWeb);
+        return createCommandMap(commandExecutors);
     }
 
     /**
@@ -87,10 +87,10 @@ public class CommandFactory {
      * @param commandExecutors the list of command executors
      * @return the map of commands
      */
-    public static Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+    public static Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
         Map<String, Command> commandMap = new LinkedHashMap<>();
         for (CommandExecutor executor : commandExecutors) {
-            List<Command> commands = createCommandList(executor, forWeb);
+            List<Command> commands = createCommandList(executor);
             for (Command command : commands) {
                 commandMap.put(command.getMethod() + "(" + countParam(command) + ")", command);
             }
@@ -153,21 +153,21 @@ public class CommandFactory {
      * @param executor the command executor
      * @return the list of commands
      */
-    private static List<Command> createCommandList(CommandExecutor executor, boolean forWeb) {
+    private static List<Command> createCommandList(CommandExecutor executor) {
         Map<Method, Action> actions = new LinkedHashMap<>();
         Map<Method, Accessor> accessors = new LinkedHashMap<>();
         for (Method method : executor.getClass().getDeclaredMethods()) {
             if (Modifier.isPublic(method.getModifiers())) {
                 Action action = method.getAnnotation(Action.class);
                 if (action != null) {
-                    if (isCommandAvailable(action, executor.getWebDriver(), forWeb)) {
+                    if (isCommandAvailable(action, executor.getWebDriver())) {
                         actions.put(method, action);
                     }
                 }
 
                 Accessor accessor = method.getAnnotation(Accessor.class);
                 if (accessor != null) {
-                    if (isCommandAvailable(accessor, executor.getWebDriver(), forWeb)) {
+                    if (isCommandAvailable(accessor, executor.getWebDriver())) {
                         accessors.put(method, accessor);
                     }
                 }
@@ -574,7 +574,7 @@ public class CommandFactory {
      * @param webDriver  the context aware web driver
      * @return true if the command is available, otherwise, false
      */
-    private static boolean isCommandAvailable(Object annotation, ContextAwareWebDriver webDriver, boolean forWeb) {
+    private static boolean isCommandAvailable(Object annotation, ContextAwareWebDriver webDriver) {
         boolean webOnly = false;
         boolean androidOnly = false;
         boolean iosOnly = false;
@@ -590,7 +590,7 @@ public class CommandFactory {
             iosOnly = accessor.iosOnly();
         }
         if (webOnly) {
-            return webDriver.isWeb() && forWeb;
+            return webDriver.isWeb();
         }
         if (androidOnly) {
             return webDriver.isAndroid();
@@ -954,13 +954,13 @@ public class CommandFactory {
         }
         String actual = getStringValue(value);
         if (paramCount == 0) {
-            if (!Pattern.compile(executor.normalizeText((String) param1)).matcher(actual).find())
+            if (!Pattern.compile(executor.normalizeText((String) param1), Pattern.MULTILINE).matcher(actual).find())
                 throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param1 + "'");
         } else if (paramCount == 1) {
-            if (!Pattern.compile(executor.normalizeText((String) param2)).matcher(actual).find())
+            if (!Pattern.compile(executor.normalizeText((String) param2), Pattern.MULTILINE).matcher(actual).find())
                 throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param2 + "'");
         } else if (paramCount == 2) {
-            if (!Pattern.compile(executor.normalizeText((String) param3)).matcher(actual).find())
+            if (!Pattern.compile(executor.normalizeText((String) param3), Pattern.MULTILINE).matcher(actual).find())
                 throw new AssertFailedException("Actual text '" + actual + "' did not match '" + param3 + "'");
         } else {
             throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
@@ -987,13 +987,13 @@ public class CommandFactory {
         }
         String actual = getStringValue(value);
         if (paramCount == 0) {
-            if (Pattern.compile(executor.normalizeText((String) param1)).matcher(actual).find())
+            if (Pattern.compile(executor.normalizeText((String) param1), Pattern.MULTILINE).matcher(actual).find())
                 throw new AssertFailedException("Actual text '" + actual + "' did match '" + param1 + "'");
         } else if (paramCount == 1) {
-            if (Pattern.compile(executor.normalizeText((String) param2)).matcher(actual).find())
+            if (Pattern.compile(executor.normalizeText((String) param2), Pattern.MULTILINE).matcher(actual).find())
                 throw new AssertFailedException("Actual text '" + actual + "' did match '" + param2 + "'");
         } else if (paramCount == 2) {
-            if (Pattern.compile(executor.normalizeText((String) param3)).matcher(actual).find())
+            if (Pattern.compile(executor.normalizeText((String) param3), Pattern.MULTILINE).matcher(actual).find())
                 throw new AssertFailedException("Actual text '" + actual + "' did match '" + param3 + "'");
         } else {
             throw new AssertFailedException("Number of parameters is invalid. Param count is " + paramCount);
