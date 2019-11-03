@@ -112,7 +112,9 @@ public class ProjectControllerTest {
                     new HashMap<String, ListResult>() {{ put("", new ListResult(AppType.MOBILE.name())); }},
                     new HashMap<String, ListResult>() {{ put("", new ListResult(WorkbookType.SHEETS.name())); }},
                     new HashMap<String, InputResult>() {{ put("", new InputResult("app")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("screenshot")); }});
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("screenshot")); }},
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("localhost")); }},
+                    new HashMap<String, InputResult>() {{ put("", new InputResult("4723")); }});
         }};
 
         projectController.create();

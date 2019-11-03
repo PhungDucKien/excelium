@@ -77,12 +77,12 @@ public class DriverFactory {
     /**
      * Default Appium host
      */
-    private static final String DEFAULT_APPIUM_HOST = "localhost";
+    public static final String DEFAULT_APPIUM_HOST = "localhost";
 
     /**
      * Default Appium port
      */
-    private static final int DEFAULT_APPIUM_PORT = 4723;
+    public static final int DEFAULT_APPIUM_PORT = 4723;
 
     /**
      * Creates context aware web driver for an environment.

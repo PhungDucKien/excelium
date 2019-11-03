@@ -103,7 +103,7 @@ public class TestRunnerTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
                 return commandMap;
             }
         };
@@ -184,7 +184,7 @@ public class TestRunnerTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
                 return commandMap;
             }
         };
@@ -252,7 +252,7 @@ public class TestRunnerTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
                 return commandMap;
             }
         };
@@ -364,7 +364,7 @@ public class TestRunnerTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
                 return commandMap;
             }
         };
@@ -474,7 +474,7 @@ public class TestRunnerTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
                 return commandMap;
             }
         };
@@ -632,7 +632,7 @@ public class TestRunnerTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
                 return commandMap;
             }
         };
@@ -904,7 +904,7 @@ public class TestRunnerTest {
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean forWeb) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
                 return commandMap;
             }
         };

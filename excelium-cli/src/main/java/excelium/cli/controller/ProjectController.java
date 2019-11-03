@@ -40,6 +40,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static excelium.cli.Prompt.*;
+import static excelium.core.driver.DriverFactory.DEFAULT_APPIUM_HOST;
+import static excelium.core.driver.DriverFactory.DEFAULT_APPIUM_PORT;
 
 /**
  * Provides commands for controlling project.
@@ -111,6 +113,13 @@ public class ProjectController extends BaseController {
         if (project.getAppType() != AppType.MOBILE) {
             String downloadFolder = promptInput("Where do you want to store downloads?", "download");
             project.setDownloadPath(Paths.get(downloadFolder));
+        }
+
+        if (project.getAppType() == AppType.MOBILE) {
+            String appiumHost = promptInput("What is the Appium server address?", DEFAULT_APPIUM_HOST);
+            project.setAppiumHost(appiumHost);
+            String appiumPort = promptInput("What is the Appium server port?", String.valueOf(DEFAULT_APPIUM_PORT));
+            project.setAppiumPort(Integer.parseInt(appiumPort));
         }
 
         ProjectGenerator generator = new ProjectGenerator();

@@ -39,8 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.fusesource.jansi.AnsiRenderer.render;
-
 /**
  * @author PhungDucKien
  * @since 2018.05.15
@@ -110,9 +108,9 @@ public class TestReporterTest {
         testReporter.endTestFlow();
 
         new Verifications() {{
-            consoleStream.println(render("@|black       Test Case 1|@"));
-            consoleStream.println(render("@|black         Test Case 2|@"));
-            consoleStream.println(render("@|black           Test Case 3|@"));
+            consoleStream.println("      Test Case 1\u001B[m");
+            consoleStream.println("        Test Case 2\u001B[m");
+            consoleStream.println("          Test Case 3\u001B[m");
         }};
     }
 }

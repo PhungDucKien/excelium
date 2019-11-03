@@ -101,6 +101,8 @@ public class MyDocletTest {
             rootDoc.options(); result = options;
             rootDoc.classes(); result = new ClassDoc[] { classDoc };
 
+            classDoc.name(); result = "NavigateCommandExecutor";
+
             classDoc.methods(); result = new MethodDoc[] { methodDoc1, methodDoc2 };
 
             typeDoc1.qualifiedName(); result = "excelium.core.command.Action";

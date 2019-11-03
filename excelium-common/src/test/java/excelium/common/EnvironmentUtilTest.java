@@ -81,13 +81,13 @@ public class EnvironmentUtilTest {
 
     @Test
     public void testGetAvailableMobileAppEnvironments() {
-        List<Environment> environments = EnvironmentUtil.getAvailableMobileAppEnvironments(Platform.ANDROID, null, null, null, null, null, null, null, null, null);
+        List<Environment> environments = EnvironmentUtil.getAvailableMobileAppEnvironments(Platform.ANDROID, null, null, null, null, null, null, null, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Platform.ANDROID, environments.get(0).getPlatform());
         Assert.assertEquals("Android Emulator", ((MobileAppEnvironment) environments.get(0)).getDeviceName());
         Assert.assertEquals("Portrait", ((MobileAppEnvironment) environments.get(0)).getOrientation());
 
-        environments = EnvironmentUtil.getAvailableMobileAppEnvironments(Platform.IOS, null, null, null, null, null, null, null, null, null);
+        environments = EnvironmentUtil.getAvailableMobileAppEnvironments(Platform.IOS, null, null, null, null, null, null, null, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Platform.IOS, environments.get(0).getPlatform());
         Assert.assertEquals("iPhone Simulator", ((MobileAppEnvironment) environments.get(0)).getDeviceName());
