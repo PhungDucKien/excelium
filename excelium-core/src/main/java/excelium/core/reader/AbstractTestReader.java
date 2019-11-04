@@ -25,6 +25,7 @@
 package excelium.core.reader;
 
 import excelium.common.ObjectUtil;
+import excelium.common.PlatformDetector;
 import excelium.common.TemplateUtil;
 import excelium.common.WildcardUtil;
 import excelium.common.ss.CellLocation;
@@ -36,6 +37,7 @@ import excelium.model.project.Template;
 import excelium.model.test.*;
 import excelium.model.test.action.TestAction;
 import excelium.model.test.config.Environment;
+import excelium.model.test.config.PcEnvironment;
 import excelium.model.test.config.TestConfig;
 import excelium.model.test.data.Column;
 import excelium.model.test.data.TableData;
@@ -220,6 +222,15 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
             } else {
                 environments.addAll(getAvailableMobileWebEnvironments(Platform.IOS, iOsVersions, iOsDevices, iOsOrientations, iOsUdid, iOsBrowsers));
             }
+        }
+
+        if (environments.isEmpty()) {
+            PcEnvironment environment = new PcEnvironment();
+            environment.setPlatform(PlatformDetector.getPlatform());
+            environment.setBrowser(Browser.CHROME);
+            environment.setBrowserVersion("");
+            environment.setResolution("1024x768");
+            environments.add(environment);
         }
 
         return environments;
@@ -457,7 +468,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                 testStep.setTestData(testData);
                 testStep.setRowIndex(height * index);
 
-                if (StringUtils.isNotBlank(testName)) {
+                if (StringUtils.isNotBlank(testName) || StringUtils.isBlank(markupLocations.get(prefix + "NAME%"))) {
                     currentTestFlow = new TestCase();
                     currentTestFlow.setNo(actualTestNo);
                     currentTestFlow.setName(testName);

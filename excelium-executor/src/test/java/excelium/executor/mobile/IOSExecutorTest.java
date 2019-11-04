@@ -26,6 +26,7 @@ package excelium.executor.mobile;
 
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
+import excelium.core.driver.DriverPool;
 import excelium.executor.MobileExcelium;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
@@ -33,6 +34,7 @@ import excelium.model.test.config.MobileAppEnvironment;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -68,7 +70,8 @@ public class IOSExecutorTest {
 
         Project project = new Project();
         project.setAppPath(Paths.get("src/test/resources"));
-        webDriver = DriverFactory.createDriver(environment, project, null);
+        RemoteWebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        webDriver = new ContextAwareWebDriver(driver, null);
         selenium = new MobileExcelium(webDriver, null, project);
     }
 

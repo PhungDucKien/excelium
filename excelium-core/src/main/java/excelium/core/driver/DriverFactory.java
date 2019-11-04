@@ -24,7 +24,6 @@
 
 package excelium.core.driver;
 
-import excelium.core.screenshot.ScreenshotService;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
@@ -33,6 +32,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.*;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
@@ -75,25 +75,14 @@ public class DriverFactory {
     private static final int WEBDRIVER_DEFAULT_IMPLICIT_WAIT = 1000;
 
     /**
-     * Default Appium host
-     */
-    public static final String DEFAULT_APPIUM_HOST = "localhost";
-
-    /**
-     * Default Appium port
-     */
-    public static final int DEFAULT_APPIUM_PORT = 4723;
-
-    /**
      * Creates context aware web driver for an environment.
      *
-     * @param environment       the environment
-     * @param project           the project
-     * @param screenshotService the screenshot service
+     * @param environment the environment
+     * @param project     the project
      * @return the context aware web driver
      * @throws IOException the io exception
      */
-    public static ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
+    public RemoteWebDriver createDriver(Environment environment, Project project) throws IOException {
         RemoteWebDriver webDriver = null;
         if (environment instanceof PcEnvironment) {
             webDriver = createPcDriver((PcEnvironment) environment, project);
@@ -101,7 +90,7 @@ public class DriverFactory {
             webDriver = createMobileDriver((MobileEnvironment) environment, project);
         }
         webDriver.manage().timeouts().implicitlyWait(WEBDRIVER_DEFAULT_IMPLICIT_WAIT, TimeUnit.MILLISECONDS);
-        return new ContextAwareWebDriver(webDriver, screenshotService);
+        return webDriver;
     }
 
     /**
@@ -112,7 +101,7 @@ public class DriverFactory {
      * @return the PC web driver
      * @throws IOException the io exception
      */
-    private static RemoteWebDriver createPcDriver(PcEnvironment environment, Project project) throws IOException {
+    private RemoteWebDriver createPcDriver(PcEnvironment environment, Project project) throws IOException {
         ensurePcDriverDownloaded(environment);
         RemoteWebDriver webDriver = null;
         switch (environment.getBrowser()) {
@@ -151,7 +140,7 @@ public class DriverFactory {
      * @return the mobile web driver
      * @throws MalformedURLException the malformed URL exception
      */
-    private static AppiumDriver createMobileDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
+    private AppiumDriver createMobileDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
         AppiumDriver appiumDriver = null;
         switch (environment.getPlatform()) {
             case ANDROID:
@@ -171,7 +160,7 @@ public class DriverFactory {
      * @param project     the project
      * @return the Chrome web driver
      */
-    private static ChromeDriver createChromeDriver(PcEnvironment environment, Project project) {
+    private ChromeDriver createChromeDriver(PcEnvironment environment, Project project) {
         System.setProperty("webdriver.chrome.driver", getPcDriverPath(environment));
 
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -191,7 +180,7 @@ public class DriverFactory {
      * @param project     the project
      * @return the Firefox web driver
      */
-    private static FirefoxDriver createFirefoxDriver(PcEnvironment environment, Project project) {
+    private FirefoxDriver createFirefoxDriver(PcEnvironment environment, Project project) {
         System.setProperty("webdriver.gecko.driver", getPcDriverPath(environment));
 
         FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -217,7 +206,7 @@ public class DriverFactory {
      * @param environment the environment
      * @return the Internet Explorer web driver
      */
-    private static InternetExplorerDriver createInternetExplorerDriver(PcEnvironment environment) {
+    private InternetExplorerDriver createInternetExplorerDriver(PcEnvironment environment) {
         System.setProperty("webdriver.ie.driver", getPcDriverPath(environment));
 
         InternetExplorerOptions ieOptions = new InternetExplorerOptions();
@@ -232,7 +221,7 @@ public class DriverFactory {
      * @param environment the environment
      * @return the Microsoft Edge web driver
      */
-    private static EdgeDriver createEdgeDriver(PcEnvironment environment) {
+    private EdgeDriver createEdgeDriver(PcEnvironment environment) {
         System.setProperty("webdriver.edge.driver", getPcDriverPath(environment));
 
         EdgeOptions edgeOptions = new EdgeOptions();
@@ -245,7 +234,7 @@ public class DriverFactory {
      * @param environment the environment
      * @return the Opera web driver
      */
-    private static OperaDriver createOperaDriver(PcEnvironment environment) {
+    private OperaDriver createOperaDriver(PcEnvironment environment) {
         System.setProperty("webdriver.opera.driver", getPcDriverPath(environment));
 
         OperaOptions operaOptions = new OperaOptions();
@@ -257,7 +246,7 @@ public class DriverFactory {
      *
      * @return the Safari web driver
      */
-    private static SafariDriver createSafariDriver() {
+    private SafariDriver createSafariDriver() {
         // Safari 10+ included Apple's SafariDriver
 
         SafariOptions safariOptions = new SafariOptions();
@@ -272,7 +261,7 @@ public class DriverFactory {
      * @return the Android driver
      * @throws MalformedURLException the malformed URL exception
      */
-    private static AndroidDriver createAndroidDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
+    private AndroidDriver createAndroidDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
         if (StringUtils.isNotBlank(environment.getPlatformVersion())) {
@@ -323,7 +312,7 @@ public class DriverFactory {
      * @return the iOS driver
      * @throws MalformedURLException the malformed URL exception
      */
-    private static IOSDriver createIOSDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
+    private IOSDriver createIOSDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.IOS);
         if (StringUtils.isNotBlank(environment.getPlatformVersion())) {
@@ -370,14 +359,14 @@ public class DriverFactory {
      * @return Appium remote address
      * @throws MalformedURLException the malformed URL exception
      */
-    private static URL getAppiumAddress(Project project) throws MalformedURLException {
+    private URL getAppiumAddress(Project project) throws MalformedURLException {
         String appiumHost = project.getAppiumHost();
         if (StringUtils.isBlank(appiumHost)) {
-            appiumHost = DEFAULT_APPIUM_HOST;
+            appiumHost = AppiumServiceBuilder.DEFAULT_LOCAL_IP_ADDRESS;
         }
         Integer appiumPort = project.getAppiumPort();
         if (appiumPort == null) {
-            appiumPort = DEFAULT_APPIUM_PORT;
+            appiumPort = AppiumServiceBuilder.DEFAULT_APPIUM_PORT;
         }
         return new URL("http://" + appiumHost + ":" + appiumPort + "/wd/hub");
     }
@@ -389,7 +378,7 @@ public class DriverFactory {
      * @param environment the environment
      * @throws IOException the io exception
      */
-    private static void ensurePcDriverDownloaded(PcEnvironment environment) throws IOException {
+    private void ensurePcDriverDownloaded(PcEnvironment environment) throws IOException {
         String driverPath = getPcDriverPath(environment);
         File driverFile = new File(driverPath);
         if (!driverFile.exists()) {
@@ -403,7 +392,7 @@ public class DriverFactory {
      * @param environment the environment
      * @return the PC web driver local path
      */
-    private static String getPcDriverPath(PcEnvironment environment) {
+    private String getPcDriverPath(PcEnvironment environment) {
         String appHome = System.getProperty("app.home");
         if (StringUtils.isBlank(appHome)) {
             appHome = System.getProperty("user.dir");
@@ -421,7 +410,7 @@ public class DriverFactory {
      * @param webDriver   the web driver
      * @param environment the environment
      */
-    private static void setWindowSize(RemoteWebDriver webDriver, PcEnvironment environment) {
+    private void setWindowSize(RemoteWebDriver webDriver, PcEnvironment environment) {
         String resolution = environment.getResolution();
         if (StringUtils.isNotBlank(resolution)) {
             String[] dimensions = resolution.split("x");

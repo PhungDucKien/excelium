@@ -50,6 +50,7 @@ import excelium.model.test.item.Item;
 import excelium.model.test.item.PageSet;
 import mockit.*;
 import org.junit.Assert;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -75,7 +76,13 @@ public class TestRunnerTest {
     private TestWriter testWriter;
 
     @Mocked
+    private RemoteWebDriver driver;
+
+    @Mocked
     private ContextAwareWebDriver webDriver;
+
+    @Mocked
+    private DriverFactory driverFactory;
 
     @Injectable
     private PrintStream consoleStream;
@@ -94,12 +101,9 @@ public class TestRunnerTest {
         });
         commandMap.put("click(1)", command);
 
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+        }};
 
         new MockUp<CommandFactory>() {
             @Mock
@@ -175,12 +179,9 @@ public class TestRunnerTest {
     public void testRunAll_NotFoundCommand() throws Exception {
         Map<String, Command> commandMap = new HashMap<>();
 
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+        }};
 
         new MockUp<CommandFactory>() {
             @Mock
@@ -243,12 +244,9 @@ public class TestRunnerTest {
         });
         commandMap.put("click(1)", command);
 
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+        }};
 
         new MockUp<CommandFactory>() {
             @Mock
@@ -355,12 +353,9 @@ public class TestRunnerTest {
         });
         commandMap.put("click(1)", command);
 
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+        }};
 
         new MockUp<CommandFactory>() {
             @Mock
@@ -465,12 +460,9 @@ public class TestRunnerTest {
         });
         commandMap.put("clickArray(1)", command);
 
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+        }};
 
         new MockUp<CommandFactory>() {
             @Mock
@@ -623,12 +615,9 @@ public class TestRunnerTest {
         });
         commandMap.put("click(1)", command);
 
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+        }};
 
         new MockUp<CommandFactory>() {
             @Mock
@@ -895,12 +884,9 @@ public class TestRunnerTest {
         });
         commandMap.put("click(1)", command);
 
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+        }};
 
         new MockUp<CommandFactory>() {
             @Mock

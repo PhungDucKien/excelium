@@ -31,6 +31,7 @@ import excelium.generator.ProjectGenerator;
 import excelium.model.enums.AppType;
 import excelium.model.enums.WorkbookType;
 import excelium.model.project.Project;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.JAXBException;
@@ -40,8 +41,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static excelium.cli.Prompt.*;
-import static excelium.core.driver.DriverFactory.DEFAULT_APPIUM_HOST;
-import static excelium.core.driver.DriverFactory.DEFAULT_APPIUM_PORT;
 
 /**
  * Provides commands for controlling project.
@@ -116,9 +115,9 @@ public class ProjectController extends BaseController {
         }
 
         if (project.getAppType() == AppType.MOBILE) {
-            String appiumHost = promptInput("What is the Appium server address?", DEFAULT_APPIUM_HOST);
+            String appiumHost = promptInput("What is the Appium server address?", AppiumServiceBuilder.DEFAULT_LOCAL_IP_ADDRESS);
             project.setAppiumHost(appiumHost);
-            String appiumPort = promptInput("What is the Appium server port?", String.valueOf(DEFAULT_APPIUM_PORT));
+            String appiumPort = promptInput("What is the Appium server port?", String.valueOf(AppiumServiceBuilder.DEFAULT_APPIUM_PORT));
             project.setAppiumPort(Integer.parseInt(appiumPort));
         }
 

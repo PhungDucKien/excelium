@@ -121,7 +121,7 @@ public class SheetsReaderTest {
         excelium.model.test.Test test = sheetsReader1.parseTest(webTemplate, null, null);
 
         Assert.assertEquals("1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE - Web Test", test.getWorkbookName());
-        Assert.assertEquals("http://demo.excelium.tech", test.getConfig().getBaseUrl());
+        Assert.assertEquals("https://google.com.vn", test.getConfig().getBaseUrl());
         Assert.assertEquals(1, test.getConfig().getEnvironments().size());
         Assert.assertEquals(Browser.CHROME, ((PcEnvironment) test.getConfig().getEnvironments().get(0)).getBrowser());
 

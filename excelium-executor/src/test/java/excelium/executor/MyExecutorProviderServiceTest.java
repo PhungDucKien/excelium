@@ -25,22 +25,19 @@
 package excelium.executor;
 
 import excelium.core.TestRunner;
-import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverFactory;
 import excelium.core.report.TestReporter;
-import excelium.core.screenshot.ScreenshotService;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
 import excelium.model.project.Project;
 import excelium.model.test.config.Environment;
 import excelium.model.test.config.PcEnvironment;
 import excelium.model.test.config.TestConfig;
-import mockit.Mock;
-import mockit.MockUp;
+import mockit.Expectations;
 import mockit.Mocked;
 import org.junit.Test;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,16 +53,17 @@ public class MyExecutorProviderServiceTest {
     private TestWriter testWriter;
 
     @Mocked
-    private ContextAwareWebDriver webDriver;
+    private RemoteWebDriver driver;
+
+    @Mocked
+    private DriverFactory driverFactory;
 
     @Test
     public void testGetWebExecutorClasses() throws Exception {
-        new MockUp<DriverFactory>() {
-            @Mock
-            public ContextAwareWebDriver createDriver(Environment environment, Project project, ScreenshotService screenshotService) throws IOException {
-                return webDriver;
-            }
-        };
+        new Expectations() {{
+            driverFactory.createDriver((Environment) any, (Project) any);
+            result = driver;
+        }};
 
         excelium.model.test.Test test = new excelium.model.test.Test();
         test.setWorkbookName("Workbook test");

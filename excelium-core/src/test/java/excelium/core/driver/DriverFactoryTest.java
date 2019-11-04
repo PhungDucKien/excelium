@@ -112,9 +112,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof ChromeDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof ChromeDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -145,9 +144,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof FirefoxDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof FirefoxDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -171,9 +169,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof InternetExplorerDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof InternetExplorerDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -197,9 +194,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof EdgeDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof EdgeDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -223,9 +219,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof SafariDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof SafariDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -255,9 +250,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.WINDOWS_32);
         environment.setResolution("1024x768");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof OperaDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof OperaDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -278,9 +272,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.ANDROID);
         environment.setAppPath("test.apk");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof AndroidDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof AndroidDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -300,9 +293,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.ANDROID);
         environment.setBrowser(Browser.CHROME);
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof AndroidDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof AndroidDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -323,9 +315,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.IOS);
         environment.setAppPath("test.ipa");
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof IOSDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof IOSDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);
@@ -345,9 +336,8 @@ public class DriverFactoryTest {
         environment.setPlatform(Platform.IOS);
         environment.setBrowser(Browser.SAFARI);
 
-        WebDriver driver = DriverFactory.createDriver(environment, project, null);
-        WebDriver innerDriver = Deencapsulation.getField(driver, "webDriver");
-        Assert.assertTrue(innerDriver instanceof IOSDriver);
+        WebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+        Assert.assertTrue(driver instanceof IOSDriver);
 
         new Verifications() {{
             webDriverTimeouts.implicitlyWait(anyLong, (TimeUnit) any);

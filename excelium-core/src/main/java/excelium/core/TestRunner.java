@@ -28,7 +28,7 @@ import excelium.common.StringUtil;
 import excelium.common.WildcardUtil;
 import excelium.core.database.DatabaseService;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.driver.DriverFactory;
+import excelium.core.driver.DriverPool;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.report.TestReporter;
 import excelium.core.screenshot.ScreenshotService;
@@ -48,6 +48,7 @@ import excelium.model.test.item.Item;
 import excelium.model.test.item.PageSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -191,7 +192,8 @@ public class TestRunner {
     private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         setEnvironment(environment);
         try {
-            webDriver = DriverFactory.createDriver(environment, project, screenshotService);
+            RemoteWebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+            webDriver = new ContextAwareWebDriver(driver, screenshotService);
             if (test.getTestSuites() != null) {
                 initializeExcelium(webDriver);
                 for (TestSuite testSuite : test.getTestSuites().values()) {
@@ -201,7 +203,7 @@ public class TestRunner {
         } finally {
             excelium = null;
             if (webDriver != null) {
-                webDriver.quit();
+//                webDriver.quit();
                 webDriver = null;
             }
         }
@@ -297,9 +299,9 @@ public class TestRunner {
      * Run the command.
      *
      * @param methodName the method name
-     * @param param1  value of parameter 1
-     * @param param2  value of parameter 2
-     * @param param3  value of parameter 3
+     * @param param1     value of parameter 1
+     * @param param2     value of parameter 2
+     * @param param3     value of parameter 3
      * @return Result of the command
      */
     private StepResult runCommand(String methodName, Object param1, Object param2, Object param3) {
@@ -324,7 +326,7 @@ public class TestRunner {
 
         if (test.getActions() != null && !test.getActions().isEmpty()) {
             for (TestAction action : test.getActions().values()) {
-                excelium.addAction(action.getName(),  () -> runTestFlow(action));
+                excelium.addAction(action.getName(), () -> runTestFlow(action));
             }
         }
     }
@@ -427,8 +429,8 @@ public class TestRunner {
     /**
      * Write test result to the workbook
      *
-     * @param testStep  the test step
-     * @param result    the result to write
+     * @param testStep the test step
+     * @param result   the result to write
      * @throws IOException the io exception
      */
     private void writeResult(TestStep testStep, Result result) throws IOException {
