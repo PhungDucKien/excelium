@@ -8,6 +8,7 @@ dependencies {
     compile project(':excelium-model')
     compile project(':excelium-common')
     compile project(':excelium-core')
+    compile project(':excelium-updater')
     compile project(':excelium-executor')
     compile project(':excelium-sheets')
     compile project(':excelium-xls')

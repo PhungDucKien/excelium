@@ -37,6 +37,7 @@ import excelium.core.writer.TestWriterFactory;
 import excelium.model.project.Project;
 import excelium.model.project.TestFile;
 import excelium.model.test.TestFilter;
+import excelium.updater.AppUpdater;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -86,6 +87,14 @@ public class TestController extends BaseController {
      */
     @Command
     public void execute() throws IOException {
+        AppUpdater updater = new AppUpdater();
+        boolean shouldRestart = updater.checkVersion();
+
+        if (shouldRestart) {
+            System.exit(0);
+            return;
+        }
+
         String action = "";
         TestExecutor testExecutor = new TestExecutor(project, testReaderFactory, testWriterFactory);
         TestFilter testFilter = new TestFilter();

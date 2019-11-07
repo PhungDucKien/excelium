@@ -382,7 +382,8 @@ public class DriverFactory {
         String driverPath = getPcDriverPath(environment);
         File driverFile = new File(driverPath);
         if (!driverFile.exists()) {
-            DriverDownloader.downloadPcDriver(environment, driverPath);
+            DriverDownloader downloader = new DriverDownloader();
+            downloader.downloadPcDriver(environment, driverPath);
         }
     }
 
