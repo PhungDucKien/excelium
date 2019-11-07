@@ -24,16 +24,14 @@
 
 package excelium.core.reader;
 
-import excelium.common.ObjectUtil;
-import excelium.common.PlatformDetector;
-import excelium.common.TemplateUtil;
-import excelium.common.WildcardUtil;
+import excelium.common.*;
 import excelium.common.ss.CellLocation;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.enums.WriteMode;
 import excelium.model.project.Template;
+import excelium.model.project.TestFile;
 import excelium.model.test.*;
 import excelium.model.test.action.TestAction;
 import excelium.model.test.config.Environment;
@@ -103,8 +101,27 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
         sheets.removeAll(actionSheets);
 
         List<S> testSheets = filterSheets(sheets, template.getTestPattern());
-        if (testFilter != null && CollectionUtils.isNotEmpty(testFilter.getSheets())) {
-            testSheets = filterSheets(testSheets, testFilter.getSheets());
+        if (testFilter != null && testFilter.getWorkbook() != null && !testFilter.getWorkbook().equals(TestFile.ALL)) {
+            if (StringUtils.isBlank(testFilter.getSheet())) {
+                String[][] listChoice = new String[testSheets.size() + 1][2];
+                int i = 0;
+                for (S sheet : testSheets) {
+                    listChoice[i++] = new String[]{getSheetName(sheet), getSheetName(sheet)};
+                }
+                listChoice[i] = new String[]{TestSuite.ALL, "All sheets"};
+
+                String runSheet = Prompt.promptList("Choose the test sheet to run:", listChoice);
+                testFilter.setSheet(runSheet);
+            }
+
+            if (testFilter.getSheet() != null && !testFilter.getSheet().equals(TestSuite.ALL)) {
+                testSheets = filterSheets(testSheets, testFilter.getSheet());
+
+                if (StringUtils.isBlank(testFilter.getTestCase())) {
+                    String runTestCase = Prompt.promptInput("Input the test number to run (leave empty to run all):", TestCase.ALL);
+                    testFilter.setTestCase(runTestCase);
+                }
+            }
         }
 
         setTestConfig(test, template);
@@ -473,7 +490,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
                     currentTestFlow.setNo(actualTestNo);
                     currentTestFlow.setName(testName);
                     currentTestFlow.setDescription(testDesc);
-                    if (testFilter == null || CollectionUtils.isEmpty(testFilter.getTestCases()) || testFilter.getTestCases().contains(String.valueOf(actualTestNo))) {
+                    if (testFilter == null || testFilter.getTestCase() == null || testFilter.getTestCase().equals(TestCase.ALL) || testFilter.getTestCase().equals(String.valueOf(actualTestNo))) {
                         testFlows.add(currentTestFlow);
                     }
                     if (testWriter != null && testNoFirstLocation != null && !String.valueOf(actualTestNo).equals(testNo)) {

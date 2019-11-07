@@ -14,7 +14,6 @@ dependencies {
     compile project(':excelium-generator')
 
     compile group: 'com.beust', name: 'jcommander', version: '1.72'
-    compile group: 'de.codeshelf.consoleui', name: 'consoleui', version: '0.0.9'
 }
 
 task cleanDist(type: Delete) {

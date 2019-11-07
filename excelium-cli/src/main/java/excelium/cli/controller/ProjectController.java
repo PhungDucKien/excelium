@@ -40,7 +40,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static excelium.cli.Prompt.*;
+import static excelium.common.Prompt.*;
 
 /**
  * Provides commands for controlling project.

@@ -2,6 +2,7 @@ dependencies {
     compile project(':excelium-model')
 
     compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.12.0'
+    compile group: 'de.codeshelf.consoleui', name: 'consoleui', version: '0.0.9'
 }
 
 task generateSources {

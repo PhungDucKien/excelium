@@ -34,7 +34,6 @@ import excelium.model.project.Template;
 import excelium.model.project.TestFile;
 import excelium.model.test.Test;
 import excelium.model.test.TestFilter;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -118,12 +117,11 @@ public class TestExecutor {
      */
     private List<TestFile> filterTestFiles(TestFilter testFilter) {
         Map<String, TestFile> tests = project.getTests();
-        if (testFilter != null && CollectionUtils.isNotEmpty(testFilter.getWorkbooks())) {
+        if (testFilter != null && testFilter.getWorkbook() != null && !testFilter.getWorkbook().equals(TestFile.ALL)) {
             List<TestFile> filtered = new ArrayList<>();
-            for (String workbook : testFilter.getWorkbooks()) {
-                if (tests.keySet().contains(workbook)) {
-                    filtered.add(tests.get(workbook));
-                }
+            String workbook = testFilter.getWorkbook();
+            if (tests.keySet().contains(workbook)) {
+                filtered.add(tests.get(workbook));
             }
             return filtered;
         } else {

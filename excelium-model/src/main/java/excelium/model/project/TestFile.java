@@ -32,6 +32,8 @@ package excelium.model.project;
  */
 public class TestFile {
 
+    public static final String ALL = "ALL";
+
     /**
      * File location. File path or spreadsheet ID
      */

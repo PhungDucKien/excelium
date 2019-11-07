@@ -37,6 +37,8 @@ import java.util.Map;
  */
 public class Template {
 
+    public static final String ALL = "ALL";
+
     /**
      * The constant BASE_URL.
      */

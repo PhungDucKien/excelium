@@ -24,8 +24,6 @@
 
 package excelium.model.test;
 
-import java.util.List;
-
 /**
  * Represents filter for test execution.
  *
@@ -37,69 +35,69 @@ public class TestFilter {
     /**
      * Workbook filter
      */
-    private List<String> workbooks;
+    private String workbook;
 
     /**
      * Sheet filter
      */
-    private List<String> sheets;
+    private String sheet;
 
     /**
      * Test case filter
      */
-    private List<String> testCases;
+    private String testCase;
 
     /**
-     * Gets workbooks.
+     * Gets workbook filter.
      *
-     * @return the workbooks
+     * @return the workbook filter
      */
-    public List<String> getWorkbooks() {
-        return workbooks;
+    public String getWorkbook() {
+        return workbook;
     }
 
     /**
-     * Sets workbooks.
+     * Sets workbook filter.
      *
-     * @param workbooks the workbooks
+     * @param workbook the workbook filter
      */
-    public void setWorkbooks(List<String> workbooks) {
-        this.workbooks = workbooks;
+    public void setWorkbook(String workbook) {
+        this.workbook = workbook;
     }
 
     /**
-     * Gets sheets.
+     * Gets sheet filter.
      *
-     * @return the sheets
+     * @return the sheet filter
      */
-    public List<String> getSheets() {
-        return sheets;
+    public String getSheet() {
+        return sheet;
     }
 
     /**
-     * Sets sheets.
+     * Sets sheet filter.
      *
-     * @param sheets the sheets
+     * @param sheet the sheet filter
      */
-    public void setSheets(List<String> sheets) {
-        this.sheets = sheets;
+    public void setSheet(String sheet) {
+        this.sheet = sheet;
     }
 
     /**
-     * Gets test cases.
+     * Gets test case filter.
      *
-     * @return the test cases
+     * @return the test case filter
      */
-    public List<String> getTestCases() {
-        return testCases;
+    public String getTestCase() {
+        return testCase;
     }
 
     /**
-     * Sets test cases.
+     * Sets test case filter.
      *
-     * @param testCases the test cases
+     * @param testCase the test case filter
      */
-    public void setTestCases(List<String> testCases) {
-        this.testCases = testCases;
+    public void setTestCase(String testCase) {
+        this.testCase = testCase;
     }
 }

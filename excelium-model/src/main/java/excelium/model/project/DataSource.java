@@ -34,6 +34,8 @@ import excelium.model.enums.DataSourceType;
  */
 public class DataSource {
 
+    public static final String ALL = "ALL";
+
     /**
      * Name
      */

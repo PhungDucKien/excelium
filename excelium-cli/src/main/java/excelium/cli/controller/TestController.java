@@ -24,7 +24,10 @@
 
 package excelium.cli.controller;
 
-import com.beust.jcommander.Parameter;
+import de.codeshelf.consoleui.prompt.ConsolePrompt;
+import de.codeshelf.consoleui.prompt.ExpandableChoiceResult;
+import de.codeshelf.consoleui.prompt.builder.ExpandableChoicePromptBuilder;
+import de.codeshelf.consoleui.prompt.builder.PromptBuilder;
 import excelium.cli.annotation.Command;
 import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
@@ -32,12 +35,14 @@ import excelium.core.TestExecutor;
 import excelium.core.reader.TestReaderFactory;
 import excelium.core.writer.TestWriterFactory;
 import excelium.model.project.Project;
+import excelium.model.project.TestFile;
 import excelium.model.test.TestFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+
+import static excelium.common.Prompt.promptList;
 
 /**
  * Provides commands for controlling test.
@@ -48,40 +53,15 @@ import java.util.List;
 @Controller
 public class TestController extends BaseController {
 
+    private static final String ACTION_ALL = "ALL";
+    private static final String ACTION_PREVIOUS_FILTER = "PREVIOUS_FILTER";
+    private static final String ACTION_FILTER_TESTS = "FILTER";
+    private static final String ACTION_QUIT = "QUIT";
+
     /**
      * Logger
      */
     private static final Logger LOG = LogManager.getLogger();
-
-    /**
-     * Debug flag
-     */
-    @Parameter(names = {"-d", "-debug"}, description = "Debug mode. Use breakpoints to pause execution")
-    private boolean debug = false;
-
-    /**
-     * Silent flag
-     */
-    @Parameter(names = {"-silent"}, description = "Do not write results to workbooks")
-    private boolean silent = false;
-
-    /**
-     * Workbook filter
-     */
-    @Parameter(names = {"-w", "-workbooks"}, description = "Use the given workbooks", variableArity = true)
-    private List<String> workbooks = new ArrayList<>();
-
-    /**
-     * Sheet filter
-     */
-    @Parameter(names = {"-s", "-sheets"}, description = "Use the given sheets", variableArity = true)
-    private List<String> sheets = new ArrayList<>();
-
-    /**
-     * Test case filter
-     */
-    @Parameter(names = {"-t", "-test-cases"}, description = "Use the given test cases", variableArity = true)
-    private List<String> testCases = new ArrayList<>();
 
     /**
      * Project instance
@@ -105,13 +85,59 @@ public class TestController extends BaseController {
      * Executes tests.
      */
     @Command
-    public void execute() {
-        TestFilter testFilter = new TestFilter();
-        testFilter.setWorkbooks(workbooks);
-        testFilter.setSheets(sheets);
-        testFilter.setTestCases(testCases);
-
+    public void execute() throws IOException {
+        String action = "";
         TestExecutor testExecutor = new TestExecutor(project, testReaderFactory, testWriterFactory);
-        testExecutor.execute(testFilter);
+        TestFilter testFilter = new TestFilter();
+        boolean testExecuted = false;
+
+        while (!ACTION_QUIT.equals(action)) {
+            action = promptAction(testExecuted);
+            switch (action) {
+                case ACTION_ALL:
+                    testFilter = new TestFilter();
+                    testFilter.setWorkbook(TestFile.ALL);
+                    testExecutor.execute(testFilter);
+                    testExecuted = true;
+                    break;
+                case ACTION_PREVIOUS_FILTER:
+                    testExecutor.execute(testFilter);
+                    testExecuted = true;
+                    break;
+                case ACTION_FILTER_TESTS:
+                    String runWorkbook = promptList("Choose the test file to run:", project.getTestListChoice(true));
+
+                    testFilter = new TestFilter();
+                    testFilter.setWorkbook(runWorkbook);
+                    testExecutor.execute(testFilter);
+                    testExecuted = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Prompts for user to choose action
+     *
+     * @return User selected action
+     * @throws IOException if an I/O exception is thrown
+     */
+    private String promptAction(boolean testExecuted) throws IOException {
+        ConsolePrompt prompt = new ConsolePrompt();
+        PromptBuilder promptBuilder = prompt.getPromptBuilder();
+
+        ExpandableChoicePromptBuilder actionPromptBuilder = promptBuilder.createChoicePrompt()
+                .message("Press one of the following keys to continue (or press <h> for help)");
+        actionPromptBuilder.newItem(ACTION_ALL).key('a').message("Run all tests").add();
+        if (testExecuted) {
+            actionPromptBuilder.newItem(ACTION_PREVIOUS_FILTER).key('p').message("Use previous filter and run tests").add();
+        }
+        actionPromptBuilder.newItem(ACTION_FILTER_TESTS).key('t').message("Set filter and run tests").add();
+        actionPromptBuilder.newItem(ACTION_QUIT).key('q').message("Quit").add();
+
+        actionPromptBuilder.addPrompt();
+
+        ExpandableChoiceResult actionResult = (ExpandableChoiceResult) prompt.prompt(promptBuilder.build()).values().iterator().next();
+        return actionResult.getSelectedId();
     }
 }

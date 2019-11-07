@@ -425,12 +425,15 @@ public class Project {
      *
      * @return the test file list choice
      */
-    public String[][] getTestListChoice() {
+    public String[][] getTestListChoice(boolean showAll) {
         if (tests != null) {
-            String[][] listChoice = new String[tests.size()][2];
+            String[][] listChoice = new String[showAll ? tests.size() + 1 : tests.size()][2];
             int i = 0;
             for (TestFile t : tests.values()) {
                 listChoice[i++] = new String[]{t.getLocation(), t.getName()};
+            }
+            if (showAll) {
+                listChoice[i] = new String[]{TestFile.ALL, "All workbooks"};
             }
             return listChoice;
         }
@@ -442,12 +445,15 @@ public class Project {
      *
      * @return the template list choice
      */
-    public String[][] getTemplateListChoice() {
+    public String[][] getTemplateListChoice(boolean showAll) {
         if (templates != null) {
-            String[][] listChoice = new String[templates.size()][2];
+            String[][] listChoice = new String[showAll ? templates.size() + 1 : templates.size()][2];
             int i = 0;
             for (Template t : templates.values()) {
                 listChoice[i++] = new String[]{t.getLocation(), t.getName()};
+            }
+            if (showAll) {
+                listChoice[i] = new String[]{Template.ALL, "All templates"};
             }
             return listChoice;
         }
@@ -459,12 +465,15 @@ public class Project {
      *
      * @return the data source list choice
      */
-    public String[][] getDataSourceListChoice() {
+    public String[][] getDataSourceListChoice(boolean showAll) {
         if (dataSources != null) {
-            String[][] listChoice = new String[dataSources.size()][2];
+            String[][] listChoice = new String[showAll ? dataSources.size() + 1 : dataSources.size()][2];
             int i = 0;
             for (DataSource d : dataSources.values()) {
                 listChoice[i++] = new String[]{d.getName(), d.getName()};
+            }
+            if (showAll) {
+                listChoice[i] = new String[]{DataSource.ALL, "All data sources"};
             }
             return listChoice;
         }

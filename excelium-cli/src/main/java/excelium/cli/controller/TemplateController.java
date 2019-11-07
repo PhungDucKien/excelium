@@ -39,7 +39,7 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import static excelium.cli.Prompt.*;
+import static excelium.common.Prompt.*;
 
 /**
  * Provides commands for controlling template.
@@ -124,8 +124,12 @@ public class TemplateController extends BaseController {
      */
     @Command(name = "remove")
     public void remove() throws IOException, JAXBException, IllegalAccessException {
-        String removeTemplate = promptList("Choose the template to remove:", project.getTemplateListChoice());
-        project.getTemplates().remove(removeTemplate);
+        String removeTemplate = promptList("Choose the template to remove:", project.getTemplateListChoice(true));
+        if (removeTemplate.equals(Template.ALL)) {
+            project.getTemplates().clear();
+        } else {
+            project.getTemplates().remove(removeTemplate);
+        }
 
         ProjectGenerator generator = new ProjectGenerator();
         generator.updateProject(project, Paths.get("."));

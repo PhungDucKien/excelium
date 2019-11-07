@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.cli;
+package excelium.common;
 
 import de.codeshelf.consoleui.elements.ConfirmChoice;
 import de.codeshelf.consoleui.prompt.ConfirmResult;
@@ -31,8 +31,6 @@ import de.codeshelf.consoleui.prompt.InputResult;
 import de.codeshelf.consoleui.prompt.ListResult;
 import de.codeshelf.consoleui.prompt.builder.ListPromptBuilder;
 import de.codeshelf.consoleui.prompt.builder.PromptBuilder;
-import excelium.common.FileUtil;
-import excelium.common.StringUtil;
 import excelium.model.enums.WorkbookType;
 
 import java.io.IOException;

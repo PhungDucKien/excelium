@@ -32,4 +32,6 @@ package excelium.model.test;
  * @since 2018.03.30
  */
 public class TestCase extends TestFlow {
+
+    public static final String ALL = "ALL";
 }

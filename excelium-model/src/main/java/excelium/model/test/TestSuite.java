@@ -35,6 +35,8 @@ import java.util.List;
  */
 public class TestSuite {
 
+    public static final String ALL = "ALL";
+
     /**
      * Sheet name
      */

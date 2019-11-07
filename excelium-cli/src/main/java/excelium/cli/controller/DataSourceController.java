@@ -38,8 +38,8 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import static excelium.cli.Prompt.promptInput;
-import static excelium.cli.Prompt.promptList;
+import static excelium.common.Prompt.promptInput;
+import static excelium.common.Prompt.promptList;
 
 /**
  * Provides commands for controlling data source.
@@ -97,7 +97,7 @@ public class DataSourceController extends BaseController {
             if (project.getDataSources().size() == 1) {
                 project.setDefaultDataSource(dataSource.getName());
             } else {
-                String defaultDataSource = promptList("Please choose the default data source", project.getDataSourceListChoice());
+                String defaultDataSource = promptList("Please choose the default data source", project.getDataSourceListChoice(false));
                 project.setDefaultDataSource(defaultDataSource);
             }
 
@@ -117,17 +117,21 @@ public class DataSourceController extends BaseController {
      */
     @Command(name = "remove")
     public void remove() throws IOException, JAXBException {
-        String removeDataSource = promptList("Choose the data source to remove:", project.getDataSourceListChoice());
-        project.getDataSources().remove(removeDataSource);
-
-        if (StringUtils.equals(project.getDefaultDataSource(), removeDataSource)) {
-            if (project.getDataSources().size() == 0) {
-                project.setDefaultDataSource(null);
-            } else if (project.getDataSources().size() == 1) {
-                project.setDefaultDataSource(project.getDataSources().keySet().iterator().next());
-            } else {
-                String defaultDataSource = promptList("Please choose the default data source", project.getDataSourceListChoice());
-                project.setDefaultDataSource(defaultDataSource);
+        String removeDataSource = promptList("Choose the data source to remove:", project.getDataSourceListChoice(true));
+        if (removeDataSource.equals(DataSource.ALL)) {
+            project.getDataSources().clear();
+            project.setDefaultDataSource(null);
+        } else {
+            project.getDataSources().remove(removeDataSource);
+            if (StringUtils.equals(project.getDefaultDataSource(), removeDataSource)) {
+                if (project.getDataSources().size() == 0) {
+                    project.setDefaultDataSource(null);
+                } else if (project.getDataSources().size() == 1) {
+                    project.setDefaultDataSource(project.getDataSources().keySet().iterator().next());
+                } else {
+                    String defaultDataSource = promptList("Please choose the default data source", project.getDataSourceListChoice(false));
+                    project.setDefaultDataSource(defaultDataSource);
+                }
             }
         }
 

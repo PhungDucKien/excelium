@@ -37,8 +37,8 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import static excelium.cli.Prompt.promptFileLocation;
-import static excelium.cli.Prompt.promptList;
+import static excelium.common.Prompt.promptFileLocation;
+import static excelium.common.Prompt.promptList;
 
 /**
  * Provides commands for controlling test files.
@@ -68,7 +68,7 @@ public class TestFileController extends BaseController {
      */
     @Command(name = "generate")
     public void generate() throws IOException {
-        String generateTemplate = promptList("Choose the template for test file generating:", project.getTemplateListChoice());
+        String generateTemplate = promptList("Choose the template for test file generating:", project.getTemplateListChoice(false));
     }
 
     /**
@@ -88,7 +88,7 @@ public class TestFileController extends BaseController {
         testFile.setLocation(fileLocation);
         testFile.setName(testReader.getWorkbookName());
 
-        String template = promptList("Choose the template of the test file:", project.getTemplateListChoice());
+        String template = promptList("Choose the template of the test file:", project.getTemplateListChoice(false));
         testFile.setTemplate(template);
 
         project.addTest(testFile);
@@ -106,8 +106,12 @@ public class TestFileController extends BaseController {
      */
     @Command(name = "remove")
     public void remove() throws IOException, JAXBException, IllegalAccessException {
-        String removeTestFile = promptList("Choose the test file to remove:", project.getTestListChoice());
-        project.getTests().remove(removeTestFile);
+        String removeTestFile = promptList("Choose the test file to remove:", project.getTestListChoice(true));
+        if (removeTestFile.equals(TestFile.ALL)) {
+            project.getTests().clear();
+        } else {
+            project.getTests().remove(removeTestFile);
+        }
 
         ProjectGenerator generator = new ProjectGenerator();
         generator.updateProject(project, Paths.get("."));
