@@ -24,12 +24,23 @@
 
 package excelium.cli.controller;
 
+import de.codeshelf.consoleui.elements.PromptableElementIF;
+import de.codeshelf.consoleui.prompt.ConsolePrompt;
+import de.codeshelf.consoleui.prompt.ExpandableChoiceResult;
+import de.codeshelf.consoleui.prompt.InputResult;
+import de.codeshelf.consoleui.prompt.ListResult;
 import excelium.core.TestExecutor;
+import excelium.model.project.DataSource;
+import excelium.model.project.Project;
+import excelium.model.project.TestFile;
 import excelium.model.test.TestFilter;
-import mockit.Mocked;
-import mockit.Tested;
-import mockit.Verifications;
+import excelium.updater.AppUpdater;
+import mockit.*;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Tests for {@link TestController}.
@@ -42,15 +53,168 @@ public class TestControllerTest {
     @Mocked
     TestExecutor testExecutor;
 
+    @Mocked
+    AppUpdater appUpdater;
+
+    @Mocked
+    ConsolePrompt consolePrompt;
+
+    @Mocked
+    TestFilter testFilter;
+
     @Tested
     TestController testController;
 
     @Test
-    public void testExecute() {
+    public void testShouldRestart() throws IOException {
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = true;
+        }};
+
+        new MockUp<System>() {
+            @Mock
+            void exit(int status) {
+            }
+        };
+
         testController.execute();
 
         new Verifications() {{
-            testExecutor.execute((TestFilter) any);
+            consolePrompt.prompt((List<PromptableElementIF>) any); times = 0;
+            testExecutor.execute((TestFilter) any); times = 0;
+        }};
+    }
+
+    @Test
+    public void testExecuteAll() throws IOException {
+        new Expectations() {{
+           appUpdater.checkVersion();
+           result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("ALL")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }});
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("ALL"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testExecuteAllTwice() throws IOException {
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("ALL")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("ALL")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }});
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("ALL"); times = 2;
+            testExecutor.execute((TestFilter) any); times = 2;
+        }};
+    }
+
+    @Test
+    public void testExecuteFilter() throws IOException {
+        Project project = new Project();
+        Deencapsulation.setField(testController, project);
+
+        String[][] testListChoices = new String[1][2];
+        testListChoices[0] = new String[]{"Workbook1", "Workbook 1"};
+
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("FILTER")); }},
+                    new HashMap<String, ListResult>() {{ put("", new ListResult("Workbook1")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }});
+
+            project.setTests(new HashMap<String, TestFile>() {{
+                put("Workbook1", new TestFile());
+            }});
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("Workbook1"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testExecuteFilterTwice() throws IOException {
+        Project project = new Project();
+        Deencapsulation.setField(testController, project);
+
+        String[][] testListChoices = new String[1][2];
+        testListChoices[0] = new String[]{"Workbook1", "Workbook 1"};
+
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("FILTER")); }},
+                    new HashMap<String, ListResult>() {{ put("", new ListResult("Workbook1")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("FILTER")); }},
+                    new HashMap<String, ListResult>() {{ put("", new ListResult("Workbook1")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }});
+
+            project.setTests(new HashMap<String, TestFile>() {{
+                put("Workbook1", new TestFile());
+            }});
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("Workbook1"); times = 2;
+            testExecutor.execute((TestFilter) any); times = 2;
+        }};
+    }
+
+    @Test
+    public void testExecutePreviousFilter() throws IOException {
+        Project project = new Project();
+        Deencapsulation.setField(testController, project);
+
+        String[][] testListChoices = new String[1][2];
+        testListChoices[0] = new String[]{"Workbook1", "Workbook 1"};
+
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("FILTER")); }},
+                    new HashMap<String, ListResult>() {{ put("", new ListResult("Workbook1")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("PREVIOUS_FILTER")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }});
+
+            project.setTests(new HashMap<String, TestFile>() {{
+                put("Workbook1", new TestFile());
+            }});
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("Workbook1"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 2;
         }};
     }
 }

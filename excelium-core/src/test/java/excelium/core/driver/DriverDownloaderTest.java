@@ -27,9 +27,13 @@ package excelium.core.driver;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.test.config.PcEnvironment;
+import mockit.Expectations;
+import mockit.Tested;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -43,15 +47,27 @@ import java.nio.file.Paths;
  */
 public class DriverDownloaderTest {
 
+    @Tested
+    private DriverDownloader driverDownloader;
+
     @Test
     public void testDownloadChromeWin32Driver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.CHROME);
         environment.setPlatform(Platform.WINDOWS_32);
 
         String driverPath = "driver/chrome_win_32";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -60,13 +76,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadChromeWin64Driver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.CHROME);
         environment.setPlatform(Platform.WINDOWS_64);
 
         String driverPath = "driver/chrome_win_64";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -75,13 +100,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadChromeMacDriver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.CHROME);
         environment.setPlatform(Platform.MAC_OS);
 
         String driverPath = "driver/chrome_mac";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -91,13 +125,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadChromeLinuxDriver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.CHROME);
         environment.setPlatform(Platform.LINUX);
 
         String driverPath = "driver/chrome_linux";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -107,13 +150,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadFirefoxWin32Driver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.FIREFOX);
         environment.setPlatform(Platform.WINDOWS_32);
 
         String driverPath = "driver/firefox_win_32";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -122,13 +174,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadFirefoxWin64Driver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.FIREFOX);
         environment.setPlatform(Platform.WINDOWS_64);
 
         String driverPath = "driver/firefox_win_64";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -137,13 +198,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadFirefoxMacDriver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("geckodriver.tar.gz").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.FIREFOX);
         environment.setPlatform(Platform.MAC_OS);
 
         String driverPath = "driver/firefox_mac";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -153,13 +223,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadFirefoxLinuxDriver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("geckodriver.tar.gz").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.FIREFOX);
         environment.setPlatform(Platform.LINUX);
 
         String driverPath = "driver/firefox_linux";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -169,13 +248,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadOperaWin32Driver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.OPERA);
         environment.setPlatform(Platform.WINDOWS_32);
 
         String driverPath = "driver/opera_win_32";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -184,13 +272,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadOperaWin64Driver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.OPERA);
         environment.setPlatform(Platform.WINDOWS_64);
 
         String driverPath = "driver/opera_win_64";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -199,13 +296,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadOperaMacDriver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.OPERA);
         environment.setPlatform(Platform.MAC_OS);
 
         String driverPath = "driver/opera_mac";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));
@@ -215,13 +321,22 @@ public class DriverDownloaderTest {
 
     @Test
     public void testDownloadOperaLinuxDriver() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(FileUtils.readFileToByteArray(Paths.get(getClass().getClassLoader().getResource("driver.zip").getPath()).toFile()));
+        baos.flush();
+
+        new Expectations(driverDownloader) {{
+            driverDownloader.download(anyString);
+            result = baos;
+        }};
+
         PcEnvironment environment = new PcEnvironment();
         environment.setBrowser(Browser.OPERA);
         environment.setPlatform(Platform.LINUX);
 
         String driverPath = "driver/opera_linux";
 
-        DriverDownloader.downloadPcDriver(environment, driverPath);
+        driverDownloader.downloadPcDriver(environment, driverPath);
 
         Path driver = Paths.get(driverPath);
         Assert.assertTrue(Files.exists(driver));

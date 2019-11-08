@@ -49,12 +49,21 @@ public class ProjectTest {
         testFile2.setName("Workbook2.xlsx");
         project.addTest(testFile2);
 
-        String[][] listChoice = project.getTestListChoice();
+        String[][] listChoice = project.getTestListChoice(false);
         Assert.assertEquals(2, listChoice.length);
         Assert.assertEquals("dir1/dir2/file1.xlsx", listChoice[0][0]);
         Assert.assertEquals("Workbook1.xlsx", listChoice[0][1]);
         Assert.assertEquals("dir1/dir2/file2.xlsx", listChoice[1][0]);
         Assert.assertEquals("Workbook2.xlsx", listChoice[1][1]);
+
+        listChoice = project.getTestListChoice(true);
+        Assert.assertEquals(3, listChoice.length);
+        Assert.assertEquals("dir1/dir2/file1.xlsx", listChoice[0][0]);
+        Assert.assertEquals("Workbook1.xlsx", listChoice[0][1]);
+        Assert.assertEquals("dir1/dir2/file2.xlsx", listChoice[1][0]);
+        Assert.assertEquals("Workbook2.xlsx", listChoice[1][1]);
+        Assert.assertEquals("ALL", listChoice[2][0]);
+        Assert.assertEquals("All workbooks", listChoice[2][1]);
     }
 
     @Test
@@ -71,11 +80,20 @@ public class ProjectTest {
         template2.setName("Workbook2.xlsx");
         project.addTemplate(template2);
 
-        String[][] listChoice = project.getTemplateListChoice();
+        String[][] listChoice = project.getTemplateListChoice(false);
         Assert.assertEquals(2, listChoice.length);
         Assert.assertEquals("dir1/dir2/file1.xlsx", listChoice[0][0]);
         Assert.assertEquals("Workbook1.xlsx", listChoice[0][1]);
         Assert.assertEquals("dir1/dir2/file2.xlsx", listChoice[1][0]);
         Assert.assertEquals("Workbook2.xlsx", listChoice[1][1]);
+
+        listChoice = project.getTemplateListChoice(true);
+        Assert.assertEquals(3, listChoice.length);
+        Assert.assertEquals("dir1/dir2/file1.xlsx", listChoice[0][0]);
+        Assert.assertEquals("Workbook1.xlsx", listChoice[0][1]);
+        Assert.assertEquals("dir1/dir2/file2.xlsx", listChoice[1][0]);
+        Assert.assertEquals("Workbook2.xlsx", listChoice[1][1]);
+        Assert.assertEquals("ALL", listChoice[2][0]);
+        Assert.assertEquals("All templates", listChoice[2][1]);
     }
 }

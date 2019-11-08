@@ -55,7 +55,9 @@ public class TemplateUtil {
         if (fields != null && fields.length > 0) {
             for (Field field : fields) {
                 if (Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers()) && field.getType().equals(String.class)) {
-                    values.add(field.get(template));
+                    if (field.get(template) instanceof String && ((String) field.get(template)).matches("^\\%.*\\%$")) {
+                        values.add(field.get(template));
+                    }
                 }
             }
         }

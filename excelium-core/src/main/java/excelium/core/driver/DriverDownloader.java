@@ -48,7 +48,7 @@ class DriverDownloader extends Downloader {
      * @param driverPath  the driver path
      * @throws IOException the io exception
      */
-    void downloadPcDriver(PcEnvironment environment, String driverPath) throws IOException {
+    public void downloadPcDriver(PcEnvironment environment, String driverPath) throws IOException {
         Files.createDirectories(Paths.get(driverPath).getParent());
 
         switch (environment.getBrowser()) {

@@ -57,7 +57,7 @@ public class Downloader {
      * @return Github latest tag
      * @throws IOException the io exception
      */
-    protected String getGithubLatestTag(String repository) throws IOException {
+    public String getGithubLatestTag(String repository) throws IOException {
         URL obj = new URL("https://github.com/" + repository + "/releases/latest");
         URLConnection conn = obj.openConnection();
         conn.getHeaderFields();
@@ -72,7 +72,7 @@ public class Downloader {
      * @return the URL content
      * @throws IOException the io exception
      */
-    protected String readStringFromURL(String requestURL) throws IOException {
+    public String readStringFromURL(String requestURL) throws IOException {
         try (InputStream is = new URL(requestURL).openStream();
              Scanner scanner = new Scanner(is, StandardCharsets.UTF_8.toString())) {
             scanner.useDelimiter("\\A");
@@ -81,14 +81,13 @@ public class Downloader {
     }
 
     /**
-     * Download the archive file and extract the desired file to the specified path.
+     * Download the archive file and return the byte array output stream.
      *
-     * @param downloadUrl     the download URL
-     * @param extractFileName the file name to extract
-     * @param path            the path to save
+     * @param downloadUrl the download URL
+     * @return the byte array output stream
      * @throws IOException the io exception
      */
-    protected void downloadAndExtract(String downloadUrl, String extractFileName, String path) throws IOException {
+    public ByteArrayOutputStream download(String downloadUrl) throws IOException {
         byte[] data = new byte[BUFFER_SIZE];
 
         URL url = new URL(downloadUrl);
@@ -113,12 +112,26 @@ public class Downloader {
             os.flush();
             pb.stop();
 
-            try (ByteArrayInputStream bais = new ByteArrayInputStream(os.toByteArray())) {
-                if (downloadUrl.endsWith(".tar.gz")) {
-                    extractTarGz(bais, extractFileName, path);
-                } else {
-                    extractZip(bais, extractFileName, path);
-                }
+            return os;
+        }
+    }
+
+    /**
+     * Download the archive file and extract the desired file to the specified path.
+     *
+     * @param downloadUrl     the download URL
+     * @param extractFileName the file name to extract
+     * @param path            the path to save
+     * @throws IOException the io exception
+     */
+    public void downloadAndExtract(String downloadUrl, String extractFileName, String path) throws IOException {
+        ByteArrayOutputStream os = download(downloadUrl);
+
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(os.toByteArray())) {
+            if (downloadUrl.endsWith(".tar.gz")) {
+                extractTarGz(bais, extractFileName, path);
+            } else {
+                extractZip(bais, extractFileName, path);
             }
         }
     }
@@ -150,7 +163,7 @@ public class Downloader {
                         }
                         extracted = true;
                         break;
-                    } else if (entry.getName().startsWith(extractFileName)) {
+                    } else if (entry.getName().startsWith(extractFileName.endsWith("/") ? extractFileName : extractFileName + "/")) {
                         String relativePath = entry.getName().replace(extractFileName, "");
                         if (relativePath.startsWith("/")) {
                             relativePath = relativePath.substring(1);
@@ -201,7 +214,7 @@ public class Downloader {
                         }
                         extracted = true;
                         break;
-                    } else if (entry.getName().startsWith(extractFileName)) {
+                    } else if (entry.getName().startsWith(extractFileName.endsWith("/") ? extractFileName : extractFileName + "/")) {
                         String relativePath = entry.getName().replace(extractFileName, "");
                         if (relativePath.startsWith("/")) {
                             relativePath = relativePath.substring(1);

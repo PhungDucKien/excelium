@@ -128,9 +128,7 @@ public class TestExecutorTest {
         }};
 
         TestFilter testFilter = new TestFilter();
-        List<String> workbooks = new ArrayList<>();
-        workbooks.add("testFile2");
-        testFilter.setWorkbooks(workbooks);
+        testFilter.setWorkbook("testFile2");
 
         TestExecutor testExecutor = new TestExecutor(createTestProject(), testReaderFactory, testWriterFactory);
         testExecutor.execute(testFilter);
