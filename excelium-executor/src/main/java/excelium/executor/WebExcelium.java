@@ -1452,6 +1452,10 @@ public class WebExcelium extends Excelium {
         runCommand("captureElementScreenshot", parentLocator, locator, null);
     }
 
+    public void captureScreenshot() throws Throwable {
+        runCommand("captureScreenshot", null, null, null);
+    }
+
     public void check(String locator) throws Throwable {
         runCommand("check", locator, null, null);
     }

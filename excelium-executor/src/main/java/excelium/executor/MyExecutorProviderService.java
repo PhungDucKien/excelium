@@ -53,10 +53,10 @@ public class MyExecutorProviderService implements ExecutorProviderService {
                 AlertCommandExecutor.class,
                 CookieCommandExecutor.class,
                 FileCommandExecutor.class,
-                ScreenshotCommandExecutor.class,
 
                 // Common
                 NavigateCommandExecutor.class,
+                ScreenshotCommandExecutor.class,
                 AttributeCommandExecutor.class,
                 StoreCommandExecutor.class,
                 ExecuteCommandExecutor.class,
@@ -82,6 +82,7 @@ public class MyExecutorProviderService implements ExecutorProviderService {
 
                 // Common
                 NavigateCommandExecutor.class,
+                ScreenshotCommandExecutor.class,
                 AttributeCommandExecutor.class,
                 StoreCommandExecutor.class,
                 ExecuteCommandExecutor.class,

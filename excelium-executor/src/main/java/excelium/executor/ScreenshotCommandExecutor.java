@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor;
 
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
@@ -52,12 +52,20 @@ public class ScreenshotCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Captures full screenshot.
+     */
+    @Action
+    public void captureScreenshot() {
+        webDriver.getScreenshotService().captureEntirePage(webDriver);
+    }
+
+    /**
      * Captures an element's screenshot.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", webOnly = true)
     public void captureElementScreenshot(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         webDriver.getScreenshotService().captureElement(webDriver, element);

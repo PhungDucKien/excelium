@@ -464,6 +464,10 @@ public class MobileExcelium extends Excelium {
         runCommand("broadcastIntent", intent, null, null);
     }
 
+    public void captureScreenshot() throws Throwable {
+        runCommand("captureScreenshot", null, null, null);
+    }
+
     public void chooseCancelConfirmation() throws Throwable {
         runCommand("chooseCancelConfirmation", null, null, null);
     }
