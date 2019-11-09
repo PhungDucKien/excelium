@@ -25,15 +25,15 @@
 package excelium.executor.web;
 
 import com.thoughtworks.selenium.SeleniumException;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NotFoundException;
 
 /**
  * Represents a class which contains commands for controlling alert dialogs.
@@ -233,7 +233,7 @@ public class AlertCommandExecutor extends CommandExecutor {
         try {
             webDriver.switchTo().alert();
             return true;
-        } catch (NoAlertPresentException e) {
+        } catch (NotFoundException e) {
             return false;
         }
     }

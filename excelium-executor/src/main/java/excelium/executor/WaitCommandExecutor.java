@@ -81,8 +81,8 @@ public class WaitCommandExecutor extends CommandExecutor {
      */
     @Action(param1 = "timeout")
     public void setTimeout(String timeout) {
-        webDriver.manage().timeouts().implicitlyWait(Long.valueOf(timeout), TimeUnit.SECONDS);
-        webDriver.manage().timeouts().setScriptTimeout(Long.valueOf(timeout), TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(Long.valueOf(timeout), TimeUnit.MILLISECONDS);
+        webDriver.manage().timeouts().setScriptTimeout(Long.valueOf(timeout), TimeUnit.MILLISECONDS);
     }
 
     /**

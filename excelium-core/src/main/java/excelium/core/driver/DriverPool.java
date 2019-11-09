@@ -38,7 +38,9 @@ import java.util.Map;
 public class DriverPool {
 
     private DriverAlivenessChecker alivenessChecker = new DriverAlivenessChecker();
+    private DriverCleaner driverCleaner = new DriverCleaner();
     private Map<String, RemoteWebDriver> drivers = new HashMap<>();
+    private Map<RemoteWebDriver, String> originalHandles = new HashMap<>();
     private DriverFactory driverFactory = new DriverFactory();
 
     private static final DriverPool INSTANCE = new DriverPool();
@@ -60,19 +62,19 @@ public class DriverPool {
 
             if (driver == null) {
                 createNewDriver(environment, project);
-            } else {
-                // Check the web driver is alive
-                if (!alivenessChecker.isAlive(driver)) {
-                    dismissDriver(driver);
-                    createNewDriver(environment, project);
-                }
+            } else if (!alivenessChecker.isAlive(driver)) {
+                dismissDriver(driver);
+                createNewDriver(environment, project);
+            } else if (!driverCleaner.clean(driver, environment, originalHandles.get(driver))) {
+                dismissDriver(driver);
+                createNewDriver(environment, project);
             }
         }
 
         return drivers.get(driverKey);
     }
 
-    protected String createKey(Environment environment) {
+    private String createKey(Environment environment) {
         StringBuilder keyBuilder = new StringBuilder();
         if (environment instanceof PcEnvironment) {
             if (environment.getPlatform() != null) {
@@ -151,17 +153,19 @@ public class DriverPool {
         for (String key : drivers.keySet()) {
             if (driver.equals(drivers.get(key))) {
                 quitDriver(driver);
-                drivers.remove(driver);
+                drivers.remove(key);
+                originalHandles.remove(driver);
                 break;
             }
         }
     }
 
-    public void dismissAll() {
+    private void dismissAll() {
         for (RemoteWebDriver driver : drivers.values()) {
             quitDriver(driver);
         }
         drivers.clear();
+        originalHandles.clear();
     }
 
     private void quitDriver(RemoteWebDriver driver) {
@@ -180,7 +184,11 @@ public class DriverPool {
     private void createNewDriver(Environment environment, Project project) throws IOException {
         String driverKey = createKey(environment);
         RemoteWebDriver driver = driverFactory.createDriver(environment, project);
+        driverCleaner.clean(driver, environment, driver.getWindowHandle());
+
         drivers.remove(driverKey);
         drivers.put(driverKey, driver);
+        originalHandles.remove(driver);
+        originalHandles.put(driver, driver.getWindowHandle());
     }
 }

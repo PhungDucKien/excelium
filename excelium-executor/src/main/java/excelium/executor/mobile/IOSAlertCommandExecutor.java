@@ -33,7 +33,7 @@ import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NotFoundException;
 
 /**
  * Represents a class which contains commands for controlling iOS alert dialogs.
@@ -233,7 +233,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
         try {
             webDriver.switchTo().alert();
             return true;
-        } catch (NoAlertPresentException e) {
+        } catch (NotFoundException e) {
             return false;
         }
     }

@@ -27,16 +27,14 @@ package excelium.executor.web;
 import excelium.common.PlatformDetector;
 import excelium.core.CommandExecutor;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.driver.DriverFactory;
+import excelium.core.driver.DriverCleaner;
 import excelium.core.driver.DriverPool;
 import excelium.executor.WebExcelium;
 import excelium.executor.web.env.GlobalWebEnvironment;
 import excelium.model.enums.Browser;
 import excelium.model.project.Project;
 import excelium.model.test.config.PcEnvironment;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
@@ -56,6 +54,8 @@ public class WebExecutorTestBase {
 
     protected static WebExcelium selenium;
 
+    private static String originalHandle;
+
     @BeforeClass
     public static void initializeServer() {
         GlobalWebEnvironment.setUp();
@@ -68,18 +68,31 @@ public class WebExecutorTestBase {
         environment.setPlatform(PlatformDetector.getPlatform());
         environment.setResolution("1024x768");
 
-        Project project = new Project();
-        project.setDownloadPath(Paths.get("download"));
-        project.setFilePath(Paths.get("file"));
-        Files.createDirectories(Paths.get("file"));
-        RemoteWebDriver driver = DriverPool.getInstance().getDriver(environment, project);
-        webDriver = new ContextAwareWebDriver(driver, null);
-        selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
+        if (webDriver == null) {
+            Runtime.getRuntime().addShutdownHook(new Thread(WebExecutorTestBase::dismissDriver));
+        } else {
+            DriverCleaner driverCleaner = new DriverCleaner();
+            if (!driverCleaner.clean(webDriver, environment, originalHandle)) {
+                dismissDriver();
+            }
+        }
+
+        if (webDriver == null) {
+            Project project = new Project();
+            project.setDownloadPath(Paths.get("download"));
+            project.setFilePath(Paths.get("file"));
+            Files.createDirectories(Paths.get("file"));
+            RemoteWebDriver driver = DriverPool.getInstance().getDriver(environment, project);
+            webDriver = new ContextAwareWebDriver(driver, null);
+            selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
+            originalHandle = webDriver.getWindowHandle();
+        }
     }
 
-    @AfterClass
-    public static void afterClass() {
-        webDriver.quit();
+    private static void dismissDriver() {
+        if (webDriver != null) {
+            DriverPool.getInstance().dismissDriver(webDriver.getWebDriver());
+        }
         webDriver = null;
     }
 }

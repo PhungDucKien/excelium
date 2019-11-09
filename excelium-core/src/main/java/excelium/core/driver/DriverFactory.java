@@ -24,7 +24,6 @@
 
 package excelium.core.driver;
 
-import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.*;
@@ -34,7 +33,6 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.*;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -59,7 +57,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Factory that creates web driver.
@@ -68,11 +65,6 @@ import java.util.concurrent.TimeUnit;
  * @since 2018.05.04
  */
 public class DriverFactory {
-
-    /**
-     * Default implicit wait (in milliseconds) for web driver
-     */
-    private static final int WEBDRIVER_DEFAULT_IMPLICIT_WAIT = 1000;
 
     /**
      * Creates context aware web driver for an environment.
@@ -89,7 +81,6 @@ public class DriverFactory {
         } else if (environment instanceof MobileEnvironment) {
             webDriver = createMobileDriver((MobileEnvironment) environment, project);
         }
-        webDriver.manage().timeouts().implicitlyWait(WEBDRIVER_DEFAULT_IMPLICIT_WAIT, TimeUnit.MILLISECONDS);
         return webDriver;
     }
 
@@ -125,10 +116,6 @@ public class DriverFactory {
                 break;
         }
 
-        // OperaChromiumDriver 2.32: cannot resize window https://github.com/operasoftware/operachromiumdriver/issues/50
-        if (environment.getBrowser() != Browser.OPERA) {
-            setWindowSize(webDriver, environment);
-        }
         return webDriver;
     }
 
@@ -403,19 +390,5 @@ public class DriverFactory {
             driverPath += ".exe";
         }
         return driverPath;
-    }
-
-    /**
-     * Set the web driver to the desired window size
-     *
-     * @param webDriver   the web driver
-     * @param environment the environment
-     */
-    private void setWindowSize(RemoteWebDriver webDriver, PcEnvironment environment) {
-        String resolution = environment.getResolution();
-        if (StringUtils.isNotBlank(resolution)) {
-            String[] dimensions = resolution.split("x");
-            webDriver.manage().window().setSize(new Dimension(Integer.parseInt(dimensions[0]), Integer.parseInt(dimensions[1])));
-        }
     }
 }

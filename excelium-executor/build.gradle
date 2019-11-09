@@ -4,3 +4,9 @@ dependencies {
     compile group: 'com.google.zxing', name: 'core', version: '3.3.2'
     compile group: 'com.google.zxing', name: 'javase', version: '3.3.2'
 }
+
+test {
+    filter {
+        includeTestsMatching "excelium.executor.WebTestSuite"
+    }
+}

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,31 +22,16 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor;
 
-import org.junit.Test;
+import excelium.executor.mobile.IOSExecutorTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class TestFramesSpecialTargets extends WebExecutorTestBase {
-  @Test
-  public void testFramesSpecialTargets() throws Throwable {
-    selenium.openWindow("../tests/html/Frames.html", "SpecialTargets");
-    selenium.waitForPopUp("SpecialTargets", "10000");
-    selenium.selectFirstWindow();
-    selenium.selectWindow("SpecialTargets");
-    selenium.selectFrame("bottomFrame");
-    selenium.click("changeTop");
-    selenium.waitForPageToLoad("30000");
-    selenium.click("changeSpan");
-    selenium.open("../tests/html/Frames.html");
-    selenium.selectFrame("bottomFrame");
-    selenium.click("changeParent");
-    selenium.waitForPageToLoad("30000");
-    selenium.click("changeSpan");
-    selenium.open("../tests/html/Frames.html");
-    selenium.selectFrame("bottomFrame");
-    selenium.click("changeSelf");
-    selenium.waitForPageToLoad("30000");
-    selenium.click("changeSpan");
-    selenium.close();
-  }
+@RunWith(Suite.class)
+
+@Suite.SuiteClasses({
+        IOSExecutorTest.class
+})
+public class MobileTestSuite {
 }
