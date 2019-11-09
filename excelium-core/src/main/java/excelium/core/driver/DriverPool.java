@@ -29,6 +29,7 @@ import excelium.model.test.config.Environment;
 import excelium.model.test.config.MobileAppEnvironment;
 import excelium.model.test.config.MobileWebEnvironment;
 import excelium.model.test.config.PcEnvironment;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
@@ -184,11 +185,12 @@ public class DriverPool {
     private void createNewDriver(Environment environment, Project project) throws IOException {
         String driverKey = createKey(environment);
         RemoteWebDriver driver = driverFactory.createDriver(environment, project);
-        driverCleaner.clean(driver, environment, driver.getWindowHandle());
-
         drivers.remove(driverKey);
         drivers.put(driverKey, driver);
-        originalHandles.remove(driver);
-        originalHandles.put(driver, driver.getWindowHandle());
+        if (!(driver instanceof AppiumDriver)) {
+            originalHandles.remove(driver);
+            originalHandles.put(driver, driver.getWindowHandle());
+        }
+        driverCleaner.clean(driver, environment, originalHandles.get(driver));
     }
 }
