@@ -219,7 +219,7 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 213 | Reload App | reloadApp |  |  | 
 214 | Reset App | resetApp |  |  | 
 215 | Rotate | rotate |  |  | 
-216 | Run App In Background | runAppInBackground | secs |  | 
+216 | Run App In Background | runAppInBackground | millis |  | 
 217 | Scroll Down To | scrollDownTo | locator |  | 
 218 | Scroll Down To | scrollDownTo | parentLocator | locator | 
 219 | Scroll Up To | scrollUpTo | locator |  | 
@@ -3586,14 +3586,14 @@ Send the currently running app for this session to the background, and return af
 ### Usage
 
 `
-runAppInBackground(secs)
+runAppInBackground(millis)
 `
 
 ### Parameters
 
 Parameter | Description
 --------- | -----------
-secs | An integer designating how long, in seconds, to background the app for.
+millis | An integer designating how long, in milliseconds, to background the app for.
 
 ## Scroll Down To
 

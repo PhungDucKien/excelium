@@ -108,7 +108,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Send the currently running app for this session to the background, and return after a certain amount of time (-1 means to deactivate the app entirely).
      *
-     * @param secs An integer designating how long, in milliseconds, to background the app for.
+     * @param millis An integer designating how long, in milliseconds, to background the app for.
      */
     @Action(param1 = "millis")
     public void runAppInBackground(String millis) {

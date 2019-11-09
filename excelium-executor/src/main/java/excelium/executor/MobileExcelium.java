@@ -896,8 +896,8 @@ public class MobileExcelium extends Excelium {
         runCommand("rotate", null, null, null);
     }
 
-    public void runAppInBackground(String secs) throws Throwable {
-        runCommand("runAppInBackground", secs, null, null);
+    public void runAppInBackground(String millis) throws Throwable {
+        runCommand("runAppInBackground", millis, null, null);
     }
 
     public void scrollDownTo(String locator) throws Throwable {
