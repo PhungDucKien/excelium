@@ -27,12 +27,12 @@ package excelium.core.screenshot;
 import com.google.common.io.Files;
 import excelium.core.TestRunner;
 import excelium.core.driver.ContextAwareWebDriver;
+import excelium.model.project.Project;
 import excelium.model.test.Test;
 import excelium.model.test.TestFlow;
 import excelium.model.test.TestStep;
 import excelium.model.test.TestSuite;
 import excelium.model.test.config.Environment;
-import excelium.model.test.config.MobileAppEnvironment;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -47,6 +47,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,7 +74,17 @@ public class ScreenshotService {
     /**
      * Test runner
      */
-    private final TestRunner testRunner;
+    private TestRunner testRunner;
+
+    /**
+     * Environment
+     */
+    private Environment environment;
+
+    /**
+     * Project
+     */
+    private Project project;
 
     /**
      * Screenshot taker
@@ -85,6 +96,8 @@ public class ScreenshotService {
      */
     private ContextAwareWebDriver currentWebDriver;
 
+    private int imageNo;
+
     /**
      * Instantiates a new Screenshot service.
      *
@@ -92,6 +105,22 @@ public class ScreenshotService {
      */
     public ScreenshotService(TestRunner testRunner) {
         this.testRunner = testRunner;
+        this.environment = testRunner.getEnvironment();
+        this.project = testRunner.getProject();
+
+        screenshotTaker = new AShot();
+    }
+
+    /**
+     * Instantiates a new Screenshot service.
+     *
+     * @param environment the environment
+     * @param project     the project
+     */
+    public ScreenshotService(Environment environment, Project project) {
+        this.environment = environment;
+        this.project = project;
+        this.imageNo = 1;
 
         screenshotTaker = new AShot();
     }
@@ -102,10 +131,10 @@ public class ScreenshotService {
      * @param webDriver the web driver
      */
     public void captureEntirePage(ContextAwareWebDriver webDriver) {
-        if (testRunner.getEnvironment() instanceof MobileAppEnvironment) {
-            captureAppPage(webDriver);
-        } else {
+        if (webDriver.isWeb()) {
             captureWebPage(webDriver);
+        } else {
+            captureAppPage(webDriver);
         }
     }
 
@@ -116,17 +145,17 @@ public class ScreenshotService {
      * @param element   the web element
      */
     public void captureElement(ContextAwareWebDriver webDriver, WebElement element) {
-        if (testRunner.getEnvironment() instanceof MobileAppEnvironment) {
-            throw new RuntimeException("The action is not supported");
-        } else {
+        if (webDriver.isWeb()) {
             captureWebElement(webDriver, element);
+        } else {
+            throw new RuntimeException("The action is not supported");
         }
     }
 
     /**
      * Capture a screenshot of entire mobile application page.
      *
-     * @param webDriver  the web driver
+     * @param webDriver the web driver
      */
     private void captureAppPage(ContextAwareWebDriver webDriver) {
         try {
@@ -140,7 +169,7 @@ public class ScreenshotService {
     /**
      * Capture a screenshot of entire web page.
      *
-     * @param webDriver  the web driver
+     * @param webDriver the web driver
      */
     private void captureWebPage(ContextAwareWebDriver webDriver) {
         try {
@@ -155,8 +184,8 @@ public class ScreenshotService {
     /**
      * Capture a screenshot of a web element
      *
-     * @param webDriver  the web driver
-     * @param element    the web element
+     * @param webDriver the web driver
+     * @param element   the web element
      */
     private void captureWebElement(ContextAwareWebDriver webDriver, WebElement element) {
         try {
@@ -174,23 +203,31 @@ public class ScreenshotService {
      * @return the screenshot image file
      */
     private File getScreenshotImageFile() {
-        Environment environment = testRunner.getEnvironment();
-        Test test = testRunner.getTest();
-        TestSuite testSuite = testRunner.getTestSuite();
-        TestStep testStep = testRunner.getTestStep();
+        Path path = project.getScreenshotPath()
+                .resolve(environment.getKey());
 
-        List<Integer> flowNos = testRunner.getTestFlows().stream().map(TestFlow::getNo).collect(Collectors.toList());
-        String flowNo = StringUtils.join(flowNos, ".");
+        if (testRunner != null) {
+            Test test = testRunner.getTest();
+            TestSuite testSuite = testRunner.getTestSuite();
+            TestStep testStep = testRunner.getTestStep();
 
-        String fileName = flowNo +
-                "-" +
-                testStep.getNo() +
-                ".png";
-        return this.testRunner.getProject().getScreenshotPath()
-                .resolve(environment.getKey())
-                .resolve(test.getWorkbookName())
-                .resolve(testSuite.getSheetName())
-                .resolve(fileName).toFile();
+            List<Integer> flowNos = testRunner.getTestFlows().stream().map(TestFlow::getNo).collect(Collectors.toList());
+            String flowNo = StringUtils.join(flowNos, ".");
+
+            String fileName = flowNo +
+                    "-" +
+                    testStep.getNo() +
+                    ".png";
+
+            return path.resolve(test.getWorkbookName())
+                    .resolve(testSuite.getSheetName())
+                    .resolve(fileName).toFile();
+        } else {
+            String fileName = imageNo + ".png";
+            imageNo++;
+
+            return path.resolve(fileName).toFile();
+        }
     }
 
     /**

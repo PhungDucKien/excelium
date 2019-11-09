@@ -133,7 +133,7 @@ public class CommandFactoryTest {
 
     @Test
     public void testCreateAccessorCommandMap() throws Exception {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(null, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(null, null, null);
         List<CommandExecutor> commandExecutors = new ArrayList<>();
         CommandExecutor executor = new MyAccessorCommandExecutor(webDriver, null, excelium, null);
         commandExecutors.add(executor);

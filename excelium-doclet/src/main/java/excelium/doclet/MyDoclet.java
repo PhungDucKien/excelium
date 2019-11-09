@@ -492,7 +492,7 @@ public class MyDoclet extends Standard {
 
     private static class StubWebContextAwareWebDriver extends ContextAwareWebDriver {
         public StubWebContextAwareWebDriver() {
-            super(new StubWebDriver(), null);
+            super(new StubWebDriver(), null, null);
         }
 
         @Override
@@ -513,7 +513,7 @@ public class MyDoclet extends Standard {
 
     private static class StubMobileContextAwareWebDriver extends ContextAwareWebDriver {
         public StubMobileContextAwareWebDriver() {
-            super(new StubWebDriver(), null);
+            super(new StubWebDriver(), null, null);
         }
 
         @Override

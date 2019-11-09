@@ -26,12 +26,10 @@ package excelium.core;
 
 import excelium.common.StringUtil;
 import excelium.common.WildcardUtil;
-import excelium.core.database.DatabaseService;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverPool;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.report.TestReporter;
-import excelium.core.screenshot.ScreenshotService;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Platform;
 import excelium.model.enums.Result;
@@ -48,7 +46,6 @@ import excelium.model.test.item.Item;
 import excelium.model.test.item.PageSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -92,16 +89,6 @@ public class TestRunner {
      * Template
      */
     private final Template template;
-
-    /**
-     * Database service
-     */
-    private final DatabaseService databaseService;
-
-    /**
-     * Screenshot service
-     */
-    private final ScreenshotService screenshotService;
 
     /**
      * Current environment
@@ -153,8 +140,6 @@ public class TestRunner {
         this.testReporter = testReporter;
         this.testWriter = testWriter;
         this.template = template;
-        this.databaseService = new DatabaseService(project);
-        this.screenshotService = new ScreenshotService(this);
     }
 
     /**
@@ -192,8 +177,7 @@ public class TestRunner {
     private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         setEnvironment(environment);
         try {
-            RemoteWebDriver driver = DriverPool.getInstance().getDriver(environment, project);
-            webDriver = new ContextAwareWebDriver(driver, screenshotService);
+            webDriver = DriverPool.getInstance().getDriver(this);
             if (test.getTestSuites() != null) {
                 initializeExcelium(webDriver);
                 for (TestSuite testSuite : test.getTestSuites().values()) {
@@ -270,7 +254,7 @@ public class TestRunner {
 
         if (command != null) {
             if (StringUtils.isNotBlank(testStep.getTestData())) {
-                databaseService.createTestData(test.getTestData().get(testStep.getTestData()).getTableData());
+                webDriver.getDatabaseService().createTestData(test.getTestData().get(testStep.getTestData()).getTableData());
             }
 
             Object param1 = getParam(command.getParam1(), testStep.getParam1());
@@ -283,7 +267,7 @@ public class TestRunner {
             }
 
             if (testStep.isCapture()) {
-                screenshotService.captureEntirePage(webDriver);
+                webDriver.getScreenshotService().captureEntirePage(webDriver);
             }
 
             return result;

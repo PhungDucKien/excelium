@@ -25,7 +25,6 @@
 package excelium.executor.mobile;
 
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.driver.DriverFactory;
 import excelium.core.driver.DriverPool;
 import excelium.executor.MobileExcelium;
 import excelium.model.enums.Platform;
@@ -34,7 +33,6 @@ import excelium.model.test.config.MobileAppEnvironment;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -48,10 +46,10 @@ public class IOSExecutorTest {
 
     /**
      * Belows are steps to be able to run this test.
-     *   - Install WDA as described at https://medium.com/@yash3x/appium-xcuitest-on-real-ios-devices-bd1ebe0dea55
-     *   - Set the following environment variables: UPDATE_WDA_BUNDLEID, TEST_PLATFORM_VERSION, TEST_DEVICE_NAME, TEST_DEVICE_UDID
-     *   - Save an XCode File config at ~/.xcconfig
-     *   - Run REAL_DEVICE=1 npm install to build the app under test
+     * - Install WDA as described at https://medium.com/@yash3x/appium-xcuitest-on-real-ios-devices-bd1ebe0dea55
+     * - Set the following environment variables: UPDATE_WDA_BUNDLEID, TEST_PLATFORM_VERSION, TEST_DEVICE_NAME, TEST_DEVICE_UDID
+     * - Save an XCode File config at ~/.xcconfig
+     * - Run REAL_DEVICE=1 npm install to build the app under test
      *
      * @throws IOException
      * @throws InvocationTargetException
@@ -70,8 +68,7 @@ public class IOSExecutorTest {
 
         Project project = new Project();
         project.setAppPath(Paths.get("src/test/resources"));
-        RemoteWebDriver driver = DriverPool.getInstance().getDriver(environment, project);
-        webDriver = new ContextAwareWebDriver(driver, null);
+        webDriver = DriverPool.getInstance().getDriver(environment, project);
         selenium = new MobileExcelium(webDriver, null, project);
     }
 

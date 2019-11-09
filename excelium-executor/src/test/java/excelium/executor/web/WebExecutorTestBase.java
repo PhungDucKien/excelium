@@ -35,7 +35,6 @@ import excelium.model.enums.Browser;
 import excelium.model.project.Project;
 import excelium.model.test.config.PcEnvironment;
 import org.junit.BeforeClass;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -82,8 +81,7 @@ public class WebExecutorTestBase {
             project.setDownloadPath(Paths.get("download"));
             project.setFilePath(Paths.get("file"));
             Files.createDirectories(Paths.get("file"));
-            RemoteWebDriver driver = DriverPool.getInstance().getDriver(environment, project);
-            webDriver = new ContextAwareWebDriver(driver, null);
+            webDriver = DriverPool.getInstance().getDriver(environment, project);
             selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
             originalHandle = webDriver.getWindowHandle();
         }

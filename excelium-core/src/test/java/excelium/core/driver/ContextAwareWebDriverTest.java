@@ -60,7 +60,7 @@ public class ContextAwareWebDriverTest {
 
     @Test
     public void testIsWeb() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertTrue(webDriver.isWeb());
 
         new Expectations() {{
@@ -68,10 +68,10 @@ public class ContextAwareWebDriverTest {
             iosDriver.isBrowser(); result = true;
         }};
 
-        webDriver = new ContextAwareWebDriver(androidDriver, null);
+        webDriver = new ContextAwareWebDriver(androidDriver, null, null);
         Assert.assertTrue(webDriver.isWeb());
 
-        webDriver = new ContextAwareWebDriver(iosDriver, null);
+        webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertTrue(webDriver.isWeb());
 
         new Expectations() {{
@@ -79,68 +79,68 @@ public class ContextAwareWebDriverTest {
             iosDriver.isBrowser(); result = false;
         }};
 
-        webDriver = new ContextAwareWebDriver(androidDriver, null);
+        webDriver = new ContextAwareWebDriver(androidDriver, null, null);
         Assert.assertFalse(webDriver.isWeb());
 
-        webDriver = new ContextAwareWebDriver(iosDriver, null);
+        webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertFalse(webDriver.isWeb());
     }
 
     @Test
     public void testIsAndroid() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertFalse(webDriver.isAndroid());
 
         new Expectations() {{
             androidDriver.isBrowser(); result = false;
         }};
 
-        webDriver = new ContextAwareWebDriver(androidDriver, null);
+        webDriver = new ContextAwareWebDriver(androidDriver, null, null);
         Assert.assertTrue(webDriver.isAndroid());
 
-        webDriver = new ContextAwareWebDriver(iosDriver, null);
+        webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertFalse(webDriver.isAndroid());
 
         new Expectations() {{
             androidDriver.isBrowser(); result = true;
         }};
 
-        webDriver = new ContextAwareWebDriver(androidDriver, null);
+        webDriver = new ContextAwareWebDriver(androidDriver, null, null);
         Assert.assertFalse(webDriver.isAndroid());
 
-        webDriver = new ContextAwareWebDriver(iosDriver, null);
+        webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertFalse(webDriver.isAndroid());
     }
 
     @Test
     public void testIsIos() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertFalse(webDriver.isIOS());
 
         new Expectations() {{
             iosDriver.isBrowser(); result = false;
         }};
 
-        webDriver = new ContextAwareWebDriver(androidDriver, null);
+        webDriver = new ContextAwareWebDriver(androidDriver, null, null);
         Assert.assertFalse(webDriver.isIOS());
 
-        webDriver = new ContextAwareWebDriver(iosDriver, null);
+        webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertTrue(webDriver.isIOS());
 
         new Expectations() {{
             iosDriver.isBrowser(); result = true;
         }};
 
-        webDriver = new ContextAwareWebDriver(androidDriver, null);
+        webDriver = new ContextAwareWebDriver(androidDriver, null, null);
         Assert.assertFalse(webDriver.isIOS());
 
-        webDriver = new ContextAwareWebDriver(iosDriver, null);
+        webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertFalse(webDriver.isIOS());
     }
 
     @Test
     public void testSetVariable() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         webDriver.setVariable("value", "var1");
 
         Assert.assertEquals("value", webDriver.getVariable("var1"));
@@ -148,7 +148,7 @@ public class ContextAwareWebDriverTest {
 
     @Test
     public void testPushVariable() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         webDriver.pushVariable("value1", "list1");
         webDriver.setVariable("value", "list2");
         webDriver.pushVariable("value3", "list2");
@@ -172,7 +172,7 @@ public class ContextAwareWebDriverTest {
 
     @Test
     public void testEvalExp() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         webDriver.setVariable(1, "x");
 
         Assert.assertEquals(2, webDriver.evalExp("x+1"));
@@ -180,7 +180,7 @@ public class ContextAwareWebDriverTest {
 
     @Test
     public void testEvalTemplate() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         webDriver.setVariable("mylove", "x");
 
         Assert.assertEquals("I love mylove", webDriver.evalTemplate("I love ${x}"));
@@ -188,7 +188,7 @@ public class ContextAwareWebDriverTest {
 
     @Test
     public void testFindElement() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertEquals(element, webDriver.findElement("id=id"));
         Assert.assertEquals(element, webDriver.findElement(null, "id=id"));
     }
@@ -202,14 +202,14 @@ public class ContextAwareWebDriverTest {
             chromeDriver.findElements((By) any); result = elements;
         }};
 
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertEquals(element, webDriver.findElements("id=id").get(0));
         Assert.assertEquals(element, webDriver.findElements(null, "id=id").get(0));
     }
 
     @Test
     public void testFindElementWithParent() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertEquals(element, webDriver.findElement("name=body", "id=id"));
 
         new Verifications() {{
@@ -227,7 +227,7 @@ public class ContextAwareWebDriverTest {
             element.findElements((By) any); result = elements;
         }};
 
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertEquals(element, webDriver.findElements("name=body", "id=id").get(0));
 
         new Verifications() {{
@@ -237,7 +237,7 @@ public class ContextAwareWebDriverTest {
 
     @Test
     public void testOverrideMethods() {
-        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null);
+        ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         webDriver.setFileDetector(null);
         webDriver.getSessionId();
         webDriver.getErrorHandler();

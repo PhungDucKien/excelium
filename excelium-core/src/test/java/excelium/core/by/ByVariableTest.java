@@ -60,7 +60,7 @@ public class ByVariableTest {
 
     @Test(expected = InvalidSelectorException.class)
     public void testFindElement_InvalidVariable() {
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         contextAwareWebDriver.setVariable(element, "var2");
 
         ByVariable by = new ByVariable("var1");
@@ -69,7 +69,7 @@ public class ByVariableTest {
 
     @Test
     public void testFindElement_SingleElement() {
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         contextAwareWebDriver.setVariable(element, "var1");
 
         ByVariable by = new ByVariable("var1");
@@ -79,7 +79,7 @@ public class ByVariableTest {
 
     @Test
     public void testFindElement_ElementList() {
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         List<WebElement> elements = new ArrayList<>();
         elements.add(element);
         elements.add(element);
@@ -95,7 +95,7 @@ public class ByVariableTest {
             webDriver.findElement((By) any); result = element;
         }};
 
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         contextAwareWebDriver.setVariable("id=123456", "var1");
 
         ByVariable by = new ByVariable("var1");
@@ -110,7 +110,7 @@ public class ByVariableTest {
 
     @Test(expected = InvalidSelectorException.class)
     public void testFindElements_InvalidVariable() {
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         contextAwareWebDriver.setVariable(element, "var2");
 
         ByVariable by = new ByVariable("var1");
@@ -119,7 +119,7 @@ public class ByVariableTest {
 
     @Test
     public void testFindElements_SingleElement() {
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         contextAwareWebDriver.setVariable(element, "var1");
 
         ByVariable by = new ByVariable("var1");
@@ -130,7 +130,7 @@ public class ByVariableTest {
 
     @Test
     public void testFindElements_ElementList() {
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         List<WebElement> elements = new ArrayList<>();
         elements.add(element);
         elements.add(element);
@@ -152,7 +152,7 @@ public class ByVariableTest {
             webDriver.findElements((By) any); result = elements;
         }};
 
-        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null);
+        ContextAwareWebDriver contextAwareWebDriver = new ContextAwareWebDriver(webDriver, null, null);
         contextAwareWebDriver.setVariable("id=123456", "var1");
 
         ByVariable by = new ByVariable("var1");
