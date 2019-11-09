@@ -40,11 +40,6 @@ import java.time.Duration;
 public class CommandExecutor {
 
     /**
-     * Default timeout (in milliseconds) for web driver
-     */
-    private static final int WEBDRIVER_DEFAULT_TIMEOUT = 120000;
-
-    /**
      * Web driver
      */
     protected final ContextAwareWebDriver webDriver;
@@ -114,7 +109,7 @@ public class CommandExecutor {
      */
     public WebDriverWait createWebDriverWait() {
         WebDriverWait wait = new WebDriverWait(webDriver, 0);
-        wait.withTimeout(Duration.ofMillis(WEBDRIVER_DEFAULT_TIMEOUT));
+        wait.withTimeout(Duration.ofMillis(webDriver.getTimeout()));
         return wait;
     }
 
@@ -125,7 +120,7 @@ public class CommandExecutor {
      * @return the web driver wait
      */
     public WebDriverWait createWebDriverWait(String timeOutInMilliseconds) {
-        long timeout = toPositiveInteger(timeOutInMilliseconds, WEBDRIVER_DEFAULT_TIMEOUT);
+        long timeout = toPositiveInteger(timeOutInMilliseconds, webDriver.getTimeout());
         WebDriverWait wait = new WebDriverWait(webDriver, 0);
         wait.withTimeout(Duration.ofMillis(timeout));
         return wait;

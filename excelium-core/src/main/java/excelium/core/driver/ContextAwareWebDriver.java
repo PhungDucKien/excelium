@@ -84,6 +84,11 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
     private final ScreenshotService screenshotService;
 
     /**
+     * Timeout (in milliseconds) for web driver
+     */
+    private int timeout = 120000;
+
+    /**
      * Instantiates a new ContextAwareWebDriver.
      *
      * @param webDriver         the web driver
@@ -301,6 +306,14 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
         } else {
             return element.getText();
         }
+    }
+
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 
     /**
