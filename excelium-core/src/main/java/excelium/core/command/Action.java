@@ -56,17 +56,17 @@ public @interface Action {
     String param3() default "";
 
     /**
-     * Is the command only available in web application
+     * Is the command available in web application
      */
-    boolean webOnly() default false;
+    boolean web() default true;
 
     /**
-     * Is the command only available in Android application
+     * Is the command available in Android application
      */
-    boolean androidOnly() default false;
+    boolean android() default true;
 
     /**
-     * Is the command only available in iOS application
+     * Is the command available in iOS application
      */
-    boolean iosOnly() default false;
+    boolean ios() default true;
 }

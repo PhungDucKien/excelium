@@ -24,8 +24,6 @@
 
 package excelium.model.test.command;
 
-import java.util.Map;
-
 /**
  * Represents command model.
  *
@@ -60,19 +58,19 @@ public class Command {
     private String param3;
 
     /**
-     * Is the command only available in web application
+     * Is the command available in web application
      */
-    private boolean webOnly;
+    private boolean web;
 
     /**
-     * Is the command only available in Android application
+     * Is the command available in Android application
      */
-    private boolean androidOnly;
+    private boolean android;
 
     /**
-     * Is the command only available in iOS application
+     * Is the command available in iOS application
      */
-    private boolean iosOnly;
+    private boolean ios;
 
     /**
      * Source method key. Used for API document generating
@@ -175,57 +173,57 @@ public class Command {
     }
 
     /**
-     * Is web only boolean.
+     * Is web boolean.
      *
      * @return the boolean
      */
-    public boolean isWebOnly() {
-        return webOnly;
+    public boolean isWeb() {
+        return web;
     }
 
     /**
-     * Sets web only.
+     * Sets web.
      *
-     * @param webOnly the web only
+     * @param web the web
      */
-    public void setWebOnly(boolean webOnly) {
-        this.webOnly = webOnly;
+    public void setWeb(boolean web) {
+        this.web = web;
     }
 
     /**
-     * Is android only boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isAndroidOnly() {
-        return androidOnly;
-    }
-
-    /**
-     * Sets android only.
-     *
-     * @param androidOnly the android only
-     */
-    public void setAndroidOnly(boolean androidOnly) {
-        this.androidOnly = androidOnly;
-    }
-
-    /**
-     * Is ios only boolean.
+     * Is android boolean.
      *
      * @return the boolean
      */
-    public boolean isIosOnly() {
-        return iosOnly;
+    public boolean isAndroid() {
+        return android;
     }
 
     /**
-     * Sets ios only.
+     * Sets android.
      *
-     * @param iosOnly the ios only
+     * @param android the android
      */
-    public void setIosOnly(boolean iosOnly) {
-        this.iosOnly = iosOnly;
+    public void setAndroid(boolean android) {
+        this.android = android;
+    }
+
+    /**
+     * Is ios boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isIos() {
+        return ios;
+    }
+
+    /**
+     * Sets ios.
+     *
+     * @param ios the ios
+     */
+    public void setIos(boolean ios) {
+        this.ios = ios;
     }
 
     /**

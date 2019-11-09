@@ -96,7 +96,7 @@ public class EvalCommandExecutor extends CommandExecutor {
      *
      * @param script the JavaScript snippet to run
      */
-    @Action(param1 = "script", webOnly = true)
+    @Action(param1 = "script", android = false, ios = false)
     public void runScript(String script) {
         evalScript(script);
     }
@@ -118,7 +118,7 @@ public class EvalCommandExecutor extends CommandExecutor {
      * @param script the JavaScript snippet to run
      * @return the results of evaluating the snippet
      */
-    @Accessor(param1 = "script", webOnly = true)
+    @Accessor(param1 = "script", android = false, ios = false)
     public String getEvalScript(String script) {
         return evalScript(script);
     }
@@ -136,7 +136,7 @@ public class EvalCommandExecutor extends CommandExecutor {
      * @param script the JavaScript snippet to run
      * @param timeout a timeout in milliseconds, after which this command will return with an error
      */
-    @Action(param1 = "script", param2 = "timeout", webOnly = true)
+    @Action(param1 = "script", param2 = "timeout", android = false, ios = false)
     public void waitForCondition(String script, String timeout) {
         WebDriverWait wait = createWebDriverWait(timeout);
         wait.until(driver -> {

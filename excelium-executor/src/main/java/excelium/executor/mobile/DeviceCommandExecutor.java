@@ -71,7 +71,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      * @param activity the given activity
      * @throws IOException Invalid properties provided
      */
-    @Action(param1 = "activity", androidOnly = true)
+    @Action(param1 = "activity", ios = false)
     public void startActivity(String activity) throws IOException {
         Properties activityProps = StringUtil.parseProperties(activity, ",");
         webDriver.getAndroidDriver().startActivity(new Activity(activityProps.getProperty("appPackage"), activityProps.getProperty("appActivity")));
@@ -86,7 +86,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      * @return true if the current activity matches the given activity, false otherwise
      * @throws IOException Invalid properties provided
      */
-    @Accessor(param1 = "activity", androidOnly = true)
+    @Accessor(param1 = "activity", ios = false)
     public boolean isActivity(String activity) throws IOException {
         String currentActivity = webDriver.getAndroidDriver().currentActivity();
         String currentPackage = webDriver.getAndroidDriver().getCurrentPackage();
@@ -180,7 +180,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      * @param intent Android Intent
      * @throws Exception
      */
-    @Action(param1 = "intent", androidOnly = true)
+    @Action(param1 = "intent", ios = false)
     public void broadcastIntent(String intent) throws Exception {
         ProcessUtil.execAdbShell(webDriver.getAndroidDriver(), "am", "broadcast", "-a", intent);
     }
@@ -188,7 +188,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Perform a shake action on the device
      */
-    @Action(iosOnly = true)
+    @Action(android = false)
     public void shake() {
         webDriver.getIOSDriver().shake();
     }
@@ -208,7 +208,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Unlock the device
      */
-    @Action(androidOnly = true)
+    @Action(ios = false)
     public void unlock() {
         webDriver.getAndroidDriver().unlockDevice();
     }
@@ -224,7 +224,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Toggle airplane mode on device
      */
-    @Action(androidOnly = true)
+    @Action(ios = false)
     public void toggleAirplaneMode() {
         webDriver.getAndroidDriver().toggleAirplaneMode();
     }
@@ -232,7 +232,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Switch the state of the wifi service
      */
-    @Action(androidOnly = true)
+    @Action(ios = false)
     public void toggleWifi() {
         webDriver.getAndroidDriver().toggleWifi();
     }
@@ -240,7 +240,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Switch the state of the location service
      */
-    @Action(androidOnly = true)
+    @Action(ios = false)
     public void toggleLocationServices() {
         webDriver.getAndroidDriver().toggleLocationServices();
     }
@@ -248,7 +248,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Simulate an accept touch id event (iOS Simulator only)
      */
-    @Action(iosOnly = true)
+    @Action(android = false)
     public void acceptTouchID() {
         webDriver.getIOSDriver().performTouchID(true);
     }
@@ -256,7 +256,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Simulate a reject touch id event (iOS Simulator only)
      */
-    @Action(iosOnly = true)
+    @Action(android = false)
     public void rejectTouchID() {
         webDriver.getIOSDriver().performTouchID(false);
     }
@@ -264,7 +264,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Open Android notifications (Emulator only)
      */
-    @Action(androidOnly = true)
+    @Action(ios = false)
     public void openNotifications() {
         webDriver.getAndroidDriver().openNotifications();
     }
@@ -274,7 +274,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      *
      * @param fingerPrintId finger prints stored in Android Keystore system (from 1 to 10)
      */
-    @Action(androidOnly = true)
+    @Action(ios = false)
     public void fingerPrint(String fingerPrintId) {
         webDriver.getAndroidDriver().fingerPrint(Integer.parseInt(fingerPrintId));
     }

@@ -396,9 +396,9 @@ public class CommandFactory {
         command.setParam1(action.param1());
         command.setParam2(action.param2());
         command.setParam3(action.param3());
-        command.setWebOnly(action.webOnly());
-        command.setAndroidOnly(action.androidOnly());
-        command.setIosOnly(action.iosOnly());
+        command.setWeb(action.web());
+        command.setAndroid(action.android());
+        command.setIos(action.ios());
         command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
         command.setConsumer((param1, param2, param3) -> {
             if (paramCount == 0) {
@@ -449,9 +449,9 @@ public class CommandFactory {
 
             command.setConsumer((param1, param2, param3) -> method.invoke(executor, param1, null, param2));
         }
-        command.setWebOnly(action.webOnly());
-        command.setAndroidOnly(action.androidOnly());
-        command.setIosOnly(action.iosOnly());
+        command.setWeb(action.web());
+        command.setAndroid(action.android());
+        command.setIos(action.ios());
         command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
 
         return command;
@@ -504,9 +504,9 @@ public class CommandFactory {
                 });
             }
         }
-        command.setWebOnly(accessor.webOnly());
-        command.setAndroidOnly(accessor.androidOnly());
-        command.setIosOnly(accessor.iosOnly());
+        command.setWeb(accessor.web());
+        command.setAndroid(accessor.android());
+        command.setIos(accessor.ios());
         command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
 
         return command;
@@ -559,9 +559,9 @@ public class CommandFactory {
                 });
             }
         }
-        command.setWebOnly(accessor.webOnly());
-        command.setAndroidOnly(accessor.androidOnly());
-        command.setIosOnly(accessor.iosOnly());
+        command.setWeb(accessor.web());
+        command.setAndroid(accessor.android());
+        command.setIos(accessor.ios());
         command.setSourceMethodKey(method.getName() + "(" + method.getParameterCount() + ")");
 
         return command;
@@ -575,30 +575,30 @@ public class CommandFactory {
      * @return true if the command is available, otherwise, false
      */
     private static boolean isCommandAvailable(Object annotation, ContextAwareWebDriver webDriver) {
-        boolean webOnly = false;
-        boolean androidOnly = false;
-        boolean iosOnly = false;
+        boolean web = true;
+        boolean android = true;
+        boolean ios = true;
         if (annotation instanceof Action) {
             Action action = (Action) annotation;
-            webOnly = action.webOnly();
-            androidOnly = action.androidOnly();
-            iosOnly = action.iosOnly();
+            web = action.web();
+            android = action.android();
+            ios = action.ios();
         } else if (annotation instanceof Accessor) {
             Accessor accessor = (Accessor) annotation;
-            webOnly = accessor.webOnly();
-            androidOnly = accessor.androidOnly();
-            iosOnly = accessor.iosOnly();
+            web = accessor.web();
+            android = accessor.android();
+            ios = accessor.ios();
         }
-        if (webOnly) {
-            return webDriver.isWeb();
+        if (web && webDriver.isWeb()) {
+            return true;
         }
-        if (androidOnly) {
-            return webDriver.isAndroid();
+        if (android && webDriver.isAndroid()) {
+            return true;
         }
-        if (iosOnly) {
-            return webDriver.isIOS();
+        if (ios && webDriver.isIOS()) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**

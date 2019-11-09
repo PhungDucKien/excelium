@@ -64,7 +64,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
      *
      * @return true if there is an alert
      */
-    @Accessor(iosOnly = true)
+    @Accessor(android = false)
     public boolean isAlertPresent() {
         return checkAlertPresent();
     }
@@ -78,7 +78,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
      *
      * @return true if there is a pending confirmation
      */
-    @Accessor(iosOnly = true)
+    @Accessor(android = false)
     public boolean isConfirmationPresent() {
         return checkAlertPresent();
     }
@@ -92,7 +92,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
      *
      * @return true if there is a pending prompt
      */
-    @Accessor(iosOnly = true)
+    @Accessor(android = false)
     public boolean isPromptPresent() {
         return checkAlertPresent();
     }
@@ -102,7 +102,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
      *
      * @return The message of the JavaScript alert
      */
-    @Accessor(iosOnly = true)
+    @Accessor(android = false)
     public String getAlert() {
         if (!isAlertPresent()) {
             throw new SeleniumException("There were no alerts");
@@ -119,7 +119,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
      *
      * @return the message of the JavaScript confirmation dialog
      */
-    @Accessor(iosOnly = true)
+    @Accessor(android = false)
     public String getConfirmation() {
         if (!isConfirmationPresent()) {
             throw new SeleniumException("There were no confirmations");
@@ -136,7 +136,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
      *
      * @return the message of the JavaScript question prompt
      */
-    @Accessor(iosOnly = true)
+    @Accessor(android = false)
     public String getPrompt() {
         if (!isPromptPresent()) {
             throw new SeleniumException("There were no prompts");
@@ -151,7 +151,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
     /**
      * Simulates as if the user had manually clicked OK.
      */
-    @Action(iosOnly = true)
+    @Action(android = false)
     public void chooseOkAlert() {
         if (!isAlertPresent()) {
             throw new SeleniumException("There were no alerts");
@@ -165,7 +165,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
     /**
      * Simulates as if the user had manually clicked OK.
      */
-    @Action(iosOnly = true)
+    @Action(android = false)
     public void chooseOkConfirmation() {
         if (!isConfirmationPresent()) {
             throw new SeleniumException("There were no confirmations");
@@ -179,7 +179,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
     /**
      * Simulates as if the user had manually clicked Cancel.
      */
-    @Action(iosOnly = true)
+    @Action(android = false)
     public void chooseCancelConfirmation() {
         if (!isConfirmationPresent()) {
             throw new SeleniumException("There were no confirmations");
@@ -196,7 +196,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
      *
      * @param answer the answer to give in response to the prompt pop-up
      */
-    @Action(param1 = "answer", iosOnly = true)
+    @Action(param1 = "answer", android = false)
     public void answerPrompt(String answer) {
         if (!isPromptPresent()) {
             throw new SeleniumException("There were no prompts");
@@ -213,7 +213,7 @@ public class IOSAlertCommandExecutor extends CommandExecutor {
     /**
      * Simulates as if the user had manually clicked Cancel.
      */
-    @Action(iosOnly = true)
+    @Action(android = false)
     public void chooseCancelPrompt() {
         if (!isPromptPresent()) {
             throw new SeleniumException("There were no prompts");

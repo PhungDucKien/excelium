@@ -65,7 +65,7 @@ public class ScreenshotCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void captureElementScreenshot(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         webDriver.getScreenshotService().captureElement(webDriver, element);

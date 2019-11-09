@@ -53,7 +53,7 @@ public class NavigateCommandExecutor extends CommandExecutor {
     /**
      * Simulates the user clicking the "Refresh" button on their browser.
      */
-    @Action(webOnly = true)
+    @Action(android = false, ios = false)
     public void refresh() {
         webDriver.navigate().refresh();
     }
@@ -69,7 +69,7 @@ public class NavigateCommandExecutor extends CommandExecutor {
     /**
      * Simulates the user clicking the "forward" button on their browser.
      */
-    @Action(webOnly = true)
+    @Action(android = false, ios = false)
     public void goForward() {
         webDriver.navigate().forward();
     }

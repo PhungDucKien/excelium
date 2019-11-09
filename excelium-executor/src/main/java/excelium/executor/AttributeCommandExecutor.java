@@ -302,7 +302,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return the selected option ID in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public String getSelectedId(String parentLocator, String locator) {
         return findFirstSelectedOptionProperty(parentLocator, locator, "id");
     }
@@ -315,7 +315,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return the selected option index in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public String getSelectedIndex(String parentLocator, String locator) {
         return findFirstSelectedOptionProperty(parentLocator, locator, "index");
     }
@@ -327,7 +327,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return the selected option label in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public String getSelectedLabel(String parentLocator, String locator) {
         return findFirstSelectedOptionProperty(parentLocator, locator, "text");
     }
@@ -339,7 +339,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return the selected option value in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public String getSelectedValue(String parentLocator, String locator) {
         return findFirstSelectedOptionProperty(parentLocator, locator, "value");
     }
@@ -352,7 +352,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option IDs in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getSelectedIds(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "id");
     }
@@ -365,7 +365,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option indexes in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getSelectedIndexes(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "index");
     }
@@ -378,7 +378,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option labels in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getSelectedLabels(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "text");
     }
@@ -391,7 +391,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all selected option values in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getSelectedValues(String parentLocator, String locator) {
         return findSelectedOptionProperties(parentLocator, locator, "value");
     }
@@ -403,7 +403,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return an array of all option labels in the specified select drop-down
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getSelectOptions(String parentLocator, String locator) {
         OptionSelector selector = new OptionSelector(webDriver, parentLocator, locator);
 
@@ -423,7 +423,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator identifying a drop-down menu
      * @return true if some option has been selected, false otherwise
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public boolean isSomethingSelected(String parentLocator, String locator) {
         String script =
                 "return (" + webDriver.getJavascriptLibrary().getSeleniumScript("isSomethingSelected.js") +
@@ -483,7 +483,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the text color of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Color getColor(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return Color.fromString(element.getCssValue("color"));
@@ -496,7 +496,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the background color of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Color getBackgroundColor(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return Color.fromString(element.getCssValue("background-color"));
@@ -509,7 +509,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the border color of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Color getBorderColor(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return Color.fromString(element.getCssValue("border-color"));
@@ -522,7 +522,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the font family of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public String getFontFamily(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return element.getCssValue("font-family");
@@ -535,7 +535,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the font size of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public String getFontSize(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return element.getCssValue("font-size");
@@ -548,7 +548,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the font style of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public String getFontStyle(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return element.getCssValue("font-style");
@@ -561,7 +561,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the font weight of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public String getFontWeight(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return element.getCssValue("font-weight");
@@ -574,7 +574,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the text decoration of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public String getTextDecoration(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return element.getCssValue("text-decoration");
@@ -587,7 +587,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return the text alignment of the specified element
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public String getTextAlignment(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         return element.getCssValue("text-align");
@@ -601,7 +601,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return of relative index of the element to its parent (starting from 0)
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementIndex(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
 
@@ -630,7 +630,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return of pixels from the edge of the frame.
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementPositionLeft(String parentLocator, String locator) {
         Point location = webDriver.findElement(parentLocator, locator).getLocation();
         return location.getX();
@@ -643,7 +643,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return of pixels from the edge of the frame.
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementPositionTop(String parentLocator, String locator) {
         Point location = webDriver.findElement(parentLocator, locator).getLocation();
         return location.getY();
@@ -656,7 +656,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return width of an element in pixels
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementWidth(String parentLocator, String locator) {
         Dimension size = webDriver.findElement(parentLocator, locator).getSize();
         return size.getWidth();
@@ -669,7 +669,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator an element locator pointing to an element
      * @return height of an element in pixels
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementHeight(String parentLocator, String locator) {
         Dimension size = webDriver.findElement(parentLocator, locator).getSize();
         return size.getHeight();
@@ -692,7 +692,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      *        textarea
      * @return the numerical position of the cursor in the field
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
     public Number getCursorPosition(String parentLocator, String locator) {
         // All supported browsers apparently support "document.selection". Let's use that and the
         // relevant snippet of code from the original selenium core to implement this. What could
@@ -738,7 +738,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * @param locator       an element locator
      * @return the QR code's value
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", webOnly = true)
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public String getQR(String parentLocator, String locator) throws IOException, NotFoundException {
         WebElement element = webDriver.findElement(parentLocator, locator);
 
