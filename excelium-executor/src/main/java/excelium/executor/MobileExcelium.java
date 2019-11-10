@@ -908,12 +908,76 @@ public class MobileExcelium extends Excelium {
         runCommand("runAppInBackground", millis, null, null);
     }
 
+    public void scrollDown() throws Throwable {
+        runCommand("scrollDown", null, null, null);
+    }
+
+    public void scrollDown(String locator) throws Throwable {
+        runCommand("scrollDown", locator, null, null);
+    }
+
+    public void scrollDown(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollDown", parentLocator, locator, null);
+    }
+
     public void scrollDownTo(String locator) throws Throwable {
         runCommand("scrollDownTo", locator, null, null);
     }
 
     public void scrollDownTo(String parentLocator, String locator) throws Throwable {
         runCommand("scrollDownTo", parentLocator, locator, null);
+    }
+
+    public void scrollLeft() throws Throwable {
+        runCommand("scrollLeft", null, null, null);
+    }
+
+    public void scrollLeft(String locator) throws Throwable {
+        runCommand("scrollLeft", locator, null, null);
+    }
+
+    public void scrollLeft(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollLeft", parentLocator, locator, null);
+    }
+
+    public void scrollLeftTo(String locator) throws Throwable {
+        runCommand("scrollLeftTo", locator, null, null);
+    }
+
+    public void scrollLeftTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollLeftTo", parentLocator, locator, null);
+    }
+
+    public void scrollRight() throws Throwable {
+        runCommand("scrollRight", null, null, null);
+    }
+
+    public void scrollRight(String locator) throws Throwable {
+        runCommand("scrollRight", locator, null, null);
+    }
+
+    public void scrollRight(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollRight", parentLocator, locator, null);
+    }
+
+    public void scrollRightTo(String locator) throws Throwable {
+        runCommand("scrollRightTo", locator, null, null);
+    }
+
+    public void scrollRightTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollRightTo", parentLocator, locator, null);
+    }
+
+    public void scrollUp() throws Throwable {
+        runCommand("scrollUp", null, null, null);
+    }
+
+    public void scrollUp(String locator) throws Throwable {
+        runCommand("scrollUp", locator, null, null);
+    }
+
+    public void scrollUp(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollUp", parentLocator, locator, null);
     }
 
     public void scrollUpTo(String locator) throws Throwable {
@@ -1000,12 +1064,52 @@ public class MobileExcelium extends Excelium {
         runCommand("storeValue", parentLocator, locator, variable);
     }
 
+    public void swipeDown() throws Throwable {
+        runCommand("swipeDown", null, null, null);
+    }
+
+    public void swipeDown(String locator) throws Throwable {
+        runCommand("swipeDown", locator, null, null);
+    }
+
+    public void swipeDown(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeDown", parentLocator, locator, null);
+    }
+
     public void swipeLeft() throws Throwable {
         runCommand("swipeLeft", null, null, null);
     }
 
+    public void swipeLeft(String locator) throws Throwable {
+        runCommand("swipeLeft", locator, null, null);
+    }
+
+    public void swipeLeft(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeLeft", parentLocator, locator, null);
+    }
+
     public void swipeRight() throws Throwable {
         runCommand("swipeRight", null, null, null);
+    }
+
+    public void swipeRight(String locator) throws Throwable {
+        runCommand("swipeRight", locator, null, null);
+    }
+
+    public void swipeRight(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeRight", parentLocator, locator, null);
+    }
+
+    public void swipeUp() throws Throwable {
+        runCommand("swipeUp", null, null, null);
+    }
+
+    public void swipeUp(String locator) throws Throwable {
+        runCommand("swipeUp", locator, null, null);
+    }
+
+    public void swipeUp(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeUp", parentLocator, locator, null);
     }
 
     public void tap(String locator) throws Throwable {
