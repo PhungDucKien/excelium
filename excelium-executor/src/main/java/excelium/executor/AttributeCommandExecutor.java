@@ -99,6 +99,19 @@ public class AttributeCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Gets the tag name of an element.
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @return the tag name of the element
+     */
+    @Accessor(param1 = "parentLocator", param2 = "locator")
+    public String getTagName(String parentLocator, String locator) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        return element.getTagName();
+    }
+
+    /**
      * Gets the (whitespace-trimmed) value of an input field (or anything else with a value
      * parameter). For checkbox/radio elements, the value will be "on" or "off" depending on whether
      * the element is checked or not.

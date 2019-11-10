@@ -892,6 +892,14 @@ public class WebExcelium extends Excelium {
         runCommand("assertNotTable", locator, cellAddress, text);
     }
 
+    public void assertNotTagName(String locator, String text) throws Throwable {
+        runCommand("assertNotTagName", locator, text, null);
+    }
+
+    public void assertNotTagName(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertNotTagName", parentLocator, locator, text);
+    }
+
     public void assertNotText(String locator, String text) throws Throwable {
         runCommand("assertNotText", locator, text, null);
     }
@@ -1254,6 +1262,30 @@ public class WebExcelium extends Excelium {
 
     public void assertTableNotMatch(String locator, String cellAddress, String text) throws Throwable {
         runCommand("assertTableNotMatch", locator, cellAddress, text);
+    }
+
+    public void assertTagName(String locator, String text) throws Throwable {
+        runCommand("assertTagName", locator, text, null);
+    }
+
+    public void assertTagName(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTagName", parentLocator, locator, text);
+    }
+
+    public void assertTagNameMatch(String locator, String text) throws Throwable {
+        runCommand("assertTagNameMatch", locator, text, null);
+    }
+
+    public void assertTagNameMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTagNameMatch", parentLocator, locator, text);
+    }
+
+    public void assertTagNameNotMatch(String locator, String text) throws Throwable {
+        runCommand("assertTagNameNotMatch", locator, text, null);
+    }
+
+    public void assertTagNameNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("assertTagNameNotMatch", parentLocator, locator, text);
     }
 
     public void assertText(String locator, String text) throws Throwable {
@@ -1888,6 +1920,10 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfNotSomethingSelected", action, parentLocator, locator);
     }
 
+    public void executeIfNotTagName(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfNotTagName", action, locator, text);
+    }
+
     public void executeIfNotText(String action, String locator, String text) throws Throwable {
         runCommand("executeIfNotText", action, locator, text);
     }
@@ -2014,6 +2050,18 @@ public class WebExcelium extends Excelium {
 
     public void executeIfSomethingSelected(String action, String parentLocator, String locator) throws Throwable {
         runCommand("executeIfSomethingSelected", action, parentLocator, locator);
+    }
+
+    public void executeIfTagName(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfTagName", action, locator, text);
+    }
+
+    public void executeIfTagNameMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfTagNameMatch", action, locator, text);
+    }
+
+    public void executeIfTagNameNotMatch(String action, String locator, String text) throws Throwable {
+        runCommand("executeIfTagNameNotMatch", action, locator, text);
     }
 
     public void executeIfText(String action, String locator, String text) throws Throwable {
@@ -2562,6 +2610,14 @@ public class WebExcelium extends Excelium {
 
     public void storeTable(String locator, String cellAddress, String variable) throws Throwable {
         runCommand("storeTable", locator, cellAddress, variable);
+    }
+
+    public void storeTagName(String locator, String variable) throws Throwable {
+        runCommand("storeTagName", locator, variable, null);
+    }
+
+    public void storeTagName(String parentLocator, String locator, String variable) throws Throwable {
+        runCommand("storeTagName", parentLocator, locator, variable);
     }
 
     public void storeText(String locator, String variable) throws Throwable {
@@ -3428,6 +3484,14 @@ public class WebExcelium extends Excelium {
         runCommand("verifyNotTable", locator, cellAddress, text);
     }
 
+    public void verifyNotTagName(String locator, String text) throws Throwable {
+        runCommand("verifyNotTagName", locator, text, null);
+    }
+
+    public void verifyNotTagName(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyNotTagName", parentLocator, locator, text);
+    }
+
     public void verifyNotText(String locator, String text) throws Throwable {
         runCommand("verifyNotText", locator, text, null);
     }
@@ -3790,6 +3854,30 @@ public class WebExcelium extends Excelium {
 
     public void verifyTableNotMatch(String locator, String cellAddress, String text) throws Throwable {
         runCommand("verifyTableNotMatch", locator, cellAddress, text);
+    }
+
+    public void verifyTagName(String locator, String text) throws Throwable {
+        runCommand("verifyTagName", locator, text, null);
+    }
+
+    public void verifyTagName(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTagName", parentLocator, locator, text);
+    }
+
+    public void verifyTagNameMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTagNameMatch", locator, text, null);
+    }
+
+    public void verifyTagNameMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTagNameMatch", parentLocator, locator, text);
+    }
+
+    public void verifyTagNameNotMatch(String locator, String text) throws Throwable {
+        runCommand("verifyTagNameNotMatch", locator, text, null);
+    }
+
+    public void verifyTagNameNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("verifyTagNameNotMatch", parentLocator, locator, text);
     }
 
     public void verifyText(String locator, String text) throws Throwable {
@@ -4320,6 +4408,14 @@ public class WebExcelium extends Excelium {
         runCommand("waitForNotTable", locator, cellAddress, text);
     }
 
+    public void waitForNotTagName(String locator, String text) throws Throwable {
+        runCommand("waitForNotTagName", locator, text, null);
+    }
+
+    public void waitForNotTagName(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForNotTagName", parentLocator, locator, text);
+    }
+
     public void waitForNotText(String locator, String text) throws Throwable {
         runCommand("waitForNotText", locator, text, null);
     }
@@ -4530,6 +4626,30 @@ public class WebExcelium extends Excelium {
 
     public void waitForTableNotMatch(String locator, String cellAddress, String text) throws Throwable {
         runCommand("waitForTableNotMatch", locator, cellAddress, text);
+    }
+
+    public void waitForTagName(String locator, String text) throws Throwable {
+        runCommand("waitForTagName", locator, text, null);
+    }
+
+    public void waitForTagName(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForTagName", parentLocator, locator, text);
+    }
+
+    public void waitForTagNameMatch(String locator, String text) throws Throwable {
+        runCommand("waitForTagNameMatch", locator, text, null);
+    }
+
+    public void waitForTagNameMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForTagNameMatch", parentLocator, locator, text);
+    }
+
+    public void waitForTagNameNotMatch(String locator, String text) throws Throwable {
+        runCommand("waitForTagNameNotMatch", locator, text, null);
+    }
+
+    public void waitForTagNameNotMatch(String parentLocator, String locator, String text) throws Throwable {
+        runCommand("waitForTagNameNotMatch", parentLocator, locator, text);
     }
 
     public void waitForText(String locator, String text) throws Throwable {
