@@ -468,6 +468,10 @@ public class MobileExcelium extends Excelium {
         runCommand("captureScreenshot", null, null, null);
     }
 
+    public void captureViewport() throws Throwable {
+        runCommand("captureViewport", null, null, null);
+    }
+
     public void chooseCancelConfirmation() throws Throwable {
         runCommand("chooseCancelConfirmation", null, null, null);
     }

@@ -70,4 +70,12 @@ public class ScreenshotCommandExecutor extends CommandExecutor {
         WebElement element = webDriver.findElement(parentLocator, locator);
         webDriver.getScreenshotService().captureElement(webDriver, element);
     }
+
+    /**
+     * Captures viewport screenshot.
+     */
+    @Action(web = false)
+    public void captureViewport() {
+        webDriver.getScreenshotService().captureViewport(webDriver);
+    }
 }

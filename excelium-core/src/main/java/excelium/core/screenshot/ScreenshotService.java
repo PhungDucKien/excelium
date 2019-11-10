@@ -45,10 +45,13 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static ru.yandex.qatools.ashot.util.InnerScript.execute;
@@ -149,6 +152,38 @@ public class ScreenshotService {
             captureWebElement(webDriver, element);
         } else {
             throw new RuntimeException("The action is not supported");
+        }
+    }
+
+    /**
+     * Capture a screenshot of contents of viewport.
+     *
+     * @param webDriver the web driver
+     */
+    public void captureViewport(ContextAwareWebDriver webDriver) {
+        if (webDriver.isWeb()) {
+            throw new RuntimeException("The action is not supported");
+        } else {
+            try {
+//                String base64EncodedPng = (String) webDriver.executeScript("mobile:viewportScreenshot");
+//                File srcFile = OutputType.FILE.convertFromBase64Png(base64EncodedPng);
+//                FileUtils.copyFile(srcFile, getScreenshotImageFile());
+
+                Map<String, Object> sessionDetails = webDriver.getAppiumDriver().getSessionDetails();
+                Map<String, Long> viewportRect = (Map<String, Long>) sessionDetails.get("viewportRect");
+
+                InputStream in = new ByteArrayInputStream(webDriver.getScreenshotAs(OutputType.BYTES));
+                BufferedImage bufferedImage = ImageIO.read(in);
+                int imageWidth = bufferedImage.getWidth();
+                int imageHeight = bufferedImage.getHeight();
+
+                Double scale = imageWidth * 1.d / viewportRect.get("width");
+                int scaleStatusBarHeight = (int) Math.round(viewportRect.get("top") * scale);
+                BufferedImage cropImage = bufferedImage.getSubimage(0, scaleStatusBarHeight, imageWidth, imageHeight - scaleStatusBarHeight);
+                ImageIO.write(cropImage, "PNG", getScreenshotImageFile());
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+            }
         }
     }
 
