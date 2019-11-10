@@ -74,7 +74,7 @@ public class SessionCommandExecutor extends CommandExecutor {
      *
      * @param rotation a string represents the three dimensional plane and how a device can be rotated about it.
      */
-    @Action
+    @Action(param1 = "rotation")
     public void rotate(String rotation) {
         String[] dim = rotation.split("\\s*,\\s*");
         webDriver.getAppiumDriver().rotate(new DeviceRotation(Integer.parseInt(dim[0]), Integer.parseInt(dim[1]), Integer.parseInt(dim[2])));
@@ -85,7 +85,7 @@ public class SessionCommandExecutor extends CommandExecutor {
      *
      * @param location Geo location string separated by commas
      */
-    @Action
+    @Action(param1 = "location")
     public void setGeolocation(String location) {
         String[] pos = location.split("\\s*,\\s*");
         webDriver.getAppiumDriver().setLocation(new Location(Float.parseFloat(pos[0]), Float.parseFloat(pos[1]), Float.parseFloat(pos[2])));

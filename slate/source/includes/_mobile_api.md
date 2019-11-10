@@ -5,7 +5,7 @@
 No | Command | Method | Param 1 | Param 2 | Param 3
 --------- | --------- | --------- | --------- | --------- | ---------
 1 | Accept Touch ID | acceptTouchID |  |  | 
-2 | Activate App | activateApp |  |  | 
+2 | Activate App | activateApp | bundleId |  | 
 3 | Answer Prompt | answerPrompt | answer |  | 
 4 | Assert Activity | assertActivity | activity |  | 
 5 | Assert Alert | assertAlert | text |  | 
@@ -205,7 +205,7 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 199 | Execute If Visible | executeIfVisible | action | locator | 
 200 | Execute If Visible | executeIfVisible | action | parentLocator | locator
 201 | Execute Loop | executeLoop | action | times | 
-202 | Finger Print | fingerPrint |  |  | 
+202 | Finger Print | fingerPrint | fingerPrintId |  | 
 203 | Go Back | goBack |  |  | 
 204 | Hide Keyboard | hideKeyboard |  |  | 
 205 | Landscape | landscape |  |  | 
@@ -220,14 +220,14 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 214 | Reject Touch ID | rejectTouchID |  |  | 
 215 | Reload App | reloadApp |  |  | 
 216 | Reset App | resetApp |  |  | 
-217 | Rotate | rotate |  |  | 
+217 | Rotate | rotate | rotation |  | 
 218 | Run App In Background | runAppInBackground | millis |  | 
 219 | Scroll Down To | scrollDownTo | locator |  | 
 220 | Scroll Down To | scrollDownTo | parentLocator | locator | 
 221 | Scroll Up To | scrollUpTo | locator |  | 
 222 | Scroll Up To | scrollUpTo | parentLocator | locator | 
-223 | Set Clipboard | setClipboard |  |  | 
-224 | Set Geolocation | setGeolocation |  |  | 
+223 | Set Clipboard | setClipboard | text |  | 
+224 | Set Geolocation | setGeolocation | location |  | 
 225 | Set Timeout | setTimeout | timeout |  | 
 226 | Shake | shake |  |  | 
 227 | Start Activity | startActivity | activity |  | 
@@ -250,7 +250,7 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 244 | Tap | tap | locator |  | 
 245 | Tap | tap | parentLocator | locator | 
 246 | Tap At | tapAt | coordinate |  | 
-247 | Terminate App | terminateApp |  |  | 
+247 | Terminate App | terminateApp | bundleId |  | 
 248 | Toggle Airplane Mode | toggleAirplaneMode |  |  | 
 249 | Toggle Location Services | toggleLocationServices |  |  | 
 250 | Toggle Wifi | toggleWifi |  |  | 
@@ -473,7 +473,7 @@ Activate the given app onto the device.
 ### Usage
 
 `
-activateApp()
+activateApp(bundleId)
 `
 
 ### Parameters
@@ -3383,7 +3383,7 @@ Authenticate users by using their finger print scans on supported emulators. (Fo
 ### Usage
 
 `
-fingerPrint()
+fingerPrint(fingerPrintId)
 `
 
 ### Parameters
@@ -3602,7 +3602,7 @@ Rotate the device in three dimensions.
 ### Usage
 
 `
-rotate()
+rotate(rotation)
 `
 
 ### Parameters
@@ -3676,7 +3676,7 @@ Set the content of the system clipboard
 ### Usage
 
 `
-setClipboard()
+setClipboard(text)
 `
 
 ### Parameters
@@ -3692,7 +3692,7 @@ Set the current geo location.
 ### Usage
 
 `
-setGeolocation()
+setGeolocation(location)
 `
 
 ### Parameters
@@ -4050,7 +4050,7 @@ Terminate the given app on the device.
 ### Usage
 
 `
-terminateApp()
+terminateApp(bundleId)
 `
 
 ### Parameters

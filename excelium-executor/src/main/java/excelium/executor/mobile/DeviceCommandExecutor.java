@@ -145,7 +145,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      *
      * @param bundleId the bundle identifier (or app id) of the app to activate.
      */
-    @Action
+    @Action(param1 = "bundleId")
     public void activateApp(String bundleId) {
         webDriver.getAppiumDriver().activateApp(bundleId);
     }
@@ -155,7 +155,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      *
      * @param bundleId the bundle identifier (or app id) of the app to be terminated.
      */
-    @Action
+    @Action(param1 = "bundleId")
     public void terminateApp(String bundleId) {
         webDriver.getAppiumDriver().terminateApp(bundleId);
     }
@@ -165,7 +165,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      *
      * @param text the value to set
      */
-    @Action
+    @Action(param1 = "text")
     public void setClipboard(String text) {
         if (webDriver.getAppiumDriver() instanceof IOSDriver) {
             webDriver.getIOSDriver().setClipboardText(text);
@@ -274,7 +274,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
      *
      * @param fingerPrintId finger prints stored in Android Keystore system (from 1 to 10)
      */
-    @Action(ios = false)
+    @Action(param1 = "fingerPrintId", ios = false)
     public void fingerPrint(String fingerPrintId) {
         webDriver.getAndroidDriver().fingerPrint(Integer.parseInt(fingerPrintId));
     }

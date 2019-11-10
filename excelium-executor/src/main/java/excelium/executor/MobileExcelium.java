@@ -40,8 +40,8 @@ public class MobileExcelium extends Excelium {
         runCommand("acceptTouchID", null, null, null);
     }
 
-    public void activateApp() throws Throwable {
-        runCommand("activateApp", null, null, null);
+    public void activateApp(String bundleId) throws Throwable {
+        runCommand("activateApp", bundleId, null, null);
     }
 
     public void answerPrompt(String answer) throws Throwable {
@@ -840,8 +840,8 @@ public class MobileExcelium extends Excelium {
         runCommand("executeLoop", action, times, null);
     }
 
-    public void fingerPrint() throws Throwable {
-        runCommand("fingerPrint", null, null, null);
+    public void fingerPrint(String fingerPrintId) throws Throwable {
+        runCommand("fingerPrint", fingerPrintId, null, null);
     }
 
     public void goBack() throws Throwable {
@@ -900,8 +900,8 @@ public class MobileExcelium extends Excelium {
         runCommand("resetApp", null, null, null);
     }
 
-    public void rotate() throws Throwable {
-        runCommand("rotate", null, null, null);
+    public void rotate(String rotation) throws Throwable {
+        runCommand("rotate", rotation, null, null);
     }
 
     public void runAppInBackground(String millis) throws Throwable {
@@ -924,12 +924,12 @@ public class MobileExcelium extends Excelium {
         runCommand("scrollUpTo", parentLocator, locator, null);
     }
 
-    public void setClipboard() throws Throwable {
-        runCommand("setClipboard", null, null, null);
+    public void setClipboard(String text) throws Throwable {
+        runCommand("setClipboard", text, null, null);
     }
 
-    public void setGeolocation() throws Throwable {
-        runCommand("setGeolocation", null, null, null);
+    public void setGeolocation(String location) throws Throwable {
+        runCommand("setGeolocation", location, null, null);
     }
 
     public void setTimeout(String timeout) throws Throwable {
@@ -1020,8 +1020,8 @@ public class MobileExcelium extends Excelium {
         runCommand("tapAt", coordinate, null, null);
     }
 
-    public void terminateApp() throws Throwable {
-        runCommand("terminateApp", null, null, null);
+    public void terminateApp(String bundleId) throws Throwable {
+        runCommand("terminateApp", bundleId, null, null);
     }
 
     public void toggleAirplaneMode() throws Throwable {
