@@ -112,6 +112,18 @@ public class MobileExcelium extends Excelium {
         runCommand("assertConfirmationPresent", null, null, null);
     }
 
+    public void assertContext(String text) throws Throwable {
+        runCommand("assertContext", text, null, null);
+    }
+
+    public void assertContextMatch(String text) throws Throwable {
+        runCommand("assertContextMatch", text, null, null);
+    }
+
+    public void assertContextNotMatch(String text) throws Throwable {
+        runCommand("assertContextNotMatch", text, null, null);
+    }
+
     public void assertDateListOrderAsc(String locator, String format) throws Throwable {
         runCommand("assertDateListOrderAsc", locator, format, null);
     }
@@ -234,6 +246,10 @@ public class MobileExcelium extends Excelium {
 
     public void assertNotConfirmation(String text) throws Throwable {
         runCommand("assertNotConfirmation", text, null, null);
+    }
+
+    public void assertNotContext(String text) throws Throwable {
+        runCommand("assertNotContext", text, null, null);
     }
 
     public void assertNotEditable(String locator) throws Throwable {
@@ -592,6 +608,18 @@ public class MobileExcelium extends Excelium {
         runCommand("executeIfConfirmationPresent", action, null, null);
     }
 
+    public void executeIfContext(String action, String text) throws Throwable {
+        runCommand("executeIfContext", action, text, null);
+    }
+
+    public void executeIfContextMatch(String action, String text) throws Throwable {
+        runCommand("executeIfContextMatch", action, text, null);
+    }
+
+    public void executeIfContextNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfContextNotMatch", action, text, null);
+    }
+
     public void executeIfEditable(String action, String locator) throws Throwable {
         runCommand("executeIfEditable", action, locator, null);
     }
@@ -670,6 +698,10 @@ public class MobileExcelium extends Excelium {
 
     public void executeIfNotConfirmation(String action, String text) throws Throwable {
         runCommand("executeIfNotConfirmation", action, text, null);
+    }
+
+    public void executeIfNotContext(String action, String text) throws Throwable {
+        runCommand("executeIfNotContext", action, text, null);
     }
 
     public void executeIfNotEditable(String action, String locator) throws Throwable {
@@ -992,6 +1024,10 @@ public class MobileExcelium extends Excelium {
         runCommand("setClipboard", text, null, null);
     }
 
+    public void setContext(String context) throws Throwable {
+        runCommand("setContext", context, null, null);
+    }
+
     public void setGeolocation(String location) throws Throwable {
         runCommand("setGeolocation", location, null, null);
     }
@@ -1022,6 +1058,10 @@ public class MobileExcelium extends Excelium {
 
     public void storeConfirmation(String variable) throws Throwable {
         runCommand("storeConfirmation", variable, null, null);
+    }
+
+    public void storeContext(String variable) throws Throwable {
+        runCommand("storeContext", variable, null, null);
     }
 
     public void storeCurrentDate(String variable) throws Throwable {
@@ -1216,6 +1256,18 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyConfirmationPresent", null, null, null);
     }
 
+    public void verifyContext(String text) throws Throwable {
+        runCommand("verifyContext", text, null, null);
+    }
+
+    public void verifyContextMatch(String text) throws Throwable {
+        runCommand("verifyContextMatch", text, null, null);
+    }
+
+    public void verifyContextNotMatch(String text) throws Throwable {
+        runCommand("verifyContextNotMatch", text, null, null);
+    }
+
     public void verifyDateListOrderAsc(String locator, String format) throws Throwable {
         runCommand("verifyDateListOrderAsc", locator, format, null);
     }
@@ -1338,6 +1390,10 @@ public class MobileExcelium extends Excelium {
 
     public void verifyNotConfirmation(String text) throws Throwable {
         runCommand("verifyNotConfirmation", text, null, null);
+    }
+
+    public void verifyNotContext(String text) throws Throwable {
+        runCommand("verifyNotContext", text, null, null);
     }
 
     public void verifyNotEditable(String locator) throws Throwable {
@@ -1660,6 +1716,18 @@ public class MobileExcelium extends Excelium {
         runCommand("waitForConfirmationPresent", null, null, null);
     }
 
+    public void waitForContext(String text) throws Throwable {
+        runCommand("waitForContext", text, null, null);
+    }
+
+    public void waitForContextMatch(String text) throws Throwable {
+        runCommand("waitForContextMatch", text, null, null);
+    }
+
+    public void waitForContextNotMatch(String text) throws Throwable {
+        runCommand("waitForContextNotMatch", text, null, null);
+    }
+
     public void waitForEditable(String locator) throws Throwable {
         runCommand("waitForEditable", locator, null, null);
     }
@@ -1734,6 +1802,10 @@ public class MobileExcelium extends Excelium {
 
     public void waitForNotConfirmation(String text) throws Throwable {
         runCommand("waitForNotConfirmation", text, null, null);
+    }
+
+    public void waitForNotContext(String text) throws Throwable {
+        runCommand("waitForNotContext", text, null, null);
     }
 
     public void waitForNotEditable(String locator) throws Throwable {

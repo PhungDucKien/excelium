@@ -79,6 +79,7 @@ public class MyExecutorProviderService implements ExecutorProviderService {
                 MobilePageCommandExecutor.class,
                 MobileElementCommandExecutor.class,
                 InteractionCommandExecutor.class,
+                ContextCommandExecutor.class,
 
                 // Common
                 NavigateCommandExecutor.class,

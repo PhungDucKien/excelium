@@ -23,459 +23,477 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 17 | Assert Confirmation Not Match | assertConfirmationNotMatch | text |  | 
 18 | Assert Confirmation Not Present | assertConfirmationNotPresent |  |  | 
 19 | Assert Confirmation Present | assertConfirmationPresent |  |  | 
-20 | Assert Date List Order Asc | assertDateListOrderAsc | locator | format | 
-21 | Assert Date List Order Asc | assertDateListOrderAsc | parentLocator | locator | format
-22 | Assert Date List Order Desc | assertDateListOrderDesc | locator | format | 
-23 | Assert Date List Order Desc | assertDateListOrderDesc | parentLocator | locator | format
-24 | Assert Editable | assertEditable | locator |  | 
-25 | Assert Editable | assertEditable | parentLocator | locator | 
-26 | Assert Element Not Present | assertElementNotPresent | locator |  | 
-27 | Assert Element Not Present | assertElementNotPresent | parentLocator | locator | 
-28 | Assert Element Present | assertElementPresent | locator |  | 
-29 | Assert Element Present | assertElementPresent | parentLocator | locator | 
-30 | Assert Enabled | assertEnabled | locator |  | 
-31 | Assert Enabled | assertEnabled | parentLocator | locator | 
-32 | Assert Eval | assertEval | expression | text | 
-33 | Assert Exists In Database | assertExistsInDatabase | sql |  | 
-34 | Assert Expression | assertExpression | expression | text | 
-35 | Assert Expression Match | assertExpressionMatch | expression | text | 
-36 | Assert Expression Not Match | assertExpressionNotMatch | expression | text | 
-37 | Assert Integer List Order Asc | assertIntegerListOrderAsc | locator |  | 
-38 | Assert Integer List Order Asc | assertIntegerListOrderAsc | parentLocator | locator | 
-39 | Assert Integer List Order Desc | assertIntegerListOrderDesc | locator |  | 
-40 | Assert Integer List Order Desc | assertIntegerListOrderDesc | parentLocator | locator | 
-41 | Assert List Contain | assertListContain | variable | text | 
-42 | Assert List Not Contain | assertListNotContain | variable | text | 
-43 | Assert List Order Asc | assertListOrderAsc | variable |  | 
-44 | Assert List Order Desc | assertListOrderDesc | variable |  | 
-45 | Assert Not Activity | assertNotActivity | activity |  | 
-46 | Assert Not Alert | assertNotAlert | text |  | 
-47 | Assert Not Attribute | assertNotAttribute | locator | name | text
-48 | Assert Not Checked | assertNotChecked | locator |  | 
-49 | Assert Not Checked | assertNotChecked | parentLocator | locator | 
-50 | Assert Not Confirmation | assertNotConfirmation | text |  | 
-51 | Assert Not Editable | assertNotEditable | locator |  | 
-52 | Assert Not Editable | assertNotEditable | parentLocator | locator | 
-53 | Assert Not Enabled | assertNotEnabled | locator |  | 
-54 | Assert Not Enabled | assertNotEnabled | parentLocator | locator | 
-55 | Assert Not Eval | assertNotEval | expression | text | 
-56 | Assert Not Exists In Database | assertNotExistsInDatabase | sql |  | 
-57 | Assert Not Expression | assertNotExpression | expression | text | 
-58 | Assert Not Page Source | assertNotPageSource | text |  | 
-59 | Assert Not Prompt | assertNotPrompt | text |  | 
-60 | Assert Not Text | assertNotText | locator | text | 
-61 | Assert Not Text | assertNotText | parentLocator | locator | text
-62 | Assert Not Text Empty | assertNotTextEmpty | locator |  | 
-63 | Assert Not Text Empty | assertNotTextEmpty | parentLocator | locator | 
-64 | Assert Not Value | assertNotValue | locator | text | 
-65 | Assert Not Value | assertNotValue | parentLocator | locator | text
-66 | Assert Not Value Empty | assertNotValueEmpty | locator |  | 
-67 | Assert Not Value Empty | assertNotValueEmpty | parentLocator | locator | 
-68 | Assert Not Variable | assertNotVariable | variable | text | 
-69 | Assert Not Visible | assertNotVisible | locator |  | 
-70 | Assert Not Visible | assertNotVisible | parentLocator | locator | 
-71 | Assert Page Source | assertPageSource | text |  | 
-72 | Assert Page Source Match | assertPageSourceMatch | text |  | 
-73 | Assert Page Source Not Match | assertPageSourceNotMatch | text |  | 
-74 | Assert Prompt | assertPrompt | text |  | 
-75 | Assert Prompt Match | assertPromptMatch | text |  | 
-76 | Assert Prompt Not Match | assertPromptNotMatch | text |  | 
-77 | Assert Prompt Not Present | assertPromptNotPresent |  |  | 
-78 | Assert Prompt Present | assertPromptPresent |  |  | 
-79 | Assert Row Count | assertRowCount | sql | count | 
-80 | Assert Row Count Greater Than | assertRowCountGreaterThan | sql | count | 
-81 | Assert Row Count Less Than | assertRowCountLessThan | sql | count | 
-82 | Assert Text | assertText | locator | text | 
-83 | Assert Text | assertText | parentLocator | locator | text
-84 | Assert Text Empty | assertTextEmpty | locator |  | 
-85 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
-86 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
-87 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
-88 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
-89 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
-90 | Assert Text Match | assertTextMatch | locator | text | 
-91 | Assert Text Match | assertTextMatch | parentLocator | locator | text
-92 | Assert Text Not Match | assertTextNotMatch | locator | text | 
-93 | Assert Text Not Match | assertTextNotMatch | parentLocator | locator | text
-94 | Assert Text Not Present | assertTextNotPresent | text |  | 
-95 | Assert Text Present | assertTextPresent | text |  | 
-96 | Assert Value | assertValue | locator | text | 
-97 | Assert Value | assertValue | parentLocator | locator | text
-98 | Assert Value Empty | assertValueEmpty | locator |  | 
-99 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
-100 | Assert Value Match | assertValueMatch | locator | text | 
-101 | Assert Value Match | assertValueMatch | parentLocator | locator | text
-102 | Assert Value Not Match | assertValueNotMatch | locator | text | 
-103 | Assert Value Not Match | assertValueNotMatch | parentLocator | locator | text
-104 | Assert Variable | assertVariable | variable | text | 
-105 | Assert Visible | assertVisible | locator |  | 
-106 | Assert Visible | assertVisible | parentLocator | locator | 
-107 | Broadcast Intent | broadcastIntent | intent |  | 
-108 | Capture Screenshot | captureScreenshot |  |  | 
-109 | Capture Viewport | captureViewport |  |  | 
-110 | Choose Cancel Confirmation | chooseCancelConfirmation |  |  | 
-111 | Choose Cancel Prompt | chooseCancelPrompt |  |  | 
-112 | Choose Ok Alert | chooseOkAlert |  |  | 
-113 | Choose Ok Confirmation | chooseOkConfirmation |  |  | 
-114 | Clear | clear | locator |  | 
-115 | Clear | clear | parentLocator | locator | 
-116 | Click | click | locator |  | 
-117 | Click | click | parentLocator | locator | 
-118 | Click Button | clickButton | indexOrText |  | 
-119 | Click Text | clickText | indexOrText |  | 
-120 | Close App | closeApp |  |  | 
-121 | Double Tap | doubleTap | locator |  | 
-122 | Double Tap | doubleTap | parentLocator | locator | 
-123 | Double Tap At | doubleTapAt | coordinate |  | 
-124 | Echo | echo | message |  | 
-125 | Execute | execute | action |  | 
-126 | Execute Each | executeEach | action | locator | variable
-127 | Execute If Activity | executeIfActivity | action | activity | 
-128 | Execute If Alert | executeIfAlert | action | text | 
-129 | Execute If Alert Match | executeIfAlertMatch | action | text | 
-130 | Execute If Alert Not Match | executeIfAlertNotMatch | action | text | 
-131 | Execute If Alert Not Present | executeIfAlertNotPresent | action |  | 
-132 | Execute If Alert Present | executeIfAlertPresent | action |  | 
-133 | Execute If Checked | executeIfChecked | action | locator | 
-134 | Execute If Checked | executeIfChecked | action | parentLocator | locator
-135 | Execute If Confirmation | executeIfConfirmation | action | text | 
-136 | Execute If Confirmation Match | executeIfConfirmationMatch | action | text | 
-137 | Execute If Confirmation Not Match | executeIfConfirmationNotMatch | action | text | 
-138 | Execute If Confirmation Not Present | executeIfConfirmationNotPresent | action |  | 
-139 | Execute If Confirmation Present | executeIfConfirmationPresent | action |  | 
-140 | Execute If Editable | executeIfEditable | action | locator | 
-141 | Execute If Editable | executeIfEditable | action | parentLocator | locator
-142 | Execute If Element Not Present | executeIfElementNotPresent | action | locator | 
-143 | Execute If Element Not Present | executeIfElementNotPresent | action | parentLocator | locator
-144 | Execute If Element Present | executeIfElementPresent | action | locator | 
-145 | Execute If Element Present | executeIfElementPresent | action | parentLocator | locator
-146 | Execute If Enabled | executeIfEnabled | action | locator | 
-147 | Execute If Enabled | executeIfEnabled | action | parentLocator | locator
-148 | Execute If Eval | executeIfEval | action | expression | text
-149 | Execute If Exists In Database | executeIfExistsInDatabase | action | sql | 
-150 | Execute If Expression | executeIfExpression | action | expression | text
-151 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
-152 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
-153 | Execute If List Contain | executeIfListContain | action | variable | text
-154 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
-155 | Execute If Not Activity | executeIfNotActivity | action | activity | 
-156 | Execute If Not Alert | executeIfNotAlert | action | text | 
-157 | Execute If Not Checked | executeIfNotChecked | action | locator | 
-158 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
-159 | Execute If Not Confirmation | executeIfNotConfirmation | action | text | 
-160 | Execute If Not Editable | executeIfNotEditable | action | locator | 
-161 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
-162 | Execute If Not Enabled | executeIfNotEnabled | action | locator | 
-163 | Execute If Not Enabled | executeIfNotEnabled | action | parentLocator | locator
-164 | Execute If Not Eval | executeIfNotEval | action | expression | text
-165 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | sql | 
-166 | Execute If Not Expression | executeIfNotExpression | action | expression | text
-167 | Execute If Not Page Source | executeIfNotPageSource | action | text | 
-168 | Execute If Not Prompt | executeIfNotPrompt | action | text | 
-169 | Execute If Not Text | executeIfNotText | action | locator | text
-170 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
-171 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
-172 | Execute If Not Value | executeIfNotValue | action | locator | text
-173 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
-174 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
-175 | Execute If Not Variable | executeIfNotVariable | action | variable | text
-176 | Execute If Not Visible | executeIfNotVisible | action | locator | 
-177 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
-178 | Execute If Page Source | executeIfPageSource | action | text | 
-179 | Execute If Page Source Match | executeIfPageSourceMatch | action | text | 
-180 | Execute If Page Source Not Match | executeIfPageSourceNotMatch | action | text | 
-181 | Execute If Prompt | executeIfPrompt | action | text | 
-182 | Execute If Prompt Match | executeIfPromptMatch | action | text | 
-183 | Execute If Prompt Not Match | executeIfPromptNotMatch | action | text | 
-184 | Execute If Prompt Not Present | executeIfPromptNotPresent | action |  | 
-185 | Execute If Prompt Present | executeIfPromptPresent | action |  | 
-186 | Execute If Text | executeIfText | action | locator | text
-187 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
-188 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
-189 | Execute If Text Match | executeIfTextMatch | action | locator | text
-190 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
-191 | Execute If Text Not Present | executeIfTextNotPresent | action | text | 
-192 | Execute If Text Present | executeIfTextPresent | action | text | 
-193 | Execute If Value | executeIfValue | action | locator | text
-194 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
-195 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
-196 | Execute If Value Match | executeIfValueMatch | action | locator | text
-197 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
-198 | Execute If Variable | executeIfVariable | action | variable | text
-199 | Execute If Visible | executeIfVisible | action | locator | 
-200 | Execute If Visible | executeIfVisible | action | parentLocator | locator
-201 | Execute Loop | executeLoop | action | times | 
-202 | Finger Print | fingerPrint | fingerPrintId |  | 
-203 | Go Back | goBack |  |  | 
-204 | Hide Keyboard | hideKeyboard |  |  | 
-205 | Landscape | landscape |  |  | 
-206 | Launch App | launchApp |  |  | 
-207 | Lock | lock |  |  | 
-208 | Long Press | longPress | locator |  | 
-209 | Long Press | longPress | parentLocator | locator | 
-210 | Long Press At | longPressAt | coordinate |  | 
-211 | Open Notifications | openNotifications |  |  | 
-212 | Pause | pause | waitTime |  | 
-213 | Portrait | portrait |  |  | 
-214 | Reject Touch ID | rejectTouchID |  |  | 
-215 | Reload App | reloadApp |  |  | 
-216 | Reset App | resetApp |  |  | 
-217 | Rotate | rotate | rotation |  | 
-218 | Run App In Background | runAppInBackground | millis |  | 
-219 | Scroll Down | scrollDown |  |  | 
-220 | Scroll Down | scrollDown | locator |  | 
-221 | Scroll Down | scrollDown | parentLocator | locator | 
-222 | Scroll Down To | scrollDownTo | locator |  | 
-223 | Scroll Down To | scrollDownTo | parentLocator | locator | 
-224 | Scroll Left | scrollLeft |  |  | 
-225 | Scroll Left | scrollLeft | locator |  | 
-226 | Scroll Left | scrollLeft | parentLocator | locator | 
-227 | Scroll Left To | scrollLeftTo | locator |  | 
-228 | Scroll Left To | scrollLeftTo | parentLocator | locator | 
-229 | Scroll Right | scrollRight |  |  | 
-230 | Scroll Right | scrollRight | locator |  | 
-231 | Scroll Right | scrollRight | parentLocator | locator | 
-232 | Scroll Right To | scrollRightTo | locator |  | 
-233 | Scroll Right To | scrollRightTo | parentLocator | locator | 
-234 | Scroll Up | scrollUp |  |  | 
-235 | Scroll Up | scrollUp | locator |  | 
-236 | Scroll Up | scrollUp | parentLocator | locator | 
-237 | Scroll Up To | scrollUpTo | locator |  | 
-238 | Scroll Up To | scrollUpTo | parentLocator | locator | 
-239 | Set Clipboard | setClipboard | text |  | 
-240 | Set Geolocation | setGeolocation | location |  | 
-241 | Set Timeout | setTimeout | timeout |  | 
-242 | Shake | shake |  |  | 
-243 | Start Activity | startActivity | activity |  | 
-244 | Store | store | text | variable | 
-245 | Store Alert | storeAlert | variable |  | 
-246 | Store Attribute | storeAttribute | locator | name | variable
-247 | Store Confirmation | storeConfirmation | variable |  | 
-248 | Store Current Date | storeCurrentDate | variable |  | 
-249 | Store Eval | storeEval | expression | variable | 
-250 | Store Expression | storeExpression | expression | variable | 
-251 | Store Page Source | storePageSource | variable |  | 
-252 | Store Prompt | storePrompt | variable |  | 
-253 | Store Push | storePush | text | variable | 
-254 | Store Text | storeText | locator | variable | 
-255 | Store Text | storeText | parentLocator | locator | variable
-256 | Store Value | storeValue | locator | variable | 
-257 | Store Value | storeValue | parentLocator | locator | variable
-258 | Swipe Down | swipeDown |  |  | 
-259 | Swipe Down | swipeDown | locator |  | 
-260 | Swipe Down | swipeDown | parentLocator | locator | 
-261 | Swipe Left | swipeLeft |  |  | 
-262 | Swipe Left | swipeLeft | locator |  | 
-263 | Swipe Left | swipeLeft | parentLocator | locator | 
-264 | Swipe Right | swipeRight |  |  | 
-265 | Swipe Right | swipeRight | locator |  | 
-266 | Swipe Right | swipeRight | parentLocator | locator | 
-267 | Swipe Up | swipeUp |  |  | 
-268 | Swipe Up | swipeUp | locator |  | 
-269 | Swipe Up | swipeUp | parentLocator | locator | 
-270 | Tap | tap | locator |  | 
-271 | Tap | tap | parentLocator | locator | 
-272 | Tap At | tapAt | coordinate |  | 
-273 | Terminate App | terminateApp | bundleId |  | 
-274 | Toggle Airplane Mode | toggleAirplaneMode |  |  | 
-275 | Toggle Location Services | toggleLocationServices |  |  | 
-276 | Toggle Wifi | toggleWifi |  |  | 
-277 | Type | type | locator | value | 
-278 | Type | type | parentLocator | locator | value
-279 | Unlock | unlock |  |  | 
-280 | Verify Activity | verifyActivity | activity |  | 
-281 | Verify Alert | verifyAlert | text |  | 
-282 | Verify Alert Match | verifyAlertMatch | text |  | 
-283 | Verify Alert Not Match | verifyAlertNotMatch | text |  | 
-284 | Verify Alert Not Present | verifyAlertNotPresent |  |  | 
-285 | Verify Alert Present | verifyAlertPresent |  |  | 
-286 | Verify Attribute | verifyAttribute | locator | name | text
-287 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
-288 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
-289 | Verify Checked | verifyChecked | locator |  | 
-290 | Verify Checked | verifyChecked | parentLocator | locator | 
-291 | Verify Confirmation | verifyConfirmation | text |  | 
-292 | Verify Confirmation Match | verifyConfirmationMatch | text |  | 
-293 | Verify Confirmation Not Match | verifyConfirmationNotMatch | text |  | 
-294 | Verify Confirmation Not Present | verifyConfirmationNotPresent |  |  | 
-295 | Verify Confirmation Present | verifyConfirmationPresent |  |  | 
-296 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
-297 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
-298 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
-299 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
-300 | Verify Editable | verifyEditable | locator |  | 
-301 | Verify Editable | verifyEditable | parentLocator | locator | 
-302 | Verify Element Not Present | verifyElementNotPresent | locator |  | 
-303 | Verify Element Not Present | verifyElementNotPresent | parentLocator | locator | 
-304 | Verify Element Present | verifyElementPresent | locator |  | 
-305 | Verify Element Present | verifyElementPresent | parentLocator | locator | 
-306 | Verify Enabled | verifyEnabled | locator |  | 
-307 | Verify Enabled | verifyEnabled | parentLocator | locator | 
-308 | Verify Eval | verifyEval | expression | text | 
-309 | Verify Exists In Database | verifyExistsInDatabase | sql |  | 
-310 | Verify Expression | verifyExpression | expression | text | 
-311 | Verify Expression Match | verifyExpressionMatch | expression | text | 
-312 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
-313 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
-314 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
-315 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
-316 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
-317 | Verify List Contain | verifyListContain | variable | text | 
-318 | Verify List Not Contain | verifyListNotContain | variable | text | 
-319 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
-320 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
-321 | Verify Not Activity | verifyNotActivity | activity |  | 
-322 | Verify Not Alert | verifyNotAlert | text |  | 
-323 | Verify Not Attribute | verifyNotAttribute | locator | name | text
-324 | Verify Not Checked | verifyNotChecked | locator |  | 
-325 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
-326 | Verify Not Confirmation | verifyNotConfirmation | text |  | 
-327 | Verify Not Editable | verifyNotEditable | locator |  | 
-328 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
-329 | Verify Not Enabled | verifyNotEnabled | locator |  | 
-330 | Verify Not Enabled | verifyNotEnabled | parentLocator | locator | 
-331 | Verify Not Eval | verifyNotEval | expression | text | 
-332 | Verify Not Exists In Database | verifyNotExistsInDatabase | sql |  | 
-333 | Verify Not Expression | verifyNotExpression | expression | text | 
-334 | Verify Not Page Source | verifyNotPageSource | text |  | 
-335 | Verify Not Prompt | verifyNotPrompt | text |  | 
-336 | Verify Not Text | verifyNotText | locator | text | 
-337 | Verify Not Text | verifyNotText | parentLocator | locator | text
-338 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
-339 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
-340 | Verify Not Value | verifyNotValue | locator | text | 
-341 | Verify Not Value | verifyNotValue | parentLocator | locator | text
-342 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
-343 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
-344 | Verify Not Variable | verifyNotVariable | variable | text | 
-345 | Verify Not Visible | verifyNotVisible | locator |  | 
-346 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
-347 | Verify Page Source | verifyPageSource | text |  | 
-348 | Verify Page Source Match | verifyPageSourceMatch | text |  | 
-349 | Verify Page Source Not Match | verifyPageSourceNotMatch | text |  | 
-350 | Verify Prompt | verifyPrompt | text |  | 
-351 | Verify Prompt Match | verifyPromptMatch | text |  | 
-352 | Verify Prompt Not Match | verifyPromptNotMatch | text |  | 
-353 | Verify Prompt Not Present | verifyPromptNotPresent |  |  | 
-354 | Verify Prompt Present | verifyPromptPresent |  |  | 
-355 | Verify Row Count | verifyRowCount | sql | count | 
-356 | Verify Row Count Greater Than | verifyRowCountGreaterThan | sql | count | 
-357 | Verify Row Count Less Than | verifyRowCountLessThan | sql | count | 
-358 | Verify Text | verifyText | locator | text | 
-359 | Verify Text | verifyText | parentLocator | locator | text
-360 | Verify Text Empty | verifyTextEmpty | locator |  | 
-361 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
-362 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
-363 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
-364 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
-365 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
-366 | Verify Text Match | verifyTextMatch | locator | text | 
-367 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
-368 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
-369 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
-370 | Verify Text Not Present | verifyTextNotPresent | text |  | 
-371 | Verify Text Present | verifyTextPresent | text |  | 
-372 | Verify Value | verifyValue | locator | text | 
-373 | Verify Value | verifyValue | parentLocator | locator | text
-374 | Verify Value Empty | verifyValueEmpty | locator |  | 
-375 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
-376 | Verify Value Match | verifyValueMatch | locator | text | 
-377 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
-378 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
-379 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
-380 | Verify Variable | verifyVariable | variable | text | 
-381 | Verify Visible | verifyVisible | locator |  | 
-382 | Verify Visible | verifyVisible | parentLocator | locator | 
-383 | Wait For Activity | waitForActivity | activity |  | 
-384 | Wait For Alert | waitForAlert | text |  | 
-385 | Wait For Alert Match | waitForAlertMatch | text |  | 
-386 | Wait For Alert Not Match | waitForAlertNotMatch | text |  | 
-387 | Wait For Alert Not Present | waitForAlertNotPresent |  |  | 
-388 | Wait For Alert Present | waitForAlertPresent |  |  | 
-389 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
-390 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
-391 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
-392 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
-393 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
-394 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
-395 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
-396 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
-397 | Wait For Attribute | waitForAttribute | locator | name | text
-398 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
-399 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
-400 | Wait For Checked | waitForChecked | locator |  | 
-401 | Wait For Checked | waitForChecked | parentLocator | locator | 
-402 | Wait For Confirmation | waitForConfirmation | text |  | 
-403 | Wait For Confirmation Match | waitForConfirmationMatch | text |  | 
-404 | Wait For Confirmation Not Match | waitForConfirmationNotMatch | text |  | 
-405 | Wait For Confirmation Not Present | waitForConfirmationNotPresent |  |  | 
-406 | Wait For Confirmation Present | waitForConfirmationPresent |  |  | 
-407 | Wait For Editable | waitForEditable | locator |  | 
-408 | Wait For Editable | waitForEditable | parentLocator | locator | 
-409 | Wait For Element Not Present | waitForElementNotPresent | locator |  | 
-410 | Wait For Element Not Present | waitForElementNotPresent | parentLocator | locator | 
-411 | Wait For Element Present | waitForElementPresent | locator |  | 
-412 | Wait For Element Present | waitForElementPresent | parentLocator | locator | 
-413 | Wait For Enabled | waitForEnabled | locator |  | 
-414 | Wait For Enabled | waitForEnabled | parentLocator | locator | 
-415 | Wait For Eval | waitForEval | expression | text | 
-416 | Wait For Exists In Database | waitForExistsInDatabase | sql |  | 
-417 | Wait For Expression | waitForExpression | expression | text | 
-418 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
-419 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
-420 | Wait For Not Activity | waitForNotActivity | activity |  | 
-421 | Wait For Not Alert | waitForNotAlert | text |  | 
-422 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
-423 | Wait For Not Checked | waitForNotChecked | locator |  | 
-424 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
-425 | Wait For Not Confirmation | waitForNotConfirmation | text |  | 
-426 | Wait For Not Editable | waitForNotEditable | locator |  | 
-427 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
-428 | Wait For Not Enabled | waitForNotEnabled | locator |  | 
-429 | Wait For Not Enabled | waitForNotEnabled | parentLocator | locator | 
-430 | Wait For Not Eval | waitForNotEval | expression | text | 
-431 | Wait For Not Exists In Database | waitForNotExistsInDatabase | sql |  | 
-432 | Wait For Not Expression | waitForNotExpression | expression | text | 
-433 | Wait For Not Page Source | waitForNotPageSource | text |  | 
-434 | Wait For Not Prompt | waitForNotPrompt | text |  | 
-435 | Wait For Not Text | waitForNotText | locator | text | 
-436 | Wait For Not Text | waitForNotText | parentLocator | locator | text
-437 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
-438 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
-439 | Wait For Not Value | waitForNotValue | locator | text | 
-440 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
-441 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
-442 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
-443 | Wait For Not Visible | waitForNotVisible | locator |  | 
-444 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
-445 | Wait For Page Source | waitForPageSource | text |  | 
-446 | Wait For Page Source Match | waitForPageSourceMatch | text |  | 
-447 | Wait For Page Source Not Match | waitForPageSourceNotMatch | text |  | 
-448 | Wait For Prompt | waitForPrompt | text |  | 
-449 | Wait For Prompt Match | waitForPromptMatch | text |  | 
-450 | Wait For Prompt Not Match | waitForPromptNotMatch | text |  | 
-451 | Wait For Prompt Not Present | waitForPromptNotPresent |  |  | 
-452 | Wait For Prompt Present | waitForPromptPresent |  |  | 
-453 | Wait For Text | waitForText | locator | text | 
-454 | Wait For Text | waitForText | parentLocator | locator | text
-455 | Wait For Text Empty | waitForTextEmpty | locator |  | 
-456 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
-457 | Wait For Text Match | waitForTextMatch | locator | text | 
-458 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
-459 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
-460 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
-461 | Wait For Text Not Present | waitForTextNotPresent | text |  | 
-462 | Wait For Text Present | waitForTextPresent | text |  | 
-463 | Wait For Value | waitForValue | locator | text | 
-464 | Wait For Value | waitForValue | parentLocator | locator | text
-465 | Wait For Value Empty | waitForValueEmpty | locator |  | 
-466 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
-467 | Wait For Value Match | waitForValueMatch | locator | text | 
-468 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
-469 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
-470 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
-471 | Wait For Visible | waitForVisible | locator |  | 
-472 | Wait For Visible | waitForVisible | parentLocator | locator | 
+20 | Assert Context | assertContext | text |  | 
+21 | Assert Context Match | assertContextMatch | text |  | 
+22 | Assert Context Not Match | assertContextNotMatch | text |  | 
+23 | Assert Date List Order Asc | assertDateListOrderAsc | locator | format | 
+24 | Assert Date List Order Asc | assertDateListOrderAsc | parentLocator | locator | format
+25 | Assert Date List Order Desc | assertDateListOrderDesc | locator | format | 
+26 | Assert Date List Order Desc | assertDateListOrderDesc | parentLocator | locator | format
+27 | Assert Editable | assertEditable | locator |  | 
+28 | Assert Editable | assertEditable | parentLocator | locator | 
+29 | Assert Element Not Present | assertElementNotPresent | locator |  | 
+30 | Assert Element Not Present | assertElementNotPresent | parentLocator | locator | 
+31 | Assert Element Present | assertElementPresent | locator |  | 
+32 | Assert Element Present | assertElementPresent | parentLocator | locator | 
+33 | Assert Enabled | assertEnabled | locator |  | 
+34 | Assert Enabled | assertEnabled | parentLocator | locator | 
+35 | Assert Eval | assertEval | expression | text | 
+36 | Assert Exists In Database | assertExistsInDatabase | sql |  | 
+37 | Assert Expression | assertExpression | expression | text | 
+38 | Assert Expression Match | assertExpressionMatch | expression | text | 
+39 | Assert Expression Not Match | assertExpressionNotMatch | expression | text | 
+40 | Assert Integer List Order Asc | assertIntegerListOrderAsc | locator |  | 
+41 | Assert Integer List Order Asc | assertIntegerListOrderAsc | parentLocator | locator | 
+42 | Assert Integer List Order Desc | assertIntegerListOrderDesc | locator |  | 
+43 | Assert Integer List Order Desc | assertIntegerListOrderDesc | parentLocator | locator | 
+44 | Assert List Contain | assertListContain | variable | text | 
+45 | Assert List Not Contain | assertListNotContain | variable | text | 
+46 | Assert List Order Asc | assertListOrderAsc | variable |  | 
+47 | Assert List Order Desc | assertListOrderDesc | variable |  | 
+48 | Assert Not Activity | assertNotActivity | activity |  | 
+49 | Assert Not Alert | assertNotAlert | text |  | 
+50 | Assert Not Attribute | assertNotAttribute | locator | name | text
+51 | Assert Not Checked | assertNotChecked | locator |  | 
+52 | Assert Not Checked | assertNotChecked | parentLocator | locator | 
+53 | Assert Not Confirmation | assertNotConfirmation | text |  | 
+54 | Assert Not Context | assertNotContext | text |  | 
+55 | Assert Not Editable | assertNotEditable | locator |  | 
+56 | Assert Not Editable | assertNotEditable | parentLocator | locator | 
+57 | Assert Not Enabled | assertNotEnabled | locator |  | 
+58 | Assert Not Enabled | assertNotEnabled | parentLocator | locator | 
+59 | Assert Not Eval | assertNotEval | expression | text | 
+60 | Assert Not Exists In Database | assertNotExistsInDatabase | sql |  | 
+61 | Assert Not Expression | assertNotExpression | expression | text | 
+62 | Assert Not Page Source | assertNotPageSource | text |  | 
+63 | Assert Not Prompt | assertNotPrompt | text |  | 
+64 | Assert Not Text | assertNotText | locator | text | 
+65 | Assert Not Text | assertNotText | parentLocator | locator | text
+66 | Assert Not Text Empty | assertNotTextEmpty | locator |  | 
+67 | Assert Not Text Empty | assertNotTextEmpty | parentLocator | locator | 
+68 | Assert Not Value | assertNotValue | locator | text | 
+69 | Assert Not Value | assertNotValue | parentLocator | locator | text
+70 | Assert Not Value Empty | assertNotValueEmpty | locator |  | 
+71 | Assert Not Value Empty | assertNotValueEmpty | parentLocator | locator | 
+72 | Assert Not Variable | assertNotVariable | variable | text | 
+73 | Assert Not Visible | assertNotVisible | locator |  | 
+74 | Assert Not Visible | assertNotVisible | parentLocator | locator | 
+75 | Assert Page Source | assertPageSource | text |  | 
+76 | Assert Page Source Match | assertPageSourceMatch | text |  | 
+77 | Assert Page Source Not Match | assertPageSourceNotMatch | text |  | 
+78 | Assert Prompt | assertPrompt | text |  | 
+79 | Assert Prompt Match | assertPromptMatch | text |  | 
+80 | Assert Prompt Not Match | assertPromptNotMatch | text |  | 
+81 | Assert Prompt Not Present | assertPromptNotPresent |  |  | 
+82 | Assert Prompt Present | assertPromptPresent |  |  | 
+83 | Assert Row Count | assertRowCount | sql | count | 
+84 | Assert Row Count Greater Than | assertRowCountGreaterThan | sql | count | 
+85 | Assert Row Count Less Than | assertRowCountLessThan | sql | count | 
+86 | Assert Text | assertText | locator | text | 
+87 | Assert Text | assertText | parentLocator | locator | text
+88 | Assert Text Empty | assertTextEmpty | locator |  | 
+89 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
+90 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
+91 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
+92 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
+93 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
+94 | Assert Text Match | assertTextMatch | locator | text | 
+95 | Assert Text Match | assertTextMatch | parentLocator | locator | text
+96 | Assert Text Not Match | assertTextNotMatch | locator | text | 
+97 | Assert Text Not Match | assertTextNotMatch | parentLocator | locator | text
+98 | Assert Text Not Present | assertTextNotPresent | text |  | 
+99 | Assert Text Present | assertTextPresent | text |  | 
+100 | Assert Value | assertValue | locator | text | 
+101 | Assert Value | assertValue | parentLocator | locator | text
+102 | Assert Value Empty | assertValueEmpty | locator |  | 
+103 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
+104 | Assert Value Match | assertValueMatch | locator | text | 
+105 | Assert Value Match | assertValueMatch | parentLocator | locator | text
+106 | Assert Value Not Match | assertValueNotMatch | locator | text | 
+107 | Assert Value Not Match | assertValueNotMatch | parentLocator | locator | text
+108 | Assert Variable | assertVariable | variable | text | 
+109 | Assert Visible | assertVisible | locator |  | 
+110 | Assert Visible | assertVisible | parentLocator | locator | 
+111 | Broadcast Intent | broadcastIntent | intent |  | 
+112 | Capture Screenshot | captureScreenshot |  |  | 
+113 | Capture Viewport | captureViewport |  |  | 
+114 | Choose Cancel Confirmation | chooseCancelConfirmation |  |  | 
+115 | Choose Cancel Prompt | chooseCancelPrompt |  |  | 
+116 | Choose Ok Alert | chooseOkAlert |  |  | 
+117 | Choose Ok Confirmation | chooseOkConfirmation |  |  | 
+118 | Clear | clear | locator |  | 
+119 | Clear | clear | parentLocator | locator | 
+120 | Click | click | locator |  | 
+121 | Click | click | parentLocator | locator | 
+122 | Click Button | clickButton | indexOrText |  | 
+123 | Click Text | clickText | indexOrText |  | 
+124 | Close App | closeApp |  |  | 
+125 | Double Tap | doubleTap | locator |  | 
+126 | Double Tap | doubleTap | parentLocator | locator | 
+127 | Double Tap At | doubleTapAt | coordinate |  | 
+128 | Echo | echo | message |  | 
+129 | Execute | execute | action |  | 
+130 | Execute Each | executeEach | action | locator | variable
+131 | Execute If Activity | executeIfActivity | action | activity | 
+132 | Execute If Alert | executeIfAlert | action | text | 
+133 | Execute If Alert Match | executeIfAlertMatch | action | text | 
+134 | Execute If Alert Not Match | executeIfAlertNotMatch | action | text | 
+135 | Execute If Alert Not Present | executeIfAlertNotPresent | action |  | 
+136 | Execute If Alert Present | executeIfAlertPresent | action |  | 
+137 | Execute If Checked | executeIfChecked | action | locator | 
+138 | Execute If Checked | executeIfChecked | action | parentLocator | locator
+139 | Execute If Confirmation | executeIfConfirmation | action | text | 
+140 | Execute If Confirmation Match | executeIfConfirmationMatch | action | text | 
+141 | Execute If Confirmation Not Match | executeIfConfirmationNotMatch | action | text | 
+142 | Execute If Confirmation Not Present | executeIfConfirmationNotPresent | action |  | 
+143 | Execute If Confirmation Present | executeIfConfirmationPresent | action |  | 
+144 | Execute If Context | executeIfContext | action | text | 
+145 | Execute If Context Match | executeIfContextMatch | action | text | 
+146 | Execute If Context Not Match | executeIfContextNotMatch | action | text | 
+147 | Execute If Editable | executeIfEditable | action | locator | 
+148 | Execute If Editable | executeIfEditable | action | parentLocator | locator
+149 | Execute If Element Not Present | executeIfElementNotPresent | action | locator | 
+150 | Execute If Element Not Present | executeIfElementNotPresent | action | parentLocator | locator
+151 | Execute If Element Present | executeIfElementPresent | action | locator | 
+152 | Execute If Element Present | executeIfElementPresent | action | parentLocator | locator
+153 | Execute If Enabled | executeIfEnabled | action | locator | 
+154 | Execute If Enabled | executeIfEnabled | action | parentLocator | locator
+155 | Execute If Eval | executeIfEval | action | expression | text
+156 | Execute If Exists In Database | executeIfExistsInDatabase | action | sql | 
+157 | Execute If Expression | executeIfExpression | action | expression | text
+158 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
+159 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
+160 | Execute If List Contain | executeIfListContain | action | variable | text
+161 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
+162 | Execute If Not Activity | executeIfNotActivity | action | activity | 
+163 | Execute If Not Alert | executeIfNotAlert | action | text | 
+164 | Execute If Not Checked | executeIfNotChecked | action | locator | 
+165 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
+166 | Execute If Not Confirmation | executeIfNotConfirmation | action | text | 
+167 | Execute If Not Context | executeIfNotContext | action | text | 
+168 | Execute If Not Editable | executeIfNotEditable | action | locator | 
+169 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
+170 | Execute If Not Enabled | executeIfNotEnabled | action | locator | 
+171 | Execute If Not Enabled | executeIfNotEnabled | action | parentLocator | locator
+172 | Execute If Not Eval | executeIfNotEval | action | expression | text
+173 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | sql | 
+174 | Execute If Not Expression | executeIfNotExpression | action | expression | text
+175 | Execute If Not Page Source | executeIfNotPageSource | action | text | 
+176 | Execute If Not Prompt | executeIfNotPrompt | action | text | 
+177 | Execute If Not Text | executeIfNotText | action | locator | text
+178 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
+179 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
+180 | Execute If Not Value | executeIfNotValue | action | locator | text
+181 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
+182 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
+183 | Execute If Not Variable | executeIfNotVariable | action | variable | text
+184 | Execute If Not Visible | executeIfNotVisible | action | locator | 
+185 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
+186 | Execute If Page Source | executeIfPageSource | action | text | 
+187 | Execute If Page Source Match | executeIfPageSourceMatch | action | text | 
+188 | Execute If Page Source Not Match | executeIfPageSourceNotMatch | action | text | 
+189 | Execute If Prompt | executeIfPrompt | action | text | 
+190 | Execute If Prompt Match | executeIfPromptMatch | action | text | 
+191 | Execute If Prompt Not Match | executeIfPromptNotMatch | action | text | 
+192 | Execute If Prompt Not Present | executeIfPromptNotPresent | action |  | 
+193 | Execute If Prompt Present | executeIfPromptPresent | action |  | 
+194 | Execute If Text | executeIfText | action | locator | text
+195 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
+196 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
+197 | Execute If Text Match | executeIfTextMatch | action | locator | text
+198 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
+199 | Execute If Text Not Present | executeIfTextNotPresent | action | text | 
+200 | Execute If Text Present | executeIfTextPresent | action | text | 
+201 | Execute If Value | executeIfValue | action | locator | text
+202 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
+203 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
+204 | Execute If Value Match | executeIfValueMatch | action | locator | text
+205 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
+206 | Execute If Variable | executeIfVariable | action | variable | text
+207 | Execute If Visible | executeIfVisible | action | locator | 
+208 | Execute If Visible | executeIfVisible | action | parentLocator | locator
+209 | Execute Loop | executeLoop | action | times | 
+210 | Finger Print | fingerPrint | fingerPrintId |  | 
+211 | Go Back | goBack |  |  | 
+212 | Hide Keyboard | hideKeyboard |  |  | 
+213 | Landscape | landscape |  |  | 
+214 | Launch App | launchApp |  |  | 
+215 | Lock | lock |  |  | 
+216 | Long Press | longPress | locator |  | 
+217 | Long Press | longPress | parentLocator | locator | 
+218 | Long Press At | longPressAt | coordinate |  | 
+219 | Open Notifications | openNotifications |  |  | 
+220 | Pause | pause | waitTime |  | 
+221 | Portrait | portrait |  |  | 
+222 | Reject Touch ID | rejectTouchID |  |  | 
+223 | Reload App | reloadApp |  |  | 
+224 | Reset App | resetApp |  |  | 
+225 | Rotate | rotate | rotation |  | 
+226 | Run App In Background | runAppInBackground | millis |  | 
+227 | Scroll Down | scrollDown |  |  | 
+228 | Scroll Down | scrollDown | locator |  | 
+229 | Scroll Down | scrollDown | parentLocator | locator | 
+230 | Scroll Down To | scrollDownTo | locator |  | 
+231 | Scroll Down To | scrollDownTo | parentLocator | locator | 
+232 | Scroll Left | scrollLeft |  |  | 
+233 | Scroll Left | scrollLeft | locator |  | 
+234 | Scroll Left | scrollLeft | parentLocator | locator | 
+235 | Scroll Left To | scrollLeftTo | locator |  | 
+236 | Scroll Left To | scrollLeftTo | parentLocator | locator | 
+237 | Scroll Right | scrollRight |  |  | 
+238 | Scroll Right | scrollRight | locator |  | 
+239 | Scroll Right | scrollRight | parentLocator | locator | 
+240 | Scroll Right To | scrollRightTo | locator |  | 
+241 | Scroll Right To | scrollRightTo | parentLocator | locator | 
+242 | Scroll Up | scrollUp |  |  | 
+243 | Scroll Up | scrollUp | locator |  | 
+244 | Scroll Up | scrollUp | parentLocator | locator | 
+245 | Scroll Up To | scrollUpTo | locator |  | 
+246 | Scroll Up To | scrollUpTo | parentLocator | locator | 
+247 | Set Clipboard | setClipboard | text |  | 
+248 | Set Context | setContext | context |  | 
+249 | Set Geolocation | setGeolocation | location |  | 
+250 | Set Timeout | setTimeout | timeout |  | 
+251 | Shake | shake |  |  | 
+252 | Start Activity | startActivity | activity |  | 
+253 | Store | store | text | variable | 
+254 | Store Alert | storeAlert | variable |  | 
+255 | Store Attribute | storeAttribute | locator | name | variable
+256 | Store Confirmation | storeConfirmation | variable |  | 
+257 | Store Context | storeContext | variable |  | 
+258 | Store Current Date | storeCurrentDate | variable |  | 
+259 | Store Eval | storeEval | expression | variable | 
+260 | Store Expression | storeExpression | expression | variable | 
+261 | Store Page Source | storePageSource | variable |  | 
+262 | Store Prompt | storePrompt | variable |  | 
+263 | Store Push | storePush | text | variable | 
+264 | Store Text | storeText | locator | variable | 
+265 | Store Text | storeText | parentLocator | locator | variable
+266 | Store Value | storeValue | locator | variable | 
+267 | Store Value | storeValue | parentLocator | locator | variable
+268 | Swipe Down | swipeDown |  |  | 
+269 | Swipe Down | swipeDown | locator |  | 
+270 | Swipe Down | swipeDown | parentLocator | locator | 
+271 | Swipe Left | swipeLeft |  |  | 
+272 | Swipe Left | swipeLeft | locator |  | 
+273 | Swipe Left | swipeLeft | parentLocator | locator | 
+274 | Swipe Right | swipeRight |  |  | 
+275 | Swipe Right | swipeRight | locator |  | 
+276 | Swipe Right | swipeRight | parentLocator | locator | 
+277 | Swipe Up | swipeUp |  |  | 
+278 | Swipe Up | swipeUp | locator |  | 
+279 | Swipe Up | swipeUp | parentLocator | locator | 
+280 | Tap | tap | locator |  | 
+281 | Tap | tap | parentLocator | locator | 
+282 | Tap At | tapAt | coordinate |  | 
+283 | Terminate App | terminateApp | bundleId |  | 
+284 | Toggle Airplane Mode | toggleAirplaneMode |  |  | 
+285 | Toggle Location Services | toggleLocationServices |  |  | 
+286 | Toggle Wifi | toggleWifi |  |  | 
+287 | Type | type | locator | value | 
+288 | Type | type | parentLocator | locator | value
+289 | Unlock | unlock |  |  | 
+290 | Verify Activity | verifyActivity | activity |  | 
+291 | Verify Alert | verifyAlert | text |  | 
+292 | Verify Alert Match | verifyAlertMatch | text |  | 
+293 | Verify Alert Not Match | verifyAlertNotMatch | text |  | 
+294 | Verify Alert Not Present | verifyAlertNotPresent |  |  | 
+295 | Verify Alert Present | verifyAlertPresent |  |  | 
+296 | Verify Attribute | verifyAttribute | locator | name | text
+297 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
+298 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
+299 | Verify Checked | verifyChecked | locator |  | 
+300 | Verify Checked | verifyChecked | parentLocator | locator | 
+301 | Verify Confirmation | verifyConfirmation | text |  | 
+302 | Verify Confirmation Match | verifyConfirmationMatch | text |  | 
+303 | Verify Confirmation Not Match | verifyConfirmationNotMatch | text |  | 
+304 | Verify Confirmation Not Present | verifyConfirmationNotPresent |  |  | 
+305 | Verify Confirmation Present | verifyConfirmationPresent |  |  | 
+306 | Verify Context | verifyContext | text |  | 
+307 | Verify Context Match | verifyContextMatch | text |  | 
+308 | Verify Context Not Match | verifyContextNotMatch | text |  | 
+309 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
+310 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
+311 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
+312 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
+313 | Verify Editable | verifyEditable | locator |  | 
+314 | Verify Editable | verifyEditable | parentLocator | locator | 
+315 | Verify Element Not Present | verifyElementNotPresent | locator |  | 
+316 | Verify Element Not Present | verifyElementNotPresent | parentLocator | locator | 
+317 | Verify Element Present | verifyElementPresent | locator |  | 
+318 | Verify Element Present | verifyElementPresent | parentLocator | locator | 
+319 | Verify Enabled | verifyEnabled | locator |  | 
+320 | Verify Enabled | verifyEnabled | parentLocator | locator | 
+321 | Verify Eval | verifyEval | expression | text | 
+322 | Verify Exists In Database | verifyExistsInDatabase | sql |  | 
+323 | Verify Expression | verifyExpression | expression | text | 
+324 | Verify Expression Match | verifyExpressionMatch | expression | text | 
+325 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
+326 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
+327 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
+328 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
+329 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
+330 | Verify List Contain | verifyListContain | variable | text | 
+331 | Verify List Not Contain | verifyListNotContain | variable | text | 
+332 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
+333 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
+334 | Verify Not Activity | verifyNotActivity | activity |  | 
+335 | Verify Not Alert | verifyNotAlert | text |  | 
+336 | Verify Not Attribute | verifyNotAttribute | locator | name | text
+337 | Verify Not Checked | verifyNotChecked | locator |  | 
+338 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
+339 | Verify Not Confirmation | verifyNotConfirmation | text |  | 
+340 | Verify Not Context | verifyNotContext | text |  | 
+341 | Verify Not Editable | verifyNotEditable | locator |  | 
+342 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
+343 | Verify Not Enabled | verifyNotEnabled | locator |  | 
+344 | Verify Not Enabled | verifyNotEnabled | parentLocator | locator | 
+345 | Verify Not Eval | verifyNotEval | expression | text | 
+346 | Verify Not Exists In Database | verifyNotExistsInDatabase | sql |  | 
+347 | Verify Not Expression | verifyNotExpression | expression | text | 
+348 | Verify Not Page Source | verifyNotPageSource | text |  | 
+349 | Verify Not Prompt | verifyNotPrompt | text |  | 
+350 | Verify Not Text | verifyNotText | locator | text | 
+351 | Verify Not Text | verifyNotText | parentLocator | locator | text
+352 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
+353 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
+354 | Verify Not Value | verifyNotValue | locator | text | 
+355 | Verify Not Value | verifyNotValue | parentLocator | locator | text
+356 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
+357 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
+358 | Verify Not Variable | verifyNotVariable | variable | text | 
+359 | Verify Not Visible | verifyNotVisible | locator |  | 
+360 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
+361 | Verify Page Source | verifyPageSource | text |  | 
+362 | Verify Page Source Match | verifyPageSourceMatch | text |  | 
+363 | Verify Page Source Not Match | verifyPageSourceNotMatch | text |  | 
+364 | Verify Prompt | verifyPrompt | text |  | 
+365 | Verify Prompt Match | verifyPromptMatch | text |  | 
+366 | Verify Prompt Not Match | verifyPromptNotMatch | text |  | 
+367 | Verify Prompt Not Present | verifyPromptNotPresent |  |  | 
+368 | Verify Prompt Present | verifyPromptPresent |  |  | 
+369 | Verify Row Count | verifyRowCount | sql | count | 
+370 | Verify Row Count Greater Than | verifyRowCountGreaterThan | sql | count | 
+371 | Verify Row Count Less Than | verifyRowCountLessThan | sql | count | 
+372 | Verify Text | verifyText | locator | text | 
+373 | Verify Text | verifyText | parentLocator | locator | text
+374 | Verify Text Empty | verifyTextEmpty | locator |  | 
+375 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
+376 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
+377 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
+378 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
+379 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
+380 | Verify Text Match | verifyTextMatch | locator | text | 
+381 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
+382 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
+383 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
+384 | Verify Text Not Present | verifyTextNotPresent | text |  | 
+385 | Verify Text Present | verifyTextPresent | text |  | 
+386 | Verify Value | verifyValue | locator | text | 
+387 | Verify Value | verifyValue | parentLocator | locator | text
+388 | Verify Value Empty | verifyValueEmpty | locator |  | 
+389 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
+390 | Verify Value Match | verifyValueMatch | locator | text | 
+391 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
+392 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
+393 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
+394 | Verify Variable | verifyVariable | variable | text | 
+395 | Verify Visible | verifyVisible | locator |  | 
+396 | Verify Visible | verifyVisible | parentLocator | locator | 
+397 | Wait For Activity | waitForActivity | activity |  | 
+398 | Wait For Alert | waitForAlert | text |  | 
+399 | Wait For Alert Match | waitForAlertMatch | text |  | 
+400 | Wait For Alert Not Match | waitForAlertNotMatch | text |  | 
+401 | Wait For Alert Not Present | waitForAlertNotPresent |  |  | 
+402 | Wait For Alert Present | waitForAlertPresent |  |  | 
+403 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
+404 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
+405 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
+406 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
+407 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
+408 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
+409 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
+410 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
+411 | Wait For Attribute | waitForAttribute | locator | name | text
+412 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
+413 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
+414 | Wait For Checked | waitForChecked | locator |  | 
+415 | Wait For Checked | waitForChecked | parentLocator | locator | 
+416 | Wait For Confirmation | waitForConfirmation | text |  | 
+417 | Wait For Confirmation Match | waitForConfirmationMatch | text |  | 
+418 | Wait For Confirmation Not Match | waitForConfirmationNotMatch | text |  | 
+419 | Wait For Confirmation Not Present | waitForConfirmationNotPresent |  |  | 
+420 | Wait For Confirmation Present | waitForConfirmationPresent |  |  | 
+421 | Wait For Context | waitForContext | text |  | 
+422 | Wait For Context Match | waitForContextMatch | text |  | 
+423 | Wait For Context Not Match | waitForContextNotMatch | text |  | 
+424 | Wait For Editable | waitForEditable | locator |  | 
+425 | Wait For Editable | waitForEditable | parentLocator | locator | 
+426 | Wait For Element Not Present | waitForElementNotPresent | locator |  | 
+427 | Wait For Element Not Present | waitForElementNotPresent | parentLocator | locator | 
+428 | Wait For Element Present | waitForElementPresent | locator |  | 
+429 | Wait For Element Present | waitForElementPresent | parentLocator | locator | 
+430 | Wait For Enabled | waitForEnabled | locator |  | 
+431 | Wait For Enabled | waitForEnabled | parentLocator | locator | 
+432 | Wait For Eval | waitForEval | expression | text | 
+433 | Wait For Exists In Database | waitForExistsInDatabase | sql |  | 
+434 | Wait For Expression | waitForExpression | expression | text | 
+435 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
+436 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
+437 | Wait For Not Activity | waitForNotActivity | activity |  | 
+438 | Wait For Not Alert | waitForNotAlert | text |  | 
+439 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
+440 | Wait For Not Checked | waitForNotChecked | locator |  | 
+441 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
+442 | Wait For Not Confirmation | waitForNotConfirmation | text |  | 
+443 | Wait For Not Context | waitForNotContext | text |  | 
+444 | Wait For Not Editable | waitForNotEditable | locator |  | 
+445 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
+446 | Wait For Not Enabled | waitForNotEnabled | locator |  | 
+447 | Wait For Not Enabled | waitForNotEnabled | parentLocator | locator | 
+448 | Wait For Not Eval | waitForNotEval | expression | text | 
+449 | Wait For Not Exists In Database | waitForNotExistsInDatabase | sql |  | 
+450 | Wait For Not Expression | waitForNotExpression | expression | text | 
+451 | Wait For Not Page Source | waitForNotPageSource | text |  | 
+452 | Wait For Not Prompt | waitForNotPrompt | text |  | 
+453 | Wait For Not Text | waitForNotText | locator | text | 
+454 | Wait For Not Text | waitForNotText | parentLocator | locator | text
+455 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
+456 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
+457 | Wait For Not Value | waitForNotValue | locator | text | 
+458 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
+459 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
+460 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
+461 | Wait For Not Visible | waitForNotVisible | locator |  | 
+462 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
+463 | Wait For Page Source | waitForPageSource | text |  | 
+464 | Wait For Page Source Match | waitForPageSourceMatch | text |  | 
+465 | Wait For Page Source Not Match | waitForPageSourceNotMatch | text |  | 
+466 | Wait For Prompt | waitForPrompt | text |  | 
+467 | Wait For Prompt Match | waitForPromptMatch | text |  | 
+468 | Wait For Prompt Not Match | waitForPromptNotMatch | text |  | 
+469 | Wait For Prompt Not Present | waitForPromptNotPresent |  |  | 
+470 | Wait For Prompt Present | waitForPromptPresent |  |  | 
+471 | Wait For Text | waitForText | locator | text | 
+472 | Wait For Text | waitForText | parentLocator | locator | text
+473 | Wait For Text Empty | waitForTextEmpty | locator |  | 
+474 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
+475 | Wait For Text Match | waitForTextMatch | locator | text | 
+476 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
+477 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
+478 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
+479 | Wait For Text Not Present | waitForTextNotPresent | text |  | 
+480 | Wait For Text Present | waitForTextPresent | text |  | 
+481 | Wait For Value | waitForValue | locator | text | 
+482 | Wait For Value | waitForValue | parentLocator | locator | text
+483 | Wait For Value Empty | waitForValueEmpty | locator |  | 
+484 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
+485 | Wait For Value Match | waitForValueMatch | locator | text | 
+486 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
+487 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
+488 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
+489 | Wait For Visible | waitForVisible | locator |  | 
+490 | Wait For Visible | waitForVisible | parentLocator | locator | 
 
 ## Accept Touch ID
 
@@ -820,6 +838,54 @@ assertConfirmationPresent()
 
 Parameter | Description
 --------- | -----------
+
+## Assert Context
+
+Asserts that the current context in which Appium is running equals to the given value. When the assert fails, the test is aborted. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+assertContext(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Context Match
+
+Asserts that the current context in which Appium is running matches the given value. When the assert fails, the test is aborted. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+assertContextMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Context Not Match
+
+Asserts that the current context in which Appium is running not match the given value. When the assert fails, the test is aborted. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+assertContextNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
 
 ## Assert Date List Order Asc
 
@@ -1242,6 +1308,22 @@ Asserts that the message of a JavaScript confirmation dialog not equal to the gi
 
 `
 assertNotConfirmation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not Context
+
+Asserts that the current context in which Appium is running not equal to the given value. When the assert fails, the test is aborted. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+assertNotContext(text)
 `
 
 ### Parameters
@@ -2464,6 +2546,57 @@ Parameter | Description
 --------- | -----------
 action | the name of the action to execute
 
+## Execute If Context
+
+Executes an action if the current context in which Appium is running equals to the given value. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+executeIfContext(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Context Match
+
+Executes an action if the current context in which Appium is running matches the given value. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+executeIfContextMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Context Not Match
+
+Executes an action if the current context in which Appium is running not match the given value. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+executeIfContextNotMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
 ## Execute If Editable
 
 Executes an action if the specified input element is editable, ie hasn't been disabled. This method will fail if the specified element isn't an input element.
@@ -2749,6 +2882,23 @@ Executes an action if the message of a JavaScript confirmation dialog not equal 
 
 `
 executeIfNotConfirmation(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Not Context
+
+Executes an action if the current context in which Appium is running not equal to the given value. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+executeIfNotContext(action, text)
 `
 
 ### Parameters
@@ -3897,6 +4047,22 @@ Parameter | Description
 --------- | -----------
 text | the value to set
 
+## Set Context
+
+Set the context being automated. <p> Set the current context to that passed in. If this is moving into a web view context it will involve attempting to connect to that web view: <p> - iOS - attempt to connect to the application through the remote debugger - Android - start a Chromedriver process and begin a session to connect to the web view
+
+### Usage
+
+`
+setContext(context)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+context | The name of the context to which to change
+
 ## Set Geolocation
 
 Set the current geo location.
@@ -4035,6 +4201,22 @@ Stores the message of a JavaScript confirmation dialog in a variable for later a
 
 `
 storeConfirmation(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store Context
+
+Stores the current context in which Appium is running in a variable for later access. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+storeContext(variable)
 `
 
 ### Parameters
@@ -4764,6 +4946,54 @@ verifyConfirmationPresent()
 Parameter | Description
 --------- | -----------
 
+## Verify Context
+
+Verifies that the current context in which Appium is running equals to the given value. When the verify fails, the test will continue execution, logging the failure. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+verifyContext(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Context Match
+
+Verifies that the current context in which Appium is running matches the given value. When the verify fails, the test will continue execution, logging the failure. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+verifyContextMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Context Not Match
+
+Verifies that the current context in which Appium is running not match the given value. When the verify fails, the test will continue execution, logging the failure. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+verifyContextNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Verify Date List Order Asc
 
 Returns the text values of the specified elements are sorted in ascending order. The values are assuming to be dates.
@@ -5185,6 +5415,22 @@ Verifies that the message of a JavaScript confirmation dialog not equal to the g
 
 `
 verifyNotConfirmation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not Context
+
+Verifies that the current context in which Appium is running not equal to the given value. When the verify fails, the test will continue execution, logging the failure. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+verifyNotContext(text)
 `
 
 ### Parameters
@@ -6337,6 +6583,54 @@ waitForConfirmationPresent()
 Parameter | Description
 --------- | -----------
 
+## Wait For Context
+
+Waits for the current context in which Appium is running equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+waitForContext(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Context Match
+
+Waits for the current context in which Appium is running matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+waitForContextMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Context Not Match
+
+Waits for the current context in which Appium is running not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+waitForContextNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Wait For Editable
 
 Waits for the specified input element is editable, ie hasn't been disabled. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. This method will fail if the specified element isn't an input element.
@@ -6604,6 +6898,22 @@ Waits for the message of a JavaScript confirmation dialog not equal to the given
 
 `
 waitForNotConfirmation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Not Context
+
+Waits for the current context in which Appium is running not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. <p> Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be: <p> - iOS - WEBVIEW_<id> - Android - WEBVIEW_<package name>
+
+### Usage
+
+`
+waitForNotContext(text)
 `
 
 ### Parameters
