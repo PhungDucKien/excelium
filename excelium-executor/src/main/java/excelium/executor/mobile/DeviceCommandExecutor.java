@@ -199,7 +199,7 @@ public class DeviceCommandExecutor extends CommandExecutor {
     @Action
     public void lock() {
         if (webDriver.getAppiumDriver() instanceof IOSDriver) {
-            webDriver.getIOSDriver().lockDevice(Duration.ofMillis(0));
+            webDriver.getIOSDriver().lockDevice();
         } else if (webDriver.getAppiumDriver() instanceof AndroidDriver) {
             webDriver.getAndroidDriver().lockDevice();
         }
@@ -208,9 +208,13 @@ public class DeviceCommandExecutor extends CommandExecutor {
     /**
      * Unlock the device
      */
-    @Action(ios = false)
+    @Action
     public void unlock() {
-        webDriver.getAndroidDriver().unlockDevice();
+        if (webDriver.getAppiumDriver() instanceof IOSDriver) {
+            webDriver.getIOSDriver().unlockDevice();
+        } else if (webDriver.getAppiumDriver() instanceof AndroidDriver) {
+            webDriver.getAndroidDriver().unlockDevice();
+        }
     }
 
     /**
