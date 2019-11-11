@@ -226,6 +226,16 @@ public class DeviceCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Hide soft keyboard by pressing the button specified key name
+     *
+     * @param name the key name to press
+     */
+    @Action(param1 = "name")
+    public void hideKeyboard(String name) {
+        webDriver.findElement(String.format("//XCUIElementTypeButton[@name='%s']", name)).click();
+    }
+
+    /**
      * Toggle airplane mode on device
      */
     @Action(ios = false)

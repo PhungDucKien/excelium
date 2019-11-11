@@ -932,6 +932,10 @@ public class MobileExcelium extends Excelium {
         runCommand("hideKeyboard", null, null, null);
     }
 
+    public void hideKeyboard(String name) throws Throwable {
+        runCommand("hideKeyboard", name, null, null);
+    }
+
     public void landscape() throws Throwable {
         runCommand("landscape", null, null, null);
     }
