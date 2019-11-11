@@ -54,9 +54,25 @@ public class ByParser {
      */
     public static By parseBy(String locator, ContextAwareWebDriver webDriver) {
         if (webDriver.isWeb()) {
-            return parseWebBy(locator);
+            return parseWebBy(locator, null);
         } else {
-            return parseMobileBy(locator);
+            return parseMobileBy(locator, null);
+        }
+    }
+
+    /**
+     * Parses the locator string to By mechanism.
+     *
+     * @param locator   the locator string
+     * @param parentBy  the parent by (for querying index)
+     * @param webDriver the web driver
+     * @return By object
+     */
+    public static By parseBy(String locator, By parentBy, ContextAwareWebDriver webDriver) {
+        if (webDriver.isWeb()) {
+            return parseWebBy(locator, parentBy);
+        } else {
+            return parseMobileBy(locator, parentBy);
         }
     }
 
@@ -64,9 +80,10 @@ public class ByParser {
      * Parses the locator string to By mechanism of Web environment.
      *
      * @param locator the locator string
+     * @param parentBy  the parent by (for querying index)
      * @return By object
      */
-    private static By parseWebBy(String locator) {
+    private static By parseWebBy(String locator, By parentBy) {
         WebLocator lc = parseWebLocator(locator);
         switch (lc.getType()) {
             case ID:
@@ -92,6 +109,8 @@ public class ByParser {
                 return new ByVariable(lc.getValue());
             case DOM:
                 return new ByDom(lc.getValue());
+            case INDEX:
+                return new ByIndex(parentBy, Integer.parseInt(lc.getValue()));
             default:
                 break;
         }
@@ -102,9 +121,10 @@ public class ByParser {
      * Parses the locator string to By mechanism of Mobile environment.
      *
      * @param locator the locator string
+     * @param parentBy  the parent by (for querying index)
      * @return By object
      */
-    private static By parseMobileBy(String locator) {
+    private static By parseMobileBy(String locator, By parentBy) {
         MobileLocator lc = parseMobileLocator(locator);
         switch (lc.getType()) {
             case ACCESSIBILITY_ID:
@@ -124,6 +144,8 @@ public class ByParser {
                 return MobileBy.AndroidUIAutomator(lc.getValue());
             case VARIABLE:
                 return new ByVariable(lc.getValue());
+            case INDEX:
+                return new ByIndex(parentBy, Integer.parseInt(lc.getValue()));
             default:
                 break;
         }
@@ -144,7 +166,7 @@ public class ByParser {
             lc.setType(WebLocatorType.fromName(m.group(1).toLowerCase()));
             lc.setValue(m.group(2));
         } else {
-            if (locator.startsWith("//")) {
+            if (locator.startsWith("/")) {
                 lc.setType(WebLocatorType.XPATH);
             } else if (locator.startsWith("document")) {
                 lc.setType(WebLocatorType.DOM);
@@ -170,7 +192,11 @@ public class ByParser {
             lc.setType(MobileLocatorType.fromName(m.group(1).toLowerCase()));
             lc.setValue(m.group(2));
         } else {
-            lc.setType(MobileLocatorType.ACCESSIBILITY_ID);
+            if (locator.startsWith("/")) {
+                lc.setType(MobileLocatorType.XPATH);
+            } else {
+                lc.setType(MobileLocatorType.ACCESSIBILITY_ID);
+            }
             lc.setValue(locator);
         }
         return lc;

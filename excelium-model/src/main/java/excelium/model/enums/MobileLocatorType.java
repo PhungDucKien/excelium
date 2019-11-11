@@ -58,7 +58,11 @@ public enum MobileLocatorType {
     /**
      * Variable mobile locator type.
      */
-    VARIABLE;
+    VARIABLE,
+    /**
+     * Reserved locator type for specifying index.
+     */
+    INDEX;
 
     /**
      * From name mobile locator type.

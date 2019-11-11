@@ -70,7 +70,11 @@ public enum WebLocatorType {
     /**
      * Variable web locator type.
      */
-    VARIABLE;
+    VARIABLE,
+    /**
+     * Reserved locator type for specifying index.
+     */
+    INDEX;
 
     /**
      * From name web locator type.

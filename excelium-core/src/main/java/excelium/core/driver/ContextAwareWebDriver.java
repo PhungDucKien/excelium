@@ -26,6 +26,7 @@ package excelium.core.driver;
 
 import com.thoughtworks.selenium.webdriven.JavascriptLibrary;
 import com.thoughtworks.selenium.webdriven.commands.KeyState;
+import excelium.core.by.ByIndex;
 import excelium.core.context.TestContext;
 import excelium.core.database.DatabaseService;
 import excelium.core.screenshot.ScreenshotService;
@@ -268,9 +269,13 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
             return findElement(locator);
         }
         By parentBy = parseBy(parentLocator, this);
-        By by = parseBy(locator, this);
-        WebElement parentElement = webDriver.findElement(parentBy);
-        return parentElement.findElement(by);
+        By by = parseBy(locator, parentBy, this);
+        if (by instanceof ByIndex) {
+            return webDriver.findElement(by);
+        } else {
+            WebElement parentElement = webDriver.findElement(parentBy);
+            return parentElement.findElement(by);
+        }
     }
 
     /**
@@ -286,13 +291,17 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
             return findElements(locator);
         }
         By parentBy = parseBy(parentLocator, this);
-        By by = parseBy(locator, this);
-        List<WebElement> parentElements = webDriver.findElements(parentBy);
-        List<WebElement> elements = new ArrayList<>();
-        for (WebElement parentElement : parentElements) {
-            elements.addAll(parentElement.findElements(by));
+        By by = parseBy(locator, parentBy, this);
+        if (by instanceof ByIndex) {
+            return webDriver.findElements(by);
+        } else {
+            List<WebElement> parentElements = webDriver.findElements(parentBy);
+            List<WebElement> elements = new ArrayList<>();
+            for (WebElement parentElement : parentElements) {
+                elements.addAll(parentElement.findElements(by));
+            }
+            return elements;
         }
-        return elements;
     }
 
     /**
