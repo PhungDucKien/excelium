@@ -24,10 +24,10 @@
 
 package excelium.core.command;
 
-import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.exception.AssertFailedException;
 import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
+import excelium.core.driver.ContextAwareWebDriver;
+import excelium.core.exception.AssertFailedException;
 import excelium.model.project.Project;
 import excelium.model.test.command.Command;
 import excelium.model.test.command.TriConsumer;
@@ -37,6 +37,7 @@ import mockit.Mocked;
 import mockit.Verifications;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.Color;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class CommandFactoryTest {
     @Test
     public void testCreateActionCommandMap() throws Exception {
         List<CommandExecutor> commandExecutors = new ArrayList<>();
-        commandExecutors.add(new MyActionCommandExecutor(null, null, excelium, null));
+        commandExecutors.add(new MyActionCommandExecutor(new StubWebContextAwareWebDriver(), null, excelium, null));
 
         Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors);
 
@@ -97,7 +98,7 @@ public class CommandFactoryTest {
 
         commandMap.get("click(1)").getConsumer().accept("id=1", null, null);
         new Verifications() {{
-           triConsumer.accept(null, "id=1", null);
+            triConsumer.accept(null, "id=1", null);
         }};
 
         commandMap.get("click(2)").getConsumer().accept("id=1", "id=2", null);
@@ -197,7 +198,8 @@ public class CommandFactoryTest {
 
         commandMap.get("executeIfUrl(2)").getConsumer().accept("action2", "NG", null);
         new Verifications() {{
-            executor.runAction("action2"); times = 0;
+            executor.runAction("action2");
+            times = 0;
         }};
 
         commandMap.get("executeIfNotUrl(2)").getConsumer().accept("action3", "NG", null);
@@ -207,7 +209,8 @@ public class CommandFactoryTest {
 
         commandMap.get("executeIfNotUrl(2)").getConsumer().accept("action4", "OK", null);
         new Verifications() {{
-            executor.runAction("action4"); times = 0;
+            executor.runAction("action4");
+            times = 0;
         }};
 
         commandMap.get("executeIfUrlMatch(2)").getConsumer().accept("action5", "^O", null);
@@ -217,7 +220,8 @@ public class CommandFactoryTest {
 
         commandMap.get("executeIfUrlMatch(2)").getConsumer().accept("action6", "O$", null);
         new Verifications() {{
-            executor.runAction("action6"); times = 0;
+            executor.runAction("action6");
+            times = 0;
         }};
 
         commandMap.get("executeIfUrlNotMatch(2)").getConsumer().accept("action7", "^N", null);
@@ -227,7 +231,8 @@ public class CommandFactoryTest {
 
         commandMap.get("executeIfUrlNotMatch(2)").getConsumer().accept("action8", "^O", null);
         new Verifications() {{
-            executor.runAction("action8"); times = 0;
+            executor.runAction("action8");
+            times = 0;
         }};
 
         // Parent locator and locator test
@@ -237,42 +242,42 @@ public class CommandFactoryTest {
             triConsumer.accept("parentLocator", "locator", null);
         }};
 
-        commandMap.get("verifyText(3)").getConsumer().accept("parentLocator", "locator","OK");
+        commandMap.get("verifyText(3)").getConsumer().accept("parentLocator", "locator", "OK");
 
         try {
-            commandMap.get("verifyText(3)").getConsumer().accept("parentLocator", "locator","NG");
+            commandMap.get("verifyText(3)").getConsumer().accept("parentLocator", "locator", "NG");
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyNotText(3)").getConsumer().accept("parentLocator", "locator","NG");
+        commandMap.get("verifyNotText(3)").getConsumer().accept("parentLocator", "locator", "NG");
 
         try {
-            commandMap.get("verifyNotText(3)").getConsumer().accept("parentLocator", "locator","OK");
+            commandMap.get("verifyNotText(3)").getConsumer().accept("parentLocator", "locator", "OK");
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextMatch(3)").getConsumer().accept("parentLocator", "locator","^O");
+        commandMap.get("verifyTextMatch(3)").getConsumer().accept("parentLocator", "locator", "^O");
 
         try {
-            commandMap.get("verifyTextMatch(3)").getConsumer().accept("parentLocator", "locator","O$");
+            commandMap.get("verifyTextMatch(3)").getConsumer().accept("parentLocator", "locator", "O$");
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextNotMatch(3)").getConsumer().accept("parentLocator", "locator","^N");
+        commandMap.get("verifyTextNotMatch(3)").getConsumer().accept("parentLocator", "locator", "^N");
 
         try {
-            commandMap.get("verifyTextNotMatch(3)").getConsumer().accept("parentLocator", "locator","^O");
+            commandMap.get("verifyTextNotMatch(3)").getConsumer().accept("parentLocator", "locator", "^O");
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("waitForText(3)").getConsumer().accept("parentLocator", "locator","OK");
-        commandMap.get("waitForNotText(3)").getConsumer().accept("parentLocator", "locator","NG");
-        commandMap.get("waitForTextMatch(3)").getConsumer().accept("parentLocator", "locator","^O");
-        commandMap.get("waitForTextNotMatch(3)").getConsumer().accept("parentLocator", "locator","O$");
+        commandMap.get("waitForText(3)").getConsumer().accept("parentLocator", "locator", "OK");
+        commandMap.get("waitForNotText(3)").getConsumer().accept("parentLocator", "locator", "NG");
+        commandMap.get("waitForTextMatch(3)").getConsumer().accept("parentLocator", "locator", "^O");
+        commandMap.get("waitForTextNotMatch(3)").getConsumer().accept("parentLocator", "locator", "O$");
 
         // Locator only
         commandMap.get("storeText(2)").getConsumer().accept("locator", "var3", null);
@@ -281,81 +286,85 @@ public class CommandFactoryTest {
             triConsumer.accept(null, "locator", null);
         }};
 
-        commandMap.get("verifyText(2)").getConsumer().accept("locator","OK", null);
+        commandMap.get("verifyText(2)").getConsumer().accept("locator", "OK", null);
 
         try {
-            commandMap.get("verifyText(2)").getConsumer().accept("locator","NG", null);
+            commandMap.get("verifyText(2)").getConsumer().accept("locator", "NG", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyNotText(2)").getConsumer().accept("locator","NG", null);
+        commandMap.get("verifyNotText(2)").getConsumer().accept("locator", "NG", null);
 
         try {
-            commandMap.get("verifyNotText(2)").getConsumer().accept("locator","OK", null);
+            commandMap.get("verifyNotText(2)").getConsumer().accept("locator", "OK", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextMatch(2)").getConsumer().accept("locator","^O", null);
+        commandMap.get("verifyTextMatch(2)").getConsumer().accept("locator", "^O", null);
 
         try {
-            commandMap.get("verifyTextMatch(2)").getConsumer().accept("locator","O$", null);
+            commandMap.get("verifyTextMatch(2)").getConsumer().accept("locator", "O$", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyTextNotMatch(2)").getConsumer().accept("locator","^N", null);
+        commandMap.get("verifyTextNotMatch(2)").getConsumer().accept("locator", "^N", null);
 
         try {
-            commandMap.get("verifyTextNotMatch(2)").getConsumer().accept("locator","^O", null);
+            commandMap.get("verifyTextNotMatch(2)").getConsumer().accept("locator", "^O", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("waitForText(2)").getConsumer().accept("locator","OK", null);
-        commandMap.get("waitForNotText(2)").getConsumer().accept("locator","NG", null);
-        commandMap.get("waitForTextMatch(2)").getConsumer().accept("locator","^O", null);
-        commandMap.get("waitForTextNotMatch(2)").getConsumer().accept("locator","O$", null);
+        commandMap.get("waitForText(2)").getConsumer().accept("locator", "OK", null);
+        commandMap.get("waitForNotText(2)").getConsumer().accept("locator", "NG", null);
+        commandMap.get("waitForTextMatch(2)").getConsumer().accept("locator", "^O", null);
+        commandMap.get("waitForTextNotMatch(2)").getConsumer().accept("locator", "O$", null);
 
-        commandMap.get("executeIfText(3)").getConsumer().accept("textAction1", "locator","OK");
+        commandMap.get("executeIfText(3)").getConsumer().accept("textAction1", "locator", "OK");
         new Verifications() {{
             executor.runAction("textAction1");
         }};
 
-        commandMap.get("executeIfText(3)").getConsumer().accept("textAction2", "locator","NG");
+        commandMap.get("executeIfText(3)").getConsumer().accept("textAction2", "locator", "NG");
         new Verifications() {{
-            executor.runAction("textAction2"); times = 0;
+            executor.runAction("textAction2");
+            times = 0;
         }};
 
-        commandMap.get("executeIfNotText(3)").getConsumer().accept("textAction3", "locator","NG");
+        commandMap.get("executeIfNotText(3)").getConsumer().accept("textAction3", "locator", "NG");
         new Verifications() {{
             executor.runAction("textAction3");
         }};
 
-        commandMap.get("executeIfNotText(3)").getConsumer().accept("textAction4", "locator","OK");
+        commandMap.get("executeIfNotText(3)").getConsumer().accept("textAction4", "locator", "OK");
         new Verifications() {{
-            executor.runAction("textAction4"); times = 0;
+            executor.runAction("textAction4");
+            times = 0;
         }};
 
-        commandMap.get("executeIfTextMatch(3)").getConsumer().accept("textAction5", "locator","^O");
+        commandMap.get("executeIfTextMatch(3)").getConsumer().accept("textAction5", "locator", "^O");
         new Verifications() {{
             executor.runAction("textAction5");
         }};
 
-        commandMap.get("executeIfTextMatch(3)").getConsumer().accept("textAction6", "locator","O$");
+        commandMap.get("executeIfTextMatch(3)").getConsumer().accept("textAction6", "locator", "O$");
         new Verifications() {{
-            executor.runAction("textAction6"); times = 0;
+            executor.runAction("textAction6");
+            times = 0;
         }};
 
-        commandMap.get("executeIfTextNotMatch(3)").getConsumer().accept("textAction7", "locator","^N");
+        commandMap.get("executeIfTextNotMatch(3)").getConsumer().accept("textAction7", "locator", "^N");
         new Verifications() {{
             executor.runAction("textAction7");
         }};
 
-        commandMap.get("executeIfTextNotMatch(3)").getConsumer().accept("textAction8", "locator","^O");
+        commandMap.get("executeIfTextNotMatch(3)").getConsumer().accept("textAction8", "locator", "^O");
         new Verifications() {{
-            executor.runAction("textAction8"); times = 0;
+            executor.runAction("textAction8");
+            times = 0;
         }};
 
         // Color compare
@@ -381,30 +390,30 @@ public class CommandFactoryTest {
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("storeColor(2)").getConsumer().accept( "locator", "var5", null);
+        commandMap.get("storeColor(2)").getConsumer().accept("locator", "var5", null);
         Assert.assertEquals(Color.fromString("#000000"), webDriver.getVariable("var5"));
         new Verifications() {{
-            triConsumer.accept( null, "locator", null);
+            triConsumer.accept(null, "locator", null);
         }};
 
-        commandMap.get("verifyColor(2)").getConsumer().accept( "locator", "#000000", null);
+        commandMap.get("verifyColor(2)").getConsumer().accept("locator", "#000000", null);
 
         try {
-            commandMap.get("verifyColor(2)").getConsumer().accept( "locator", "#000001", null);
+            commandMap.get("verifyColor(2)").getConsumer().accept("locator", "#000001", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
 
-        commandMap.get("verifyNotColor(2)").getConsumer().accept( "locator", "#000001", null);
+        commandMap.get("verifyNotColor(2)").getConsumer().accept("locator", "#000001", null);
 
         try {
-            commandMap.get("verifyNotColor(2)").getConsumer().accept( "locator", "#000000", null);
+            commandMap.get("verifyNotColor(2)").getConsumer().accept("locator", "#000000", null);
             fail("AssertFailedException was not occured.");
         } catch (AssertFailedException e) {
         }
     }
 
-        public class MyActionCommandExecutor extends CommandExecutor {
+    public class MyActionCommandExecutor extends CommandExecutor {
         public MyActionCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
             super(webDriver, baseUrl, excelium, project);
         }
@@ -452,6 +461,40 @@ public class CommandFactoryTest {
         public Color getColor(String parentLocator, String locator) throws Exception {
             triConsumer.accept(parentLocator, locator, null);
             return Color.fromString("black");
+        }
+    }
+
+    private static class StubWebContextAwareWebDriver extends ContextAwareWebDriver {
+        public StubWebContextAwareWebDriver() {
+            super(new StubWebDriver(), null, null);
+        }
+
+        @Override
+        public boolean isWeb() {
+            return true;
+        }
+
+        @Override
+        public boolean isAndroid() {
+            return false;
+        }
+
+        @Override
+        public boolean isIOS() {
+            return false;
+        }
+    }
+
+    /**
+     * A stub web driver that does nothing.
+     */
+    private static class StubWebDriver extends RemoteWebDriver {
+        StubWebDriver() {
+        }
+
+        @Override
+        public String getWindowHandle() {
+            return null;
         }
     }
 }
