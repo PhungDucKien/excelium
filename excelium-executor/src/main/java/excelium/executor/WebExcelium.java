@@ -2664,6 +2664,10 @@ public class WebExcelium extends Excelium {
         runCommand("typeAndTab", parentLocator, locator, value);
     }
 
+    public void typeKeys(String value) throws Throwable {
+        runCommand("typeKeys", value, null, null);
+    }
+
     public void typeKeys(String locator, String value) throws Throwable {
         runCommand("typeKeys", locator, value, null);
     }

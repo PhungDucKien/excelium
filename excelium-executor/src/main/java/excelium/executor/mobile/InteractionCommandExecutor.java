@@ -67,6 +67,16 @@ public class InteractionCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Sends keys to the keyboard representation in the device.
+     *
+     * @param value the value to type
+     */
+    @Action(param1 = "value")
+    public void typeKeys(String value) {
+        webDriver.getKeyboard().sendKeys(value);
+    }
+
+    /**
      * Single tap on the touch enabled device
      *
      * @param parentLocator an element locator of parent element

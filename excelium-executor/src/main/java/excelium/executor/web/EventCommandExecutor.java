@@ -24,10 +24,10 @@
 
 package excelium.executor.web;
 
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -51,6 +51,24 @@ public class EventCommandExecutor extends CommandExecutor {
      */
     public EventCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
         super(webDriver, baseUrl, excelium, project);
+    }
+
+    /**
+     * Sends keys to the keyboard representation in the browser.
+     *
+     * @param value the value to type
+     */
+    @Action(param1 = "value")
+    public void typeKeys(String value) {
+        value = value.replace("\\10", Keys.ENTER);
+        value = value.replace("\\13", Keys.RETURN);
+        value = value.replace("\\27", Keys.ESCAPE);
+        value = value.replace("\\38", Keys.ARROW_UP);
+        value = value.replace("\\40", Keys.ARROW_DOWN);
+        value = value.replace("\\37", Keys.ARROW_LEFT);
+        value = value.replace("\\39", Keys.ARROW_RIGHT);
+
+        webDriver.getKeyboard().sendKeys(value);
     }
 
     /**
@@ -96,8 +114,8 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      * @param keySequence   Either be a string(
-     *        "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
-     *        w", "\119".
+     *                      "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
+     *                      w", "\119".
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence")
     public void keyPress(String parentLocator, String locator, String keySequence) {
@@ -110,8 +128,8 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      * @param keySequence   Either be a string(
-     *        "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
-     *        w", "\119".
+     *                      "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
+     *                      w", "\119".
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence")
     public void keyDown(String parentLocator, String locator, String keySequence) {
@@ -126,8 +144,8 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      * @param keySequence   Either be a string(
-     *        "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
-     *        w", "\119".
+     *                      "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
+     *                      w", "\119".
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence")
     public void keyUp(String parentLocator, String locator, String keySequence) {
@@ -144,7 +162,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * keystroke to a particular element, focus on the element first before running this command.
      *
      * @param keycode an integer keycode number corresponding to a java.awt.event.KeyEvent; note that
-     *        Java keycodes are NOT the same thing as JavaScript keycodes!
+     *                Java keycodes are NOT the same thing as JavaScript keycodes!
      */
     @Action(param1 = "keycode")
     public void keyPress(String keycode) {
@@ -161,7 +179,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * first before running this command.
      *
      * @param keycode an integer keycode number corresponding to a java.awt.event.KeyEvent; note that
-     *        Java keycodes are NOT the same thing as JavaScript keycodes!
+     *                Java keycodes are NOT the same thing as JavaScript keycodes!
      */
     @Action(param1 = "keycode")
     public void keyDown(String keycode) {
@@ -177,7 +195,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * to a particular element, focus on the element first before running this command.
      *
      * @param keycode an integer keycode number corresponding to a java.awt.event.KeyEvent; note that
-     *        Java keycodes are NOT the same thing as JavaScript keycodes!
+     *                Java keycodes are NOT the same thing as JavaScript keycodes!
      */
     @Action(param1 = "keycode")
     public void keyUp(String keycode) {
@@ -271,8 +289,8 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param coordString specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
-     *        element returned by the locator.
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
     public void clickAt(String parentLocator, String locator, String coordString) {
@@ -289,8 +307,8 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param coordString specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
-     *        element returned by the locator.
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
     public void doubleClickAt(String parentLocator, String locator, String coordString) {
@@ -307,8 +325,8 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param coordString specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
-     *        element returned by the locator.
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
     public void contextMenuAt(String parentLocator, String locator, String coordString) {
@@ -359,8 +377,8 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param coordString specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
-     *        element returned by the locator.
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
     public void mouseDownAt(String parentLocator, String locator, String coordString) {
@@ -385,8 +403,8 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param coordString specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
-     *        element returned by the locator.
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
     public void mouseUpAt(String parentLocator, String locator, String coordString) {
@@ -409,8 +427,8 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param coordString specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
-     *        element returned by the locator.
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
     public void mouseMoveAt(String parentLocator, String locator, String coordString) {
@@ -422,7 +440,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * the cursor to that field.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator
+     * @param locator       an element locator
      */
     @Action(param1 = "parentLocator", param2 = "locator")
     public void focus(String parentLocator, String locator) {
@@ -434,7 +452,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * the cursor from that field.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator
+     * @param locator       an element locator
      */
     @Action(param1 = "parentLocator", param2 = "locator")
     public void blur(String parentLocator, String locator) {
@@ -446,7 +464,7 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param eventName the event name, e.g. "focus" or "blur"
+     * @param eventName     the event name, e.g. "focus" or "blur"
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "eventName")
     public void fireEvent(String parentLocator, String locator, String eventName) {
@@ -461,12 +479,12 @@ public class EventCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
-     * @param eventName the event name, e.g. "focus" or "blur"
-     * @param coordString specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
-     *        element returned by the locator.
+     * @param eventName     the event name, e.g. "focus" or "blur"
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
      */
     private void fireEventAt(String parentLocator, String locator, String eventName, String coordString) {
-        String fire =  "return (" + webDriver.getJavascriptLibrary().getSeleniumScript("fireEventAt.js") + ").apply(null, arguments);";
+        String fire = "return (" + webDriver.getJavascriptLibrary().getSeleniumScript("fireEventAt.js") + ").apply(null, arguments);";
 
         WebElement element = webDriver.findElement(parentLocator, locator);
         webDriver.executeScript(fire, element, eventName, coordString);

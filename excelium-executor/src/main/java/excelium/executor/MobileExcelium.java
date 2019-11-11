@@ -1248,6 +1248,10 @@ public class MobileExcelium extends Excelium {
         runCommand("type", parentLocator, locator, value);
     }
 
+    public void typeKeys(String value) throws Throwable {
+        runCommand("typeKeys", value, null, null);
+    }
+
     public void unlock() throws Throwable {
         runCommand("unlock", null, null, null);
     }
