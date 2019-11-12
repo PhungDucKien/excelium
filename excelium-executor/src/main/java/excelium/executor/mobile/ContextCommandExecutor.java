@@ -31,6 +31,10 @@ import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Represents a class which contains commands for controlling mobile context actions.
  *
@@ -67,6 +71,42 @@ public class ContextCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Set the context being automated to the native app context.
+     */
+    @Action
+    public void setNativeAppContext() {
+        webDriver.getAppiumDriver().context("NATIVE_APP");
+    }
+
+    /**
+     * Set the context being automated to a web view context.
+     * <p>
+     * It will involve attempting to connect to that web view:
+     * <p>
+     * - iOS - attempt to connect to the application through the remote debugger
+     * - Android - start a Chromedriver process and begin a session to connect to the web view
+     *
+     * @param index The index of the web view context
+     */
+    @Action(param1 = "index")
+    public void setWebViewContext(String index) {
+        Set<String> contexts = webDriver.getAppiumDriver().getContextHandles();
+        List<String> webViewContexts = new ArrayList<>();
+        for (String context : contexts) {
+            if (context.startsWith("WEBVIEW_")) {
+                webViewContexts.add(context);
+            }
+        }
+
+        int idx = Integer.parseInt(index);
+        if (idx > webViewContexts.size()) {
+            throw new IndexOutOfBoundsException("No context with index = " + index + " available");
+        }
+
+        webDriver.getAppiumDriver().context(webViewContexts.get(idx - 1));
+    }
+
+    /**
      * Get the current context in which Appium is running.
      * <p>
      * Retrieve the current context. This can be either NATIVE_APP for the native context, or a web view context, which will be:
@@ -79,5 +119,15 @@ public class ContextCommandExecutor extends CommandExecutor {
     @Accessor
     public String getContext() {
         return webDriver.getAppiumDriver().getContext();
+    }
+
+    /**
+     * Get the count of contexts.
+     *
+     * @return the count of contexts
+     */
+    @Accessor
+    public int getContextCount() {
+        return webDriver.getAppiumDriver().getContextHandles().size();
     }
 }

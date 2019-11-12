@@ -116,6 +116,10 @@ public class MobileExcelium extends Excelium {
         runCommand("assertContext", text, null, null);
     }
 
+    public void assertContextCount(String text) throws Throwable {
+        runCommand("assertContextCount", text, null, null);
+    }
+
     public void assertContextMatch(String text) throws Throwable {
         runCommand("assertContextMatch", text, null, null);
     }
@@ -250,6 +254,10 @@ public class MobileExcelium extends Excelium {
 
     public void assertNotContext(String text) throws Throwable {
         runCommand("assertNotContext", text, null, null);
+    }
+
+    public void assertNotContextCount(String text) throws Throwable {
+        runCommand("assertNotContextCount", text, null, null);
     }
 
     public void assertNotEditable(String locator) throws Throwable {
@@ -664,6 +672,10 @@ public class MobileExcelium extends Excelium {
         runCommand("executeIfContext", action, text, null);
     }
 
+    public void executeIfContextCount(String action, String text) throws Throwable {
+        runCommand("executeIfContextCount", action, text, null);
+    }
+
     public void executeIfContextMatch(String action, String text) throws Throwable {
         runCommand("executeIfContextMatch", action, text, null);
     }
@@ -754,6 +766,10 @@ public class MobileExcelium extends Excelium {
 
     public void executeIfNotContext(String action, String text) throws Throwable {
         runCommand("executeIfNotContext", action, text, null);
+    }
+
+    public void executeIfNotContextCount(String action, String text) throws Throwable {
+        runCommand("executeIfNotContextCount", action, text, null);
     }
 
     public void executeIfNotEditable(String action, String locator) throws Throwable {
@@ -1104,8 +1120,16 @@ public class MobileExcelium extends Excelium {
         runCommand("setGeolocation", location, null, null);
     }
 
+    public void setNativeAppContext() throws Throwable {
+        runCommand("setNativeAppContext", null, null, null);
+    }
+
     public void setTimeout(String timeout) throws Throwable {
         runCommand("setTimeout", timeout, null, null);
+    }
+
+    public void setWebViewContext(String index) throws Throwable {
+        runCommand("setWebViewContext", index, null, null);
     }
 
     public void shake() throws Throwable {
@@ -1134,6 +1158,10 @@ public class MobileExcelium extends Excelium {
 
     public void storeContext(String variable) throws Throwable {
         runCommand("storeContext", variable, null, null);
+    }
+
+    public void storeContextCount(String variable) throws Throwable {
+        runCommand("storeContextCount", variable, null, null);
     }
 
     public void storeCurrentDate(String variable) throws Throwable {
@@ -1344,6 +1372,10 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyContext", text, null, null);
     }
 
+    public void verifyContextCount(String text) throws Throwable {
+        runCommand("verifyContextCount", text, null, null);
+    }
+
     public void verifyContextMatch(String text) throws Throwable {
         runCommand("verifyContextMatch", text, null, null);
     }
@@ -1478,6 +1510,10 @@ public class MobileExcelium extends Excelium {
 
     public void verifyNotContext(String text) throws Throwable {
         runCommand("verifyNotContext", text, null, null);
+    }
+
+    public void verifyNotContextCount(String text) throws Throwable {
+        runCommand("verifyNotContextCount", text, null, null);
     }
 
     public void verifyNotEditable(String locator) throws Throwable {
@@ -1844,6 +1880,10 @@ public class MobileExcelium extends Excelium {
         runCommand("waitForContext", text, null, null);
     }
 
+    public void waitForContextCount(String text) throws Throwable {
+        runCommand("waitForContextCount", text, null, null);
+    }
+
     public void waitForContextMatch(String text) throws Throwable {
         runCommand("waitForContextMatch", text, null, null);
     }
@@ -1930,6 +1970,10 @@ public class MobileExcelium extends Excelium {
 
     public void waitForNotContext(String text) throws Throwable {
         runCommand("waitForNotContext", text, null, null);
+    }
+
+    public void waitForNotContextCount(String text) throws Throwable {
+        runCommand("waitForNotContextCount", text, null, null);
     }
 
     public void waitForNotEditable(String locator) throws Throwable {
