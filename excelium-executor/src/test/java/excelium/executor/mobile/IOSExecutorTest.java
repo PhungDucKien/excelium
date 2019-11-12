@@ -306,6 +306,104 @@ public class IOSExecutorTest {
     }
 
     @Test
+    public void testFindElements() throws Throwable {
+        selenium.assertElementPresent("Buttons");
+        selenium.assertElementNotPresent("Buttons", "class=XCUIElementTypeNavigationBar");
+
+        selenium.click("class=XCUIElementTypeTable", "class=XCUIElementTypeStaticText");
+        selenium.pause("1000");
+        selenium.click("class=XCUIElementTypeTable", "class=XCUIElementTypeStaticText");
+        selenium.assertAlertPresent();
+        selenium.chooseOkAlert();
+
+        selenium.goBack();
+
+        selenium.assertElementPresent("Alert Views");
+        selenium.assertElementPresent("Alert Views", "index=1");
+        selenium.assertElementNotPresent("Alert Views", "index=2");
+        selenium.assertAttribute("Alert Views", "label", "Alert Views");
+
+        selenium.click("Buttons");
+        selenium.assertElementPresent("Button");
+
+        selenium.setTimeout("5000");
+        Date before = new Date();
+        try {
+            selenium.click("//something_not_there");
+            Assert.fail("Should be rejected");
+        } catch (Exception e) {
+        }
+        Date now = new Date();
+        Assert.assertTrue(now.getTime() - before.getTime() >= 5000);
+        selenium.setTimeout("1000");
+
+        selenium.assertAttribute("//XCUIElementTypeCell[last()]/XCUIElementTypeButton", "name", "Button");
+        selenium.assertAttribute("//XCUIElementTypeButton", "name", "UICatalog");
+        selenium.assertElementPresent("//XCUIElementTypeButton", "index=4");
+        selenium.assertAttribute("//XCUIElementTypeButton[@name='X Button']", "name", "X Button");
+        selenium.assertElementNotPresent("/XCUIElementTypeButton");
+
+        try {
+            selenium.assertAttribute("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText", "name", "Buttons");
+        } catch (Exception e) {
+            selenium.assertAttribute("//XCUIElementTypeNavigationBar/XCUIElementTypeOther", "name", "Buttons");
+        }
+        selenium.assertAttribute("//XCUIElementTypeTable[1]//XCUIElementTypeButton[1]", "name", "Button");
+        selenium.assertAttribute("//XCUIElementTypeTable[1]//XCUIElementTypeCell[4]//XCUIElementTypeButton[1]", "name", "X Button");
+        selenium.assertAttribute("//XCUIElementTypeTable//XCUIElementTypeButton[contains(@name, 'X')]", "name", "X Button");
+
+        selenium.assertElementPresent("//XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]");
+        selenium.assertElementNotPresent("//XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]", "index=2");
+
+        selenium.goBack();
+
+        selenium.click("Accessibility_Id=Alert Views");
+        selenium.assertAttribute("Accessibility_Id=Okay / Cancel", "name", "Okay / Cancel");
+        selenium.assertElementNotPresent("Accessibility_Id=Okay / Cancel", "index=2");
+
+        selenium.goBack();
+
+        selenium.assertElementPresent("class=XCUIElementTypeTable", "Accessibility_Id=Alert Views");
+
+        selenium.click("Image View");
+        selenium.assertElementPresent("class=XCUIElementTypeImage");
+
+        selenium.goBack();
+        selenium.click("Alert Views");
+        selenium.assertElementPresent("Okay / Cancel", "class=XCUIElementTypeStaticText");
+
+        selenium.goBack();
+
+        selenium.scrollDownTo("Text Fields");
+        selenium.click("Text Fields");
+        selenium.assertElementPresent("class=XCUIElementTypeTextField", "index=4");
+        selenium.assertElementNotPresent("class=XCUIElementTypeTextField", "index=5");
+        selenium.assertElementPresent("class=XCUIElementTypeSecureTextField", "index=1");
+        selenium.assertElementNotPresent("class=XCUIElementTypeSecureTextField", "index=2");
+
+        selenium.goBack();
+        selenium.scrollUpTo("Alert Views");
+
+        selenium.assertElementPresent("ios_ns_predicate=visible = 1");
+        selenium.assertElementPresent("ios_ns_predicate=visible = 0");
+        selenium.assertElementPresent("ios_ns_predicate=wdRect.width >= 0");
+        selenium.assertElementPresent("ios_ns_predicate=wdRect.width BETWEEN {100,200}");
+        selenium.assertElementPresent("ios_ns_predicate=wdName LIKE '* View'", "index=2");
+        selenium.assertElementPresent("ios_ns_predicate=wdRect.x >= 0 AND wdRect.y >= 0", "index=2");
+
+        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow");
+        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow/*");
+        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow[1]/*");
+        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow/*[-1]");
+
+        selenium.assertAttribute("//XCUIElementTypeTable//*[@visible=\"true\"][1]", "type", "XCUIElementTypeCell");
+        selenium.assertAttribute("//XCUIElementTypeTable/*[@visible=\"true\"][1]/*[@visible = 'true'][1]", "name", "Action Sheets");
+
+        selenium.assertElementPresent("//*[@scrollable=\"true\"]");
+        selenium.assertAttribute("//*[@scrollable=\"true\"]", "type", "XCUIElementTypeTable");
+    }
+
+    @Test
     public void testAlert() throws Throwable {
         selenium.click("Alert Views");
         selenium.assertElementPresent("Simple");
