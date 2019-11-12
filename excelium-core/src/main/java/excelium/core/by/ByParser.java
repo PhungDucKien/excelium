@@ -142,6 +142,10 @@ public class ByParser {
                 return MobileBy.xpath(lc.getValue());
             case ANDROID_UIAUTOMATOR:
                 return MobileBy.AndroidUIAutomator(lc.getValue());
+            case IOS_NS_PREDICATE:
+                return MobileBy.iOSNsPredicateString(lc.getValue());
+            case IOS_CLASS_CHAIN:
+                return MobileBy.iOSClassChain(lc.getValue());
             case VARIABLE:
                 return new ByVariable(lc.getValue());
             case INDEX:

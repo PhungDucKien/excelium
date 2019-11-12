@@ -56,6 +56,14 @@ public enum MobileLocatorType {
      */
     ANDROID_UIAUTOMATOR,
     /**
+     * iOS NS Predicate mobile locator type.
+     */
+    IOS_NS_PREDICATE,
+    /**
+     * iOS Class Chain mobile locator type.
+     */
+    IOS_CLASS_CHAIN,
+    /**
      * Variable mobile locator type.
      */
     VARIABLE,
