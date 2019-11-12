@@ -24,13 +24,12 @@
 
 package excelium.executor.web;
 
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -230,7 +229,7 @@ public class PageCommandExecutor extends CommandExecutor {
      * of tables.
      *
      * @param xpath the xpath expression to evaluate. do NOT wrap this expression in a 'count()'
-     *        function; we will do that for you.
+     *              function; we will do that for you.
      * @return the number of nodes that match the specified xpath
      */
     @Accessor(param1 = "xpath", storeCmd = false, waitCmd = false, executeCmd = false)
@@ -243,14 +242,13 @@ public class PageCommandExecutor extends CommandExecutor {
      * the number of tables.
      *
      * @param css the css selector to evaluate. do NOT wrap this expression in a 'count()' function;
-     *        we will do that for you.
+     *            we will do that for you.
      * @return the number of nodes that match the specified selector
      */
     @Accessor(param1 = "css", storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getCssCount(String css) {
         return webDriver.findElements(By.cssSelector(css)).size();
     }
-
 
     /**
      * Waits for a new page to load.

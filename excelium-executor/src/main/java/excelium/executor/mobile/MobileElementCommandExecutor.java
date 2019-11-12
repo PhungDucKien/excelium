@@ -30,12 +30,18 @@ import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.function.BiFunction;
 
 /**
  * Represents a class which contains commands for controlling mobile elements.
@@ -158,5 +164,73 @@ public class MobileElementCommandExecutor extends CommandExecutor {
     public void clear(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         element.clear();
+    }
+
+    /**
+     * Drags an element a certain distance and then drops it
+     *
+     * @param parentLocator   an element locator of parent element
+     * @param locator         an element locator
+     * @param movementsString offset in pixels from the current location to which the element should
+     *                        be moved, e.g., "+70,-300"
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "movementsString")
+    public void dragAndDrop(String parentLocator, String locator, String movementsString) {
+        String[] parts = movementsString.split("\\s*,\\s*", 2);
+        int xDelta = Integer.parseInt(parts[0].trim());
+        int yDelta = Integer.parseInt(parts[1].trim());
+
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        Point clientStartXY = element.getLocation();
+        int clientStartX = clientStartXY.getX();
+        int clientStartY = clientStartXY.getY();
+
+        int clientFinishX = ((clientStartX + xDelta) < 0) ? 0 : (clientStartX + xDelta);
+        int clientFinishY = ((clientStartY + yDelta) < 0) ? 0 : (clientStartY + yDelta);
+
+        int mouseSpeed = 10;
+        BiFunction<Integer, Integer, Integer> move = (current, dest) -> {
+            if (current.equals(dest)) return 0;
+            if (Math.abs(current - dest) < mouseSpeed) return dest - current;
+            return (current < dest) ? mouseSpeed : -mouseSpeed;
+        };
+
+        int clientX = clientStartX;
+        int clientY = clientStartY;
+
+        TouchAction actions = new TouchAction(webDriver.getAppiumDriver())
+                .press(PointOption.point(element.getLocation().x + element.getSize().width / 2, element.getLocation().y + element.getSize().height / 2))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)));
+
+        while ((clientX != clientFinishX) || (clientY != clientFinishY)) {
+            int deltaX = move.apply(clientX, clientFinishX);
+            int deltaY = move.apply(clientY, clientFinishY);
+            clientX += deltaX;
+            clientY += deltaY;
+            actions.moveTo(PointOption.point(clientX, clientY));
+        }
+
+        actions.release();
+        actions.perform();
+    }
+
+    /**
+     * Drags an element and drops it on another element
+     *
+     * @param toBeDraggedObjectLocator     an element to be dragged
+     * @param dragDestinationObjectLocator an element whose location (i.e., whose center-most pixel)
+     *                                     will be the point where locatorOfObjectToBeDragged is dropped
+     */
+    @Action(param1 = "toBeDraggedObjectLocator", param2 = "dragDestinationObjectLocator")
+    public void dragAndDropToObject(String toBeDraggedObjectLocator, String dragDestinationObjectLocator) {
+        WebElement elementFrom = webDriver.findElement(toBeDraggedObjectLocator);
+        WebElement elementTo = webDriver.findElement(dragDestinationObjectLocator);
+
+        new TouchAction(webDriver.getAppiumDriver())
+                .press(PointOption.point(elementFrom.getLocation().x + elementFrom.getSize().width / 2, elementFrom.getLocation().y + elementFrom.getSize().height / 2))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(elementTo.getLocation().x + elementTo.getSize().width / 2, elementTo.getLocation().y + elementTo.getSize().height / 2))
+                .release()
+                .perform();
     }
 }

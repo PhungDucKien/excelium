@@ -29,6 +29,7 @@ import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
+import org.openqa.selenium.By;
 
 /**
  * Represents a class which contains commands for controlling mobile pages.
@@ -88,5 +89,18 @@ public class MobilePageCommandExecutor extends CommandExecutor {
         } catch (RuntimeException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns the number of nodes that match the specified xpath, eg. "//XCUIElementTypeTable" would give the number
+     * of iOS tables.
+     *
+     * @param xpath the xpath expression to evaluate. do NOT wrap this expression in a 'count()'
+     *              function; we will do that for you.
+     * @return the number of nodes that match the specified xpath
+     */
+    @Accessor(param1 = "xpath", storeCmd = false, waitCmd = false, executeCmd = false)
+    public Number getXpathCount(String xpath) {
+        return webDriver.findElements(By.xpath(xpath)).size();
     }
 }

@@ -340,6 +340,10 @@ public class MobileExcelium extends Excelium {
         runCommand("assertNotVisible", parentLocator, locator, null);
     }
 
+    public void assertNotXpathCount(String xpath, String text) throws Throwable {
+        runCommand("assertNotXpathCount", xpath, text, null);
+    }
+
     public void assertPageSource(String text) throws Throwable {
         runCommand("assertPageSource", text, null, null);
     }
@@ -508,6 +512,10 @@ public class MobileExcelium extends Excelium {
         runCommand("assertVisible", parentLocator, locator, null);
     }
 
+    public void assertXpathCount(String xpath, String text) throws Throwable {
+        runCommand("assertXpathCount", xpath, text, null);
+    }
+
     public void broadcastIntent(String intent) throws Throwable {
         runCommand("broadcastIntent", intent, null, null);
     }
@@ -574,6 +582,18 @@ public class MobileExcelium extends Excelium {
 
     public void doubleTapAt(String coordinate) throws Throwable {
         runCommand("doubleTapAt", coordinate, null, null);
+    }
+
+    public void dragAndDrop(String locator, String movementsString) throws Throwable {
+        runCommand("dragAndDrop", locator, movementsString, null);
+    }
+
+    public void dragAndDrop(String parentLocator, String locator, String movementsString) throws Throwable {
+        runCommand("dragAndDrop", parentLocator, locator, movementsString);
+    }
+
+    public void dragAndDropToObject(String toBeDraggedObjectLocator, String dragDestinationObjectLocator) throws Throwable {
+        runCommand("dragAndDropToObject", toBeDraggedObjectLocator, dragDestinationObjectLocator, null);
     }
 
     public void echo(String message) throws Throwable {
@@ -1548,6 +1568,10 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyNotVisible", parentLocator, locator, null);
     }
 
+    public void verifyNotXpathCount(String xpath, String text) throws Throwable {
+        runCommand("verifyNotXpathCount", xpath, text, null);
+    }
+
     public void verifyPageSource(String text) throws Throwable {
         runCommand("verifyPageSource", text, null, null);
     }
@@ -1714,6 +1738,10 @@ public class MobileExcelium extends Excelium {
 
     public void verifyVisible(String parentLocator, String locator) throws Throwable {
         runCommand("verifyVisible", parentLocator, locator, null);
+    }
+
+    public void verifyXpathCount(String xpath, String text) throws Throwable {
+        runCommand("verifyXpathCount", xpath, text, null);
     }
 
     public void waitForActivity(String activity) throws Throwable {
