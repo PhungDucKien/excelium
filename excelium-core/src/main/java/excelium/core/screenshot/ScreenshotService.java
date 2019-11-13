@@ -180,7 +180,7 @@ public class ScreenshotService {
                 Double scale = imageWidth * 1.d / viewportRect.get("width");
                 int scaleStatusBarHeight = (int) Math.round(viewportRect.get("top") * scale);
                 BufferedImage cropImage = bufferedImage.getSubimage(0, scaleStatusBarHeight, imageWidth, imageHeight - scaleStatusBarHeight);
-                ImageIO.write(cropImage, "PNG", getScreenshotImageFile());
+                writeImage(cropImage, getScreenshotImageFile());
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
             }
