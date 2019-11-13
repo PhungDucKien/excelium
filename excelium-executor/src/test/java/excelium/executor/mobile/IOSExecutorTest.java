@@ -31,11 +31,9 @@ import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.MobileAppEnvironment;
 import org.apache.commons.io.FileUtils;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.ScreenOrientation;
+import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -70,7 +68,7 @@ public class IOSExecutorTest {
         environment.setPlatformVersion(System.getenv("TEST_PLATFORM_VERSION"));
         environment.setDeviceName(System.getenv("TEST_DEVICE_NAME"));
         environment.setUdid(System.getenv("TEST_DEVICE_UDID"));
-        environment.setBundleId("vn.altplus.example.UICatalog");
+        environment.setBundleId("com.vn.altplus.UICatalog");
 
         project = new Project();
         project.setAppPath(Paths.get("src/test/resources"));
@@ -150,6 +148,7 @@ public class IOSExecutorTest {
         selenium.setGeolocation("30.0001,21.0002,10");
     }
 
+    @Ignore("Shake is not supported on real devices")
     @Test
     public void testShake() throws Throwable {
         selenium.shake();
@@ -169,7 +168,14 @@ public class IOSExecutorTest {
         selenium.scrollDownTo("Web View");
         selenium.click("Web View");
 
+        selenium.pause("1000");
+
+        selenium.assertContextCount("2");
+        selenium.setWebViewContext("1");
+
         // TODO
+
+        selenium.setNativeAppContext();
 
         selenium.goBack();
         selenium.scrollUp();
@@ -401,6 +407,99 @@ public class IOSExecutorTest {
 
         selenium.assertElementPresent("//*[@scrollable=\"true\"]");
         selenium.assertAttribute("//*[@scrollable=\"true\"]", "type", "XCUIElementTypeTable");
+    }
+
+    @Test
+    public void testGestures() throws Throwable {
+        selenium.click("Alert Views");
+        selenium.waitForElementPresent("Okay / Cancel");
+
+        selenium.tap("Okay / Cancel");
+        selenium.assertElementPresent("OK");
+        selenium.click("OK");
+
+        selenium.waitForElementNotPresent("OK");
+
+        WebElement element = webDriver.findElement("Okay / Cancel");
+        int x = element.getLocation().x + element.getSize().width / 2;
+        int y = element.getLocation().y + element.getSize().height / 2;
+        selenium.tapAt(x + "," + y);
+        selenium.assertElementPresent("OK");
+        selenium.click("OK");
+
+        selenium.waitForElementNotPresent("OK");
+
+        selenium.longPress("Okay / Cancel");
+        selenium.assertElementPresent("Cancel");
+        selenium.click("Cancel");
+
+        selenium.waitForElementNotPresent("Cancel");
+
+        selenium.longPressAt(x + "," + y);
+        selenium.assertElementPresent("OK");
+        selenium.click("OK");
+
+        selenium.waitForElementNotPresent("OK");
+
+        selenium.goBack();
+        selenium.scrollUpTo("Alert Views");
+
+        selenium.assertNotVisible("Web View");
+        selenium.dragAndDropToObject("Progress Views", "Activity Indicators");
+        selenium.waitForVisible("Web View");
+        selenium.assertVisible("Web View");
+
+        selenium.goBack();
+        selenium.scrollUpTo("Alert Views");
+
+        selenium.scrollDown();
+        selenium.click("Steppers");
+        selenium.doubleTap("Increment");
+        selenium.assertElementPresent("2");
+
+        selenium.goBack();
+        selenium.scrollUpTo("Alert Views");
+
+        WebElement pickerEl = webDriver.findElement("Picker View");
+        int yInit = pickerEl.getLocation().y;
+        selenium.swipeUp("class=XCUIElementTypeWindow");
+        int yMiddle = pickerEl.getLocation().y;
+        Assert.assertTrue(yMiddle < yInit);
+        selenium.swipeDown("class=XCUIElementTypeWindow");
+        int yFinal = pickerEl.getLocation().y;
+        Assert.assertTrue(yFinal > yMiddle);
+
+        selenium.goBack();
+        selenium.scrollUpTo("Alert Views");
+    }
+
+    @Test
+    public void testControlCenter() throws Throwable {
+        boolean isStatusBarAvailable = false;
+        try {
+            selenium.assertElementNotPresent("class=XCUIElementTypeStatusBar");
+        } catch (Exception err) {
+            // if this exists,
+            isStatusBarAvailable = true;
+            selenium.assertElementNotPresent("ControlCenterView");
+        }
+
+        selenium.openControlCenter();
+
+        // Control Center ought to be visible now
+        if (isStatusBarAvailable) {
+            selenium.assertElementPresent("ControlCenterView");
+        } else {
+            selenium.assertElementPresent("class='XCUIElementTypeStatusBar'");
+        }
+
+        selenium.closeControlCenter();
+
+        if (isStatusBarAvailable) {
+            selenium.assertElementNotPresent("ControlCenterView");
+        } else {
+            selenium.assertElementNotPresent("class=XCUIElementTypeStatusBar");
+        }
     }
 
     @Test
