@@ -32,9 +32,14 @@ import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.executor.util.ProcessUtil;
 import excelium.model.project.Project;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -291,5 +296,65 @@ public class DeviceCommandExecutor extends CommandExecutor {
     @Action(param1 = "fingerPrintId", ios = false)
     public void fingerPrint(String fingerPrintId) {
         webDriver.getAndroidDriver().fingerPrint(Integer.parseInt(fingerPrintId));
+    }
+
+    /**
+     * Open Control Center on iOS devices.
+     */
+    @Action(android = false)
+    public void openControlCenter() {
+
+        // Copy from https://github.com/appium/appium-xcuitest-driver/blob/master/test/functional/basic/gesture-e2e-specs.js
+        int x, y0, y1;
+        WebElement window = webDriver.findElement("class=XCUIElementTypeApplication");
+        int width = window.getSize().width;
+        int height = window.getSize().height;
+        try {
+            // Try locating the 'Cellular' element (which can be pulled down)
+            WebElement cellularEl = webDriver.findElement("Cellular");
+            x = cellularEl.getLocation().x;
+            y0 = cellularEl.getLocation().y;
+        } catch (NoSuchElementException e) {
+            // Otherwise, pull up the middle of the bottom of the device (for iPhone X, pull down from the top)
+            x = width / 2;
+            y0 = webDriver.isIphoneX() ? 15 : height - 5;
+        }
+        y1 = height / 2;
+
+        new TouchAction(webDriver.getAppiumDriver())
+                .press(PointOption.point(x, y0))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(x, y1))
+                .perform();
+    }
+
+    /**
+     * Close Control Center on iOS devices.
+     */
+    @Action(android = false)
+    public void closeControlCenter() {
+
+        // Copy from https://github.com/appium/appium-xcuitest-driver/blob/master/test/functional/basic/gesture-e2e-specs.js
+        int x, y0, y1;
+        WebElement window = webDriver.findElement("class=XCUIElementTypeApplication");
+        int width = window.getSize().width;
+        int height = window.getSize().height;
+        try {
+            // Try locating the 'Cellular' element (which can be pulled down)
+            WebElement cellularEl = webDriver.findElement("Cellular");
+            x = cellularEl.getLocation().x;
+            y0 = cellularEl.getLocation().y;
+        } catch (NoSuchElementException e) {
+            // Otherwise, pull up the middle of the bottom of the device (for iPhone X, pull down from the top)
+            x = width / 2;
+            y0 = webDriver.isIphoneX() ? 15 : height - 5;
+        }
+        y1 = height / 2;
+
+        new TouchAction(webDriver.getAppiumDriver())
+                .press(PointOption.point(x, y1))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(x, y0))
+                .perform();
     }
 }

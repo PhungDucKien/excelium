@@ -33,10 +33,12 @@ import excelium.core.screenshot.ScreenshotService;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.jexl3.JxltEngine;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Keyboard;
@@ -161,6 +163,20 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
      */
     public boolean isIOS() {
         return webDriver instanceof IOSDriver && !((IOSDriver) webDriver).isBrowser();
+    }
+
+    public boolean isIphoneX() {
+        if (isIOS()) {
+            String deviceName = (String) webDriver.getCapabilities().getCapability(MobileCapabilityType.DEVICE_NAME);
+            if (StringUtils.isNotBlank(deviceName) && deviceName.toLowerCase().contains("iphone x")) {
+                return true;
+            }
+            deviceName = (String) getIOSDriver().getSessionDetails().get(MobileCapabilityType.DEVICE_NAME);
+            if (StringUtils.isNotBlank(deviceName) && deviceName.toLowerCase().contains("iphone x")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

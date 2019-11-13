@@ -580,6 +580,10 @@ public class MobileExcelium extends Excelium {
         runCommand("closeApp", null, null, null);
     }
 
+    public void closeControlCenter() throws Throwable {
+        runCommand("closeControlCenter", null, null, null);
+    }
+
     public void doubleTap(String locator) throws Throwable {
         runCommand("doubleTap", locator, null, null);
     }
@@ -994,6 +998,10 @@ public class MobileExcelium extends Excelium {
 
     public void longPressAt(String coordinate) throws Throwable {
         runCommand("longPressAt", coordinate, null, null);
+    }
+
+    public void openControlCenter() throws Throwable {
+        runCommand("openControlCenter", null, null, null);
     }
 
     public void openNotifications() throws Throwable {
