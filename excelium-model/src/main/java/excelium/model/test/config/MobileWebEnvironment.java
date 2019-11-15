@@ -45,6 +45,11 @@ public class MobileWebEnvironment extends MobileEnvironment {
     private String browserVersion;
 
     /**
+     * Base url
+     */
+    private String baseUrl;
+
+    /**
      * Gets browser.
      *
      * @return the browser
@@ -78,6 +83,24 @@ public class MobileWebEnvironment extends MobileEnvironment {
      */
     public void setBrowserVersion(String browserVersion) {
         this.browserVersion = browserVersion;
+    }
+
+    /**
+     * Gets base url.
+     *
+     * @return the base url
+     */
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    /**
+     * Sets base url.
+     *
+     * @param baseUrl the base url
+     */
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 
     @Override

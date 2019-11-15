@@ -51,6 +51,11 @@ public class PcEnvironment extends Environment {
     private String resolution;
 
     /**
+     * Base url
+     */
+    private String baseUrl;
+
+    /**
      * Gets browser.
      *
      * @return the browser
@@ -102,6 +107,24 @@ public class PcEnvironment extends Environment {
      */
     public void setResolution(String resolution) {
         this.resolution = resolution;
+    }
+
+    /**
+     * Gets base url.
+     *
+     * @return the base url
+     */
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    /**
+     * Sets base url.
+     *
+     * @param baseUrl the base url
+     */
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 
     @Override

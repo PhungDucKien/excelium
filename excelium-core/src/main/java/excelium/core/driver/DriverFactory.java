@@ -311,6 +311,8 @@ public class DriverFactory {
         desiredCapabilities.setCapability(MobileCapabilityType.UDID, environment.getUdid());
         if (environment instanceof MobileWebEnvironment) {
             desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, ((MobileWebEnvironment) environment).getBrowser().getText());
+            desiredCapabilities.setCapability(IOSMobileCapabilityType.SAFARI_INITIAL_URL, ((MobileWebEnvironment) environment).getBaseUrl());
+            desiredCapabilities.setCapability(IOSMobileCapabilityType.SAFARI_ALLOW_POPUPS, true);
         } else if (environment instanceof MobileAppEnvironment) {
             String appPath = ((MobileAppEnvironment) environment).getAppPath();
             if (StringUtils.isNotBlank(appPath)) {

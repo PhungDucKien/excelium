@@ -46,7 +46,7 @@ public class EnvironmentUtilTest {
 
     @Test
     public void testGetAvailablePcEnvironments() {
-        List<Environment> environments = EnvironmentUtil.getAvailablePcEnvironments(Browser.CHROME, null, null);
+        List<Environment> environments = EnvironmentUtil.getAvailablePcEnvironments(Browser.CHROME, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Browser.CHROME, ((PcEnvironment) environments.get(0)).getBrowser());
         Assert.assertEquals("1024x768", ((PcEnvironment) environments.get(0)).getResolution());
@@ -55,7 +55,7 @@ public class EnvironmentUtilTest {
             add("10.0");
         }}, new ArrayList<String>() {{
             add("800x600");
-        }});
+        }}, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Browser.CHROME, ((PcEnvironment) environments.get(0)).getBrowser());
         Assert.assertEquals("10.0", ((PcEnvironment) environments.get(0)).getBrowserVersion());
@@ -64,14 +64,14 @@ public class EnvironmentUtilTest {
 
     @Test
     public void testGetAvailableMobileWebEnvironments() {
-        List<Environment> environments = EnvironmentUtil.getAvailableMobileWebEnvironments(Platform.ANDROID, null, null, null, null, null);
+        List<Environment> environments = EnvironmentUtil.getAvailableMobileWebEnvironments(Platform.ANDROID, null, null, null, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Browser.CHROME, ((MobileWebEnvironment) environments.get(0)).getBrowser());
         Assert.assertEquals(Platform.ANDROID, environments.get(0).getPlatform());
         Assert.assertEquals("Android Emulator", ((MobileWebEnvironment) environments.get(0)).getDeviceName());
         Assert.assertEquals("Portrait", ((MobileWebEnvironment) environments.get(0)).getOrientation());
 
-        environments = EnvironmentUtil.getAvailableMobileWebEnvironments(Platform.IOS, null, null, null, null, null);
+        environments = EnvironmentUtil.getAvailableMobileWebEnvironments(Platform.IOS, null, null, null, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Browser.SAFARI, ((MobileWebEnvironment) environments.get(0)).getBrowser());
         Assert.assertEquals(Platform.IOS, environments.get(0).getPlatform());

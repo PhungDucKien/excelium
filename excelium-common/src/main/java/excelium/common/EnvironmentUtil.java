@@ -49,9 +49,10 @@ public class EnvironmentUtil {
      * @param browser     the browser
      * @param versions    the versions
      * @param resolutions the resolutions
+     * @param baseUrl     the base url
      * @return the available pc environments
      */
-    public static List<Environment> getAvailablePcEnvironments(Browser browser, List<String> versions, List<String> resolutions) {
+    public static List<Environment> getAvailablePcEnvironments(Browser browser, List<String> versions, List<String> resolutions, String baseUrl) {
         List<Environment> environments = new ArrayList<>();
         Platform platform = PlatformDetector.getPlatform();
         if (isBrowserAvailable(platform, browser)) {
@@ -70,6 +71,7 @@ public class EnvironmentUtil {
                     environment.setBrowser(browser);
                     environment.setBrowserVersion(version);
                     environment.setResolution(resolution);
+                    environment.setBaseUrl(baseUrl);
                     environments.add(environment);
                 }
             }
@@ -86,9 +88,10 @@ public class EnvironmentUtil {
      * @param orientations     the orientations
      * @param udid             the udid
      * @param browsers         the browsers
+     * @param baseUrl          the base url
      * @return the available mobile web environments
      */
-    public static List<Environment> getAvailableMobileWebEnvironments(Platform platform, List<String> platformVersions, List<String> deviceNames, List<String> orientations, String udid, List<String> browsers) {
+    public static List<Environment> getAvailableMobileWebEnvironments(Platform platform, List<String> platformVersions, List<String> deviceNames, List<String> orientations, String udid, List<String> browsers, String baseUrl) {
         if (CollectionUtils.isEmpty(platformVersions)) {
             platformVersions = new ArrayList<>();
             platformVersions.add("");
@@ -125,6 +128,7 @@ public class EnvironmentUtil {
                         environment.setOrientation(orientation);
                         environment.setUdid(udid);
                         environment.setBrowser(Browser.fromName(browser));
+                        environment.setBaseUrl(baseUrl);
                         environments.add(environment);
                     }
                 }

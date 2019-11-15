@@ -160,6 +160,8 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
      * @throws IOException if the IOException occurs
      */
     private List<Environment> getEnvironments(Map<Object, Object> configurationValues) throws IOException {
+        String baseUrl = getStringValue(configurationValues.get(BASE_URL));
+
         boolean pcEnabled = getBooleanValue(configurationValues.get(USE_PC));
         boolean androidEnabled = getBooleanValue(configurationValues.get(USE_ANDROID));
         boolean iOsEnabled = getBooleanValue(configurationValues.get(USE_IOS));
@@ -212,24 +214,24 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
         List<Environment> environments = new ArrayList<>();
         if (pcEnabled) {
             if (chromeEnabled)
-                environments.addAll(getAvailablePcEnvironments(Browser.CHROME, chromeVersions, chromeResolutions));
+                environments.addAll(getAvailablePcEnvironments(Browser.CHROME, chromeVersions, chromeResolutions, baseUrl));
             if (firefoxEnabled)
-                environments.addAll(getAvailablePcEnvironments(Browser.FIREFOX, firefoxVersions, firefoxResolutions));
+                environments.addAll(getAvailablePcEnvironments(Browser.FIREFOX, firefoxVersions, firefoxResolutions, baseUrl));
             if (ieEnabled)
-                environments.addAll(getAvailablePcEnvironments(Browser.IE, ieVersions, ieResolutions));
+                environments.addAll(getAvailablePcEnvironments(Browser.IE, ieVersions, ieResolutions, baseUrl));
             if (edgeEnabled)
-                environments.addAll(getAvailablePcEnvironments(Browser.EDGE, edgeVersions, edgeResolutions));
+                environments.addAll(getAvailablePcEnvironments(Browser.EDGE, edgeVersions, edgeResolutions, baseUrl));
             if (safariEnabled)
-                environments.addAll(getAvailablePcEnvironments(Browser.SAFARI, safariVersions, safariResolutions));
+                environments.addAll(getAvailablePcEnvironments(Browser.SAFARI, safariVersions, safariResolutions, baseUrl));
             if (operaEnabled)
-                environments.addAll(getAvailablePcEnvironments(Browser.OPERA, operaVersions, operaResolutions));
+                environments.addAll(getAvailablePcEnvironments(Browser.OPERA, operaVersions, operaResolutions, baseUrl));
         }
 
         if (androidEnabled) {
             if (CollectionUtils.isEmpty(androidBrowsers)) {
                 environments.addAll(getAvailableMobileAppEnvironments(Platform.ANDROID, androidVersions, androidDevices, androidOrientations, androidUdid, androidApkPath, androidAppActivity, androidAppPackage, androidAppWaitActivity, androidAppWaitPackage, null));
             } else {
-                environments.addAll(getAvailableMobileWebEnvironments(Platform.ANDROID, androidVersions, androidDevices, androidOrientations, androidUdid, androidBrowsers));
+                environments.addAll(getAvailableMobileWebEnvironments(Platform.ANDROID, androidVersions, androidDevices, androidOrientations, androidUdid, androidBrowsers, baseUrl));
             }
         }
 
@@ -237,7 +239,7 @@ public abstract class AbstractTestReader<W, S> extends AbstractWorkbookReader<W,
             if (CollectionUtils.isEmpty(iOsBrowsers)) {
                 environments.addAll(getAvailableMobileAppEnvironments(Platform.IOS, iOsVersions, iOsDevices, iOsOrientations, iOsUdid, iOsIpaPath, null, null, null, null, bundleId));
             } else {
-                environments.addAll(getAvailableMobileWebEnvironments(Platform.IOS, iOsVersions, iOsDevices, iOsOrientations, iOsUdid, iOsBrowsers));
+                environments.addAll(getAvailableMobileWebEnvironments(Platform.IOS, iOsVersions, iOsDevices, iOsOrientations, iOsUdid, iOsBrowsers, baseUrl));
             }
         }
 
