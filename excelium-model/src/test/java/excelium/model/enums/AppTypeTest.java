@@ -39,18 +39,15 @@ public class AppTypeTest {
     public void testFromName() {
         Assert.assertEquals(AppType.WEB, AppType.fromName("WEB"));
         Assert.assertEquals(AppType.MOBILE, AppType.fromName("MOBILE"));
-        Assert.assertEquals(AppType.UNDEFINED, AppType.fromName("UNDEFINED"));
     }
 
     @Test
     public void testGetListChoice() {
         String[][] listChoice = AppType.getListChoice();
-        Assert.assertEquals(3, listChoice.length);
+        Assert.assertEquals(2, listChoice.length);
         Assert.assertEquals("WEB", listChoice[0][0]);
         Assert.assertEquals("Web application", listChoice[0][1]);
         Assert.assertEquals("MOBILE", listChoice[1][0]);
         Assert.assertEquals("Mobile application", listChoice[1][1]);
-        Assert.assertEquals("UNDEFINED", listChoice[2][0]);
-        Assert.assertEquals("Not defined", listChoice[2][1]);
     }
 }

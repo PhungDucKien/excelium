@@ -38,11 +38,7 @@ public enum AppType {
     /**
      * The Mobile.
      */
-    MOBILE("Mobile application"),
-    /**
-     * The Undefined.
-     */
-    UNDEFINED("Not defined");
+    MOBILE("Mobile application");
 
     /**
      * Text
