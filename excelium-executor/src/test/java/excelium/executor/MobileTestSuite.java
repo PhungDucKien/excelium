@@ -24,14 +24,14 @@
 
 package excelium.executor;
 
-import excelium.executor.mobile.IOSExecutorTest;
+import excelium.executor.mobile.IOSAppExecutorTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-        IOSExecutorTest.class
+        IOSAppExecutorTest.class
 })
 public class MobileTestSuite {
 }

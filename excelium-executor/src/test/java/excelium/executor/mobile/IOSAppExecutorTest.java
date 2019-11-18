@@ -40,7 +40,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.Date;
 
-public class IOSExecutorTest {
+public class IOSAppExecutorTest {
 
     protected static ContextAwareWebDriver webDriver;
 
@@ -79,7 +79,9 @@ public class IOSExecutorTest {
 
     @AfterClass
     public static void afterClass() {
-        webDriver.quit();
+        if (webDriver != null) {
+            DriverPool.getInstance().dismissDriver(webDriver.getWebDriver());
+        }
         webDriver = null;
     }
 
