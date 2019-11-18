@@ -50,11 +50,11 @@ public class MyExecutorProviderService implements ExecutorProviderService {
                 WebElementCommandExecutor.class,
                 EventCommandExecutor.class,
                 TableCommandExecutor.class,
-                AlertCommandExecutor.class,
                 CookieCommandExecutor.class,
                 FileCommandExecutor.class,
 
                 // Common
+                AlertCommandExecutor.class,
                 NavigateCommandExecutor.class,
                 ScreenshotCommandExecutor.class,
                 AttributeCommandExecutor.class,
@@ -74,7 +74,6 @@ public class MyExecutorProviderService implements ExecutorProviderService {
         return new ArrayList<>(Arrays.asList(
                 // Mobile
                 SessionCommandExecutor.class,
-                IOSAlertCommandExecutor.class,
                 DeviceCommandExecutor.class,
                 MobilePageCommandExecutor.class,
                 MobileElementCommandExecutor.class,
@@ -82,6 +81,7 @@ public class MyExecutorProviderService implements ExecutorProviderService {
                 ContextCommandExecutor.class,
 
                 // Common
+                AlertCommandExecutor.class,
                 NavigateCommandExecutor.class,
                 ScreenshotCommandExecutor.class,
                 AttributeCommandExecutor.class,
