@@ -48,4 +48,5 @@ task "doc-publish"(type: Exec) {
 task build(dependsOn: [":excelium-cli:dist"]) {
 }
 
+beforeReleaseBuild.dependsOn ":excelium-cli:generateSources"
 afterReleaseBuild.dependsOn "doc-build","doc-publish"
