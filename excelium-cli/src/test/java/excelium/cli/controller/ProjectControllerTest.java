@@ -65,13 +65,36 @@ public class ProjectControllerTest {
     public void testCreateWebSheets() throws Exception {
         new Expectations() {{
             consolePrompt.prompt((List<PromptableElementIF>) any);
-            returns(new HashMap<String, ConfirmResult>() {{ put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES)); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("myproject")); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(AppType.WEB.name())); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(WorkbookType.SHEETS.name())); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("file")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("screenshot")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("download")); }});
+            returns(new HashMap<String, ConfirmResult>() {{
+                        put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("myproject"));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(AppType.WEB.name()));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(WorkbookType.SHEETS.name()));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("file"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("download"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("screenshot"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("localhost"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("4723"));
+                    }},
+                    new HashMap<String, ConfirmResult>() {{
+                        put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.NO));
+                    }});
         }};
 
         projectController.create();
@@ -85,15 +108,39 @@ public class ProjectControllerTest {
     public void testCreateWebExcel() throws Exception {
         new Expectations() {{
             consolePrompt.prompt((List<PromptableElementIF>) any);
-            returns(new HashMap<String, ConfirmResult>() {{ put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES)); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("myproject")); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(AppType.WEB.name())); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(WorkbookType.EXCEL.name())); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("test")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("template")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("file")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("screenshot")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("download")); }});
+            returns(new HashMap<String, ConfirmResult>() {{
+                        put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("myproject"));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(AppType.WEB.name()));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(WorkbookType.EXCEL.name()));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("test"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("template"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("file"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("download"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("screenshot"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("localhost"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("4723"));
+                    }});
         }};
 
         projectController.create();
@@ -107,14 +154,33 @@ public class ProjectControllerTest {
     public void testCreateMobileSheets() throws Exception {
         new Expectations() {{
             consolePrompt.prompt((List<PromptableElementIF>) any);
-            returns(new HashMap<String, ConfirmResult>() {{ put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES)); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("myproject")); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(AppType.MOBILE.name())); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(WorkbookType.SHEETS.name())); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("app")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("screenshot")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("localhost")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("4723")); }});
+            returns(new HashMap<String, ConfirmResult>() {{
+                        put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("myproject"));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(AppType.MOBILE.name()));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(WorkbookType.SHEETS.name()));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("app"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("screenshot"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("localhost"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("4723"));
+                    }},
+                    new HashMap<String, ConfirmResult>() {{
+                        put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.NO));
+                    }});
         }};
 
         projectController.create();
@@ -128,14 +194,36 @@ public class ProjectControllerTest {
     public void testCreateMobileExcel() throws Exception {
         new Expectations() {{
             consolePrompt.prompt((List<PromptableElementIF>) any);
-            returns(new HashMap<String, ConfirmResult>() {{ put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES)); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("myproject")); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(AppType.WEB.name())); }},
-                    new HashMap<String, ListResult>() {{ put("", new ListResult(WorkbookType.EXCEL.name())); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("test")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("template")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("app")); }},
-                    new HashMap<String, InputResult>() {{ put("", new InputResult("screenshot")); }});
+            returns(new HashMap<String, ConfirmResult>() {{
+                        put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.YES));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("myproject"));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(AppType.WEB.name()));
+                    }},
+                    new HashMap<String, ListResult>() {{
+                        put("", new ListResult(WorkbookType.EXCEL.name()));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("test"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("template"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("app"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("screenshot"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("localhost"));
+                    }},
+                    new HashMap<String, InputResult>() {{
+                        put("", new InputResult("4723"));
+                    }});
         }};
 
         projectController.create();

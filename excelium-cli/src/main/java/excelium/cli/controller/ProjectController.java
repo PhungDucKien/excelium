@@ -27,10 +27,15 @@ package excelium.cli.controller;
 import com.beust.jcommander.Parameter;
 import excelium.cli.annotation.Command;
 import excelium.cli.annotation.Controller;
+import excelium.cli.annotation.Injectable;
+import excelium.common.TemplateUtil;
+import excelium.core.reader.TestReader;
+import excelium.core.reader.TestReaderFactory;
 import excelium.generator.ProjectGenerator;
 import excelium.model.enums.AppType;
 import excelium.model.enums.WorkbookType;
 import excelium.model.project.Project;
+import excelium.model.project.Template;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.lang3.StringUtils;
 
@@ -58,6 +63,12 @@ public class ProjectController extends BaseController {
     private String folderName;
 
     /**
+     * Test reader factory
+     */
+    @Injectable
+    private TestReaderFactory testReaderFactory;
+
+    /**
      * Creates an empty structured project folder.
      * Project configuration file will be written to project.xml of specified folder.
      *
@@ -65,7 +76,7 @@ public class ProjectController extends BaseController {
      * @throws JAXBException the jaxb exception
      */
     @Command(name = "create")
-    public void create() throws IOException, JAXBException {
+    public void create() throws IOException, JAXBException, IllegalAccessException {
         Path basePath = StringUtils.isBlank(folderName) ? Paths.get(".") : Paths.get(folderName);
         File projectFile = basePath.resolve("project.xml").toFile();
 
@@ -96,29 +107,57 @@ public class ProjectController extends BaseController {
             project.setTemplatePath(Paths.get(templateFolder));
         }
 
-        if (project.getAppType() != AppType.WEB) {
-            String appFolder = promptInput("Where do you want to load application?", "app");
-            project.setAppPath(Paths.get(appFolder));
-        }
-
-        if (project.getAppType() != AppType.MOBILE) {
+        if (project.getAppType() == AppType.WEB) {
             String fileFolder = promptInput("Where do you want to load files?", "file");
             project.setFilePath(Paths.get(fileFolder));
+
+            String downloadFolder = promptInput("Where do you want to store downloads?", "download");
+            project.setDownloadPath(Paths.get(downloadFolder));
+        } else {
+            String appFolder = promptInput("Where do you want to load application?", "app");
+            project.setAppPath(Paths.get(appFolder));
         }
 
         String screenshotFolder = promptInput("Where do you want to store screenshots?", "screenshot");
         project.setScreenshotPath(Paths.get(screenshotFolder));
 
-        if (project.getAppType() != AppType.MOBILE) {
-            String downloadFolder = promptInput("Where do you want to store downloads?", "download");
-            project.setDownloadPath(Paths.get(downloadFolder));
-        }
+        String appiumHost = promptInput("What is the Appium server address?", AppiumServiceBuilder.DEFAULT_LOCAL_IP_ADDRESS);
+        project.setAppiumHost(appiumHost);
+        String appiumPort = promptInput("What is the Appium server port?", String.valueOf(AppiumServiceBuilder.DEFAULT_APPIUM_PORT));
+        project.setAppiumPort(Integer.parseInt(appiumPort));
 
-        if (project.getAppType() == AppType.MOBILE) {
-            String appiumHost = promptInput("What is the Appium server address?", AppiumServiceBuilder.DEFAULT_LOCAL_IP_ADDRESS);
-            project.setAppiumHost(appiumHost);
-            String appiumPort = promptInput("What is the Appium server port?", String.valueOf(AppiumServiceBuilder.DEFAULT_APPIUM_PORT));
-            project.setAppiumPort(Integer.parseInt(appiumPort));
+        if (project.getWorkbookType() == WorkbookType.SHEETS) {
+            boolean importDefault = promptConfirm("Would you like to import the default template?");
+            if (importDefault) {
+                String fileLocation = "";
+                if (project.getAppType() == AppType.WEB) {
+                    fileLocation = "1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50";
+                } else if (project.getAppType() == AppType.MOBILE) {
+                    fileLocation = "1u1Wr4JrcaGp84joTFCRLSQA1cWXLaa9TK3fUv-EkX9w";
+                }
+                if (StringUtils.isNotBlank(fileLocation)) {
+                    TestReader testReader = testReaderFactory.createReader(fileLocation);
+
+                    Template template = new Template();
+                    template.setLocation(fileLocation);
+                    template.setName(testReader.getWorkbookName());
+                    template.setMarkupLocations(testReader.batchFindFirstOccurrence(TemplateUtil.getMarkups()));
+
+                    String mappingSheet = TemplateUtil.getSuggestSheetForMapping(template);
+                    template.setMappingPattern(mappingSheet);
+
+                    String actionSheet = TemplateUtil.getSuggestSheetForAction(template);
+                    template.setActionPattern(actionSheet);
+
+                    String dataSheet = TemplateUtil.getSuggestSheetForData(template);
+                    template.setDataPattern(dataSheet);
+
+                    template.setTestPattern("*");
+                    template.addIgnorePattern("Commands");
+
+                    project.addTemplate(template);
+                }
+            }
         }
 
         ProjectGenerator generator = new ProjectGenerator();
