@@ -36,6 +36,14 @@ public class <#if isWeb>Web<#else>Mobile</#if>Excelium extends Excelium {
         super(webDriver, baseUrl, project);
     }
 
+    protected void setWebContext() {
+        super.setWebContext();
+    }
+
+    protected void setNativeContext() {
+        super.setNativeContext();
+    }
+
 <#list items>
 <#items as command>
     public void ${command.getMethod()}(<#if command.getParam1()?has_content>String ${(command.getParam1())!}</#if><#if command.getParam2()?has_content>, String ${(command.getParam2())!}</#if><#if command.getParam3()?has_content>, String ${(command.getParam3())!}</#if>) throws Throwable {

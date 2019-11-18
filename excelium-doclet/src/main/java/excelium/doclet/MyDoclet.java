@@ -27,9 +27,10 @@ package excelium.doclet;
 import com.sun.javadoc.*;
 import com.sun.tools.doclets.standard.Standard;
 import excelium.common.StringUtil;
+import excelium.core.CommandContext;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
-import excelium.core.command.CommandFactory;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.service.ExecutorProviderService;
 import excelium.doclet.i18n.Language;
@@ -40,6 +41,7 @@ import excelium.doclet.service.FreeMarkerTemplateService;
 import excelium.doclet.service.TemplateService;
 import excelium.executor.MyExecutorProviderService;
 import excelium.model.test.command.Command;
+import mockit.Deencapsulation;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -126,7 +128,15 @@ public class MyDoclet extends Standard {
                 commandDetail.setName(command.getName());
                 commandDetail.setMethod(command.getMethod());
 
-                MethodDoc methodDoc = commandMethodDocs.get((isWeb ? "web." : "mobile.") + command.getSourceMethodKey());
+                MethodDoc methodDoc;
+                if (isWeb) {
+                    methodDoc = commandMethodDocs.get("web." + command.getSourceMethodKey());
+                } else {
+                    methodDoc = commandMethodDocs.get("mobile." + command.getSourceMethodKey());
+                    if (methodDoc == null) {
+                        methodDoc = commandMethodDocs.get("web." + command.getSourceMethodKey());
+                    }
+                }
                 if (methodDoc == null) {
                     methodDoc = commandMethodDocs.get(command.getSourceMethodKey());
                 }
@@ -211,7 +221,14 @@ public class MyDoclet extends Standard {
      */
     private static Map<String, Command> getCommandMap(boolean isWeb) {
         try {
-            return CommandFactory.createCommandMap(isWeb ? new StubWebContextAwareWebDriver() : new StubMobileContextAwareWebDriver(), null, null, null, isWeb);
+            Excelium excelium = new Excelium(isWeb ? new StubWebContextAwareWebDriver() : new StubMobileContextAwareWebDriver(), null, null);
+            Map<String, CommandContext> commandContexts = Deencapsulation.getField(excelium, "commandContexts");
+            Map<String, Command> result = new LinkedHashMap<>();
+            for (CommandContext context : commandContexts.values()) {
+                Map<String, Command> commandMap = Deencapsulation.getField(context, "commandMap");
+                result.putAll(commandMap);
+            }
+            return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -496,8 +513,13 @@ public class MyDoclet extends Standard {
         }
 
         @Override
-        public boolean isWeb() {
+        public boolean isWebApp() {
             return true;
+        }
+
+        @Override
+        public boolean isMobileApp() {
+            return false;
         }
 
         @Override
@@ -517,8 +539,13 @@ public class MyDoclet extends Standard {
         }
 
         @Override
-        public boolean isWeb() {
+        public boolean isWebApp() {
             return false;
+        }
+
+        @Override
+        public boolean isMobileApp() {
+            return true;
         }
 
         @Override

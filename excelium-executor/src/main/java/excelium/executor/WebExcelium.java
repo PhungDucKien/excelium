@@ -36,6 +36,14 @@ public class WebExcelium extends Excelium {
         super(webDriver, baseUrl, project);
     }
 
+    protected void setWebContext() {
+        super.setWebContext();
+    }
+
+    protected void setNativeContext() {
+        super.setNativeContext();
+    }
+
     public void addSelection(String locator, String optionLocator) throws Throwable {
         runCommand("addSelection", locator, optionLocator, null);
     }

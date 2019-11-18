@@ -6,546 +6,1310 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 --------- | --------- | --------- | --------- | --------- | ---------
 1 | Accept Touch ID | acceptTouchID |  |  | 
 2 | Activate App | activateApp | bundleId |  | 
-3 | Answer Prompt | answerPrompt | answer |  | 
-4 | Assert Activity | assertActivity | activity |  | 
-5 | Assert Alert | assertAlert | text |  | 
-6 | Assert Alert Match | assertAlertMatch | text |  | 
-7 | Assert Alert Not Match | assertAlertNotMatch | text |  | 
-8 | Assert Alert Not Present | assertAlertNotPresent |  |  | 
-9 | Assert Alert Present | assertAlertPresent |  |  | 
-10 | Assert Attribute | assertAttribute | locator | name | text
-11 | Assert Attribute Match | assertAttributeMatch | locator | name | text
-12 | Assert Attribute Not Match | assertAttributeNotMatch | locator | name | text
-13 | Assert Checked | assertChecked | locator |  | 
-14 | Assert Checked | assertChecked | parentLocator | locator | 
-15 | Assert Confirmation | assertConfirmation | text |  | 
-16 | Assert Confirmation Match | assertConfirmationMatch | text |  | 
-17 | Assert Confirmation Not Match | assertConfirmationNotMatch | text |  | 
-18 | Assert Confirmation Not Present | assertConfirmationNotPresent |  |  | 
-19 | Assert Confirmation Present | assertConfirmationPresent |  |  | 
-20 | Assert Context | assertContext | text |  | 
-21 | Assert Context Count | assertContextCount | text |  | 
-22 | Assert Context Match | assertContextMatch | text |  | 
-23 | Assert Context Not Match | assertContextNotMatch | text |  | 
-24 | Assert Date List Order Asc | assertDateListOrderAsc | locator | format | 
-25 | Assert Date List Order Asc | assertDateListOrderAsc | parentLocator | locator | format
-26 | Assert Date List Order Desc | assertDateListOrderDesc | locator | format | 
-27 | Assert Date List Order Desc | assertDateListOrderDesc | parentLocator | locator | format
-28 | Assert Editable | assertEditable | locator |  | 
-29 | Assert Editable | assertEditable | parentLocator | locator | 
-30 | Assert Element Not Present | assertElementNotPresent | locator |  | 
-31 | Assert Element Not Present | assertElementNotPresent | parentLocator | locator | 
-32 | Assert Element Present | assertElementPresent | locator |  | 
-33 | Assert Element Present | assertElementPresent | parentLocator | locator | 
-34 | Assert Enabled | assertEnabled | locator |  | 
-35 | Assert Enabled | assertEnabled | parentLocator | locator | 
-36 | Assert Eval | assertEval | expression | text | 
-37 | Assert Exists In Database | assertExistsInDatabase | sql |  | 
-38 | Assert Expression | assertExpression | expression | text | 
-39 | Assert Expression Match | assertExpressionMatch | expression | text | 
-40 | Assert Expression Not Match | assertExpressionNotMatch | expression | text | 
-41 | Assert Integer List Order Asc | assertIntegerListOrderAsc | locator |  | 
-42 | Assert Integer List Order Asc | assertIntegerListOrderAsc | parentLocator | locator | 
-43 | Assert Integer List Order Desc | assertIntegerListOrderDesc | locator |  | 
-44 | Assert Integer List Order Desc | assertIntegerListOrderDesc | parentLocator | locator | 
-45 | Assert List Contain | assertListContain | variable | text | 
-46 | Assert List Not Contain | assertListNotContain | variable | text | 
-47 | Assert List Order Asc | assertListOrderAsc | variable |  | 
-48 | Assert List Order Desc | assertListOrderDesc | variable |  | 
-49 | Assert Not Activity | assertNotActivity | activity |  | 
-50 | Assert Not Alert | assertNotAlert | text |  | 
-51 | Assert Not Attribute | assertNotAttribute | locator | name | text
-52 | Assert Not Checked | assertNotChecked | locator |  | 
-53 | Assert Not Checked | assertNotChecked | parentLocator | locator | 
-54 | Assert Not Confirmation | assertNotConfirmation | text |  | 
-55 | Assert Not Context | assertNotContext | text |  | 
-56 | Assert Not Context Count | assertNotContextCount | text |  | 
-57 | Assert Not Editable | assertNotEditable | locator |  | 
-58 | Assert Not Editable | assertNotEditable | parentLocator | locator | 
-59 | Assert Not Enabled | assertNotEnabled | locator |  | 
-60 | Assert Not Enabled | assertNotEnabled | parentLocator | locator | 
-61 | Assert Not Eval | assertNotEval | expression | text | 
-62 | Assert Not Exists In Database | assertNotExistsInDatabase | sql |  | 
-63 | Assert Not Expression | assertNotExpression | expression | text | 
-64 | Assert Not Page Source | assertNotPageSource | text |  | 
-65 | Assert Not Prompt | assertNotPrompt | text |  | 
-66 | Assert Not Tag Name | assertNotTagName | locator | text | 
-67 | Assert Not Tag Name | assertNotTagName | parentLocator | locator | text
-68 | Assert Not Text | assertNotText | locator | text | 
-69 | Assert Not Text | assertNotText | parentLocator | locator | text
-70 | Assert Not Text Empty | assertNotTextEmpty | locator |  | 
-71 | Assert Not Text Empty | assertNotTextEmpty | parentLocator | locator | 
-72 | Assert Not Value | assertNotValue | locator | text | 
-73 | Assert Not Value | assertNotValue | parentLocator | locator | text
-74 | Assert Not Value Empty | assertNotValueEmpty | locator |  | 
-75 | Assert Not Value Empty | assertNotValueEmpty | parentLocator | locator | 
-76 | Assert Not Variable | assertNotVariable | variable | text | 
-77 | Assert Not Visible | assertNotVisible | locator |  | 
-78 | Assert Not Visible | assertNotVisible | parentLocator | locator | 
-79 | Assert Not Xpath Count | assertNotXpathCount | xpath | text | 
-80 | Assert Page Source | assertPageSource | text |  | 
-81 | Assert Page Source Match | assertPageSourceMatch | text |  | 
-82 | Assert Page Source Not Match | assertPageSourceNotMatch | text |  | 
-83 | Assert Prompt | assertPrompt | text |  | 
-84 | Assert Prompt Match | assertPromptMatch | text |  | 
-85 | Assert Prompt Not Match | assertPromptNotMatch | text |  | 
-86 | Assert Prompt Not Present | assertPromptNotPresent |  |  | 
-87 | Assert Prompt Present | assertPromptPresent |  |  | 
-88 | Assert Row Count | assertRowCount | sql | count | 
-89 | Assert Row Count Greater Than | assertRowCountGreaterThan | sql | count | 
-90 | Assert Row Count Less Than | assertRowCountLessThan | sql | count | 
-91 | Assert Tag Name | assertTagName | locator | text | 
-92 | Assert Tag Name | assertTagName | parentLocator | locator | text
-93 | Assert Tag Name Match | assertTagNameMatch | locator | text | 
-94 | Assert Tag Name Match | assertTagNameMatch | parentLocator | locator | text
-95 | Assert Tag Name Not Match | assertTagNameNotMatch | locator | text | 
-96 | Assert Tag Name Not Match | assertTagNameNotMatch | parentLocator | locator | text
-97 | Assert Text | assertText | locator | text | 
-98 | Assert Text | assertText | parentLocator | locator | text
-99 | Assert Text Empty | assertTextEmpty | locator |  | 
-100 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
-101 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
-102 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
-103 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
-104 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
-105 | Assert Text Match | assertTextMatch | locator | text | 
-106 | Assert Text Match | assertTextMatch | parentLocator | locator | text
-107 | Assert Text Not Match | assertTextNotMatch | locator | text | 
-108 | Assert Text Not Match | assertTextNotMatch | parentLocator | locator | text
-109 | Assert Text Not Present | assertTextNotPresent | text |  | 
-110 | Assert Text Present | assertTextPresent | text |  | 
-111 | Assert Value | assertValue | locator | text | 
-112 | Assert Value | assertValue | parentLocator | locator | text
-113 | Assert Value Empty | assertValueEmpty | locator |  | 
-114 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
-115 | Assert Value Match | assertValueMatch | locator | text | 
-116 | Assert Value Match | assertValueMatch | parentLocator | locator | text
-117 | Assert Value Not Match | assertValueNotMatch | locator | text | 
-118 | Assert Value Not Match | assertValueNotMatch | parentLocator | locator | text
-119 | Assert Variable | assertVariable | variable | text | 
-120 | Assert Visible | assertVisible | locator |  | 
-121 | Assert Visible | assertVisible | parentLocator | locator | 
-122 | Assert Xpath Count | assertXpathCount | xpath | text | 
-123 | Broadcast Intent | broadcastIntent | intent |  | 
-124 | Capture Screenshot | captureScreenshot |  |  | 
-125 | Capture Viewport | captureViewport |  |  | 
-126 | Choose Cancel Confirmation | chooseCancelConfirmation |  |  | 
-127 | Choose Cancel Prompt | chooseCancelPrompt |  |  | 
-128 | Choose Ok Alert | chooseOkAlert |  |  | 
-129 | Choose Ok Confirmation | chooseOkConfirmation |  |  | 
-130 | Clear | clear | locator |  | 
-131 | Clear | clear | parentLocator | locator | 
-132 | Click | click | locator |  | 
-133 | Click | click | parentLocator | locator | 
-134 | Click Button | clickButton | indexOrText |  | 
-135 | Click Text | clickText | indexOrText |  | 
-136 | Close App | closeApp |  |  | 
-137 | Close Control Center | closeControlCenter |  |  | 
-138 | Double Tap | doubleTap | locator |  | 
-139 | Double Tap | doubleTap | parentLocator | locator | 
-140 | Double Tap At | doubleTapAt | coordinate |  | 
-141 | Drag And Drop | dragAndDrop | locator | movementsString | 
-142 | Drag And Drop | dragAndDrop | parentLocator | locator | movementsString
-143 | Drag And Drop To Object | dragAndDropToObject | toBeDraggedObjectLocator | dragDestinationObjectLocator | 
-144 | Echo | echo | message |  | 
-145 | Execute | execute | action |  | 
-146 | Execute Each | executeEach | action | locator | variable
-147 | Execute If Activity | executeIfActivity | action | activity | 
-148 | Execute If Alert | executeIfAlert | action | text | 
-149 | Execute If Alert Match | executeIfAlertMatch | action | text | 
-150 | Execute If Alert Not Match | executeIfAlertNotMatch | action | text | 
-151 | Execute If Alert Not Present | executeIfAlertNotPresent | action |  | 
-152 | Execute If Alert Present | executeIfAlertPresent | action |  | 
-153 | Execute If Checked | executeIfChecked | action | locator | 
-154 | Execute If Checked | executeIfChecked | action | parentLocator | locator
-155 | Execute If Confirmation | executeIfConfirmation | action | text | 
-156 | Execute If Confirmation Match | executeIfConfirmationMatch | action | text | 
-157 | Execute If Confirmation Not Match | executeIfConfirmationNotMatch | action | text | 
-158 | Execute If Confirmation Not Present | executeIfConfirmationNotPresent | action |  | 
-159 | Execute If Confirmation Present | executeIfConfirmationPresent | action |  | 
-160 | Execute If Context | executeIfContext | action | text | 
-161 | Execute If Context Count | executeIfContextCount | action | text | 
-162 | Execute If Context Match | executeIfContextMatch | action | text | 
-163 | Execute If Context Not Match | executeIfContextNotMatch | action | text | 
-164 | Execute If Editable | executeIfEditable | action | locator | 
-165 | Execute If Editable | executeIfEditable | action | parentLocator | locator
-166 | Execute If Element Not Present | executeIfElementNotPresent | action | locator | 
-167 | Execute If Element Not Present | executeIfElementNotPresent | action | parentLocator | locator
-168 | Execute If Element Present | executeIfElementPresent | action | locator | 
-169 | Execute If Element Present | executeIfElementPresent | action | parentLocator | locator
-170 | Execute If Enabled | executeIfEnabled | action | locator | 
-171 | Execute If Enabled | executeIfEnabled | action | parentLocator | locator
-172 | Execute If Eval | executeIfEval | action | expression | text
-173 | Execute If Exists In Database | executeIfExistsInDatabase | action | sql | 
-174 | Execute If Expression | executeIfExpression | action | expression | text
-175 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
-176 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
-177 | Execute If List Contain | executeIfListContain | action | variable | text
-178 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
-179 | Execute If Not Activity | executeIfNotActivity | action | activity | 
-180 | Execute If Not Alert | executeIfNotAlert | action | text | 
-181 | Execute If Not Checked | executeIfNotChecked | action | locator | 
-182 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
-183 | Execute If Not Confirmation | executeIfNotConfirmation | action | text | 
-184 | Execute If Not Context | executeIfNotContext | action | text | 
-185 | Execute If Not Context Count | executeIfNotContextCount | action | text | 
-186 | Execute If Not Editable | executeIfNotEditable | action | locator | 
-187 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
-188 | Execute If Not Enabled | executeIfNotEnabled | action | locator | 
-189 | Execute If Not Enabled | executeIfNotEnabled | action | parentLocator | locator
-190 | Execute If Not Eval | executeIfNotEval | action | expression | text
-191 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | sql | 
-192 | Execute If Not Expression | executeIfNotExpression | action | expression | text
-193 | Execute If Not Page Source | executeIfNotPageSource | action | text | 
-194 | Execute If Not Prompt | executeIfNotPrompt | action | text | 
-195 | Execute If Not Tag Name | executeIfNotTagName | action | locator | text
-196 | Execute If Not Text | executeIfNotText | action | locator | text
-197 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
-198 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
-199 | Execute If Not Value | executeIfNotValue | action | locator | text
-200 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
-201 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
-202 | Execute If Not Variable | executeIfNotVariable | action | variable | text
-203 | Execute If Not Visible | executeIfNotVisible | action | locator | 
-204 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
-205 | Execute If Page Source | executeIfPageSource | action | text | 
-206 | Execute If Page Source Match | executeIfPageSourceMatch | action | text | 
-207 | Execute If Page Source Not Match | executeIfPageSourceNotMatch | action | text | 
-208 | Execute If Prompt | executeIfPrompt | action | text | 
-209 | Execute If Prompt Match | executeIfPromptMatch | action | text | 
-210 | Execute If Prompt Not Match | executeIfPromptNotMatch | action | text | 
-211 | Execute If Prompt Not Present | executeIfPromptNotPresent | action |  | 
-212 | Execute If Prompt Present | executeIfPromptPresent | action |  | 
-213 | Execute If Tag Name | executeIfTagName | action | locator | text
-214 | Execute If Tag Name Match | executeIfTagNameMatch | action | locator | text
-215 | Execute If Tag Name Not Match | executeIfTagNameNotMatch | action | locator | text
-216 | Execute If Text | executeIfText | action | locator | text
-217 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
-218 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
-219 | Execute If Text Match | executeIfTextMatch | action | locator | text
-220 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
-221 | Execute If Text Not Present | executeIfTextNotPresent | action | text | 
-222 | Execute If Text Present | executeIfTextPresent | action | text | 
-223 | Execute If Value | executeIfValue | action | locator | text
-224 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
-225 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
-226 | Execute If Value Match | executeIfValueMatch | action | locator | text
-227 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
-228 | Execute If Variable | executeIfVariable | action | variable | text
-229 | Execute If Visible | executeIfVisible | action | locator | 
-230 | Execute If Visible | executeIfVisible | action | parentLocator | locator
-231 | Execute Loop | executeLoop | action | times | 
-232 | Finger Print | fingerPrint | fingerPrintId |  | 
-233 | Go Back | goBack |  |  | 
-234 | Hide Keyboard | hideKeyboard |  |  | 
-235 | Hide Keyboard | hideKeyboard | name |  | 
-236 | Landscape | landscape |  |  | 
-237 | Launch App | launchApp |  |  | 
-238 | Lock | lock |  |  | 
-239 | Long Press | longPress | locator |  | 
-240 | Long Press | longPress | parentLocator | locator | 
-241 | Long Press At | longPressAt | coordinate |  | 
-242 | Open Control Center | openControlCenter |  |  | 
-243 | Open Notifications | openNotifications |  |  | 
-244 | Pause | pause | waitTime |  | 
-245 | Portrait | portrait |  |  | 
-246 | Reject Touch ID | rejectTouchID |  |  | 
-247 | Reload App | reloadApp |  |  | 
-248 | Reset App | resetApp |  |  | 
-249 | Rotate | rotate | rotation |  | 
-250 | Run App In Background | runAppInBackground | millis |  | 
-251 | Scroll Down | scrollDown |  |  | 
-252 | Scroll Down | scrollDown | locator |  | 
-253 | Scroll Down | scrollDown | parentLocator | locator | 
-254 | Scroll Down To | scrollDownTo | locator |  | 
-255 | Scroll Down To | scrollDownTo | parentLocator | locator | 
-256 | Scroll Left | scrollLeft |  |  | 
-257 | Scroll Left | scrollLeft | locator |  | 
-258 | Scroll Left | scrollLeft | parentLocator | locator | 
-259 | Scroll Left To | scrollLeftTo | locator |  | 
-260 | Scroll Left To | scrollLeftTo | parentLocator | locator | 
-261 | Scroll Right | scrollRight |  |  | 
-262 | Scroll Right | scrollRight | locator |  | 
-263 | Scroll Right | scrollRight | parentLocator | locator | 
-264 | Scroll Right To | scrollRightTo | locator |  | 
-265 | Scroll Right To | scrollRightTo | parentLocator | locator | 
-266 | Scroll Up | scrollUp |  |  | 
-267 | Scroll Up | scrollUp | locator |  | 
-268 | Scroll Up | scrollUp | parentLocator | locator | 
-269 | Scroll Up To | scrollUpTo | locator |  | 
-270 | Scroll Up To | scrollUpTo | parentLocator | locator | 
-271 | Set Clipboard | setClipboard | text |  | 
-272 | Set Context | setContext | context |  | 
-273 | Set Geolocation | setGeolocation | location |  | 
-274 | Set Native App Context | setNativeAppContext |  |  | 
-275 | Set Timeout | setTimeout | timeout |  | 
-276 | Set Web View Context | setWebViewContext | index |  | 
-277 | Shake | shake |  |  | 
-278 | Start Activity | startActivity | activity |  | 
-279 | Store | store | text | variable | 
-280 | Store Alert | storeAlert | variable |  | 
-281 | Store Attribute | storeAttribute | locator | name | variable
-282 | Store Confirmation | storeConfirmation | variable |  | 
-283 | Store Context | storeContext | variable |  | 
-284 | Store Context Count | storeContextCount | variable |  | 
-285 | Store Current Date | storeCurrentDate | variable |  | 
-286 | Store Eval | storeEval | expression | variable | 
-287 | Store Expression | storeExpression | expression | variable | 
-288 | Store Page Source | storePageSource | variable |  | 
-289 | Store Prompt | storePrompt | variable |  | 
-290 | Store Push | storePush | text | variable | 
-291 | Store Tag Name | storeTagName | locator | variable | 
-292 | Store Tag Name | storeTagName | parentLocator | locator | variable
-293 | Store Text | storeText | locator | variable | 
-294 | Store Text | storeText | parentLocator | locator | variable
-295 | Store Value | storeValue | locator | variable | 
-296 | Store Value | storeValue | parentLocator | locator | variable
-297 | Swipe Down | swipeDown |  |  | 
-298 | Swipe Down | swipeDown | locator |  | 
-299 | Swipe Down | swipeDown | parentLocator | locator | 
-300 | Swipe Left | swipeLeft |  |  | 
-301 | Swipe Left | swipeLeft | locator |  | 
-302 | Swipe Left | swipeLeft | parentLocator | locator | 
-303 | Swipe Right | swipeRight |  |  | 
-304 | Swipe Right | swipeRight | locator |  | 
-305 | Swipe Right | swipeRight | parentLocator | locator | 
-306 | Swipe Up | swipeUp |  |  | 
-307 | Swipe Up | swipeUp | locator |  | 
-308 | Swipe Up | swipeUp | parentLocator | locator | 
-309 | Tap | tap | locator |  | 
-310 | Tap | tap | parentLocator | locator | 
-311 | Tap At | tapAt | coordinate |  | 
-312 | Terminate App | terminateApp | bundleId |  | 
-313 | Toggle Airplane Mode | toggleAirplaneMode |  |  | 
-314 | Toggle Location Services | toggleLocationServices |  |  | 
-315 | Toggle Wifi | toggleWifi |  |  | 
-316 | Type | type | locator | value | 
-317 | Type | type | parentLocator | locator | value
-318 | Type Keys | typeKeys | value |  | 
-319 | Unlock | unlock |  |  | 
-320 | Verify Activity | verifyActivity | activity |  | 
-321 | Verify Alert | verifyAlert | text |  | 
-322 | Verify Alert Match | verifyAlertMatch | text |  | 
-323 | Verify Alert Not Match | verifyAlertNotMatch | text |  | 
-324 | Verify Alert Not Present | verifyAlertNotPresent |  |  | 
-325 | Verify Alert Present | verifyAlertPresent |  |  | 
-326 | Verify Attribute | verifyAttribute | locator | name | text
-327 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
-328 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
-329 | Verify Checked | verifyChecked | locator |  | 
-330 | Verify Checked | verifyChecked | parentLocator | locator | 
-331 | Verify Confirmation | verifyConfirmation | text |  | 
-332 | Verify Confirmation Match | verifyConfirmationMatch | text |  | 
-333 | Verify Confirmation Not Match | verifyConfirmationNotMatch | text |  | 
-334 | Verify Confirmation Not Present | verifyConfirmationNotPresent |  |  | 
-335 | Verify Confirmation Present | verifyConfirmationPresent |  |  | 
-336 | Verify Context | verifyContext | text |  | 
-337 | Verify Context Count | verifyContextCount | text |  | 
-338 | Verify Context Match | verifyContextMatch | text |  | 
-339 | Verify Context Not Match | verifyContextNotMatch | text |  | 
-340 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
-341 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
-342 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
-343 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
-344 | Verify Editable | verifyEditable | locator |  | 
-345 | Verify Editable | verifyEditable | parentLocator | locator | 
-346 | Verify Element Not Present | verifyElementNotPresent | locator |  | 
-347 | Verify Element Not Present | verifyElementNotPresent | parentLocator | locator | 
-348 | Verify Element Present | verifyElementPresent | locator |  | 
-349 | Verify Element Present | verifyElementPresent | parentLocator | locator | 
-350 | Verify Enabled | verifyEnabled | locator |  | 
-351 | Verify Enabled | verifyEnabled | parentLocator | locator | 
-352 | Verify Eval | verifyEval | expression | text | 
-353 | Verify Exists In Database | verifyExistsInDatabase | sql |  | 
-354 | Verify Expression | verifyExpression | expression | text | 
-355 | Verify Expression Match | verifyExpressionMatch | expression | text | 
-356 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
-357 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
-358 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
-359 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
-360 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
-361 | Verify List Contain | verifyListContain | variable | text | 
-362 | Verify List Not Contain | verifyListNotContain | variable | text | 
-363 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
-364 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
-365 | Verify Not Activity | verifyNotActivity | activity |  | 
-366 | Verify Not Alert | verifyNotAlert | text |  | 
-367 | Verify Not Attribute | verifyNotAttribute | locator | name | text
-368 | Verify Not Checked | verifyNotChecked | locator |  | 
-369 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
-370 | Verify Not Confirmation | verifyNotConfirmation | text |  | 
-371 | Verify Not Context | verifyNotContext | text |  | 
-372 | Verify Not Context Count | verifyNotContextCount | text |  | 
-373 | Verify Not Editable | verifyNotEditable | locator |  | 
-374 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
-375 | Verify Not Enabled | verifyNotEnabled | locator |  | 
-376 | Verify Not Enabled | verifyNotEnabled | parentLocator | locator | 
-377 | Verify Not Eval | verifyNotEval | expression | text | 
-378 | Verify Not Exists In Database | verifyNotExistsInDatabase | sql |  | 
-379 | Verify Not Expression | verifyNotExpression | expression | text | 
-380 | Verify Not Page Source | verifyNotPageSource | text |  | 
-381 | Verify Not Prompt | verifyNotPrompt | text |  | 
-382 | Verify Not Tag Name | verifyNotTagName | locator | text | 
-383 | Verify Not Tag Name | verifyNotTagName | parentLocator | locator | text
-384 | Verify Not Text | verifyNotText | locator | text | 
-385 | Verify Not Text | verifyNotText | parentLocator | locator | text
-386 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
-387 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
-388 | Verify Not Value | verifyNotValue | locator | text | 
-389 | Verify Not Value | verifyNotValue | parentLocator | locator | text
-390 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
-391 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
-392 | Verify Not Variable | verifyNotVariable | variable | text | 
-393 | Verify Not Visible | verifyNotVisible | locator |  | 
-394 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
-395 | Verify Not Xpath Count | verifyNotXpathCount | xpath | text | 
-396 | Verify Page Source | verifyPageSource | text |  | 
-397 | Verify Page Source Match | verifyPageSourceMatch | text |  | 
-398 | Verify Page Source Not Match | verifyPageSourceNotMatch | text |  | 
-399 | Verify Prompt | verifyPrompt | text |  | 
-400 | Verify Prompt Match | verifyPromptMatch | text |  | 
-401 | Verify Prompt Not Match | verifyPromptNotMatch | text |  | 
-402 | Verify Prompt Not Present | verifyPromptNotPresent |  |  | 
-403 | Verify Prompt Present | verifyPromptPresent |  |  | 
-404 | Verify Row Count | verifyRowCount | sql | count | 
-405 | Verify Row Count Greater Than | verifyRowCountGreaterThan | sql | count | 
-406 | Verify Row Count Less Than | verifyRowCountLessThan | sql | count | 
-407 | Verify Tag Name | verifyTagName | locator | text | 
-408 | Verify Tag Name | verifyTagName | parentLocator | locator | text
-409 | Verify Tag Name Match | verifyTagNameMatch | locator | text | 
-410 | Verify Tag Name Match | verifyTagNameMatch | parentLocator | locator | text
-411 | Verify Tag Name Not Match | verifyTagNameNotMatch | locator | text | 
-412 | Verify Tag Name Not Match | verifyTagNameNotMatch | parentLocator | locator | text
-413 | Verify Text | verifyText | locator | text | 
-414 | Verify Text | verifyText | parentLocator | locator | text
-415 | Verify Text Empty | verifyTextEmpty | locator |  | 
-416 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
-417 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
-418 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
-419 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
-420 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
-421 | Verify Text Match | verifyTextMatch | locator | text | 
-422 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
-423 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
-424 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
-425 | Verify Text Not Present | verifyTextNotPresent | text |  | 
-426 | Verify Text Present | verifyTextPresent | text |  | 
-427 | Verify Value | verifyValue | locator | text | 
-428 | Verify Value | verifyValue | parentLocator | locator | text
-429 | Verify Value Empty | verifyValueEmpty | locator |  | 
-430 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
-431 | Verify Value Match | verifyValueMatch | locator | text | 
-432 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
-433 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
-434 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
-435 | Verify Variable | verifyVariable | variable | text | 
-436 | Verify Visible | verifyVisible | locator |  | 
-437 | Verify Visible | verifyVisible | parentLocator | locator | 
-438 | Verify Xpath Count | verifyXpathCount | xpath | text | 
-439 | Wait For Activity | waitForActivity | activity |  | 
-440 | Wait For Alert | waitForAlert | text |  | 
-441 | Wait For Alert Match | waitForAlertMatch | text |  | 
-442 | Wait For Alert Not Match | waitForAlertNotMatch | text |  | 
-443 | Wait For Alert Not Present | waitForAlertNotPresent |  |  | 
-444 | Wait For Alert Present | waitForAlertPresent |  |  | 
-445 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
-446 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
-447 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
-448 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
-449 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
-450 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
-451 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
-452 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
-453 | Wait For Attribute | waitForAttribute | locator | name | text
-454 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
-455 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
-456 | Wait For Checked | waitForChecked | locator |  | 
-457 | Wait For Checked | waitForChecked | parentLocator | locator | 
-458 | Wait For Confirmation | waitForConfirmation | text |  | 
-459 | Wait For Confirmation Match | waitForConfirmationMatch | text |  | 
-460 | Wait For Confirmation Not Match | waitForConfirmationNotMatch | text |  | 
-461 | Wait For Confirmation Not Present | waitForConfirmationNotPresent |  |  | 
-462 | Wait For Confirmation Present | waitForConfirmationPresent |  |  | 
-463 | Wait For Context | waitForContext | text |  | 
-464 | Wait For Context Count | waitForContextCount | text |  | 
-465 | Wait For Context Match | waitForContextMatch | text |  | 
-466 | Wait For Context Not Match | waitForContextNotMatch | text |  | 
-467 | Wait For Editable | waitForEditable | locator |  | 
-468 | Wait For Editable | waitForEditable | parentLocator | locator | 
-469 | Wait For Element Not Present | waitForElementNotPresent | locator |  | 
-470 | Wait For Element Not Present | waitForElementNotPresent | parentLocator | locator | 
-471 | Wait For Element Present | waitForElementPresent | locator |  | 
-472 | Wait For Element Present | waitForElementPresent | parentLocator | locator | 
-473 | Wait For Enabled | waitForEnabled | locator |  | 
-474 | Wait For Enabled | waitForEnabled | parentLocator | locator | 
-475 | Wait For Eval | waitForEval | expression | text | 
-476 | Wait For Exists In Database | waitForExistsInDatabase | sql |  | 
-477 | Wait For Expression | waitForExpression | expression | text | 
-478 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
-479 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
-480 | Wait For Not Activity | waitForNotActivity | activity |  | 
-481 | Wait For Not Alert | waitForNotAlert | text |  | 
-482 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
-483 | Wait For Not Checked | waitForNotChecked | locator |  | 
-484 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
-485 | Wait For Not Confirmation | waitForNotConfirmation | text |  | 
-486 | Wait For Not Context | waitForNotContext | text |  | 
-487 | Wait For Not Context Count | waitForNotContextCount | text |  | 
-488 | Wait For Not Editable | waitForNotEditable | locator |  | 
-489 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
-490 | Wait For Not Enabled | waitForNotEnabled | locator |  | 
-491 | Wait For Not Enabled | waitForNotEnabled | parentLocator | locator | 
-492 | Wait For Not Eval | waitForNotEval | expression | text | 
-493 | Wait For Not Exists In Database | waitForNotExistsInDatabase | sql |  | 
-494 | Wait For Not Expression | waitForNotExpression | expression | text | 
-495 | Wait For Not Page Source | waitForNotPageSource | text |  | 
-496 | Wait For Not Prompt | waitForNotPrompt | text |  | 
-497 | Wait For Not Tag Name | waitForNotTagName | locator | text | 
-498 | Wait For Not Tag Name | waitForNotTagName | parentLocator | locator | text
-499 | Wait For Not Text | waitForNotText | locator | text | 
-500 | Wait For Not Text | waitForNotText | parentLocator | locator | text
-501 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
-502 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
-503 | Wait For Not Value | waitForNotValue | locator | text | 
-504 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
-505 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
-506 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
-507 | Wait For Not Visible | waitForNotVisible | locator |  | 
-508 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
-509 | Wait For Page Source | waitForPageSource | text |  | 
-510 | Wait For Page Source Match | waitForPageSourceMatch | text |  | 
-511 | Wait For Page Source Not Match | waitForPageSourceNotMatch | text |  | 
-512 | Wait For Prompt | waitForPrompt | text |  | 
-513 | Wait For Prompt Match | waitForPromptMatch | text |  | 
-514 | Wait For Prompt Not Match | waitForPromptNotMatch | text |  | 
-515 | Wait For Prompt Not Present | waitForPromptNotPresent |  |  | 
-516 | Wait For Prompt Present | waitForPromptPresent |  |  | 
-517 | Wait For Tag Name | waitForTagName | locator | text | 
-518 | Wait For Tag Name | waitForTagName | parentLocator | locator | text
-519 | Wait For Tag Name Match | waitForTagNameMatch | locator | text | 
-520 | Wait For Tag Name Match | waitForTagNameMatch | parentLocator | locator | text
-521 | Wait For Tag Name Not Match | waitForTagNameNotMatch | locator | text | 
-522 | Wait For Tag Name Not Match | waitForTagNameNotMatch | parentLocator | locator | text
-523 | Wait For Text | waitForText | locator | text | 
-524 | Wait For Text | waitForText | parentLocator | locator | text
-525 | Wait For Text Empty | waitForTextEmpty | locator |  | 
-526 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
-527 | Wait For Text Match | waitForTextMatch | locator | text | 
-528 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
-529 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
-530 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
-531 | Wait For Text Not Present | waitForTextNotPresent | text |  | 
-532 | Wait For Text Present | waitForTextPresent | text |  | 
-533 | Wait For Value | waitForValue | locator | text | 
-534 | Wait For Value | waitForValue | parentLocator | locator | text
-535 | Wait For Value Empty | waitForValueEmpty | locator |  | 
-536 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
-537 | Wait For Value Match | waitForValueMatch | locator | text | 
-538 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
-539 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
-540 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
-541 | Wait For Visible | waitForVisible | locator |  | 
-542 | Wait For Visible | waitForVisible | parentLocator | locator | 
+3 | Add Selection | addSelection | locator | optionLocator | 
+4 | Add Selection | addSelection | parentLocator | locator | optionLocator
+5 | Add Selection Id | addSelectionId | locator | id | 
+6 | Add Selection Id | addSelectionId | parentLocator | locator | id
+7 | Add Selection Index | addSelectionIndex | locator | index | 
+8 | Add Selection Index | addSelectionIndex | parentLocator | locator | index
+9 | Add Selection Label | addSelectionLabel | locator | label | 
+10 | Add Selection Label | addSelectionLabel | parentLocator | locator | label
+11 | Add Selection Value | addSelectionValue | locator | value | 
+12 | Add Selection Value | addSelectionValue | parentLocator | locator | value
+13 | Alt Key Down | altKeyDown |  |  | 
+14 | Alt Key Up | altKeyUp |  |  | 
+15 | Answer Prompt | answerPrompt | answer |  | 
+16 | Assert Activity | assertActivity | activity |  | 
+17 | Assert Alert | assertAlert | text |  | 
+18 | Assert Alert Match | assertAlertMatch | text |  | 
+19 | Assert Alert Not Match | assertAlertNotMatch | text |  | 
+20 | Assert Alert Not Present | assertAlertNotPresent |  |  | 
+21 | Assert Alert Present | assertAlertPresent |  |  | 
+22 | Assert All Buttons | assertAllButtons | text |  | 
+23 | Assert All Buttons Match | assertAllButtonsMatch | text |  | 
+24 | Assert All Buttons Not Match | assertAllButtonsNotMatch | text |  | 
+25 | Assert All Fields | assertAllFields | text |  | 
+26 | Assert All Fields Match | assertAllFieldsMatch | text |  | 
+27 | Assert All Fields Not Match | assertAllFieldsNotMatch | text |  | 
+28 | Assert All Links | assertAllLinks | text |  | 
+29 | Assert All Links Match | assertAllLinksMatch | text |  | 
+30 | Assert All Links Not Match | assertAllLinksNotMatch | text |  | 
+31 | Assert All Window Names | assertAllWindowNames | text |  | 
+32 | Assert All Window Names Match | assertAllWindowNamesMatch | text |  | 
+33 | Assert All Window Names Not Match | assertAllWindowNamesNotMatch | text |  | 
+34 | Assert All Window Titles | assertAllWindowTitles | text |  | 
+35 | Assert All Window Titles Match | assertAllWindowTitlesMatch | text |  | 
+36 | Assert All Window Titles Not Match | assertAllWindowTitlesNotMatch | text |  | 
+37 | Assert Attribute | assertAttribute | locator | name | text
+38 | Assert Attribute From All Windows | assertAttributeFromAllWindows | attributeName | text | 
+39 | Assert Attribute From All Windows Match | assertAttributeFromAllWindowsMatch | attributeName | text | 
+40 | Assert Attribute From All Windows Not Match | assertAttributeFromAllWindowsNotMatch | attributeName | text | 
+41 | Assert Attribute Match | assertAttributeMatch | locator | name | text
+42 | Assert Attribute Not Match | assertAttributeNotMatch | locator | name | text
+43 | Assert Background Color | assertBackgroundColor | locator | text | 
+44 | Assert Background Color | assertBackgroundColor | parentLocator | locator | text
+45 | Assert Body Text | assertBodyText | text |  | 
+46 | Assert Body Text Match | assertBodyTextMatch | text |  | 
+47 | Assert Body Text Not Match | assertBodyTextNotMatch | text |  | 
+48 | Assert Border Color | assertBorderColor | locator | text | 
+49 | Assert Border Color | assertBorderColor | parentLocator | locator | text
+50 | Assert Checked | assertChecked | locator |  | 
+51 | Assert Checked | assertChecked | parentLocator | locator | 
+52 | Assert Color | assertColor | locator | text | 
+53 | Assert Color | assertColor | parentLocator | locator | text
+54 | Assert Confirmation | assertConfirmation | text |  | 
+55 | Assert Confirmation Match | assertConfirmationMatch | text |  | 
+56 | Assert Confirmation Not Match | assertConfirmationNotMatch | text |  | 
+57 | Assert Confirmation Not Present | assertConfirmationNotPresent |  |  | 
+58 | Assert Confirmation Present | assertConfirmationPresent |  |  | 
+59 | Assert Context | assertContext | text |  | 
+60 | Assert Context Count | assertContextCount | text |  | 
+61 | Assert Context Match | assertContextMatch | text |  | 
+62 | Assert Context Not Match | assertContextNotMatch | text |  | 
+63 | Assert Cookie | assertCookie | text |  | 
+64 | Assert Cookie By Name | assertCookieByName | name | text | 
+65 | Assert Cookie By Name Match | assertCookieByNameMatch | name | text | 
+66 | Assert Cookie By Name Not Match | assertCookieByNameNotMatch | name | text | 
+67 | Assert Cookie Match | assertCookieMatch | text |  | 
+68 | Assert Cookie Not Match | assertCookieNotMatch | text |  | 
+69 | Assert Cookie Not Present | assertCookieNotPresent | name |  | 
+70 | Assert Cookie Present | assertCookiePresent | name |  | 
+71 | Assert Css Count | assertCssCount | css | text | 
+72 | Assert Cursor Position | assertCursorPosition | locator | text | 
+73 | Assert Cursor Position | assertCursorPosition | parentLocator | locator | text
+74 | Assert Date List Order Asc | assertDateListOrderAsc | locator | format | 
+75 | Assert Date List Order Asc | assertDateListOrderAsc | parentLocator | locator | format
+76 | Assert Date List Order Desc | assertDateListOrderDesc | locator | format | 
+77 | Assert Date List Order Desc | assertDateListOrderDesc | parentLocator | locator | format
+78 | Assert Editable | assertEditable | locator |  | 
+79 | Assert Editable | assertEditable | parentLocator | locator | 
+80 | Assert Element Height | assertElementHeight | locator | text | 
+81 | Assert Element Height | assertElementHeight | parentLocator | locator | text
+82 | Assert Element Index | assertElementIndex | locator | text | 
+83 | Assert Element Index | assertElementIndex | parentLocator | locator | text
+84 | Assert Element Not Present | assertElementNotPresent | locator |  | 
+85 | Assert Element Not Present | assertElementNotPresent | parentLocator | locator | 
+86 | Assert Element Position Left | assertElementPositionLeft | locator | text | 
+87 | Assert Element Position Left | assertElementPositionLeft | parentLocator | locator | text
+88 | Assert Element Position Top | assertElementPositionTop | locator | text | 
+89 | Assert Element Position Top | assertElementPositionTop | parentLocator | locator | text
+90 | Assert Element Present | assertElementPresent | locator |  | 
+91 | Assert Element Present | assertElementPresent | parentLocator | locator | 
+92 | Assert Element Width | assertElementWidth | locator | text | 
+93 | Assert Element Width | assertElementWidth | parentLocator | locator | text
+94 | Assert Enabled | assertEnabled | locator |  | 
+95 | Assert Enabled | assertEnabled | parentLocator | locator | 
+96 | Assert Eval | assertEval | expression | text | 
+97 | Assert Eval Script | assertEvalScript | script | text | 
+98 | Assert Eval Script Match | assertEvalScriptMatch | script | text | 
+99 | Assert Eval Script Not Match | assertEvalScriptNotMatch | script | text | 
+100 | Assert Exists In Database | assertExistsInDatabase | sql |  | 
+101 | Assert Expression | assertExpression | expression | text | 
+102 | Assert Expression Match | assertExpressionMatch | expression | text | 
+103 | Assert Expression Not Match | assertExpressionNotMatch | expression | text | 
+104 | Assert File Contain Line | assertFileContainLine | filePattern | charset | text
+105 | Assert File Downloaded | assertFileDownloaded | filePattern |  | 
+106 | Assert File First Line | assertFileFirstLine | filePattern | charset | text
+107 | Assert Font Family | assertFontFamily | locator | text | 
+108 | Assert Font Family | assertFontFamily | parentLocator | locator | text
+109 | Assert Font Family Match | assertFontFamilyMatch | locator | text | 
+110 | Assert Font Family Match | assertFontFamilyMatch | parentLocator | locator | text
+111 | Assert Font Family Not Match | assertFontFamilyNotMatch | locator | text | 
+112 | Assert Font Family Not Match | assertFontFamilyNotMatch | parentLocator | locator | text
+113 | Assert Font Size | assertFontSize | locator | text | 
+114 | Assert Font Size | assertFontSize | parentLocator | locator | text
+115 | Assert Font Size Match | assertFontSizeMatch | locator | text | 
+116 | Assert Font Size Match | assertFontSizeMatch | parentLocator | locator | text
+117 | Assert Font Size Not Match | assertFontSizeNotMatch | locator | text | 
+118 | Assert Font Size Not Match | assertFontSizeNotMatch | parentLocator | locator | text
+119 | Assert Font Style | assertFontStyle | locator | text | 
+120 | Assert Font Style | assertFontStyle | parentLocator | locator | text
+121 | Assert Font Style Match | assertFontStyleMatch | locator | text | 
+122 | Assert Font Style Match | assertFontStyleMatch | parentLocator | locator | text
+123 | Assert Font Style Not Match | assertFontStyleNotMatch | locator | text | 
+124 | Assert Font Style Not Match | assertFontStyleNotMatch | parentLocator | locator | text
+125 | Assert Font Weight | assertFontWeight | locator | text | 
+126 | Assert Font Weight | assertFontWeight | parentLocator | locator | text
+127 | Assert Font Weight Match | assertFontWeightMatch | locator | text | 
+128 | Assert Font Weight Match | assertFontWeightMatch | parentLocator | locator | text
+129 | Assert Font Weight Not Match | assertFontWeightNotMatch | locator | text | 
+130 | Assert Font Weight Not Match | assertFontWeightNotMatch | parentLocator | locator | text
+131 | Assert Html Source | assertHtmlSource | text |  | 
+132 | Assert Html Source Match | assertHtmlSourceMatch | text |  | 
+133 | Assert Html Source Not Match | assertHtmlSourceNotMatch | text |  | 
+134 | Assert Integer List Order Asc | assertIntegerListOrderAsc | locator |  | 
+135 | Assert Integer List Order Asc | assertIntegerListOrderAsc | parentLocator | locator | 
+136 | Assert Integer List Order Desc | assertIntegerListOrderDesc | locator |  | 
+137 | Assert Integer List Order Desc | assertIntegerListOrderDesc | parentLocator | locator | 
+138 | Assert List Contain | assertListContain | variable | text | 
+139 | Assert List Not Contain | assertListNotContain | variable | text | 
+140 | Assert List Order Asc | assertListOrderAsc | variable |  | 
+141 | Assert List Order Desc | assertListOrderDesc | variable |  | 
+142 | Assert Location | assertLocation | text |  | 
+143 | Assert Location Match | assertLocationMatch | text |  | 
+144 | Assert Location Not Match | assertLocationNotMatch | text |  | 
+145 | Assert Not Activity | assertNotActivity | activity |  | 
+146 | Assert Not Alert | assertNotAlert | text |  | 
+147 | Assert Not All Buttons | assertNotAllButtons | text |  | 
+148 | Assert Not All Fields | assertNotAllFields | text |  | 
+149 | Assert Not All Links | assertNotAllLinks | text |  | 
+150 | Assert Not All Window Names | assertNotAllWindowNames | text |  | 
+151 | Assert Not All Window Titles | assertNotAllWindowTitles | text |  | 
+152 | Assert Not Attribute | assertNotAttribute | locator | name | text
+153 | Assert Not Attribute From All Windows | assertNotAttributeFromAllWindows | attributeName | text | 
+154 | Assert Not Background Color | assertNotBackgroundColor | locator | text | 
+155 | Assert Not Background Color | assertNotBackgroundColor | parentLocator | locator | text
+156 | Assert Not Body Text | assertNotBodyText | text |  | 
+157 | Assert Not Border Color | assertNotBorderColor | locator | text | 
+158 | Assert Not Border Color | assertNotBorderColor | parentLocator | locator | text
+159 | Assert Not Checked | assertNotChecked | locator |  | 
+160 | Assert Not Checked | assertNotChecked | parentLocator | locator | 
+161 | Assert Not Color | assertNotColor | locator | text | 
+162 | Assert Not Color | assertNotColor | parentLocator | locator | text
+163 | Assert Not Confirmation | assertNotConfirmation | text |  | 
+164 | Assert Not Context | assertNotContext | text |  | 
+165 | Assert Not Context Count | assertNotContextCount | text |  | 
+166 | Assert Not Cookie | assertNotCookie | text |  | 
+167 | Assert Not Cookie By Name | assertNotCookieByName | name | text | 
+168 | Assert Not Css Count | assertNotCssCount | css | text | 
+169 | Assert Not Cursor Position | assertNotCursorPosition | locator | text | 
+170 | Assert Not Cursor Position | assertNotCursorPosition | parentLocator | locator | text
+171 | Assert Not Editable | assertNotEditable | locator |  | 
+172 | Assert Not Editable | assertNotEditable | parentLocator | locator | 
+173 | Assert Not Element Height | assertNotElementHeight | locator | text | 
+174 | Assert Not Element Height | assertNotElementHeight | parentLocator | locator | text
+175 | Assert Not Element Index | assertNotElementIndex | locator | text | 
+176 | Assert Not Element Index | assertNotElementIndex | parentLocator | locator | text
+177 | Assert Not Element Position Left | assertNotElementPositionLeft | locator | text | 
+178 | Assert Not Element Position Left | assertNotElementPositionLeft | parentLocator | locator | text
+179 | Assert Not Element Position Top | assertNotElementPositionTop | locator | text | 
+180 | Assert Not Element Position Top | assertNotElementPositionTop | parentLocator | locator | text
+181 | Assert Not Element Width | assertNotElementWidth | locator | text | 
+182 | Assert Not Element Width | assertNotElementWidth | parentLocator | locator | text
+183 | Assert Not Enabled | assertNotEnabled | locator |  | 
+184 | Assert Not Enabled | assertNotEnabled | parentLocator | locator | 
+185 | Assert Not Eval | assertNotEval | expression | text | 
+186 | Assert Not Eval Script | assertNotEvalScript | script | text | 
+187 | Assert Not Exists In Database | assertNotExistsInDatabase | sql |  | 
+188 | Assert Not Expression | assertNotExpression | expression | text | 
+189 | Assert Not File Downloaded | assertNotFileDownloaded | filePattern |  | 
+190 | Assert Not Font Family | assertNotFontFamily | locator | text | 
+191 | Assert Not Font Family | assertNotFontFamily | parentLocator | locator | text
+192 | Assert Not Font Size | assertNotFontSize | locator | text | 
+193 | Assert Not Font Size | assertNotFontSize | parentLocator | locator | text
+194 | Assert Not Font Style | assertNotFontStyle | locator | text | 
+195 | Assert Not Font Style | assertNotFontStyle | parentLocator | locator | text
+196 | Assert Not Font Weight | assertNotFontWeight | locator | text | 
+197 | Assert Not Font Weight | assertNotFontWeight | parentLocator | locator | text
+198 | Assert Not Html Source | assertNotHtmlSource | text |  | 
+199 | Assert Not Location | assertNotLocation | text |  | 
+200 | Assert Not Ordered | assertNotOrdered | firstLocator | secondLocator | 
+201 | Assert Not Page Source | assertNotPageSource | text |  | 
+202 | Assert Not Prompt | assertNotPrompt | text |  | 
+203 | Assert Not QR | assertNotQR | locator | text | 
+204 | Assert Not QR | assertNotQR | parentLocator | locator | text
+205 | Assert Not Select Options | assertNotSelectOptions | locator | text | 
+206 | Assert Not Select Options | assertNotSelectOptions | parentLocator | locator | text
+207 | Assert Not Selected Id | assertNotSelectedId | locator | text | 
+208 | Assert Not Selected Id | assertNotSelectedId | parentLocator | locator | text
+209 | Assert Not Selected Ids | assertNotSelectedIds | locator | text | 
+210 | Assert Not Selected Ids | assertNotSelectedIds | parentLocator | locator | text
+211 | Assert Not Selected Index | assertNotSelectedIndex | locator | text | 
+212 | Assert Not Selected Index | assertNotSelectedIndex | parentLocator | locator | text
+213 | Assert Not Selected Indexes | assertNotSelectedIndexes | locator | text | 
+214 | Assert Not Selected Indexes | assertNotSelectedIndexes | parentLocator | locator | text
+215 | Assert Not Selected Label | assertNotSelectedLabel | locator | text | 
+216 | Assert Not Selected Label | assertNotSelectedLabel | parentLocator | locator | text
+217 | Assert Not Selected Labels | assertNotSelectedLabels | locator | text | 
+218 | Assert Not Selected Labels | assertNotSelectedLabels | parentLocator | locator | text
+219 | Assert Not Selected Value | assertNotSelectedValue | locator | text | 
+220 | Assert Not Selected Value | assertNotSelectedValue | parentLocator | locator | text
+221 | Assert Not Selected Values | assertNotSelectedValues | locator | text | 
+222 | Assert Not Selected Values | assertNotSelectedValues | parentLocator | locator | text
+223 | Assert Not Something Selected | assertNotSomethingSelected | locator |  | 
+224 | Assert Not Something Selected | assertNotSomethingSelected | parentLocator | locator | 
+225 | Assert Not Table | assertNotTable | locator | cellAddress | text
+226 | Assert Not Tag Name | assertNotTagName | locator | text | 
+227 | Assert Not Tag Name | assertNotTagName | parentLocator | locator | text
+228 | Assert Not Text | assertNotText | locator | text | 
+229 | Assert Not Text | assertNotText | parentLocator | locator | text
+230 | Assert Not Text Alignment | assertNotTextAlignment | locator | text | 
+231 | Assert Not Text Alignment | assertNotTextAlignment | parentLocator | locator | text
+232 | Assert Not Text Decoration | assertNotTextDecoration | locator | text | 
+233 | Assert Not Text Decoration | assertNotTextDecoration | parentLocator | locator | text
+234 | Assert Not Text Empty | assertNotTextEmpty | locator |  | 
+235 | Assert Not Text Empty | assertNotTextEmpty | parentLocator | locator | 
+236 | Assert Not Title | assertNotTitle | text |  | 
+237 | Assert Not Value | assertNotValue | locator | text | 
+238 | Assert Not Value | assertNotValue | parentLocator | locator | text
+239 | Assert Not Value Empty | assertNotValueEmpty | locator |  | 
+240 | Assert Not Value Empty | assertNotValueEmpty | parentLocator | locator | 
+241 | Assert Not Variable | assertNotVariable | variable | text | 
+242 | Assert Not Visible | assertNotVisible | locator |  | 
+243 | Assert Not Visible | assertNotVisible | parentLocator | locator | 
+244 | Assert Not Xpath Count | assertNotXpathCount | xpath | text | 
+245 | Assert Ordered | assertOrdered | firstLocator | secondLocator | 
+246 | Assert Page Source | assertPageSource | text |  | 
+247 | Assert Page Source Match | assertPageSourceMatch | text |  | 
+248 | Assert Page Source Not Match | assertPageSourceNotMatch | text |  | 
+249 | Assert Prompt | assertPrompt | text |  | 
+250 | Assert Prompt Match | assertPromptMatch | text |  | 
+251 | Assert Prompt Not Match | assertPromptNotMatch | text |  | 
+252 | Assert Prompt Not Present | assertPromptNotPresent |  |  | 
+253 | Assert Prompt Present | assertPromptPresent |  |  | 
+254 | Assert QR | assertQR | locator | text | 
+255 | Assert QR | assertQR | parentLocator | locator | text
+256 | Assert QR Match | assertQRMatch | locator | text | 
+257 | Assert QR Match | assertQRMatch | parentLocator | locator | text
+258 | Assert QR Not Match | assertQRNotMatch | locator | text | 
+259 | Assert QR Not Match | assertQRNotMatch | parentLocator | locator | text
+260 | Assert Row Count | assertRowCount | sql | count | 
+261 | Assert Row Count Greater Than | assertRowCountGreaterThan | sql | count | 
+262 | Assert Row Count Less Than | assertRowCountLessThan | sql | count | 
+263 | Assert Select Options | assertSelectOptions | locator | text | 
+264 | Assert Select Options | assertSelectOptions | parentLocator | locator | text
+265 | Assert Select Options Match | assertSelectOptionsMatch | locator | text | 
+266 | Assert Select Options Match | assertSelectOptionsMatch | parentLocator | locator | text
+267 | Assert Select Options Not Match | assertSelectOptionsNotMatch | locator | text | 
+268 | Assert Select Options Not Match | assertSelectOptionsNotMatch | parentLocator | locator | text
+269 | Assert Selected Id | assertSelectedId | locator | text | 
+270 | Assert Selected Id | assertSelectedId | parentLocator | locator | text
+271 | Assert Selected Id Match | assertSelectedIdMatch | locator | text | 
+272 | Assert Selected Id Match | assertSelectedIdMatch | parentLocator | locator | text
+273 | Assert Selected Id Not Match | assertSelectedIdNotMatch | locator | text | 
+274 | Assert Selected Id Not Match | assertSelectedIdNotMatch | parentLocator | locator | text
+275 | Assert Selected Ids | assertSelectedIds | locator | text | 
+276 | Assert Selected Ids | assertSelectedIds | parentLocator | locator | text
+277 | Assert Selected Ids Match | assertSelectedIdsMatch | locator | text | 
+278 | Assert Selected Ids Match | assertSelectedIdsMatch | parentLocator | locator | text
+279 | Assert Selected Ids Not Match | assertSelectedIdsNotMatch | locator | text | 
+280 | Assert Selected Ids Not Match | assertSelectedIdsNotMatch | parentLocator | locator | text
+281 | Assert Selected Index | assertSelectedIndex | locator | text | 
+282 | Assert Selected Index | assertSelectedIndex | parentLocator | locator | text
+283 | Assert Selected Index Match | assertSelectedIndexMatch | locator | text | 
+284 | Assert Selected Index Match | assertSelectedIndexMatch | parentLocator | locator | text
+285 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | locator | text | 
+286 | Assert Selected Index Not Match | assertSelectedIndexNotMatch | parentLocator | locator | text
+287 | Assert Selected Indexes | assertSelectedIndexes | locator | text | 
+288 | Assert Selected Indexes | assertSelectedIndexes | parentLocator | locator | text
+289 | Assert Selected Indexes Match | assertSelectedIndexesMatch | locator | text | 
+290 | Assert Selected Indexes Match | assertSelectedIndexesMatch | parentLocator | locator | text
+291 | Assert Selected Indexes Not Match | assertSelectedIndexesNotMatch | locator | text | 
+292 | Assert Selected Indexes Not Match | assertSelectedIndexesNotMatch | parentLocator | locator | text
+293 | Assert Selected Label | assertSelectedLabel | locator | text | 
+294 | Assert Selected Label | assertSelectedLabel | parentLocator | locator | text
+295 | Assert Selected Label Match | assertSelectedLabelMatch | locator | text | 
+296 | Assert Selected Label Match | assertSelectedLabelMatch | parentLocator | locator | text
+297 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | locator | text | 
+298 | Assert Selected Label Not Match | assertSelectedLabelNotMatch | parentLocator | locator | text
+299 | Assert Selected Labels | assertSelectedLabels | locator | text | 
+300 | Assert Selected Labels | assertSelectedLabels | parentLocator | locator | text
+301 | Assert Selected Labels Match | assertSelectedLabelsMatch | locator | text | 
+302 | Assert Selected Labels Match | assertSelectedLabelsMatch | parentLocator | locator | text
+303 | Assert Selected Labels Not Match | assertSelectedLabelsNotMatch | locator | text | 
+304 | Assert Selected Labels Not Match | assertSelectedLabelsNotMatch | parentLocator | locator | text
+305 | Assert Selected Value | assertSelectedValue | locator | text | 
+306 | Assert Selected Value | assertSelectedValue | parentLocator | locator | text
+307 | Assert Selected Value Match | assertSelectedValueMatch | locator | text | 
+308 | Assert Selected Value Match | assertSelectedValueMatch | parentLocator | locator | text
+309 | Assert Selected Value Not Match | assertSelectedValueNotMatch | locator | text | 
+310 | Assert Selected Value Not Match | assertSelectedValueNotMatch | parentLocator | locator | text
+311 | Assert Selected Values | assertSelectedValues | locator | text | 
+312 | Assert Selected Values | assertSelectedValues | parentLocator | locator | text
+313 | Assert Selected Values Match | assertSelectedValuesMatch | locator | text | 
+314 | Assert Selected Values Match | assertSelectedValuesMatch | parentLocator | locator | text
+315 | Assert Selected Values Not Match | assertSelectedValuesNotMatch | locator | text | 
+316 | Assert Selected Values Not Match | assertSelectedValuesNotMatch | parentLocator | locator | text
+317 | Assert Something Selected | assertSomethingSelected | locator |  | 
+318 | Assert Something Selected | assertSomethingSelected | parentLocator | locator | 
+319 | Assert Table | assertTable | locator | cellAddress | text
+320 | Assert Table Match | assertTableMatch | locator | cellAddress | text
+321 | Assert Table Not Match | assertTableNotMatch | locator | cellAddress | text
+322 | Assert Tag Name | assertTagName | locator | text | 
+323 | Assert Tag Name | assertTagName | parentLocator | locator | text
+324 | Assert Tag Name Match | assertTagNameMatch | locator | text | 
+325 | Assert Tag Name Match | assertTagNameMatch | parentLocator | locator | text
+326 | Assert Tag Name Not Match | assertTagNameNotMatch | locator | text | 
+327 | Assert Tag Name Not Match | assertTagNameNotMatch | parentLocator | locator | text
+328 | Assert Text | assertText | locator | text | 
+329 | Assert Text | assertText | parentLocator | locator | text
+330 | Assert Text Alignment | assertTextAlignment | locator | text | 
+331 | Assert Text Alignment | assertTextAlignment | parentLocator | locator | text
+332 | Assert Text Alignment Match | assertTextAlignmentMatch | locator | text | 
+333 | Assert Text Alignment Match | assertTextAlignmentMatch | parentLocator | locator | text
+334 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | locator | text | 
+335 | Assert Text Alignment Not Match | assertTextAlignmentNotMatch | parentLocator | locator | text
+336 | Assert Text Decoration | assertTextDecoration | locator | text | 
+337 | Assert Text Decoration | assertTextDecoration | parentLocator | locator | text
+338 | Assert Text Decoration Match | assertTextDecorationMatch | locator | text | 
+339 | Assert Text Decoration Match | assertTextDecorationMatch | parentLocator | locator | text
+340 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | locator | text | 
+341 | Assert Text Decoration Not Match | assertTextDecorationNotMatch | parentLocator | locator | text
+342 | Assert Text Empty | assertTextEmpty | locator |  | 
+343 | Assert Text Empty | assertTextEmpty | parentLocator | locator | 
+344 | Assert Text List Order Asc | assertTextListOrderAsc | locator |  | 
+345 | Assert Text List Order Asc | assertTextListOrderAsc | parentLocator | locator | 
+346 | Assert Text List Order Desc | assertTextListOrderDesc | locator |  | 
+347 | Assert Text List Order Desc | assertTextListOrderDesc | parentLocator | locator | 
+348 | Assert Text Match | assertTextMatch | locator | text | 
+349 | Assert Text Match | assertTextMatch | parentLocator | locator | text
+350 | Assert Text Not Match | assertTextNotMatch | locator | text | 
+351 | Assert Text Not Match | assertTextNotMatch | parentLocator | locator | text
+352 | Assert Text Not Present | assertTextNotPresent | pattern |  | 
+353 | Assert Text Present | assertTextPresent | pattern |  | 
+354 | Assert Title | assertTitle | text |  | 
+355 | Assert Title Match | assertTitleMatch | text |  | 
+356 | Assert Title Not Match | assertTitleNotMatch | text |  | 
+357 | Assert Value | assertValue | locator | text | 
+358 | Assert Value | assertValue | parentLocator | locator | text
+359 | Assert Value Empty | assertValueEmpty | locator |  | 
+360 | Assert Value Empty | assertValueEmpty | parentLocator | locator | 
+361 | Assert Value Match | assertValueMatch | locator | text | 
+362 | Assert Value Match | assertValueMatch | parentLocator | locator | text
+363 | Assert Value Not Match | assertValueNotMatch | locator | text | 
+364 | Assert Value Not Match | assertValueNotMatch | parentLocator | locator | text
+365 | Assert Variable | assertVariable | variable | text | 
+366 | Assert Visible | assertVisible | locator |  | 
+367 | Assert Visible | assertVisible | parentLocator | locator | 
+368 | Assert Xpath Count | assertXpathCount | xpath | text | 
+369 | Assign Id | assignId | locator | identifier | 
+370 | Assign Id | assignId | parentLocator | locator | identifier
+371 | Attach File | attachFile | locator | filePath | 
+372 | Attach File | attachFile | parentLocator | locator | filePath
+373 | Blur | blur | locator |  | 
+374 | Blur | blur | parentLocator | locator | 
+375 | Broadcast Intent | broadcastIntent | intent |  | 
+376 | Capture Element Screenshot | captureElementScreenshot | locator |  | 
+377 | Capture Element Screenshot | captureElementScreenshot | parentLocator | locator | 
+378 | Capture Screenshot | captureScreenshot |  |  | 
+379 | Capture Viewport | captureViewport |  |  | 
+380 | Check | check | locator |  | 
+381 | Check | check | parentLocator | locator | 
+382 | Choose Cancel Confirmation | chooseCancelConfirmation |  |  | 
+383 | Choose Cancel Prompt | chooseCancelPrompt |  |  | 
+384 | Choose Ok Alert | chooseOkAlert |  |  | 
+385 | Choose Ok Confirmation | chooseOkConfirmation |  |  | 
+386 | Clear | clear | locator |  | 
+387 | Clear | clear | parentLocator | locator | 
+388 | Click | click | locator |  | 
+389 | Click | click | parentLocator | locator | 
+390 | Click At | clickAt | locator | coordString | 
+391 | Click At | clickAt | parentLocator | locator | coordString
+392 | Click Button | clickButton | indexOrText |  | 
+393 | Click Text | clickText | indexOrText |  | 
+394 | Close | close |  |  | 
+395 | Close App | closeApp |  |  | 
+396 | Close Control Center | closeControlCenter |  |  | 
+397 | Context Menu | contextMenu | locator |  | 
+398 | Context Menu | contextMenu | parentLocator | locator | 
+399 | Context Menu At | contextMenuAt | locator | coordString | 
+400 | Context Menu At | contextMenuAt | parentLocator | locator | coordString
+401 | Control Key Down | controlKeyDown |  |  | 
+402 | Control Key Up | controlKeyUp |  |  | 
+403 | Create Cookie | createCookie | nameValuePair | optionsString | 
+404 | Delete All Visible Cookies | deleteAllVisibleCookies |  |  | 
+405 | Delete Cookie | deleteCookie | name |  | 
+406 | Delete Downloaded File | deleteDownloadedFile | filePattern |  | 
+407 | Deselect Pop Up | deselectPopUp |  |  | 
+408 | Double Click | doubleClick | locator |  | 
+409 | Double Click | doubleClick | parentLocator | locator | 
+410 | Double Click At | doubleClickAt | locator | coordString | 
+411 | Double Click At | doubleClickAt | parentLocator | locator | coordString
+412 | Double Tap | doubleTap | locator |  | 
+413 | Double Tap | doubleTap | parentLocator | locator | 
+414 | Double Tap At | doubleTapAt | coordinate |  | 
+415 | Drag And Drop | dragAndDrop | locator | movementsString | 
+416 | Drag And Drop | dragAndDrop | parentLocator | locator | movementsString
+417 | Drag And Drop To Object | dragAndDropToObject | toBeDraggedObjectLocator | dragDestinationObjectLocator | 
+418 | Echo | echo | message |  | 
+419 | Execute | execute | action |  | 
+420 | Execute Each | executeEach | action | locator | variable
+421 | Execute If Activity | executeIfActivity | action | activity | 
+422 | Execute If Alert | executeIfAlert | action | text | 
+423 | Execute If Alert Match | executeIfAlertMatch | action | text | 
+424 | Execute If Alert Not Match | executeIfAlertNotMatch | action | text | 
+425 | Execute If Alert Not Present | executeIfAlertNotPresent | action |  | 
+426 | Execute If Alert Present | executeIfAlertPresent | action |  | 
+427 | Execute If Body Text | executeIfBodyText | action | text | 
+428 | Execute If Body Text Match | executeIfBodyTextMatch | action | text | 
+429 | Execute If Body Text Not Match | executeIfBodyTextNotMatch | action | text | 
+430 | Execute If Checked | executeIfChecked | action | locator | 
+431 | Execute If Checked | executeIfChecked | action | parentLocator | locator
+432 | Execute If Confirmation | executeIfConfirmation | action | text | 
+433 | Execute If Confirmation Match | executeIfConfirmationMatch | action | text | 
+434 | Execute If Confirmation Not Match | executeIfConfirmationNotMatch | action | text | 
+435 | Execute If Confirmation Not Present | executeIfConfirmationNotPresent | action |  | 
+436 | Execute If Confirmation Present | executeIfConfirmationPresent | action |  | 
+437 | Execute If Context | executeIfContext | action | text | 
+438 | Execute If Context Count | executeIfContextCount | action | text | 
+439 | Execute If Context Match | executeIfContextMatch | action | text | 
+440 | Execute If Context Not Match | executeIfContextNotMatch | action | text | 
+441 | Execute If Cookie | executeIfCookie | action | text | 
+442 | Execute If Cookie By Name | executeIfCookieByName | action | name | text
+443 | Execute If Cookie By Name Match | executeIfCookieByNameMatch | action | name | text
+444 | Execute If Cookie By Name Not Match | executeIfCookieByNameNotMatch | action | name | text
+445 | Execute If Cookie Match | executeIfCookieMatch | action | text | 
+446 | Execute If Cookie Not Match | executeIfCookieNotMatch | action | text | 
+447 | Execute If Cookie Not Present | executeIfCookieNotPresent | action | name | 
+448 | Execute If Cookie Present | executeIfCookiePresent | action | name | 
+449 | Execute If Editable | executeIfEditable | action | locator | 
+450 | Execute If Editable | executeIfEditable | action | parentLocator | locator
+451 | Execute If Element Not Present | executeIfElementNotPresent | action | locator | 
+452 | Execute If Element Not Present | executeIfElementNotPresent | action | parentLocator | locator
+453 | Execute If Element Present | executeIfElementPresent | action | locator | 
+454 | Execute If Element Present | executeIfElementPresent | action | parentLocator | locator
+455 | Execute If Enabled | executeIfEnabled | action | locator | 
+456 | Execute If Enabled | executeIfEnabled | action | parentLocator | locator
+457 | Execute If Eval | executeIfEval | action | expression | text
+458 | Execute If Eval Script | executeIfEvalScript | action | script | text
+459 | Execute If Eval Script Match | executeIfEvalScriptMatch | action | script | text
+460 | Execute If Eval Script Not Match | executeIfEvalScriptNotMatch | action | script | text
+461 | Execute If Exists In Database | executeIfExistsInDatabase | action | sql | 
+462 | Execute If Expression | executeIfExpression | action | expression | text
+463 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
+464 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
+465 | Execute If File Downloaded | executeIfFileDownloaded | action | filePattern | 
+466 | Execute If Html Source | executeIfHtmlSource | action | text | 
+467 | Execute If Html Source Match | executeIfHtmlSourceMatch | action | text | 
+468 | Execute If Html Source Not Match | executeIfHtmlSourceNotMatch | action | text | 
+469 | Execute If List Contain | executeIfListContain | action | variable | text
+470 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
+471 | Execute If Location | executeIfLocation | action | text | 
+472 | Execute If Location Match | executeIfLocationMatch | action | text | 
+473 | Execute If Location Not Match | executeIfLocationNotMatch | action | text | 
+474 | Execute If Not Activity | executeIfNotActivity | action | activity | 
+475 | Execute If Not Alert | executeIfNotAlert | action | text | 
+476 | Execute If Not Body Text | executeIfNotBodyText | action | text | 
+477 | Execute If Not Checked | executeIfNotChecked | action | locator | 
+478 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
+479 | Execute If Not Confirmation | executeIfNotConfirmation | action | text | 
+480 | Execute If Not Context | executeIfNotContext | action | text | 
+481 | Execute If Not Context Count | executeIfNotContextCount | action | text | 
+482 | Execute If Not Cookie | executeIfNotCookie | action | text | 
+483 | Execute If Not Cookie By Name | executeIfNotCookieByName | action | name | text
+484 | Execute If Not Editable | executeIfNotEditable | action | locator | 
+485 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
+486 | Execute If Not Enabled | executeIfNotEnabled | action | locator | 
+487 | Execute If Not Enabled | executeIfNotEnabled | action | parentLocator | locator
+488 | Execute If Not Eval | executeIfNotEval | action | expression | text
+489 | Execute If Not Eval Script | executeIfNotEvalScript | action | script | text
+490 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | sql | 
+491 | Execute If Not Expression | executeIfNotExpression | action | expression | text
+492 | Execute If Not File Downloaded | executeIfNotFileDownloaded | action | filePattern | 
+493 | Execute If Not Html Source | executeIfNotHtmlSource | action | text | 
+494 | Execute If Not Location | executeIfNotLocation | action | text | 
+495 | Execute If Not Page Source | executeIfNotPageSource | action | text | 
+496 | Execute If Not Prompt | executeIfNotPrompt | action | text | 
+497 | Execute If Not QR | executeIfNotQR | action | locator | text
+498 | Execute If Not Selected Id | executeIfNotSelectedId | action | locator | text
+499 | Execute If Not Selected Index | executeIfNotSelectedIndex | action | locator | text
+500 | Execute If Not Selected Label | executeIfNotSelectedLabel | action | locator | text
+501 | Execute If Not Selected Value | executeIfNotSelectedValue | action | locator | text
+502 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | locator | 
+503 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | parentLocator | locator
+504 | Execute If Not Tag Name | executeIfNotTagName | action | locator | text
+505 | Execute If Not Text | executeIfNotText | action | locator | text
+506 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
+507 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
+508 | Execute If Not Title | executeIfNotTitle | action | text | 
+509 | Execute If Not Value | executeIfNotValue | action | locator | text
+510 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
+511 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
+512 | Execute If Not Variable | executeIfNotVariable | action | variable | text
+513 | Execute If Not Visible | executeIfNotVisible | action | locator | 
+514 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
+515 | Execute If Page Source | executeIfPageSource | action | text | 
+516 | Execute If Page Source Match | executeIfPageSourceMatch | action | text | 
+517 | Execute If Page Source Not Match | executeIfPageSourceNotMatch | action | text | 
+518 | Execute If Prompt | executeIfPrompt | action | text | 
+519 | Execute If Prompt Match | executeIfPromptMatch | action | text | 
+520 | Execute If Prompt Not Match | executeIfPromptNotMatch | action | text | 
+521 | Execute If Prompt Not Present | executeIfPromptNotPresent | action |  | 
+522 | Execute If Prompt Present | executeIfPromptPresent | action |  | 
+523 | Execute If QR | executeIfQR | action | locator | text
+524 | Execute If QR Match | executeIfQRMatch | action | locator | text
+525 | Execute If QR Not Match | executeIfQRNotMatch | action | locator | text
+526 | Execute If Selected Id | executeIfSelectedId | action | locator | text
+527 | Execute If Selected Id Match | executeIfSelectedIdMatch | action | locator | text
+528 | Execute If Selected Id Not Match | executeIfSelectedIdNotMatch | action | locator | text
+529 | Execute If Selected Index | executeIfSelectedIndex | action | locator | text
+530 | Execute If Selected Index Match | executeIfSelectedIndexMatch | action | locator | text
+531 | Execute If Selected Index Not Match | executeIfSelectedIndexNotMatch | action | locator | text
+532 | Execute If Selected Label | executeIfSelectedLabel | action | locator | text
+533 | Execute If Selected Label Match | executeIfSelectedLabelMatch | action | locator | text
+534 | Execute If Selected Label Not Match | executeIfSelectedLabelNotMatch | action | locator | text
+535 | Execute If Selected Value | executeIfSelectedValue | action | locator | text
+536 | Execute If Selected Value Match | executeIfSelectedValueMatch | action | locator | text
+537 | Execute If Selected Value Not Match | executeIfSelectedValueNotMatch | action | locator | text
+538 | Execute If Something Selected | executeIfSomethingSelected | action | locator | 
+539 | Execute If Something Selected | executeIfSomethingSelected | action | parentLocator | locator
+540 | Execute If Tag Name | executeIfTagName | action | locator | text
+541 | Execute If Tag Name Match | executeIfTagNameMatch | action | locator | text
+542 | Execute If Tag Name Not Match | executeIfTagNameNotMatch | action | locator | text
+543 | Execute If Text | executeIfText | action | locator | text
+544 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
+545 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
+546 | Execute If Text Match | executeIfTextMatch | action | locator | text
+547 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
+548 | Execute If Text Not Present | executeIfTextNotPresent | action | pattern | 
+549 | Execute If Text Present | executeIfTextPresent | action | pattern | 
+550 | Execute If Title | executeIfTitle | action | text | 
+551 | Execute If Title Match | executeIfTitleMatch | action | text | 
+552 | Execute If Title Not Match | executeIfTitleNotMatch | action | text | 
+553 | Execute If Value | executeIfValue | action | locator | text
+554 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
+555 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
+556 | Execute If Value Match | executeIfValueMatch | action | locator | text
+557 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
+558 | Execute If Variable | executeIfVariable | action | variable | text
+559 | Execute If Visible | executeIfVisible | action | locator | 
+560 | Execute If Visible | executeIfVisible | action | parentLocator | locator
+561 | Execute Loop | executeLoop | action | times | 
+562 | Finger Print | fingerPrint | fingerPrintId |  | 
+563 | Fire Event | fireEvent | locator | eventName | 
+564 | Fire Event | fireEvent | parentLocator | locator | eventName
+565 | Focus | focus | locator |  | 
+566 | Focus | focus | parentLocator | locator | 
+567 | Go Back | goBack |  |  | 
+568 | Go Forward | goForward |  |  | 
+569 | Hide Keyboard | hideKeyboard |  |  | 
+570 | Hide Keyboard | hideKeyboard | name |  | 
+571 | Highlight | highlight | locator |  | 
+572 | Highlight | highlight | parentLocator | locator | 
+573 | Key Down | keyDown | keycode |  | 
+574 | Key Down | keyDown | locator | keySequence | 
+575 | Key Down | keyDown | parentLocator | locator | keySequence
+576 | Key Press | keyPress | keycode |  | 
+577 | Key Press | keyPress | locator | keySequence | 
+578 | Key Press | keyPress | parentLocator | locator | keySequence
+579 | Key Up | keyUp | keycode |  | 
+580 | Key Up | keyUp | locator | keySequence | 
+581 | Key Up | keyUp | parentLocator | locator | keySequence
+582 | Landscape | landscape |  |  | 
+583 | Launch App | launchApp |  |  | 
+584 | Lock | lock |  |  | 
+585 | Long Press | longPress | locator |  | 
+586 | Long Press | longPress | parentLocator | locator | 
+587 | Long Press At | longPressAt | coordinate |  | 
+588 | Meta Key Down | metaKeyDown |  |  | 
+589 | Meta Key Up | metaKeyUp |  |  | 
+590 | Mouse Down | mouseDown | locator |  | 
+591 | Mouse Down | mouseDown | parentLocator | locator | 
+592 | Mouse Down At | mouseDownAt | locator | coordString | 
+593 | Mouse Down At | mouseDownAt | parentLocator | locator | coordString
+594 | Mouse Move | mouseMove | locator |  | 
+595 | Mouse Move | mouseMove | parentLocator | locator | 
+596 | Mouse Move At | mouseMoveAt | locator | coordString | 
+597 | Mouse Move At | mouseMoveAt | parentLocator | locator | coordString
+598 | Mouse Out | mouseOut | locator |  | 
+599 | Mouse Out | mouseOut | parentLocator | locator | 
+600 | Mouse Over | mouseOver | locator |  | 
+601 | Mouse Over | mouseOver | parentLocator | locator | 
+602 | Mouse Up | mouseUp | locator |  | 
+603 | Mouse Up | mouseUp | parentLocator | locator | 
+604 | Mouse Up At | mouseUpAt | locator | coordString | 
+605 | Mouse Up At | mouseUpAt | parentLocator | locator | coordString
+606 | Open | open | url |  | 
+607 | Open Control Center | openControlCenter |  |  | 
+608 | Open Notifications | openNotifications |  |  | 
+609 | Open Window | openWindow | url |  | 
+610 | Open Window | openWindow | url | windowID | 
+611 | Pause | pause | waitTime |  | 
+612 | Portrait | portrait |  |  | 
+613 | Refresh | refresh |  |  | 
+614 | Reject Touch ID | rejectTouchID |  |  | 
+615 | Reload App | reloadApp |  |  | 
+616 | Remove All Selections | removeAllSelections | locator |  | 
+617 | Remove All Selections | removeAllSelections | parentLocator | locator | 
+618 | Remove Selection | removeSelection | locator | optionLocator | 
+619 | Remove Selection | removeSelection | parentLocator | locator | optionLocator
+620 | Remove Selection Id | removeSelectionId | locator | id | 
+621 | Remove Selection Id | removeSelectionId | parentLocator | locator | id
+622 | Remove Selection Index | removeSelectionIndex | locator | index | 
+623 | Remove Selection Index | removeSelectionIndex | parentLocator | locator | index
+624 | Remove Selection Label | removeSelectionLabel | locator | label | 
+625 | Remove Selection Label | removeSelectionLabel | parentLocator | locator | label
+626 | Remove Selection Value | removeSelectionValue | locator | value | 
+627 | Remove Selection Value | removeSelectionValue | parentLocator | locator | value
+628 | Reset App | resetApp |  |  | 
+629 | Rotate | rotate | rotation |  | 
+630 | Run App In Background | runAppInBackground | millis |  | 
+631 | Run Script | runScript | script |  | 
+632 | Scroll Down | scrollDown |  |  | 
+633 | Scroll Down | scrollDown | locator |  | 
+634 | Scroll Down | scrollDown | parentLocator | locator | 
+635 | Scroll Down To | scrollDownTo | locator |  | 
+636 | Scroll Down To | scrollDownTo | parentLocator | locator | 
+637 | Scroll Left | scrollLeft |  |  | 
+638 | Scroll Left | scrollLeft | locator |  | 
+639 | Scroll Left | scrollLeft | parentLocator | locator | 
+640 | Scroll Left To | scrollLeftTo | locator |  | 
+641 | Scroll Left To | scrollLeftTo | parentLocator | locator | 
+642 | Scroll Right | scrollRight |  |  | 
+643 | Scroll Right | scrollRight | locator |  | 
+644 | Scroll Right | scrollRight | parentLocator | locator | 
+645 | Scroll Right To | scrollRightTo | locator |  | 
+646 | Scroll Right To | scrollRightTo | parentLocator | locator | 
+647 | Scroll Up | scrollUp |  |  | 
+648 | Scroll Up | scrollUp | locator |  | 
+649 | Scroll Up | scrollUp | parentLocator | locator | 
+650 | Scroll Up To | scrollUpTo | locator |  | 
+651 | Scroll Up To | scrollUpTo | parentLocator | locator | 
+652 | Select | select | locator | optionLocator | 
+653 | Select | select | parentLocator | locator | optionLocator
+654 | Select First Window | selectFirstWindow |  |  | 
+655 | Select Frame | selectFrame | locator |  | 
+656 | Select Id | selectId | locator | id | 
+657 | Select Id | selectId | parentLocator | locator | id
+658 | Select Index | selectIndex | locator | index | 
+659 | Select Index | selectIndex | parentLocator | locator | index
+660 | Select Label | selectLabel | locator | label | 
+661 | Select Label | selectLabel | parentLocator | locator | label
+662 | Select Last Window | selectLastWindow |  |  | 
+663 | Select Parent Frame | selectParentFrame |  |  | 
+664 | Select Pop Up | selectPopUp | windowID |  | 
+665 | Select Value | selectValue | locator | value | 
+666 | Select Value | selectValue | parentLocator | locator | value
+667 | Select Window | selectWindow | windowID |  | 
+668 | Set Clipboard | setClipboard | text |  | 
+669 | Set Context | setContext | context |  | 
+670 | Set Cursor Position | setCursorPosition | locator | position | 
+671 | Set Cursor Position | setCursorPosition | parentLocator | locator | position
+672 | Set Geolocation | setGeolocation | location |  | 
+673 | Set Native App Context | setNativeAppContext |  |  | 
+674 | Set Timeout | setTimeout | timeout |  | 
+675 | Set Web View Context | setWebViewContext | index |  | 
+676 | Shake | shake |  |  | 
+677 | Shift Key Down | shiftKeyDown |  |  | 
+678 | Shift Key Up | shiftKeyUp |  |  | 
+679 | Start Activity | startActivity | activity |  | 
+680 | Store | store | text | variable | 
+681 | Store Alert | storeAlert | variable |  | 
+682 | Store All Buttons | storeAllButtons | variable |  | 
+683 | Store All Fields | storeAllFields | variable |  | 
+684 | Store All Links | storeAllLinks | variable |  | 
+685 | Store All Window Names | storeAllWindowNames | variable |  | 
+686 | Store All Window Titles | storeAllWindowTitles | variable |  | 
+687 | Store Attribute | storeAttribute | locator | name | variable
+688 | Store Attribute From All Windows | storeAttributeFromAllWindows | attributeName | variable | 
+689 | Store Body Text | storeBodyText | variable |  | 
+690 | Store Confirmation | storeConfirmation | variable |  | 
+691 | Store Context | storeContext | variable |  | 
+692 | Store Context Count | storeContextCount | variable |  | 
+693 | Store Cookie | storeCookie | variable |  | 
+694 | Store Cookie By Name | storeCookieByName | name | variable | 
+695 | Store Current Date | storeCurrentDate | variable |  | 
+696 | Store Cursor Position | storeCursorPosition | locator | variable | 
+697 | Store Cursor Position | storeCursorPosition | parentLocator | locator | variable
+698 | Store Eval | storeEval | expression | variable | 
+699 | Store Eval Script | storeEvalScript | script | variable | 
+700 | Store Expression | storeExpression | expression | variable | 
+701 | Store Html Source | storeHtmlSource | variable |  | 
+702 | Store Location | storeLocation | variable |  | 
+703 | Store Page Source | storePageSource | variable |  | 
+704 | Store Prompt | storePrompt | variable |  | 
+705 | Store Push | storePush | text | variable | 
+706 | Store QR | storeQR | locator | variable | 
+707 | Store QR | storeQR | parentLocator | locator | variable
+708 | Store Select Options | storeSelectOptions | locator | variable | 
+709 | Store Select Options | storeSelectOptions | parentLocator | locator | variable
+710 | Store Selected Id | storeSelectedId | locator | variable | 
+711 | Store Selected Id | storeSelectedId | parentLocator | locator | variable
+712 | Store Selected Ids | storeSelectedIds | locator | variable | 
+713 | Store Selected Ids | storeSelectedIds | parentLocator | locator | variable
+714 | Store Selected Index | storeSelectedIndex | locator | variable | 
+715 | Store Selected Index | storeSelectedIndex | parentLocator | locator | variable
+716 | Store Selected Indexes | storeSelectedIndexes | locator | variable | 
+717 | Store Selected Indexes | storeSelectedIndexes | parentLocator | locator | variable
+718 | Store Selected Label | storeSelectedLabel | locator | variable | 
+719 | Store Selected Label | storeSelectedLabel | parentLocator | locator | variable
+720 | Store Selected Labels | storeSelectedLabels | locator | variable | 
+721 | Store Selected Labels | storeSelectedLabels | parentLocator | locator | variable
+722 | Store Selected Value | storeSelectedValue | locator | variable | 
+723 | Store Selected Value | storeSelectedValue | parentLocator | locator | variable
+724 | Store Selected Values | storeSelectedValues | locator | variable | 
+725 | Store Selected Values | storeSelectedValues | parentLocator | locator | variable
+726 | Store Table | storeTable | locator | cellAddress | variable
+727 | Store Tag Name | storeTagName | locator | variable | 
+728 | Store Tag Name | storeTagName | parentLocator | locator | variable
+729 | Store Text | storeText | locator | variable | 
+730 | Store Text | storeText | parentLocator | locator | variable
+731 | Store Title | storeTitle | variable |  | 
+732 | Store Value | storeValue | locator | variable | 
+733 | Store Value | storeValue | parentLocator | locator | variable
+734 | Submit | submit | locator |  | 
+735 | Submit | submit | parentLocator | locator | 
+736 | Swipe Down | swipeDown |  |  | 
+737 | Swipe Down | swipeDown | locator |  | 
+738 | Swipe Down | swipeDown | parentLocator | locator | 
+739 | Swipe Left | swipeLeft |  |  | 
+740 | Swipe Left | swipeLeft | locator |  | 
+741 | Swipe Left | swipeLeft | parentLocator | locator | 
+742 | Swipe Right | swipeRight |  |  | 
+743 | Swipe Right | swipeRight | locator |  | 
+744 | Swipe Right | swipeRight | parentLocator | locator | 
+745 | Swipe Up | swipeUp |  |  | 
+746 | Swipe Up | swipeUp | locator |  | 
+747 | Swipe Up | swipeUp | parentLocator | locator | 
+748 | Tap | tap | locator |  | 
+749 | Tap | tap | parentLocator | locator | 
+750 | Tap At | tapAt | coordinate |  | 
+751 | Terminate App | terminateApp | bundleId |  | 
+752 | Toggle Airplane Mode | toggleAirplaneMode |  |  | 
+753 | Toggle Location Services | toggleLocationServices |  |  | 
+754 | Toggle Wifi | toggleWifi |  |  | 
+755 | Type | type | locator | value | 
+756 | Type | type | parentLocator | locator | value
+757 | Type And Tab | typeAndTab | locator | value | 
+758 | Type And Tab | typeAndTab | parentLocator | locator | value
+759 | Type Keys | typeKeys | value |  | 
+760 | Type Keys | typeKeys | locator | value | 
+761 | Type Keys | typeKeys | parentLocator | locator | value
+762 | Uncheck | uncheck | locator |  | 
+763 | Uncheck | uncheck | parentLocator | locator | 
+764 | Unlock | unlock |  |  | 
+765 | Verify Activity | verifyActivity | activity |  | 
+766 | Verify Alert | verifyAlert | text |  | 
+767 | Verify Alert Match | verifyAlertMatch | text |  | 
+768 | Verify Alert Not Match | verifyAlertNotMatch | text |  | 
+769 | Verify Alert Not Present | verifyAlertNotPresent |  |  | 
+770 | Verify Alert Present | verifyAlertPresent |  |  | 
+771 | Verify All Buttons | verifyAllButtons | text |  | 
+772 | Verify All Buttons Match | verifyAllButtonsMatch | text |  | 
+773 | Verify All Buttons Not Match | verifyAllButtonsNotMatch | text |  | 
+774 | Verify All Fields | verifyAllFields | text |  | 
+775 | Verify All Fields Match | verifyAllFieldsMatch | text |  | 
+776 | Verify All Fields Not Match | verifyAllFieldsNotMatch | text |  | 
+777 | Verify All Links | verifyAllLinks | text |  | 
+778 | Verify All Links Match | verifyAllLinksMatch | text |  | 
+779 | Verify All Links Not Match | verifyAllLinksNotMatch | text |  | 
+780 | Verify All Window Names | verifyAllWindowNames | text |  | 
+781 | Verify All Window Names Match | verifyAllWindowNamesMatch | text |  | 
+782 | Verify All Window Names Not Match | verifyAllWindowNamesNotMatch | text |  | 
+783 | Verify All Window Titles | verifyAllWindowTitles | text |  | 
+784 | Verify All Window Titles Match | verifyAllWindowTitlesMatch | text |  | 
+785 | Verify All Window Titles Not Match | verifyAllWindowTitlesNotMatch | text |  | 
+786 | Verify Attribute | verifyAttribute | locator | name | text
+787 | Verify Attribute From All Windows | verifyAttributeFromAllWindows | attributeName | text | 
+788 | Verify Attribute From All Windows Match | verifyAttributeFromAllWindowsMatch | attributeName | text | 
+789 | Verify Attribute From All Windows Not Match | verifyAttributeFromAllWindowsNotMatch | attributeName | text | 
+790 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
+791 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
+792 | Verify Background Color | verifyBackgroundColor | locator | text | 
+793 | Verify Background Color | verifyBackgroundColor | parentLocator | locator | text
+794 | Verify Body Text | verifyBodyText | text |  | 
+795 | Verify Body Text Match | verifyBodyTextMatch | text |  | 
+796 | Verify Body Text Not Match | verifyBodyTextNotMatch | text |  | 
+797 | Verify Border Color | verifyBorderColor | locator | text | 
+798 | Verify Border Color | verifyBorderColor | parentLocator | locator | text
+799 | Verify Checked | verifyChecked | locator |  | 
+800 | Verify Checked | verifyChecked | parentLocator | locator | 
+801 | Verify Color | verifyColor | locator | text | 
+802 | Verify Color | verifyColor | parentLocator | locator | text
+803 | Verify Confirmation | verifyConfirmation | text |  | 
+804 | Verify Confirmation Match | verifyConfirmationMatch | text |  | 
+805 | Verify Confirmation Not Match | verifyConfirmationNotMatch | text |  | 
+806 | Verify Confirmation Not Present | verifyConfirmationNotPresent |  |  | 
+807 | Verify Confirmation Present | verifyConfirmationPresent |  |  | 
+808 | Verify Context | verifyContext | text |  | 
+809 | Verify Context Count | verifyContextCount | text |  | 
+810 | Verify Context Match | verifyContextMatch | text |  | 
+811 | Verify Context Not Match | verifyContextNotMatch | text |  | 
+812 | Verify Cookie | verifyCookie | text |  | 
+813 | Verify Cookie By Name | verifyCookieByName | name | text | 
+814 | Verify Cookie By Name Match | verifyCookieByNameMatch | name | text | 
+815 | Verify Cookie By Name Not Match | verifyCookieByNameNotMatch | name | text | 
+816 | Verify Cookie Match | verifyCookieMatch | text |  | 
+817 | Verify Cookie Not Match | verifyCookieNotMatch | text |  | 
+818 | Verify Cookie Not Present | verifyCookieNotPresent | name |  | 
+819 | Verify Cookie Present | verifyCookiePresent | name |  | 
+820 | Verify Css Count | verifyCssCount | css | text | 
+821 | Verify Cursor Position | verifyCursorPosition | locator | text | 
+822 | Verify Cursor Position | verifyCursorPosition | parentLocator | locator | text
+823 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
+824 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
+825 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
+826 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
+827 | Verify Editable | verifyEditable | locator |  | 
+828 | Verify Editable | verifyEditable | parentLocator | locator | 
+829 | Verify Element Height | verifyElementHeight | locator | text | 
+830 | Verify Element Height | verifyElementHeight | parentLocator | locator | text
+831 | Verify Element Index | verifyElementIndex | locator | text | 
+832 | Verify Element Index | verifyElementIndex | parentLocator | locator | text
+833 | Verify Element Not Present | verifyElementNotPresent | locator |  | 
+834 | Verify Element Not Present | verifyElementNotPresent | parentLocator | locator | 
+835 | Verify Element Position Left | verifyElementPositionLeft | locator | text | 
+836 | Verify Element Position Left | verifyElementPositionLeft | parentLocator | locator | text
+837 | Verify Element Position Top | verifyElementPositionTop | locator | text | 
+838 | Verify Element Position Top | verifyElementPositionTop | parentLocator | locator | text
+839 | Verify Element Present | verifyElementPresent | locator |  | 
+840 | Verify Element Present | verifyElementPresent | parentLocator | locator | 
+841 | Verify Element Width | verifyElementWidth | locator | text | 
+842 | Verify Element Width | verifyElementWidth | parentLocator | locator | text
+843 | Verify Enabled | verifyEnabled | locator |  | 
+844 | Verify Enabled | verifyEnabled | parentLocator | locator | 
+845 | Verify Eval | verifyEval | expression | text | 
+846 | Verify Eval Script | verifyEvalScript | script | text | 
+847 | Verify Eval Script Match | verifyEvalScriptMatch | script | text | 
+848 | Verify Eval Script Not Match | verifyEvalScriptNotMatch | script | text | 
+849 | Verify Exists In Database | verifyExistsInDatabase | sql |  | 
+850 | Verify Expression | verifyExpression | expression | text | 
+851 | Verify Expression Match | verifyExpressionMatch | expression | text | 
+852 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
+853 | Verify File Contain Line | verifyFileContainLine | filePattern | charset | text
+854 | Verify File Downloaded | verifyFileDownloaded | filePattern |  | 
+855 | Verify File First Line | verifyFileFirstLine | filePattern | charset | text
+856 | Verify Font Family | verifyFontFamily | locator | text | 
+857 | Verify Font Family | verifyFontFamily | parentLocator | locator | text
+858 | Verify Font Family Match | verifyFontFamilyMatch | locator | text | 
+859 | Verify Font Family Match | verifyFontFamilyMatch | parentLocator | locator | text
+860 | Verify Font Family Not Match | verifyFontFamilyNotMatch | locator | text | 
+861 | Verify Font Family Not Match | verifyFontFamilyNotMatch | parentLocator | locator | text
+862 | Verify Font Size | verifyFontSize | locator | text | 
+863 | Verify Font Size | verifyFontSize | parentLocator | locator | text
+864 | Verify Font Size Match | verifyFontSizeMatch | locator | text | 
+865 | Verify Font Size Match | verifyFontSizeMatch | parentLocator | locator | text
+866 | Verify Font Size Not Match | verifyFontSizeNotMatch | locator | text | 
+867 | Verify Font Size Not Match | verifyFontSizeNotMatch | parentLocator | locator | text
+868 | Verify Font Style | verifyFontStyle | locator | text | 
+869 | Verify Font Style | verifyFontStyle | parentLocator | locator | text
+870 | Verify Font Style Match | verifyFontStyleMatch | locator | text | 
+871 | Verify Font Style Match | verifyFontStyleMatch | parentLocator | locator | text
+872 | Verify Font Style Not Match | verifyFontStyleNotMatch | locator | text | 
+873 | Verify Font Style Not Match | verifyFontStyleNotMatch | parentLocator | locator | text
+874 | Verify Font Weight | verifyFontWeight | locator | text | 
+875 | Verify Font Weight | verifyFontWeight | parentLocator | locator | text
+876 | Verify Font Weight Match | verifyFontWeightMatch | locator | text | 
+877 | Verify Font Weight Match | verifyFontWeightMatch | parentLocator | locator | text
+878 | Verify Font Weight Not Match | verifyFontWeightNotMatch | locator | text | 
+879 | Verify Font Weight Not Match | verifyFontWeightNotMatch | parentLocator | locator | text
+880 | Verify Html Source | verifyHtmlSource | text |  | 
+881 | Verify Html Source Match | verifyHtmlSourceMatch | text |  | 
+882 | Verify Html Source Not Match | verifyHtmlSourceNotMatch | text |  | 
+883 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
+884 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
+885 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
+886 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
+887 | Verify List Contain | verifyListContain | variable | text | 
+888 | Verify List Not Contain | verifyListNotContain | variable | text | 
+889 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
+890 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
+891 | Verify Location | verifyLocation | text |  | 
+892 | Verify Location Match | verifyLocationMatch | text |  | 
+893 | Verify Location Not Match | verifyLocationNotMatch | text |  | 
+894 | Verify Not Activity | verifyNotActivity | activity |  | 
+895 | Verify Not Alert | verifyNotAlert | text |  | 
+896 | Verify Not All Buttons | verifyNotAllButtons | text |  | 
+897 | Verify Not All Fields | verifyNotAllFields | text |  | 
+898 | Verify Not All Links | verifyNotAllLinks | text |  | 
+899 | Verify Not All Window Names | verifyNotAllWindowNames | text |  | 
+900 | Verify Not All Window Titles | verifyNotAllWindowTitles | text |  | 
+901 | Verify Not Attribute | verifyNotAttribute | locator | name | text
+902 | Verify Not Attribute From All Windows | verifyNotAttributeFromAllWindows | attributeName | text | 
+903 | Verify Not Background Color | verifyNotBackgroundColor | locator | text | 
+904 | Verify Not Background Color | verifyNotBackgroundColor | parentLocator | locator | text
+905 | Verify Not Body Text | verifyNotBodyText | text |  | 
+906 | Verify Not Border Color | verifyNotBorderColor | locator | text | 
+907 | Verify Not Border Color | verifyNotBorderColor | parentLocator | locator | text
+908 | Verify Not Checked | verifyNotChecked | locator |  | 
+909 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
+910 | Verify Not Color | verifyNotColor | locator | text | 
+911 | Verify Not Color | verifyNotColor | parentLocator | locator | text
+912 | Verify Not Confirmation | verifyNotConfirmation | text |  | 
+913 | Verify Not Context | verifyNotContext | text |  | 
+914 | Verify Not Context Count | verifyNotContextCount | text |  | 
+915 | Verify Not Cookie | verifyNotCookie | text |  | 
+916 | Verify Not Cookie By Name | verifyNotCookieByName | name | text | 
+917 | Verify Not Css Count | verifyNotCssCount | css | text | 
+918 | Verify Not Cursor Position | verifyNotCursorPosition | locator | text | 
+919 | Verify Not Cursor Position | verifyNotCursorPosition | parentLocator | locator | text
+920 | Verify Not Editable | verifyNotEditable | locator |  | 
+921 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
+922 | Verify Not Element Height | verifyNotElementHeight | locator | text | 
+923 | Verify Not Element Height | verifyNotElementHeight | parentLocator | locator | text
+924 | Verify Not Element Index | verifyNotElementIndex | locator | text | 
+925 | Verify Not Element Index | verifyNotElementIndex | parentLocator | locator | text
+926 | Verify Not Element Position Left | verifyNotElementPositionLeft | locator | text | 
+927 | Verify Not Element Position Left | verifyNotElementPositionLeft | parentLocator | locator | text
+928 | Verify Not Element Position Top | verifyNotElementPositionTop | locator | text | 
+929 | Verify Not Element Position Top | verifyNotElementPositionTop | parentLocator | locator | text
+930 | Verify Not Element Width | verifyNotElementWidth | locator | text | 
+931 | Verify Not Element Width | verifyNotElementWidth | parentLocator | locator | text
+932 | Verify Not Enabled | verifyNotEnabled | locator |  | 
+933 | Verify Not Enabled | verifyNotEnabled | parentLocator | locator | 
+934 | Verify Not Eval | verifyNotEval | expression | text | 
+935 | Verify Not Eval Script | verifyNotEvalScript | script | text | 
+936 | Verify Not Exists In Database | verifyNotExistsInDatabase | sql |  | 
+937 | Verify Not Expression | verifyNotExpression | expression | text | 
+938 | Verify Not File Downloaded | verifyNotFileDownloaded | filePattern |  | 
+939 | Verify Not Font Family | verifyNotFontFamily | locator | text | 
+940 | Verify Not Font Family | verifyNotFontFamily | parentLocator | locator | text
+941 | Verify Not Font Size | verifyNotFontSize | locator | text | 
+942 | Verify Not Font Size | verifyNotFontSize | parentLocator | locator | text
+943 | Verify Not Font Style | verifyNotFontStyle | locator | text | 
+944 | Verify Not Font Style | verifyNotFontStyle | parentLocator | locator | text
+945 | Verify Not Font Weight | verifyNotFontWeight | locator | text | 
+946 | Verify Not Font Weight | verifyNotFontWeight | parentLocator | locator | text
+947 | Verify Not Html Source | verifyNotHtmlSource | text |  | 
+948 | Verify Not Location | verifyNotLocation | text |  | 
+949 | Verify Not Ordered | verifyNotOrdered | firstLocator | secondLocator | 
+950 | Verify Not Page Source | verifyNotPageSource | text |  | 
+951 | Verify Not Prompt | verifyNotPrompt | text |  | 
+952 | Verify Not QR | verifyNotQR | locator | text | 
+953 | Verify Not QR | verifyNotQR | parentLocator | locator | text
+954 | Verify Not Select Options | verifyNotSelectOptions | locator | text | 
+955 | Verify Not Select Options | verifyNotSelectOptions | parentLocator | locator | text
+956 | Verify Not Selected Id | verifyNotSelectedId | locator | text | 
+957 | Verify Not Selected Id | verifyNotSelectedId | parentLocator | locator | text
+958 | Verify Not Selected Ids | verifyNotSelectedIds | locator | text | 
+959 | Verify Not Selected Ids | verifyNotSelectedIds | parentLocator | locator | text
+960 | Verify Not Selected Index | verifyNotSelectedIndex | locator | text | 
+961 | Verify Not Selected Index | verifyNotSelectedIndex | parentLocator | locator | text
+962 | Verify Not Selected Indexes | verifyNotSelectedIndexes | locator | text | 
+963 | Verify Not Selected Indexes | verifyNotSelectedIndexes | parentLocator | locator | text
+964 | Verify Not Selected Label | verifyNotSelectedLabel | locator | text | 
+965 | Verify Not Selected Label | verifyNotSelectedLabel | parentLocator | locator | text
+966 | Verify Not Selected Labels | verifyNotSelectedLabels | locator | text | 
+967 | Verify Not Selected Labels | verifyNotSelectedLabels | parentLocator | locator | text
+968 | Verify Not Selected Value | verifyNotSelectedValue | locator | text | 
+969 | Verify Not Selected Value | verifyNotSelectedValue | parentLocator | locator | text
+970 | Verify Not Selected Values | verifyNotSelectedValues | locator | text | 
+971 | Verify Not Selected Values | verifyNotSelectedValues | parentLocator | locator | text
+972 | Verify Not Something Selected | verifyNotSomethingSelected | locator |  | 
+973 | Verify Not Something Selected | verifyNotSomethingSelected | parentLocator | locator | 
+974 | Verify Not Table | verifyNotTable | locator | cellAddress | text
+975 | Verify Not Tag Name | verifyNotTagName | locator | text | 
+976 | Verify Not Tag Name | verifyNotTagName | parentLocator | locator | text
+977 | Verify Not Text | verifyNotText | locator | text | 
+978 | Verify Not Text | verifyNotText | parentLocator | locator | text
+979 | Verify Not Text Alignment | verifyNotTextAlignment | locator | text | 
+980 | Verify Not Text Alignment | verifyNotTextAlignment | parentLocator | locator | text
+981 | Verify Not Text Decoration | verifyNotTextDecoration | locator | text | 
+982 | Verify Not Text Decoration | verifyNotTextDecoration | parentLocator | locator | text
+983 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
+984 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
+985 | Verify Not Title | verifyNotTitle | text |  | 
+986 | Verify Not Value | verifyNotValue | locator | text | 
+987 | Verify Not Value | verifyNotValue | parentLocator | locator | text
+988 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
+989 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
+990 | Verify Not Variable | verifyNotVariable | variable | text | 
+991 | Verify Not Visible | verifyNotVisible | locator |  | 
+992 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
+993 | Verify Not Xpath Count | verifyNotXpathCount | xpath | text | 
+994 | Verify Ordered | verifyOrdered | firstLocator | secondLocator | 
+995 | Verify Page Source | verifyPageSource | text |  | 
+996 | Verify Page Source Match | verifyPageSourceMatch | text |  | 
+997 | Verify Page Source Not Match | verifyPageSourceNotMatch | text |  | 
+998 | Verify Prompt | verifyPrompt | text |  | 
+999 | Verify Prompt Match | verifyPromptMatch | text |  | 
+1,000 | Verify Prompt Not Match | verifyPromptNotMatch | text |  | 
+1,001 | Verify Prompt Not Present | verifyPromptNotPresent |  |  | 
+1,002 | Verify Prompt Present | verifyPromptPresent |  |  | 
+1,003 | Verify QR | verifyQR | locator | text | 
+1,004 | Verify QR | verifyQR | parentLocator | locator | text
+1,005 | Verify QR Match | verifyQRMatch | locator | text | 
+1,006 | Verify QR Match | verifyQRMatch | parentLocator | locator | text
+1,007 | Verify QR Not Match | verifyQRNotMatch | locator | text | 
+1,008 | Verify QR Not Match | verifyQRNotMatch | parentLocator | locator | text
+1,009 | Verify Row Count | verifyRowCount | sql | count | 
+1,010 | Verify Row Count Greater Than | verifyRowCountGreaterThan | sql | count | 
+1,011 | Verify Row Count Less Than | verifyRowCountLessThan | sql | count | 
+1,012 | Verify Select Options | verifySelectOptions | locator | text | 
+1,013 | Verify Select Options | verifySelectOptions | parentLocator | locator | text
+1,014 | Verify Select Options Match | verifySelectOptionsMatch | locator | text | 
+1,015 | Verify Select Options Match | verifySelectOptionsMatch | parentLocator | locator | text
+1,016 | Verify Select Options Not Match | verifySelectOptionsNotMatch | locator | text | 
+1,017 | Verify Select Options Not Match | verifySelectOptionsNotMatch | parentLocator | locator | text
+1,018 | Verify Selected Id | verifySelectedId | locator | text | 
+1,019 | Verify Selected Id | verifySelectedId | parentLocator | locator | text
+1,020 | Verify Selected Id Match | verifySelectedIdMatch | locator | text | 
+1,021 | Verify Selected Id Match | verifySelectedIdMatch | parentLocator | locator | text
+1,022 | Verify Selected Id Not Match | verifySelectedIdNotMatch | locator | text | 
+1,023 | Verify Selected Id Not Match | verifySelectedIdNotMatch | parentLocator | locator | text
+1,024 | Verify Selected Ids | verifySelectedIds | locator | text | 
+1,025 | Verify Selected Ids | verifySelectedIds | parentLocator | locator | text
+1,026 | Verify Selected Ids Match | verifySelectedIdsMatch | locator | text | 
+1,027 | Verify Selected Ids Match | verifySelectedIdsMatch | parentLocator | locator | text
+1,028 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | locator | text | 
+1,029 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | parentLocator | locator | text
+1,030 | Verify Selected Index | verifySelectedIndex | locator | text | 
+1,031 | Verify Selected Index | verifySelectedIndex | parentLocator | locator | text
+1,032 | Verify Selected Index Match | verifySelectedIndexMatch | locator | text | 
+1,033 | Verify Selected Index Match | verifySelectedIndexMatch | parentLocator | locator | text
+1,034 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | locator | text | 
+1,035 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | parentLocator | locator | text
+1,036 | Verify Selected Indexes | verifySelectedIndexes | locator | text | 
+1,037 | Verify Selected Indexes | verifySelectedIndexes | parentLocator | locator | text
+1,038 | Verify Selected Indexes Match | verifySelectedIndexesMatch | locator | text | 
+1,039 | Verify Selected Indexes Match | verifySelectedIndexesMatch | parentLocator | locator | text
+1,040 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | locator | text | 
+1,041 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | parentLocator | locator | text
+1,042 | Verify Selected Label | verifySelectedLabel | locator | text | 
+1,043 | Verify Selected Label | verifySelectedLabel | parentLocator | locator | text
+1,044 | Verify Selected Label Match | verifySelectedLabelMatch | locator | text | 
+1,045 | Verify Selected Label Match | verifySelectedLabelMatch | parentLocator | locator | text
+1,046 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | locator | text | 
+1,047 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | parentLocator | locator | text
+1,048 | Verify Selected Labels | verifySelectedLabels | locator | text | 
+1,049 | Verify Selected Labels | verifySelectedLabels | parentLocator | locator | text
+1,050 | Verify Selected Labels Match | verifySelectedLabelsMatch | locator | text | 
+1,051 | Verify Selected Labels Match | verifySelectedLabelsMatch | parentLocator | locator | text
+1,052 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | locator | text | 
+1,053 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | parentLocator | locator | text
+1,054 | Verify Selected Value | verifySelectedValue | locator | text | 
+1,055 | Verify Selected Value | verifySelectedValue | parentLocator | locator | text
+1,056 | Verify Selected Value Match | verifySelectedValueMatch | locator | text | 
+1,057 | Verify Selected Value Match | verifySelectedValueMatch | parentLocator | locator | text
+1,058 | Verify Selected Value Not Match | verifySelectedValueNotMatch | locator | text | 
+1,059 | Verify Selected Value Not Match | verifySelectedValueNotMatch | parentLocator | locator | text
+1,060 | Verify Selected Values | verifySelectedValues | locator | text | 
+1,061 | Verify Selected Values | verifySelectedValues | parentLocator | locator | text
+1,062 | Verify Selected Values Match | verifySelectedValuesMatch | locator | text | 
+1,063 | Verify Selected Values Match | verifySelectedValuesMatch | parentLocator | locator | text
+1,064 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | locator | text | 
+1,065 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | parentLocator | locator | text
+1,066 | Verify Something Selected | verifySomethingSelected | locator |  | 
+1,067 | Verify Something Selected | verifySomethingSelected | parentLocator | locator | 
+1,068 | Verify Table | verifyTable | locator | cellAddress | text
+1,069 | Verify Table Match | verifyTableMatch | locator | cellAddress | text
+1,070 | Verify Table Not Match | verifyTableNotMatch | locator | cellAddress | text
+1,071 | Verify Tag Name | verifyTagName | locator | text | 
+1,072 | Verify Tag Name | verifyTagName | parentLocator | locator | text
+1,073 | Verify Tag Name Match | verifyTagNameMatch | locator | text | 
+1,074 | Verify Tag Name Match | verifyTagNameMatch | parentLocator | locator | text
+1,075 | Verify Tag Name Not Match | verifyTagNameNotMatch | locator | text | 
+1,076 | Verify Tag Name Not Match | verifyTagNameNotMatch | parentLocator | locator | text
+1,077 | Verify Text | verifyText | locator | text | 
+1,078 | Verify Text | verifyText | parentLocator | locator | text
+1,079 | Verify Text Alignment | verifyTextAlignment | locator | text | 
+1,080 | Verify Text Alignment | verifyTextAlignment | parentLocator | locator | text
+1,081 | Verify Text Alignment Match | verifyTextAlignmentMatch | locator | text | 
+1,082 | Verify Text Alignment Match | verifyTextAlignmentMatch | parentLocator | locator | text
+1,083 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | locator | text | 
+1,084 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | parentLocator | locator | text
+1,085 | Verify Text Decoration | verifyTextDecoration | locator | text | 
+1,086 | Verify Text Decoration | verifyTextDecoration | parentLocator | locator | text
+1,087 | Verify Text Decoration Match | verifyTextDecorationMatch | locator | text | 
+1,088 | Verify Text Decoration Match | verifyTextDecorationMatch | parentLocator | locator | text
+1,089 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | locator | text | 
+1,090 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | parentLocator | locator | text
+1,091 | Verify Text Empty | verifyTextEmpty | locator |  | 
+1,092 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
+1,093 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
+1,094 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
+1,095 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
+1,096 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
+1,097 | Verify Text Match | verifyTextMatch | locator | text | 
+1,098 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
+1,099 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
+1,100 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
+1,101 | Verify Text Not Present | verifyTextNotPresent | pattern |  | 
+1,102 | Verify Text Present | verifyTextPresent | pattern |  | 
+1,103 | Verify Title | verifyTitle | text |  | 
+1,104 | Verify Title Match | verifyTitleMatch | text |  | 
+1,105 | Verify Title Not Match | verifyTitleNotMatch | text |  | 
+1,106 | Verify Value | verifyValue | locator | text | 
+1,107 | Verify Value | verifyValue | parentLocator | locator | text
+1,108 | Verify Value Empty | verifyValueEmpty | locator |  | 
+1,109 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
+1,110 | Verify Value Match | verifyValueMatch | locator | text | 
+1,111 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
+1,112 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
+1,113 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
+1,114 | Verify Variable | verifyVariable | variable | text | 
+1,115 | Verify Visible | verifyVisible | locator |  | 
+1,116 | Verify Visible | verifyVisible | parentLocator | locator | 
+1,117 | Verify Xpath Count | verifyXpathCount | xpath | text | 
+1,118 | Wait For Activity | waitForActivity | activity |  | 
+1,119 | Wait For Alert | waitForAlert | text |  | 
+1,120 | Wait For Alert Match | waitForAlertMatch | text |  | 
+1,121 | Wait For Alert Not Match | waitForAlertNotMatch | text |  | 
+1,122 | Wait For Alert Not Present | waitForAlertNotPresent |  |  | 
+1,123 | Wait For Alert Present | waitForAlertPresent |  |  | 
+1,124 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
+1,125 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
+1,126 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
+1,127 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
+1,128 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
+1,129 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
+1,130 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
+1,131 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
+1,132 | Wait For Attribute | waitForAttribute | locator | name | text
+1,133 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
+1,134 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
+1,135 | Wait For Body Text | waitForBodyText | text |  | 
+1,136 | Wait For Body Text Match | waitForBodyTextMatch | text |  | 
+1,137 | Wait For Body Text Not Match | waitForBodyTextNotMatch | text |  | 
+1,138 | Wait For Checked | waitForChecked | locator |  | 
+1,139 | Wait For Checked | waitForChecked | parentLocator | locator | 
+1,140 | Wait For Condition | waitForCondition | script | timeout | 
+1,141 | Wait For Confirmation | waitForConfirmation | text |  | 
+1,142 | Wait For Confirmation Match | waitForConfirmationMatch | text |  | 
+1,143 | Wait For Confirmation Not Match | waitForConfirmationNotMatch | text |  | 
+1,144 | Wait For Confirmation Not Present | waitForConfirmationNotPresent |  |  | 
+1,145 | Wait For Confirmation Present | waitForConfirmationPresent |  |  | 
+1,146 | Wait For Context | waitForContext | text |  | 
+1,147 | Wait For Context Count | waitForContextCount | text |  | 
+1,148 | Wait For Context Match | waitForContextMatch | text |  | 
+1,149 | Wait For Context Not Match | waitForContextNotMatch | text |  | 
+1,150 | Wait For Cookie | waitForCookie | text |  | 
+1,151 | Wait For Cookie By Name | waitForCookieByName | name | text | 
+1,152 | Wait For Cookie By Name Match | waitForCookieByNameMatch | name | text | 
+1,153 | Wait For Cookie By Name Not Match | waitForCookieByNameNotMatch | name | text | 
+1,154 | Wait For Cookie Match | waitForCookieMatch | text |  | 
+1,155 | Wait For Cookie Not Match | waitForCookieNotMatch | text |  | 
+1,156 | Wait For Cookie Not Present | waitForCookieNotPresent | name |  | 
+1,157 | Wait For Cookie Present | waitForCookiePresent | name |  | 
+1,158 | Wait For Editable | waitForEditable | locator |  | 
+1,159 | Wait For Editable | waitForEditable | parentLocator | locator | 
+1,160 | Wait For Element Not Present | waitForElementNotPresent | locator |  | 
+1,161 | Wait For Element Not Present | waitForElementNotPresent | parentLocator | locator | 
+1,162 | Wait For Element Present | waitForElementPresent | locator |  | 
+1,163 | Wait For Element Present | waitForElementPresent | parentLocator | locator | 
+1,164 | Wait For Enabled | waitForEnabled | locator |  | 
+1,165 | Wait For Enabled | waitForEnabled | parentLocator | locator | 
+1,166 | Wait For Eval | waitForEval | expression | text | 
+1,167 | Wait For Eval Script | waitForEvalScript | script | text | 
+1,168 | Wait For Eval Script Match | waitForEvalScriptMatch | script | text | 
+1,169 | Wait For Eval Script Not Match | waitForEvalScriptNotMatch | script | text | 
+1,170 | Wait For Exists In Database | waitForExistsInDatabase | sql |  | 
+1,171 | Wait For Expression | waitForExpression | expression | text | 
+1,172 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
+1,173 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
+1,174 | Wait For File Downloaded | waitForFileDownloaded | filePattern |  | 
+1,175 | Wait For Html Source | waitForHtmlSource | text |  | 
+1,176 | Wait For Html Source Match | waitForHtmlSourceMatch | text |  | 
+1,177 | Wait For Html Source Not Match | waitForHtmlSourceNotMatch | text |  | 
+1,178 | Wait For Location | waitForLocation | text |  | 
+1,179 | Wait For Location Match | waitForLocationMatch | text |  | 
+1,180 | Wait For Location Not Match | waitForLocationNotMatch | text |  | 
+1,181 | Wait For Not Activity | waitForNotActivity | activity |  | 
+1,182 | Wait For Not Alert | waitForNotAlert | text |  | 
+1,183 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
+1,184 | Wait For Not Body Text | waitForNotBodyText | text |  | 
+1,185 | Wait For Not Checked | waitForNotChecked | locator |  | 
+1,186 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
+1,187 | Wait For Not Confirmation | waitForNotConfirmation | text |  | 
+1,188 | Wait For Not Context | waitForNotContext | text |  | 
+1,189 | Wait For Not Context Count | waitForNotContextCount | text |  | 
+1,190 | Wait For Not Cookie | waitForNotCookie | text |  | 
+1,191 | Wait For Not Cookie By Name | waitForNotCookieByName | name | text | 
+1,192 | Wait For Not Editable | waitForNotEditable | locator |  | 
+1,193 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
+1,194 | Wait For Not Enabled | waitForNotEnabled | locator |  | 
+1,195 | Wait For Not Enabled | waitForNotEnabled | parentLocator | locator | 
+1,196 | Wait For Not Eval | waitForNotEval | expression | text | 
+1,197 | Wait For Not Eval Script | waitForNotEvalScript | script | text | 
+1,198 | Wait For Not Exists In Database | waitForNotExistsInDatabase | sql |  | 
+1,199 | Wait For Not Expression | waitForNotExpression | expression | text | 
+1,200 | Wait For Not File Downloaded | waitForNotFileDownloaded | filePattern |  | 
+1,201 | Wait For Not Html Source | waitForNotHtmlSource | text |  | 
+1,202 | Wait For Not Location | waitForNotLocation | text |  | 
+1,203 | Wait For Not Page Source | waitForNotPageSource | text |  | 
+1,204 | Wait For Not Prompt | waitForNotPrompt | text |  | 
+1,205 | Wait For Not QR | waitForNotQR | locator | text | 
+1,206 | Wait For Not QR | waitForNotQR | parentLocator | locator | text
+1,207 | Wait For Not Selected Id | waitForNotSelectedId | locator | text | 
+1,208 | Wait For Not Selected Id | waitForNotSelectedId | parentLocator | locator | text
+1,209 | Wait For Not Selected Index | waitForNotSelectedIndex | locator | text | 
+1,210 | Wait For Not Selected Index | waitForNotSelectedIndex | parentLocator | locator | text
+1,211 | Wait For Not Selected Label | waitForNotSelectedLabel | locator | text | 
+1,212 | Wait For Not Selected Label | waitForNotSelectedLabel | parentLocator | locator | text
+1,213 | Wait For Not Selected Value | waitForNotSelectedValue | locator | text | 
+1,214 | Wait For Not Selected Value | waitForNotSelectedValue | parentLocator | locator | text
+1,215 | Wait For Not Something Selected | waitForNotSomethingSelected | locator |  | 
+1,216 | Wait For Not Something Selected | waitForNotSomethingSelected | parentLocator | locator | 
+1,217 | Wait For Not Table | waitForNotTable | locator | cellAddress | text
+1,218 | Wait For Not Tag Name | waitForNotTagName | locator | text | 
+1,219 | Wait For Not Tag Name | waitForNotTagName | parentLocator | locator | text
+1,220 | Wait For Not Text | waitForNotText | locator | text | 
+1,221 | Wait For Not Text | waitForNotText | parentLocator | locator | text
+1,222 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
+1,223 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
+1,224 | Wait For Not Title | waitForNotTitle | text |  | 
+1,225 | Wait For Not Value | waitForNotValue | locator | text | 
+1,226 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
+1,227 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
+1,228 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
+1,229 | Wait For Not Visible | waitForNotVisible | locator |  | 
+1,230 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
+1,231 | Wait For Page Source | waitForPageSource | text |  | 
+1,232 | Wait For Page Source Match | waitForPageSourceMatch | text |  | 
+1,233 | Wait For Page Source Not Match | waitForPageSourceNotMatch | text |  | 
+1,234 | Wait For Page To Load | waitForPageToLoad | timeout |  | 
+1,235 | Wait For Pop Up | waitForPopUp | windowID | timeout | 
+1,236 | Wait For Prompt | waitForPrompt | text |  | 
+1,237 | Wait For Prompt Match | waitForPromptMatch | text |  | 
+1,238 | Wait For Prompt Not Match | waitForPromptNotMatch | text |  | 
+1,239 | Wait For Prompt Not Present | waitForPromptNotPresent |  |  | 
+1,240 | Wait For Prompt Present | waitForPromptPresent |  |  | 
+1,241 | Wait For QR | waitForQR | locator | text | 
+1,242 | Wait For QR | waitForQR | parentLocator | locator | text
+1,243 | Wait For QR Match | waitForQRMatch | locator | text | 
+1,244 | Wait For QR Match | waitForQRMatch | parentLocator | locator | text
+1,245 | Wait For QR Not Match | waitForQRNotMatch | locator | text | 
+1,246 | Wait For QR Not Match | waitForQRNotMatch | parentLocator | locator | text
+1,247 | Wait For Selected Id | waitForSelectedId | locator | text | 
+1,248 | Wait For Selected Id | waitForSelectedId | parentLocator | locator | text
+1,249 | Wait For Selected Id Match | waitForSelectedIdMatch | locator | text | 
+1,250 | Wait For Selected Id Match | waitForSelectedIdMatch | parentLocator | locator | text
+1,251 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | locator | text | 
+1,252 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | parentLocator | locator | text
+1,253 | Wait For Selected Index | waitForSelectedIndex | locator | text | 
+1,254 | Wait For Selected Index | waitForSelectedIndex | parentLocator | locator | text
+1,255 | Wait For Selected Index Match | waitForSelectedIndexMatch | locator | text | 
+1,256 | Wait For Selected Index Match | waitForSelectedIndexMatch | parentLocator | locator | text
+1,257 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | locator | text | 
+1,258 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | parentLocator | locator | text
+1,259 | Wait For Selected Label | waitForSelectedLabel | locator | text | 
+1,260 | Wait For Selected Label | waitForSelectedLabel | parentLocator | locator | text
+1,261 | Wait For Selected Label Match | waitForSelectedLabelMatch | locator | text | 
+1,262 | Wait For Selected Label Match | waitForSelectedLabelMatch | parentLocator | locator | text
+1,263 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | locator | text | 
+1,264 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | parentLocator | locator | text
+1,265 | Wait For Selected Value | waitForSelectedValue | locator | text | 
+1,266 | Wait For Selected Value | waitForSelectedValue | parentLocator | locator | text
+1,267 | Wait For Selected Value Match | waitForSelectedValueMatch | locator | text | 
+1,268 | Wait For Selected Value Match | waitForSelectedValueMatch | parentLocator | locator | text
+1,269 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | locator | text | 
+1,270 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | parentLocator | locator | text
+1,271 | Wait For Something Selected | waitForSomethingSelected | locator |  | 
+1,272 | Wait For Something Selected | waitForSomethingSelected | parentLocator | locator | 
+1,273 | Wait For Table | waitForTable | locator | cellAddress | text
+1,274 | Wait For Table Match | waitForTableMatch | locator | cellAddress | text
+1,275 | Wait For Table Not Match | waitForTableNotMatch | locator | cellAddress | text
+1,276 | Wait For Tag Name | waitForTagName | locator | text | 
+1,277 | Wait For Tag Name | waitForTagName | parentLocator | locator | text
+1,278 | Wait For Tag Name Match | waitForTagNameMatch | locator | text | 
+1,279 | Wait For Tag Name Match | waitForTagNameMatch | parentLocator | locator | text
+1,280 | Wait For Tag Name Not Match | waitForTagNameNotMatch | locator | text | 
+1,281 | Wait For Tag Name Not Match | waitForTagNameNotMatch | parentLocator | locator | text
+1,282 | Wait For Text | waitForText | locator | text | 
+1,283 | Wait For Text | waitForText | parentLocator | locator | text
+1,284 | Wait For Text Empty | waitForTextEmpty | locator |  | 
+1,285 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
+1,286 | Wait For Text Match | waitForTextMatch | locator | text | 
+1,287 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
+1,288 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
+1,289 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
+1,290 | Wait For Text Not Present | waitForTextNotPresent | pattern |  | 
+1,291 | Wait For Text Present | waitForTextPresent | pattern |  | 
+1,292 | Wait For Title | waitForTitle | text |  | 
+1,293 | Wait For Title Match | waitForTitleMatch | text |  | 
+1,294 | Wait For Title Not Match | waitForTitleNotMatch | text |  | 
+1,295 | Wait For Value | waitForValue | locator | text | 
+1,296 | Wait For Value | waitForValue | parentLocator | locator | text
+1,297 | Wait For Value Empty | waitForValueEmpty | locator |  | 
+1,298 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
+1,299 | Wait For Value Match | waitForValueMatch | locator | text | 
+1,300 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
+1,301 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
+1,302 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
+1,303 | Wait For Visible | waitForVisible | locator |  | 
+1,304 | Wait For Visible | waitForVisible | parentLocator | locator | 
+1,305 | Window Focus | windowFocus |  |  | 
+1,306 | Window Maximize | windowMaximize |  |  | 
 
 ## Accept Touch ID
 
@@ -577,6 +1341,146 @@ activateApp(bundleId)
 Parameter | Description
 --------- | -----------
 bundleId | the bundle identifier (or app id) of the app to activate.
+
+## Add Selection
+
+Add a selection to the set of selected options in a multi-select element using an option locator.
+
+### Usage
+
+`
+addSelection(locator, optionLocator)
+`
+
+`
+addSelection(parentLocator, locator, optionLocator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+optionLocator | an option locator (a label by default)
+
+## Add Selection Id
+
+Add a selection to the set of selected options in a multi-select element using an element ID.
+
+### Usage
+
+`
+addSelectionId(locator, id)
+`
+
+`
+addSelectionId(parentLocator, locator, id)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+id | an element ID
+
+## Add Selection Index
+
+Add a selection to the set of selected options in a multi-select element using an index.
+
+### Usage
+
+`
+addSelectionIndex(locator, index)
+`
+
+`
+addSelectionIndex(parentLocator, locator, index)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+index | an index
+
+## Add Selection Label
+
+Add a selection to the set of selected options in a multi-select element using a label.
+
+### Usage
+
+`
+addSelectionLabel(locator, label)
+`
+
+`
+addSelectionLabel(parentLocator, locator, label)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+label | a label
+
+## Add Selection Value
+
+Add a selection to the set of selected options in a multi-select element using a value.
+
+### Usage
+
+`
+addSelectionValue(locator, value)
+`
+
+`
+addSelectionValue(parentLocator, locator, value)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+value | a value
+
+## Alt Key Down
+
+Press the alt key and hold it down until doAltUp() is called or a new page is loaded.
+
+### Usage
+
+`
+altKeyDown()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Alt Key Up
+
+Release the alt key.
+
+### Usage
+
+`
+altKeyUp()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 
 ## Answer Prompt
 
@@ -692,6 +1596,264 @@ assertAlertPresent()
 Parameter | Description
 --------- | -----------
 
+## Assert All Buttons
+
+Asserts that the IDs of all buttons on the page equals to the given value. When the assert fails, the test is aborted.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllButtons(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Buttons Match
+
+Asserts that the IDs of all buttons on the page matches the given value. When the assert fails, the test is aborted.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllButtonsMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Buttons Not Match
+
+Asserts that the IDs of all buttons on the page not match the given value. When the assert fails, the test is aborted.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllButtonsNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Fields
+
+Asserts that the IDs of all input fields on the page equals to the given value. When the assert fails, the test is aborted.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllFields(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Fields Match
+
+Asserts that the IDs of all input fields on the page matches the given value. When the assert fails, the test is aborted.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllFieldsMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Fields Not Match
+
+Asserts that the IDs of all input fields on the page not match the given value. When the assert fails, the test is aborted.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllFieldsNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Links
+
+Asserts that the IDs of all links on the page equals to the given value. When the assert fails, the test is aborted.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllLinks(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Links Match
+
+Asserts that the IDs of all links on the page matches the given value. When the assert fails, the test is aborted.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllLinksMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Links Not Match
+
+Asserts that the IDs of all links on the page not match the given value. When the assert fails, the test is aborted.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertAllLinksNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Window Names
+
+Asserts that the names of all windows that the browser knows about equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAllWindowNames(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Window Names Match
+
+Asserts that the names of all windows that the browser knows about matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAllWindowNamesMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Window Names Not Match
+
+Asserts that the names of all windows that the browser knows about not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAllWindowNamesNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Window Titles
+
+Asserts that the titles of all windows that the browser knows about equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAllWindowTitles(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Window Titles Match
+
+Asserts that the titles of all windows that the browser knows about matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAllWindowTitlesMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert All Window Titles Not Match
+
+Asserts that the titles of all windows that the browser knows about not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAllWindowTitlesNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Assert Attribute
 
 Asserts that the value of the given attribute of the element equals to the given value. When the assert fails, the test is aborted. Will return the current value, even if this has been modified after the page has been loaded.
@@ -722,6 +1884,57 @@ Parameter | Description
 --------- | -----------
 locator | an element locator
 name | The name of the attribute.
+text | the value to match with the result
+
+## Assert Attribute From All Windows
+
+Asserts that every instance of some attribute from all known windows equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAttributeFromAllWindows(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
+text | the value to match with the result
+
+## Assert Attribute From All Windows Match
+
+Asserts that every instance of some attribute from all known windows matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAttributeFromAllWindowsMatch(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
+text | the value to match with the result
+
+## Assert Attribute From All Windows Not Match
+
+Asserts that every instance of some attribute from all known windows not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertAttributeFromAllWindowsNotMatch(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
 text | the value to match with the result
 
 ## Assert Attribute Match
@@ -788,6 +2001,98 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
+## Assert Background Color
+
+Asserts that the background color of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertBackgroundColor(locator, text)
+`
+
+`
+assertBackgroundColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Body Text
+
+Asserts that the entire text of the page equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertBodyText(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Body Text Match
+
+Asserts that the entire text of the page matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertBodyTextMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Body Text Not Match
+
+Asserts that the entire text of the page not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertBodyTextNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Border Color
+
+Asserts that the border color of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertBorderColor(locator, text)
+`
+
+`
+assertBorderColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Assert Checked
 
 Asserts that a toggle-button (checkbox/radio) is checked. When the assert fails, the test is aborted. Fails if the specified element doesn't exist or isn't a toggle-button.
@@ -808,6 +2113,28 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator pointing to a checkbox or radio button
+
+## Assert Color
+
+Asserts that the text color of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertColor(locator, text)
+`
+
+`
+assertColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Assert Confirmation
 
@@ -955,6 +2282,178 @@ Parameter | Description
 --------- | -----------
 text | the value to match with the result
 
+## Assert Cookie
+
+Asserts that all cookies of the current page under test equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookie(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Cookie By Name
+
+Asserts that the value of the cookie with the specified name equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookieByName(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Assert Cookie By Name Match
+
+Asserts that the value of the cookie with the specified name matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookieByNameMatch(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Assert Cookie By Name Not Match
+
+Asserts that the value of the cookie with the specified name not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookieByNameNotMatch(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Assert Cookie Match
+
+Asserts that all cookies of the current page under test matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookieMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Cookie Not Match
+
+Asserts that all cookies of the current page under test not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookieNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Cookie Not Present
+
+Asserts that a cookie with the specified name is not present. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookieNotPresent(name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+
+## Assert Cookie Present
+
+Asserts that a cookie with the specified name is present. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertCookiePresent(name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+
+## Assert Css Count
+
+Asserts that the number of nodes that match the specified css selector, eg equals to the given value. When the assert fails, the test is aborted. "css=table" would give the number of tables.
+
+### Usage
+
+`
+assertCssCount(css, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+css | the css selector to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
+text | the value to match with the result
+
+## Assert Cursor Position
+
+Asserts that the text cursor position in the given input element or textarea equals to the given value. When the assert fails, the test is aborted. Beware, this may not work perfectly on all browsers.
+
+ <p> Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to return the position of the last location of the cursor, even though the cursor is now gone from the page. This is filed as <a href="http://jira.openqa.org/browse/SEL-243">SEL-243</a>. </p> This method will fail if the specified element isn't an input element or textarea, or there is no cursor in the element.
+
+### Usage
+
+`
+assertCursorPosition(locator, text)
+`
+
+`
+assertCursorPosition(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an input element or textarea
+text | the value to match with the result
+
 ## Assert Date List Order Asc
 
 Returns the text values of the specified elements are sorted in ascending order. The values are assuming to be dates.
@@ -1020,6 +2519,50 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
+## Assert Element Height
+
+Asserts that the height of an element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertElementHeight(locator, text)
+`
+
+`
+assertElementHeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Element Index
+
+Asserts that the relative index of an element to its parent (starting from 0) equals to the given value. When the assert fails, the test is aborted. The comment node and empty text node will be ignored.
+
+### Usage
+
+`
+assertElementIndex(locator, text)
+`
+
+`
+assertElementIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Assert Element Not Present
 
 Asserts that the specified element is not somewhere on the page. When the assert fails, the test is aborted.
@@ -1041,6 +2584,50 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
+## Assert Element Position Left
+
+Asserts that the horizontal position of an element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertElementPositionLeft(locator, text)
+`
+
+`
+assertElementPositionLeft(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Element Position Top
+
+Asserts that the vertical position of an element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertElementPositionTop(locator, text)
+`
+
+`
+assertElementPositionTop(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Assert Element Present
 
 Asserts that the specified element is somewhere on the page. When the assert fails, the test is aborted.
@@ -1061,6 +2648,28 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Assert Element Width
+
+Asserts that the width of an element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertElementWidth(locator, text)
+`
+
+`
+assertElementWidth(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Assert Enabled
 
@@ -1098,6 +2707,63 @@ assertEval(expression, text)
 Parameter | Description
 --------- | -----------
 expression | the snippet to run
+text | the value to match with the result
+
+## Assert Eval Script
+
+Asserts that the result of evaluating the specified JavaScript snippet equals to the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+assertEvalScript(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Assert Eval Script Match
+
+Asserts that the result of evaluating the specified JavaScript snippet matches the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+assertEvalScriptMatch(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Assert Eval Script Not Match
+
+Asserts that the result of evaluating the specified JavaScript snippet not match the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+assertEvalScriptNotMatch(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
 text | the value to match with the result
 
 ## Assert Exists In Database
@@ -1171,6 +2837,370 @@ assertExpressionNotMatch(expression, text)
 Parameter | Description
 --------- | -----------
 expression | the value to return
+text | the value to match with the result
+
+## Assert File Contain Line
+
+Verifies the contents of the file contains the given text. This method is useful for testing CSV file's contents.
+
+### Usage
+
+`
+assertFileContainLine(filePattern, charset, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+charset | the charset
+text | the text to compare
+
+## Assert File Downloaded
+
+Asserts that a file is downloaded by browser. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFileDownloaded(filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+
+## Assert File First Line
+
+Verifies the first line of the file equals to the given text. This method is useful for testing CSV file's header.
+
+### Usage
+
+`
+assertFileFirstLine(filePattern, charset, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+charset | the charset
+text | the text to compare
+
+## Assert Font Family
+
+Asserts that the font family of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontFamily(locator, text)
+`
+
+`
+assertFontFamily(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Family Match
+
+Asserts that the font family of the specified element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontFamilyMatch(locator, text)
+`
+
+`
+assertFontFamilyMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Family Not Match
+
+Asserts that the font family of the specified element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontFamilyNotMatch(locator, text)
+`
+
+`
+assertFontFamilyNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Size
+
+Asserts that the font size of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontSize(locator, text)
+`
+
+`
+assertFontSize(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Size Match
+
+Asserts that the font size of the specified element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontSizeMatch(locator, text)
+`
+
+`
+assertFontSizeMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Size Not Match
+
+Asserts that the font size of the specified element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontSizeNotMatch(locator, text)
+`
+
+`
+assertFontSizeNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Style
+
+Asserts that the font style of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontStyle(locator, text)
+`
+
+`
+assertFontStyle(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Style Match
+
+Asserts that the font style of the specified element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontStyleMatch(locator, text)
+`
+
+`
+assertFontStyleMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Style Not Match
+
+Asserts that the font style of the specified element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontStyleNotMatch(locator, text)
+`
+
+`
+assertFontStyleNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Weight
+
+Asserts that the font weight of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontWeight(locator, text)
+`
+
+`
+assertFontWeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Weight Match
+
+Asserts that the font weight of the specified element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontWeightMatch(locator, text)
+`
+
+`
+assertFontWeightMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Font Weight Not Match
+
+Asserts that the font weight of the specified element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertFontWeightNotMatch(locator, text)
+`
+
+`
+assertFontWeightNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Html Source
+
+Asserts that the entire HTML source between the opening and closing "html" tags equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertHtmlSource(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Html Source Match
+
+Asserts that the entire HTML source between the opening and closing "html" tags matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertHtmlSourceMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Html Source Not Match
+
+Asserts that the entire HTML source between the opening and closing "html" tags not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertHtmlSourceNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 text | the value to match with the result
 
 ## Assert Integer List Order Asc
@@ -1283,6 +3313,54 @@ Parameter | Description
 --------- | -----------
 variable | the variable
 
+## Assert Location
+
+Asserts that the absolute URL of the current page equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertLocation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Location Match
+
+Asserts that the absolute URL of the current page matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertLocationMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Location Not Match
+
+Asserts that the absolute URL of the current page not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertLocationNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Assert Not Activity
 
 Asserts that the current activity matches the given activity. When the assert fails, the test is aborted. The activity is identified by a string separated by a comma, containing "appPackage" and "appActivity" properties. For example: appPackage=example,appActivity=example
@@ -1307,6 +3385,92 @@ Asserts that the message of a JavaScript alert not equal to the given value. Whe
 
 `
 assertNotAlert(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not All Buttons
+
+Asserts that the IDs of all buttons on the page not equal to the given value. When the assert fails, the test is aborted.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertNotAllButtons(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not All Fields
+
+Asserts that the IDs of all input fields on the page not equal to the given value. When the assert fails, the test is aborted.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertNotAllFields(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not All Links
+
+Asserts that the IDs of all links on the page not equal to the given value. When the assert fails, the test is aborted.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+assertNotAllLinks(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not All Window Names
+
+Asserts that the names of all windows that the browser knows about not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotAllWindowNames(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not All Window Titles
+
+Asserts that the titles of all windows that the browser knows about not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotAllWindowTitles(text)
 `
 
 ### Parameters
@@ -1347,6 +3511,83 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
+## Assert Not Attribute From All Windows
+
+Asserts that every instance of some attribute from all known windows not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotAttributeFromAllWindows(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
+text | the value to match with the result
+
+## Assert Not Background Color
+
+Asserts that the background color of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotBackgroundColor(locator, text)
+`
+
+`
+assertNotBackgroundColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Body Text
+
+Asserts that the entire text of the page not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotBodyText(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not Border Color
+
+Asserts that the border color of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotBorderColor(locator, text)
+`
+
+`
+assertNotBorderColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Assert Not Checked
 
 Asserts that a toggle-button (checkbox/radio) is not checked. When the assert fails, the test is aborted. Fails if the specified element doesn't exist or isn't a toggle-button.
@@ -1367,6 +3608,28 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator pointing to a checkbox or radio button
+
+## Assert Not Color
+
+Asserts that the text color of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotColor(locator, text)
+`
+
+`
+assertNotColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Assert Not Confirmation
 
@@ -1416,6 +3679,80 @@ Parameter | Description
 --------- | -----------
 text | the value to match with the result
 
+## Assert Not Cookie
+
+Asserts that all cookies of the current page under test not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotCookie(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not Cookie By Name
+
+Asserts that the value of the cookie with the specified name not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotCookieByName(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Assert Not Css Count
+
+Asserts that the number of nodes that match the specified css selector, eg not equal to the given value. When the assert fails, the test is aborted. "css=table" would give the number of tables.
+
+### Usage
+
+`
+assertNotCssCount(css, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+css | the css selector to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
+text | the value to match with the result
+
+## Assert Not Cursor Position
+
+Asserts that the text cursor position in the given input element or textarea not equal to the given value. When the assert fails, the test is aborted. Beware, this may not work perfectly on all browsers.
+
+ <p> Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to return the position of the last location of the cursor, even though the cursor is now gone from the page. This is filed as <a href="http://jira.openqa.org/browse/SEL-243">SEL-243</a>. </p> This method will fail if the specified element isn't an input element or textarea, or there is no cursor in the element.
+
+### Usage
+
+`
+assertNotCursorPosition(locator, text)
+`
+
+`
+assertNotCursorPosition(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an input element or textarea
+text | the value to match with the result
+
 ## Assert Not Editable
 
 Asserts that the specified input element is not editable, ie hasn't been disabled. When the assert fails, the test is aborted. This method will fail if the specified element isn't an input element.
@@ -1436,6 +3773,116 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Assert Not Element Height
+
+Asserts that the height of an element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotElementHeight(locator, text)
+`
+
+`
+assertNotElementHeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Element Index
+
+Asserts that the relative index of an element to its parent (starting from 0) not equal to the given value. When the assert fails, the test is aborted. The comment node and empty text node will be ignored.
+
+### Usage
+
+`
+assertNotElementIndex(locator, text)
+`
+
+`
+assertNotElementIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Element Position Left
+
+Asserts that the horizontal position of an element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotElementPositionLeft(locator, text)
+`
+
+`
+assertNotElementPositionLeft(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Element Position Top
+
+Asserts that the vertical position of an element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotElementPositionTop(locator, text)
+`
+
+`
+assertNotElementPositionTop(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Element Width
+
+Asserts that the width of an element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotElementWidth(locator, text)
+`
+
+`
+assertNotElementWidth(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Assert Not Enabled
 
@@ -1475,6 +3922,25 @@ Parameter | Description
 expression | the snippet to run
 text | the value to match with the result
 
+## Assert Not Eval Script
+
+Asserts that the result of evaluating the specified JavaScript snippet not equal to the given value. When the assert fails, the test is aborted. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+assertNotEvalScript(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
 ## Assert Not Exists In Database
 
 Asserts that any row would be returned by given the input SQL statement. When the assert fails, the test is aborted.
@@ -1510,6 +3976,159 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
+## Assert Not File Downloaded
+
+Asserts that a file is not downloaded by browser. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotFileDownloaded(filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+
+## Assert Not Font Family
+
+Asserts that the font family of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotFontFamily(locator, text)
+`
+
+`
+assertNotFontFamily(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Font Size
+
+Asserts that the font size of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotFontSize(locator, text)
+`
+
+`
+assertNotFontSize(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Font Style
+
+Asserts that the font style of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotFontStyle(locator, text)
+`
+
+`
+assertNotFontStyle(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Font Weight
+
+Asserts that the font weight of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotFontWeight(locator, text)
+`
+
+`
+assertNotFontWeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Html Source
+
+Asserts that the entire HTML source between the opening and closing "html" tags not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotHtmlSource(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not Location
+
+Asserts that the absolute URL of the current page not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotLocation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Not Ordered
+
+Asserts that these two elements have same parent and are ordered siblings in the DOM. When the assert fails, the test is aborted. Two same elements will not be considered ordered.
+
+### Usage
+
+`
+assertNotOrdered(firstLocator, secondLocator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+firstLocator | an element locator pointing to the first element
+secondLocator | an element locator pointing to the second element
+
 ## Assert Not Page Source
 
 Asserts that the current application hierarchy XML (app) or page source (web). <p> In a web context, the source returns the source HTML of the current window. In a native context (iOS, Android, etc...) it will return the application hierarchy XML not equal to the given value. When the assert fails, the test is aborted.
@@ -1540,6 +4159,265 @@ assertNotPrompt(text)
 
 Parameter | Description
 --------- | -----------
+text | the value to match with the result
+
+## Assert Not QR
+
+Asserts that the QR code's value from the image tag source encoded in Base64 format not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotQR(locator, text)
+`
+
+`
+assertNotQR(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Assert Not Select Options
+
+Asserts that all option labels in the specified select drop-down not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectOptions(locator, text)
+`
+
+`
+assertNotSelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Id
+
+Asserts that option element ID for selected option in the specified select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedId(locator, text)
+`
+
+`
+assertNotSelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Ids
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedIds(locator, text)
+`
+
+`
+assertNotSelectedIds(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Index
+
+Asserts that option index (option number, starting at 0) for selected option in the specified select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedIndex(locator, text)
+`
+
+`
+assertNotSelectedIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Indexes
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedIndexes(locator, text)
+`
+
+`
+assertNotSelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Label
+
+Asserts that option label (visible text) for selected option in the specified select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedLabel(locator, text)
+`
+
+`
+assertNotSelectedLabel(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Labels
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedLabels(locator, text)
+`
+
+`
+assertNotSelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Value
+
+Asserts that option value (value attribute) for selected option in the specified select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedValue(locator, text)
+`
+
+`
+assertNotSelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Selected Values
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSelectedValues(locator, text)
+`
+
+`
+assertNotSelectedValues(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Not Something Selected
+
+Asserts that some option in a drop-down menu is not selected. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotSomethingSelected(locator)
+`
+
+`
+assertNotSomethingSelected(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+
+## Assert Not Table
+
+Asserts that the text from a cell of a table not equal to the given value. When the assert fails, the test is aborted. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+assertNotTable(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
 text | the value to match with the result
 
 ## Assert Not Tag Name
@@ -1586,6 +4464,50 @@ parentLocator | an element locator of parent element
 locator | an element locator
 text | the value to match with the result
 
+## Assert Not Text Alignment
+
+Asserts that the text alignment of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotTextAlignment(locator, text)
+`
+
+`
+assertNotTextAlignment(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Not Text Decoration
+
+Asserts that the text decoration of the specified element not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotTextDecoration(locator, text)
+`
+
+`
+assertNotTextDecoration(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Assert Not Text Empty
 
 Asserts that the text of an element is not empty. When the assert fails, the test is aborted.
@@ -1606,6 +4528,22 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Assert Not Title
+
+Asserts that the title of the current page not equal to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertNotTitle(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
 
 ## Assert Not Value
 
@@ -1704,6 +4642,23 @@ Parameter | Description
 --------- | -----------
 xpath | the xpath expression to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
 text | the value to match with the result
+
+## Assert Ordered
+
+Asserts that these two elements have same parent and are ordered siblings in the DOM. When the assert fails, the test is aborted. Two same elements will not be considered ordered.
+
+### Usage
+
+`
+assertOrdered(firstLocator, secondLocator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+firstLocator | an element locator pointing to the first element
+secondLocator | an element locator pointing to the second element
 
 ## Assert Page Source
 
@@ -1835,6 +4790,72 @@ assertPromptPresent()
 Parameter | Description
 --------- | -----------
 
+## Assert QR
+
+Asserts that the QR code's value from the image tag source encoded in Base64 format equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertQR(locator, text)
+`
+
+`
+assertQR(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Assert QR Match
+
+Asserts that the QR code's value from the image tag source encoded in Base64 format matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertQRMatch(locator, text)
+`
+
+`
+assertQRMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Assert QR Not Match
+
+Asserts that the QR code's value from the image tag source encoded in Base64 format not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertQRNotMatch(locator, text)
+`
+
+`
+assertQRNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
 ## Assert Row Count
 
 Check if the number of rows returned from selectStatement is equal to the value submitted.
@@ -1885,6 +4906,675 @@ Parameter | Description
 --------- | -----------
 sql | the sql
 count | the count
+
+## Assert Select Options
+
+Asserts that all option labels in the specified select drop-down equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectOptions(locator, text)
+`
+
+`
+assertSelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Select Options Match
+
+Asserts that all option labels in the specified select drop-down matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectOptionsMatch(locator, text)
+`
+
+`
+assertSelectOptionsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Select Options Not Match
+
+Asserts that all option labels in the specified select drop-down not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectOptionsNotMatch(locator, text)
+`
+
+`
+assertSelectOptionsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Id
+
+Asserts that option element ID for selected option in the specified select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedId(locator, text)
+`
+
+`
+assertSelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Id Match
+
+Asserts that option element ID for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIdMatch(locator, text)
+`
+
+`
+assertSelectedIdMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Id Not Match
+
+Asserts that option element ID for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIdNotMatch(locator, text)
+`
+
+`
+assertSelectedIdNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Ids
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIds(locator, text)
+`
+
+`
+assertSelectedIds(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Ids Match
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIdsMatch(locator, text)
+`
+
+`
+assertSelectedIdsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Ids Not Match
+
+Asserts that all option element IDs for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIdsNotMatch(locator, text)
+`
+
+`
+assertSelectedIdsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Index
+
+Asserts that option index (option number, starting at 0) for selected option in the specified select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndex(locator, text)
+`
+
+`
+assertSelectedIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Index Match
+
+Asserts that option index (option number, starting at 0) for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexMatch(locator, text)
+`
+
+`
+assertSelectedIndexMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Index Not Match
+
+Asserts that option index (option number, starting at 0) for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexNotMatch(locator, text)
+`
+
+`
+assertSelectedIndexNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Indexes
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexes(locator, text)
+`
+
+`
+assertSelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Indexes Match
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexesMatch(locator, text)
+`
+
+`
+assertSelectedIndexesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Indexes Not Match
+
+Asserts that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedIndexesNotMatch(locator, text)
+`
+
+`
+assertSelectedIndexesNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Label
+
+Asserts that option label (visible text) for selected option in the specified select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabel(locator, text)
+`
+
+`
+assertSelectedLabel(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Label Match
+
+Asserts that option label (visible text) for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabelMatch(locator, text)
+`
+
+`
+assertSelectedLabelMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Label Not Match
+
+Asserts that option label (visible text) for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabelNotMatch(locator, text)
+`
+
+`
+assertSelectedLabelNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Labels
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabels(locator, text)
+`
+
+`
+assertSelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Labels Match
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabelsMatch(locator, text)
+`
+
+`
+assertSelectedLabelsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Labels Not Match
+
+Asserts that all option labels (visible text) for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedLabelsNotMatch(locator, text)
+`
+
+`
+assertSelectedLabelsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Value
+
+Asserts that option value (value attribute) for selected option in the specified select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValue(locator, text)
+`
+
+`
+assertSelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Value Match
+
+Asserts that option value (value attribute) for selected option in the specified select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValueMatch(locator, text)
+`
+
+`
+assertSelectedValueMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Value Not Match
+
+Asserts that option value (value attribute) for selected option in the specified select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValueNotMatch(locator, text)
+`
+
+`
+assertSelectedValueNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Values
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValues(locator, text)
+`
+
+`
+assertSelectedValues(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Values Match
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValuesMatch(locator, text)
+`
+
+`
+assertSelectedValuesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Selected Values Not Match
+
+Asserts that all option values (value attributes) for selected options in the specified select or multi-select element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSelectedValuesNotMatch(locator, text)
+`
+
+`
+assertSelectedValuesNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Assert Something Selected
+
+Asserts that some option in a drop-down menu is selected. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertSomethingSelected(locator)
+`
+
+`
+assertSomethingSelected(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+
+## Assert Table
+
+Asserts that the text from a cell of a table equals to the given value. When the assert fails, the test is aborted. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+assertTable(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
+
+## Assert Table Match
+
+Asserts that the text from a cell of a table matches the given value. When the assert fails, the test is aborted. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+assertTableMatch(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
+
+## Assert Table Not Match
+
+Asserts that the text from a cell of a table not match the given value. When the assert fails, the test is aborted. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+assertTableNotMatch(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
 
 ## Assert Tag Name
 
@@ -1972,6 +5662,138 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+text | the value to match with the result
+
+## Assert Text Alignment
+
+Asserts that the text alignment of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTextAlignment(locator, text)
+`
+
+`
+assertTextAlignment(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Text Alignment Match
+
+Asserts that the text alignment of the specified element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTextAlignmentMatch(locator, text)
+`
+
+`
+assertTextAlignmentMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Text Alignment Not Match
+
+Asserts that the text alignment of the specified element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTextAlignmentNotMatch(locator, text)
+`
+
+`
+assertTextAlignmentNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Text Decoration
+
+Asserts that the text decoration of the specified element equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTextDecoration(locator, text)
+`
+
+`
+assertTextDecoration(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Text Decoration Match
+
+Asserts that the text decoration of the specified element matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTextDecorationMatch(locator, text)
+`
+
+`
+assertTextDecorationMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Assert Text Decoration Not Match
+
+Asserts that the text decoration of the specified element not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTextDecorationNotMatch(locator, text)
+`
+
+`
+assertTextDecorationNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
 text | the value to match with the result
 
 ## Assert Text Empty
@@ -2083,12 +5905,12 @@ text | the value to match with the result
 
 ## Assert Text Not Present
 
-Asserts that the specified text appears somewhere on the page not equal to the given value. When the assert fails, the test is aborted.
+Asserts that the specified text appears somewhere on the page. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertTextNotPresent(text)
+assertTextNotPresent(pattern)
 `
 
 ### Parameters
@@ -2096,16 +5918,15 @@ assertTextNotPresent(text)
 Parameter | Description
 --------- | -----------
 text | a text to match with the text of the page
-text | the value to match with the result
 
 ## Assert Text Present
 
-Asserts that the specified text appears somewhere on the page equals to the given value. When the assert fails, the test is aborted.
+Asserts that the specified text appears somewhere on the page. When the assert fails, the test is aborted.
 
 ### Usage
 
 `
-assertTextPresent(text)
+assertTextPresent(pattern)
 `
 
 ### Parameters
@@ -2113,6 +5934,53 @@ assertTextPresent(text)
 Parameter | Description
 --------- | -----------
 text | a text to match with the text of the page
+
+## Assert Title
+
+Asserts that the title of the current page equals to the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTitle(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Title Match
+
+Asserts that the title of the current page matches the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTitleMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Assert Title Not Match
+
+Asserts that the title of the current page not match the given value. When the assert fails, the test is aborted.
+
+### Usage
+
+`
+assertTitleNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 text | the value to match with the result
 
 ## Assert Value
@@ -2257,6 +6125,71 @@ Parameter | Description
 xpath | the xpath expression to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
 text | the value to match with the result
 
+## Assign Id
+
+Temporarily sets the "id" attribute of the specified element, so you can locate it in the future using its ID rather than a slow/complicated XPath. This ID will disappear once the page is reloaded.
+
+### Usage
+
+`
+assignId(locator, identifier)
+`
+
+`
+assignId(parentLocator, locator, identifier)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+identifier | a string to be used as the ID of the specified element
+
+## Attach File
+
+Sets a file input (upload) field to the file listed in fileLocator
+
+### Usage
+
+`
+attachFile(locator, filePath)
+`
+
+`
+attachFile(parentLocator, locator, filePath)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+filePath | a path or a URL pointing to the specified file.
+
+## Blur
+
+Remove the focus from the specified element; for example, if the element is an input field, remove the cursor from that field.
+
+### Usage
+
+`
+blur(locator)
+`
+
+`
+blur(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
 ## Broadcast Intent
 
 Broadcast an Android Intent.
@@ -2272,6 +6205,27 @@ broadcastIntent(intent)
 Parameter | Description
 --------- | -----------
 intent | Android Intent
+
+## Capture Element Screenshot
+
+Captures an element's screenshot.
+
+### Usage
+
+`
+captureElementScreenshot(locator)
+`
+
+`
+captureElementScreenshot(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
 
 ## Capture Screenshot
 
@@ -2302,6 +6256,27 @@ captureViewport()
 
 Parameter | Description
 --------- | -----------
+
+## Check
+
+Check a toggle-button (checkbox/radio)
+
+### Usage
+
+`
+check(locator)
+`
+
+`
+check(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
 
 ## Choose Cancel Confirmation
 
@@ -2405,6 +6380,28 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
+## Click At
+
+Clicks on a link, button, checkbox or radio button. If the click action causes a new page to load (like a link usually does), call waitForPageToLoad.
+
+### Usage
+
+`
+clickAt(locator, coordString)
+`
+
+`
+clickAt(parentLocator, locator, coordString)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+coordString | specifies the x,y position (i.e. - 10,20) of the mouse event relative to the element returned by the locator.
+
 ## Click Button
 
 Click a button with the given text at its center point. <p> If the element's center point is obscured by another element, an element click intercepted error is returned. If the element is outside the viewport, an element not interactable error is returned. Not all drivers automatically scroll the element into view and may need to be scrolled to in order to interact with it.
@@ -2437,6 +6434,21 @@ Parameter | Description
 --------- | -----------
 indexOrText | an index or a text to find
 
+## Close
+
+Simulates the user clicking the "close" button in the titlebar of a popup window or tab.
+
+### Usage
+
+`
+close()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
 ## Close App
 
 Close an app on device.
@@ -2466,6 +6478,203 @@ closeControlCenter()
 
 Parameter | Description
 --------- | -----------
+
+## Context Menu
+
+Simulates opening the context menu for the specified element (as might happen if the user "right-clicked" on the element).
+
+### Usage
+
+`
+contextMenu(locator)
+`
+
+`
+contextMenu(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Context Menu At
+
+Simulates opening the context menu for the specified element (as might happen if the user "right-clicked" on the element).
+
+### Usage
+
+`
+contextMenuAt(locator, coordString)
+`
+
+`
+contextMenuAt(parentLocator, locator, coordString)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+coordString | specifies the x,y position (i.e. - 10,20) of the mouse event relative to the element returned by the locator.
+
+## Control Key Down
+
+Press the control key and hold it down until doControlUp() is called or a new page is loaded.
+
+### Usage
+
+`
+controlKeyDown()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Control Key Up
+
+Release the control key.
+
+### Usage
+
+`
+controlKeyUp()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Create Cookie
+
+Create a new cookie whose path and domain are same with those of current page under test, unless you specified a path for this cookie explicitly.
+
+### Usage
+
+`
+createCookie(nameValuePair, optionsString)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+nameValuePair | name and value of the cookie in a format "name=value"
+optionsString | options for the cookie. Currently supported options include 'path', 'max_age' and 'domain'. the optionsString's format is "path=/path/, max_age=60, domain=.foo.com". The order of options are irrelevant, the unit of the value of 'max_age' is second. Note that specifying a domain that isn't a subset of the current domain will usually fail.
+
+## Delete All Visible Cookies
+
+Calls deleteCookie with recurse=true on all cookies visible to the current page. As noted on the documentation for deleteCookie, recurse=true can be much slower than simply deleting the cookies using a known domain/path.
+
+### Usage
+
+`
+deleteAllVisibleCookies()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Delete Cookie
+
+Delete a named cookie with specified path and domain. Be careful; to delete a cookie, you need to delete it using the exact same path and domain that were used to create the cookie. If the path is wrong, or the domain is wrong, the cookie simply won't be deleted. Also note that specifying a domain that isn't a subset of the current domain will usually fail.
+
+ Since there's no way to discover at runtime the original path and domain of a given cookie, we've added an option called 'recurse' to try all sub-domains of the current domain with all paths that are a subset of the current path. Beware; this option can be slow. In big-O notation, it operates in O(n*m) time, where n is the number of dots in the domain name and m is the number of slashes in the path.
+
+### Usage
+
+`
+deleteCookie(name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie to be deleted
+
+## Delete Downloaded File
+
+Deletes downloaded files.
+
+### Usage
+
+`
+deleteDownloadedFile(filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+
+## Deselect Pop Up
+
+Selects the main window. Functionally equivalent to using <code>selectWindow()</code> and specifying no value for <code>windowID</code>.
+
+### Usage
+
+`
+deselectPopUp()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Double Click
+
+Double clicks on a link, button, checkbox or radio button. If the double click action causes a new page to load (like a link usually does), call waitForPageToLoad.
+
+### Usage
+
+`
+doubleClick(locator)
+`
+
+`
+doubleClick(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Double Click At
+
+Double clicks on a link, button, checkbox or radio button. If the double click action causes a new page to load (like a link usually does), call waitForPageToLoad.
+
+### Usage
+
+`
+doubleClickAt(locator, coordString)
+`
+
+`
+doubleClickAt(parentLocator, locator, coordString)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+coordString | specifies the x,y position (i.e. - 10,20) of the mouse event relative to the element returned by the locator.
 
 ## Double Tap
 
@@ -2697,6 +6906,57 @@ Parameter | Description
 --------- | -----------
 action | the name of the action to execute
 
+## Execute If Body Text
+
+Executes an action if the entire text of the page equals to the given value.
+
+### Usage
+
+`
+executeIfBodyText(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Body Text Match
+
+Executes an action if the entire text of the page matches the given value.
+
+### Usage
+
+`
+executeIfBodyTextMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Body Text Not Match
+
+Executes an action if the entire text of the page not match the given value.
+
+### Usage
+
+`
+executeIfBodyTextNotMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
 ## Execute If Checked
 
 Executes an action if a toggle-button (checkbox/radio) is checked. Fails if the specified element doesn't exist or isn't a toggle-button.
@@ -2874,6 +7134,145 @@ Parameter | Description
 action | the name of the action to execute
 text | the value to match with the result
 
+## Execute If Cookie
+
+Executes an action if all cookies of the current page under test equals to the given value.
+
+### Usage
+
+`
+executeIfCookie(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Cookie By Name
+
+Executes an action if the value of the cookie with the specified name equals to the given value.
+
+### Usage
+
+`
+executeIfCookieByName(action, name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+name | the name of the cookie
+text | the value to match with the result
+
+## Execute If Cookie By Name Match
+
+Executes an action if the value of the cookie with the specified name matches the given value.
+
+### Usage
+
+`
+executeIfCookieByNameMatch(action, name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+name | the name of the cookie
+text | the value to match with the result
+
+## Execute If Cookie By Name Not Match
+
+Executes an action if the value of the cookie with the specified name not match the given value.
+
+### Usage
+
+`
+executeIfCookieByNameNotMatch(action, name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+name | the name of the cookie
+text | the value to match with the result
+
+## Execute If Cookie Match
+
+Executes an action if all cookies of the current page under test matches the given value.
+
+### Usage
+
+`
+executeIfCookieMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Cookie Not Match
+
+Executes an action if all cookies of the current page under test not match the given value.
+
+### Usage
+
+`
+executeIfCookieNotMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Cookie Not Present
+
+Executes an action if a cookie with the specified name is not present.
+
+### Usage
+
+`
+executeIfCookieNotPresent(action, name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+name | the name of the cookie
+
+## Execute If Cookie Present
+
+Executes an action if a cookie with the specified name is present.
+
+### Usage
+
+`
+executeIfCookiePresent(action, name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+name | the name of the cookie
+
 ## Execute If Editable
 
 Executes an action if the specified input element is editable, ie hasn't been disabled. This method will fail if the specified element isn't an input element.
@@ -2980,6 +7379,66 @@ action | the name of the action to execute
 expression | the snippet to run
 text | the value to match with the result
 
+## Execute If Eval Script
+
+Executes an action if the result of evaluating the specified JavaScript snippet equals to the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+executeIfEvalScript(action, script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Execute If Eval Script Match
+
+Executes an action if the result of evaluating the specified JavaScript snippet matches the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+executeIfEvalScriptMatch(action, script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Execute If Eval Script Not Match
+
+Executes an action if the result of evaluating the specified JavaScript snippet not match the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+executeIfEvalScriptNotMatch(action, script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+script | the JavaScript snippet to run
+text | the value to match with the result
+
 ## Execute If Exists In Database
 
 Executes an action if any row would be returned by given the input SQL statement.
@@ -3057,6 +7516,74 @@ action | the name of the action to execute
 expression | the value to return
 text | the value to match with the result
 
+## Execute If File Downloaded
+
+Executes an action if a file is downloaded by browser.
+
+### Usage
+
+`
+executeIfFileDownloaded(action, filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+filePattern | the file name pattern
+
+## Execute If Html Source
+
+Executes an action if the entire HTML source between the opening and closing "html" tags equals to the given value.
+
+### Usage
+
+`
+executeIfHtmlSource(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Html Source Match
+
+Executes an action if the entire HTML source between the opening and closing "html" tags matches the given value.
+
+### Usage
+
+`
+executeIfHtmlSourceMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Html Source Not Match
+
+Executes an action if the entire HTML source between the opening and closing "html" tags not match the given value.
+
+### Usage
+
+`
+executeIfHtmlSourceNotMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
 ## Execute If List Contain
 
 Executes an action if the specified text pattern appears in the specified variable list value contains the given value.
@@ -3095,6 +7622,57 @@ variable | the variable
 text | the text to compare
 text | the value to match with the result
 
+## Execute If Location
+
+Executes an action if the absolute URL of the current page equals to the given value.
+
+### Usage
+
+`
+executeIfLocation(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Location Match
+
+Executes an action if the absolute URL of the current page matches the given value.
+
+### Usage
+
+`
+executeIfLocationMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Location Not Match
+
+Executes an action if the absolute URL of the current page not match the given value.
+
+### Usage
+
+`
+executeIfLocationNotMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
 ## Execute If Not Activity
 
 Executes an action if the current activity matches the given activity. The activity is identified by a string separated by a comma, containing "appPackage" and "appActivity" properties. For example: appPackage=example,appActivity=example
@@ -3120,6 +7698,23 @@ Executes an action if the message of a JavaScript alert not equal to the given v
 
 `
 executeIfNotAlert(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Not Body Text
+
+Executes an action if the entire text of the page not equal to the given value.
+
+### Usage
+
+`
+executeIfNotBodyText(action, text)
 `
 
 ### Parameters
@@ -3202,6 +7797,41 @@ Parameter | Description
 action | the name of the action to execute
 text | the value to match with the result
 
+## Execute If Not Cookie
+
+Executes an action if all cookies of the current page under test not equal to the given value.
+
+### Usage
+
+`
+executeIfNotCookie(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Not Cookie By Name
+
+Executes an action if the value of the cookie with the specified name not equal to the given value.
+
+### Usage
+
+`
+executeIfNotCookieByName(action, name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+name | the name of the cookie
+text | the value to match with the result
+
 ## Execute If Not Editable
 
 Executes an action if the specified input element is not editable, ie hasn't been disabled. This method will fail if the specified element isn't an input element.
@@ -3264,6 +7894,26 @@ action | the name of the action to execute
 expression | the snippet to run
 text | the value to match with the result
 
+## Execute If Not Eval Script
+
+Executes an action if the result of evaluating the specified JavaScript snippet not equal to the given value. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+executeIfNotEvalScript(action, script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+script | the JavaScript snippet to run
+text | the value to match with the result
+
 ## Execute If Not Exists In Database
 
 Executes an action if any row would be returned by given the input SQL statement.
@@ -3301,6 +7951,57 @@ action | the name of the action to execute
 expression | the value to return
 text | the value to match with the result
 
+## Execute If Not File Downloaded
+
+Executes an action if a file is not downloaded by browser.
+
+### Usage
+
+`
+executeIfNotFileDownloaded(action, filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+filePattern | the file name pattern
+
+## Execute If Not Html Source
+
+Executes an action if the entire HTML source between the opening and closing "html" tags not equal to the given value.
+
+### Usage
+
+`
+executeIfNotHtmlSource(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Not Location
+
+Executes an action if the absolute URL of the current page not equal to the given value.
+
+### Usage
+
+`
+executeIfNotLocation(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
 ## Execute If Not Page Source
 
 Executes an action if the current application hierarchy XML (app) or page source (web). <p> In a web context, the source returns the source HTML of the current window. In a native context (iOS, Android, etc...) it will return the application hierarchy XML not equal to the given value.
@@ -3334,6 +8035,123 @@ Parameter | Description
 --------- | -----------
 action | the name of the action to execute
 text | the value to match with the result
+
+## Execute If Not QR
+
+Executes an action if the QR code's value from the image tag source encoded in Base64 format not equal to the given value.
+
+### Usage
+
+`
+executeIfNotQR(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Execute If Not Selected Id
+
+Executes an action if option element ID for selected option in the specified select element not equal to the given value.
+
+### Usage
+
+`
+executeIfNotSelectedId(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Not Selected Index
+
+Executes an action if option index (option number, starting at 0) for selected option in the specified select element not equal to the given value.
+
+### Usage
+
+`
+executeIfNotSelectedIndex(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Not Selected Label
+
+Executes an action if option label (visible text) for selected option in the specified select element not equal to the given value.
+
+### Usage
+
+`
+executeIfNotSelectedLabel(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Not Selected Value
+
+Executes an action if option value (value attribute) for selected option in the specified select element not equal to the given value.
+
+### Usage
+
+`
+executeIfNotSelectedValue(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Not Something Selected
+
+Executes an action if some option in a drop-down menu is not selected.
+
+### Usage
+
+`
+executeIfNotSomethingSelected(action, locator)
+`
+
+`
+executeIfNotSomethingSelected(action, parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
 
 ## Execute If Not Tag Name
 
@@ -3394,6 +8212,23 @@ Parameter | Description
 action | the name of the action to execute
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Execute If Not Title
+
+Executes an action if the title of the current page not equal to the given value.
+
+### Usage
+
+`
+executeIfNotTitle(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
 
 ## Execute If Not Value
 
@@ -3614,6 +8449,313 @@ Parameter | Description
 --------- | -----------
 action | the name of the action to execute
 
+## Execute If QR
+
+Executes an action if the QR code's value from the image tag source encoded in Base64 format equals to the given value.
+
+### Usage
+
+`
+executeIfQR(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Execute If QR Match
+
+Executes an action if the QR code's value from the image tag source encoded in Base64 format matches the given value.
+
+### Usage
+
+`
+executeIfQRMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Execute If QR Not Match
+
+Executes an action if the QR code's value from the image tag source encoded in Base64 format not match the given value.
+
+### Usage
+
+`
+executeIfQRNotMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Execute If Selected Id
+
+Executes an action if option element ID for selected option in the specified select element equals to the given value.
+
+### Usage
+
+`
+executeIfSelectedId(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Id Match
+
+Executes an action if option element ID for selected option in the specified select element matches the given value.
+
+### Usage
+
+`
+executeIfSelectedIdMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Id Not Match
+
+Executes an action if option element ID for selected option in the specified select element not match the given value.
+
+### Usage
+
+`
+executeIfSelectedIdNotMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Index
+
+Executes an action if option index (option number, starting at 0) for selected option in the specified select element equals to the given value.
+
+### Usage
+
+`
+executeIfSelectedIndex(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Index Match
+
+Executes an action if option index (option number, starting at 0) for selected option in the specified select element matches the given value.
+
+### Usage
+
+`
+executeIfSelectedIndexMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Index Not Match
+
+Executes an action if option index (option number, starting at 0) for selected option in the specified select element not match the given value.
+
+### Usage
+
+`
+executeIfSelectedIndexNotMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Label
+
+Executes an action if option label (visible text) for selected option in the specified select element equals to the given value.
+
+### Usage
+
+`
+executeIfSelectedLabel(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Label Match
+
+Executes an action if option label (visible text) for selected option in the specified select element matches the given value.
+
+### Usage
+
+`
+executeIfSelectedLabelMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Label Not Match
+
+Executes an action if option label (visible text) for selected option in the specified select element not match the given value.
+
+### Usage
+
+`
+executeIfSelectedLabelNotMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Value
+
+Executes an action if option value (value attribute) for selected option in the specified select element equals to the given value.
+
+### Usage
+
+`
+executeIfSelectedValue(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Value Match
+
+Executes an action if option value (value attribute) for selected option in the specified select element matches the given value.
+
+### Usage
+
+`
+executeIfSelectedValueMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Selected Value Not Match
+
+Executes an action if option value (value attribute) for selected option in the specified select element not match the given value.
+
+### Usage
+
+`
+executeIfSelectedValueNotMatch(action, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Execute If Something Selected
+
+Executes an action if some option in a drop-down menu is selected.
+
+### Usage
+
+`
+executeIfSomethingSelected(action, locator)
+`
+
+`
+executeIfSomethingSelected(action, parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+
 ## Execute If Tag Name
 
 Executes an action if the tag name of an element equals to the given value.
@@ -3752,12 +8894,12 @@ text | the value to match with the result
 
 ## Execute If Text Not Present
 
-Executes an action if the specified text appears somewhere on the page not equal to the given value.
+Executes an action if the specified text appears somewhere on the page.
 
 ### Usage
 
 `
-executeIfTextNotPresent(action, text)
+executeIfTextNotPresent(action, pattern)
 `
 
 ### Parameters
@@ -3766,16 +8908,15 @@ Parameter | Description
 --------- | -----------
 action | the name of the action to execute
 text | a text to match with the text of the page
-text | the value to match with the result
 
 ## Execute If Text Present
 
-Executes an action if the specified text appears somewhere on the page equals to the given value.
+Executes an action if the specified text appears somewhere on the page.
 
 ### Usage
 
 `
-executeIfTextPresent(action, text)
+executeIfTextPresent(action, pattern)
 `
 
 ### Parameters
@@ -3784,6 +8925,56 @@ Parameter | Description
 --------- | -----------
 action | the name of the action to execute
 text | a text to match with the text of the page
+
+## Execute If Title
+
+Executes an action if the title of the current page equals to the given value.
+
+### Usage
+
+`
+executeIfTitle(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Title Match
+
+Executes an action if the title of the current page matches the given value.
+
+### Usage
+
+`
+executeIfTitleMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
+text | the value to match with the result
+
+## Execute If Title Not Match
+
+Executes an action if the title of the current page not match the given value.
+
+### Usage
+
+`
+executeIfTitleNotMatch(action, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+action | the name of the action to execute
 text | the value to match with the result
 
 ## Execute If Value
@@ -3938,6 +9129,49 @@ Parameter | Description
 --------- | -----------
 fingerPrintId | finger prints stored in Android Keystore system (from 1 to 10)
 
+## Fire Event
+
+Explicitly simulate an event, to trigger the corresponding "on<em>event</em>" handler.
+
+### Usage
+
+`
+fireEvent(locator, eventName)
+`
+
+`
+fireEvent(parentLocator, locator, eventName)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+eventName | the event name, e.g. "focus" or "blur"
+
+## Focus
+
+Move the focus to the specified element; for example, if the element is an input field, move the cursor to that field.
+
+### Usage
+
+`
+focus(locator)
+`
+
+`
+focus(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
 ## Go Back
 
 Simulates the user clicking the "back" button on their browser.
@@ -3946,6 +9180,21 @@ Simulates the user clicking the "back" button on their browser.
 
 `
 goBack()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Go Forward
+
+Simulates the user clicking the "forward" button on their browser.
+
+### Usage
+
+`
+goForward()
 `
 
 ### Parameters
@@ -3983,6 +9232,141 @@ hideKeyboard(name)
 Parameter | Description
 --------- | -----------
 name | the key name to press
+
+## Highlight
+
+Briefly changes the backgroundColor of the specified element yellow. Useful for debugging.
+
+### Usage
+
+`
+highlight(locator)
+`
+
+`
+highlight(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Key Down
+
+Simulates a user pressing a key (without releasing it yet) by sending a native operating system keystroke. This function uses the java.awt.Robot class to send a keystroke; this more accurately simulates typing a key on the keyboard. It does not honor settings from the shiftKeyDown, controlKeyDown, altKeyDown and metaKeyDown commands, and does not target any particular HTML element. To send a keystroke to a particular element, focus on the element first before running this command.
+
+### Usage
+
+`
+keyDown(keycode)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+keycode | an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
+
+## Key Down
+
+Simulates a user pressing a key (without releasing it yet).
+
+### Usage
+
+`
+keyDown(locator, keySequence)
+`
+
+`
+keyDown(parentLocator, locator, keySequence)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+keySequence | Either be a string( "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: " w", "\119".
+
+## Key Press
+
+Simulates a user pressing and releasing a key by sending a native operating system keystroke. This function uses the java.awt.Robot class to send a keystroke; this more accurately simulates typing a key on the keyboard. It does not honor settings from the shiftKeyDown, controlKeyDown, altKeyDown and metaKeyDown commands, and does not target any particular HTML element. To send a keystroke to a particular element, focus on the element first before running this command.
+
+### Usage
+
+`
+keyPress(keycode)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+keycode | an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
+
+## Key Press
+
+Simulates a user pressing and releasing a key.
+
+### Usage
+
+`
+keyPress(locator, keySequence)
+`
+
+`
+keyPress(parentLocator, locator, keySequence)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+keySequence | Either be a string( "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: " w", "\119".
+
+## Key Up
+
+Simulates a user releasing a key by sending a native operating system keystroke. This function uses the java.awt.Robot class to send a keystroke; this more accurately simulates typing a key on the keyboard. It does not honor settings from the shiftKeyDown, controlKeyDown, altKeyDown and metaKeyDown commands, and does not target any particular HTML element. To send a keystroke to a particular element, focus on the element first before running this command.
+
+### Usage
+
+`
+keyUp(keycode)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+keycode | an integer keycode number corresponding to a java.awt.event.KeyEvent; note that Java keycodes are NOT the same thing as JavaScript keycodes!
+
+## Key Up
+
+Simulates a user releasing a key.
+
+### Usage
+
+`
+keyUp(locator, keySequence)
+`
+
+`
+keyUp(parentLocator, locator, keySequence)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+keySequence | Either be a string( "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: " w", "\119".
 
 ## Landscape
 
@@ -4066,6 +9450,225 @@ Parameter | Description
 --------- | -----------
 coordinate | a string represents a position of x and y
 
+## Meta Key Down
+
+Press the meta key and hold it down until doMetaUp() is called or a new page is loaded.
+
+### Usage
+
+`
+metaKeyDown()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Meta Key Up
+
+Release the meta key.
+
+### Usage
+
+`
+metaKeyUp()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Mouse Down
+
+Simulates a user pressing the left mouse button (without releasing it yet) on the specified element.
+
+### Usage
+
+`
+mouseDown(locator)
+`
+
+`
+mouseDown(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Mouse Down At
+
+Simulates a user pressing the left mouse button (without releasing it yet) at the specified location.
+
+### Usage
+
+`
+mouseDownAt(locator, coordString)
+`
+
+`
+mouseDownAt(parentLocator, locator, coordString)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+coordString | specifies the x,y position (i.e. - 10,20) of the mouse event relative to the element returned by the locator.
+
+## Mouse Move
+
+Simulates a user pressing the mouse button (without releasing it yet) on the specified element.
+
+### Usage
+
+`
+mouseMove(locator)
+`
+
+`
+mouseMove(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Mouse Move At
+
+Simulates a user pressing the mouse button (without releasing it yet) on the specified element.
+
+### Usage
+
+`
+mouseMoveAt(locator, coordString)
+`
+
+`
+mouseMoveAt(parentLocator, locator, coordString)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+coordString | specifies the x,y position (i.e. - 10,20) of the mouse event relative to the element returned by the locator.
+
+## Mouse Out
+
+Simulates a user moving the mouse pointer away from the specified element.
+
+### Usage
+
+`
+mouseOut(locator)
+`
+
+`
+mouseOut(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Mouse Over
+
+Simulates a user hovering a mouse over the specified element.
+
+### Usage
+
+`
+mouseOver(locator)
+`
+
+`
+mouseOver(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Mouse Up
+
+Simulates the event that occurs when the user releases the mouse button (i.e., stops holding the button down) on the specified element.
+
+### Usage
+
+`
+mouseUp(locator)
+`
+
+`
+mouseUp(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+
+## Mouse Up At
+
+Simulates the event that occurs when the user releases the mouse button (i.e., stops holding the button down) at the specified location.
+
+### Usage
+
+`
+mouseUpAt(locator, coordString)
+`
+
+`
+mouseUpAt(parentLocator, locator, coordString)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+coordString | specifies the x,y position (i.e. - 10,20) of the mouse event relative to the element returned by the locator.
+
+## Open
+
+Opens an URL in the test frame. This accepts both relative and absolute URLs. <p> The "open" command waits for the page to load before proceeding.
+
+ <aside class="notice">The URL must be on the same domain as the runner HTML due to security restrictions in the browser (Same Origin Policy). If you need to open an URL on another domain, use the Selenium Server to start a new browser session on that domain.</aside>
+
+### Usage
+
+`
+open(url)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+url | the URL to open; may be relative or absolute
+
 ## Open Control Center
 
 Open Control Center on iOS devices.
@@ -4096,6 +9699,41 @@ openNotifications()
 Parameter | Description
 --------- | -----------
 
+## Open Window
+
+Opens a popup window. This accepts both relative and absolute URLs. <p> The "openWindow" command selects the window after the window is opened. (the "selectWindow" command is implicitly invoked)
+
+### Usage
+
+`
+openWindow(url)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+url | the URL to open; may be relative or absolute
+
+## Open Window
+
+Opens a popup window (if a window with that ID isn't already open). <p> The "openWindow" command selects the window after the window is opened. (the "selectWindow" command is implicitly invoked)
+
+ <aside class="notice"> In some cases, Selenium will be unable to intercept a call to window.open (if the call occurs during or before the "onLoad" event, for example). In those cases, you can force Selenium to notice the open window's name by using the Selenium openWindow command, using an empty (blank) url, like this: openWindow("", "myFunnyWindow").</aside>
+
+### Usage
+
+`
+openWindow(url, windowID)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+url | the URL to open, which can be blank
+windowID | the JavaScript window ID of the window to select
+
 ## Pause
 
 Wait for the specified amount of time (in milliseconds)
@@ -4120,6 +9758,21 @@ Set the current device/browser orientation to portrait.
 
 `
 portrait()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Refresh
+
+Simulates the user clicking the "Refresh" button on their browser.
+
+### Usage
+
+`
+refresh()
 `
 
 ### Parameters
@@ -4156,6 +9809,137 @@ reloadApp()
 
 Parameter | Description
 --------- | -----------
+
+## Remove All Selections
+
+Unselects all of the selected options in a multi-select element.
+
+### Usage
+
+`
+removeAllSelections(locator)
+`
+
+`
+removeAllSelections(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+
+## Remove Selection
+
+Remove a selection from the set of selected options in a multi-select element using an option locator.
+
+### Usage
+
+`
+removeSelection(locator, optionLocator)
+`
+
+`
+removeSelection(parentLocator, locator, optionLocator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+optionLocator | an option locator (a label by default)
+
+## Remove Selection Id
+
+Remove a selection from the set of selected options in a multi-select element using an element ID.
+
+### Usage
+
+`
+removeSelectionId(locator, id)
+`
+
+`
+removeSelectionId(parentLocator, locator, id)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+id | an element ID
+
+## Remove Selection Index
+
+Remove a selection from the set of selected options in a multi-select element using an index.
+
+### Usage
+
+`
+removeSelectionIndex(locator, index)
+`
+
+`
+removeSelectionIndex(parentLocator, locator, index)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+index | an index
+
+## Remove Selection Label
+
+Remove a selection from the set of selected options in a multi-select element using a label.
+
+### Usage
+
+`
+removeSelectionLabel(locator, label)
+`
+
+`
+removeSelectionLabel(parentLocator, locator, label)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+label | a label
+
+## Remove Selection Value
+
+Remove a selection from the set of selected options in a multi-select element using a value.
+
+### Usage
+
+`
+removeSelectionValue(locator, value)
+`
+
+`
+removeSelectionValue(parentLocator, locator, value)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a multi-select box
+value | a value
 
 ## Reset App
 
@@ -4203,6 +9987,22 @@ runAppInBackground(millis)
 Parameter | Description
 --------- | -----------
 millis | An integer designating how long, in milliseconds, to background the app for.
+
+## Run Script
+
+Creates a new "script" tag in the body of the current test window, and adds the specified text into the body of the command. Scripts run in this way can often be debugged more easily than scripts executed using Selenium's "getEval" command. Beware that JS exceptions thrown in these script tags aren't managed by Selenium, so you should probably wrap your script in try/catch blocks if there is any chance that the script will throw an exception.
+
+### Usage
+
+`
+runScript(script)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
 
 ## Scroll Down
 
@@ -4432,6 +10232,217 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
+## Select
+
+Select an option from a drop-down using an option locator.
+
+ <p> Option locators provide different ways of specifying options of an HTML Select element (e.g. for selecting a specific option, or for asserting that the selected option satisfies a specification). There are several forms of Select Option Locator. </p> <ul> <li><strong>label</strong>=<em>labelPattern</em>: matches options based on their labels, i.e. the visible text. (This is the default.) <ul class="first last simple"> <li>label=regexp:^[Oo]ther</li> </ul> </li> <li><strong>value</strong>=<em>valuePattern</em>: matches options based on their values. <ul class="first last simple"> <li>value=other</li> </ul> </li> <li><strong>id</strong>=<em>id</em>:
+
+ matches options based on their ids. <ul class="first last simple"> <li>id=option1</li> </ul> </li> <li><strong>index</strong>=<em>index</em>: matches an option based on its index (offset from zero). <ul class="first last simple"> <li>index=2</li> </ul> </li> </ul> <p> If no option locator prefix is provided, the default behaviour is to match on <strong>label</strong>. </p>
+
+### Usage
+
+`
+select(locator, optionLocator)
+`
+
+`
+select(parentLocator, locator, optionLocator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+optionLocator | an option locator (a label by default)
+
+## Select First Window
+
+Selects the first window (mostly the original window instantiated by the browser).
+
+### Usage
+
+`
+selectFirstWindow()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Select Frame
+
+Selects a frame within the current window. (You may invoke this command multiple times to select nested frames.) To select the parent frame, use "relative=parent" as a locator; to select the top frame, use "relative=top". You can also select a frame by its 0-based index number; select the first frame with "index=0", or the third frame with "index=2".
+
+### Usage
+
+`
+selectFrame(locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator identifying a frame or iframe
+
+## Select Id
+
+Select an option from a drop-down using an element ID.
+
+### Usage
+
+`
+selectId(locator, id)
+`
+
+`
+selectId(parentLocator, locator, id)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+id | an element ID
+
+## Select Index
+
+Select an option from a drop-down using an index.
+
+### Usage
+
+`
+selectIndex(locator, index)
+`
+
+`
+selectIndex(parentLocator, locator, index)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+index | an index
+
+## Select Label
+
+Select an option from a drop-down using a label.
+
+### Usage
+
+`
+selectLabel(locator, label)
+`
+
+`
+selectLabel(parentLocator, locator, label)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+label | a label
+
+## Select Last Window
+
+Selects the last opened window.
+
+### Usage
+
+`
+selectLastWindow()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Select Parent Frame
+
+Selects the parent frame within the current window. Equivalents to selectFrame("relative=up").
+
+### Usage
+
+`
+selectParentFrame()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Select Pop Up
+
+Simplifies the process of selecting a popup window (and does not offer functionality beyond what <code>selectWindow()</code> already provides). <ul> <li>If <code>windowID</code> is either not specified, or specified as "null", the first non-top window is selected. The top window is the one that would be selected by <code>selectWindow()</code> without providing a <code>windowID</code> . This should not be used when more than one popup window is in play.</li> <li>Otherwise, the window will be looked up considering <code>windowID</code> as the following in order: 1) the "name" of the window, as specified to <code>window.open()</code>; 2) a javascript variable which is a reference to a window; and 3) the title of the window. This is the same ordered lookup performed by <code>selectWindow</code> .</li> </ul>
+
+### Usage
+
+`
+selectPopUp(windowID)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+windowID | an identifier for the popup window, which can take on a number of different meanings
+
+## Select Value
+
+Select an option from a drop-down using a value.
+
+### Usage
+
+`
+selectValue(locator, value)
+`
+
+`
+selectValue(parentLocator, locator, value)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+value | a value
+
+## Select Window
+
+Selects a popup window using a window locator; once a popup window has been selected, all commands go to that window. To select the main window again, use null as the target.
+
+ <p>
+
+ Window locators provide different ways of specifying the window object: by title, by internal JavaScript "name," or by JavaScript variable. </p> <ul> <li><strong>title</strong>=<em>My Special Window</em>: Finds the window using the text that appears in the title bar. Be careful; two windows can share the same title. If that happens, this locator will just pick one.</li> <li><strong>name</strong>=<em>myWindow</em>: Finds the window using its internal JavaScript "name" property. This is the second parameter "windowName" passed to the JavaScript method window.open(url, windowName, windowFeatures, replaceFlag) (which Selenium intercepts).</li> <li><strong>var</strong>=<em>variableName</em>: Some pop-up windows are unnamed (anonymous), but are associated with a JavaScript variable name in the current application window, e.g. "window.foo = window.open(url);". In those cases, you can open the window using "var=foo".</li> </ul> <p> If no window locator prefix is provided, we'll try to guess what you mean like this: </p> <p> 1.) if windowID is null, (or the string "null") then it is assumed the user is referring to the original window instantiated by the browser). </p> <p> 2.) if the value of the "windowID" parameter is a JavaScript variable name in the current application window, then it is assumed that this variable contains the return value from a call to the JavaScript window.open() method. </p> <p> 3.) Otherwise, selenium looks in a hash it maintains that maps string names to window "names". </p> <p> 4.) If <em>that</em> fails, we'll try looping over all of the known windows to try to find the appropriate "title". Since "title" is not necessarily unique, this may have unexpected behavior. </p> <p> If you're having trouble figuring out the name of a window that you want to manipulate, look at the Selenium log messages which identify the names of windows created via window.open (and therefore intercepted by Selenium). You will see messages like the following for each window as it is opened: </p> <p> <code>debug: window.open call intercepted; window ID (which you can use with selectWindow()) is "myNewWindow"</code> </p> <p> In some cases, Selenium will be unable to intercept a call to window.open (if the call occurs during or before the "onLoad" event, for example). (This is bug SEL-339.) In those cases, you can force Selenium to notice the open window's name by using the Selenium openWindow command, using an empty (blank) url, like this: openWindow("", "myFunnyWindow"). </p>
+
+### Usage
+
+`
+selectWindow(windowID)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+windowID | the JavaScript window ID of the window to select
+
 ## Set Clipboard
 
 Set the content of the system clipboard
@@ -4463,6 +10474,28 @@ setContext(context)
 Parameter | Description
 --------- | -----------
 context | The name of the context to which to change
+
+## Set Cursor Position
+
+Moves the text cursor to the specified position in the given input element or textarea. This method will fail if the specified element isn't an input element or textarea.
+
+### Usage
+
+`
+setCursorPosition(locator, position)
+`
+
+`
+setCursorPosition(parentLocator, locator, position)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an input element or textarea
+position | the numerical position of the cursor in the field; position should be 0 to move the position to the beginning of the field. You can also set the cursor to -1 to move it to the end of the field.
 
 ## Set Geolocation
 
@@ -4544,6 +10577,36 @@ shake()
 Parameter | Description
 --------- | -----------
 
+## Shift Key Down
+
+Press the shift key and hold it down until doShiftUp() is called or a new page is loaded.
+
+### Usage
+
+`
+shiftKeyDown()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Shift Key Up
+
+Release the shift key.
+
+### Usage
+
+`
+shiftKeyUp()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
 ## Start Activity
 
 Start an Android activity by providing package name and activity name. <p> The activity is identified by a string separated by a comma, containing "appPackage" and "appActivity" properties. For example: appPackage=example,appActivity=example
@@ -4593,6 +10656,92 @@ Parameter | Description
 --------- | -----------
 variable | the name of a variable in which the result is to be stored
 
+## Store All Buttons
+
+Stores the IDs of all buttons on the page in a variable for later access.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+storeAllButtons(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store All Fields
+
+Stores the IDs of all input fields on the page in a variable for later access.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+storeAllFields(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store All Links
+
+Stores the IDs of all links on the page in a variable for later access.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+storeAllLinks(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store All Window Names
+
+Stores the names of all windows that the browser knows about in a variable for later access.
+
+### Usage
+
+`
+storeAllWindowNames(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store All Window Titles
+
+Stores the titles of all windows that the browser knows about in a variable for later access.
+
+### Usage
+
+`
+storeAllWindowTitles(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
 ## Store Attribute
 
 Stores the value of the given attribute of the element in a variable for later access. Will return the current value, even if this has been modified after the page has been loaded.
@@ -4623,6 +10772,39 @@ Parameter | Description
 --------- | -----------
 locator | an element locator
 name | The name of the attribute.
+variable | the name of a variable in which the result is to be stored
+
+## Store Attribute From All Windows
+
+Stores every instance of some attribute from all known windows in a variable for later access.
+
+### Usage
+
+`
+storeAttributeFromAllWindows(attributeName, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
+variable | the name of a variable in which the result is to be stored
+
+## Store Body Text
+
+Stores the entire text of the page in a variable for later access.
+
+### Usage
+
+`
+storeBodyText(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 variable | the name of a variable in which the result is to be stored
 
 ## Store Confirmation
@@ -4673,6 +10855,39 @@ Parameter | Description
 --------- | -----------
 variable | the name of a variable in which the result is to be stored
 
+## Store Cookie
+
+Stores all cookies of the current page under test in a variable for later access.
+
+### Usage
+
+`
+storeCookie(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store Cookie By Name
+
+Stores the value of the cookie with the specified name in a variable for later access.
+
+### Usage
+
+`
+storeCookieByName(name, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+variable | the name of a variable in which the result is to be stored
+
 ## Store Current Date
 
 Stores the current date in a variable for later access.
@@ -4687,6 +10902,30 @@ storeCurrentDate(variable)
 
 Parameter | Description
 --------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store Cursor Position
+
+Stores the text cursor position in the given input element or textarea in a variable for later access. Beware, this may not work perfectly on all browsers.
+
+ <p> Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to return the position of the last location of the cursor, even though the cursor is now gone from the page. This is filed as <a href="http://jira.openqa.org/browse/SEL-243">SEL-243</a>. </p> This method will fail if the specified element isn't an input element or textarea, or there is no cursor in the element.
+
+### Usage
+
+`
+storeCursorPosition(locator, variable)
+`
+
+`
+storeCursorPosition(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an input element or textarea
 variable | the name of a variable in which the result is to be stored
 
 ## Store Eval
@@ -4706,6 +10945,25 @@ Parameter | Description
 expression | the snippet to run
 variable | the name of a variable in which the result is to be stored
 
+## Store Eval Script
+
+Stores the result of evaluating the specified JavaScript snippet in a variable for later access. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+storeEvalScript(script, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+variable | the name of a variable in which the result is to be stored
+
 ## Store Expression
 
 Stores the specified expression in a variable for later access.
@@ -4723,6 +10981,38 @@ storeExpression(expression, variable)
 Parameter | Description
 --------- | -----------
 expression | the value to return
+variable | the name of a variable in which the result is to be stored
+
+## Store Html Source
+
+Stores the entire HTML source between the opening and closing "html" tags in a variable for later access.
+
+### Usage
+
+`
+storeHtmlSource(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
+## Store Location
+
+Stores the absolute URL of the current page in a variable for later access.
+
+### Usage
+
+`
+storeLocation(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 variable | the name of a variable in which the result is to be stored
 
 ## Store Page Source
@@ -4774,6 +11064,244 @@ Parameter | Description
 text | the value to store
 variable | the name of a variable in which the result is to be stored.
 
+## Store QR
+
+Stores the QR code's value from the image tag source encoded in Base64 format in a variable for later access.
+
+### Usage
+
+`
+storeQR(locator, variable)
+`
+
+`
+storeQR(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+variable | the name of a variable in which the result is to be stored
+
+## Store Select Options
+
+Stores all option labels in the specified select drop-down in a variable for later access.
+
+### Usage
+
+`
+storeSelectOptions(locator, variable)
+`
+
+`
+storeSelectOptions(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Id
+
+Stores option element ID for selected option in the specified select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedId(locator, variable)
+`
+
+`
+storeSelectedId(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Ids
+
+Stores all option element IDs for selected options in the specified select or multi-select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedIds(locator, variable)
+`
+
+`
+storeSelectedIds(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Index
+
+Stores option index (option number, starting at 0) for selected option in the specified select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedIndex(locator, variable)
+`
+
+`
+storeSelectedIndex(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Indexes
+
+Stores all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedIndexes(locator, variable)
+`
+
+`
+storeSelectedIndexes(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Label
+
+Stores option label (visible text) for selected option in the specified select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedLabel(locator, variable)
+`
+
+`
+storeSelectedLabel(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Labels
+
+Stores all option labels (visible text) for selected options in the specified select or multi-select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedLabels(locator, variable)
+`
+
+`
+storeSelectedLabels(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Value
+
+Stores option value (value attribute) for selected option in the specified select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedValue(locator, variable)
+`
+
+`
+storeSelectedValue(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Selected Values
+
+Stores all option values (value attributes) for selected options in the specified select or multi-select element in a variable for later access.
+
+### Usage
+
+`
+storeSelectedValues(locator, variable)
+`
+
+`
+storeSelectedValues(parentLocator, locator, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+variable | the name of a variable in which the result is to be stored
+
+## Store Table
+
+Stores the text from a cell of a table in a variable for later access. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+storeTable(locator, cellAddress, variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+variable | the name of a variable in which the result is to be stored
+
 ## Store Tag Name
 
 Stores the tag name of an element in a variable for later access.
@@ -4818,6 +11346,22 @@ parentLocator | an element locator of parent element
 locator | an element locator
 variable | the name of a variable in which the result is to be stored
 
+## Store Title
+
+Stores the title of the current page in a variable for later access.
+
+### Usage
+
+`
+storeTitle(variable)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+variable | the name of a variable in which the result is to be stored
+
 ## Store Value
 
 Stores the (whitespace-trimmed) value of an input field (or anything else with a value parameter) in a variable for later access. For checkbox/radio elements, the value will be "on" or "off" depending on whether the element is checked or not.
@@ -4839,6 +11383,27 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 variable | the name of a variable in which the result is to be stored
+
+## Submit
+
+Submit the specified form. This is particularly useful for forms without submit buttons, e.g. single-input "Search" forms.
+
+### Usage
+
+`
+submit(locator)
+`
+
+`
+submit(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator for the form you want to submit
 
 ## Swipe Down
 
@@ -5104,6 +11669,30 @@ parentLocator | an element locator of parent element
 locator | an element locator
 value | the value to type
 
+## Type And Tab
+
+Sets the value of an input field, as though you typed it in and press Tab key.
+
+ <p> Can also be used to set the value of combo boxes, check boxes, etc. In these cases, value should be the value of the option selected, not the visible text. </p>
+
+### Usage
+
+`
+typeAndTab(locator, value)
+`
+
+`
+typeAndTab(parentLocator, locator, value)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+value | the value to type
+
 ## Type Keys
 
 Sends keys to the keyboard representation in the device.
@@ -5119,6 +11708,51 @@ typeKeys(value)
 Parameter | Description
 --------- | -----------
 value | the value to type
+
+## Type Keys
+
+Simulates keystroke events on the specified element, as though you typed the value key-by-key.
+
+ <p> This is a convenience method for calling keyDown, keyUp, keyPress for every character in the specified string; this is useful for dynamic UI widgets (like auto-completing combo boxes) that require explicit key events. </p> <p> Unlike the simple "type" command, which forces the specified value into the page directly, this command may or may not have any visible effect, even in cases where typing keys would normally have a visible effect. For example, if you use "typeKeys" on a form element, you may or may not see the results of what you typed in the field. </p> <p> In some cases, you may need to use the simple "type" command to set the value of the field and then the "typeKeys" command to send the keystroke events corresponding to what you just typed. </p>
+
+### Usage
+
+`
+typeKeys(locator, value)
+`
+
+`
+typeKeys(parentLocator, locator, value)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+value | the value to type
+
+## Uncheck
+
+Uncheck a toggle-button (checkbox/radio)
+
+### Usage
+
+`
+uncheck(locator)
+`
+
+`
+uncheck(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
 
 ## Unlock
 
@@ -5233,6 +11867,264 @@ verifyAlertPresent()
 Parameter | Description
 --------- | -----------
 
+## Verify All Buttons
+
+Verifies that the IDs of all buttons on the page equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllButtons(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Buttons Match
+
+Verifies that the IDs of all buttons on the page matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllButtonsMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Buttons Not Match
+
+Verifies that the IDs of all buttons on the page not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllButtonsNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Fields
+
+Verifies that the IDs of all input fields on the page equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllFields(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Fields Match
+
+Verifies that the IDs of all input fields on the page matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllFieldsMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Fields Not Match
+
+Verifies that the IDs of all input fields on the page not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllFieldsNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Links
+
+Verifies that the IDs of all links on the page equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllLinks(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Links Match
+
+Verifies that the IDs of all links on the page matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllLinksMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Links Not Match
+
+Verifies that the IDs of all links on the page not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyAllLinksNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Window Names
+
+Verifies that the names of all windows that the browser knows about equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAllWindowNames(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Window Names Match
+
+Verifies that the names of all windows that the browser knows about matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAllWindowNamesMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Window Names Not Match
+
+Verifies that the names of all windows that the browser knows about not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAllWindowNamesNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Window Titles
+
+Verifies that the titles of all windows that the browser knows about equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAllWindowTitles(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Window Titles Match
+
+Verifies that the titles of all windows that the browser knows about matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAllWindowTitlesMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify All Window Titles Not Match
+
+Verifies that the titles of all windows that the browser knows about not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAllWindowTitlesNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Verify Attribute
 
 Verifies that the value of the given attribute of the element equals to the given value. When the verify fails, the test will continue execution, logging the failure. Will return the current value, even if this has been modified after the page has been loaded.
@@ -5263,6 +12155,57 @@ Parameter | Description
 --------- | -----------
 locator | an element locator
 name | The name of the attribute.
+text | the value to match with the result
+
+## Verify Attribute From All Windows
+
+Verifies that every instance of some attribute from all known windows equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAttributeFromAllWindows(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
+text | the value to match with the result
+
+## Verify Attribute From All Windows Match
+
+Verifies that every instance of some attribute from all known windows matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAttributeFromAllWindowsMatch(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
+text | the value to match with the result
+
+## Verify Attribute From All Windows Not Match
+
+Verifies that every instance of some attribute from all known windows not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyAttributeFromAllWindowsNotMatch(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
 text | the value to match with the result
 
 ## Verify Attribute Match
@@ -5329,6 +12272,98 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
+## Verify Background Color
+
+Verifies that the background color of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyBackgroundColor(locator, text)
+`
+
+`
+verifyBackgroundColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Body Text
+
+Verifies that the entire text of the page equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyBodyText(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Body Text Match
+
+Verifies that the entire text of the page matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyBodyTextMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Body Text Not Match
+
+Verifies that the entire text of the page not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyBodyTextNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Border Color
+
+Verifies that the border color of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyBorderColor(locator, text)
+`
+
+`
+verifyBorderColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Verify Checked
 
 Verifies that a toggle-button (checkbox/radio) is checked. When the verify fails, the test will continue execution, logging the failure. Fails if the specified element doesn't exist or isn't a toggle-button.
@@ -5349,6 +12384,28 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator pointing to a checkbox or radio button
+
+## Verify Color
+
+Verifies that the text color of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyColor(locator, text)
+`
+
+`
+verifyColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Verify Confirmation
 
@@ -5496,6 +12553,178 @@ Parameter | Description
 --------- | -----------
 text | the value to match with the result
 
+## Verify Cookie
+
+Verifies that all cookies of the current page under test equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookie(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Cookie By Name
+
+Verifies that the value of the cookie with the specified name equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookieByName(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Verify Cookie By Name Match
+
+Verifies that the value of the cookie with the specified name matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookieByNameMatch(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Verify Cookie By Name Not Match
+
+Verifies that the value of the cookie with the specified name not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookieByNameNotMatch(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Verify Cookie Match
+
+Verifies that all cookies of the current page under test matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookieMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Cookie Not Match
+
+Verifies that all cookies of the current page under test not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookieNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Cookie Not Present
+
+Verifies that a cookie with the specified name is not present. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookieNotPresent(name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+
+## Verify Cookie Present
+
+Verifies that a cookie with the specified name is present. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyCookiePresent(name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+
+## Verify Css Count
+
+Verifies that the number of nodes that match the specified css selector, eg equals to the given value. When the verify fails, the test will continue execution, logging the failure. "css=table" would give the number of tables.
+
+### Usage
+
+`
+verifyCssCount(css, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+css | the css selector to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
+text | the value to match with the result
+
+## Verify Cursor Position
+
+Verifies that the text cursor position in the given input element or textarea equals to the given value. When the verify fails, the test will continue execution, logging the failure. Beware, this may not work perfectly on all browsers.
+
+ <p> Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to return the position of the last location of the cursor, even though the cursor is now gone from the page. This is filed as <a href="http://jira.openqa.org/browse/SEL-243">SEL-243</a>. </p> This method will fail if the specified element isn't an input element or textarea, or there is no cursor in the element.
+
+### Usage
+
+`
+verifyCursorPosition(locator, text)
+`
+
+`
+verifyCursorPosition(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an input element or textarea
+text | the value to match with the result
+
 ## Verify Date List Order Asc
 
 Returns the text values of the specified elements are sorted in ascending order. The values are assuming to be dates.
@@ -5561,6 +12790,50 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
+## Verify Element Height
+
+Verifies that the height of an element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyElementHeight(locator, text)
+`
+
+`
+verifyElementHeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Element Index
+
+Verifies that the relative index of an element to its parent (starting from 0) equals to the given value. When the verify fails, the test will continue execution, logging the failure. The comment node and empty text node will be ignored.
+
+### Usage
+
+`
+verifyElementIndex(locator, text)
+`
+
+`
+verifyElementIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Verify Element Not Present
 
 Verifies that the specified element is not somewhere on the page. When the verify fails, the test will continue execution, logging the failure.
@@ -5582,6 +12855,50 @@ Parameter | Description
 parentLocator | an element locator of parent element
 locator | an element locator
 
+## Verify Element Position Left
+
+Verifies that the horizontal position of an element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyElementPositionLeft(locator, text)
+`
+
+`
+verifyElementPositionLeft(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Element Position Top
+
+Verifies that the vertical position of an element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyElementPositionTop(locator, text)
+`
+
+`
+verifyElementPositionTop(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Verify Element Present
 
 Verifies that the specified element is somewhere on the page. When the verify fails, the test will continue execution, logging the failure.
@@ -5602,6 +12919,28 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Verify Element Width
+
+Verifies that the width of an element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyElementWidth(locator, text)
+`
+
+`
+verifyElementWidth(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Verify Enabled
 
@@ -5639,6 +12978,63 @@ verifyEval(expression, text)
 Parameter | Description
 --------- | -----------
 expression | the snippet to run
+text | the value to match with the result
+
+## Verify Eval Script
+
+Verifies that the result of evaluating the specified JavaScript snippet equals to the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+verifyEvalScript(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Verify Eval Script Match
+
+Verifies that the result of evaluating the specified JavaScript snippet matches the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+verifyEvalScriptMatch(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Verify Eval Script Not Match
+
+Verifies that the result of evaluating the specified JavaScript snippet not match the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+verifyEvalScriptNotMatch(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
 text | the value to match with the result
 
 ## Verify Exists In Database
@@ -5712,6 +13108,370 @@ verifyExpressionNotMatch(expression, text)
 Parameter | Description
 --------- | -----------
 expression | the value to return
+text | the value to match with the result
+
+## Verify File Contain Line
+
+Verifies the contents of the file contains the given text. This method is useful for testing CSV file's contents.
+
+### Usage
+
+`
+verifyFileContainLine(filePattern, charset, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+charset | the charset
+text | the text to compare
+
+## Verify File Downloaded
+
+Verifies that a file is downloaded by browser. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFileDownloaded(filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+
+## Verify File First Line
+
+Verifies the first line of the file equals to the given text. This method is useful for testing CSV file's header.
+
+### Usage
+
+`
+verifyFileFirstLine(filePattern, charset, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+charset | the charset
+text | the text to compare
+
+## Verify Font Family
+
+Verifies that the font family of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontFamily(locator, text)
+`
+
+`
+verifyFontFamily(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Family Match
+
+Verifies that the font family of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontFamilyMatch(locator, text)
+`
+
+`
+verifyFontFamilyMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Family Not Match
+
+Verifies that the font family of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontFamilyNotMatch(locator, text)
+`
+
+`
+verifyFontFamilyNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Size
+
+Verifies that the font size of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontSize(locator, text)
+`
+
+`
+verifyFontSize(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Size Match
+
+Verifies that the font size of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontSizeMatch(locator, text)
+`
+
+`
+verifyFontSizeMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Size Not Match
+
+Verifies that the font size of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontSizeNotMatch(locator, text)
+`
+
+`
+verifyFontSizeNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Style
+
+Verifies that the font style of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontStyle(locator, text)
+`
+
+`
+verifyFontStyle(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Style Match
+
+Verifies that the font style of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontStyleMatch(locator, text)
+`
+
+`
+verifyFontStyleMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Style Not Match
+
+Verifies that the font style of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontStyleNotMatch(locator, text)
+`
+
+`
+verifyFontStyleNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Weight
+
+Verifies that the font weight of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontWeight(locator, text)
+`
+
+`
+verifyFontWeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Weight Match
+
+Verifies that the font weight of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontWeightMatch(locator, text)
+`
+
+`
+verifyFontWeightMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Font Weight Not Match
+
+Verifies that the font weight of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyFontWeightNotMatch(locator, text)
+`
+
+`
+verifyFontWeightNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Html Source
+
+Verifies that the entire HTML source between the opening and closing "html" tags equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyHtmlSource(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Html Source Match
+
+Verifies that the entire HTML source between the opening and closing "html" tags matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyHtmlSourceMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Html Source Not Match
+
+Verifies that the entire HTML source between the opening and closing "html" tags not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyHtmlSourceNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 text | the value to match with the result
 
 ## Verify Integer List Order Asc
@@ -5824,6 +13584,54 @@ Parameter | Description
 --------- | -----------
 variable | the variable
 
+## Verify Location
+
+Verifies that the absolute URL of the current page equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyLocation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Location Match
+
+Verifies that the absolute URL of the current page matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyLocationMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Location Not Match
+
+Verifies that the absolute URL of the current page not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyLocationNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Verify Not Activity
 
 Verifies that the current activity matches the given activity. When the verify fails, the test will continue execution, logging the failure. The activity is identified by a string separated by a comma, containing "appPackage" and "appActivity" properties. For example: appPackage=example,appActivity=example
@@ -5848,6 +13656,92 @@ Verifies that the message of a JavaScript alert not equal to the given value. Wh
 
 `
 verifyNotAlert(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not All Buttons
+
+Verifies that the IDs of all buttons on the page not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given button has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyNotAllButtons(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not All Fields
+
+Verifies that the IDs of all input fields on the page not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given field has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyNotAllFields(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not All Links
+
+Verifies that the IDs of all links on the page not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+ <p> If a given link has no ID, it will appear as "" in this array. </p>
+
+### Usage
+
+`
+verifyNotAllLinks(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not All Window Names
+
+Verifies that the names of all windows that the browser knows about not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotAllWindowNames(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not All Window Titles
+
+Verifies that the titles of all windows that the browser knows about not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotAllWindowTitles(text)
 `
 
 ### Parameters
@@ -5888,6 +13782,83 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
+## Verify Not Attribute From All Windows
+
+Verifies that every instance of some attribute from all known windows not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotAttributeFromAllWindows(attributeName, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+attributeName | name of an attribute on the windows
+text | the value to match with the result
+
+## Verify Not Background Color
+
+Verifies that the background color of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotBackgroundColor(locator, text)
+`
+
+`
+verifyNotBackgroundColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Body Text
+
+Verifies that the entire text of the page not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotBodyText(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not Border Color
+
+Verifies that the border color of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotBorderColor(locator, text)
+`
+
+`
+verifyNotBorderColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Verify Not Checked
 
 Verifies that a toggle-button (checkbox/radio) is not checked. When the verify fails, the test will continue execution, logging the failure. Fails if the specified element doesn't exist or isn't a toggle-button.
@@ -5908,6 +13879,28 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator pointing to a checkbox or radio button
+
+## Verify Not Color
+
+Verifies that the text color of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotColor(locator, text)
+`
+
+`
+verifyNotColor(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Verify Not Confirmation
 
@@ -5957,6 +13950,80 @@ Parameter | Description
 --------- | -----------
 text | the value to match with the result
 
+## Verify Not Cookie
+
+Verifies that all cookies of the current page under test not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotCookie(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not Cookie By Name
+
+Verifies that the value of the cookie with the specified name not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotCookieByName(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Verify Not Css Count
+
+Verifies that the number of nodes that match the specified css selector, eg not equal to the given value. When the verify fails, the test will continue execution, logging the failure. "css=table" would give the number of tables.
+
+### Usage
+
+`
+verifyNotCssCount(css, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+css | the css selector to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
+text | the value to match with the result
+
+## Verify Not Cursor Position
+
+Verifies that the text cursor position in the given input element or textarea not equal to the given value. When the verify fails, the test will continue execution, logging the failure. Beware, this may not work perfectly on all browsers.
+
+ <p> Specifically, if the cursor/selection has been cleared by JavaScript, this command will tend to return the position of the last location of the cursor, even though the cursor is now gone from the page. This is filed as <a href="http://jira.openqa.org/browse/SEL-243">SEL-243</a>. </p> This method will fail if the specified element isn't an input element or textarea, or there is no cursor in the element.
+
+### Usage
+
+`
+verifyNotCursorPosition(locator, text)
+`
+
+`
+verifyNotCursorPosition(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an input element or textarea
+text | the value to match with the result
+
 ## Verify Not Editable
 
 Verifies that the specified input element is not editable, ie hasn't been disabled. When the verify fails, the test will continue execution, logging the failure. This method will fail if the specified element isn't an input element.
@@ -5977,6 +14044,116 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Verify Not Element Height
+
+Verifies that the height of an element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotElementHeight(locator, text)
+`
+
+`
+verifyNotElementHeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Element Index
+
+Verifies that the relative index of an element to its parent (starting from 0) not equal to the given value. When the verify fails, the test will continue execution, logging the failure. The comment node and empty text node will be ignored.
+
+### Usage
+
+`
+verifyNotElementIndex(locator, text)
+`
+
+`
+verifyNotElementIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Element Position Left
+
+Verifies that the horizontal position of an element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotElementPositionLeft(locator, text)
+`
+
+`
+verifyNotElementPositionLeft(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Element Position Top
+
+Verifies that the vertical position of an element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotElementPositionTop(locator, text)
+`
+
+`
+verifyNotElementPositionTop(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Element Width
+
+Verifies that the width of an element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotElementWidth(locator, text)
+`
+
+`
+verifyNotElementWidth(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
 
 ## Verify Not Enabled
 
@@ -6016,6 +14193,25 @@ Parameter | Description
 expression | the snippet to run
 text | the value to match with the result
 
+## Verify Not Eval Script
+
+Verifies that the result of evaluating the specified JavaScript snippet not equal to the given value. When the verify fails, the test will continue execution, logging the failure. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+verifyNotEvalScript(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
 ## Verify Not Exists In Database
 
 Verifies that any row would be returned by given the input SQL statement. When the verify fails, the test will continue execution, logging the failure.
@@ -6051,6 +14247,159 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
+## Verify Not File Downloaded
+
+Verifies that a file is not downloaded by browser. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotFileDownloaded(filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+
+## Verify Not Font Family
+
+Verifies that the font family of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotFontFamily(locator, text)
+`
+
+`
+verifyNotFontFamily(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Font Size
+
+Verifies that the font size of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotFontSize(locator, text)
+`
+
+`
+verifyNotFontSize(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Font Style
+
+Verifies that the font style of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotFontStyle(locator, text)
+`
+
+`
+verifyNotFontStyle(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Font Weight
+
+Verifies that the font weight of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotFontWeight(locator, text)
+`
+
+`
+verifyNotFontWeight(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Html Source
+
+Verifies that the entire HTML source between the opening and closing "html" tags not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotHtmlSource(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not Location
+
+Verifies that the absolute URL of the current page not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotLocation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Not Ordered
+
+Verifies that these two elements have same parent and are ordered siblings in the DOM. When the verify fails, the test will continue execution, logging the failure. Two same elements will not be considered ordered.
+
+### Usage
+
+`
+verifyNotOrdered(firstLocator, secondLocator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+firstLocator | an element locator pointing to the first element
+secondLocator | an element locator pointing to the second element
+
 ## Verify Not Page Source
 
 Verifies that the current application hierarchy XML (app) or page source (web). <p> In a web context, the source returns the source HTML of the current window. In a native context (iOS, Android, etc...) it will return the application hierarchy XML not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
@@ -6081,6 +14430,265 @@ verifyNotPrompt(text)
 
 Parameter | Description
 --------- | -----------
+text | the value to match with the result
+
+## Verify Not QR
+
+Verifies that the QR code's value from the image tag source encoded in Base64 format not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotQR(locator, text)
+`
+
+`
+verifyNotQR(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Verify Not Select Options
+
+Verifies that all option labels in the specified select drop-down not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectOptions(locator, text)
+`
+
+`
+verifyNotSelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Id
+
+Verifies that option element ID for selected option in the specified select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedId(locator, text)
+`
+
+`
+verifyNotSelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Ids
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedIds(locator, text)
+`
+
+`
+verifyNotSelectedIds(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Index
+
+Verifies that option index (option number, starting at 0) for selected option in the specified select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedIndex(locator, text)
+`
+
+`
+verifyNotSelectedIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Indexes
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedIndexes(locator, text)
+`
+
+`
+verifyNotSelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Label
+
+Verifies that option label (visible text) for selected option in the specified select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedLabel(locator, text)
+`
+
+`
+verifyNotSelectedLabel(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Labels
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedLabels(locator, text)
+`
+
+`
+verifyNotSelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Value
+
+Verifies that option value (value attribute) for selected option in the specified select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedValue(locator, text)
+`
+
+`
+verifyNotSelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Selected Values
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSelectedValues(locator, text)
+`
+
+`
+verifyNotSelectedValues(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Not Something Selected
+
+Verifies that some option in a drop-down menu is not selected. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotSomethingSelected(locator)
+`
+
+`
+verifyNotSomethingSelected(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+
+## Verify Not Table
+
+Verifies that the text from a cell of a table not equal to the given value. When the verify fails, the test will continue execution, logging the failure. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+verifyNotTable(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
 text | the value to match with the result
 
 ## Verify Not Tag Name
@@ -6127,6 +14735,50 @@ parentLocator | an element locator of parent element
 locator | an element locator
 text | the value to match with the result
 
+## Verify Not Text Alignment
+
+Verifies that the text alignment of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotTextAlignment(locator, text)
+`
+
+`
+verifyNotTextAlignment(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Not Text Decoration
+
+Verifies that the text decoration of the specified element not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotTextDecoration(locator, text)
+`
+
+`
+verifyNotTextDecoration(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
 ## Verify Not Text Empty
 
 Verifies that the text of an element is not empty. When the verify fails, the test will continue execution, logging the failure.
@@ -6147,6 +14799,22 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Verify Not Title
+
+Verifies that the title of the current page not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyNotTitle(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
 
 ## Verify Not Value
 
@@ -6245,6 +14913,23 @@ Parameter | Description
 --------- | -----------
 xpath | the xpath expression to evaluate. do NOT wrap this expression in a 'count()' function; we will do that for you.
 text | the value to match with the result
+
+## Verify Ordered
+
+Verifies that these two elements have same parent and are ordered siblings in the DOM. When the verify fails, the test will continue execution, logging the failure. Two same elements will not be considered ordered.
+
+### Usage
+
+`
+verifyOrdered(firstLocator, secondLocator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+firstLocator | an element locator pointing to the first element
+secondLocator | an element locator pointing to the second element
 
 ## Verify Page Source
 
@@ -6376,6 +15061,72 @@ verifyPromptPresent()
 Parameter | Description
 --------- | -----------
 
+## Verify QR
+
+Verifies that the QR code's value from the image tag source encoded in Base64 format equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyQR(locator, text)
+`
+
+`
+verifyQR(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Verify QR Match
+
+Verifies that the QR code's value from the image tag source encoded in Base64 format matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyQRMatch(locator, text)
+`
+
+`
+verifyQRMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Verify QR Not Match
+
+Verifies that the QR code's value from the image tag source encoded in Base64 format not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyQRNotMatch(locator, text)
+`
+
+`
+verifyQRNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
 ## Verify Row Count
 
 Check if the number of rows returned from selectStatement is equal to the value submitted.
@@ -6426,6 +15177,675 @@ Parameter | Description
 --------- | -----------
 sql | the sql
 count | the count
+
+## Verify Select Options
+
+Verifies that all option labels in the specified select drop-down equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectOptions(locator, text)
+`
+
+`
+verifySelectOptions(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Select Options Match
+
+Verifies that all option labels in the specified select drop-down matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectOptionsMatch(locator, text)
+`
+
+`
+verifySelectOptionsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Select Options Not Match
+
+Verifies that all option labels in the specified select drop-down not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectOptionsNotMatch(locator, text)
+`
+
+`
+verifySelectOptionsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Id
+
+Verifies that option element ID for selected option in the specified select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedId(locator, text)
+`
+
+`
+verifySelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Id Match
+
+Verifies that option element ID for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIdMatch(locator, text)
+`
+
+`
+verifySelectedIdMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Id Not Match
+
+Verifies that option element ID for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIdNotMatch(locator, text)
+`
+
+`
+verifySelectedIdNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Ids
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIds(locator, text)
+`
+
+`
+verifySelectedIds(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Ids Match
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIdsMatch(locator, text)
+`
+
+`
+verifySelectedIdsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Ids Not Match
+
+Verifies that all option element IDs for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIdsNotMatch(locator, text)
+`
+
+`
+verifySelectedIdsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Index
+
+Verifies that option index (option number, starting at 0) for selected option in the specified select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndex(locator, text)
+`
+
+`
+verifySelectedIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Index Match
+
+Verifies that option index (option number, starting at 0) for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexMatch(locator, text)
+`
+
+`
+verifySelectedIndexMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Index Not Match
+
+Verifies that option index (option number, starting at 0) for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexNotMatch(locator, text)
+`
+
+`
+verifySelectedIndexNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Indexes
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexes(locator, text)
+`
+
+`
+verifySelectedIndexes(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Indexes Match
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexesMatch(locator, text)
+`
+
+`
+verifySelectedIndexesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Indexes Not Match
+
+Verifies that all option indexes (option number, starting at 0) for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedIndexesNotMatch(locator, text)
+`
+
+`
+verifySelectedIndexesNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Label
+
+Verifies that option label (visible text) for selected option in the specified select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabel(locator, text)
+`
+
+`
+verifySelectedLabel(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Label Match
+
+Verifies that option label (visible text) for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabelMatch(locator, text)
+`
+
+`
+verifySelectedLabelMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Label Not Match
+
+Verifies that option label (visible text) for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabelNotMatch(locator, text)
+`
+
+`
+verifySelectedLabelNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Labels
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabels(locator, text)
+`
+
+`
+verifySelectedLabels(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Labels Match
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabelsMatch(locator, text)
+`
+
+`
+verifySelectedLabelsMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Labels Not Match
+
+Verifies that all option labels (visible text) for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedLabelsNotMatch(locator, text)
+`
+
+`
+verifySelectedLabelsNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Value
+
+Verifies that option value (value attribute) for selected option in the specified select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValue(locator, text)
+`
+
+`
+verifySelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Value Match
+
+Verifies that option value (value attribute) for selected option in the specified select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValueMatch(locator, text)
+`
+
+`
+verifySelectedValueMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Value Not Match
+
+Verifies that option value (value attribute) for selected option in the specified select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValueNotMatch(locator, text)
+`
+
+`
+verifySelectedValueNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Values
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValues(locator, text)
+`
+
+`
+verifySelectedValues(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Values Match
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValuesMatch(locator, text)
+`
+
+`
+verifySelectedValuesMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Selected Values Not Match
+
+Verifies that all option values (value attributes) for selected options in the specified select or multi-select element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySelectedValuesNotMatch(locator, text)
+`
+
+`
+verifySelectedValuesNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Verify Something Selected
+
+Verifies that some option in a drop-down menu is selected. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifySomethingSelected(locator)
+`
+
+`
+verifySomethingSelected(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+
+## Verify Table
+
+Verifies that the text from a cell of a table equals to the given value. When the verify fails, the test will continue execution, logging the failure. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+verifyTable(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
+
+## Verify Table Match
+
+Verifies that the text from a cell of a table matches the given value. When the verify fails, the test will continue execution, logging the failure. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+verifyTableMatch(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
+
+## Verify Table Not Match
+
+Verifies that the text from a cell of a table not match the given value. When the verify fails, the test will continue execution, logging the failure. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+verifyTableNotMatch(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
 
 ## Verify Tag Name
 
@@ -6513,6 +15933,138 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+text | the value to match with the result
+
+## Verify Text Alignment
+
+Verifies that the text alignment of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTextAlignment(locator, text)
+`
+
+`
+verifyTextAlignment(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Text Alignment Match
+
+Verifies that the text alignment of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTextAlignmentMatch(locator, text)
+`
+
+`
+verifyTextAlignmentMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Text Alignment Not Match
+
+Verifies that the text alignment of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTextAlignmentNotMatch(locator, text)
+`
+
+`
+verifyTextAlignmentNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Text Decoration
+
+Verifies that the text decoration of the specified element equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTextDecoration(locator, text)
+`
+
+`
+verifyTextDecoration(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Text Decoration Match
+
+Verifies that the text decoration of the specified element matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTextDecorationMatch(locator, text)
+`
+
+`
+verifyTextDecorationMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
+text | the value to match with the result
+
+## Verify Text Decoration Not Match
+
+Verifies that the text decoration of the specified element not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTextDecorationNotMatch(locator, text)
+`
+
+`
+verifyTextDecorationNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator pointing to an element
 text | the value to match with the result
 
 ## Verify Text Empty
@@ -6624,12 +16176,12 @@ text | the value to match with the result
 
 ## Verify Text Not Present
 
-Verifies that the specified text appears somewhere on the page not equal to the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the specified text appears somewhere on the page. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyTextNotPresent(text)
+verifyTextNotPresent(pattern)
 `
 
 ### Parameters
@@ -6637,16 +16189,15 @@ verifyTextNotPresent(text)
 Parameter | Description
 --------- | -----------
 text | a text to match with the text of the page
-text | the value to match with the result
 
 ## Verify Text Present
 
-Verifies that the specified text appears somewhere on the page equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+Verifies that the specified text appears somewhere on the page. When the verify fails, the test will continue execution, logging the failure.
 
 ### Usage
 
 `
-verifyTextPresent(text)
+verifyTextPresent(pattern)
 `
 
 ### Parameters
@@ -6654,6 +16205,53 @@ verifyTextPresent(text)
 Parameter | Description
 --------- | -----------
 text | a text to match with the text of the page
+
+## Verify Title
+
+Verifies that the title of the current page equals to the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTitle(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Title Match
+
+Verifies that the title of the current page matches the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTitleMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Verify Title Not Match
+
+Verifies that the title of the current page not match the given value. When the verify fails, the test will continue execution, logging the failure.
+
+### Usage
+
+`
+verifyTitleNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 text | the value to match with the result
 
 ## Verify Value
@@ -7120,6 +16718,54 @@ locator | an element locator
 name | The name of the attribute.
 text | the value to match with the result
 
+## Wait For Body Text
+
+Waits for the entire text of the page equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForBodyText(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Body Text Match
+
+Waits for the entire text of the page matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForBodyTextMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Body Text Not Match
+
+Waits for the entire text of the page not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForBodyTextNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Wait For Checked
 
 Waits for a toggle-button (checkbox/radio) is checked. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. Fails if the specified element doesn't exist or isn't a toggle-button.
@@ -7140,6 +16786,25 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator pointing to a checkbox or radio button
+
+## Wait For Condition
+
+Runs the specified JavaScript snippet repeatedly until it evaluates to "true". The snippet may have multiple lines, but only the result of the last line will be considered.
+
+ <p> Note that, by default, the snippet will be run in the runner's test window, not in the window of your application. To get the window of your application, you can use the JavaScript snippet <code>selenium.browserbot.getCurrentWindow()</code>, and then run your JavaScript in there </p>
+
+### Usage
+
+`
+waitForCondition(script, timeout)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+timeout | a timeout in milliseconds, after which this command will return with an error
 
 ## Wait For Confirmation
 
@@ -7287,6 +16952,137 @@ Parameter | Description
 --------- | -----------
 text | the value to match with the result
 
+## Wait For Cookie
+
+Waits for all cookies of the current page under test equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookie(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Cookie By Name
+
+Waits for the value of the cookie with the specified name equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookieByName(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Wait For Cookie By Name Match
+
+Waits for the value of the cookie with the specified name matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookieByNameMatch(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Wait For Cookie By Name Not Match
+
+Waits for the value of the cookie with the specified name not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookieByNameNotMatch(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
+## Wait For Cookie Match
+
+Waits for all cookies of the current page under test matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookieMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Cookie Not Match
+
+Waits for all cookies of the current page under test not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookieNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Cookie Not Present
+
+Waits for a cookie with the specified name is not present. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookieNotPresent(name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+
+## Wait For Cookie Present
+
+Waits for a cookie with the specified name is present. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForCookiePresent(name)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+
 ## Wait For Editable
 
 Waits for the specified input element is editable, ie hasn't been disabled. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. This method will fail if the specified element isn't an input element.
@@ -7388,6 +17184,63 @@ Parameter | Description
 expression | the snippet to run
 text | the value to match with the result
 
+## Wait For Eval Script
+
+Waits for the result of evaluating the specified JavaScript snippet equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+waitForEvalScript(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Wait For Eval Script Match
+
+Waits for the result of evaluating the specified JavaScript snippet matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+waitForEvalScriptMatch(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
+## Wait For Eval Script Not Match
+
+Waits for the result of evaluating the specified JavaScript snippet not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+waitForEvalScriptNotMatch(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
 ## Wait For Exists In Database
 
 Waits for any row would be returned by given the input SQL statement. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
@@ -7461,6 +17314,118 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
+## Wait For File Downloaded
+
+Waits for a file is downloaded by browser. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForFileDownloaded(filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+
+## Wait For Html Source
+
+Waits for the entire HTML source between the opening and closing "html" tags equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForHtmlSource(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Html Source Match
+
+Waits for the entire HTML source between the opening and closing "html" tags matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForHtmlSourceMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Html Source Not Match
+
+Waits for the entire HTML source between the opening and closing "html" tags not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForHtmlSourceNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Location
+
+Waits for the absolute URL of the current page equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForLocation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Location Match
+
+Waits for the absolute URL of the current page matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForLocationMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Location Not Match
+
+Waits for the absolute URL of the current page not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForLocationNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Wait For Not Activity
 
 Waits for the current activity matches the given activity. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The activity is identified by a string separated by a comma, containing "appPackage" and "appActivity" properties. For example: appPackage=example,appActivity=example
@@ -7523,6 +17488,22 @@ Parameter | Description
 --------- | -----------
 locator | an element locator
 name | The name of the attribute.
+text | the value to match with the result
+
+## Wait For Not Body Text
+
+Waits for the entire text of the page not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotBodyText(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 text | the value to match with the result
 
 ## Wait For Not Checked
@@ -7594,6 +17575,39 @@ Parameter | Description
 --------- | -----------
 text | the value to match with the result
 
+## Wait For Not Cookie
+
+Waits for all cookies of the current page under test not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotCookie(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Not Cookie By Name
+
+Waits for the value of the cookie with the specified name not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotCookieByName(name, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+name | the name of the cookie
+text | the value to match with the result
+
 ## Wait For Not Editable
 
 Waits for the specified input element is not editable, ie hasn't been disabled. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. This method will fail if the specified element isn't an input element.
@@ -7653,6 +17667,25 @@ Parameter | Description
 expression | the snippet to run
 text | the value to match with the result
 
+## Wait For Not Eval Script
+
+Waits for the result of evaluating the specified JavaScript snippet not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The snippet may have multiple lines, but only the result of the last line will be returned.
+
+ <p> Note that, by default, the snippet will run in the context of the "selenium" object itself, so <code>this</code> will refer to the Selenium object. Use <code>window</code> to refer to the window of your application, e.g. <code>window.document.getElementById('foo')</code> </p> <p> If you need to use a locator to refer to a single element in your application page, you can use <code>this.browserbot.findElement("id=foo")</code> where "id=foo" is your locator. </p>
+
+### Usage
+
+`
+waitForNotEvalScript(script, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+script | the JavaScript snippet to run
+text | the value to match with the result
+
 ## Wait For Not Exists In Database
 
 Waits for any row would be returned by given the input SQL statement. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
@@ -7688,6 +17721,54 @@ Parameter | Description
 expression | the value to return
 text | the value to match with the result
 
+## Wait For Not File Downloaded
+
+Waits for a file is not downloaded by browser. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotFileDownloaded(filePattern)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+filePattern | the file name pattern
+
+## Wait For Not Html Source
+
+Waits for the entire HTML source between the opening and closing "html" tags not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotHtmlSource(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Not Location
+
+Waits for the absolute URL of the current page not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotLocation(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
 ## Wait For Not Page Source
 
 Waits for the current application hierarchy XML (app) or page source (web). <p> In a web context, the source returns the source HTML of the current window. In a native context (iOS, Android, etc...) it will return the application hierarchy XML not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
@@ -7718,6 +17799,155 @@ waitForNotPrompt(text)
 
 Parameter | Description
 --------- | -----------
+text | the value to match with the result
+
+## Wait For Not QR
+
+Waits for the QR code's value from the image tag source encoded in Base64 format not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotQR(locator, text)
+`
+
+`
+waitForNotQR(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Wait For Not Selected Id
+
+Waits for option element ID for selected option in the specified select element not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotSelectedId(locator, text)
+`
+
+`
+waitForNotSelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Not Selected Index
+
+Waits for option index (option number, starting at 0) for selected option in the specified select element not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotSelectedIndex(locator, text)
+`
+
+`
+waitForNotSelectedIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Not Selected Label
+
+Waits for option label (visible text) for selected option in the specified select element not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotSelectedLabel(locator, text)
+`
+
+`
+waitForNotSelectedLabel(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Not Selected Value
+
+Waits for option value (value attribute) for selected option in the specified select element not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotSelectedValue(locator, text)
+`
+
+`
+waitForNotSelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Not Something Selected
+
+Waits for some option in a drop-down menu is not selected. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotSomethingSelected(locator)
+`
+
+`
+waitForNotSomethingSelected(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+
+## Wait For Not Table
+
+Waits for the text from a cell of a table not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+waitForNotTable(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
 text | the value to match with the result
 
 ## Wait For Not Tag Name
@@ -7784,6 +18014,22 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Wait For Not Title
+
+Waits for the title of the current page not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForNotTitle(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
 
 ## Wait For Not Value
 
@@ -7897,6 +18143,41 @@ Parameter | Description
 --------- | -----------
 text | the value to match with the result
 
+## Wait For Page To Load
+
+Waits for a new page to load.
+
+ <p> You can use this command instead of the "AndWait" suffixes, "clickAndWait", "selectAndWait", "typeAndWait" etc. (which are only available in the JS API). </p> <p> Selenium constantly keeps track of new pages loading, and sets a "newPageLoaded" flag when it first notices a page load. Running any other Selenium command after turns the flag to false. Hence, if you want to wait for a page to load, you must wait immediately after a Selenium command that caused a page-load. </p>
+
+### Usage
+
+`
+waitForPageToLoad(timeout)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+timeout | a timeout in milliseconds, after which this command will return with an error
+
+## Wait For Pop Up
+
+Waits for a popup window to appear and load up.
+
+### Usage
+
+`
+waitForPopUp(windowID, timeout)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+windowID | the JavaScript window "name" of the window that will appear (not the text of the title bar) If unspecified, or specified as "null", this command will wait for the first non-top window to appear (don't rely on this if you are working with multiple popups simultaneously).
+timeout | a timeout in milliseconds, after which the action will return with an error. If this value is not specified, the default Selenium timeout will be used. See the setTimeout() command.
+
 ## Wait For Prompt
 
 Waits for the message of a JavaScript question prompt dialog equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
@@ -7978,6 +18259,411 @@ waitForPromptPresent()
 
 Parameter | Description
 --------- | -----------
+
+## Wait For QR
+
+Waits for the QR code's value from the image tag source encoded in Base64 format equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForQR(locator, text)
+`
+
+`
+waitForQR(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Wait For QR Match
+
+Waits for the QR code's value from the image tag source encoded in Base64 format matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForQRMatch(locator, text)
+`
+
+`
+waitForQRMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Wait For QR Not Match
+
+Waits for the QR code's value from the image tag source encoded in Base64 format not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForQRNotMatch(locator, text)
+`
+
+`
+waitForQRNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator
+text | the value to match with the result
+
+## Wait For Selected Id
+
+Waits for option element ID for selected option in the specified select element equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedId(locator, text)
+`
+
+`
+waitForSelectedId(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Id Match
+
+Waits for option element ID for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedIdMatch(locator, text)
+`
+
+`
+waitForSelectedIdMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Id Not Match
+
+Waits for option element ID for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedIdNotMatch(locator, text)
+`
+
+`
+waitForSelectedIdNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Index
+
+Waits for option index (option number, starting at 0) for selected option in the specified select element equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedIndex(locator, text)
+`
+
+`
+waitForSelectedIndex(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Index Match
+
+Waits for option index (option number, starting at 0) for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedIndexMatch(locator, text)
+`
+
+`
+waitForSelectedIndexMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Index Not Match
+
+Waits for option index (option number, starting at 0) for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedIndexNotMatch(locator, text)
+`
+
+`
+waitForSelectedIndexNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Label
+
+Waits for option label (visible text) for selected option in the specified select element equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedLabel(locator, text)
+`
+
+`
+waitForSelectedLabel(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Label Match
+
+Waits for option label (visible text) for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedLabelMatch(locator, text)
+`
+
+`
+waitForSelectedLabelMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Label Not Match
+
+Waits for option label (visible text) for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedLabelNotMatch(locator, text)
+`
+
+`
+waitForSelectedLabelNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Value
+
+Waits for option value (value attribute) for selected option in the specified select element equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedValue(locator, text)
+`
+
+`
+waitForSelectedValue(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Value Match
+
+Waits for option value (value attribute) for selected option in the specified select element matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedValueMatch(locator, text)
+`
+
+`
+waitForSelectedValueMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Selected Value Not Match
+
+Waits for option value (value attribute) for selected option in the specified select element not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSelectedValueNotMatch(locator, text)
+`
+
+`
+waitForSelectedValueNotMatch(parentLocator, locator, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+text | the value to match with the result
+
+## Wait For Something Selected
+
+Waits for some option in a drop-down menu is selected. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForSomethingSelected(locator)
+`
+
+`
+waitForSomethingSelected(parentLocator, locator)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+parentLocator | an element locator of parent element
+locator | an element locator identifying a drop-down menu
+
+## Wait For Table
+
+Waits for the text from a cell of a table equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+waitForTable(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
+
+## Wait For Table Match
+
+Waits for the text from a cell of a table matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+waitForTableMatch(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
+
+## Wait For Table Not Match
+
+Waits for the text from a cell of a table not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting. The cellAddress syntax row.column, where row and column start at 0.
+
+### Usage
+
+`
+waitForTableNotMatch(locator, cellAddress, text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+locator | an element locator pointing to a table
+cellAddress | a cell address, e.g. "1.4"
+text | the value to match with the result
 
 ## Wait For Tag Name
 
@@ -8134,12 +18820,12 @@ text | the value to match with the result
 
 ## Wait For Text Not Present
 
-Waits for the specified text appears somewhere on the page not equal to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for the specified text appears somewhere on the page. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForTextNotPresent(text)
+waitForTextNotPresent(pattern)
 `
 
 ### Parameters
@@ -8147,16 +18833,15 @@ waitForTextNotPresent(text)
 Parameter | Description
 --------- | -----------
 text | a text to match with the text of the page
-text | the value to match with the result
 
 ## Wait For Text Present
 
-Waits for the specified text appears somewhere on the page equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+Waits for the specified text appears somewhere on the page. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
 
 ### Usage
 
 `
-waitForTextPresent(text)
+waitForTextPresent(pattern)
 `
 
 ### Parameters
@@ -8164,6 +18849,53 @@ waitForTextPresent(text)
 Parameter | Description
 --------- | -----------
 text | a text to match with the text of the page
+
+## Wait For Title
+
+Waits for the title of the current page equals to the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForTitle(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Title Match
+
+Waits for the title of the current page matches the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForTitleMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+text | the value to match with the result
+
+## Wait For Title Not Match
+
+Waits for the title of the current page not match the given value. They will succeed immediately if the condition is already true. However, they will fail and halt the test if the condition does not become true within the current timeout setting.
+
+### Usage
+
+`
+waitForTitleNotMatch(text)
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 text | the value to match with the result
 
 ## Wait For Value
@@ -8273,4 +19005,34 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
+
+## Window Focus
+
+Gives focus to the currently selected window
+
+### Usage
+
+`
+windowFocus()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
+
+## Window Maximize
+
+Resize currently selected window to take up the entire screen
+
+### Usage
+
+`
+windowMaximize()
+`
+
+### Parameters
+
+Parameter | Description
+--------- | -----------
 

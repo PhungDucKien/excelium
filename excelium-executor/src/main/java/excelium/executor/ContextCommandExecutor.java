@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-package excelium.executor.mobile;
+package excelium.executor;
 
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
+import excelium.executor.MobileExcelium;
 import excelium.model.project.Project;
 
 import java.util.ArrayList;
@@ -65,17 +66,23 @@ public class ContextCommandExecutor extends CommandExecutor {
      *
      * @param context The name of the context to which to change
      */
-    @Action(param1 = "context")
+    @Action(param1 = "context", web = false)
     public void setContext(String context) {
         webDriver.getAppiumDriver().context(context);
+        if (context.toUpperCase().startsWith("WEBVIEW_")) {
+            ((MobileExcelium) excelium).setWebContext();
+        } else {
+            ((MobileExcelium) excelium).setNativeContext();
+        }
     }
 
     /**
      * Set the context being automated to the native app context.
      */
-    @Action
+    @Action(web = false)
     public void setNativeAppContext() {
         webDriver.getAppiumDriver().context("NATIVE_APP");
+        ((MobileExcelium) excelium).setNativeContext();
     }
 
     /**
@@ -88,7 +95,7 @@ public class ContextCommandExecutor extends CommandExecutor {
      *
      * @param index The index of the web view context
      */
-    @Action(param1 = "index")
+    @Action(param1 = "index", web = false)
     public void setWebViewContext(String index) {
         Set<String> contexts = webDriver.getAppiumDriver().getContextHandles();
         List<String> webViewContexts = new ArrayList<>();
@@ -104,6 +111,7 @@ public class ContextCommandExecutor extends CommandExecutor {
         }
 
         webDriver.getAppiumDriver().context(webViewContexts.get(idx - 1));
+        ((MobileExcelium) excelium).setWebContext();
     }
 
     /**
@@ -116,7 +124,7 @@ public class ContextCommandExecutor extends CommandExecutor {
      *
      * @return the current context
      */
-    @Accessor
+    @Accessor(web = false)
     public String getContext() {
         return webDriver.getAppiumDriver().getContext();
     }
@@ -126,7 +134,7 @@ public class ContextCommandExecutor extends CommandExecutor {
      *
      * @return the count of contexts
      */
-    @Accessor
+    @Accessor(web = false)
     public int getContextCount() {
         return webDriver.getAppiumDriver().getContextHandles().size();
     }

@@ -3,6 +3,7 @@ dependencies {
 
     compile files(org.gradle.internal.jvm.Jvm.current().toolsJar)
     compile group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
+    compile group: 'org.jmockit', name: 'jmockit', version: '1.39'
 }
 
 task "doc-clean"(type: Delete) {

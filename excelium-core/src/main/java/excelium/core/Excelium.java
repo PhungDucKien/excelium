@@ -143,7 +143,7 @@ public class Excelium {
             CommandContext webContext = new CommandContext(baseUrl, this, project, true);
             commandContexts.put("WEB", webContext);
 
-            currentContext = "WEB";
+            setWebContext();
         } else if (webDriver.isMobileApp()) {
             CommandContext nativeContext = new CommandContext(baseUrl, this, project, false);
             commandContexts.put("NATIVE", nativeContext);
@@ -151,7 +151,7 @@ public class Excelium {
             CommandContext webContext = new CommandContext(baseUrl, this, project, true);
             commandContexts.put("WEB", webContext);
 
-            currentContext = "NATIVE";
+            setNativeContext();
         }
     }
 
@@ -164,7 +164,19 @@ public class Excelium {
         return webDriver;
     }
 
-    protected CommandContext getCurrentCommandContext() {
+    protected String getCurrentContext() {
+        return currentContext;
+    }
+
+    protected void setWebContext() {
+        this.currentContext = "WEB";
+    }
+
+    protected void setNativeContext() {
+        this.currentContext = "NATIVE";
+    }
+
+    CommandContext getCurrentCommandContext() {
         return commandContexts.get(currentContext);
     }
 
