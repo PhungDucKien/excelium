@@ -76,9 +76,9 @@ public class CommandFactory {
      *
      * @return the map of commands
      */
-    public static Map<String, Command> createCommandMap(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean forWeb) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        List<CommandExecutor> commandExecutors = getCommandExecutors(webDriver, baseUrl, excelium, project, forWeb);
-        return createCommandMap(commandExecutors);
+    public static Map<String, Command> createCommandMap(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean webContext) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<CommandExecutor> commandExecutors = getCommandExecutors(webDriver, baseUrl, excelium, project, webContext);
+        return createCommandMap(commandExecutors, webContext);
     }
 
     /**
@@ -87,10 +87,10 @@ public class CommandFactory {
      * @param commandExecutors the list of command executors
      * @return the map of commands
      */
-    public static Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+    public static Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
         Map<String, Command> commandMap = new LinkedHashMap<>();
         for (CommandExecutor executor : commandExecutors) {
-            List<Command> commands = createCommandList(executor);
+            List<Command> commands = createCommandList(executor, webContext);
             for (Command command : commands) {
                 commandMap.put(command.getMethod() + "(" + countParam(command) + ")", command);
             }
@@ -107,13 +107,13 @@ public class CommandFactory {
      * @throws InvocationTargetException the invocation target exception
      * @throws InstantiationException    the instantiation exception
      */
-    private static List<CommandExecutor> getCommandExecutors(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean forWeb) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    private static List<CommandExecutor> getCommandExecutors(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project, boolean webContext) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         List<CommandExecutor> commandExecutors = new ArrayList<>();
 
-        List<Class<? extends CommandExecutor>> cached = forWeb ? webCommandExecutorClasses : mobileCommandExecutorClasses;
+        List<Class<? extends CommandExecutor>> cached = webContext ? webCommandExecutorClasses : mobileCommandExecutorClasses;
 
         if (CollectionUtils.isEmpty(cached)) {
-            cached.addAll(getCommandExecutorClasses(forWeb));
+            cached.addAll(getCommandExecutorClasses(webContext));
         }
         for (Class<? extends CommandExecutor> clazz : cached) {
             CommandExecutor commandExecutor = clazz.getConstructor(ContextAwareWebDriver.class, String.class, Excelium.class, Project.class)
@@ -127,15 +127,15 @@ public class CommandFactory {
     /**
      * Gets command executor classes.
      *
-     * @param forWeb the for web
+     * @param webContext the web context
      * @return the command executor classes
      */
-    private static List<Class<? extends CommandExecutor>> getCommandExecutorClasses(boolean forWeb) {
+    private static List<Class<? extends CommandExecutor>> getCommandExecutorClasses(boolean webContext) {
         List<Class<? extends CommandExecutor>> classes = new ArrayList<>();
         ServiceLoader<ExecutorProviderService> serviceLoader = ServiceLoader.load(ExecutorProviderService.class);
         for (ExecutorProviderService service : serviceLoader) {
             List<Class<? extends CommandExecutor>> providedClasses;
-            if (forWeb) {
+            if (webContext) {
                 providedClasses = service.getWebExecutorClasses();
             } else {
                 providedClasses = service.getMobileExecutorClasses();
@@ -153,21 +153,21 @@ public class CommandFactory {
      * @param executor the command executor
      * @return the list of commands
      */
-    private static List<Command> createCommandList(CommandExecutor executor) {
+    private static List<Command> createCommandList(CommandExecutor executor, boolean webContext) {
         Map<Method, Action> actions = new LinkedHashMap<>();
         Map<Method, Accessor> accessors = new LinkedHashMap<>();
         for (Method method : executor.getClass().getDeclaredMethods()) {
             if (Modifier.isPublic(method.getModifiers())) {
                 Action action = method.getAnnotation(Action.class);
                 if (action != null) {
-                    if (isCommandAvailable(action, executor.getWebDriver())) {
+                    if (isCommandAvailable(action, executor.getWebDriver(), webContext)) {
                         actions.put(method, action);
                     }
                 }
 
                 Accessor accessor = method.getAnnotation(Accessor.class);
                 if (accessor != null) {
-                    if (isCommandAvailable(accessor, executor.getWebDriver())) {
+                    if (isCommandAvailable(accessor, executor.getWebDriver(), webContext)) {
                         accessors.put(method, accessor);
                     }
                 }
@@ -574,7 +574,7 @@ public class CommandFactory {
      * @param webDriver  the context aware web driver
      * @return true if the command is available, otherwise, false
      */
-    private static boolean isCommandAvailable(Object annotation, ContextAwareWebDriver webDriver) {
+    private static boolean isCommandAvailable(Object annotation, ContextAwareWebDriver webDriver, boolean webContext) {
         boolean web = true;
         boolean android = true;
         boolean ios = true;
@@ -589,13 +589,13 @@ public class CommandFactory {
             android = accessor.android();
             ios = accessor.ios();
         }
-        if (web && webDriver.isWeb()) {
+        if (web && webContext) {
             return true;
         }
-        if (android && webDriver.isAndroid()) {
+        if (android && !webContext && webDriver.isAndroid()) {
             return true;
         }
-        if (ios && webDriver.isIOS()) {
+        if (ios && !webContext && webDriver.isIOS()) {
             return true;
         }
         return false;

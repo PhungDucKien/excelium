@@ -53,7 +53,7 @@ public class ByParser {
      * @return By object
      */
     public static By parseBy(String locator, ContextAwareWebDriver webDriver) {
-        if (webDriver.isWeb()) {
+        if (webDriver.isWebContext()) {
             return parseWebBy(locator, null);
         } else {
             return parseMobileBy(locator, null);
@@ -69,7 +69,7 @@ public class ByParser {
      * @return By object
      */
     public static By parseBy(String locator, By parentBy, ContextAwareWebDriver webDriver) {
-        if (webDriver.isWeb()) {
+        if (webDriver.isWebContext()) {
             return parseWebBy(locator, parentBy);
         } else {
             return parseMobileBy(locator, parentBy);

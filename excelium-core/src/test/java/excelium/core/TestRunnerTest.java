@@ -103,11 +103,12 @@ public class TestRunnerTest {
 
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            webDriver.isWebApp(); result = true;
         }};
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
                 return commandMap;
             }
         };
@@ -181,11 +182,12 @@ public class TestRunnerTest {
 
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            webDriver.isWebApp(); result = true;
         }};
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
                 return commandMap;
             }
         };
@@ -246,11 +248,12 @@ public class TestRunnerTest {
 
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            webDriver.isWebApp(); result = true;
         }};
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
                 return commandMap;
             }
         };
@@ -355,11 +358,12 @@ public class TestRunnerTest {
 
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            webDriver.isWebApp(); result = true;
         }};
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
                 return commandMap;
             }
         };
@@ -462,11 +466,12 @@ public class TestRunnerTest {
 
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            webDriver.isWebApp(); result = true;
         }};
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
                 return commandMap;
             }
         };
@@ -617,11 +622,12 @@ public class TestRunnerTest {
 
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            webDriver.isWebApp(); result = true;
         }};
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
                 return commandMap;
             }
         };
@@ -886,11 +892,12 @@ public class TestRunnerTest {
 
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            webDriver.isWebApp(); result = true;
         }};
 
         new MockUp<CommandFactory>() {
             @Mock
-            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors) {
+            public Map<String, Command> createCommandMap(List<CommandExecutor> commandExecutors, boolean webContext) {
                 return commandMap;
             }
         };

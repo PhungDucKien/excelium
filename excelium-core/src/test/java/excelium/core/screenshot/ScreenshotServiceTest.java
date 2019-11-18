@@ -108,7 +108,9 @@ public class ScreenshotServiceTest {
             screenshot.getImage(); result = new BufferedImage(100, 100, TYPE_INT_RGB);
 
             webDriver.executeScript(anyString); result = 1;
-            webDriver.isWeb(); result = true;
+            webDriver.isWebApp(); result = true;
+            webDriver.isWebContext(); result = true;
+            webDriver.isMobile(); result = false;
         }};
 
         ScreenshotService screenshotService = new ScreenshotService(testRunner);

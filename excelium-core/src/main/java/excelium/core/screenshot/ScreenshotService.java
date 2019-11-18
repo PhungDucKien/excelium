@@ -37,11 +37,13 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategy;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -134,7 +136,7 @@ public class ScreenshotService {
      * @param webDriver the web driver
      */
     public void captureEntirePage(ContextAwareWebDriver webDriver) {
-        if (webDriver.isWeb()) {
+        if (webDriver.isWebApp() && webDriver.isWebContext()) {
             captureWebPage(webDriver);
         } else {
             captureAppPage(webDriver);
@@ -148,7 +150,7 @@ public class ScreenshotService {
      * @param element   the web element
      */
     public void captureElement(ContextAwareWebDriver webDriver, WebElement element) {
-        if (webDriver.isWeb()) {
+        if (webDriver.isWebApp() && webDriver.isWebContext()) {
             captureWebElement(webDriver, element);
         } else {
             throw new RuntimeException("The action is not supported");
@@ -161,7 +163,7 @@ public class ScreenshotService {
      * @param webDriver the web driver
      */
     public void captureViewport(ContextAwareWebDriver webDriver) {
-        if (webDriver.isWeb()) {
+        if (webDriver.isPC()) {
             throw new RuntimeException("The action is not supported");
         } else {
             try {
@@ -285,7 +287,30 @@ public class ScreenshotService {
      */
     private synchronized void setShootingStrategy(ContextAwareWebDriver webDriver) {
         if (currentWebDriver != webDriver) {
-            screenshotTaker.shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(getDpr(webDriver)), 100));
+            int headerToCut = 0;
+            int footerToCut = 0;
+            if (webDriver.isMobile()) {
+                String currentContext = webDriver.getAppiumDriver().getContext();
+                webDriver.getAppiumDriver().context("NATIVE_APP");
+
+                try {
+                    WebElement urlEl = webDriver.findElementByName("URL");
+                    WebElement parentEl = urlEl.findElement(By.xpath("./.."));
+                    headerToCut = parentEl.getRect().y + parentEl.getRect().height;
+
+                    WebElement toolbarEl = webDriver.findElementByName("BottomBrowserToolbar");
+                    footerToCut = toolbarEl.getRect().height;
+                } catch (Exception e) {
+                    LOG.error(e.getMessage(), e);
+                }
+
+                webDriver.getAppiumDriver().context(currentContext);
+            }
+            ShootingStrategy cutting = ShootingStrategies.cutting(headerToCut, footerToCut);
+            ShootingStrategy scaling = ShootingStrategies.scaling(cutting, getDpr(webDriver));
+            ShootingStrategy pasting = ShootingStrategies.viewportPasting(scaling, 100);
+            screenshotTaker.shootingStrategy(pasting);
+
             currentWebDriver = webDriver;
         }
     }

@@ -250,7 +250,7 @@ public class TestRunner {
     private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException, SQLException, ClassNotFoundException {
         this.testStep = testStep;
         String methodName = StringUtils.uncapitalize(StringUtils.remove(WordUtils.capitalizeFully(testStep.getCommand()), " "));
-        Command command = excelium.getCommandMap().get(methodName + "(" + countParam(testStep) + ")");
+        Command command = excelium.getCurrentCommandContext().getCommandMap().get(methodName + "(" + countParam(testStep) + ")");
 
         if (command != null) {
             if (StringUtils.isNotBlank(testStep.getTestData())) {

@@ -193,7 +193,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
     public String getAttribute(String locator, String name) {
         WebElement element = webDriver.findElement(locator);
 
-        if (webDriver.isWeb()) {
+        if (webDriver.isWebContext()) {
             try {
                 return (String) webDriver.executeScript(
                         Joiner.on("\n").join(

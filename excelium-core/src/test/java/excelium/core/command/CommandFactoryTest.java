@@ -65,7 +65,7 @@ public class CommandFactoryTest {
         List<CommandExecutor> commandExecutors = new ArrayList<>();
         commandExecutors.add(new MyActionCommandExecutor(new StubWebContextAwareWebDriver(), null, excelium, null));
 
-        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors);
+        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors, true);
 
         Assert.assertEquals(9, commandMap.size());
         Assert.assertEquals("locator", commandMap.get("click(1)").getParam1());
@@ -143,7 +143,7 @@ public class CommandFactoryTest {
             executor.runAction(anyString);
         }};
 
-        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors);
+        Map<String, Command> commandMap = CommandFactory.createCommandMap(commandExecutors, true);
 
         Assert.assertEquals(63, commandMap.size());
 
@@ -467,11 +467,6 @@ public class CommandFactoryTest {
     private static class StubWebContextAwareWebDriver extends ContextAwareWebDriver {
         public StubWebContextAwareWebDriver() {
             super(new StubWebDriver(), null, null);
-        }
-
-        @Override
-        public boolean isWeb() {
-            return true;
         }
 
         @Override

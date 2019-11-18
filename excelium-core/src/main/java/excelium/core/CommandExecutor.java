@@ -96,7 +96,7 @@ public class CommandExecutor {
      */
     public String normalizeText(String text) {
         text = text.replace("\r\n", "\n");
-        if (!webDriver.isWeb()) {
+        if (webDriver.isNativeContext()) {
             text = text.replace("\n", "&#10;");
         }
         return text;

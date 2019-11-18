@@ -210,7 +210,7 @@ public class WaitCommandExecutor extends CommandExecutor {
         return new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver driver) {
-                if (webDriver.isWeb()) {
+                if (webDriver.isWebContext()) {
                     String script = webDriver.getJavascriptLibrary().getSeleniumScript("isTextPresent.js");
 
                     Boolean result = (Boolean) webDriver.executeScript(

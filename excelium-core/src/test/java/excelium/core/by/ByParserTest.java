@@ -47,7 +47,7 @@ public class ByParserTest {
     @Test
     public void testParseByWeb() {
         new Expectations() {{
-            webDriver.isWeb(); result = true;
+            webDriver.isWebContext(); result = true;
         }};
 
         By by = ByParser.parseBy("id=id", webDriver);
@@ -90,7 +90,7 @@ public class ByParserTest {
     @Test
     public void testParseByMobile() {
         new Expectations() {{
-            webDriver.isWeb(); result = false;
+            webDriver.isWebContext(); result = false;
         }};
 
         By by = ByParser.parseBy("accessibility_id=accessibility_id", webDriver);

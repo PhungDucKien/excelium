@@ -40,11 +40,16 @@ import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.jexl3.JxltEngine;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.*;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,6 +58,8 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import static excelium.core.by.ByParser.parseBy;
+import static java.util.Optional.ofNullable;
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 /**
  * Web driver that enables context awareness.
@@ -129,40 +136,62 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
         return (IOSDriver) webDriver;
     }
 
-    /**
-     * Determine whether the web driver is web automation driver.
-     *
-     * @return true if the web driver is web automation driver
-     */
-    public boolean isWeb() {
-        return !(webDriver instanceof AppiumDriver) || ((AppiumDriver) webDriver).isBrowser();
+    public boolean isPC() {
+        return !(webDriver instanceof AppiumDriver);
     }
 
-    /**
-     * Determine whether the web driver is Internet Explorer driver.
-     *
-     * @return true if the web driver is Internet Explorer driver
-     */
+    public boolean isMobile() {
+        return webDriver instanceof AppiumDriver;
+    }
+
+    public boolean isWebApp() {
+        return isPC() || ofNullable(getAppiumDriver().getSessionDetail("browserName"))
+                .orElse(null) != null;
+    }
+
+    public boolean isMobileApp() {
+        return isMobile() && ofNullable(getAppiumDriver().getSessionDetail("browserName"))
+                .orElse(null) == null;
+    }
+
+    public boolean isWebContext() {
+        return isPC() || !containsIgnoreCase(getAppiumDriver().getContext(), "NATIVE_APP");
+    }
+
+    public boolean isNativeContext() {
+        return isMobile() && containsIgnoreCase(getAppiumDriver().getContext(), "NATIVE_APP");
+    }
+
+    public boolean isChrome() {
+        return webDriver instanceof ChromeDriver;
+    }
+
+    public boolean isFirefox() {
+        return webDriver instanceof FirefoxDriver;
+    }
+
     public boolean isIE() {
         return webDriver instanceof InternetExplorerDriver;
     }
 
-    /**
-     * Determine whether the web driver is Android automation driver.
-     *
-     * @return true if the web driver is Android automation driver
-     */
-    public boolean isAndroid() {
-        return webDriver instanceof AndroidDriver && !((AndroidDriver) webDriver).isBrowser();
+    public boolean isEdge() {
+        return webDriver instanceof EdgeDriver;
     }
 
-    /**
-     * Determine whether the web driver is iOS automation driver.
-     *
-     * @return true if the web driver is iOS automation driver
-     */
+    public boolean isSafari() {
+        return webDriver instanceof SafariDriver;
+    }
+
+    public boolean isOpera() {
+        return webDriver instanceof OperaDriver;
+    }
+
+    public boolean isAndroid() {
+        return webDriver instanceof AndroidDriver;
+    }
+
     public boolean isIOS() {
-        return webDriver instanceof IOSDriver && !((IOSDriver) webDriver).isBrowser();
+        return webDriver instanceof IOSDriver;
     }
 
     public boolean isIphoneX() {
@@ -327,7 +356,7 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
      * @return the text of the element
      */
     public String getElementText(WebElement element) {
-        if (isWeb()) {
+        if (isWebContext()) {
             String getText = javascriptLibrary.getSeleniumScript("getText.js");
             try {
                 return (String) webDriver.executeScript(

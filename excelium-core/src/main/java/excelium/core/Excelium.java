@@ -25,13 +25,9 @@
 package excelium.core;
 
 import excelium.common.StringUtil;
-import excelium.core.command.CommandFactory;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.exception.ActionNotFoundException;
-import excelium.core.exception.CommandNotFoundException;
 import excelium.model.project.Project;
-import excelium.model.test.command.Command;
-import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -50,12 +46,17 @@ public class Excelium {
     /**
      * Web driver
      */
-    protected final ContextAwareWebDriver webDriver;
+    private final ContextAwareWebDriver webDriver;
 
     /**
-     * The command map
+     * Current context
      */
-    private Map<String, Command> commandMap;
+    private String currentContext;
+
+    /**
+     * The map of command contexts
+     */
+    private Map<String, CommandContext> commandContexts;
 
     /**
      * The map of actions
@@ -76,32 +77,22 @@ public class Excelium {
     public Excelium(ContextAwareWebDriver webDriver, String baseUrl, Project project) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         this.webDriver = webDriver;
         this.actions = new HashMap<>();
-        this.commandMap = CommandFactory.createCommandMap(webDriver, baseUrl, this, project, webDriver.isWeb());
+        this.commandContexts = new HashMap<>();
+
+        initCommandContexts(webDriver, baseUrl, project);
     }
 
     /**
      * Run the command.
      *
      * @param methodName the method name
-     * @param param1  value of parameter 1
-     * @param param2  value of parameter 2
-     * @param param3  value of parameter 3
+     * @param param1     value of parameter 1
+     * @param param2     value of parameter 2
+     * @param param3     value of parameter 3
      * @throws Throwable if an error occurred
      */
     protected void runCommand(String methodName, Object param1, Object param2, Object param3) throws Throwable {
-        Command command = commandMap.get(methodName + "(" + countParam(param1, param2, param3) + ")");
-        if (command != null) {
-            try {
-                param1 = preprocessParameter(param1);
-                param2 = preprocessParameter(param2);
-                param3 = preprocessParameter(param3);
-                command.getConsumer().accept(param1, param2, param3);
-            } catch (InvocationTargetException e) {
-                throw e.getCause();
-            }
-        } else {
-            throw new CommandNotFoundException("Command not found: " + methodName);
-        }
+        commandContexts.get(currentContext).runCommand(methodName, param1, param2, param3);
     }
 
     /**
@@ -147,63 +138,34 @@ public class Excelium {
         throw new ActionNotFoundException("Action not found: " + actionName);
     }
 
-    /**
-     * Preprocesses parameter value.
-     *
-     * @param paramValue parameter value
-     * @return processed value
-     */
-    private Object preprocessParameter(Object paramValue) {
-        if (paramValue instanceof String) {
-            return preprocessStringParameter((String) paramValue);
-        }
-        if (paramValue != null && paramValue.getClass().equals(String[].class)) {
-            String[] value = new String[((String[])paramValue).length];
-            for (int i = 0; i < ((String[])paramValue).length; i++) {
-                value[i] = preprocessStringParameter(((String[])paramValue)[i]);
-            }
-            return value;
-        }
-        return paramValue;
-    }
+    private void initCommandContexts(ContextAwareWebDriver webDriver, String baseUrl, Project project) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        if (webDriver.isWebApp()) {
+            CommandContext webContext = new CommandContext(baseUrl, this, project, true);
+            commandContexts.put("WEB", webContext);
 
-    /**
-     * Evaluate a string parameter, performing evaluation and variable substitution.
-     * If the string matches the pattern "exp{ ... }", evaluate the string between the braces.
-     */
-    private String preprocessStringParameter(String value) {
-        Matcher match = Pattern.compile("^exp\\{((.|\\r?\\n)+)\\}$").matcher(value);
-        if (match.find()) {
-            Object result = webDriver.evalExp(match.group(1));
-            return result == null ? null : result.toString();
-        }
-        try {
-            return webDriver.evalTemplate(value);
-        } catch (Exception e) {
-            return value;
+            currentContext = "WEB";
+        } else if (webDriver.isMobileApp()) {
+            CommandContext nativeContext = new CommandContext(baseUrl, this, project, false);
+            commandContexts.put("NATIVE", nativeContext);
+
+            CommandContext webContext = new CommandContext(baseUrl, this, project, true);
+            commandContexts.put("WEB", webContext);
+
+            currentContext = "NATIVE";
         }
     }
 
     /**
-     * Count the number of parameters.
+     * Gets web driver.
      *
-     * @return the number of parameters
+     * @return the web driver
      */
-    private static int countParam(Object param1, Object param2, Object param3) {
-        int count = 0;
-        if ((param1 instanceof String && StringUtils.isNotBlank((String) param1)) || param1 != null) count++;
-        if ((param2 instanceof String && StringUtils.isNotBlank((String) param2)) || param2 != null) count++;
-        if ((param3 instanceof String && StringUtils.isNotBlank((String) param3)) || param3 != null) count++;
-        return count;
+    public ContextAwareWebDriver getWebDriver() {
+        return webDriver;
     }
 
-    /**
-     * Gets command map.
-     *
-     * @return the command map
-     */
-    Map<String, Command> getCommandMap() {
-        return commandMap;
+    protected CommandContext getCurrentCommandContext() {
+        return commandContexts.get(currentContext);
     }
 
     /**
