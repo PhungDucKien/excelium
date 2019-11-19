@@ -26,6 +26,7 @@ package excelium.core.driver;
 
 import excelium.model.enums.Browser;
 import excelium.model.test.config.Environment;
+import excelium.model.test.config.MobileWebEnvironment;
 import excelium.model.test.config.PcEnvironment;
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +35,9 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class DriverCleaner {
@@ -62,7 +66,7 @@ public class DriverCleaner {
             webDriver.manage().timeouts().setScriptTimeout(WEBDRIVER_DEFAULT_SCRIPT_TIMEOUT, TimeUnit.MILLISECONDS);
             webDriver.manage().timeouts().pageLoadTimeout(WEBDRIVER_DEFAULT_PAGE_LOAD_TIMEOUT, TimeUnit.MILLISECONDS);
 
-            if (!(webDriver instanceof AppiumDriver) || ((AppiumDriver) webDriver).isBrowser()) {
+            if (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment) {
                 if (webDriver.switchTo() != null) {
                     if (isAlertPresent(webDriver)) {
                         Alert alert = webDriver.switchTo().alert();
@@ -71,13 +75,31 @@ public class DriverCleaner {
                         }
                     }
 
-                    for (String handle : webDriver.getWindowHandles()) {
-                        if (!handle.equals(originalHandle)) {
-                            webDriver.switchTo().window(handle);
-                            webDriver.close();
+                    if (StringUtils.isNotBlank(originalHandle)) {
+                        for (String handle : webDriver.getWindowHandles()) {
+                            if (!handle.equals(originalHandle)) {
+                                webDriver.switchTo().window(handle);
+                                webDriver.close();
+                            }
+                        }
+                        webDriver.switchTo().window(originalHandle);
+
+                        if (environment instanceof MobileWebEnvironment) {
+                            Set<String> contexts = ((AppiumDriver) webDriver).getContextHandles();
+                            List<String> webViewContexts = new ArrayList<>();
+                            for (String context : contexts) {
+                                if (context.startsWith("WEBVIEW_")) {
+                                    webViewContexts.add(context);
+                                }
+                            }
+
+                            if (1 > webViewContexts.size()) {
+                                throw new IndexOutOfBoundsException("No context with index = " + 1 + " available");
+                            }
+
+                            ((AppiumDriver) webDriver).context(webViewContexts.get(0));
                         }
                     }
-                    webDriver.switchTo().window(originalHandle);
                 }
 
                 webDriver.manage().deleteAllCookies();

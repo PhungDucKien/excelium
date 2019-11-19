@@ -39,6 +39,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 public class DriverPool {
 
     private DriverAlivenessChecker alivenessChecker = new DriverAlivenessChecker();
@@ -206,7 +208,7 @@ public class DriverPool {
         RemoteWebDriver driver = driverFactory.createDriver(environment, project);
         drivers.remove(driverKey);
         drivers.put(driverKey, driver);
-        if (!(driver instanceof AppiumDriver)) {
+        if (!(driver instanceof AppiumDriver) || isNotBlank((driver.getCapabilities().getBrowserName()))) {
             originalHandles.remove(driver);
             originalHandles.put(driver, driver.getWindowHandle());
         }

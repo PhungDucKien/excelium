@@ -46,7 +46,6 @@ public class MyExecutorProviderService implements ExecutorProviderService {
     public List<Class<? extends CommandExecutor>> getWebExecutorClasses(ContextAwareWebDriver driver) {
         List<Class<? extends CommandExecutor>> executorClasses = new ArrayList<>(Arrays.asList(
                 // Web
-                WindowCommandExecutor.class,
                 PageCommandExecutor.class,
                 WebElementCommandExecutor.class,
                 EventCommandExecutor.class,
@@ -71,6 +70,8 @@ public class MyExecutorProviderService implements ExecutorProviderService {
 
         if (driver.isMobileApp()) {
             executorClasses.add(ContextCommandExecutor.class);
+        } else {
+            executorClasses.add(WindowCommandExecutor.class);
         }
 
         return executorClasses;

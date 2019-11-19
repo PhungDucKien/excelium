@@ -170,7 +170,7 @@ public class IOSAppExecutorTest {
         selenium.scrollDownTo("Web View");
         selenium.click("Web View");
 
-        selenium.pause("1000");
+        selenium.waitForContextCount("2");
 
         selenium.assertContextCount("2");
         selenium.setWebViewContext("1");

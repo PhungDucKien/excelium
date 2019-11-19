@@ -88,10 +88,14 @@ public class MyDoclet extends Standard {
         templateService = new FreeMarkerTemplateService();
 
         String destinationDir = getDestinationDir(root);
-        Map<String, MethodDoc> commandMethodDocs = getCommandMethodDocs(root);
 
-        generateDoc(true, destinationDir, commandMethodDocs, generateClasses);
-        generateDoc(false, destinationDir, commandMethodDocs, generateClasses);
+        ContextAwareWebDriver driver = new StubWebContextAwareWebDriver();
+        Map<String, MethodDoc> commandMethodDocs = getCommandMethodDocs(driver, root);
+        generateDoc(driver, destinationDir, commandMethodDocs, generateClasses);
+
+        driver = new StubMobileContextAwareWebDriver();
+        commandMethodDocs = getCommandMethodDocs(driver, root);
+        generateDoc(driver, destinationDir, commandMethodDocs, generateClasses);
 
         return true;
     }
@@ -99,13 +103,12 @@ public class MyDoclet extends Standard {
     /**
      * Generates markdown API documentation.
      *
-     * @param isWeb             true for Web, false for Mobile
      * @param destinationDir    the destination directory
      * @param commandMethodDocs the list of methods that are annotated with either @{@link Action} or @{@link Accessor}
      * @param generateClasses   generate Excelium classes
      */
-    private static void generateDoc(boolean isWeb, String destinationDir, Map<String, MethodDoc> commandMethodDocs, boolean generateClasses) {
-        Map<String, Command> commandMap = getCommandMap(isWeb);
+    private static void generateDoc(ContextAwareWebDriver driver, String destinationDir, Map<String, MethodDoc> commandMethodDocs, boolean generateClasses) {
+        Map<String, Command> commandMap = getCommandMap(driver);
 
         List<CommandItem> commandItems = new ArrayList<>();
         for (Command command : commandMap.values()) {
@@ -129,7 +132,7 @@ public class MyDoclet extends Standard {
                 commandDetail.setMethod(command.getMethod());
 
                 MethodDoc methodDoc;
-                if (isWeb) {
+                if (driver.isWebApp()) {
                     methodDoc = commandMethodDocs.get("web." + command.getSourceMethodKey());
                 } else {
                     methodDoc = commandMethodDocs.get("mobile." + command.getSourceMethodKey());
@@ -158,15 +161,15 @@ public class MyDoclet extends Standard {
         Map<String, Object> input = new HashMap<>();
         input.put("items", commandItems);
         input.put("details", commandDetails);
-        input.put("isWeb", isWeb);
+        input.put("isWeb", driver.isWebApp());
 
-        File outputFile = new File(destinationDir, isWeb ? "_web_api.md" : "_mobile_api.md");
+        File outputFile = new File(destinationDir, driver.isWebApp() ? "_web_api.md" : "_mobile_api.md");
         templateService.processTemplate("api.ftl", input, outputFile);
 
         if (generateClasses) {
             // Generate Excelium API classes
             File javaFile = new File("../excelium-executor/src/main/java/excelium/executor/" +
-                    (isWeb ? "WebExcelium.java" : "MobileExcelium.java"));
+                    (driver.isWebApp() ? "WebExcelium.java" : "MobileExcelium.java"));
             templateService.processTemplate("java.ftl", input, javaFile);
         }
     }
@@ -177,16 +180,16 @@ public class MyDoclet extends Standard {
      * @param root the root
      * @return the list of methods that are annotated with either @{@link Action} or @{@link Accessor}.
      */
-    private static Map<String, MethodDoc> getCommandMethodDocs(RootDoc root) {
+    private static Map<String, MethodDoc> getCommandMethodDocs(ContextAwareWebDriver driver, RootDoc root) {
         Map<String, MethodDoc> commandMethodDocs = new HashMap<>();
         for (ClassDoc classDoc : root.classes()) {
             MethodDoc[] methodDocs = classDoc.methods();
             for (MethodDoc methodDoc : methodDocs) {
                 if (containsCommandAnnotations(methodDoc)) {
-                    if (isCommonClass(classDoc.name())) {
+                    if (isCommonClass(driver, classDoc.name())) {
                         commandMethodDocs.put(methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
                     } else {
-                        commandMethodDocs.put((isWebClass(classDoc.name()) ? "web." : "mobile.") + methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
+                        commandMethodDocs.put((isWebClass(driver, classDoc.name()) ? "web." : "mobile.") + methodDoc.name() + "(" + methodDoc.parameters().length + ")", methodDoc);
                     }
                 }
             }
@@ -194,8 +197,7 @@ public class MyDoclet extends Standard {
         return commandMethodDocs;
     }
 
-    private static boolean isCommonClass(String className) {
-        StubMobileContextAwareWebDriver driver = new StubMobileContextAwareWebDriver();
+    private static boolean isCommonClass(ContextAwareWebDriver driver, String className) {
         ExecutorProviderService providerService = new MyExecutorProviderService();
         List<String> webClasses = providerService.getWebExecutorClasses(driver).stream().map(Class::getSimpleName).collect(Collectors.toList());
         List<String> mobileClasses = providerService.getMobileExecutorClasses(driver).stream().map(Class::getSimpleName).collect(Collectors.toList());
@@ -208,8 +210,7 @@ public class MyDoclet extends Standard {
         return false;
     }
 
-    private static boolean isWebClass(String className) {
-        StubMobileContextAwareWebDriver driver = new StubMobileContextAwareWebDriver();
+    private static boolean isWebClass(ContextAwareWebDriver driver, String className) {
         ExecutorProviderService providerService = new MyExecutorProviderService();
         List<String> webClasses = providerService.getWebExecutorClasses(driver).stream().map(Class::getSimpleName).collect(Collectors.toList());
         return webClasses.contains(className);
@@ -218,12 +219,11 @@ public class MyDoclet extends Standard {
     /**
      * Get the list of Excelium commands
      *
-     * @param isWeb true for Web, false for Mobile
      * @return the list of Excelium commands
      */
-    private static Map<String, Command> getCommandMap(boolean isWeb) {
+    private static Map<String, Command> getCommandMap(ContextAwareWebDriver driver) {
         try {
-            Excelium excelium = new Excelium(isWeb ? new StubWebContextAwareWebDriver() : new StubMobileContextAwareWebDriver(), null, null);
+            Excelium excelium = new Excelium(driver, null, null);
             Map<String, CommandContext> commandContexts = Deencapsulation.getField(excelium, "commandContexts");
             Map<String, Command> result = new LinkedHashMap<>();
             for (CommandContext context : commandContexts.values()) {
@@ -525,6 +525,11 @@ public class MyDoclet extends Standard {
         }
 
         @Override
+        public boolean isPC() {
+            return true;
+        }
+
+        @Override
         public boolean isAndroid() {
             return false;
         }
@@ -548,6 +553,11 @@ public class MyDoclet extends Standard {
         @Override
         public boolean isMobileApp() {
             return true;
+        }
+
+        @Override
+        public boolean isPC() {
+            return false;
         }
 
         @Override

@@ -32,8 +32,10 @@ import mockit.Verifications;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,9 +89,12 @@ public class ContextAwareWebDriverTest {
         ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertTrue(webDriver.isWebApp());
 
+        Capabilities webCapabilities = new DesiredCapabilities();
+        ((DesiredCapabilities) webCapabilities).setBrowserName("Browser");
+
         new Expectations() {{
-            androidDriver.getSessionDetail("browserName"); result = "Chrome";
-            iosDriver.getSessionDetail("browserName"); result = "Safari";
+            androidDriver.getCapabilities(); result = webCapabilities;
+            iosDriver.getCapabilities(); result = webCapabilities;
         }};
 
         webDriver = new ContextAwareWebDriver(androidDriver, null, null);
@@ -98,9 +103,11 @@ public class ContextAwareWebDriverTest {
         webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertTrue(webDriver.isWebApp());
 
+        Capabilities appCapabilities = new DesiredCapabilities();
+
         new Expectations() {{
-            androidDriver.getSessionDetail("browserName"); result = null;
-            iosDriver.getSessionDetail("browserName"); result = null;
+            androidDriver.getCapabilities(); result = appCapabilities;
+            iosDriver.getCapabilities(); result = appCapabilities;
         }};
 
         webDriver = new ContextAwareWebDriver(androidDriver, null, null);
@@ -115,9 +122,12 @@ public class ContextAwareWebDriverTest {
         ContextAwareWebDriver webDriver = new ContextAwareWebDriver(chromeDriver, null, null);
         Assert.assertFalse(webDriver.isMobileApp());
 
+        Capabilities webCapabilities = new DesiredCapabilities();
+        ((DesiredCapabilities) webCapabilities).setBrowserName("Browser");
+
         new Expectations() {{
-            androidDriver.getSessionDetail("browserName"); result = "Chrome";
-            iosDriver.getSessionDetail("browserName"); result = "Safari";
+            androidDriver.getCapabilities(); result = webCapabilities;
+            iosDriver.getCapabilities(); result = webCapabilities;
         }};
 
         webDriver = new ContextAwareWebDriver(androidDriver, null, null);
@@ -126,9 +136,11 @@ public class ContextAwareWebDriverTest {
         webDriver = new ContextAwareWebDriver(iosDriver, null, null);
         Assert.assertFalse(webDriver.isMobileApp());
 
+        Capabilities appCapabilities = new DesiredCapabilities();
+
         new Expectations() {{
-            androidDriver.getSessionDetail("browserName"); result = null;
-            iosDriver.getSessionDetail("browserName"); result = null;
+            androidDriver.getCapabilities(); result = appCapabilities;
+            iosDriver.getCapabilities(); result = appCapabilities;
         }};
 
         webDriver = new ContextAwareWebDriver(androidDriver, null, null);

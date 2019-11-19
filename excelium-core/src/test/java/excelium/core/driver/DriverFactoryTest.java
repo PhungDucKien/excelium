@@ -35,6 +35,7 @@ import io.appium.java_client.ios.IOSDriver;
 import mockit.*;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,6 +43,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.io.IOException;
@@ -266,9 +268,11 @@ public class DriverFactoryTest {
 
     @Test
     public void testCreateAndroidAppDriver() throws IOException {
+        Capabilities capabilities = new DesiredCapabilities();
         new Expectations() {{
             webDriverOptions.timeouts(); result = webDriverTimeouts;
             androidDriver.manage(); result = webDriverOptions;
+            androidDriver.getCapabilities(); result = capabilities;
         }};
 
         Project project = new Project();
@@ -289,9 +293,12 @@ public class DriverFactoryTest {
 
     @Test
     public void testCreateAndroidWebDriver() throws IOException {
+        Capabilities capabilities = new DesiredCapabilities();
+        ((DesiredCapabilities) capabilities).setBrowserName("Chrome");
         new Expectations() {{
             webDriverOptions.timeouts(); result = webDriverTimeouts;
             androidDriver.manage(); result = webDriverOptions;
+            androidDriver.getCapabilities(); result = capabilities;
         }};
 
         Project project = new Project();
@@ -311,9 +318,11 @@ public class DriverFactoryTest {
 
     @Test
     public void testCreateIOSAppDriver() throws IOException {
+        Capabilities capabilities = new DesiredCapabilities();
         new Expectations() {{
             webDriverOptions.timeouts(); result = webDriverTimeouts;
             iosDriver.manage(); result = webDriverOptions;
+            iosDriver.getCapabilities(); result = capabilities;
         }};
 
         Project project = new Project();
@@ -334,9 +343,12 @@ public class DriverFactoryTest {
 
     @Test
     public void testCreateIOSWebDriver() throws IOException {
+        Capabilities capabilities = new DesiredCapabilities();
+        ((DesiredCapabilities) capabilities).setBrowserName("Safari");
         new Expectations() {{
             webDriverOptions.timeouts(); result = webDriverTimeouts;
             iosDriver.manage(); result = webDriverOptions;
+            iosDriver.getCapabilities(); result = capabilities;
         }};
 
         Project project = new Project();

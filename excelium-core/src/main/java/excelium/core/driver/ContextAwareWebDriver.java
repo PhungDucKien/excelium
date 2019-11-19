@@ -58,8 +58,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import static excelium.core.by.ByParser.parseBy;
-import static java.util.Optional.ofNullable;
-import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Web driver that enables context awareness.
@@ -145,13 +144,11 @@ public class ContextAwareWebDriver extends RemoteWebDriver {
     }
 
     public boolean isWebApp() {
-        return isPC() || ofNullable(getAppiumDriver().getSessionDetail("browserName"))
-                .orElse(null) != null;
+        return isPC() || isNotBlank(getAppiumDriver().getCapabilities().getBrowserName());
     }
 
     public boolean isMobileApp() {
-        return isMobile() && ofNullable(getAppiumDriver().getSessionDetail("browserName"))
-                .orElse(null) == null;
+        return isMobile() && isBlank(getAppiumDriver().getCapabilities().getBrowserName());
     }
 
     public boolean isWebContext() {
