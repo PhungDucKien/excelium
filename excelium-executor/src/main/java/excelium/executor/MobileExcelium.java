@@ -2488,6 +2488,14 @@ public class MobileExcelium extends Excelium {
         runCommand("pause", waitTime, null, null);
     }
 
+    public void pinch(String locator, String scale) throws Throwable {
+        runCommand("pinch", locator, scale, null);
+    }
+
+    public void pinch(String parentLocator, String locator, String scale) throws Throwable {
+        runCommand("pinch", parentLocator, locator, scale);
+    }
+
     public void portrait() throws Throwable {
         runCommand("portrait", null, null, null);
     }

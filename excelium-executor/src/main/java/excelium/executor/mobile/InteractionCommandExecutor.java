@@ -365,6 +365,19 @@ public class InteractionCommandExecutor extends CommandExecutor {
         scrollLeftTo(webDriver.getAppiumDriver(), parentLocator, locator);
     }
 
+    /**
+     * Performs pinch gesture on the given element.
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @param scale         Pinch scale of type float. Use a scale between 0 and 1 to "pinch close" or zoom out and a scale greater than 1 to "pinch open" or zoom in.
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "scale")
+    public void pinch(String parentLocator, String locator, String scale) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        pinch(webDriver.getAppiumDriver(), element, Double.parseDouble(scale));
+    }
+
     private void swipeUp(AppiumDriver driver, WebElement element) {
         if (driver instanceof AndroidDriver) {
             swipeAndroid((AndroidDriver) driver, "up", element);
@@ -461,6 +474,14 @@ public class InteractionCommandExecutor extends CommandExecutor {
         }
     }
 
+    private void pinch(AppiumDriver driver, WebElement element, double scale) {
+        if (driver instanceof AndroidDriver) {
+            pinchAndroid((AndroidDriver) driver, element, scale);
+        } else if (driver instanceof IOSDriver) {
+            pinchIOS((IOSDriver) driver, element, scale);
+        }
+    }
+
     private void swipeAndroid(AndroidDriver driver, String direction, WebElement element) {
         int xOffset = 0;
         int yOffset = 0;
@@ -509,6 +530,9 @@ public class InteractionCommandExecutor extends CommandExecutor {
         }
     }
 
+    private void pinchAndroid(AndroidDriver driver, WebElement element, double scale) {
+    }
+
     private void swipeIOS(IOSDriver driver, String direction, WebElement element) {
         Map<String, Object> params = new HashMap<>();
         params.put("direction", direction);
@@ -533,5 +557,15 @@ public class InteractionCommandExecutor extends CommandExecutor {
         params.put("element", ((RemoteWebElement) element).getId());
         params.put("toVisible", true);
         driver.executeScript("mobile: scroll", params);
+    }
+
+    private void pinchIOS(IOSDriver driver, WebElement element, double scale) {
+        Map<String, Object> params = new HashMap<>();
+        if (element != null) {
+            params.put("element", ((RemoteWebElement) element).getId());
+        }
+        params.put("scale", scale);
+        params.put("velocity", scale < 1 ? -2 : 2);
+        driver.executeScript("mobile: pinch", params);
     }
 }

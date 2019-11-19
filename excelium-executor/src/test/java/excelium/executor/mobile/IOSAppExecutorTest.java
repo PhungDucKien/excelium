@@ -478,6 +478,20 @@ public class IOSAppExecutorTest {
         int yFinal = pickerEl.getLocation().y;
         Assert.assertTrue(yFinal > yMiddle);
 
+        selenium.scrollDownTo("Web View");
+        selenium.click("Web View");
+
+        // at this point this test relies on watching it happen, nothing is asserted
+        // in automation, this just checks that errors aren't thrown
+        selenium.waitForContextCount("2");
+
+        selenium.setWebViewContext("1");
+        selenium.open("../tests/appium/appium.png");
+        selenium.setNativeAppContext();
+
+        selenium.pinch("class=XCUIElementTypeApplication", "6");
+        selenium.pinch("class=XCUIElementTypeApplication", "0.5");
+
         selenium.goBack();
         selenium.scrollUpTo("Alert Views");
     }
