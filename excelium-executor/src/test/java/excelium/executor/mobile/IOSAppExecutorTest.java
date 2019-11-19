@@ -27,6 +27,7 @@ package excelium.executor.mobile;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverPool;
 import excelium.executor.MobileExcelium;
+import excelium.executor.web.env.GlobalWebEnvironment;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.MobileAppEnvironment;
@@ -47,6 +48,11 @@ public class IOSAppExecutorTest {
     protected static MobileExcelium selenium;
 
     protected static Project project;
+
+    @BeforeClass
+    public static void initializeServer() {
+        GlobalWebEnvironment.setUp();
+    }
 
     /**
      * Belows are steps to be able to run this test.
@@ -74,7 +80,7 @@ public class IOSAppExecutorTest {
         project.setAppPath(Paths.get("src/test/resources"));
         project.setScreenshotPath(Paths.get("screenshot"));
         webDriver = DriverPool.getInstance().getDriver(environment, project);
-        selenium = new MobileExcelium(webDriver, null, project);
+        selenium = new MobileExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
     }
 
     @AfterClass
@@ -175,7 +181,8 @@ public class IOSAppExecutorTest {
         selenium.assertContextCount("2");
         selenium.setWebViewContext("1");
 
-        // TODO
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.assertTitle("I am a page title");
 
         selenium.setNativeAppContext();
 

@@ -28,6 +28,8 @@ import org.openqa.selenium.net.PortProber;
 import org.openqa.selenium.net.UrlChecker;
 import org.openqa.selenium.os.CommandLine;
 
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,9 +67,13 @@ public class WebEnvironment {
             command.executeAsync();
 
             PortProber.pollPort(port);
-            serverUrl = "http://localhost:" + port;
+            String localServerUrl = "http://localhost:" + port;
 
-            URL status = new URL(serverUrl + "/tests");
+            Socket socket = new Socket();
+            socket.connect(new InetSocketAddress("google.com", 80));
+            serverUrl = "http://" + socket.getLocalAddress() + ":" + port;
+
+            URL status = new URL(localServerUrl + "/tests");
             new UrlChecker().waitUntilAvailable(60, TimeUnit.SECONDS, status);
         } catch (Exception e) {
             throw new RuntimeException(e);
