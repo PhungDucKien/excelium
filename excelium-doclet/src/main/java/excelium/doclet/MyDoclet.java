@@ -195,9 +195,10 @@ public class MyDoclet extends Standard {
     }
 
     private static boolean isCommonClass(String className) {
+        StubMobileContextAwareWebDriver driver = new StubMobileContextAwareWebDriver();
         ExecutorProviderService providerService = new MyExecutorProviderService();
-        List<String> webClasses = providerService.getWebExecutorClasses().stream().map(Class::getSimpleName).collect(Collectors.toList());
-        List<String> mobileClasses = providerService.getMobileExecutorClasses().stream().map(Class::getSimpleName).collect(Collectors.toList());
+        List<String> webClasses = providerService.getWebExecutorClasses(driver).stream().map(Class::getSimpleName).collect(Collectors.toList());
+        List<String> mobileClasses = providerService.getMobileExecutorClasses(driver).stream().map(Class::getSimpleName).collect(Collectors.toList());
 
         webClasses.retainAll(mobileClasses);
 
@@ -208,8 +209,9 @@ public class MyDoclet extends Standard {
     }
 
     private static boolean isWebClass(String className) {
+        StubMobileContextAwareWebDriver driver = new StubMobileContextAwareWebDriver();
         ExecutorProviderService providerService = new MyExecutorProviderService();
-        List<String> webClasses = providerService.getWebExecutorClasses().stream().map(Class::getSimpleName).collect(Collectors.toList());
+        List<String> webClasses = providerService.getWebExecutorClasses(driver).stream().map(Class::getSimpleName).collect(Collectors.toList());
         return webClasses.contains(className);
     }
 

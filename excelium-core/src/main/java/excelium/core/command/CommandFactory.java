@@ -113,7 +113,7 @@ public class CommandFactory {
         List<Class<? extends CommandExecutor>> cached = webContext ? webCommandExecutorClasses : mobileCommandExecutorClasses;
 
         if (CollectionUtils.isEmpty(cached)) {
-            cached.addAll(getCommandExecutorClasses(webContext));
+            cached.addAll(getCommandExecutorClasses(webDriver, webContext));
         }
         for (Class<? extends CommandExecutor> clazz : cached) {
             CommandExecutor commandExecutor = clazz.getConstructor(ContextAwareWebDriver.class, String.class, Excelium.class, Project.class)
@@ -130,15 +130,15 @@ public class CommandFactory {
      * @param webContext the web context
      * @return the command executor classes
      */
-    private static List<Class<? extends CommandExecutor>> getCommandExecutorClasses(boolean webContext) {
+    private static List<Class<? extends CommandExecutor>> getCommandExecutorClasses(ContextAwareWebDriver webDriver, boolean webContext) {
         List<Class<? extends CommandExecutor>> classes = new ArrayList<>();
         ServiceLoader<ExecutorProviderService> serviceLoader = ServiceLoader.load(ExecutorProviderService.class);
         for (ExecutorProviderService service : serviceLoader) {
             List<Class<? extends CommandExecutor>> providedClasses;
             if (webContext) {
-                providedClasses = service.getWebExecutorClasses();
+                providedClasses = service.getWebExecutorClasses(webDriver);
             } else {
-                providedClasses = service.getMobileExecutorClasses();
+                providedClasses = service.getMobileExecutorClasses(webDriver);
             }
             if (CollectionUtils.isNotEmpty(providedClasses)) {
                 classes.addAll(providedClasses);

@@ -25,19 +25,20 @@
 package excelium.core.service;
 
 import excelium.core.CommandExecutor;
+import excelium.core.driver.ContextAwareWebDriver;
 
 import java.util.List;
 
 /**
  * An interface service that defines public methods for retrieving
  * command executor classes used for web and mobile applications.
- *
+ * <p>
  * The implementations of this service must register their presence with the service
  * through ServiceLoader mechanism.
  *
  * @author PhungDucKien
- * @since 2018.05.28
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html">Class ServiceLoader</a>
+ * @since 2018.05.28
  */
 public interface ExecutorProviderService {
 
@@ -46,12 +47,12 @@ public interface ExecutorProviderService {
      *
      * @return list of command executor class
      */
-    List<Class<? extends CommandExecutor>> getWebExecutorClasses();
+    List<Class<? extends CommandExecutor>> getWebExecutorClasses(ContextAwareWebDriver driver);
 
     /**
      * Defines command executor classes used for mobile applications.
      *
      * @return list of command executor class
      */
-    List<Class<? extends CommandExecutor>> getMobileExecutorClasses();
+    List<Class<? extends CommandExecutor>> getMobileExecutorClasses(ContextAwareWebDriver driver);
 }

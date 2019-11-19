@@ -25,6 +25,7 @@
 package excelium.executor;
 
 import excelium.core.CommandExecutor;
+import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.service.ExecutorProviderService;
 import excelium.executor.mobile.*;
 import excelium.executor.web.*;
@@ -42,8 +43,8 @@ import java.util.List;
 public class MyExecutorProviderService implements ExecutorProviderService {
 
     @Override
-    public List<Class<? extends CommandExecutor>> getWebExecutorClasses() {
-        return new ArrayList<>(Arrays.asList(
+    public List<Class<? extends CommandExecutor>> getWebExecutorClasses(ContextAwareWebDriver driver) {
+        List<Class<? extends CommandExecutor>> executorClasses = new ArrayList<>(Arrays.asList(
                 // Web
                 WindowCommandExecutor.class,
                 PageCommandExecutor.class,
@@ -67,10 +68,16 @@ public class MyExecutorProviderService implements ExecutorProviderService {
                 EvalCommandExecutor.class,
                 DebugCommandExecutor.class
         ));
+
+        if (driver.isMobileApp()) {
+            executorClasses.add(ContextCommandExecutor.class);
+        }
+
+        return executorClasses;
     }
 
     @Override
-    public List<Class<? extends CommandExecutor>> getMobileExecutorClasses() {
+    public List<Class<? extends CommandExecutor>> getMobileExecutorClasses(ContextAwareWebDriver driver) {
         return new ArrayList<>(Arrays.asList(
                 // Mobile
                 SessionCommandExecutor.class,
@@ -78,7 +85,6 @@ public class MyExecutorProviderService implements ExecutorProviderService {
                 MobilePageCommandExecutor.class,
                 MobileElementCommandExecutor.class,
                 InteractionCommandExecutor.class,
-                ContextCommandExecutor.class,
 
                 // Common
                 AlertCommandExecutor.class,
@@ -92,7 +98,8 @@ public class MyExecutorProviderService implements ExecutorProviderService {
                 CollectionCommandExecutor.class,
                 DateCommandExecutor.class,
                 EvalCommandExecutor.class,
-                DebugCommandExecutor.class
+                DebugCommandExecutor.class,
+                ContextCommandExecutor.class
         ));
     }
 }
