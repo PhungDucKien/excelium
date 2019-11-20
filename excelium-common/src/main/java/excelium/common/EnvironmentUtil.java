@@ -31,6 +31,7 @@ import excelium.model.test.config.MobileAppEnvironment;
 import excelium.model.test.config.MobileWebEnvironment;
 import excelium.model.test.config.PcEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,9 +100,9 @@ public class EnvironmentUtil {
         if (CollectionUtils.isEmpty(deviceNames)) {
             deviceNames = new ArrayList<>();
             if (platform == Platform.ANDROID) {
-                deviceNames.add("Android Emulator");
+                deviceNames.add("Android");
             } else if (platform == Platform.IOS) {
-                deviceNames.add("iPhone Simulator");
+                deviceNames.add("iPhone");
             }
         }
         if (CollectionUtils.isEmpty(orientations)) {
@@ -126,7 +127,7 @@ public class EnvironmentUtil {
                         environment.setPlatformVersion(platformVersion);
                         environment.setDeviceName(deviceName);
                         environment.setOrientation(orientation);
-                        environment.setUdid(udid);
+                        environment.setUdid(StringUtils.isBlank(udid) ? "auto" : udid);
                         environment.setBrowser(Browser.fromName(browser));
                         environment.setBaseUrl(baseUrl);
                         environments.add(environment);
@@ -162,9 +163,9 @@ public class EnvironmentUtil {
         if (CollectionUtils.isEmpty(deviceNames)) {
             deviceNames = new ArrayList<>();
             if (platform == Platform.ANDROID) {
-                deviceNames.add("Android Emulator");
+                deviceNames.add("Android");
             } else if (platform == Platform.IOS) {
-                deviceNames.add("iPhone Simulator");
+                deviceNames.add("iPhone");
             }
         }
         if (CollectionUtils.isEmpty(orientations)) {
@@ -180,7 +181,7 @@ public class EnvironmentUtil {
                     environment.setPlatformVersion(platformVersion);
                     environment.setDeviceName(deviceName);
                     environment.setOrientation(orientation);
-                    environment.setUdid(udid);
+                    environment.setUdid(StringUtils.isBlank(udid) ? "auto" : udid);
                     environment.setAppPath(appPath);
                     environment.setAppActivity(appActivity);
                     environment.setAppPackage(appPackage);

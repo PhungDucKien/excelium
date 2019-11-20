@@ -56,7 +56,7 @@ public class IOSWebExecutorTest {
     /**
      * Belows are steps to be able to run this test.
      * - Install WDA as described at https://medium.com/@yash3x/appium-xcuitest-on-real-ios-devices-bd1ebe0dea55
-     * - Set the following environment variables: UPDATE_WDA_BUNDLEID, TEST_PLATFORM_VERSION, TEST_DEVICE_NAME, TEST_DEVICE_UDID
+     * - Set the following environment variables: UPDATE_WDA_BUNDLEID
      * - Save an XCode File config at ~/.xcconfig
      *
      * @throws IOException
@@ -69,9 +69,6 @@ public class IOSWebExecutorTest {
     public static void beforeClass() throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         MobileWebEnvironment environment = new MobileWebEnvironment();
         environment.setPlatform(Platform.IOS);
-        environment.setPlatformVersion(System.getenv("TEST_PLATFORM_VERSION"));
-        environment.setDeviceName(System.getenv("TEST_DEVICE_NAME"));
-        environment.setUdid(System.getenv("TEST_DEVICE_UDID"));
         environment.setBrowser(Browser.SAFARI);
 
         project = new Project();

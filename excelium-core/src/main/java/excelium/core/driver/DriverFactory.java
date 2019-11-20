@@ -254,10 +254,8 @@ public class DriverFactory {
         if (StringUtils.isNotBlank(environment.getPlatformVersion())) {
             desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, environment.getPlatformVersion());
         }
-        if (StringUtils.isNotBlank(environment.getDeviceName())) {
-            desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, environment.getDeviceName());
-        }
-        desiredCapabilities.setCapability(MobileCapabilityType.UDID, environment.getUdid());
+        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, StringUtils.isBlank(environment.getDeviceName()) ? "Android" : environment.getDeviceName());
+        desiredCapabilities.setCapability(MobileCapabilityType.UDID, StringUtils.isBlank(environment.getUdid()) ? "auto" : environment.getUdid());
         if (environment instanceof MobileWebEnvironment) {
             desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, ((MobileWebEnvironment) environment).getBrowser().getText());
         } else if (environment instanceof MobileAppEnvironment) {
@@ -305,14 +303,13 @@ public class DriverFactory {
         if (StringUtils.isNotBlank(environment.getPlatformVersion())) {
             desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, environment.getPlatformVersion());
         }
-        if (StringUtils.isNotBlank(environment.getDeviceName())) {
-            desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, environment.getDeviceName());
-        }
-        desiredCapabilities.setCapability(MobileCapabilityType.UDID, environment.getUdid());
+        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, StringUtils.isBlank(environment.getDeviceName()) ? "iPhone" : environment.getDeviceName());
+        desiredCapabilities.setCapability(MobileCapabilityType.UDID, StringUtils.isBlank(environment.getUdid()) ? "auto" : environment.getUdid());
         if (environment instanceof MobileWebEnvironment) {
             desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, ((MobileWebEnvironment) environment).getBrowser().getText());
             desiredCapabilities.setCapability(IOSMobileCapabilityType.SAFARI_INITIAL_URL, ((MobileWebEnvironment) environment).getBaseUrl());
             desiredCapabilities.setCapability(IOSMobileCapabilityType.SAFARI_ALLOW_POPUPS, true);
+            desiredCapabilities.setCapability(IOSMobileCapabilityType.NATIVE_WEB_TAP, true);
         } else if (environment instanceof MobileAppEnvironment) {
             String appPath = ((MobileAppEnvironment) environment).getAppPath();
             if (StringUtils.isNotBlank(appPath)) {

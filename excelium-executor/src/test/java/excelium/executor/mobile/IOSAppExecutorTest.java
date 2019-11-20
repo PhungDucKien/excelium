@@ -57,7 +57,7 @@ public class IOSAppExecutorTest {
     /**
      * Belows are steps to be able to run this test.
      * - Install WDA as described at https://medium.com/@yash3x/appium-xcuitest-on-real-ios-devices-bd1ebe0dea55
-     * - Set the following environment variables: UPDATE_WDA_BUNDLEID, TEST_PLATFORM_VERSION, TEST_DEVICE_NAME, TEST_DEVICE_UDID
+     * - Set the following environment variables: UPDATE_WDA_BUNDLEID
      * - Save an XCode File config at ~/.xcconfig
      * - Run REAL_DEVICE=1 npm install to build the app under test
      *
@@ -71,9 +71,6 @@ public class IOSAppExecutorTest {
     public static void beforeClass() throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         MobileAppEnvironment environment = new MobileAppEnvironment();
         environment.setPlatform(Platform.IOS);
-        environment.setPlatformVersion(System.getenv("TEST_PLATFORM_VERSION"));
-        environment.setDeviceName(System.getenv("TEST_DEVICE_NAME"));
-        environment.setUdid(System.getenv("TEST_DEVICE_UDID"));
         environment.setBundleId("com.vn.altplus.UICatalog");
 
         project = new Project();
