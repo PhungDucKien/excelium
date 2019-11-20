@@ -33,6 +33,7 @@ import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.MobileWebEnvironment;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -86,7 +87,31 @@ public class IOSWebExecutorTest {
     }
 
     @Test
-    public void testOpen() throws Throwable {
-        selenium.open("http://google.com.vn");
+    public void testAlert() throws Throwable {
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.click("alert1");
+        selenium.assertAlert("I am an alert");
+        selenium.chooseOkAlert();
+        selenium.assertTitle("I am a page title");
+
+        try {
+            selenium.assertAlert("I am an alert");
+            Assert.fail("Should be rejected");
+        } catch (Exception e) {
+        }
+
+        selenium.click("prompt1");
+        selenium.answerPrompt("of course!");
+        selenium.assertValue("promptVal", "of course!");
+
+        selenium.click("alert1");
+
+        try {
+            selenium.answerPrompt("yes I do!");
+            Assert.fail("Should be rejected");
+        } catch (Exception e) {
+        }
+
+        selenium.chooseOkAlert();
     }
 }

@@ -556,6 +556,7 @@ public class IOSAppExecutorTest {
 
         try {
             selenium.chooseOkAlert();
+            Assert.fail("Should be rejected");
         } catch (Exception e) {
         }
 
