@@ -87,6 +87,17 @@ public class WaitCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Sets the amount of time to wait for a page load to complete before throwing an error.
+     *
+     * @param timeout a timeout in milliseconds, after which the page load will return with an error
+     */
+    @Action(param1 = "timeout")
+    public void setPageLoadTimeout(String timeout) {
+        long wait = toPositiveInteger(timeout, webDriver.getTimeout());
+        webDriver.manage().timeouts().pageLoadTimeout(wait, TimeUnit.MILLISECONDS);
+    }
+
+    /**
      * Waits for any of the specified texts is somewhere on the page.
      *
      * @param textArray array of texts

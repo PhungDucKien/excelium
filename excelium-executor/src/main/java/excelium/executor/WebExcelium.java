@@ -2432,6 +2432,10 @@ public class WebExcelium extends Excelium {
         runCommand("setCursorPosition", parentLocator, locator, position);
     }
 
+    public void setPageLoadTimeout(String timeout) throws Throwable {
+        runCommand("setPageLoadTimeout", timeout, null, null);
+    }
+
     public void setTimeout(String timeout) throws Throwable {
         runCommand("setTimeout", timeout, null, null);
     }

@@ -2744,6 +2744,10 @@ public class MobileExcelium extends Excelium {
         runCommand("setNativeAppContext", null, null, null);
     }
 
+    public void setPageLoadTimeout(String timeout) throws Throwable {
+        runCommand("setPageLoadTimeout", timeout, null, null);
+    }
+
     public void setTimeout(String timeout) throws Throwable {
         runCommand("setTimeout", timeout, null, null);
     }
