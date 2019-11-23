@@ -24,8 +24,14 @@
 
 package excelium.executor.web.env;
 
- import excelium.executor.web.env.servlet.UploadServlet;
+import com.github.underscore.U;
+import excelium.common.NumberUtil;
+import excelium.executor.web.env.servlet.UploadServlet;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.seleniumhq.jetty9.http.HttpMethod;
 import org.seleniumhq.jetty9.server.Connector;
+import org.seleniumhq.jetty9.server.Request;
 import org.seleniumhq.jetty9.server.Server;
 import org.seleniumhq.jetty9.server.ServerConnector;
 import org.seleniumhq.jetty9.server.handler.ContextHandler;
@@ -35,7 +41,16 @@ import org.seleniumhq.jetty9.servlet.ServletContextHandler;
 import org.seleniumhq.jetty9.servlet.ServletHolder;
 import org.seleniumhq.jetty9.util.resource.Resource;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A HTTP server.
@@ -61,13 +76,13 @@ public class HttpServer {
         Server server = new Server();
         ServerConnector connector = new ServerConnector(server);
         connector.setPort(port);
-        server.setConnectors(new Connector[] {connector });
+        server.setConnectors(new Connector[]{connector});
 
         HandlerList handlers = new HandlerList();
 
         ContextHandler context = new ContextHandler();
         context.setContextPath("/tests");
-        ResourceHandler testHandler = new ResourceHandler();
+        ResourceHandler testHandler = new DynamicResourceHandler();
         testHandler.setBaseResource(Resource.newClassPathResource("/tests"));
         testHandler.setDirectoriesListed(true);
         context.setHandler(testHandler);
@@ -80,5 +95,55 @@ public class HttpServer {
 
         server.setHandler(handlers);
         server.start();
+    }
+
+    private static class DynamicResourceHandler extends ResourceHandler {
+        @Override
+        public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+            String delay = request.getParameter("delay");
+            if (StringUtils.isNotBlank(delay)) {
+                try {
+                    Thread.sleep(NumberUtil.parseInteger(delay, 0));
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            String path = request.getPathInfo();
+            if (path.endsWith(".html") && path.contains("/appium")) {
+                String throwError = request.getParameter("throwError");
+
+                response.setContentType("text/html");
+
+                Cookie cookie1 = new Cookie("guineacookie1", "i_am_a_cookie_value");
+                cookie1.setPath("/");
+                response.addCookie(cookie1);
+
+                Cookie cookie2 = new Cookie("guineacookie2", "cookie2");
+                cookie2.setPath("/");
+                response.addCookie(cookie2);
+
+                Cookie cookie3 = new Cookie("guineacookie3", "cant_access_this");
+                cookie3.setDomain(".blargimarg.com");
+                cookie3.setPath("/");
+                response.addCookie(cookie3);
+
+                Map<Object, Object> params = new HashMap<>();
+                params.put("throwError", throwError);
+                params.put("serverTime", new Date().getTime() / 1000);
+                params.put("userAgent", request.getHeader("user-agent"));
+                params.put("comment", HttpMethod.POST.is(request.getMethod()) ? request.getParameter("comments") : "None");
+
+                String template = IOUtils.toString(this.getClass().getResourceAsStream("/tests" + path), "UTF-8");
+                String res = U.template(template).apply(params);
+                OutputStream out = response.getOutputStream();
+                out.write(res.getBytes());
+                out.flush();
+
+                baseRequest.setHandled(true);
+            } else {
+                super.handle(target, baseRequest, request, response);
+            }
+        }
     }
 }

@@ -3,6 +3,8 @@ dependencies {
 
     compile group: 'com.google.zxing', name: 'core', version: '3.3.2'
     compile group: 'com.google.zxing', name: 'javase', version: '3.3.2'
+
+    testCompile group: 'com.github.javadev', name: 'underscore', version: '1.49'
 }
 
 test {
