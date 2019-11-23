@@ -24,7 +24,10 @@
 
 package excelium.executor.web;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Date;
 
 public class TestWait extends WebExecutorTestBase {
   @Test
@@ -54,5 +57,30 @@ public class TestWait extends WebExecutorTestBase {
     selenium.click("slowPage_reload");
     selenium.waitForPageToLoad("30000");
     selenium.verifyTitle("Slow Loading Page");
+  }
+
+  @Test
+  public void testPageLoadTimeout() throws Throwable {
+    selenium.open("http://appium.io");
+    selenium.setPageLoadTimeout("3000");
+    try {
+      selenium.open("../tests/appium/test/guinea-pig.html?delay=30000");
+      Assert.fail("Should be rejected");
+    } catch (Exception e) {
+    }
+
+    // the page should not have time to load
+    selenium.assertHtmlSourceMatch("Appium: Mobile App Automation Made Awesome.");
+
+    Date before = new Date();
+    selenium.setTimeout("12000");
+    selenium.setPageLoadTimeout("-1");
+    selenium.open("../tests/appium/test/guinea-pig.html?delay=3000");
+    Date now = new Date();
+
+    // the page should load after 3000
+    selenium.assertHtmlSourceMatch("I am some page content");
+    Assert.assertTrue(now.getTime() - before.getTime() >= 3000);
+    Assert.assertTrue(now.getTime() - before.getTime() < 12000);
   }
 }
