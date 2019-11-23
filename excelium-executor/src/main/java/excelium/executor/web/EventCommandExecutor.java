@@ -29,6 +29,10 @@ import excelium.core.Excelium;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -298,7 +302,13 @@ public class EventCommandExecutor extends CommandExecutor {
         String[] parts = coordString.split(",");
         int xOffset = Integer.parseInt(parts[0]);
         int yOffset = Integer.parseInt(parts[1]);
-        new Actions(webDriver).moveToElement(element, xOffset, yOffset).click().perform();
+        if (webDriver.isPC()) {
+            new Actions(webDriver).moveToElement(element, xOffset, yOffset).click().perform();
+        } else {
+            new TouchAction(webDriver.getAppiumDriver())
+                    .tap(TapOptions.tapOptions().withTapsCount(1).withPosition(PointOption.point(element.getLocation().x + xOffset, element.getLocation().y + yOffset)))
+                    .perform();
+        }
     }
 
     /**
@@ -316,7 +326,13 @@ public class EventCommandExecutor extends CommandExecutor {
         String[] parts = coordString.split(",");
         int xOffset = Integer.parseInt(parts[0]);
         int yOffset = Integer.parseInt(parts[1]);
-        new Actions(webDriver).moveToElement(element, xOffset, yOffset).doubleClick().perform();
+        if (webDriver.isPC()) {
+            new Actions(webDriver).moveToElement(element, xOffset, yOffset).doubleClick().perform();
+        } else {
+            new TouchAction(webDriver.getAppiumDriver())
+                    .tap(TapOptions.tapOptions().withTapsCount(2).withPosition(PointOption.point(element.getLocation().x + xOffset, element.getLocation().y + yOffset)))
+                    .perform();
+        }
     }
 
     /**
@@ -334,7 +350,13 @@ public class EventCommandExecutor extends CommandExecutor {
         String[] parts = coordString.split(",");
         int xOffset = Integer.parseInt(parts[0]);
         int yOffset = Integer.parseInt(parts[1]);
-        new Actions(webDriver).moveToElement(element, xOffset, yOffset).contextClick().perform();
+        if (webDriver.isPC()) {
+            new Actions(webDriver).moveToElement(element, xOffset, yOffset).contextClick().perform();
+        } else {
+            new TouchAction(webDriver.getAppiumDriver())
+                    .longPress(LongPressOptions.longPressOptions().withPosition(PointOption.point(element.getLocation().x + xOffset, element.getLocation().y + yOffset)))
+                    .perform();
+        }
     }
 
     /**

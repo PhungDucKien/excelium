@@ -32,6 +32,12 @@ import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.executor.web.support.OptionSelector;
 import excelium.model.project.Project;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -39,6 +45,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.function.BiFunction;
 
 /**
@@ -142,7 +149,13 @@ public class WebElementCommandExecutor extends CommandExecutor {
     public void doubleClick(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
 
-        new Actions(webDriver).doubleClick(element).perform();
+        if (webDriver.isPC()) {
+            new Actions(webDriver).doubleClick(element).perform();
+        } else {
+            new TouchAction(webDriver.getAppiumDriver())
+                    .tap(TapOptions.tapOptions().withTapsCount(2).withElement(ElementOption.element(element)))
+                    .perform();
+        }
     }
 
     /**
@@ -155,8 +168,14 @@ public class WebElementCommandExecutor extends CommandExecutor {
     @Action(param1 = "parentLocator", param2 = "locator")
     public void contextMenu(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
-        Actions actionBuilder = new Actions(webDriver);
-        actionBuilder.contextClick(element).perform();
+
+        if (webDriver.isPC()) {
+            new Actions(webDriver).contextClick(element).perform();
+        } else {
+            new TouchAction(webDriver.getAppiumDriver())
+                    .longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(element)))
+                    .perform();
+        }
     }
 
     /**
@@ -180,7 +199,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * </ul>
      * </li>
      * <li><strong>id</strong>=<em>id</em>:
-     *
+     * <p>
      * matches options based on their ids.
      * <ul class="first last simple">
      * <li>id=option1</li>
@@ -261,7 +280,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * locator.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
+     * @param locator       an element locator identifying a multi-select box
      * @param optionLocator an option locator (a label by default)
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator")
@@ -274,8 +293,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Add a selection to the set of selected options in a multi-select element using a label.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param label a label
+     * @param locator       an element locator identifying a multi-select box
+     * @param label         a label
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "label")
     public void addSelectionLabel(String parentLocator, String locator, String label) {
@@ -286,8 +305,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Add a selection to the set of selected options in a multi-select element using a value.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param value a value
+     * @param locator       an element locator identifying a multi-select box
+     * @param value         a value
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
     public void addSelectionValue(String parentLocator, String locator, String value) {
@@ -298,8 +317,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Add a selection to the set of selected options in a multi-select element using an index.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param index an index
+     * @param locator       an element locator identifying a multi-select box
+     * @param index         an index
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "index")
     public void addSelectionIndex(String parentLocator, String locator, String index) {
@@ -310,8 +329,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Add a selection to the set of selected options in a multi-select element using an element ID.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param id an element ID
+     * @param locator       an element locator identifying a multi-select box
+     * @param id            an element ID
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "id")
     public void addSelectionId(String parentLocator, String locator, String id) {
@@ -323,7 +342,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * locator.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
+     * @param locator       an element locator identifying a multi-select box
      * @param optionLocator an option locator (a label by default)
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator")
@@ -336,8 +355,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Remove a selection from the set of selected options in a multi-select element using a label.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param label a label
+     * @param locator       an element locator identifying a multi-select box
+     * @param label         a label
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "label")
     public void removeSelectionLabel(String parentLocator, String locator, String label) {
@@ -348,8 +367,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Remove a selection from the set of selected options in a multi-select element using a value.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param value a value
+     * @param locator       an element locator identifying a multi-select box
+     * @param value         a value
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
     public void removeSelectionValue(String parentLocator, String locator, String value) {
@@ -360,8 +379,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Remove a selection from the set of selected options in a multi-select element using an index.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param index an index
+     * @param locator       an element locator identifying a multi-select box
+     * @param index         an index
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "index")
     public void removeSelectionIndex(String parentLocator, String locator, String index) {
@@ -372,8 +391,8 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Remove a selection from the set of selected options in a multi-select element using an element ID.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
-     * @param id an element ID
+     * @param locator       an element locator identifying a multi-select box
+     * @param id            an element ID
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "id")
     public void removeSelectionId(String parentLocator, String locator, String id) {
@@ -384,7 +403,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Unselects all of the selected options in a multi-select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a multi-select box
+     * @param locator       an element locator identifying a multi-select box
      */
     @Action(param1 = "parentLocator", param2 = "locator")
     public void removeAllSelections(String parentLocator, String locator) {
@@ -399,7 +418,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Check a toggle-button (checkbox/radio)
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator
+     * @param locator       an element locator
      */
     @Action(param1 = "parentLocator", param2 = "locator")
     public void check(String parentLocator, String locator) {
@@ -413,7 +432,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Uncheck a toggle-button (checkbox/radio)
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator
+     * @param locator       an element locator
      */
     @Action(param1 = "parentLocator", param2 = "locator")
     public void uncheck(String parentLocator, String locator) {
@@ -428,7 +447,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * single-input "Search" forms.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator for the form you want to submit
+     * @param locator       an element locator for the form you want to submit
      */
     @Action(param1 = "parentLocator", param2 = "locator")
     public void submit(String parentLocator, String locator) {
@@ -439,7 +458,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Clears the value of an input field.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator
+     * @param locator       an element locator
      */
     @Action(param1 = "parentLocator", param2 = "locator")
     public void clear(String parentLocator, String locator) {
@@ -450,10 +469,10 @@ public class WebElementCommandExecutor extends CommandExecutor {
     /**
      * Drags an element a certain distance and then drops it
      *
-     * @param parentLocator an element locator of parent element
-     * @param locator an element locator
+     * @param parentLocator   an element locator of parent element
+     * @param locator         an element locator
      * @param movementsString offset in pixels from the current location to which the element should
-     *        be moved, e.g., "+70,-300"
+     *                        be moved, e.g., "+70,-300"
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "movementsString")
     public void dragAndDrop(String parentLocator, String locator, String movementsString) {
@@ -473,38 +492,65 @@ public class WebElementCommandExecutor extends CommandExecutor {
         BiFunction<Integer, Integer, Integer> move = (current, dest) -> {
             if (current.equals(dest)) return 0;
             if (Math.abs(current - dest) < mouseSpeed) return dest - current;
-            return (current < dest) ? mouseSpeed : - mouseSpeed;
+            return (current < dest) ? mouseSpeed : -mouseSpeed;
         };
 
         int clientX = clientStartX;
         int clientY = clientStartY;
 
-        Actions actions = new Actions(webDriver).clickAndHold(element);
+        if (webDriver.isPC()) {
+            Actions actions = new Actions(webDriver).clickAndHold(element);
 
-        while ((clientX != clientFinishX) || (clientY != clientFinishY)) {
-            int deltaX = move.apply(clientX, clientFinishX);
-            int deltaY = move.apply(clientY, clientFinishY);
-            clientX += deltaX;
-            clientY += deltaY;
-            actions.moveByOffset(deltaX, deltaY);
+            while ((clientX != clientFinishX) || (clientY != clientFinishY)) {
+                int deltaX = move.apply(clientX, clientFinishX);
+                int deltaY = move.apply(clientY, clientFinishY);
+                clientX += deltaX;
+                clientY += deltaY;
+                actions.moveByOffset(deltaX, deltaY);
+            }
+
+            actions.release();
+            actions.perform();
+        } else {
+            TouchAction actions = new TouchAction(webDriver.getAppiumDriver())
+                    .press(PointOption.point(element.getLocation().x + element.getSize().width / 2, element.getLocation().y + element.getSize().height / 2))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)));
+
+            while ((clientX != clientFinishX) || (clientY != clientFinishY)) {
+                int deltaX = move.apply(clientX, clientFinishX);
+                int deltaY = move.apply(clientY, clientFinishY);
+                clientX += deltaX;
+                clientY += deltaY;
+                actions.moveTo(PointOption.point(clientX, clientY));
+            }
+
+            actions.release();
+            actions.perform();
         }
-
-        actions.release();
-        actions.perform();
     }
 
     /**
      * Drags an element and drops it on another element
      *
-     * @param toBeDraggedObjectLocator an element to be dragged
+     * @param toBeDraggedObjectLocator     an element to be dragged
      * @param dragDestinationObjectLocator an element whose location (i.e., whose center-most pixel)
-     *        will be the point where locatorOfObjectToBeDragged is dropped
+     *                                     will be the point where locatorOfObjectToBeDragged is dropped
      */
     @Action(param1 = "toBeDraggedObjectLocator", param2 = "dragDestinationObjectLocator")
     public void dragAndDropToObject(String toBeDraggedObjectLocator, String dragDestinationObjectLocator) {
         WebElement elementFrom = webDriver.findElement(toBeDraggedObjectLocator);
         WebElement elementTo = webDriver.findElement(dragDestinationObjectLocator);
-        new Actions(webDriver).dragAndDrop(elementFrom, elementTo).perform();
+
+        if (webDriver.isPC()) {
+            new Actions(webDriver).dragAndDrop(elementFrom, elementTo).perform();
+        } else {
+            new TouchAction(webDriver.getAppiumDriver())
+                    .press(PointOption.point(elementFrom.getLocation().x + elementFrom.getSize().width / 2, elementFrom.getLocation().y + elementFrom.getSize().height / 2))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                    .moveTo(PointOption.point(elementTo.getLocation().x + elementTo.getSize().width / 2, elementTo.getLocation().y + elementTo.getSize().height / 2))
+                    .release()
+                    .perform();
+        }
     }
 
     /**
@@ -512,10 +558,10 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * method will fail if the specified element isn't an input element or textarea.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an input element or textarea
-     * @param position the numerical position of the cursor in the field; position should be 0 to move
-     *        the position to the beginning of the field. You can also set the cursor to -1 to move it
-     *        to the end of the field.
+     * @param locator       an element locator pointing to an input element or textarea
+     * @param position      the numerical position of the cursor in the field; position should be 0 to move
+     *                      the position to the beginning of the field. You can also set the cursor to -1 to move it
+     *                      to the end of the field.
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "position")
     public void setCursorPosition(String parentLocator, String locator, String position) {
@@ -537,7 +583,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator pointing to an element
-     * @param identifier a string to be used as the ID of the specified element
+     * @param identifier    a string to be used as the ID of the specified element
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "identifier")
     public void assignId(String parentLocator, String locator, String identifier) {
@@ -549,7 +595,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * Check if these two elements have same parent and are ordered siblings in the DOM. Two same
      * elements will not be considered ordered.
      *
-     * @param firstLocator an element locator pointing to the first element
+     * @param firstLocator  an element locator pointing to the first element
      * @param secondLocator an element locator pointing to the second element
      * @return true if element1 is the previous sibling of element2, false otherwise
      */
