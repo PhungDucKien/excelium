@@ -195,7 +195,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
 
         if (webDriver.isWebContext()) {
             try {
-                return (String) webDriver.executeScript(
+                String attr = (String) webDriver.executeScript(
                         Joiner.on("\n").join(
                                 "var element = arguments[0];",
                                 "var attributeName = arguments[1].toLowerCase();",
@@ -235,6 +235,10 @@ public class AttributeCommandExecutor extends CommandExecutor {
 
                         element,
                         name);
+                if (StringUtils.isBlank(attr)) {
+                    return element.getAttribute(name);
+                }
+                return attr;
             } catch (WebDriverException e) {
                 return element.getAttribute(name);
             }
