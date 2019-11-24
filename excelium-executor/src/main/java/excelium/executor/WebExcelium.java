@@ -1584,6 +1584,10 @@ public class WebExcelium extends Excelium {
         runCommand("controlKeyUp", null, null, null);
     }
 
+    public void createCookie(String nameValuePair) throws Throwable {
+        runCommand("createCookie", nameValuePair, null, null);
+    }
+
     public void createCookie(String nameValuePair, String optionsString) throws Throwable {
         runCommand("createCookie", nameValuePair, optionsString, null);
     }

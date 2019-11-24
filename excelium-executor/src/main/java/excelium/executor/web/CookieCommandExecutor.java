@@ -65,6 +65,16 @@ public class CookieCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Create a new cookie whose path and domain are same with those of current page under test.
+     *
+     * @param nameValuePair name and value of the cookie in a format "name=value"
+     */
+    @Action(param1 = "nameValuePair")
+    public void createCookie(String nameValuePair) {
+        createCookie(nameValuePair, "");
+    }
+
+    /**
      * Create a new cookie whose path and domain are same with those of current page under test,
      * unless you specified a path for this cookie explicitly.
      *
