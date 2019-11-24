@@ -28,6 +28,7 @@ import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.*;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileCommand;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.*;
@@ -45,7 +46,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.remote.CommandInfo;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.DriverCommand;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
@@ -57,6 +60,8 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static io.appium.java_client.MobileCommand.postC;
 
 /**
  * Factory that creates web driver.
@@ -268,8 +273,6 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
                 }
             }
-            desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
-            desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
             desiredCapabilities.setCapability(AndroidMobileCapabilityType.DONT_STOP_APP_ON_RESET, true);
 
             if (StringUtils.isNotBlank(((MobileAppEnvironment) environment).getAppActivity())) {
@@ -286,7 +289,10 @@ public class DriverFactory {
             }
         }
 
-        return new AndroidDriver(getAppiumAddress(project), desiredCapabilities);
+        desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
+        desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
+
+        return new AndroidDriver(new AppiumCommandExecutor(getCommandRepository(), getAppiumAddress(project)), desiredCapabilities);
     }
 
     /**
@@ -320,13 +326,14 @@ public class DriverFactory {
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
                 }
             }
-            desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
-            desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
-
             if (StringUtils.isNotBlank(((MobileAppEnvironment) environment).getBundleId())) {
                 desiredCapabilities.setCapability(IOSMobileCapabilityType.BUNDLE_ID, ((MobileAppEnvironment) environment).getBundleId());
             }
         }
+
+        desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
+        desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
+
         // For iOS 9.3 or higher
         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
 
@@ -335,7 +342,7 @@ public class DriverFactory {
         desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_CONFIG_FILE, xcodeConfigFilePath);
         desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, System.getenv("UPDATE_WDA_BUNDLEID"));
 
-        return new IOSDriver(getAppiumAddress(project), desiredCapabilities);
+        return new IOSDriver(new AppiumCommandExecutor(getCommandRepository(), getAppiumAddress(project)), desiredCapabilities);
     }
 
     /**
@@ -389,5 +396,11 @@ public class DriverFactory {
             driverPath += ".exe";
         }
         return driverPath;
+    }
+
+    private Map<String, CommandInfo> getCommandRepository() {
+        Map<String, CommandInfo> commands = new HashMap<>(MobileCommand.commandRepository);
+        commands.put(DriverCommand.SUBMIT_ELEMENT, postC("/session/:sessionId/element/:id/submit"));
+        return commands;
     }
 }
