@@ -38,7 +38,7 @@ public class TestBasicAuth extends WebExecutorTestBase {
   }
 
   private String getUrl() throws MalformedURLException {
-    URL url = new URL(GlobalWebEnvironment.get().getServerUrl() + "/tests/html/basicAuth/index.html");
+    URL url = new URL(GlobalWebEnvironment.get().getLocalServerUrl() + "/tests/html/basicAuth/index.html");
 
     return String.format("%s://alice:foo@%s:%d%s",
         url.getProtocol(), url.getHost(), url.getPort(), url.getFile());

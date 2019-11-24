@@ -46,6 +46,7 @@ public class WebEnvironment {
     private CommandLine command;
 
     private String serverUrl;
+    private String localServerUrl;
 
     public WebEnvironment() {
         this(PortProber.findFreePort());
@@ -67,7 +68,7 @@ public class WebEnvironment {
             command.executeAsync();
 
             PortProber.pollPort(port);
-            String localServerUrl = "http://localhost:" + port;
+            localServerUrl = "http://localhost:" + port;
 
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress("google.com", 80));
@@ -84,6 +85,9 @@ public class WebEnvironment {
         return serverUrl;
     }
 
+    public String getLocalServerUrl() {
+        return localServerUrl;
+    }
 
     public void stop() {
         command.destroy();
