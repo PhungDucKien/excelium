@@ -592,6 +592,14 @@ public class WebExcelium extends Excelium {
         runCommand("assertLocationNotMatch", text, null, null);
     }
 
+    public void assertLogContainLine(String text) throws Throwable {
+        runCommand("assertLogContainLine", text, null, null);
+    }
+
+    public void assertLogNotContainLine(String text) throws Throwable {
+        runCommand("assertLogNotContainLine", text, null, null);
+    }
+
     public void assertNotAlert(String text) throws Throwable {
         runCommand("assertNotAlert", text, null, null);
     }
@@ -1526,6 +1534,10 @@ public class WebExcelium extends Excelium {
 
     public void clear(String parentLocator, String locator) throws Throwable {
         runCommand("clear", parentLocator, locator, null);
+    }
+
+    public void clearLog() throws Throwable {
+        runCommand("clearLog", null, null, null);
     }
 
     public void click(String locator) throws Throwable {
@@ -3190,6 +3202,14 @@ public class WebExcelium extends Excelium {
 
     public void verifyLocationNotMatch(String text) throws Throwable {
         runCommand("verifyLocationNotMatch", text, null, null);
+    }
+
+    public void verifyLogContainLine(String text) throws Throwable {
+        runCommand("verifyLogContainLine", text, null, null);
+    }
+
+    public void verifyLogNotContainLine(String text) throws Throwable {
+        runCommand("verifyLogNotContainLine", text, null, null);
     }
 
     public void verifyNotAlert(String text) throws Throwable {
