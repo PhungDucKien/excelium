@@ -72,8 +72,8 @@ public class IOSWebExecutorTest {
         webDriver = DriverPool.getInstance().getDriver(environment, project);
         selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
 
-       selenium.assertLocation("http://appium.io/");
-       selenium.assertTitle("Appium: Mobile App Automation Made Awesome.");
+        selenium.assertLocation("http://appium.io/");
+        selenium.assertTitle("Appium: Mobile App Automation Made Awesome.");
     }
 
     @AfterClass
@@ -261,5 +261,64 @@ public class IOSWebExecutorTest {
         }
 
         selenium.chooseOkAlert();
+    }
+
+    @Test
+    public void testCookie() throws Throwable {
+        selenium.open("../tests/appium/test/iframes.html");
+        selenium.deleteAllVisibleCookies();
+        selenium.assertCookieNotPresent("guineacookie1");
+        selenium.assertCookieNotPresent("guineacookie2");
+        selenium.assertCookieNotPresent("guineacookie3");
+
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.deleteCookie("newcookie");
+
+        selenium.assertCookiePresent("guineacookie1");
+        selenium.assertCookiePresent("guineacookie2");
+
+        selenium.createCookie("newcookie=i_am_new_here");
+        selenium.assertCookiePresent("guineacookie1");
+        selenium.assertCookiePresent("guineacookie2");
+        selenium.assertCookiePresent("newcookie");
+
+        selenium.deleteAllVisibleCookies();
+        selenium.open("../tests/appium/test/guinea-pig.html");
+
+        selenium.assertCookieNotPresent("expiredcookie");
+        selenium.createCookie("expiredcookie=i_am_new_here", "max_age=5");
+        selenium.assertCookiePresent("guineacookie1");
+        selenium.assertCookiePresent("guineacookie2");
+        selenium.assertCookiePresent("expiredcookie");
+
+        selenium.pause("5000");
+
+        selenium.assertCookiePresent("guineacookie1");
+        selenium.assertCookiePresent("guineacookie2");
+        selenium.assertCookieNotPresent("expiredcookie");
+
+        selenium.deleteCookie("expiredcookie");
+
+        selenium.deleteAllVisibleCookies();
+        selenium.open("../tests/appium/test/guinea-pig.html");
+
+        selenium.createCookie("newcookie=i_am_new_here");
+        selenium.assertCookiePresent("newcookie");
+
+        selenium.deleteCookie("newcookie");
+        selenium.assertCookieNotPresent("newcookie");
+        selenium.assertCookiePresent("guineacookie1");
+        selenium.assertCookiePresent("guineacookie2");
+
+        selenium.deleteAllVisibleCookies();
+        selenium.open("../tests/appium/test/guinea-pig.html");
+
+        selenium.createCookie("newcookie=i_am_new_here");
+        selenium.assertCookiePresent("newcookie");
+
+        selenium.deleteAllVisibleCookies();
+        selenium.assertCookieNotPresent("newcookie");
+        selenium.assertCookieNotPresent("guineacookie1");
+        selenium.assertCookieNotPresent("guineacookie2");
     }
 }
