@@ -515,6 +515,16 @@ public class MyDoclet extends Standard {
         }
 
         @Override
+        public boolean isPC() {
+            return true;
+        }
+
+        @Override
+        public boolean isMobile() {
+            return true;
+        }
+
+        @Override
         public boolean isWebApp() {
             return true;
         }
@@ -525,8 +535,13 @@ public class MyDoclet extends Standard {
         }
 
         @Override
-        public boolean isPC() {
+        public boolean isWebContext() {
             return true;
+        }
+
+        @Override
+        public boolean isNativeContext() {
+            return false;
         }
 
         @Override
@@ -546,6 +561,16 @@ public class MyDoclet extends Standard {
         }
 
         @Override
+        public boolean isPC() {
+            return false;
+        }
+
+        @Override
+        public boolean isMobile() {
+            return true;
+        }
+
+        @Override
         public boolean isWebApp() {
             return false;
         }
@@ -556,8 +581,13 @@ public class MyDoclet extends Standard {
         }
 
         @Override
-        public boolean isPC() {
+        public boolean isWebContext() {
             return false;
+        }
+
+        @Override
+        public boolean isNativeContext() {
+            return true;
         }
 
         @Override

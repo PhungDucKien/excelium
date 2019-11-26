@@ -536,18 +536,6 @@ public class WebExcelium extends Excelium {
         runCommand("assertFontWeightNotMatch", parentLocator, locator, text);
     }
 
-    public void assertHtmlSource(String text) throws Throwable {
-        runCommand("assertHtmlSource", text, null, null);
-    }
-
-    public void assertHtmlSourceMatch(String text) throws Throwable {
-        runCommand("assertHtmlSourceMatch", text, null, null);
-    }
-
-    public void assertHtmlSourceNotMatch(String text) throws Throwable {
-        runCommand("assertHtmlSourceNotMatch", text, null, null);
-    }
-
     public void assertIntegerListOrderAsc(String locator) throws Throwable {
         runCommand("assertIntegerListOrderAsc", locator, null, null);
     }
@@ -800,16 +788,16 @@ public class WebExcelium extends Excelium {
         runCommand("assertNotFontWeight", parentLocator, locator, text);
     }
 
-    public void assertNotHtmlSource(String text) throws Throwable {
-        runCommand("assertNotHtmlSource", text, null, null);
-    }
-
     public void assertNotLocation(String text) throws Throwable {
         runCommand("assertNotLocation", text, null, null);
     }
 
     public void assertNotOrdered(String firstLocator, String secondLocator) throws Throwable {
         runCommand("assertNotOrdered", firstLocator, secondLocator, null);
+    }
+
+    public void assertNotPageSource(String text) throws Throwable {
+        runCommand("assertNotPageSource", text, null, null);
     }
 
     public void assertNotPrompt(String text) throws Throwable {
@@ -986,6 +974,18 @@ public class WebExcelium extends Excelium {
 
     public void assertOrdered(String firstLocator, String secondLocator) throws Throwable {
         runCommand("assertOrdered", firstLocator, secondLocator, null);
+    }
+
+    public void assertPageSource(String text) throws Throwable {
+        runCommand("assertPageSource", text, null, null);
+    }
+
+    public void assertPageSourceMatch(String text) throws Throwable {
+        runCommand("assertPageSourceMatch", text, null, null);
+    }
+
+    public void assertPageSourceNotMatch(String text) throws Throwable {
+        runCommand("assertPageSourceNotMatch", text, null, null);
     }
 
     public void assertPrompt(String text) throws Throwable {
@@ -1556,6 +1556,10 @@ public class WebExcelium extends Excelium {
         runCommand("clickAt", parentLocator, locator, coordString);
     }
 
+    public void clickButton(String indexOrText) throws Throwable {
+        runCommand("clickButton", indexOrText, null, null);
+    }
+
     public void close() throws Throwable {
         runCommand("close", null, null, null);
     }
@@ -1808,18 +1812,6 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfFileDownloaded", action, filePattern, null);
     }
 
-    public void executeIfHtmlSource(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSource", action, text, null);
-    }
-
-    public void executeIfHtmlSourceMatch(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSourceMatch", action, text, null);
-    }
-
-    public void executeIfHtmlSourceNotMatch(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSourceNotMatch", action, text, null);
-    }
-
     public void executeIfListContain(String action, String variable, String text) throws Throwable {
         runCommand("executeIfListContain", action, variable, text);
     }
@@ -1904,12 +1896,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfNotFileDownloaded", action, filePattern, null);
     }
 
-    public void executeIfNotHtmlSource(String action, String text) throws Throwable {
-        runCommand("executeIfNotHtmlSource", action, text, null);
-    }
-
     public void executeIfNotLocation(String action, String text) throws Throwable {
         runCommand("executeIfNotLocation", action, text, null);
+    }
+
+    public void executeIfNotPageSource(String action, String text) throws Throwable {
+        runCommand("executeIfNotPageSource", action, text, null);
     }
 
     public void executeIfNotPrompt(String action, String text) throws Throwable {
@@ -1986,6 +1978,18 @@ public class WebExcelium extends Excelium {
 
     public void executeIfNotVisible(String action, String parentLocator, String locator) throws Throwable {
         runCommand("executeIfNotVisible", action, parentLocator, locator);
+    }
+
+    public void executeIfPageSource(String action, String text) throws Throwable {
+        runCommand("executeIfPageSource", action, text, null);
+    }
+
+    public void executeIfPageSourceMatch(String action, String text) throws Throwable {
+        runCommand("executeIfPageSourceMatch", action, text, null);
+    }
+
+    public void executeIfPageSourceNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfPageSourceNotMatch", action, text, null);
     }
 
     public void executeIfPrompt(String action, String text) throws Throwable {
@@ -2232,6 +2236,10 @@ public class WebExcelium extends Excelium {
         runCommand("keyUp", parentLocator, locator, keySequence);
     }
 
+    public void landscape() throws Throwable {
+        runCommand("landscape", null, null, null);
+    }
+
     public void metaKeyDown() throws Throwable {
         runCommand("metaKeyDown", null, null, null);
     }
@@ -2320,6 +2328,22 @@ public class WebExcelium extends Excelium {
         runCommand("pause", waitTime, null, null);
     }
 
+    public void pinch(String scale) throws Throwable {
+        runCommand("pinch", scale, null, null);
+    }
+
+    public void pinch(String locator, String scale) throws Throwable {
+        runCommand("pinch", locator, scale, null);
+    }
+
+    public void pinch(String parentLocator, String locator, String scale) throws Throwable {
+        runCommand("pinch", parentLocator, locator, scale);
+    }
+
+    public void portrait() throws Throwable {
+        runCommand("portrait", null, null, null);
+    }
+
     public void refresh() throws Throwable {
         runCommand("refresh", null, null, null);
     }
@@ -2372,8 +2396,92 @@ public class WebExcelium extends Excelium {
         runCommand("removeSelectionValue", parentLocator, locator, value);
     }
 
+    public void rotate(String rotation) throws Throwable {
+        runCommand("rotate", rotation, null, null);
+    }
+
     public void runScript(String script) throws Throwable {
         runCommand("runScript", script, null, null);
+    }
+
+    public void scrollDown() throws Throwable {
+        runCommand("scrollDown", null, null, null);
+    }
+
+    public void scrollDown(String locator) throws Throwable {
+        runCommand("scrollDown", locator, null, null);
+    }
+
+    public void scrollDown(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollDown", parentLocator, locator, null);
+    }
+
+    public void scrollDownTo(String locator) throws Throwable {
+        runCommand("scrollDownTo", locator, null, null);
+    }
+
+    public void scrollDownTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollDownTo", parentLocator, locator, null);
+    }
+
+    public void scrollLeft() throws Throwable {
+        runCommand("scrollLeft", null, null, null);
+    }
+
+    public void scrollLeft(String locator) throws Throwable {
+        runCommand("scrollLeft", locator, null, null);
+    }
+
+    public void scrollLeft(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollLeft", parentLocator, locator, null);
+    }
+
+    public void scrollLeftTo(String locator) throws Throwable {
+        runCommand("scrollLeftTo", locator, null, null);
+    }
+
+    public void scrollLeftTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollLeftTo", parentLocator, locator, null);
+    }
+
+    public void scrollRight() throws Throwable {
+        runCommand("scrollRight", null, null, null);
+    }
+
+    public void scrollRight(String locator) throws Throwable {
+        runCommand("scrollRight", locator, null, null);
+    }
+
+    public void scrollRight(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollRight", parentLocator, locator, null);
+    }
+
+    public void scrollRightTo(String locator) throws Throwable {
+        runCommand("scrollRightTo", locator, null, null);
+    }
+
+    public void scrollRightTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollRightTo", parentLocator, locator, null);
+    }
+
+    public void scrollUp() throws Throwable {
+        runCommand("scrollUp", null, null, null);
+    }
+
+    public void scrollUp(String locator) throws Throwable {
+        runCommand("scrollUp", locator, null, null);
+    }
+
+    public void scrollUp(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollUp", parentLocator, locator, null);
+    }
+
+    public void scrollUpTo(String locator) throws Throwable {
+        runCommand("scrollUpTo", locator, null, null);
+    }
+
+    public void scrollUpTo(String parentLocator, String locator) throws Throwable {
+        runCommand("scrollUpTo", parentLocator, locator, null);
     }
 
     public void select(String locator, String optionLocator) throws Throwable {
@@ -2446,6 +2554,10 @@ public class WebExcelium extends Excelium {
 
     public void setCursorPosition(String parentLocator, String locator, String position) throws Throwable {
         runCommand("setCursorPosition", parentLocator, locator, position);
+    }
+
+    public void setGeolocation(String location) throws Throwable {
+        runCommand("setGeolocation", location, null, null);
     }
 
     public void setPageLoadTimeout(String timeout) throws Throwable {
@@ -2540,12 +2652,12 @@ public class WebExcelium extends Excelium {
         runCommand("storeExpression", expression, variable, null);
     }
 
-    public void storeHtmlSource(String variable) throws Throwable {
-        runCommand("storeHtmlSource", variable, null, null);
-    }
-
     public void storeLocation(String variable) throws Throwable {
         runCommand("storeLocation", variable, null, null);
+    }
+
+    public void storePageSource(String variable) throws Throwable {
+        runCommand("storePageSource", variable, null, null);
     }
 
     public void storePrompt(String variable) throws Throwable {
@@ -2674,6 +2786,54 @@ public class WebExcelium extends Excelium {
 
     public void submit(String parentLocator, String locator) throws Throwable {
         runCommand("submit", parentLocator, locator, null);
+    }
+
+    public void swipeDown() throws Throwable {
+        runCommand("swipeDown", null, null, null);
+    }
+
+    public void swipeDown(String locator) throws Throwable {
+        runCommand("swipeDown", locator, null, null);
+    }
+
+    public void swipeDown(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeDown", parentLocator, locator, null);
+    }
+
+    public void swipeLeft() throws Throwable {
+        runCommand("swipeLeft", null, null, null);
+    }
+
+    public void swipeLeft(String locator) throws Throwable {
+        runCommand("swipeLeft", locator, null, null);
+    }
+
+    public void swipeLeft(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeLeft", parentLocator, locator, null);
+    }
+
+    public void swipeRight() throws Throwable {
+        runCommand("swipeRight", null, null, null);
+    }
+
+    public void swipeRight(String locator) throws Throwable {
+        runCommand("swipeRight", locator, null, null);
+    }
+
+    public void swipeRight(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeRight", parentLocator, locator, null);
+    }
+
+    public void swipeUp() throws Throwable {
+        runCommand("swipeUp", null, null, null);
+    }
+
+    public void swipeUp(String locator) throws Throwable {
+        runCommand("swipeUp", locator, null, null);
+    }
+
+    public void swipeUp(String parentLocator, String locator) throws Throwable {
+        runCommand("swipeUp", parentLocator, locator, null);
     }
 
     public void type(String locator, String value) throws Throwable {
@@ -3152,18 +3312,6 @@ public class WebExcelium extends Excelium {
         runCommand("verifyFontWeightNotMatch", parentLocator, locator, text);
     }
 
-    public void verifyHtmlSource(String text) throws Throwable {
-        runCommand("verifyHtmlSource", text, null, null);
-    }
-
-    public void verifyHtmlSourceMatch(String text) throws Throwable {
-        runCommand("verifyHtmlSourceMatch", text, null, null);
-    }
-
-    public void verifyHtmlSourceNotMatch(String text) throws Throwable {
-        runCommand("verifyHtmlSourceNotMatch", text, null, null);
-    }
-
     public void verifyIntegerListOrderAsc(String locator) throws Throwable {
         runCommand("verifyIntegerListOrderAsc", locator, null, null);
     }
@@ -3416,16 +3564,16 @@ public class WebExcelium extends Excelium {
         runCommand("verifyNotFontWeight", parentLocator, locator, text);
     }
 
-    public void verifyNotHtmlSource(String text) throws Throwable {
-        runCommand("verifyNotHtmlSource", text, null, null);
-    }
-
     public void verifyNotLocation(String text) throws Throwable {
         runCommand("verifyNotLocation", text, null, null);
     }
 
     public void verifyNotOrdered(String firstLocator, String secondLocator) throws Throwable {
         runCommand("verifyNotOrdered", firstLocator, secondLocator, null);
+    }
+
+    public void verifyNotPageSource(String text) throws Throwable {
+        runCommand("verifyNotPageSource", text, null, null);
     }
 
     public void verifyNotPrompt(String text) throws Throwable {
@@ -3602,6 +3750,18 @@ public class WebExcelium extends Excelium {
 
     public void verifyOrdered(String firstLocator, String secondLocator) throws Throwable {
         runCommand("verifyOrdered", firstLocator, secondLocator, null);
+    }
+
+    public void verifyPageSource(String text) throws Throwable {
+        runCommand("verifyPageSource", text, null, null);
+    }
+
+    public void verifyPageSourceMatch(String text) throws Throwable {
+        runCommand("verifyPageSourceMatch", text, null, null);
+    }
+
+    public void verifyPageSourceNotMatch(String text) throws Throwable {
+        runCommand("verifyPageSourceNotMatch", text, null, null);
     }
 
     public void verifyPrompt(String text) throws Throwable {
@@ -4292,18 +4452,6 @@ public class WebExcelium extends Excelium {
         runCommand("waitForFileDownloaded", filePattern, null, null);
     }
 
-    public void waitForHtmlSource(String text) throws Throwable {
-        runCommand("waitForHtmlSource", text, null, null);
-    }
-
-    public void waitForHtmlSourceMatch(String text) throws Throwable {
-        runCommand("waitForHtmlSourceMatch", text, null, null);
-    }
-
-    public void waitForHtmlSourceNotMatch(String text) throws Throwable {
-        runCommand("waitForHtmlSourceNotMatch", text, null, null);
-    }
-
     public void waitForLocation(String text) throws Throwable {
         runCommand("waitForLocation", text, null, null);
     }
@@ -4384,12 +4532,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForNotFileDownloaded", filePattern, null, null);
     }
 
-    public void waitForNotHtmlSource(String text) throws Throwable {
-        runCommand("waitForNotHtmlSource", text, null, null);
-    }
-
     public void waitForNotLocation(String text) throws Throwable {
         runCommand("waitForNotLocation", text, null, null);
+    }
+
+    public void waitForNotPageSource(String text) throws Throwable {
+        runCommand("waitForNotPageSource", text, null, null);
     }
 
     public void waitForNotPrompt(String text) throws Throwable {
@@ -4498,6 +4646,18 @@ public class WebExcelium extends Excelium {
 
     public void waitForNotVisible(String parentLocator, String locator) throws Throwable {
         runCommand("waitForNotVisible", parentLocator, locator, null);
+    }
+
+    public void waitForPageSource(String text) throws Throwable {
+        runCommand("waitForPageSource", text, null, null);
+    }
+
+    public void waitForPageSourceMatch(String text) throws Throwable {
+        runCommand("waitForPageSourceMatch", text, null, null);
+    }
+
+    public void waitForPageSourceNotMatch(String text) throws Throwable {
+        runCommand("waitForPageSourceNotMatch", text, null, null);
     }
 
     public void waitForPageToLoad(String timeout) throws Throwable {

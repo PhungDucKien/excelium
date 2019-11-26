@@ -564,18 +564,6 @@ public class MobileExcelium extends Excelium {
         runCommand("assertFontWeightNotMatch", parentLocator, locator, text);
     }
 
-    public void assertHtmlSource(String text) throws Throwable {
-        runCommand("assertHtmlSource", text, null, null);
-    }
-
-    public void assertHtmlSourceMatch(String text) throws Throwable {
-        runCommand("assertHtmlSourceMatch", text, null, null);
-    }
-
-    public void assertHtmlSourceNotMatch(String text) throws Throwable {
-        runCommand("assertHtmlSourceNotMatch", text, null, null);
-    }
-
     public void assertIntegerListOrderAsc(String locator) throws Throwable {
         runCommand("assertIntegerListOrderAsc", locator, null, null);
     }
@@ -838,10 +826,6 @@ public class MobileExcelium extends Excelium {
 
     public void assertNotFontWeight(String parentLocator, String locator, String text) throws Throwable {
         runCommand("assertNotFontWeight", parentLocator, locator, text);
-    }
-
-    public void assertNotHtmlSource(String text) throws Throwable {
-        runCommand("assertNotHtmlSource", text, null, null);
     }
 
     public void assertNotLocation(String text) throws Throwable {
@@ -1716,6 +1700,14 @@ public class MobileExcelium extends Excelium {
         runCommand("doubleTapAt", coordinate, null, null);
     }
 
+    public void doubleTapAt(String locator, String coordString) throws Throwable {
+        runCommand("doubleTapAt", locator, coordString, null);
+    }
+
+    public void doubleTapAt(String parentLocator, String locator, String coordString) throws Throwable {
+        runCommand("doubleTapAt", parentLocator, locator, coordString);
+    }
+
     public void dragAndDrop(String locator, String movementsString) throws Throwable {
         runCommand("dragAndDrop", locator, movementsString, null);
     }
@@ -1920,18 +1912,6 @@ public class MobileExcelium extends Excelium {
         runCommand("executeIfFileDownloaded", action, filePattern, null);
     }
 
-    public void executeIfHtmlSource(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSource", action, text, null);
-    }
-
-    public void executeIfHtmlSourceMatch(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSourceMatch", action, text, null);
-    }
-
-    public void executeIfHtmlSourceNotMatch(String action, String text) throws Throwable {
-        runCommand("executeIfHtmlSourceNotMatch", action, text, null);
-    }
-
     public void executeIfListContain(String action, String variable, String text) throws Throwable {
         runCommand("executeIfListContain", action, variable, text);
     }
@@ -2026,10 +2006,6 @@ public class MobileExcelium extends Excelium {
 
     public void executeIfNotFileDownloaded(String action, String filePattern) throws Throwable {
         runCommand("executeIfNotFileDownloaded", action, filePattern, null);
-    }
-
-    public void executeIfNotHtmlSource(String action, String text) throws Throwable {
-        runCommand("executeIfNotHtmlSource", action, text, null);
     }
 
     public void executeIfNotLocation(String action, String text) throws Throwable {
@@ -2408,6 +2384,14 @@ public class MobileExcelium extends Excelium {
         runCommand("longPressAt", coordinate, null, null);
     }
 
+    public void longPressAt(String locator, String coordString) throws Throwable {
+        runCommand("longPressAt", locator, coordString, null);
+    }
+
+    public void longPressAt(String parentLocator, String locator, String coordString) throws Throwable {
+        runCommand("longPressAt", parentLocator, locator, coordString);
+    }
+
     public void metaKeyDown() throws Throwable {
         runCommand("metaKeyDown", null, null, null);
     }
@@ -2504,6 +2488,10 @@ public class MobileExcelium extends Excelium {
         runCommand("pause", waitTime, null, null);
     }
 
+    public void pinch(String scale) throws Throwable {
+        runCommand("pinch", scale, null, null);
+    }
+
     public void pinch(String locator, String scale) throws Throwable {
         runCommand("pinch", locator, scale, null);
     }
@@ -2584,8 +2572,8 @@ public class MobileExcelium extends Excelium {
         runCommand("rotate", rotation, null, null);
     }
 
-    public void runAppInBackground(String millis) throws Throwable {
-        runCommand("runAppInBackground", millis, null, null);
+    public void runAppInBackground(String secs) throws Throwable {
+        runCommand("runAppInBackground", secs, null, null);
     }
 
     public void runScript(String script) throws Throwable {
@@ -2872,10 +2860,6 @@ public class MobileExcelium extends Excelium {
         runCommand("storeExpression", expression, variable, null);
     }
 
-    public void storeHtmlSource(String variable) throws Throwable {
-        runCommand("storeHtmlSource", variable, null, null);
-    }
-
     public void storeLocation(String variable) throws Throwable {
         runCommand("storeLocation", variable, null, null);
     }
@@ -3070,6 +3054,14 @@ public class MobileExcelium extends Excelium {
 
     public void tapAt(String coordinate) throws Throwable {
         runCommand("tapAt", coordinate, null, null);
+    }
+
+    public void tapAt(String locator, String coordString) throws Throwable {
+        runCommand("tapAt", locator, coordString, null);
+    }
+
+    public void tapAt(String parentLocator, String locator, String coordString) throws Throwable {
+        runCommand("tapAt", parentLocator, locator, coordString);
     }
 
     public void terminateApp(String bundleId) throws Throwable {
@@ -3588,18 +3580,6 @@ public class MobileExcelium extends Excelium {
         runCommand("verifyFontWeightNotMatch", parentLocator, locator, text);
     }
 
-    public void verifyHtmlSource(String text) throws Throwable {
-        runCommand("verifyHtmlSource", text, null, null);
-    }
-
-    public void verifyHtmlSourceMatch(String text) throws Throwable {
-        runCommand("verifyHtmlSourceMatch", text, null, null);
-    }
-
-    public void verifyHtmlSourceNotMatch(String text) throws Throwable {
-        runCommand("verifyHtmlSourceNotMatch", text, null, null);
-    }
-
     public void verifyIntegerListOrderAsc(String locator) throws Throwable {
         runCommand("verifyIntegerListOrderAsc", locator, null, null);
     }
@@ -3862,10 +3842,6 @@ public class MobileExcelium extends Excelium {
 
     public void verifyNotFontWeight(String parentLocator, String locator, String text) throws Throwable {
         runCommand("verifyNotFontWeight", parentLocator, locator, text);
-    }
-
-    public void verifyNotHtmlSource(String text) throws Throwable {
-        runCommand("verifyNotHtmlSource", text, null, null);
     }
 
     public void verifyNotLocation(String text) throws Throwable {
@@ -4776,18 +4752,6 @@ public class MobileExcelium extends Excelium {
         runCommand("waitForFileDownloaded", filePattern, null, null);
     }
 
-    public void waitForHtmlSource(String text) throws Throwable {
-        runCommand("waitForHtmlSource", text, null, null);
-    }
-
-    public void waitForHtmlSourceMatch(String text) throws Throwable {
-        runCommand("waitForHtmlSourceMatch", text, null, null);
-    }
-
-    public void waitForHtmlSourceNotMatch(String text) throws Throwable {
-        runCommand("waitForHtmlSourceNotMatch", text, null, null);
-    }
-
     public void waitForLocation(String text) throws Throwable {
         runCommand("waitForLocation", text, null, null);
     }
@@ -4878,10 +4842,6 @@ public class MobileExcelium extends Excelium {
 
     public void waitForNotFileDownloaded(String filePattern) throws Throwable {
         runCommand("waitForNotFileDownloaded", filePattern, null, null);
-    }
-
-    public void waitForNotHtmlSource(String text) throws Throwable {
-        runCommand("waitForNotHtmlSource", text, null, null);
     }
 
     public void waitForNotLocation(String text) throws Throwable {
