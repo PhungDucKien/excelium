@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor.web.common;
 
 import com.google.common.collect.Iterables;
 import com.thoughtworks.selenium.SeleniumException;
 import com.thoughtworks.selenium.webdriven.Windows;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -117,7 +117,6 @@ public class WindowCommandExecutor extends CommandExecutor {
      * commands go to that window. To select the main window again, use null as the target.
      *
      * <p>
-     *
      * Window locators provide different ways of specifying the window object: by title, by internal
      * JavaScript "name," or by JavaScript variable.
      * </p>
@@ -190,7 +189,7 @@ public class WindowCommandExecutor extends CommandExecutor {
      * </ul>
      *
      * @param windowID an identifier for the popup window, which can take on a number of different
-     *        meanings
+     *                 meanings
      */
     @Action(param1 = "windowID")
     public void selectPopUp(String windowID) {
@@ -212,7 +211,7 @@ public class WindowCommandExecutor extends CommandExecutor {
      * select the top frame, use "relative=top". You can also select a frame by its 0-based index
      * number; select the first frame with "index=0", or the third frame with "index=2".
      *
-     * @param locator       an element locator identifying a frame or iframe
+     * @param locator an element locator identifying a frame or iframe
      */
     @Action(param1 = "locator")
     public void selectFrame(String locator) {
@@ -232,12 +231,12 @@ public class WindowCommandExecutor extends CommandExecutor {
      * Waits for a popup window to appear and load up.
      *
      * @param windowID the JavaScript window "name" of the window that will appear (not the text of
-     *        the title bar) If unspecified, or specified as "null", this command will wait for the
-     *        first non-top window to appear (don't rely on this if you are working with multiple
-     *        popups simultaneously).
-     * @param timeout a timeout in milliseconds, after which the action will return with an error. If
-     *        this value is not specified, the default Selenium timeout will be used. See the
-     *        setTimeout() command.
+     *                 the title bar) If unspecified, or specified as "null", this command will wait for the
+     *                 first non-top window to appear (don't rely on this if you are working with multiple
+     *                 popups simultaneously).
+     * @param timeout  a timeout in milliseconds, after which the action will return with an error. If
+     *                 this value is not specified, the default Selenium timeout will be used. See the
+     *                 setTimeout() command.
      */
     @Action(param1 = "windowID", param2 = "timeout")
     public void waitForPopUp(String windowID, String timeout) {
@@ -275,13 +274,17 @@ public class WindowCommandExecutor extends CommandExecutor {
         selectWindow(windowHandle);
     }
 
-    /** Gives focus to the currently selected window */
+    /**
+     * Gives focus to the currently selected window
+     */
     @Action
     public void windowFocus() {
         webDriver.executeScript("window.focus()");
     }
 
-    /** Resize currently selected window to take up the entire screen */
+    /**
+     * Resize currently selected window to take up the entire screen
+     */
     @Action
     public void windowMaximize() {
         webDriver.executeScript("if (window.screen) { window.moveTo(0, 0); window.resizeTo(window.screen.availWidth, window.screen.availHeight);};");

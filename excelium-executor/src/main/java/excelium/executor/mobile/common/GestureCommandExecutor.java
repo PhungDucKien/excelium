@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.mobile;
+package excelium.executor.mobile.common;
 
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
@@ -33,10 +33,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.touch.LongPressOptions;
-import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -47,118 +44,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents a class which contains commands for controlling mobile interaction actions.
+ * Represents a class which contains commands for controlling mobile gesture actions.
  *
  * @author PhungDucKien
  * @since 2019.10.28
  */
-public class InteractionCommandExecutor extends CommandExecutor {
+public class GestureCommandExecutor extends CommandExecutor {
 
     /**
-     * Instantiates a new Interaction command executor.
+     * Instantiates a new Gesture command executor.
      *
      * @param webDriver the web driver
      * @param baseUrl   the base url
      * @param excelium  the excelium
      * @param project   the project
      */
-    public InteractionCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
+    public GestureCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
         super(webDriver, baseUrl, excelium, project);
     }
 
     /**
-     * Sends keys to the keyboard representation in the device.
-     *
-     * @param value the value to type
-     */
-    @Action(param1 = "value")
-    public void typeKeys(String value) {
-        webDriver.getKeyboard().sendKeys(value);
-    }
-
-    /**
-     * Single tap on the touch enabled device
-     *
-     * @param parentLocator an element locator of parent element
-     * @param locator       an element locator
-     */
-    @Action(param1 = "parentLocator", param2 = "locator")
-    public void tap(String parentLocator, String locator) {
-        WebElement element = webDriver.findElement(parentLocator, locator);
-        new TouchAction(webDriver.getAppiumDriver())
-                .tap(TapOptions.tapOptions().withTapsCount(1).withElement(ElementOption.element(element)))
-                .perform();
-    }
-
-    /**
-     * Double tap on the touch screen using finger motion events
-     *
-     * @param parentLocator an element locator of parent element
-     * @param locator       an element locator
-     */
-    @Action(param1 = "parentLocator", param2 = "locator")
-    public void doubleTap(String parentLocator, String locator) {
-        WebElement element = webDriver.findElement(parentLocator, locator);
-        new TouchAction(webDriver.getAppiumDriver())
-                .tap(TapOptions.tapOptions().withTapsCount(2).withElement(ElementOption.element(element)))
-                .perform();
-    }
-
-    /**
-     * Long press on the touch screen using finger motion events.
-     *
-     * @param parentLocator an element locator of parent element
-     * @param locator       an element locator
-     */
-    @Action(param1 = "parentLocator", param2 = "locator")
-    public void longPress(String parentLocator, String locator) {
-        WebElement element = webDriver.findElement(parentLocator, locator);
-        new TouchAction(webDriver.getAppiumDriver())
-                .longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(element)))
-                .perform();
-    }
-
-    /**
-     * Single tap at a specified position on the touch enabled device
-     *
-     * @param coordinate a string represents a position of x and y
-     */
-    @Action(param1 = "coordinate")
-    public void tapAt(String coordinate) {
-        String[] coords = coordinate.split(",");
-        new TouchAction(webDriver.getAppiumDriver())
-                .tap(TapOptions.tapOptions().withTapsCount(1).withPosition(PointOption.point(Integer.parseInt(coords[0].trim()), Integer.parseInt(coords[1].trim()))))
-                .perform();
-    }
-
-    /**
-     * Double tap at a specified position on the touch enabled device
-     *
-     * @param coordinate a string represents a position of x and y
-     */
-    @Action(param1 = "coordinate")
-    public void doubleTapAt(String coordinate) {
-        String[] coords = coordinate.split(",");
-        new TouchAction(webDriver.getAppiumDriver())
-                .tap(TapOptions.tapOptions().withTapsCount(2).withPosition(PointOption.point(Integer.parseInt(coords[0].trim()), Integer.parseInt(coords[1].trim()))))
-                .perform();
-    }
-
-    /**
-     * Long press at a specified position on the touch enabled device
-     *
-     * @param coordinate a string represents a position of x and y
-     */
-    @Action(param1 = "coordinate")
-    public void longPressAt(String coordinate) {
-        String[] coords = coordinate.split(",");
-        new TouchAction(webDriver.getAppiumDriver())
-                .longPress(LongPressOptions.longPressOptions().withPosition(PointOption.point(Integer.parseInt(coords[0].trim()), Integer.parseInt(coords[1].trim()))))
-                .perform();
-    }
-
-    /**
      * Performs a simple "swipe" up gesture on the whole screen.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      */
     @Action
     public void swipeUp() {
@@ -167,6 +75,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Performs a simple "swipe" down gesture on the whole screen.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      */
     @Action
     public void swipeDown() {
@@ -175,6 +85,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Performs a simple "swipe" right gesture on the whole screen.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      */
     @Action
     public void swipeRight() {
@@ -183,6 +95,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Performs a simple "swipe" left gesture on the whole screen.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      */
     @Action
     public void swipeLeft() {
@@ -191,6 +105,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Performs a simple "swipe" up gesture on the particular screen element.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -203,6 +119,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Performs a simple "swipe" down gesture on the particular screen element.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -215,6 +133,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Performs a simple "swipe" right gesture on the particular screen element.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -227,6 +147,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Performs a simple "swipe" left gesture on the particular screen element.
+     * This method does not accept coordinates and simply emulates single swipe with one finger.
+     * It might be useful for such cases like album pagination, switching views, etc.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -275,6 +197,7 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls up on the particular screen element.
+     * The main difference from swipe call is that scroll will try to move the current viewport exactly to the next/previous page (the term "page" means the content, which fits into a single device screen)
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -287,6 +210,7 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls down on the particular screen element.
+     * The main difference from swipe call is that scroll will try to move the current viewport exactly to the next/previous page (the term "page" means the content, which fits into a single device screen)
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -299,6 +223,7 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls right on the particular screen element.
+     * The main difference from swipe call is that scroll will try to move the current viewport exactly to the next/previous page (the term "page" means the content, which fits into a single device screen)
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -311,6 +236,7 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls left on the particular screen element.
+     * The main difference from swipe call is that scroll will try to move the current viewport exactly to the next/previous page (the term "page" means the content, which fits into a single device screen)
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -323,6 +249,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls up on the whole screen to the first visible element in the parent container.
+     * Use this method to emulate precise scrolling in tables or collection views, where it is already known to which element the scrolling should be performed.
+     * Although, there is one known limitation there: in case it is necessary to perform too many scroll gestures on parent container to reach the necessary child element (tens of them) then the method call may fail.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -334,6 +262,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls down on the whole screen to the first visible element in the parent container.
+     * Use this method to emulate precise scrolling in tables or collection views, where it is already known to which element the scrolling should be performed.
+     * Although, there is one known limitation there: in case it is necessary to perform too many scroll gestures on parent container to reach the necessary child element (tens of them) then the method call may fail.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -345,6 +275,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls right on the whole screen to the first visible element in the parent container.
+     * Use this method to emulate precise scrolling in tables or collection views, where it is already known to which element the scrolling should be performed.
+     * Although, there is one known limitation there: in case it is necessary to perform too many scroll gestures on parent container to reach the necessary child element (tens of them) then the method call may fail.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -356,6 +288,8 @@ public class InteractionCommandExecutor extends CommandExecutor {
 
     /**
      * Scrolls left on the whole screen to the first visible element in the parent container.
+     * Use this method to emulate precise scrolling in tables or collection views, where it is already known to which element the scrolling should be performed.
+     * Although, there is one known limitation there: in case it is necessary to perform too many scroll gestures on parent container to reach the necessary child element (tens of them) then the method call may fail.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
@@ -363,6 +297,16 @@ public class InteractionCommandExecutor extends CommandExecutor {
     @Action(param1 = "parentLocator", param2 = "locator")
     public void scrollLeftTo(String parentLocator, String locator) {
         scrollLeftTo(webDriver.getAppiumDriver(), parentLocator, locator);
+    }
+
+    /**
+     * Performs pinch gesture on the application element.
+     *
+     * @param scale Pinch scale of type float. Use a scale between 0 and 1 to "pinch close" or zoom out and a scale greater than 1 to "pinch open" or zoom in.
+     */
+    @Action(param1 = "scale")
+    public void pinch(String scale) {
+        pinch(webDriver.getAppiumDriver(), null, Double.parseDouble(scale));
     }
 
     /**

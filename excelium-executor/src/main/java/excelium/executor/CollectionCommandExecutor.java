@@ -25,12 +25,12 @@
 package excelium.executor;
 
 import com.google.common.collect.Ordering;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
 import excelium.core.exception.AssertFailedException;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.openqa.selenium.WebElement;
 
@@ -64,7 +64,7 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * Return true if the specified text pattern appears in the specified variable list value, or false otherwise.
      *
      * @param variable the variable
-     * @param text the text to compare
+     * @param text     the text to compare
      * @return true if the specified text pattern appears in the specified variable list value, or false otherwise
      */
     @Accessor(param1 = "variable", param2 = "text")
@@ -113,7 +113,7 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * Returns the text values of the specified elements are sorted in ascending order.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return true if the values in ascending order, false otherwise
      */
     @Action(param1 = "parentLocator", param2 = "locator")
@@ -132,7 +132,7 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * Returns the text values of the specified elements are sorted in descending order.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return true if the values in descending order, false otherwise
      */
     @Action(param1 = "parentLocator", param2 = "locator")
@@ -152,7 +152,7 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * The values are assuming to be numbers.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return true if the values in ascending order, false otherwise
      */
     @Action(param1 = "parentLocator", param2 = "locator")
@@ -172,7 +172,7 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * The values are assuming to be numbers.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return true if the values in descending order, false otherwise
      */
     @Action(param1 = "parentLocator", param2 = "locator")
@@ -192,8 +192,8 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * The values are assuming to be dates.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
-     * @param format date format to parse
+     * @param locator       an element locator pointing to an element
+     * @param format        date format to parse
      * @return true if the values in ascending order, false otherwise
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "format")
@@ -214,8 +214,8 @@ public class CollectionCommandExecutor extends CommandExecutor {
      * The values are assuming to be dates.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
-     * @param format date format to parse
+     * @param locator       an element locator pointing to an element
+     * @param format        date format to parse
      * @return true if the values in descending order, false otherwise
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "format")

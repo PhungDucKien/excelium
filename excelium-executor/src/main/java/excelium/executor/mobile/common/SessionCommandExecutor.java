@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.mobile;
+package excelium.executor.mobile.common;
 
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
@@ -83,7 +83,7 @@ public class SessionCommandExecutor extends CommandExecutor {
     /**
      * Set the current geo location.
      *
-     * @param location Geo location string separated by commas
+     * @param location the string of physical location of the browser separated by commas ("latitude,longitude,altitude")
      */
     @Action(param1 = "location")
     public void setGeolocation(String location) {

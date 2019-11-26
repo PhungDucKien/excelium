@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor.web.common;
 
 import com.google.gson.Gson;
 import excelium.core.CommandExecutor;
@@ -62,7 +62,7 @@ public class LogCommandExecutor extends CommandExecutor {
     /**
      * Clear browser console log.
      */
-    @Action(android = false, ios = false)
+    @Action
     public void clearLog() {
         if (webDriver.isPC()) {
             webDriver.manage().logs().get(LogType.BROWSER);
@@ -78,7 +78,7 @@ public class LogCommandExecutor extends CommandExecutor {
      * @param text the text to compare
      * @throws AssertFailedException if the console log doesn't contain the given text
      */
-    @Action(param1 = "text", android = false, ios = false)
+    @Action(param1 = "text")
     public void verifyLogContainLine(String text) throws Exception {
         if (webDriver.isPC()) {
             webDriver.manage().logs().get(LogType.BROWSER).iterator().forEachRemaining(entry -> logs.add(new Gson().fromJson(entry.getMessage(), LogEntry.class).getText()));
@@ -97,7 +97,7 @@ public class LogCommandExecutor extends CommandExecutor {
      * @param text the text to compare
      * @throws AssertFailedException if the console log contains the given text
      */
-    @Action(param1 = "text", android = false, ios = false)
+    @Action(param1 = "text")
     public void verifyLogNotContainLine(String text) throws Exception {
         if (webDriver.isPC()) {
             webDriver.manage().logs().get(LogType.BROWSER).iterator().forEachRemaining(entry -> logs.add(new Gson().fromJson(entry.getMessage(), LogEntry.class).getText()));

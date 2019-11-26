@@ -27,8 +27,16 @@ package excelium.executor;
 import excelium.core.CommandExecutor;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.service.ExecutorProviderService;
-import excelium.executor.mobile.*;
-import excelium.executor.web.*;
+import excelium.executor.mobile.app.ActivityCommandExecutor;
+import excelium.executor.mobile.app.AppCommandExecutor;
+import excelium.executor.mobile.app.DeviceCommandExecutor;
+import excelium.executor.mobile.common.GestureCommandExecutor;
+import excelium.executor.mobile.common.SessionCommandExecutor;
+import excelium.executor.web.common.CookieCommandExecutor;
+import excelium.executor.web.common.LogCommandExecutor;
+import excelium.executor.web.common.TableCommandExecutor;
+import excelium.executor.web.common.WindowCommandExecutor;
+import excelium.executor.web.pc.FileCommandExecutor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,33 +54,47 @@ public class MyExecutorProviderService implements ExecutorProviderService {
     public List<Class<? extends CommandExecutor>> getWebExecutorClasses(ContextAwareWebDriver driver) {
         List<Class<? extends CommandExecutor>> executorClasses = new ArrayList<>(Arrays.asList(
                 // Web
-                PageCommandExecutor.class,
-                WebElementCommandExecutor.class,
-                EventCommandExecutor.class,
-                TableCommandExecutor.class,
                 CookieCommandExecutor.class,
-                FileCommandExecutor.class,
                 LogCommandExecutor.class,
+                TableCommandExecutor.class,
 
                 // Common
                 AlertCommandExecutor.class,
-                NavigateCommandExecutor.class,
-                ScreenshotCommandExecutor.class,
                 AttributeCommandExecutor.class,
-                StoreCommandExecutor.class,
-                ExecuteCommandExecutor.class,
-                WaitCommandExecutor.class,
-                DatabaseCommandExecutor.class,
                 CollectionCommandExecutor.class,
+                DatabaseCommandExecutor.class,
                 DateCommandExecutor.class,
+                DebugCommandExecutor.class,
+                ElementCommandExecutor.class,
                 EvalCommandExecutor.class,
-                DebugCommandExecutor.class
+                EventCommandExecutor.class,
+                ExecuteCommandExecutor.class,
+                NavigateCommandExecutor.class,
+                PageCommandExecutor.class,
+                ScreenshotCommandExecutor.class,
+                StoreCommandExecutor.class,
+                WaitCommandExecutor.class
         ));
 
+        // File
+        if (driver.isPC()) {
+            executorClasses.add(FileCommandExecutor.class);
+        }
+
+        // Mobile Common
+        if (driver.isMobile()) {
+            executorClasses.add(GestureCommandExecutor.class);
+            executorClasses.add(SessionCommandExecutor.class);
+        }
+
+        // Web Common
+        if (driver.isWebApp()) {
+            executorClasses.add(WindowCommandExecutor.class);
+        }
+
+        // Context
         if (driver.isMobileApp()) {
             executorClasses.add(ContextCommandExecutor.class);
-        } else {
-            executorClasses.add(WindowCommandExecutor.class);
         }
 
         return executorClasses;
@@ -80,28 +102,41 @@ public class MyExecutorProviderService implements ExecutorProviderService {
 
     @Override
     public List<Class<? extends CommandExecutor>> getMobileExecutorClasses(ContextAwareWebDriver driver) {
-        return new ArrayList<>(Arrays.asList(
+        List<Class<? extends CommandExecutor>> executorClasses = new ArrayList<>(Arrays.asList(
                 // Mobile
-                SessionCommandExecutor.class,
+                AppCommandExecutor.class,
                 DeviceCommandExecutor.class,
-                MobilePageCommandExecutor.class,
-                MobileElementCommandExecutor.class,
-                InteractionCommandExecutor.class,
+
+                // Mobile Common
+                GestureCommandExecutor.class,
+                SessionCommandExecutor.class,
+
+                // Context
+                ContextCommandExecutor.class,
 
                 // Common
                 AlertCommandExecutor.class,
-                NavigateCommandExecutor.class,
-                ScreenshotCommandExecutor.class,
                 AttributeCommandExecutor.class,
-                StoreCommandExecutor.class,
-                ExecuteCommandExecutor.class,
-                WaitCommandExecutor.class,
-                DatabaseCommandExecutor.class,
                 CollectionCommandExecutor.class,
+                DatabaseCommandExecutor.class,
                 DateCommandExecutor.class,
-                EvalCommandExecutor.class,
                 DebugCommandExecutor.class,
-                ContextCommandExecutor.class
+                ElementCommandExecutor.class,
+                EvalCommandExecutor.class,
+                EventCommandExecutor.class,
+                ExecuteCommandExecutor.class,
+                NavigateCommandExecutor.class,
+                PageCommandExecutor.class,
+                ScreenshotCommandExecutor.class,
+                StoreCommandExecutor.class,
+                WaitCommandExecutor.class
         ));
+
+        // Android
+        if (driver.isAndroid()) {
+            executorClasses.add(ActivityCommandExecutor.class);
+        }
+
+        return executorClasses;
     }
 }

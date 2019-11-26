@@ -98,9 +98,9 @@ public class AlertCommandExecutor extends CommandExecutor {
     }
 
     /**
-     * Retrieves the message of a JavaScript alert, or fail if there were no alerts.
+     * Retrieves the message of a alert, or fail if there were no alerts.
      *
-     * @return The message of the JavaScript alert
+     * @return The message of the alert
      */
     @Accessor(android = false)
     public String getAlert() {
@@ -115,9 +115,9 @@ public class AlertCommandExecutor extends CommandExecutor {
     }
 
     /**
-     * Retrieves the message of a JavaScript confirmation dialog.
+     * Retrieves the message of a confirmation dialog.
      *
-     * @return the message of the JavaScript confirmation dialog
+     * @return the message of the confirmation dialog
      */
     @Accessor(android = false)
     public String getConfirmation() {
@@ -132,9 +132,9 @@ public class AlertCommandExecutor extends CommandExecutor {
     }
 
     /**
-     * Retrieves the message of a JavaScript question prompt dialog.
+     * Retrieves the message of a question prompt dialog.
      *
-     * @return the message of the JavaScript question prompt
+     * @return the message of the question prompt
      */
     @Accessor(android = false)
     public String getPrompt() {
@@ -191,8 +191,7 @@ public class AlertCommandExecutor extends CommandExecutor {
     }
 
     /**
-     * Instructs Selenium to return the specified answer string in response to the JavaScript
-     * prompt [window.prompt()].
+     * Instructs Selenium to return the specified answer string in response to the prompt.
      *
      * @param answer the answer to give in response to the prompt pop-up
      */

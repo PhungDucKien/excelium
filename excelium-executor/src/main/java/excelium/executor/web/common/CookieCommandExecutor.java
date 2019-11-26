@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor.web.common;
 
 import com.thoughtworks.selenium.SeleniumException;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.openqa.selenium.Cookie;
 
@@ -80,10 +80,10 @@ public class CookieCommandExecutor extends CommandExecutor {
      *
      * @param nameValuePair name and value of the cookie in a format "name=value"
      * @param optionsString options for the cookie. Currently supported options include 'path',
-     *        'max_age' and 'domain'. the optionsString's format is
-     *        "path=/path/, max_age=60, domain=.foo.com". The order of options are irrelevant, the
-     *        unit of the value of 'max_age' is second. Note that specifying a domain that isn't a
-     *        subset of the current domain will usually fail.
+     *                      'max_age' and 'domain'. the optionsString's format is
+     *                      "path=/path/, max_age=60, domain=.foo.com". The order of options are irrelevant, the
+     *                      unit of the value of 'max_age' is second. Note that specifying a domain that isn't a
+     *                      subset of the current domain will usually fail.
      */
     @Action(param1 = "nameValuePair", param2 = "optionsString")
     public void createCookie(String nameValuePair, String optionsString) {
@@ -134,7 +134,7 @@ public class CookieCommandExecutor extends CommandExecutor {
      * to delete it using the exact same path and domain that were used to create the cookie. If the
      * path is wrong, or the domain is wrong, the cookie simply won't be deleted. Also note that
      * specifying a domain that isn't a subset of the current domain will usually fail.
-     *
+     * <p>
      * Since there's no way to discover at runtime the original path and domain of a given cookie,
      * we've added an option called 'recurse' to try all sub-domains of the current domain with all
      * paths that are a subset of the current path. Beware; this option can be slow. In big-O

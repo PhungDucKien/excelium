@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor.web.pc;
 
 import com.google.common.io.Resources;
 import com.thoughtworks.selenium.SeleniumException;

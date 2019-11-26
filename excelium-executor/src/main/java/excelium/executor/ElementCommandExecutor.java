@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor;
 
 import com.thoughtworks.selenium.SeleniumException;
 import excelium.core.CommandExecutor;
@@ -32,13 +32,17 @@ import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.executor.web.support.OptionSelector;
 import excelium.model.project.Project;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -46,25 +50,26 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.List;
 import java.util.function.BiFunction;
 
 /**
- * Represents a class which contains commands for controlling web elements.
+ * Represents a class which contains commands for controlling elements.
  *
  * @author PhungDucKien
  * @since 2018.07.03
  */
-public class WebElementCommandExecutor extends CommandExecutor {
+public class ElementCommandExecutor extends CommandExecutor {
 
     /**
-     * Instantiates a new Web element command executor.
+     * Instantiates a new Element command executor.
      *
      * @param webDriver the web driver
      * @param baseUrl   the base url
      * @param excelium  the excelium
      * @param project   the project
      */
-    public WebElementCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
+    public ElementCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
         super(webDriver, baseUrl, excelium, project);
     }
 
@@ -82,27 +87,37 @@ public class WebElementCommandExecutor extends CommandExecutor {
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
     public void type(String parentLocator, String locator, String value) {
-        if (webDriver.isControlKeyDown() || webDriver.isAltKeyDown() || webDriver.isMetaKeyDown())
-            throw new SeleniumException(
-                    "type not supported immediately after call to controlKeyDown() or altKeyDown() or metaKeyDown()");
+        if (webDriver.isWebContext()) {
+            if (webDriver.isControlKeyDown() || webDriver.isAltKeyDown() || webDriver.isMetaKeyDown())
+                throw new SeleniumException(
+                        "type not supported immediately after call to controlKeyDown() or altKeyDown() or metaKeyDown()");
 
-        String valueToUse = webDriver.isShiftKeyDown() ? value.toUpperCase() : value;
+            String valueToUse = webDriver.isShiftKeyDown() ? value.toUpperCase() : value;
 
-        WebElement element = webDriver.findElement(parentLocator, locator);
+            WebElement element = webDriver.findElement(parentLocator, locator);
 
-        String tagName = element.getTagName();
-        String elementType = element.getAttribute("type");
-        if (!"input".equals(tagName.toLowerCase())) {
-            webDriver.executeScript("arguments[0].value = '';", element);
-            element.sendKeys(valueToUse);
-        } else {
-            if (elementType != null && "file".equals(elementType.toLowerCase())) {
-                File file = project.getFilePath().resolve(valueToUse).toFile();
-                element.clear();
-                element.sendKeys(file.getAbsolutePath());
+            String tagName = element.getTagName();
+            String elementType = element.getAttribute("type");
+            if (!"input".equals(tagName.toLowerCase())) {
+                webDriver.executeScript("arguments[0].value = '';", element);
+                element.sendKeys(valueToUse);
             } else {
-                String type = "return (" + webDriver.getJavascriptLibrary().getSeleniumScript("type.js") + ").apply(null, arguments);";
-                webDriver.executeScript(type, element, valueToUse);
+                if (elementType != null && "file".equals(elementType.toLowerCase())) {
+                    File file = project.getFilePath().resolve(valueToUse).toFile();
+                    element.clear();
+                    element.sendKeys(file.getAbsolutePath());
+                } else {
+                    String type = "return (" + webDriver.getJavascriptLibrary().getSeleniumScript("type.js") + ").apply(null, arguments);";
+                    webDriver.executeScript(type, element, valueToUse);
+                }
+            }
+        } else {
+            MobileElement element = (MobileElement) webDriver.findElement(parentLocator, locator);
+            if (webDriver.getAppiumDriver() instanceof IOSDriver) {
+                element.sendKeys(value);
+            } else if (webDriver.getAppiumDriver() instanceof AndroidDriver) {
+                // https://stackoverflow.com/questions/27859076/appium-sendkeys-really-slow-on-android
+                element.setValue(value);
             }
         }
     }
@@ -122,17 +137,29 @@ public class WebElementCommandExecutor extends CommandExecutor {
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
     public void typeAndTab(String parentLocator, String locator, String value) {
         type(parentLocator, locator, value);
-        new Actions(webDriver).sendKeys(Keys.TAB).perform();
+        if (webDriver.isPC()) {
+            new Actions(webDriver).sendKeys(Keys.TAB).perform();
+        } else {
+            if (webDriver.getAppiumDriver() instanceof AndroidDriver) {
+                if (webDriver.getAndroidDriver().isKeyboardShown()) {
+                    webDriver.getAppiumDriver().hideKeyboard();
+                }
+            } else {
+                webDriver.getAppiumDriver().hideKeyboard();
+            }
+        }
     }
 
     /**
-     * Clicks on a link, button, checkbox or radio button. If the click action causes a new page to
+     * Clicks on a link, button, checkbox or radio button at its center point. If the click action causes a new page to
      * load (like a link usually does), call waitForPageToLoad.
+     * <p>
+     * On mobile devices, if the element's center point is obscured by another element, an element click intercepted error is returned. If the element is outside the viewport, an element not interactable error is returned. Not all drivers automatically scroll the element into view and may need to be scrolled to in order to interact with it.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void click(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         element.click();
@@ -145,7 +172,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void doubleClick(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
 
@@ -165,7 +192,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void contextMenu(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
 
@@ -176,6 +203,48 @@ public class WebElementCommandExecutor extends CommandExecutor {
                     .longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(element)))
                     .perform();
         }
+    }
+
+    /**
+     * Single tap on the touch enabled device
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", web = false)
+    public void tap(String parentLocator, String locator) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        new TouchAction(webDriver.getAppiumDriver())
+                .tap(TapOptions.tapOptions().withTapsCount(1).withElement(ElementOption.element(element)))
+                .perform();
+    }
+
+    /**
+     * Double tap on the touch screen using finger motion events
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", web = false)
+    public void doubleTap(String parentLocator, String locator) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        new TouchAction(webDriver.getAppiumDriver())
+                .tap(TapOptions.tapOptions().withTapsCount(2).withElement(ElementOption.element(element)))
+                .perform();
+    }
+
+    /**
+     * Long press on the touch screen using finger motion events.
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", web = false)
+    public void longPress(String parentLocator, String locator) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        new TouchAction(webDriver.getAppiumDriver())
+                .longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(element)))
+                .perform();
     }
 
     /**
@@ -221,7 +290,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a drop-down menu
      * @param optionLocator an option locator (a label by default)
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator", android = false, ios = false)
     public void select(String parentLocator, String locator, String optionLocator) {
         OptionSelector selector = new OptionSelector(webDriver, parentLocator, locator);
         selector.setSelected(optionLocator);
@@ -234,7 +303,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a drop-down menu
      * @param label         a label
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "label")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "label", android = false, ios = false)
     public void selectLabel(String parentLocator, String locator, String label) {
         select(parentLocator, locator, "label=" + label);
     }
@@ -246,7 +315,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a drop-down menu
      * @param value         a value
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "value", android = false, ios = false)
     public void selectValue(String parentLocator, String locator, String value) {
         select(parentLocator, locator, "value=" + value);
     }
@@ -258,7 +327,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a drop-down menu
      * @param index         an index
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "index")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "index", android = false, ios = false)
     public void selectIndex(String parentLocator, String locator, String index) {
         select(parentLocator, locator, "index=" + index);
     }
@@ -270,7 +339,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a drop-down menu
      * @param id            an element ID
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "id")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "id", android = false, ios = false)
     public void selectId(String parentLocator, String locator, String id) {
         select(parentLocator, locator, "id=" + id);
     }
@@ -283,7 +352,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param optionLocator an option locator (a label by default)
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator", android = false, ios = false)
     public void addSelection(String parentLocator, String locator, String optionLocator) {
         OptionSelector selector = new OptionSelector(webDriver, parentLocator, locator);
         selector.addSelection(optionLocator);
@@ -296,7 +365,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param label         a label
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "label")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "label", android = false, ios = false)
     public void addSelectionLabel(String parentLocator, String locator, String label) {
         addSelection(parentLocator, locator, "label=" + label);
     }
@@ -308,7 +377,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param value         a value
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "value", android = false, ios = false)
     public void addSelectionValue(String parentLocator, String locator, String value) {
         addSelection(parentLocator, locator, "value=" + value);
     }
@@ -320,7 +389,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param index         an index
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "index")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "index", android = false, ios = false)
     public void addSelectionIndex(String parentLocator, String locator, String index) {
         addSelection(parentLocator, locator, "index=" + index);
     }
@@ -332,7 +401,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param id            an element ID
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "id")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "id", android = false, ios = false)
     public void addSelectionId(String parentLocator, String locator, String id) {
         addSelection(parentLocator, locator, "id=" + id);
     }
@@ -345,7 +414,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param optionLocator an option locator (a label by default)
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "optionLocator", android = false, ios = false)
     public void removeSelection(String parentLocator, String locator, String optionLocator) {
         OptionSelector selector = new OptionSelector(webDriver, parentLocator, locator);
         selector.removeSelection(optionLocator);
@@ -358,7 +427,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param label         a label
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "label")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "label", android = false, ios = false)
     public void removeSelectionLabel(String parentLocator, String locator, String label) {
         removeSelection(parentLocator, locator, "label=" + label);
     }
@@ -370,7 +439,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param value         a value
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "value", android = false, ios = false)
     public void removeSelectionValue(String parentLocator, String locator, String value) {
         removeSelection(parentLocator, locator, "value=" + value);
     }
@@ -382,7 +451,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param index         an index
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "index")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "index", android = false, ios = false)
     public void removeSelectionIndex(String parentLocator, String locator, String index) {
         removeSelection(parentLocator, locator, "index=" + index);
     }
@@ -394,7 +463,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator identifying a multi-select box
      * @param id            an element ID
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "id")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "id", android = false, ios = false)
     public void removeSelectionId(String parentLocator, String locator, String id) {
         removeSelection(parentLocator, locator, "id=" + id);
     }
@@ -405,7 +474,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator identifying a multi-select box
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void removeAllSelections(String parentLocator, String locator) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         Select selectElement = new Select(element);
@@ -563,7 +632,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      *                      the position to the beginning of the field. You can also set the cursor to -1 to move it
      *                      to the end of the field.
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "position")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "position", android = false, ios = false)
     public void setCursorPosition(String parentLocator, String locator, String position) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         long index = toInteger(position, -1);
@@ -585,7 +654,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param locator       an element locator pointing to an element
      * @param identifier    a string to be used as the ID of the specified element
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "identifier")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "identifier", android = false, ios = false)
     public void assignId(String parentLocator, String locator, String identifier) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         webDriver.executeScript("arguments[0].id = arguments[1]", element, identifier);
@@ -599,7 +668,7 @@ public class WebElementCommandExecutor extends CommandExecutor {
      * @param secondLocator an element locator pointing to the second element
      * @return true if element1 is the previous sibling of element2, false otherwise
      */
-    @Accessor(param1 = "firstLocator", param2 = "secondLocator", storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "firstLocator", param2 = "secondLocator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public boolean isOrdered(String firstLocator, String secondLocator) {
         WebElement one = webDriver.findElement(firstLocator);
         WebElement two = webDriver.findElement(secondLocator);
@@ -618,5 +687,61 @@ public class WebElementCommandExecutor extends CommandExecutor {
 
         Boolean result = (Boolean) webDriver.executeScript(ordered, one, two);
         return result != null && result;
+    }
+
+    /**
+     * Click a button with the given text at its center point.
+     * <p>
+     * If the element's center point is obscured by another element, an element click intercepted error is returned. If the element is outside the viewport, an element not interactable error is returned. Not all drivers automatically scroll the element into view and may need to be scrolled to in order to interact with it.
+     *
+     * @param indexOrText an index or a text to find
+     */
+    @Action(param1 = "indexOrText")
+    public void clickButton(String indexOrText) {
+        String buttonClass = null;
+        if (webDriver.isWebContext()) {
+            buttonClass = "button";
+        } else if (webDriver.isIOS()) {
+            buttonClass = "XCUIElementTypeButton";
+        } else if (webDriver.isAndroid()) {
+            buttonClass = "android.widget.Button";
+        }
+        WebElement element = findElementByClassName(buttonClass, indexOrText);
+        element.click();
+    }
+
+    /**
+     * Click a text label with the given text at its center point.
+     * <p>
+     * If the element's center point is obscured by another element, an element click intercepted error is returned. If the element is outside the viewport, an element not interactable error is returned. Not all drivers automatically scroll the element into view and may need to be scrolled to in order to interact with it.
+     *
+     * @param indexOrText an index or a text to find
+     */
+    @Action(param1 = "indexOrText", web = false)
+    public void clickText(String indexOrText) {
+        String textClass;
+        if (webDriver.isIOS()) {
+            textClass = "XCUIElementTypeTextView";
+        } else {
+            textClass = "android.widget.TextView";
+        }
+        WebElement element = findElementByClassName(textClass, indexOrText);
+        element.click();
+    }
+
+    private WebElement findElementByClassName(String className, String indexOrText) {
+        List<WebElement> elements = webDriver.findElements("class=" + className);
+
+        if (indexOrText.startsWith("index=")) {
+            int index = Integer.parseInt(indexOrText.split("=")[1]);
+            return elements.get(index);
+        } else {
+            for (WebElement element : elements) {
+                if (element.getText().equals(indexOrText)) {
+                    return element;
+                }
+            }
+        }
+        throw new NoSuchElementException("No such element.");
     }
 }

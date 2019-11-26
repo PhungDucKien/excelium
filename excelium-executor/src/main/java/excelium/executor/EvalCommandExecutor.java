@@ -26,11 +26,11 @@ package excelium.executor;
 
 import com.thoughtworks.selenium.webdriven.CompoundMutator;
 import com.thoughtworks.selenium.webdriven.ScriptMutator;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -96,7 +96,7 @@ public class EvalCommandExecutor extends CommandExecutor {
      *
      * @param script the JavaScript snippet to run
      */
-    @Action(param1 = "script", android = false, ios = false)
+    @Action(param1 = "script")
     public void runScript(String script) {
         evalScript(script);
     }
@@ -118,7 +118,7 @@ public class EvalCommandExecutor extends CommandExecutor {
      * @param script the JavaScript snippet to run
      * @return the results of evaluating the snippet
      */
-    @Accessor(param1 = "script", android = false, ios = false)
+    @Accessor(param1 = "script")
     public String getEvalScript(String script) {
         return evalScript(script);
     }
@@ -133,10 +133,10 @@ public class EvalCommandExecutor extends CommandExecutor {
      * <code>selenium.browserbot.getCurrentWindow()</code>, and then run your JavaScript in there
      * </p>
      *
-     * @param script the JavaScript snippet to run
+     * @param script  the JavaScript snippet to run
      * @param timeout a timeout in milliseconds, after which this command will return with an error
      */
-    @Action(param1 = "script", param2 = "timeout", android = false, ios = false)
+    @Action(param1 = "script", param2 = "timeout")
     public void waitForCondition(String script, String timeout) {
         WebDriverWait wait = createWebDriverWait(timeout);
         wait.until(driver -> {

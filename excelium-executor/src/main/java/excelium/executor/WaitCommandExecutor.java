@@ -24,10 +24,10 @@
 
 package excelium.executor;
 
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -91,7 +91,7 @@ public class WaitCommandExecutor extends CommandExecutor {
      *
      * @param timeout a timeout in milliseconds, after which the page load will return with an error
      */
-    @Action(param1 = "timeout")
+    @Action(param1 = "timeout", android = false, ios = false)
     public void setPageLoadTimeout(String timeout) {
         long wait = toPositiveInteger(timeout, webDriver.getTimeout());
         webDriver.manage().timeouts().pageLoadTimeout(wait, TimeUnit.MILLISECONDS);

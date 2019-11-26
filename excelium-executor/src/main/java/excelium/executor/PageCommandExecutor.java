@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor;
 
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
@@ -70,7 +70,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @param url the URL to open; may be relative or absolute
      */
-    @Action(param1 = "url")
+    @Action(param1 = "url", android = false, ios = false)
     public void open(String url) {
         webDriver.get(getAbsoluteUrl(url));
     }
@@ -80,7 +80,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the title of the current page
      */
-    @Accessor
+    @Accessor(android = false, ios = false)
     public String getTitle() {
         String getText = webDriver.getJavascriptLibrary().getSeleniumScript("getText.js");
         try {
@@ -97,7 +97,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the absolute URL of the current page
      */
-    @Accessor
+    @Accessor(android = false, ios = false)
     public String getLocation() {
         return webDriver.executeScript("return window.location.href").toString();
     }
@@ -107,18 +107,20 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the entire text of the page
      */
-    @Accessor
+    @Accessor(android = false, ios = false)
     public String getBodyText() {
         return webDriver.getElementText(webDriver.findElement(By.xpath("//body")));
     }
 
     /**
-     * Returns the entire HTML source between the opening and closing "html" tags.
+     * Returns the current application hierarchy XML (app) or page source (web).
+     * <p>
+     * In a web context, the source returns the source HTML of the current window. In a native context (iOS, Android, etc...) it will return the application hierarchy XML.
      *
-     * @return the entire HTML source
+     * @return the entire page source
      */
     @Accessor
-    public String getHtmlSource() {
+    public String getPageSource() {
         return webDriver.getPageSource();
     }
 
@@ -131,13 +133,17 @@ public class PageCommandExecutor extends CommandExecutor {
      */
     @Accessor(param1 = "pattern")
     public boolean isTextPresent(String pattern) {
-        String script = webDriver.getJavascriptLibrary().getSeleniumScript("isTextPresent.js");
+        if (webDriver.isWebContext()) {
+            String script = webDriver.getJavascriptLibrary().getSeleniumScript("isTextPresent.js");
 
-        Boolean result = (Boolean) webDriver.executeScript(
-                "return (" + script + ")(arguments[0]);", pattern);
+            Boolean result = (Boolean) webDriver.executeScript(
+                    "return (" + script + ")(arguments[0]);", pattern);
 
-        // Handle the null case
-        return Boolean.TRUE == result;
+            // Handle the null case
+            return Boolean.TRUE == result;
+        } else {
+            return this.webDriver.getPageSource().contains(normalizeText(pattern));
+        }
     }
 
     /**
@@ -166,7 +172,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the IDs of all buttons on the page
      */
-    @Accessor(waitCmd = false, executeCmd = false)
+    @Accessor(android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getAllButtons() {
         List<WebElement> allInputs = webDriver.findElements(By.xpath("//input"));
         List<String> ids = new ArrayList<>();
@@ -189,7 +195,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the IDs of all links on the page
      */
-    @Accessor(waitCmd = false, executeCmd = false)
+    @Accessor(android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getAllLinks() {
         List<WebElement> allLinks = webDriver.findElements(By.xpath("//a"));
         List<String> links = new ArrayList<>();
@@ -210,7 +216,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @return the IDs of all field on the page
      */
-    @Accessor(waitCmd = false, executeCmd = false)
+    @Accessor(android = false, ios = false, waitCmd = false, executeCmd = false)
     public String[] getAllFields() {
         List<WebElement> allInputs = webDriver.findElements(By.xpath("//input"));
         List<String> ids = new ArrayList<>();
@@ -245,7 +251,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *            we will do that for you.
      * @return the number of nodes that match the specified selector
      */
-    @Accessor(param1 = "css", storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "css", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getCssCount(String css) {
         return webDriver.findElements(By.cssSelector(css)).size();
     }
@@ -266,7 +272,7 @@ public class PageCommandExecutor extends CommandExecutor {
      *
      * @param timeout a timeout in milliseconds, after which this command will return with an error
      */
-    @Action(param1 = "timeout")
+    @Action(param1 = "timeout", android = false, ios = false)
     public void waitForPageToLoad(String timeout) {
         // Micro sleep before we continue in case an async click needs processing.
         hesitate(timeToWait);

@@ -29,10 +29,10 @@ import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import com.thoughtworks.selenium.SeleniumException;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.executor.web.support.OptionSelector;
 import excelium.model.project.Project;
 import org.apache.commons.codec.binary.Base64;
@@ -128,8 +128,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
         // the "checked" attribute if the checkbox or the radio button is not-checked, "true" otherwise.
         if (element.getTagName().equals("input")
                 && (element.getAttribute("type").equals("checkbox")
-                || element.getAttribute("type").equals("radio")))
-        {
+                || element.getAttribute("type").equals("radio"))) {
             if (element.getAttribute("checked") == null) {
                 return "off";
             }
@@ -248,30 +247,6 @@ public class AttributeCommandExecutor extends CommandExecutor {
     }
 
     /**
-     * Determines whether the specified input element is editable, ie hasn't been disabled. This
-     * method will fail if the specified element isn't an input element.
-     *
-     * @param parentLocator an element locator of parent element
-     * @param locator       an element locator
-     * @return true if the input element is editable, false otherwise
-     */
-    @Accessor(param1 = "parentLocator", param2 = "locator")
-    public boolean isEditable(String parentLocator, String locator) {
-        WebElement element = webDriver.findElement(parentLocator, locator);
-        String tagName = element.getTagName().toLowerCase();
-        boolean acceptableTagName = "input".equals(tagName) || "select".equals(tagName);
-        String readonly = "";
-        if ("input".equals(tagName)) {
-            readonly = element.getAttribute("readonly");
-            if (readonly == null || "false".equals(readonly)) {
-                readonly = "";
-            }
-        }
-
-        return element.isEnabled() && acceptableTagName && "".equals(readonly);
-    }
-
-    /**
      * Gets whether an element is enabled. Fails if the specified element
      * doesn't exist.
      *
@@ -303,8 +278,8 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * doesn't exist or isn't a toggle-button.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to a checkbox or radio
-     *        button
+     * @param locator       an element locator pointing to a checkbox or radio
+     *                      button
      * @return true if the checkbox is checked, false otherwise
      */
     @Accessor(param1 = "parentLocator", param2 = "locator")
@@ -313,10 +288,34 @@ public class AttributeCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Determines whether the specified input element is editable, ie hasn't been disabled. This
+     * method will fail if the specified element isn't an input element.
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @return true if the input element is editable, false otherwise
+     */
+    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
+    public boolean isEditable(String parentLocator, String locator) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        String tagName = element.getTagName().toLowerCase();
+        boolean acceptableTagName = "input".equals(tagName) || "select".equals(tagName);
+        String readonly = "";
+        if ("input".equals(tagName)) {
+            readonly = element.getAttribute("readonly");
+            if (readonly == null || "false".equals(readonly)) {
+                readonly = "";
+            }
+        }
+
+        return element.isEnabled() && acceptableTagName && "".equals(readonly);
+    }
+
+    /**
      * Gets option element ID for selected option in the specified select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return the selected option ID in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
@@ -329,7 +328,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return the selected option index in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
@@ -341,7 +340,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Gets option label (visible text) for selected option in the specified select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return the selected option label in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
@@ -353,7 +352,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Gets option value (value attribute) for selected option in the specified select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return the selected option value in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
@@ -366,7 +365,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return an array of all selected option IDs in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
@@ -379,7 +378,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * select or multi-select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return an array of all selected option indexes in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
@@ -392,7 +391,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * multi-select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return an array of all selected option labels in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
@@ -405,7 +404,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * multi-select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return an array of all selected option values in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
@@ -417,7 +416,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Gets all option labels in the specified select drop-down.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return an array of all option labels in the specified select drop-down
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
@@ -437,7 +436,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Determines whether some option in a drop-down menu is selected.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
+     * @param locator       an element locator identifying a drop-down menu
      * @return true if some option has been selected, false otherwise
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
@@ -456,8 +455,8 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Gets option attribute value for the first selected option in the specified select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
-     * @param property the attribute
+     * @param locator       an element locator identifying a drop-down menu
+     * @param property      the attribute
      * @return the first selected option attribute value in the specified select drop-down
      */
     private String findFirstSelectedOptionProperty(String parentLocator, String locator, String property) {
@@ -476,8 +475,8 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * multi-select element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator identifying a drop-down menu
-     * @param property the attribute
+     * @param locator       an element locator identifying a drop-down menu
+     * @param property      the attribute
      * @return an array of all selected option attribute values in the specified select drop-down
      */
     private String[] findSelectedOptionProperties(String parentLocator, String locator, String property) {
@@ -497,7 +496,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the text color of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the text color of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -510,7 +509,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the background color of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the background color of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -523,7 +522,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the border color of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the border color of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -536,7 +535,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the font family of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the font family of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -549,7 +548,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the font size of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the font size of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -562,7 +561,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the font style of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the font style of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -575,7 +574,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the font weight of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the font weight of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -588,7 +587,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the text decoration of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the text decoration of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -601,7 +600,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Returns the text alignment of the specified element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return the text alignment of the specified element
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -615,7 +614,7 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * empty text node will be ignored.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return of relative index of the element to its parent (starting from 0)
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
@@ -644,10 +643,10 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Retrieves the horizontal position of an element
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return of pixels from the edge of the frame.
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementPositionLeft(String parentLocator, String locator) {
         Point location = webDriver.findElement(parentLocator, locator).getLocation();
         return location.getX();
@@ -657,10 +656,10 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Retrieves the vertical position of an element
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return of pixels from the edge of the frame.
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementPositionTop(String parentLocator, String locator) {
         Point location = webDriver.findElement(parentLocator, locator).getLocation();
         return location.getY();
@@ -670,10 +669,10 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Retrieves the width of an element
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return width of an element in pixels
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementWidth(String parentLocator, String locator) {
         Dimension size = webDriver.findElement(parentLocator, locator).getSize();
         return size.getWidth();
@@ -683,10 +682,10 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * Retrieves the height of an element
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an element
+     * @param locator       an element locator pointing to an element
      * @return height of an element in pixels
      */
-    @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, storeCmd = false, waitCmd = false, executeCmd = false)
+    @Accessor(param1 = "parentLocator", param2 = "locator", storeCmd = false, waitCmd = false, executeCmd = false)
     public Number getElementHeight(String parentLocator, String locator) {
         Dimension size = webDriver.findElement(parentLocator, locator).getSize();
         return size.getHeight();
@@ -705,8 +704,8 @@ public class AttributeCommandExecutor extends CommandExecutor {
      * no cursor in the element.
      *
      * @param parentLocator an element locator of parent element
-     * @param locator an element locator pointing to an input element or
-     *        textarea
+     * @param locator       an element locator pointing to an input element or
+     *                      textarea
      * @return the numerical position of the cursor in the field
      */
     @Accessor(param1 = "parentLocator", param2 = "locator", android = false, ios = false, waitCmd = false, executeCmd = false)
@@ -720,31 +719,31 @@ public class AttributeCommandExecutor extends CommandExecutor {
         return (Number) webDriver.executeScript(
                 Joiner.on("\n").join(
                         "var element = arguments[0];",
-                                "var doc = document;",
-                                "var win = window;",
-                                "if( doc.selection && !browserVersion.isOpera){",
-                                "    try {",
-                                "        var selectRange = doc.selection.createRange().duplicate();",
-                                "        var elementRange = element.createTextRange();",
-                                "        selectRange.move('character',0);",
-                                "        elementRange.move('character',0);",
-                                "        var inRange1 = selectRange.inRange(elementRange);",
-                                "        var inRange2 = elementRange.inRange(selectRange);",
-                                "        elementRange.setEndPoint('EndToEnd', selectRange);",
-                                "    } catch (e) {",
-                                "        throw Error('There is no cursor on this page!');",
-                                "    }",
-                                "    var answer = String(elementRange.text).replace(/\\\\r/g,'').length;",
-                                "    return answer;",
-                                "} else {",
-                                "    if (typeof(element.selectionStart) != 'undefined') {",
-                                "        if (win.getSelection && typeof(win.getSelection().rangeCount) != undefined && win.getSelection().rangeCount == 0) {",
-                                "            throw Error('There is no cursor on this page!');",
-                                "        }",
-                                "        return element.selectionStart;",
-                                "    }",
-                                "}",
-                                "throw Error('Couldn\\\'t detect cursor position on this browser!');"),
+                        "var doc = document;",
+                        "var win = window;",
+                        "if( doc.selection && !browserVersion.isOpera){",
+                        "    try {",
+                        "        var selectRange = doc.selection.createRange().duplicate();",
+                        "        var elementRange = element.createTextRange();",
+                        "        selectRange.move('character',0);",
+                        "        elementRange.move('character',0);",
+                        "        var inRange1 = selectRange.inRange(elementRange);",
+                        "        var inRange2 = elementRange.inRange(selectRange);",
+                        "        elementRange.setEndPoint('EndToEnd', selectRange);",
+                        "    } catch (e) {",
+                        "        throw Error('There is no cursor on this page!');",
+                        "    }",
+                        "    var answer = String(elementRange.text).replace(/\\\\r/g,'').length;",
+                        "    return answer;",
+                        "} else {",
+                        "    if (typeof(element.selectionStart) != 'undefined') {",
+                        "        if (win.getSelection && typeof(win.getSelection().rangeCount) != undefined && win.getSelection().rangeCount == 0) {",
+                        "            throw Error('There is no cursor on this page!');",
+                        "        }",
+                        "        return element.selectionStart;",
+                        "    }",
+                        "}",
+                        "throw Error('Couldn\\\'t detect cursor position on this browser!');"),
                 element);
     }
 

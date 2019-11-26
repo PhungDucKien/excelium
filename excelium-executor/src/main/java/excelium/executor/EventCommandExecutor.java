@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor;
 
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
@@ -58,19 +58,21 @@ public class EventCommandExecutor extends CommandExecutor {
     }
 
     /**
-     * Sends keys to the keyboard representation in the browser.
+     * Sends keys to the keyboard representation in the device.
      *
      * @param value the value to type
      */
     @Action(param1 = "value")
     public void typeKeys(String value) {
-        value = value.replace("\\10", Keys.ENTER);
-        value = value.replace("\\13", Keys.RETURN);
-        value = value.replace("\\27", Keys.ESCAPE);
-        value = value.replace("\\38", Keys.ARROW_UP);
-        value = value.replace("\\40", Keys.ARROW_DOWN);
-        value = value.replace("\\37", Keys.ARROW_LEFT);
-        value = value.replace("\\39", Keys.ARROW_RIGHT);
+        if (webDriver.isWebContext()) {
+            value = value.replace("\\10", Keys.ENTER);
+            value = value.replace("\\13", Keys.RETURN);
+            value = value.replace("\\27", Keys.ESCAPE);
+            value = value.replace("\\38", Keys.ARROW_UP);
+            value = value.replace("\\40", Keys.ARROW_DOWN);
+            value = value.replace("\\37", Keys.ARROW_LEFT);
+            value = value.replace("\\39", Keys.ARROW_RIGHT);
+        }
 
         webDriver.getKeyboard().sendKeys(value);
     }
@@ -100,13 +102,15 @@ public class EventCommandExecutor extends CommandExecutor {
      */
     @Action(param1 = "parentLocator", param2 = "locator", param3 = "value")
     public void typeKeys(String parentLocator, String locator, String value) {
-        value = value.replace("\\10", Keys.ENTER);
-        value = value.replace("\\13", Keys.RETURN);
-        value = value.replace("\\27", Keys.ESCAPE);
-        value = value.replace("\\38", Keys.ARROW_UP);
-        value = value.replace("\\40", Keys.ARROW_DOWN);
-        value = value.replace("\\37", Keys.ARROW_LEFT);
-        value = value.replace("\\39", Keys.ARROW_RIGHT);
+        if (webDriver.isWebContext()) {
+            value = value.replace("\\10", Keys.ENTER);
+            value = value.replace("\\13", Keys.RETURN);
+            value = value.replace("\\27", Keys.ESCAPE);
+            value = value.replace("\\38", Keys.ARROW_UP);
+            value = value.replace("\\40", Keys.ARROW_DOWN);
+            value = value.replace("\\37", Keys.ARROW_LEFT);
+            value = value.replace("\\39", Keys.ARROW_RIGHT);
+        }
 
         WebElement element = webDriver.findElement(parentLocator, locator);
         element.sendKeys(value);
@@ -121,7 +125,7 @@ public class EventCommandExecutor extends CommandExecutor {
      *                      "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
      *                      w", "\119".
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence", android = false, ios = false)
     public void keyPress(String parentLocator, String locator, String keySequence) {
         typeKeys(parentLocator, locator, keySequence);
     }
@@ -135,7 +139,7 @@ public class EventCommandExecutor extends CommandExecutor {
      *                      "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
      *                      w", "\119".
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence", android = false, ios = false)
     public void keyDown(String parentLocator, String locator, String keySequence) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         webDriver.getJavascriptLibrary().callEmbeddedSelenium(webDriver, "doKeyDown", element,
@@ -151,7 +155,7 @@ public class EventCommandExecutor extends CommandExecutor {
      *                      "\" followed by the numeric keycode  of the key to be pressed, normally the ASCII value of that key), or a single  character. For example: "
      *                      w", "\119".
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "keySequence", android = false, ios = false)
     public void keyUp(String parentLocator, String locator, String keySequence) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         webDriver.getJavascriptLibrary().callEmbeddedSelenium(webDriver, "doKeyUp", element,
@@ -168,7 +172,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param keycode an integer keycode number corresponding to a java.awt.event.KeyEvent; note that
      *                Java keycodes are NOT the same thing as JavaScript keycodes!
      */
-    @Action(param1 = "keycode")
+    @Action(param1 = "keycode", android = false, ios = false)
     public void keyPress(String keycode) {
         char[] chars = Character.toChars(Integer.parseInt(keycode));
         new Actions(webDriver).sendKeys(new String(chars)).perform();
@@ -185,7 +189,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param keycode an integer keycode number corresponding to a java.awt.event.KeyEvent; note that
      *                Java keycodes are NOT the same thing as JavaScript keycodes!
      */
-    @Action(param1 = "keycode")
+    @Action(param1 = "keycode", android = false, ios = false)
     public void keyDown(String keycode) {
         char[] chars = Character.toChars(Integer.parseInt(keycode));
         new Actions(webDriver).keyDown(Keys.getKeyFromUnicode(chars[0])).perform();
@@ -201,7 +205,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param keycode an integer keycode number corresponding to a java.awt.event.KeyEvent; note that
      *                Java keycodes are NOT the same thing as JavaScript keycodes!
      */
-    @Action(param1 = "keycode")
+    @Action(param1 = "keycode", android = false, ios = false)
     public void keyUp(String keycode) {
         char[] chars = Character.toChars(Integer.parseInt(keycode));
         new Actions(webDriver).keyUp(Keys.getKeyFromUnicode(chars[0])).perform();
@@ -210,7 +214,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Press the meta key and hold it down until doMetaUp() is called or a new page is loaded.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void metaKeyDown() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyDown(Keys.META).perform();
@@ -220,7 +224,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Release the meta key.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void metaKeyUp() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyUp(Keys.META).perform();
@@ -230,7 +234,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Press the alt key and hold it down until doAltUp() is called or a new page is loaded.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void altKeyDown() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyDown(Keys.ALT).perform();
@@ -240,7 +244,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Release the alt key.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void altKeyUp() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyUp(Keys.ALT).perform();
@@ -250,7 +254,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Press the control key and hold it down until doControlUp() is called or a new page is loaded.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void controlKeyDown() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyDown(Keys.CONTROL).perform();
@@ -260,7 +264,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Release the control key.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void controlKeyUp() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyUp(Keys.CONTROL).perform();
@@ -270,7 +274,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Press the shift key and hold it down until doShiftUp() is called or a new page is loaded.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void shiftKeyDown() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyDown(Keys.SHIFT).perform();
@@ -280,7 +284,7 @@ public class EventCommandExecutor extends CommandExecutor {
     /**
      * Release the shift key.
      */
-    @Action
+    @Action(android = false, ios = false)
     public void shiftKeyUp() {
         Actions actionBuilder = new Actions(webDriver);
         actionBuilder.keyUp(Keys.SHIFT).perform();
@@ -296,7 +300,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
      *                      element returned by the locator.
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", android = false, ios = false)
     public void clickAt(String parentLocator, String locator, String coordString) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         String[] parts = coordString.split(",");
@@ -320,7 +324,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
      *                      element returned by the locator.
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", android = false, ios = false)
     public void doubleClickAt(String parentLocator, String locator, String coordString) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         String[] parts = coordString.split(",");
@@ -344,7 +348,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
      *                      element returned by the locator.
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", android = false, ios = false)
     public void contextMenuAt(String parentLocator, String locator, String coordString) {
         WebElement element = webDriver.findElement(parentLocator, locator);
         String[] parts = coordString.split(",");
@@ -360,12 +364,108 @@ public class EventCommandExecutor extends CommandExecutor {
     }
 
     /**
+     * Single tap at a specified position on the touch enabled device
+     *
+     * @param coordinate a string represents a position of x and y
+     */
+    @Action(param1 = "coordinate", web = false)
+    public void tapAt(String coordinate) {
+        String[] coords = coordinate.split(",");
+        new TouchAction(webDriver.getAppiumDriver())
+                .tap(TapOptions.tapOptions().withTapsCount(1).withPosition(PointOption.point(Integer.parseInt(coords[0].trim()), Integer.parseInt(coords[1].trim()))))
+                .perform();
+    }
+
+    /**
+     * Double tap at a specified position on the touch enabled device
+     *
+     * @param coordinate a string represents a position of x and y
+     */
+    @Action(param1 = "coordinate", web = false)
+    public void doubleTapAt(String coordinate) {
+        String[] coords = coordinate.split(",");
+        new TouchAction(webDriver.getAppiumDriver())
+                .tap(TapOptions.tapOptions().withTapsCount(2).withPosition(PointOption.point(Integer.parseInt(coords[0].trim()), Integer.parseInt(coords[1].trim()))))
+                .perform();
+    }
+
+    /**
+     * Long press at a specified position on the touch enabled device
+     *
+     * @param coordinate a string represents a position of x and y
+     */
+    @Action(param1 = "coordinate", web = false)
+    public void longPressAt(String coordinate) {
+        String[] coords = coordinate.split(",");
+        new TouchAction(webDriver.getAppiumDriver())
+                .longPress(LongPressOptions.longPressOptions().withPosition(PointOption.point(Integer.parseInt(coords[0].trim()), Integer.parseInt(coords[1].trim()))))
+                .perform();
+    }
+
+    /**
+     * Single tap at a specified position of an offset from the top-left corner of the element on the touch enabled device
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", web = false)
+    public void tapAt(String parentLocator, String locator, String coordString) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        String[] parts = coordString.split(",");
+        int xOffset = Integer.parseInt(parts[0]);
+        int yOffset = Integer.parseInt(parts[1]);
+        new TouchAction(webDriver.getAppiumDriver())
+                .tap(TapOptions.tapOptions().withTapsCount(1).withPosition(PointOption.point(element.getLocation().x + xOffset, element.getLocation().y + yOffset)))
+                .perform();
+    }
+
+    /**
+     * Double tap at a specified position of an offset from the top-left corner of the element on the touch enabled device
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", web = false)
+    public void doubleTapAt(String parentLocator, String locator, String coordString) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        String[] parts = coordString.split(",");
+        int xOffset = Integer.parseInt(parts[0]);
+        int yOffset = Integer.parseInt(parts[1]);
+        new TouchAction(webDriver.getAppiumDriver())
+                .tap(TapOptions.tapOptions().withTapsCount(2).withPosition(PointOption.point(element.getLocation().x + xOffset, element.getLocation().y + yOffset)))
+                .perform();
+    }
+
+    /**
+     * Long press at a specified position of an offset from the top-left corner of the element on the touch enabled device
+     *
+     * @param parentLocator an element locator of parent element
+     * @param locator       an element locator
+     * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
+     *                      element returned by the locator.
+     */
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", web = false)
+    public void longPressAt(String parentLocator, String locator, String coordString) {
+        WebElement element = webDriver.findElement(parentLocator, locator);
+        String[] parts = coordString.split(",");
+        int xOffset = Integer.parseInt(parts[0]);
+        int yOffset = Integer.parseInt(parts[1]);
+        new TouchAction(webDriver.getAppiumDriver())
+                .longPress(LongPressOptions.longPressOptions().withPosition(PointOption.point(element.getLocation().x + xOffset, element.getLocation().y + yOffset)))
+                .perform();
+    }
+
+    /**
      * Simulates a user hovering a mouse over the specified element.
      *
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void mouseOver(String parentLocator, String locator) {
         fireEvent(parentLocator, locator, "mouseover");
     }
@@ -376,7 +476,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void mouseOut(String parentLocator, String locator) {
         fireEvent(parentLocator, locator, "mouseout");
     }
@@ -388,7 +488,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void mouseDown(String parentLocator, String locator) {
         fireEvent(parentLocator, locator, "mousedown");
     }
@@ -402,7 +502,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
      *                      element returned by the locator.
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", android = false, ios = false)
     public void mouseDownAt(String parentLocator, String locator, String coordString) {
         fireEventAt(parentLocator, locator, "mousedown", coordString);
     }
@@ -414,7 +514,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void mouseUp(String parentLocator, String locator) {
         fireEvent(parentLocator, locator, "mouseup");
     }
@@ -428,7 +528,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
      *                      element returned by the locator.
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", android = false, ios = false)
     public void mouseUpAt(String parentLocator, String locator, String coordString) {
         fireEventAt(parentLocator, locator, "mouseup", coordString);
     }
@@ -439,7 +539,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void mouseMove(String parentLocator, String locator) {
         fireEvent(parentLocator, locator, "mousemove");
     }
@@ -452,7 +552,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param coordString   specifies the x,y position (i.e. - 10,20) of the mouse event relative to the
      *                      element returned by the locator.
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "coordString", android = false, ios = false)
     public void mouseMoveAt(String parentLocator, String locator, String coordString) {
         fireEventAt(parentLocator, locator, "mousemove", coordString);
     }
@@ -464,7 +564,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void focus(String parentLocator, String locator) {
         fireEvent(parentLocator, locator, "focus");
     }
@@ -476,7 +576,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param parentLocator an element locator of parent element
      * @param locator       an element locator
      */
-    @Action(param1 = "parentLocator", param2 = "locator")
+    @Action(param1 = "parentLocator", param2 = "locator", android = false, ios = false)
     public void blur(String parentLocator, String locator) {
         fireEvent(parentLocator, locator, "blur");
     }
@@ -488,7 +588,7 @@ public class EventCommandExecutor extends CommandExecutor {
      * @param locator       an element locator
      * @param eventName     the event name, e.g. "focus" or "blur"
      */
-    @Action(param1 = "parentLocator", param2 = "locator", param3 = "eventName")
+    @Action(param1 = "parentLocator", param2 = "locator", param3 = "eventName", android = false, ios = false)
     public void fireEvent(String parentLocator, String locator, String eventName) {
         String fire = "return (" + webDriver.getJavascriptLibrary().getSeleniumScript("fireEvent.js") + ").apply(null, arguments);";
 

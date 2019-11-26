@@ -333,6 +333,7 @@ public class DriverFactory {
 
         desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
         desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
+        desiredCapabilities.setCapability(IOSMobileCapabilityType.ALLOW_TOUCHID_ENROLL, true);
 
         // For iOS 9.3 or higher
         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);

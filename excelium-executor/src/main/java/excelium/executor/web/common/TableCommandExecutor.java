@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Excelium
+ * Copyright (c) 2019 Excelium
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-package excelium.executor.web;
+package excelium.executor.web.common;
 
 import com.thoughtworks.selenium.SeleniumException;
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 import org.openqa.selenium.WebElement;
 
@@ -59,7 +59,7 @@ public class TableCommandExecutor extends CommandExecutor {
      * Gets the text from a cell of a table. The cellAddress syntax row.column, where row
      * and column start at 0.
      *
-     * @param locator an element locator pointing to a table
+     * @param locator     an element locator pointing to a table
      * @param cellAddress a cell address, e.g. "1.4"
      * @return the text from the specified cell
      */

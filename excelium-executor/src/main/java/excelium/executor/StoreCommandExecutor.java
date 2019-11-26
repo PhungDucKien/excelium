@@ -24,11 +24,11 @@
 
 package excelium.executor;
 
+import excelium.core.CommandExecutor;
+import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.core.Excelium;
-import excelium.core.CommandExecutor;
 import excelium.model.project.Project;
 
 /**
@@ -54,7 +54,7 @@ public class StoreCommandExecutor extends CommandExecutor {
     /**
      * Stores a value in a variable for later access.
      *
-     * @param text the value to store
+     * @param text     the value to store
      * @param variable the name of a variable in which the result is to be stored.
      */
     @Action(param1 = "text", param2 = "variable")
@@ -65,7 +65,7 @@ public class StoreCommandExecutor extends CommandExecutor {
     /**
      * Stores a value in an array variable for later access.
      *
-     * @param text the value to store
+     * @param text     the value to store
      * @param variable the name of a variable in which the result is to be stored.
      */
     @Action(param1 = "text", param2 = "variable")
