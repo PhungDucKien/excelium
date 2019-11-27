@@ -32,10 +32,7 @@ import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.MobileWebEnvironment;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import java.nio.file.Paths;
 import java.util.Date;
@@ -82,6 +79,11 @@ public class IOSWebExecutorTest {
             DriverPool.getInstance().dismissDriver(webDriver.getWebDriver());
         }
         webDriver = null;
+    }
+
+    @Before
+    public void before() throws Throwable {
+        selenium.cleanDriver();
     }
 
     @Test

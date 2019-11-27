@@ -1552,6 +1552,10 @@ public class WebExcelium extends Excelium {
         runCommand("chooseOkConfirmation", null, null, null);
     }
 
+    public void cleanDriver() throws Throwable {
+        runCommand("cleanDriver", null, null, null);
+    }
+
     public void clear(String locator) throws Throwable {
         runCommand("clear", locator, null, null);
     }

@@ -88,6 +88,11 @@ public class IOSAppExecutorTest {
         webDriver = null;
     }
 
+    @Before
+    public void before() throws Throwable {
+        selenium.cleanDriver();
+    }
+
     @Test
     public void testPageSource() throws Throwable {
         selenium.assertPageSourceMatch("^.*<AppiumAUT>.*$");

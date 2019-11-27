@@ -34,8 +34,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 import static excelium.core.by.ByParser.parseBy;
 
 /**
@@ -67,34 +65,6 @@ public class WaitCommandExecutor extends CommandExecutor {
     @Action(param1 = "waitTime")
     public void pause(String waitTime) throws InterruptedException {
         Thread.sleep(toInteger(waitTime, 0));
-    }
-
-    /**
-     * Specifies the amount of time that Selenium will wait for actions to complete.
-     *
-     * <p>
-     * Actions that require waiting include "open" and the "waitFor*" actions.
-     * </p>
-     * The default timeout is 30 seconds.
-     *
-     * @param timeout a timeout in milliseconds, after which the action will return with an error
-     */
-    @Action(param1 = "timeout")
-    public void setTimeout(String timeout) {
-        webDriver.manage().timeouts().implicitlyWait(Long.valueOf(timeout), TimeUnit.MILLISECONDS);
-        webDriver.manage().timeouts().setScriptTimeout(Long.valueOf(timeout), TimeUnit.MILLISECONDS);
-        webDriver.setTimeout(Integer.valueOf(timeout));
-    }
-
-    /**
-     * Sets the amount of time to wait for a page load to complete before throwing an error.
-     *
-     * @param timeout a timeout in milliseconds, after which the page load will return with an error
-     */
-    @Action(param1 = "timeout", android = false, ios = false)
-    public void setPageLoadTimeout(String timeout) {
-        long wait = toPositiveInteger(timeout, webDriver.getTimeout());
-        webDriver.manage().timeouts().pageLoadTimeout(wait, TimeUnit.MILLISECONDS);
     }
 
     /**

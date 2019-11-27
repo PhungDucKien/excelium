@@ -34,6 +34,7 @@ import excelium.executor.web.env.GlobalWebEnvironment;
 import excelium.model.enums.Browser;
 import excelium.model.project.Project;
 import excelium.model.test.config.PcEnvironment;
+import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.io.IOException;
@@ -92,5 +93,10 @@ public class WebExecutorTestBase {
             DriverPool.getInstance().dismissDriver(webDriver.getWebDriver());
         }
         webDriver = null;
+    }
+
+    @Before
+    public void before() throws Throwable {
+        selenium.cleanDriver();
     }
 }

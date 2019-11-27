@@ -202,7 +202,7 @@ public class TestRunner {
     private void runTestSuite(TestSuite testSuite) throws IOException, SQLException, ClassNotFoundException {
         setTestSuite(testSuite);
         for (TestCase testCase : testSuite.getTestCases()) {
-            runTestFlow(testCase);
+            runTestFlow(testCase, true);
         }
     }
 
@@ -213,9 +213,13 @@ public class TestRunner {
      * @return Result of the flow
      * @throws IOException the io exception
      */
-    private Result runTestFlow(TestFlow testFlow) throws IOException, SQLException, ClassNotFoundException {
+    private Result runTestFlow(TestFlow testFlow, boolean cleanDriver) throws IOException, SQLException, ClassNotFoundException {
         Result flowResult = Result.OK;
         try {
+            if (cleanDriver) {
+                DriverPool.getInstance().cleanDriver(webDriver.getWebDriver());
+            }
+
             testFlows.add(testFlow);
             testReporter.startTestFlow(testFlow);
             boolean shouldContinue = true;
@@ -310,7 +314,7 @@ public class TestRunner {
 
         if (test.getActions() != null && !test.getActions().isEmpty()) {
             for (TestAction action : test.getActions().values()) {
-                excelium.addAction(action.getName(), () -> runTestFlow(action));
+                excelium.addAction(action.getName(), () -> runTestFlow(action, false));
             }
         }
     }

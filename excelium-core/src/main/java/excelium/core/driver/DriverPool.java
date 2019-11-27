@@ -46,6 +46,7 @@ public class DriverPool {
     private DriverAlivenessChecker alivenessChecker = new DriverAlivenessChecker();
     private DriverCleaner driverCleaner = new DriverCleaner();
     private Map<String, RemoteWebDriver> drivers = new HashMap<>();
+    private Map<RemoteWebDriver, Environment> environments = new HashMap<>();
     private Map<RemoteWebDriver, String> originalHandles = new HashMap<>();
     private DriverFactory driverFactory = new DriverFactory();
 
@@ -176,6 +177,7 @@ public class DriverPool {
             if (driver.equals(drivers.get(key))) {
                 quitDriver(driver);
                 drivers.remove(key);
+                environments.remove(driver);
                 originalHandles.remove(driver);
                 break;
             }
@@ -187,7 +189,20 @@ public class DriverPool {
             quitDriver(driver);
         }
         drivers.clear();
+        environments.clear();
         originalHandles.clear();
+    }
+
+    public boolean cleanDriver(RemoteWebDriver driver) {
+        if (!drivers.containsValue(driver)) {
+            throw new Error("The driver is not owned by the pool: " + driver);
+        }
+        for (String key : drivers.keySet()) {
+            if (driver.equals(drivers.get(key))) {
+                return driverCleaner.clean(driver, environments.get(driver), originalHandles.get(driver));
+            }
+        }
+        return false;
     }
 
     private void quitDriver(RemoteWebDriver driver) {
@@ -208,6 +223,8 @@ public class DriverPool {
         RemoteWebDriver driver = driverFactory.createDriver(environment, project);
         drivers.remove(driverKey);
         drivers.put(driverKey, driver);
+        environments.remove(driver);
+        environments.put(driver, environment);
         if (!(driver instanceof AppiumDriver) || isNotBlank((driver.getCapabilities().getBrowserName()))) {
             originalHandles.remove(driver);
             originalHandles.put(driver, driver.getWindowHandle());
