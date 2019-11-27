@@ -101,7 +101,11 @@ public class DriverCleaner {
                                 throw new IndexOutOfBoundsException("No context with index = " + 1 + " available");
                             }
 
-                            ((AppiumDriver) webDriver).context(webViewContexts.get(0));
+                            if (webViewContexts.contains("WEBVIEW_" + originalHandle)) {
+                                ((AppiumDriver) webDriver).context("WEBVIEW_" + originalHandle);
+                            } else {
+                                ((AppiumDriver) webDriver).context(webViewContexts.get(0));
+                            }
                         }
                     }
                 }

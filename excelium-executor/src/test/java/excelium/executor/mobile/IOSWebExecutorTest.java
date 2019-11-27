@@ -385,4 +385,61 @@ public class IOSWebExecutorTest {
         selenium.waitForTitle("Another Page: page 3");
         selenium.assertTitle("Another Page: page 3");
     }
+
+    @Test
+    public void testWindow() throws Throwable {
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.setTimeout("10000");
+        try {
+            selenium.selectWindow("noexistman");
+            Assert.fail("Should be rejected");
+        } catch (Exception e) {
+        }
+
+        selenium.click("blanklink");
+        selenium.waitForWindowCount("2");
+        selenium.selectLastWindow();
+        selenium.waitForTitle("I am another page title");
+        selenium.assertTitle("I am another page title");
+        selenium.close();
+        selenium.selectOriginalWindow();
+        selenium.waitForTitle("I am a page title");
+        selenium.assertTitle("I am a page title");
+
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.click("blanklink");
+        selenium.waitForWindowCount("2");
+        selenium.selectLastWindow();
+        selenium.waitForTitle("I am another page title");
+        selenium.assertTitle("I am another page title");
+        selenium.selectOriginalWindow();
+        selenium.waitForTitle("I am a page title");
+        selenium.assertTitle("I am a page title");
+        selenium.selectLastWindow();
+        selenium.waitForTitle("I am another page title");
+        selenium.assertTitle("I am another page title");
+        selenium.close();
+        selenium.selectOriginalWindow();
+        selenium.waitForTitle("I am a page title");
+        selenium.assertTitle("I am a page title");
+
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.click("link=i am a link");
+        selenium.waitForElementPresent("only_on_page_2");
+        selenium.assertElementPresent("only_on_page_2");
+        selenium.goBack();
+        selenium.waitForElementPresent("i_am_a_textbox");
+        selenium.assertElementPresent("i_am_a_textbox");
+        selenium.goForward();
+        selenium.waitForElementPresent("only_on_page_2");
+        selenium.assertElementPresent("only_on_page_2");
+        selenium.goBack();
+
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.click("link=i am a new window link");
+        selenium.waitForWindowCount("2");
+        selenium.selectLastWindow();
+        selenium.waitForTitle("I am another page title");
+        selenium.assertTitle("I am another page title");
+    }
 }

@@ -34,10 +34,12 @@ import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.NoSuchContextException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a class which contains commands for controlling windows.
@@ -172,6 +174,27 @@ public class WindowCommandExecutor extends CommandExecutor {
     @Action(param1 = "windowID")
     public void selectWindow(String windowID) {
         windows.selectWindow(webDriver, windowID);
+        if (webDriver.isMobile()) {
+            String windowHandle = webDriver.getWindowHandle();
+
+            Set<String> contexts = webDriver.getAppiumDriver().getContextHandles();
+            List<String> webViewContexts = new ArrayList<>();
+            for (String context : contexts) {
+                if (context.startsWith("WEBVIEW_")) {
+                    webViewContexts.add(context);
+                }
+            }
+
+            if (1 > webViewContexts.size()) {
+                throw new IndexOutOfBoundsException("No context with index = " + 1 + " available");
+            }
+
+            if (webViewContexts.contains("WEBVIEW_" + windowHandle)) {
+                webDriver.getAppiumDriver().context("WEBVIEW_" + windowHandle);
+            } else {
+                throw new NoSuchContextException("No such context WEBVIEW_" + windowHandle + " found");
+            }
+        }
     }
 
     /**
@@ -194,6 +217,27 @@ public class WindowCommandExecutor extends CommandExecutor {
     @Action(param1 = "windowID")
     public void selectPopUp(String windowID) {
         windows.selectPopUp(webDriver, windowID);
+        if (webDriver.isMobile()) {
+            String windowHandle = webDriver.getWindowHandle();
+
+            Set<String> contexts = webDriver.getAppiumDriver().getContextHandles();
+            List<String> webViewContexts = new ArrayList<>();
+            for (String context : contexts) {
+                if (context.startsWith("WEBVIEW_")) {
+                    webViewContexts.add(context);
+                }
+            }
+
+            if (1 > webViewContexts.size()) {
+                throw new IndexOutOfBoundsException("No context with index = " + 1 + " available");
+            }
+
+            if (webViewContexts.contains("WEBVIEW_" + windowHandle)) {
+                webDriver.getAppiumDriver().context("WEBVIEW_" + windowHandle);
+            } else {
+                throw new NoSuchContextException("No such context WEBVIEW_" + windowHandle + " found");
+            }
+        }
     }
 
     /**
@@ -202,7 +246,7 @@ public class WindowCommandExecutor extends CommandExecutor {
      */
     @Action
     public void deselectPopUp() {
-        windows.selectWindow(webDriver, "");
+        selectWindow("");
     }
 
     /**
@@ -224,7 +268,7 @@ public class WindowCommandExecutor extends CommandExecutor {
      */
     @Action
     public void selectParentFrame() {
-        windows.selectFrame(webDriver, "relative=up");
+        selectFrame("relative=up");
     }
 
     /**
@@ -245,7 +289,7 @@ public class WindowCommandExecutor extends CommandExecutor {
         WebDriverWait wait = createWebDriverWait(timeout);
         wait.until(driver -> {
             try {
-                windows.selectPopUp(driver, windowID);
+                selectPopUp(windowID);
                 return !"about:blank".equals(driver.getCurrentUrl());
             } catch (SeleniumException e) {
                 // Swallow
@@ -253,7 +297,7 @@ public class WindowCommandExecutor extends CommandExecutor {
             return false;
         });
 
-        webDriver.switchTo().window(current);
+        selectWindow(current);
     }
 
     /**
@@ -272,6 +316,40 @@ public class WindowCommandExecutor extends CommandExecutor {
     public void selectLastWindow() {
         String windowHandle = Iterables.getLast(webDriver.getWindowHandles());
         selectWindow(windowHandle);
+    }
+
+    /**
+     * Selects the previous window.
+     */
+    @Action
+    public void selectPreviousWindow() {
+        List<String> windowHandles = new ArrayList<>(webDriver.getWindowHandles());
+        int index = windowHandles.indexOf(webDriver.getWindowHandle());
+        if (index > 0) {
+            String windowHandle = windowHandles.get(index - 1);
+            selectWindow(windowHandle);
+        }
+    }
+
+    /**
+     * Selects the next window.
+     */
+    @Action
+    public void selectNextWindow() {
+        List<String> windowHandles = new ArrayList<>(webDriver.getWindowHandles());
+        int index = windowHandles.indexOf(webDriver.getWindowHandle());
+        if (index < windowHandles.size() - 1) {
+            String windowHandle = windowHandles.get(index + 1);
+            selectWindow(windowHandle);
+        }
+    }
+
+    /**
+     * Selects the original window.
+     */
+    @Action
+    public void selectOriginalWindow() {
+        selectWindow(null);
     }
 
     /**
@@ -302,13 +380,13 @@ public class WindowCommandExecutor extends CommandExecutor {
 
         List<String> attributes = new ArrayList<>();
         for (String handle : webDriver.getWindowHandles()) {
-            webDriver.switchTo().window(handle);
+            selectWindow(handle);
             String value = (String) webDriver.executeScript(
                     "return '' + window[arguments[0]];", attributeName);
             attributes.add(value);
         }
 
-        webDriver.switchTo().window(current);
+        selectWindow(current);
 
         return attributes.toArray(new String[0]);
     }
@@ -324,11 +402,11 @@ public class WindowCommandExecutor extends CommandExecutor {
 
         List<String> attributes = new ArrayList<>();
         for (String handle : webDriver.getWindowHandles()) {
-            webDriver.switchTo().window(handle);
+            selectWindow(handle);
             attributes.add(webDriver.executeScript("return window.name").toString());
         }
 
-        webDriver.switchTo().window(current);
+        selectWindow(current);
 
         return attributes.toArray(new String[0]);
     }
@@ -344,12 +422,32 @@ public class WindowCommandExecutor extends CommandExecutor {
 
         List<String> attributes = new ArrayList<>();
         for (String handle : webDriver.getWindowHandles()) {
-            webDriver.switchTo().window(handle);
+            selectWindow(handle);
             attributes.add(webDriver.getTitle());
         }
 
-        webDriver.switchTo().window(current);
+        selectWindow(current);
 
         return attributes.toArray(new String[0]);
+    }
+
+    /**
+     * Get the current window handle.
+     *
+     * @return the current window handle
+     */
+    @Accessor
+    public String getWindowHandle() {
+        return webDriver.getWindowHandle();
+    }
+
+    /**
+     * Get the count of all windows that the browser knows about.
+     *
+     * @return the count of all windows that the browser knows about.
+     */
+    @Accessor
+    public int getWindowCount() {
+        return webDriver.getWindowHandles().size();
     }
 }

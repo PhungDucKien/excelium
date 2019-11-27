@@ -24,6 +24,7 @@
 
 package excelium.executor;
 
+import com.google.common.collect.Iterables;
 import excelium.core.CommandExecutor;
 import excelium.core.Excelium;
 import excelium.core.command.Accessor;
@@ -43,6 +44,8 @@ import java.util.Set;
  */
 public class ContextCommandExecutor extends CommandExecutor {
 
+    private String originalWindowHandle;
+
     /**
      * Instantiates a new Context command executor.
      *
@@ -53,6 +56,9 @@ public class ContextCommandExecutor extends CommandExecutor {
      */
     public ContextCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
         super(webDriver, baseUrl, excelium, project);
+        if (webDriver.isWebApp()) {
+            originalWindowHandle = webDriver.getWindowHandle();
+        }
     }
 
     /**
@@ -80,8 +86,7 @@ public class ContextCommandExecutor extends CommandExecutor {
      */
     @Action
     public void setNativeAppContext() {
-        webDriver.getAppiumDriver().context("NATIVE_APP");
-        ((MobileExcelium) excelium).setNativeContext();
+        setContext("NATIVE_APP");
     }
 
     /**
@@ -109,8 +114,70 @@ public class ContextCommandExecutor extends CommandExecutor {
             throw new IndexOutOfBoundsException("No context with index = " + index + " available");
         }
 
-        webDriver.getAppiumDriver().context(webViewContexts.get(idx - 1));
-        ((MobileExcelium) excelium).setWebContext();
+        setContext(webViewContexts.get(idx - 1));
+    }
+
+    /**
+     * Sets the last context.
+     */
+    @Action
+    public void setLastContext() {
+        String contextHandle = (String) Iterables.getLast(webDriver.getAppiumDriver().getContextHandles());
+        setContext(contextHandle);
+    }
+
+    /**
+     * Sets the previous context.
+     */
+    @Action
+    public void setPreviousContext() {
+        List<String> contextHandles = new ArrayList<>(webDriver.getAppiumDriver().getContextHandles());
+        int index = contextHandles.indexOf(webDriver.getAppiumDriver().getContext());
+        if (index > 0) {
+            String contextHandle = contextHandles.get(index - 1);
+            setContext(contextHandle);
+        }
+    }
+
+    /**
+     * Sets the next context.
+     */
+    @Action
+    public void setNextContext() {
+        List<String> contextHandles = new ArrayList<>(webDriver.getAppiumDriver().getContextHandles());
+        int index = contextHandles.indexOf(webDriver.getAppiumDriver().getContext());
+        if (index < contextHandles.size() - 1) {
+            String contextHandle = contextHandles.get(index + 1);
+            setContext(contextHandle);
+        }
+    }
+
+    /**
+     * Sets the original context.
+     */
+    @Action
+    public void setOriginalContext() {
+        if (webDriver.isWebApp()) {
+            Set<String> contexts = webDriver.getAppiumDriver().getContextHandles();
+            List<String> webViewContexts = new ArrayList<>();
+            for (String context : contexts) {
+                if (context.startsWith("WEBVIEW_")) {
+                    webViewContexts.add(context);
+                }
+            }
+
+            if (1 > webViewContexts.size()) {
+                throw new IndexOutOfBoundsException("No context with index = " + 1 + " available");
+            }
+
+            if (webViewContexts.contains("WEBVIEW_" + originalWindowHandle)) {
+                setContext("WEBVIEW_" + originalWindowHandle);
+            } else {
+                setContext(webViewContexts.get(0));
+            }
+        } else {
+            setNativeAppContext();
+        }
     }
 
     /**

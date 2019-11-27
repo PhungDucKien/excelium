@@ -968,6 +968,14 @@ public class WebExcelium extends Excelium {
         runCommand("assertNotVisible", parentLocator, locator, null);
     }
 
+    public void assertNotWindowCount(String text) throws Throwable {
+        runCommand("assertNotWindowCount", text, null, null);
+    }
+
+    public void assertNotWindowHandle(String text) throws Throwable {
+        runCommand("assertNotWindowHandle", text, null, null);
+    }
+
     public void assertNotXpathCount(String xpath, String text) throws Throwable {
         runCommand("assertNotXpathCount", xpath, text, null);
     }
@@ -1462,6 +1470,22 @@ public class WebExcelium extends Excelium {
 
     public void assertVisible(String parentLocator, String locator) throws Throwable {
         runCommand("assertVisible", parentLocator, locator, null);
+    }
+
+    public void assertWindowCount(String text) throws Throwable {
+        runCommand("assertWindowCount", text, null, null);
+    }
+
+    public void assertWindowHandle(String text) throws Throwable {
+        runCommand("assertWindowHandle", text, null, null);
+    }
+
+    public void assertWindowHandleMatch(String text) throws Throwable {
+        runCommand("assertWindowHandleMatch", text, null, null);
+    }
+
+    public void assertWindowHandleNotMatch(String text) throws Throwable {
+        runCommand("assertWindowHandleNotMatch", text, null, null);
     }
 
     public void assertXpathCount(String xpath, String text) throws Throwable {
@@ -1980,6 +2004,14 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfNotVisible", action, parentLocator, locator);
     }
 
+    public void executeIfNotWindowCount(String action, String text) throws Throwable {
+        runCommand("executeIfNotWindowCount", action, text, null);
+    }
+
+    public void executeIfNotWindowHandle(String action, String text) throws Throwable {
+        runCommand("executeIfNotWindowHandle", action, text, null);
+    }
+
     public void executeIfPageSource(String action, String text) throws Throwable {
         runCommand("executeIfPageSource", action, text, null);
     }
@@ -2162,6 +2194,22 @@ public class WebExcelium extends Excelium {
 
     public void executeIfVisible(String action, String parentLocator, String locator) throws Throwable {
         runCommand("executeIfVisible", action, parentLocator, locator);
+    }
+
+    public void executeIfWindowCount(String action, String text) throws Throwable {
+        runCommand("executeIfWindowCount", action, text, null);
+    }
+
+    public void executeIfWindowHandle(String action, String text) throws Throwable {
+        runCommand("executeIfWindowHandle", action, text, null);
+    }
+
+    public void executeIfWindowHandleMatch(String action, String text) throws Throwable {
+        runCommand("executeIfWindowHandleMatch", action, text, null);
+    }
+
+    public void executeIfWindowHandleNotMatch(String action, String text) throws Throwable {
+        runCommand("executeIfWindowHandleNotMatch", action, text, null);
     }
 
     public void executeLoop(String action, String times) throws Throwable {
@@ -2528,12 +2576,24 @@ public class WebExcelium extends Excelium {
         runCommand("selectLastWindow", null, null, null);
     }
 
+    public void selectNextWindow() throws Throwable {
+        runCommand("selectNextWindow", null, null, null);
+    }
+
+    public void selectOriginalWindow() throws Throwable {
+        runCommand("selectOriginalWindow", null, null, null);
+    }
+
     public void selectParentFrame() throws Throwable {
         runCommand("selectParentFrame", null, null, null);
     }
 
     public void selectPopUp(String windowID) throws Throwable {
         runCommand("selectPopUp", windowID, null, null);
+    }
+
+    public void selectPreviousWindow() throws Throwable {
+        runCommand("selectPreviousWindow", null, null, null);
     }
 
     public void selectValue(String locator, String value) throws Throwable {
@@ -2778,6 +2838,14 @@ public class WebExcelium extends Excelium {
 
     public void storeValue(String parentLocator, String locator, String variable) throws Throwable {
         runCommand("storeValue", parentLocator, locator, variable);
+    }
+
+    public void storeWindowCount(String variable) throws Throwable {
+        runCommand("storeWindowCount", variable, null, null);
+    }
+
+    public void storeWindowHandle(String variable) throws Throwable {
+        runCommand("storeWindowHandle", variable, null, null);
     }
 
     public void submit(String locator) throws Throwable {
@@ -3744,6 +3812,14 @@ public class WebExcelium extends Excelium {
         runCommand("verifyNotVisible", parentLocator, locator, null);
     }
 
+    public void verifyNotWindowCount(String text) throws Throwable {
+        runCommand("verifyNotWindowCount", text, null, null);
+    }
+
+    public void verifyNotWindowHandle(String text) throws Throwable {
+        runCommand("verifyNotWindowHandle", text, null, null);
+    }
+
     public void verifyNotXpathCount(String xpath, String text) throws Throwable {
         runCommand("verifyNotXpathCount", xpath, text, null);
     }
@@ -4240,6 +4316,22 @@ public class WebExcelium extends Excelium {
         runCommand("verifyVisible", parentLocator, locator, null);
     }
 
+    public void verifyWindowCount(String text) throws Throwable {
+        runCommand("verifyWindowCount", text, null, null);
+    }
+
+    public void verifyWindowHandle(String text) throws Throwable {
+        runCommand("verifyWindowHandle", text, null, null);
+    }
+
+    public void verifyWindowHandleMatch(String text) throws Throwable {
+        runCommand("verifyWindowHandleMatch", text, null, null);
+    }
+
+    public void verifyWindowHandleNotMatch(String text) throws Throwable {
+        runCommand("verifyWindowHandleNotMatch", text, null, null);
+    }
+
     public void verifyXpathCount(String xpath, String text) throws Throwable {
         runCommand("verifyXpathCount", xpath, text, null);
     }
@@ -4648,6 +4740,14 @@ public class WebExcelium extends Excelium {
         runCommand("waitForNotVisible", parentLocator, locator, null);
     }
 
+    public void waitForNotWindowCount(String text) throws Throwable {
+        runCommand("waitForNotWindowCount", text, null, null);
+    }
+
+    public void waitForNotWindowHandle(String text) throws Throwable {
+        runCommand("waitForNotWindowHandle", text, null, null);
+    }
+
     public void waitForPageSource(String text) throws Throwable {
         runCommand("waitForPageSource", text, null, null);
     }
@@ -4942,6 +5042,22 @@ public class WebExcelium extends Excelium {
 
     public void waitForVisible(String parentLocator, String locator) throws Throwable {
         runCommand("waitForVisible", parentLocator, locator, null);
+    }
+
+    public void waitForWindowCount(String text) throws Throwable {
+        runCommand("waitForWindowCount", text, null, null);
+    }
+
+    public void waitForWindowHandle(String text) throws Throwable {
+        runCommand("waitForWindowHandle", text, null, null);
+    }
+
+    public void waitForWindowHandleMatch(String text) throws Throwable {
+        runCommand("waitForWindowHandleMatch", text, null, null);
+    }
+
+    public void waitForWindowHandleNotMatch(String text) throws Throwable {
+        runCommand("waitForWindowHandleNotMatch", text, null, null);
     }
 
     public void windowFocus() throws Throwable {
