@@ -444,4 +444,83 @@ public class IOSWebExecutorTest {
         selenium.waitForTitle("I am another page title");
         selenium.assertTitle("I am another page title");
     }
+
+    @Test
+    public void testFrame() throws Throwable {
+        selenium.open("../tests/appium/test/frameset.html");
+        selenium.selectFrame("name=first");
+        selenium.assertTitle("Sub frame 1");
+        selenium.assertText("css=h1", "Sub frame 1");
+
+        selenium.open("../tests/appium/test/frameset.html");
+        selenium.selectFrame("index=1");
+        selenium.assertTitle("Sub frame 2");
+        selenium.assertText("css=h1", "Sub frame 2");
+
+        selenium.open("../tests/appium/test/frameset.html");
+        selenium.selectFrame("id=frame3");
+        selenium.assertTitle("Sub frame 3");
+        selenium.assertText("css=h1", "Sub frame 3");
+
+        selenium.open("../tests/appium/test/frameset.html");
+        selenium.selectFrame("name=first");
+        selenium.assertTitle("Sub frame 1");
+        selenium.assertText("css=h1", "Sub frame 1");
+        selenium.selectFrame("relative=top");
+        selenium.assertElementPresent("css=frameset");
+
+        selenium.open("../tests/appium/test/frameset.html");
+        selenium.selectFrame("name=third");
+        selenium.assertTitle("Sub frame 3");
+        selenium.selectFrame("name=childframe");
+        selenium.assertElementPresent("only_on_page_2");
+
+        selenium.open("../tests/appium/test/frameset.html");
+        selenium.selectFrame("name=first");
+        selenium.assertEvalScript("document.getElementsByTagName('h1')[0].innerHTML", "Sub frame 1");
+
+        selenium.open("../tests/appium/test/frameset.html");
+        selenium.assertPageSourceMatch("Frameset guinea pig");
+        selenium.selectFrame("name=first");
+        selenium.assertPageSourceMatch("Sub frame 1");
+        selenium.assertPageSourceNotMatch("Frameset guinea pig");
+    }
+
+    @Test
+    public void testIFrame() throws Throwable {
+        selenium.open("../tests/appium/test/iframes.html");
+        selenium.selectFrame("name=iframe1");
+        selenium.assertTitle("Sub frame 1");
+        selenium.assertText("css=h1", "Sub frame 1");
+
+        selenium.open("../tests/appium/test/iframes.html");
+        selenium.selectFrame("index=1");
+        selenium.assertTitle("Sub frame 2");
+        selenium.assertText("css=h1", "Sub frame 2");
+
+        selenium.open("../tests/appium/test/iframes.html");
+        selenium.selectFrame("id=id-iframe3");
+        selenium.assertTitle("Sub frame 3");
+        selenium.assertText("css=h1", "Sub frame 3");
+
+        selenium.open("../tests/appium/test/iframes.html");
+        try {
+            selenium.selectFrame("id=noexist");
+            Assert.fail("Should be rejected");
+        } catch (Exception e) {
+        }
+
+        selenium.open("../tests/appium/test/iframes.html");
+        selenium.selectFrame("name=iframe1");
+        selenium.assertTitle("Sub frame 1");
+        selenium.assertText("css=h1", "Sub frame 1");
+        selenium.selectFrame("relative=top");
+        selenium.assertElementPresent("css=iframe");
+
+        selenium.open("../tests/appium/test/iframes.html");
+        selenium.assertPageSourceMatch("Iframe guinea pig");
+        selenium.selectFrame("name=iframe1");
+        selenium.assertPageSourceMatch("Sub frame 1");
+        selenium.assertPageSourceNotMatch("Iframe guinea pig");
+    }
 }
