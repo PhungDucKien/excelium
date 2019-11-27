@@ -70,7 +70,7 @@ public class TestWait extends WebExecutorTestBase {
     }
 
     // the page should not have time to load
-    selenium.assertHtmlSourceMatch("Appium: Mobile App Automation Made Awesome.");
+    selenium.assertPageSourceMatch("Appium: Mobile App Automation Made Awesome.");
 
     Date before = new Date();
     selenium.setTimeout("12000");
@@ -79,7 +79,7 @@ public class TestWait extends WebExecutorTestBase {
     Date now = new Date();
 
     // the page should load after 3000
-    selenium.assertHtmlSourceMatch("I am some page content");
+    selenium.assertPageSourceMatch("I am some page content");
     Assert.assertTrue(now.getTime() - before.getTime() >= 3000);
     Assert.assertTrue(now.getTime() - before.getTime() < 12000);
   }

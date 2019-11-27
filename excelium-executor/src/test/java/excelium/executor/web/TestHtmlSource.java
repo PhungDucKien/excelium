@@ -28,9 +28,9 @@ import org.junit.Test;
 
 public class TestHtmlSource extends WebExecutorTestBase {
   @Test
-  public void testHtmlSource() throws Throwable {
+  public void testPageSource() throws Throwable {
     selenium.open("../tests/html/test_html_source.html");
-    selenium.verifyHtmlSourceMatch("^[\\s\\S]*Text is here[\\s\\S]*$");
-    selenium.verifyHtmlSourceNotMatch("^[\\s\\S]*can not be found[\\s\\S]*$");
+    selenium.verifyPageSourceMatch("^[\\s\\S]*Text is here[\\s\\S]*$");
+    selenium.verifyPageSourceNotMatch("^[\\s\\S]*can not be found[\\s\\S]*$");
   }
 }

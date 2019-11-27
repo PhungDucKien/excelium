@@ -129,10 +129,10 @@ public class IOSWebExecutorTest {
         selenium.assertAttribute("css=option:nth-child(3)", "index", "2");
         selenium.assertText("i_am_an_id", "I am a div");
         selenium.assertText("css=#i_am_an_id", "I am a div");
-        selenium.assertHtmlSourceMatch("<html");
-        selenium.assertHtmlSourceMatch("I am a page title");
-        selenium.assertHtmlSourceMatch("i appear 3 times");
-        selenium.assertHtmlSourceMatch("</html>");
+        selenium.assertPageSourceMatch("<html");
+        selenium.assertPageSourceMatch("I am a page title");
+        selenium.assertPageSourceMatch("i appear 3 times");
+        selenium.assertPageSourceMatch("</html>");
         selenium.assertLocationMatch("test/guinea-pig");
         selenium.click("link=i am an anchor link");
         selenium.pause("500");
@@ -320,5 +320,69 @@ public class IOSWebExecutorTest {
         selenium.assertCookieNotPresent("newcookie");
         selenium.assertCookieNotPresent("guineacookie1");
         selenium.assertCookieNotPresent("guineacookie2");
+    }
+
+    @Test
+    public void testExecute() throws Throwable {
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.scrollDown();
+
+        try {
+            selenium.runScript("'nan'--");
+            Assert.fail("Should be rejected");
+        } catch (Exception e) {
+        }
+
+        selenium.assertEvalScript("1 + 1", "2");
+        selenium.assertEvalScript("1+1", "2");
+
+        try {
+            selenium.runScript("return 1+1");
+            Assert.fail("Should be rejected");
+        } catch (Exception e) {
+        }
+
+        selenium.assertEvalScript("document.body.innerHTML.indexOf('I am some page content') > 0", "true");
+        selenium.assertEvalScript("document.body.innerHTML.indexOf('I am not some page content') > 0", "false");
+    }
+
+    @Test
+    public void testNativeTap() throws Throwable {
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.click("link=i am a link to page 3");
+        selenium.waitForTitle("Another Page: page 3");
+        selenium.assertTitle("Another Page: page 3");
+
+        selenium.open("../tests/appium/test/guinea-pig-app-banner.html");
+        selenium.click("link=i am a link to page 3");
+        selenium.waitForTitle("Another Page: page 3");
+        selenium.assertTitle("Another Page: page 3");
+
+        selenium.open("../tests/appium/test/guinea-pig-scrollable.html");
+        selenium.scrollDown();
+        selenium.click("link=i am a link to page 3");
+        selenium.waitForTitle("Another Page: page 3");
+        selenium.assertTitle("Another Page: page 3");
+
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.assertPageSourceNotMatch("Your comments: Hello");
+        selenium.type("css=[name='comments']", "Hello");
+        selenium.click("css=[name='submit']");
+        selenium.pause("1000");
+        selenium.assertPageSourceMatch("Your comments: Hello");
+
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.click("link=i am a new window link");
+        selenium.waitForTitle("I am another page title");
+        selenium.assertTitle("I am another page title");
+
+        selenium.open("../tests/appium/test/guinea-pig.html");
+        selenium.click("link=i am a link to page 3");
+        selenium.waitForTitle("Another Page: page 3");
+        selenium.assertTitle("Another Page: page 3");
+        selenium.goBack();
+        selenium.click("link=i am a link to page 3");
+        selenium.waitForTitle("Another Page: page 3");
+        selenium.assertTitle("Another Page: page 3");
     }
 }

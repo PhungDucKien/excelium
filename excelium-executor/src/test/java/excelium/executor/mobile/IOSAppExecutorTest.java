@@ -98,7 +98,7 @@ public class IOSAppExecutorTest {
     @Test
     public void testDeactivate() throws Throwable {
         Date before = new Date();
-        selenium.runAppInBackground("4000");
+        selenium.runAppInBackground("4");
         Date now = new Date();
         Assert.assertTrue(now.getTime() - before.getTime() >= 4000);
         selenium.assertPageSourceMatch("^.*<AppiumAUT>.*$");
@@ -133,15 +133,15 @@ public class IOSAppExecutorTest {
         selenium.portrait();
         Assert.assertEquals(webDriver.getAppiumDriver().getOrientation(), ScreenOrientation.PORTRAIT);
 
-        selenium.click("Buttons");
-        selenium.click("Button");
+        selenium.tap("Buttons");
+        selenium.tap("Button");
         selenium.goBack();
 
         selenium.landscape();
         Assert.assertEquals(webDriver.getAppiumDriver().getOrientation(), ScreenOrientation.LANDSCAPE);
 
-        selenium.click("Buttons");
-        selenium.click("Button");
+        selenium.tap("Buttons");
+        selenium.tap("Button");
         selenium.goBack();
 
         selenium.portrait();
@@ -171,7 +171,7 @@ public class IOSAppExecutorTest {
     @Test
     public void testContext() throws Throwable {
         selenium.scrollDownTo("Web View");
-        selenium.click("Web View");
+        selenium.tap("Web View");
 
         selenium.waitForContextCount("2");
 
@@ -215,7 +215,7 @@ public class IOSAppExecutorTest {
         String phText = "Placeholder text";
 
         selenium.scrollDownTo("Text Fields");
-        selenium.click("Text Fields");
+        selenium.tap("Text Fields");
 
         selenium.type("class=XCUIElementTypeTextField", text1);
         selenium.assertText("class=XCUIElementTypeTextField", text1);
@@ -288,7 +288,7 @@ public class IOSAppExecutorTest {
         selenium.clear("class=XCUIElementTypeTextField");
 
         // hide keyboard
-        selenium.click("class=XCUIElementTypeTextField");
+        selenium.tap("class=XCUIElementTypeTextField");
         selenium.pause("500");
         selenium.assertVisible("Done");
         selenium.hideKeyboard("Done");
@@ -301,7 +301,7 @@ public class IOSAppExecutorTest {
 
     @Test
     public void testPickerWheel() throws Throwable {
-        selenium.click("Picker View");
+        selenium.tap("Picker View");
         selenium.assertValue("class=XCUIElementTypePickerWheel", "index=1", "65");
         selenium.assertValue("class=XCUIElementTypePickerWheel", "index=2", "205");
         selenium.assertValue("class=XCUIElementTypePickerWheel", "index=3", "120");
@@ -322,9 +322,9 @@ public class IOSAppExecutorTest {
         selenium.assertElementPresent("Buttons");
         selenium.assertElementNotPresent("Buttons", "class=XCUIElementTypeNavigationBar");
 
-        selenium.click("class=XCUIElementTypeTable", "class=XCUIElementTypeStaticText");
+        selenium.tap("class=XCUIElementTypeTable", "class=XCUIElementTypeStaticText");
         selenium.pause("1000");
-        selenium.click("class=XCUIElementTypeTable", "class=XCUIElementTypeStaticText");
+        selenium.tap("class=XCUIElementTypeTable", "class=XCUIElementTypeStaticText");
         selenium.assertAlertPresent();
         selenium.chooseOkAlert();
 
@@ -335,13 +335,13 @@ public class IOSAppExecutorTest {
         selenium.assertElementNotPresent("Alert Views", "index=2");
         selenium.assertAttribute("Alert Views", "label", "Alert Views");
 
-        selenium.click("Buttons");
+        selenium.tap("Buttons");
         selenium.assertElementPresent("Button");
 
         selenium.setTimeout("5000");
         Date before = new Date();
         try {
-            selenium.click("//something_not_there");
+            selenium.tap("//something_not_there");
             Assert.fail("Should be rejected");
         } catch (Exception e) {
         }
@@ -369,7 +369,7 @@ public class IOSAppExecutorTest {
 
         selenium.goBack();
 
-        selenium.click("Accessibility_Id=Alert Views");
+        selenium.tap("Accessibility_Id=Alert Views");
         selenium.assertAttribute("Accessibility_Id=Okay / Cancel", "name", "Okay / Cancel");
         selenium.assertElementNotPresent("Accessibility_Id=Okay / Cancel", "index=2");
 
@@ -377,17 +377,17 @@ public class IOSAppExecutorTest {
 
         selenium.assertElementPresent("class=XCUIElementTypeTable", "Accessibility_Id=Alert Views");
 
-        selenium.click("Image View");
+        selenium.tap("Image View");
         selenium.assertElementPresent("class=XCUIElementTypeImage");
 
         selenium.goBack();
-        selenium.click("Alert Views");
+        selenium.tap("Alert Views");
         selenium.assertElementPresent("Okay / Cancel", "class=XCUIElementTypeStaticText");
 
         selenium.goBack();
 
         selenium.scrollDownTo("Text Fields");
-        selenium.click("Text Fields");
+        selenium.tap("Text Fields");
         selenium.assertElementPresent("class=XCUIElementTypeTextField", "index=4");
         selenium.assertElementNotPresent("class=XCUIElementTypeTextField", "index=5");
         selenium.assertElementPresent("class=XCUIElementTypeSecureTextField", "index=1");
@@ -417,12 +417,12 @@ public class IOSAppExecutorTest {
 
     @Test
     public void testGestures() throws Throwable {
-        selenium.click("Alert Views");
+        selenium.tap("Alert Views");
         selenium.waitForElementPresent("Okay / Cancel");
 
         selenium.tap("Okay / Cancel");
         selenium.assertElementPresent("OK");
-        selenium.click("OK");
+        selenium.tap("OK");
 
         selenium.waitForElementNotPresent("OK");
 
@@ -431,19 +431,19 @@ public class IOSAppExecutorTest {
         int y = element.getLocation().y + element.getSize().height / 2;
         selenium.tapAt(x + "," + y);
         selenium.assertElementPresent("OK");
-        selenium.click("OK");
+        selenium.tap("OK");
 
         selenium.waitForElementNotPresent("OK");
 
         selenium.longPress("Okay / Cancel");
         selenium.assertElementPresent("Cancel");
-        selenium.click("Cancel");
+        selenium.tap("Cancel");
 
         selenium.waitForElementNotPresent("Cancel");
 
         selenium.longPressAt(x + "," + y);
         selenium.assertElementPresent("OK");
-        selenium.click("OK");
+        selenium.tap("OK");
 
         selenium.waitForElementNotPresent("OK");
 
@@ -459,7 +459,7 @@ public class IOSAppExecutorTest {
         selenium.scrollUpTo("Alert Views");
 
         selenium.scrollDown();
-        selenium.click("Steppers");
+        selenium.tap("Steppers");
         selenium.doubleTap("Increment");
         selenium.assertElementPresent("2");
 
@@ -476,7 +476,7 @@ public class IOSAppExecutorTest {
         Assert.assertTrue(yFinal > yMiddle);
 
         selenium.scrollDownTo("Web View");
-        selenium.click("Web View");
+        selenium.tap("Web View");
 
         // at this point this test relies on watching it happen, nothing is asserted
         // in automation, this just checks that errors aren't thrown
@@ -524,35 +524,40 @@ public class IOSAppExecutorTest {
 
     @Test
     public void testAlert() throws Throwable {
-        selenium.click("Alert Views");
+        selenium.tap("Alert Views");
         selenium.assertElementPresent("Simple");
 
-        selenium.click("Simple");
+        selenium.tap("Simple");
         selenium.waitForAlertPresent();
         selenium.assertAlertMatch("^.*A Short Title Is Best.*$");
         selenium.chooseOkAlert();
+        selenium.waitForAlertNotPresent();
 
-        selenium.click("Okay / Cancel");
+        selenium.tap("Okay / Cancel");
         selenium.waitForConfirmationPresent();
         selenium.assertConfirmationMatch("^.*A Short Title Is Best.*$");
         selenium.chooseOkConfirmation();
+        selenium.waitForConfirmationNotPresent();
 
-        selenium.click("Other");
+        selenium.tap("Other");
         selenium.waitForConfirmationPresent();
         selenium.assertConfirmationMatch("^.*A Short Title Is Best.*$");
         selenium.chooseOkConfirmation();
+        selenium.waitForConfirmationNotPresent();
 
-        selenium.click("Text Entry");
+        selenium.tap("Text Entry");
         selenium.waitForPromptPresent();
         selenium.type("class=XCUIElementTypeTextField", "hello world");
         selenium.assertText("class=XCUIElementTypeTextField", "hello world");
         selenium.answerPrompt("");
+        selenium.waitForPromptNotPresent();
 
-        selenium.click("Secure Text Entry");
+        selenium.tap("Secure Text Entry");
         selenium.waitForPromptPresent();
         selenium.type("class=XCUIElementTypeSecureTextField", "hello world");
         selenium.assertText("class=XCUIElementTypeSecureTextField", "•••••••••••");
         selenium.answerPrompt("");
+        selenium.waitForPromptNotPresent();
 
         try {
             selenium.chooseOkAlert();
