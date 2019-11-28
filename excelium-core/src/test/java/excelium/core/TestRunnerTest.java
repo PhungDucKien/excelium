@@ -104,6 +104,7 @@ public class TestRunnerTest {
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
             webDriver.isWebApp(); result = true;
+            webDriver.getWebDriver(); result = driver;
         }};
 
         new MockUp<CommandFactory>() {
@@ -183,6 +184,7 @@ public class TestRunnerTest {
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
             webDriver.isWebApp(); result = true;
+            webDriver.getWebDriver(); result = driver;
         }};
 
         new MockUp<CommandFactory>() {
@@ -249,6 +251,7 @@ public class TestRunnerTest {
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
             webDriver.isWebApp(); result = true;
+            webDriver.getWebDriver(); result = driver;
         }};
 
         new MockUp<CommandFactory>() {
@@ -359,6 +362,7 @@ public class TestRunnerTest {
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
             webDriver.isWebApp(); result = true;
+            webDriver.getWebDriver(); result = driver;
         }};
 
         new MockUp<CommandFactory>() {
@@ -467,6 +471,7 @@ public class TestRunnerTest {
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
             webDriver.isWebApp(); result = true;
+            webDriver.getWebDriver(); result = driver;
         }};
 
         new MockUp<CommandFactory>() {
@@ -623,6 +628,7 @@ public class TestRunnerTest {
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
             webDriver.isWebApp(); result = true;
+            webDriver.getWebDriver(); result = driver;
         }};
 
         new MockUp<CommandFactory>() {
@@ -893,6 +899,7 @@ public class TestRunnerTest {
         new Expectations() {{
             driverFactory.createDriver((Environment) any, (Project) any); result = driver;
             webDriver.isWebApp(); result = true;
+            webDriver.getWebDriver(); result = driver;
         }};
 
         new MockUp<CommandFactory>() {

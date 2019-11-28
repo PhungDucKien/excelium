@@ -32,6 +32,7 @@ import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.MobileAppEnvironment;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.*;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
@@ -48,6 +49,8 @@ public class IOSAppExecutorTest {
     protected static MobileExcelium selenium;
 
     protected static Project project;
+
+    protected static boolean isRealDevice;
 
     @BeforeClass
     public static void initializeServer() {
@@ -71,7 +74,16 @@ public class IOSAppExecutorTest {
     public static void beforeClass() throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         MobileAppEnvironment environment = new MobileAppEnvironment();
         environment.setPlatform(Platform.IOS);
-        environment.setBundleId("com.vn.altplus.UICatalog");
+
+        String udid = System.getenv("TEST_DEVICE_UDID");
+        environment.setUdid(udid);
+        if (StringUtils.isBlank(udid) || udid.equalsIgnoreCase("auto")) {
+            environment.setBundleId("com.vn.altplus.UICatalog");
+            isRealDevice = true;
+        } else {
+            environment.setAppPath("ios-uicatalog/UICatalog/build/Release-iphonesimulator/UICatalog-iphonesimulator.app");
+            isRealDevice = false;
+        }
 
         project = new Project();
         project.setAppPath(Paths.get("src/test/resources"));
@@ -155,13 +167,16 @@ public class IOSAppExecutorTest {
 
     @Test
     public void testGeoLocation() throws Throwable {
-        selenium.setGeolocation("30.0001,21.0002,10");
+        if (!isRealDevice) {
+            selenium.setGeolocation("30.0001,21.0002,10");
+        }
     }
 
-    @Ignore("Shake is not supported on real devices")
     @Test
     public void testShake() throws Throwable {
-        selenium.shake();
+        if (!isRealDevice) {
+            selenium.shake();
+        }
     }
 
     @Test

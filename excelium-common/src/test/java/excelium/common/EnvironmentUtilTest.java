@@ -68,14 +68,14 @@ public class EnvironmentUtilTest {
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Browser.CHROME, ((MobileWebEnvironment) environments.get(0)).getBrowser());
         Assert.assertEquals(Platform.ANDROID, environments.get(0).getPlatform());
-        Assert.assertEquals("Android Emulator", ((MobileWebEnvironment) environments.get(0)).getDeviceName());
+        Assert.assertEquals("Android", ((MobileWebEnvironment) environments.get(0)).getDeviceName());
         Assert.assertEquals("Portrait", ((MobileWebEnvironment) environments.get(0)).getOrientation());
 
         environments = EnvironmentUtil.getAvailableMobileWebEnvironments(Platform.IOS, null, null, null, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Browser.SAFARI, ((MobileWebEnvironment) environments.get(0)).getBrowser());
         Assert.assertEquals(Platform.IOS, environments.get(0).getPlatform());
-        Assert.assertEquals("iPhone Simulator", ((MobileWebEnvironment) environments.get(0)).getDeviceName());
+        Assert.assertEquals("iPhone", ((MobileWebEnvironment) environments.get(0)).getDeviceName());
         Assert.assertEquals("Portrait", ((MobileWebEnvironment) environments.get(0)).getOrientation());
     }
 
@@ -84,13 +84,13 @@ public class EnvironmentUtilTest {
         List<Environment> environments = EnvironmentUtil.getAvailableMobileAppEnvironments(Platform.ANDROID, null, null, null, null, null, null, null, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Platform.ANDROID, environments.get(0).getPlatform());
-        Assert.assertEquals("Android Emulator", ((MobileAppEnvironment) environments.get(0)).getDeviceName());
+        Assert.assertEquals("Android", ((MobileAppEnvironment) environments.get(0)).getDeviceName());
         Assert.assertEquals("Portrait", ((MobileAppEnvironment) environments.get(0)).getOrientation());
 
         environments = EnvironmentUtil.getAvailableMobileAppEnvironments(Platform.IOS, null, null, null, null, null, null, null, null, null, null);
         Assert.assertEquals(1, environments.size());
         Assert.assertEquals(Platform.IOS, environments.get(0).getPlatform());
-        Assert.assertEquals("iPhone Simulator", ((MobileAppEnvironment) environments.get(0)).getDeviceName());
+        Assert.assertEquals("iPhone", ((MobileAppEnvironment) environments.get(0)).getDeviceName());
         Assert.assertEquals("Portrait", ((MobileAppEnvironment) environments.get(0)).getOrientation());
     }
 }

@@ -32,6 +32,7 @@ import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.MobileWebEnvironment;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.*;
 
 import java.nio.file.Paths;
@@ -44,6 +45,8 @@ public class IOSWebExecutorTest {
     protected static WebExcelium selenium;
 
     protected static Project project;
+
+    protected static boolean isRealDevice;
 
     @BeforeClass
     public static void initializeServer() {
@@ -64,13 +67,27 @@ public class IOSWebExecutorTest {
         environment.setPlatform(Platform.IOS);
         environment.setBrowser(Browser.SAFARI);
 
+        String udid = System.getenv("TEST_DEVICE_UDID");
+        environment.setUdid(udid);
+        if (StringUtils.isBlank(udid) || udid.equalsIgnoreCase("auto")) {
+            isRealDevice = true;
+        } else {
+            isRealDevice = false;
+        }
+
         project = new Project();
         project.setScreenshotPath(Paths.get("screenshot"));
         webDriver = DriverPool.getInstance().getDriver(environment, project);
         selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
 
-        selenium.assertLocation("http://appium.io/");
-        selenium.assertTitle("Appium: Mobile App Automation Made Awesome.");
+        if (isRealDevice) {
+            selenium.assertLocation("http://appium.io/");
+            selenium.assertTitle("Appium: Mobile App Automation Made Awesome.");
+        } else {
+            selenium.assertLocationMatch("/welcome");
+            selenium.assertTitle("Appium/welcome");
+            selenium.assertTextPresent("Let's browse!");
+        }
     }
 
     @AfterClass
