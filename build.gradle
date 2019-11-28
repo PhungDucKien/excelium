@@ -3,6 +3,8 @@ plugins {
 }
 
 allprojects {
+    apply plugin: 'jacoco'
+    
     repositories {
         mavenCentral()
     }
@@ -27,6 +29,44 @@ subprojects {
 
         testCompile group: 'org.jmockit', name: 'jmockit', version: '1.39'
         testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+
+    jacocoTestReport {
+        additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+        sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+        classDirectories =  files(sourceSets.main.output)
+        reports {
+            html.enabled = true
+            xml.enabled = true
+            csv.enabled = false
+        }
+        afterEvaluate {
+            classDirectories = files(classDirectories.files.collect {
+                fileTree(dir: it,
+                        exclude: ['**/MobileExcelium.class',
+                                  '**/WebExcelium.class'])
+            })
+        }
+    }
+}
+
+task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+    dependsOn = subprojects.test
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories =  files(subprojects.sourceSets.main.output)
+    executionData = files(subprojects.jacocoTestReport.executionData)
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['**/MobileExcelium.class',
+                              '**/WebExcelium.class'])
+        })
     }
 }
 
