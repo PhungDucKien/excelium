@@ -28,6 +28,7 @@ import excelium.cli.annotation.Command;
 import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
 import excelium.core.database.DatabaseService;
+import excelium.core.database.DatabaseServiceFactory;
 import excelium.generator.ProjectGenerator;
 import excelium.model.enums.DataSourceType;
 import excelium.model.project.DataSource;
@@ -86,8 +87,8 @@ public class DataSourceController extends BaseController {
         dataSource.setUserName(userName);
         dataSource.setPassword(password);
 
-        DatabaseService databaseService = new DatabaseService(project);
-        boolean isConnectible = databaseService.testConnection(dataSource);
+        DatabaseService databaseService = DatabaseServiceFactory.createService(dataSource);
+        boolean isConnectible = databaseService.testConnection();
 
         if (isConnectible) {
             String dataSourceName = promptInput("Enter the name of the data source", databaseName);

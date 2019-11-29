@@ -49,7 +49,6 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -145,15 +144,9 @@ public class TestRunner {
     /**
      * Run all tests on all environments.
      *
-     * @throws IOException               the io exception
-     * @throws SQLException              the sql exception
-     * @throws ClassNotFoundException    the class not found exception
-     * @throws NoSuchMethodException     the no such method exception
-     * @throws InstantiationException    the instantiation exception
-     * @throws IllegalAccessException    the illegal access exception
-     * @throws InvocationTargetException the invocation target exception
+     * @throws Exception the exception
      */
-    public void runAll() throws IOException, SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+    public void runAll() throws Exception {
         testReporter.startTest(test);
         testStepResultMap = new HashMap<>();
         testFlows = new ArrayList<>();
@@ -166,15 +159,9 @@ public class TestRunner {
      * Run all tests on an environment.
      *
      * @param environment the environment
-     * @throws IOException               the io exception
-     * @throws SQLException              the sql exception
-     * @throws ClassNotFoundException    the class not found exception
-     * @throws InvocationTargetException the invocation target exception
-     * @throws NoSuchMethodException     the no such method exception
-     * @throws InstantiationException    the instantiation exception
-     * @throws IllegalAccessException    the illegal access exception
+     * @throws Exception the exception
      */
-    private void runEnvironment(Environment environment) throws IOException, SQLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    private void runEnvironment(Environment environment) throws Exception {
         setEnvironment(environment);
         try {
             webDriver = DriverPool.getInstance().getDriver(this);
@@ -197,9 +184,9 @@ public class TestRunner {
      * Run a test suite.
      *
      * @param testSuite the test suite
-     * @throws IOException the io exception
+     * @throws Exception the exception
      */
-    private void runTestSuite(TestSuite testSuite) throws IOException, SQLException, ClassNotFoundException {
+    private void runTestSuite(TestSuite testSuite) throws Exception {
         setTestSuite(testSuite);
         for (TestCase testCase : testSuite.getTestCases()) {
             runTestFlow(testCase, true);
@@ -211,9 +198,9 @@ public class TestRunner {
      *
      * @param testFlow the test flow
      * @return Result of the flow
-     * @throws IOException the io exception
+     * @throws Exception the exception
      */
-    private Result runTestFlow(TestFlow testFlow, boolean cleanDriver) throws IOException, SQLException, ClassNotFoundException {
+    private Result runTestFlow(TestFlow testFlow, boolean cleanDriver) throws Exception {
         Result flowResult = Result.OK;
         try {
             if (cleanDriver) {
@@ -249,9 +236,9 @@ public class TestRunner {
      * @param testStep    test step
      * @param writeResult should write the result to the workbook
      * @return Result of the step
-     * @throws IOException the io exception
+     * @throws Exception the exception
      */
-    private StepResult runTestStep(TestStep testStep, boolean writeResult) throws IOException, SQLException, ClassNotFoundException {
+    private StepResult runTestStep(TestStep testStep, boolean writeResult) throws Exception {
         this.testStep = testStep;
         String methodName = StringUtils.uncapitalize(StringUtils.remove(WordUtils.capitalizeFully(testStep.getCommand()), " "));
         Command command = excelium.getCurrentCommandContext().getCommandMap().get(methodName + "(" + countParam(testStep) + ")");

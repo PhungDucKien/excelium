@@ -29,6 +29,7 @@ import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.database.DatabaseService;
+import excelium.core.database.DatabaseServiceFactory;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.exception.AssertFailedException;
 import excelium.model.project.Project;
@@ -56,7 +57,7 @@ public class DatabaseCommandExecutor extends CommandExecutor {
      */
     public DatabaseCommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
         super(webDriver, baseUrl, excelium, project);
-        databaseService = new DatabaseService(project);
+        databaseService = DatabaseServiceFactory.createService(project);
     }
 
     /**

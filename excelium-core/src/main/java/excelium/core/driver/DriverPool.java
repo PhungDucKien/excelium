@@ -26,6 +26,7 @@ package excelium.core.driver;
 
 import excelium.core.TestRunner;
 import excelium.core.database.DatabaseService;
+import excelium.core.database.DatabaseServiceFactory;
 import excelium.core.screenshot.ScreenshotService;
 import excelium.model.project.Project;
 import excelium.model.test.config.Environment;
@@ -62,7 +63,7 @@ public class DriverPool {
 
     public ContextAwareWebDriver getDriver(TestRunner testRunner) throws IOException {
         RemoteWebDriver webDriver = getInnerDriver(testRunner.getEnvironment(), testRunner.getProject());
-        DatabaseService databaseService = new DatabaseService(testRunner.getProject());
+        DatabaseService databaseService = DatabaseServiceFactory.createService(testRunner.getProject());
         ScreenshotService screenshotService = new ScreenshotService(testRunner);
 
         return new ContextAwareWebDriver(webDriver, databaseService, screenshotService);
@@ -70,7 +71,7 @@ public class DriverPool {
 
     public ContextAwareWebDriver getDriver(Environment environment, Project project) throws IOException {
         RemoteWebDriver webDriver = getInnerDriver(environment, project);
-        DatabaseService databaseService = new DatabaseService(project);
+        DatabaseService databaseService = DatabaseServiceFactory.createService(project);
         ScreenshotService screenshotService = new ScreenshotService(environment, project);
 
         return new ContextAwareWebDriver(webDriver, databaseService, screenshotService);

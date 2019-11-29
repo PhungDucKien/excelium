@@ -29,6 +29,7 @@ import de.codeshelf.consoleui.prompt.ConsolePrompt;
 import de.codeshelf.consoleui.prompt.InputResult;
 import de.codeshelf.consoleui.prompt.ListResult;
 import excelium.core.database.DatabaseService;
+import excelium.core.database.DatabaseServiceFactory;
 import excelium.generator.ProjectGenerator;
 import excelium.model.enums.DataSourceType;
 import excelium.model.project.DataSource;
@@ -68,8 +69,15 @@ public class DataSourceControllerTest {
         Project project = new Project();
         Deencapsulation.setField(dataSourceController, project);
 
+        new MockUp<DatabaseServiceFactory>(){
+            @Mock
+            public DatabaseService createService(DataSource dataSource) {
+                return databaseService;
+            }
+        };
+
         new Expectations() {{
-            databaseService.testConnection((DataSource) any); result = true;
+            databaseService.testConnection(); result = true;
 
             consolePrompt.prompt((List<PromptableElementIF>) any);
             returns(new HashMap<String, ListResult>() {{ put("", new ListResult("MySQL")); }},
@@ -101,8 +109,15 @@ public class DataSourceControllerTest {
         Project project = new Project();
         Deencapsulation.setField(dataSourceController, project);
 
+        new MockUp<DatabaseServiceFactory>(){
+            @Mock
+            public DatabaseService createService(DataSource dataSource) {
+                return databaseService;
+            }
+        };
+
         new Expectations() {{
-            databaseService.testConnection((DataSource) any); result = true;
+            databaseService.testConnection(); result = true;
 
             consolePrompt.prompt((List<PromptableElementIF>) any);
             returns(new HashMap<String, ListResult>() {{ put("", new ListResult("MySQL")); }},

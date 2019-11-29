@@ -43,12 +43,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Tests for {@link DatabaseService}.
+ * Tests for {@link SQLDatabaseService}.
  *
  * @author PhungDucKien
  * @since 2018.05.26
  */
-public class DatabaseServiceTest {
+public class SQLDatabaseServiceTest {
 
     private static DataSource mysqlDataSource;
     private static DataSource postgresDataSource;
@@ -72,8 +72,8 @@ public class DatabaseServiceTest {
 
     @Test
     public void testTestConnection() {
-        DatabaseService databaseService = new DatabaseService(null);
-        Assert.assertTrue(databaseService.testConnection(mysqlDataSource));
+        DatabaseService databaseService = DatabaseServiceFactory.createService(mysqlDataSource);
+        Assert.assertTrue(databaseService.testConnection());
 
         DataSource falseDataSource = new DataSource();
         falseDataSource.setType(DataSourceType.MYSQL);
@@ -81,7 +81,8 @@ public class DatabaseServiceTest {
         falseDataSource.setUrl(DataSourceType.MYSQL.getUrl("localhost", "3306", "exceliumdb"));
         falseDataSource.setUserName("root");
         falseDataSource.setPassword("1234567");
-        Assert.assertFalse(databaseService.testConnection(falseDataSource));
+        databaseService = DatabaseServiceFactory.createService(falseDataSource);
+        Assert.assertFalse(databaseService.testConnection());
     }
 
     @Test
@@ -92,7 +93,7 @@ public class DatabaseServiceTest {
         project.setDefaultDataSource("default");
         project.setDataSources(dataSourceMap);
 
-        DatabaseService databaseService = new DatabaseService(project);
+        SQLDatabaseService databaseService = (SQLDatabaseService) DatabaseServiceFactory.createService(project);
         databaseService.executeSql(Paths.get(getClass().getClassLoader().getResource("db-init.sql").getPath()));
     }
 
@@ -104,7 +105,7 @@ public class DatabaseServiceTest {
         project.setDefaultDataSource("default");
         project.setDataSources(dataSourceMap);
 
-        DatabaseService databaseService = new DatabaseService(project);
+        SQLDatabaseService databaseService = (SQLDatabaseService) DatabaseServiceFactory.createService(project);
         databaseService.executeSql(Paths.get(getClass().getClassLoader().getResource("db-init.sql").getPath()));
 
         Assert.assertEquals(2, databaseService.count("FROM users"));
@@ -128,7 +129,7 @@ public class DatabaseServiceTest {
         project.setDefaultDataSource("default");
         project.setDataSources(dataSourceMap);
 
-        DatabaseService databaseService = new DatabaseService(project);
+        SQLDatabaseService databaseService = (SQLDatabaseService) DatabaseServiceFactory.createService(project);
         databaseService.executeSql(Paths.get(getClass().getClassLoader().getResource("db-init.sql").getPath()));
 
         List<TableData> tableDataList = new ArrayList<>();
@@ -180,7 +181,7 @@ public class DatabaseServiceTest {
         project.setDefaultDataSource("default");
         project.setDataSources(dataSourceMap);
 
-        DatabaseService databaseService = new DatabaseService(project);
+        SQLDatabaseService databaseService = (SQLDatabaseService) DatabaseServiceFactory.createService(project);
         databaseService.executeSql(Paths.get(getClass().getClassLoader().getResource("db-init.sql").getPath()));
 
         List<TableData> tableDataList = new ArrayList<>();
@@ -232,7 +233,7 @@ public class DatabaseServiceTest {
         project.setDefaultDataSource("default");
         project.setDataSources(dataSourceMap);
 
-        DatabaseService databaseService = new DatabaseService(project);
+        SQLDatabaseService databaseService = (SQLDatabaseService) DatabaseServiceFactory.createService(project);
         databaseService.executeSql(Paths.get(getClass().getClassLoader().getResource("db-init.sql").getPath()));
 
         List<TableData> tableDataList = new ArrayList<>();
@@ -284,7 +285,7 @@ public class DatabaseServiceTest {
         project.setDefaultDataSource("default");
         project.setDataSources(dataSourceMap);
 
-        DatabaseService databaseService = new DatabaseService(project);
+        SQLDatabaseService databaseService = (SQLDatabaseService) DatabaseServiceFactory.createService(project);
         databaseService.executeSql(Paths.get(getClass().getClassLoader().getResource("db-init.sql").getPath()));
 
         List<TableData> tableDataList = new ArrayList<>();
@@ -336,7 +337,7 @@ public class DatabaseServiceTest {
         project.setDefaultDataSource("default");
         project.setDataSources(dataSourceMap);
 
-        DatabaseService databaseService = new DatabaseService(project);
+        SQLDatabaseService databaseService = (SQLDatabaseService) DatabaseServiceFactory.createService(project);
         databaseService.executeSql(Paths.get(getClass().getClassLoader().getResource("db-init.sql").getPath()));
 
         List<TableData> tableDataList = new ArrayList<>();
