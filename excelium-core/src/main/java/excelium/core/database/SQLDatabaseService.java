@@ -30,6 +30,7 @@ import excelium.model.test.data.Column;
 import excelium.model.test.data.TableData;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -140,6 +141,52 @@ public class SQLDatabaseService implements DatabaseService {
 
         try (Connection connection = getConnection(dataSource);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (countSql) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } else {
+                if (rs.last()) {
+                    return rs.getRow();
+                }
+            }
+            return 0;
+        }
+    }
+
+    /**
+     * Executes the given SQL query and return the count.
+     *
+     * @param sql    the SQL query
+     * @param values the values to bind
+     * @return the count
+     * @throws SQLException           the sql exception
+     * @throws ClassNotFoundException the class not found exception
+     */
+    @Override
+    public int count(String sql, String values) throws SQLException, ClassNotFoundException {
+        boolean countSql;
+        if (sql.trim().toUpperCase().startsWith("FROM ")) {
+            sql = "SELECT count(*) " + sql;
+            countSql = true;
+        } else if (sql.trim().toUpperCase().startsWith("SELECT ")) {
+            countSql = false;
+        } else {
+            throw new SQLSyntaxErrorException("Invalid SQL Statement. SQL = " + sql);
+        }
+
+        try (Connection connection = getConnection(dataSource);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            Yaml yaml = new Yaml();
+            Map<String, Object> obj = yaml.load(values);
+            int i = 1;
+            for (String key : obj.keySet()) {
+                preparedStatement.setObject(i, obj.get(key));
+                i++;
+            }
+
             ResultSet rs = preparedStatement.executeQuery();
 
             if (countSql) {

@@ -119,6 +119,14 @@ public class SQLDatabaseServiceTest {
         Assert.assertEquals(0, databaseService.count("FROM users WHERE name='moderator'"));
         Assert.assertEquals(0, databaseService.count("SELECT * FROM users WHERE name='moderator'"));
         Assert.assertEquals(1, databaseService.count("SELECT count(*) FROM users WHERE name='moderator'"));
+
+        Assert.assertEquals(1, databaseService.count("FROM users WHERE name=?", "name: user"));
+        Assert.assertEquals(1, databaseService.count("SELECT * FROM users WHERE name=?", "name: user"));
+        Assert.assertEquals(1, databaseService.count("SELECT count(*) FROM users WHERE name=?", "name: user"));
+
+        Assert.assertEquals(0, databaseService.count("FROM users WHERE name=?", "name: moderator"));
+        Assert.assertEquals(0, databaseService.count("SELECT * FROM users WHERE name=?", "name: moderator"));
+        Assert.assertEquals(1, databaseService.count("SELECT count(*) FROM users WHERE name=?", "name: moderator"));
     }
 
     @Test

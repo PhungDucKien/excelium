@@ -412,8 +412,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertEvalScriptNotMatch", script, text, null);
     }
 
-    public void assertExistsInDatabase(String sql) throws Throwable {
-        runCommand("assertExistsInDatabase", sql, null, null);
+    public void assertExistsInDatabase(String query) throws Throwable {
+        runCommand("assertExistsInDatabase", query, null, null);
+    }
+
+    public void assertExistsInDatabase(String query, String values) throws Throwable {
+        runCommand("assertExistsInDatabase", query, values, null);
     }
 
     public void assertExpression(String expression, String text) throws Throwable {
@@ -744,8 +748,12 @@ public class WebExcelium extends Excelium {
         runCommand("assertNotEvalScript", script, text, null);
     }
 
-    public void assertNotExistsInDatabase(String sql) throws Throwable {
-        runCommand("assertNotExistsInDatabase", sql, null, null);
+    public void assertNotExistsInDatabase(String query) throws Throwable {
+        runCommand("assertNotExistsInDatabase", query, null, null);
+    }
+
+    public void assertNotExistsInDatabase(String query, String values) throws Throwable {
+        runCommand("assertNotExistsInDatabase", query, values, null);
     }
 
     public void assertNotExpression(String expression, String text) throws Throwable {
@@ -1040,16 +1048,28 @@ public class WebExcelium extends Excelium {
         runCommand("assertQRNotMatch", parentLocator, locator, text);
     }
 
-    public void assertRowCount(String sql, String count) throws Throwable {
-        runCommand("assertRowCount", sql, count, null);
+    public void assertRowCount(String query, String count) throws Throwable {
+        runCommand("assertRowCount", query, count, null);
     }
 
-    public void assertRowCountGreaterThan(String sql, String count) throws Throwable {
-        runCommand("assertRowCountGreaterThan", sql, count, null);
+    public void assertRowCount(String query, String values, String count) throws Throwable {
+        runCommand("assertRowCount", query, values, count);
     }
 
-    public void assertRowCountLessThan(String sql, String count) throws Throwable {
-        runCommand("assertRowCountLessThan", sql, count, null);
+    public void assertRowCountGreaterThan(String query, String count) throws Throwable {
+        runCommand("assertRowCountGreaterThan", query, count, null);
+    }
+
+    public void assertRowCountGreaterThan(String query, String values, String count) throws Throwable {
+        runCommand("assertRowCountGreaterThan", query, values, count);
+    }
+
+    public void assertRowCountLessThan(String query, String count) throws Throwable {
+        runCommand("assertRowCountLessThan", query, count, null);
+    }
+
+    public void assertRowCountLessThan(String query, String values, String count) throws Throwable {
+        runCommand("assertRowCountLessThan", query, values, count);
     }
 
     public void assertSelectOptions(String locator, String text) throws Throwable {
@@ -1820,8 +1840,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfEvalScriptNotMatch", action, script, text);
     }
 
-    public void executeIfExistsInDatabase(String action, String sql) throws Throwable {
-        runCommand("executeIfExistsInDatabase", action, sql, null);
+    public void executeIfExistsInDatabase(String action, String query) throws Throwable {
+        runCommand("executeIfExistsInDatabase", action, query, null);
+    }
+
+    public void executeIfExistsInDatabase(String action, String query, String values) throws Throwable {
+        runCommand("executeIfExistsInDatabase", action, query, values);
     }
 
     public void executeIfExpression(String action, String expression, String text) throws Throwable {
@@ -1912,8 +1936,12 @@ public class WebExcelium extends Excelium {
         runCommand("executeIfNotEvalScript", action, script, text);
     }
 
-    public void executeIfNotExistsInDatabase(String action, String sql) throws Throwable {
-        runCommand("executeIfNotExistsInDatabase", action, sql, null);
+    public void executeIfNotExistsInDatabase(String action, String query) throws Throwable {
+        runCommand("executeIfNotExistsInDatabase", action, query, null);
+    }
+
+    public void executeIfNotExistsInDatabase(String action, String query, String values) throws Throwable {
+        runCommand("executeIfNotExistsInDatabase", action, query, values);
     }
 
     public void executeIfNotExpression(String action, String expression, String text) throws Throwable {
@@ -3260,8 +3288,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyEvalScriptNotMatch", script, text, null);
     }
 
-    public void verifyExistsInDatabase(String sql) throws Throwable {
-        runCommand("verifyExistsInDatabase", sql, null, null);
+    public void verifyExistsInDatabase(String query) throws Throwable {
+        runCommand("verifyExistsInDatabase", query, null, null);
+    }
+
+    public void verifyExistsInDatabase(String query, String values) throws Throwable {
+        runCommand("verifyExistsInDatabase", query, values, null);
     }
 
     public void verifyExpression(String expression, String text) throws Throwable {
@@ -3592,8 +3624,12 @@ public class WebExcelium extends Excelium {
         runCommand("verifyNotEvalScript", script, text, null);
     }
 
-    public void verifyNotExistsInDatabase(String sql) throws Throwable {
-        runCommand("verifyNotExistsInDatabase", sql, null, null);
+    public void verifyNotExistsInDatabase(String query) throws Throwable {
+        runCommand("verifyNotExistsInDatabase", query, null, null);
+    }
+
+    public void verifyNotExistsInDatabase(String query, String values) throws Throwable {
+        runCommand("verifyNotExistsInDatabase", query, values, null);
     }
 
     public void verifyNotExpression(String expression, String text) throws Throwable {
@@ -3888,16 +3924,28 @@ public class WebExcelium extends Excelium {
         runCommand("verifyQRNotMatch", parentLocator, locator, text);
     }
 
-    public void verifyRowCount(String sql, String count) throws Throwable {
-        runCommand("verifyRowCount", sql, count, null);
+    public void verifyRowCount(String query, String count) throws Throwable {
+        runCommand("verifyRowCount", query, count, null);
     }
 
-    public void verifyRowCountGreaterThan(String sql, String count) throws Throwable {
-        runCommand("verifyRowCountGreaterThan", sql, count, null);
+    public void verifyRowCount(String query, String values, String count) throws Throwable {
+        runCommand("verifyRowCount", query, values, count);
     }
 
-    public void verifyRowCountLessThan(String sql, String count) throws Throwable {
-        runCommand("verifyRowCountLessThan", sql, count, null);
+    public void verifyRowCountGreaterThan(String query, String count) throws Throwable {
+        runCommand("verifyRowCountGreaterThan", query, count, null);
+    }
+
+    public void verifyRowCountGreaterThan(String query, String values, String count) throws Throwable {
+        runCommand("verifyRowCountGreaterThan", query, values, count);
+    }
+
+    public void verifyRowCountLessThan(String query, String count) throws Throwable {
+        runCommand("verifyRowCountLessThan", query, count, null);
+    }
+
+    public void verifyRowCountLessThan(String query, String values, String count) throws Throwable {
+        runCommand("verifyRowCountLessThan", query, values, count);
     }
 
     public void verifySelectOptions(String locator, String text) throws Throwable {
@@ -4528,8 +4576,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForEvalScriptNotMatch", script, text, null);
     }
 
-    public void waitForExistsInDatabase(String sql) throws Throwable {
-        runCommand("waitForExistsInDatabase", sql, null, null);
+    public void waitForExistsInDatabase(String query) throws Throwable {
+        runCommand("waitForExistsInDatabase", query, null, null);
+    }
+
+    public void waitForExistsInDatabase(String query, String values) throws Throwable {
+        runCommand("waitForExistsInDatabase", query, values, null);
     }
 
     public void waitForExpression(String expression, String text) throws Throwable {
@@ -4616,8 +4668,12 @@ public class WebExcelium extends Excelium {
         runCommand("waitForNotEvalScript", script, text, null);
     }
 
-    public void waitForNotExistsInDatabase(String sql) throws Throwable {
-        runCommand("waitForNotExistsInDatabase", sql, null, null);
+    public void waitForNotExistsInDatabase(String query) throws Throwable {
+        runCommand("waitForNotExistsInDatabase", query, null, null);
+    }
+
+    public void waitForNotExistsInDatabase(String query, String values) throws Throwable {
+        runCommand("waitForNotExistsInDatabase", query, values, null);
     }
 
     public void waitForNotExpression(String expression, String text) throws Throwable {

@@ -61,63 +61,128 @@ public class DatabaseCommandExecutor extends CommandExecutor {
     }
 
     /**
-     * Check if any row would be returned by given the input SQL statement.
+     * Check if any row would be returned by the given input query statement.
      *
-     * @param sql the sql
+     * @param query the query
      * @return the boolean
      * @throws Exception the exception
      */
-    @Accessor(param1 = "sql")
-    public boolean isExistsInDatabase(String sql) throws Exception {
-        int rowCount = this.databaseService.count(sql);
+    @Accessor(param1 = "query")
+    public boolean isExistsInDatabase(String query) throws Exception {
+        int rowCount = this.databaseService.count(query);
         return rowCount > 0;
     }
 
     /**
-     * Check if the number of rows returned from selectStatement is equal to the value submitted.
+     * Check if any row would be returned by the given input query statement.
      *
-     * @param sql   the sql
+     * @param query  the query
+     * @param values the values to bind
+     * @return the boolean
+     * @throws Exception the exception
+     */
+    @Accessor(param1 = "query", param2 = "values")
+    public boolean isExistsInDatabase(String query, String values) throws Exception {
+        int rowCount = this.databaseService.count(query, values);
+        return rowCount > 0;
+    }
+
+    /**
+     * Check if the number of rows returned by the given input query statement is equal to the value submitted.
+     *
+     * @param query the query
      * @param count the count
      * @throws Exception the exception
      */
-    @Action(param1 = "sql", param2 = "count")
-    public void verifyRowCount(String sql, String count) throws Exception {
-        int rowCount = this.databaseService.count(sql);
+    @Action(param1 = "query", param2 = "count")
+    public void verifyRowCount(String query, String count) throws Exception {
+        int rowCount = this.databaseService.count(query);
         int expectedRowCount = Integer.parseInt(count);
         if (rowCount != expectedRowCount) {
-            throw new AssertFailedException("Expected to have " + expectedRowCount + " rows from '" + sql + "' but got " + rowCount + " rows.");
+            throw new AssertFailedException("Expected to have " + expectedRowCount + " rows from '" + query + "' but got " + rowCount + " rows.");
         }
     }
 
     /**
-     * Check if the number of rows returned from selectStatement is greater than the value submitted.
+     * Check if the number of rows returned by the given input query statement is greater than the value submitted.
      *
-     * @param sql   the sql
+     * @param query the query
      * @param count the count
      * @throws Exception the exception
      */
-    @Action(param1 = "sql", param2 = "count")
-    public void verifyRowCountGreaterThan(String sql, String count) throws Exception {
-        int rowCount = this.databaseService.count(sql);
+    @Action(param1 = "query", param2 = "count")
+    public void verifyRowCountGreaterThan(String query, String count) throws Exception {
+        int rowCount = this.databaseService.count(query);
         int expectedRowCount = Integer.parseInt(count);
         if (rowCount < expectedRowCount) {
-            throw new AssertFailedException("Expected to have more than " + expectedRowCount + " rows from '" + sql + "' but got " + rowCount + " rows.");
+            throw new AssertFailedException("Expected to have more than " + expectedRowCount + " rows from '" + query + "' but got " + rowCount + " rows.");
         }
     }
 
     /**
-     * Check if the number of rows returned from selectStatement is less than the value submitted.
+     * Check if the number of rows returned by the given input query statement is less than the value submitted.
      *
-     * @param sql   the sql
+     * @param query the query
      * @param count the count
      * @throws Exception the exception
      */
-    @Action(param1 = "sql", param2 = "count")
-    public void verifyRowCountLessThan(String sql, String count) throws Exception {
-        int rowCount = this.databaseService.count(sql);
+    @Action(param1 = "query", param2 = "count")
+    public void verifyRowCountLessThan(String query, String count) throws Exception {
+        int rowCount = this.databaseService.count(query);
         int expectedRowCount = Integer.parseInt(count);
         if (rowCount > expectedRowCount) {
-            throw new AssertFailedException("Expected to have less than " + expectedRowCount + " rows from '" + sql + "' but got " + rowCount + " rows.");
+            throw new AssertFailedException("Expected to have less than " + expectedRowCount + " rows from '" + query + "' but got " + rowCount + " rows.");
+        }
+    }
+
+    /**
+     * Check if the number of rows returned by the given input query statement is equal to the value submitted.
+     *
+     * @param query  the query
+     * @param values the values to bind
+     * @param count  the count
+     * @throws Exception the exception
+     */
+    @Action(param1 = "query", param2 = "values", param3 = "count")
+    public void verifyRowCount(String query, String values, String count) throws Exception {
+        int rowCount = this.databaseService.count(query, values);
+        int expectedRowCount = Integer.parseInt(count);
+        if (rowCount != expectedRowCount) {
+            throw new AssertFailedException("Expected to have " + expectedRowCount + " rows from '" + query + "' but got " + rowCount + " rows.");
+        }
+    }
+
+    /**
+     * Check if the number of rows returned by the given input query statement is greater than the value submitted.
+     *
+     * @param query  the query
+     * @param values the values to bind
+     * @param count  the count
+     * @throws Exception the exception
+     */
+    @Action(param1 = "query", param2 = "values", param3 = "count")
+    public void verifyRowCountGreaterThan(String query, String values, String count) throws Exception {
+        int rowCount = this.databaseService.count(query, values);
+        int expectedRowCount = Integer.parseInt(count);
+        if (rowCount < expectedRowCount) {
+            throw new AssertFailedException("Expected to have more than " + expectedRowCount + " rows from '" + query + "' but got " + rowCount + " rows.");
+        }
+    }
+
+    /**
+     * Check if the number of rows returned by the given input query statement is less than the value submitted.
+     *
+     * @param query  the query
+     * @param values the values to bind
+     * @param count  the count
+     * @throws Exception the exception
+     */
+    @Action(param1 = "query", param2 = "values", param3 = "count")
+    public void verifyRowCountLessThan(String query, String values, String count) throws Exception {
+        int rowCount = this.databaseService.count(query, values);
+        int expectedRowCount = Integer.parseInt(count);
+        if (rowCount > expectedRowCount) {
+            throw new AssertFailedException("Expected to have less than " + expectedRowCount + " rows from '" + query + "' but got " + rowCount + " rows.");
         }
     }
 }

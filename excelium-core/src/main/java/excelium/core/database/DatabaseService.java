@@ -59,4 +59,14 @@ public interface DatabaseService {
      * @throws Exception the exception
      */
     int count(String query) throws Exception;
+
+    /**
+     * Executes the given query and return the count.
+     *
+     * @param query  the query
+     * @param values the values to bind
+     * @return the count
+     * @throws Exception the exception
+     */
+    int count(String query, String values) throws Exception;
 }
