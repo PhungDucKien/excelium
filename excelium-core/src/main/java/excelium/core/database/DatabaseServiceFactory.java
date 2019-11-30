@@ -45,7 +45,7 @@ public class DatabaseServiceFactory {
                 case POSTGRESQL:
                     return new SQLDatabaseService(dataSource);
                 case DYNAMODB:
-                    return null;
+                    return new DynamoDBDatabaseService(dataSource);
             }
         }
         return null;

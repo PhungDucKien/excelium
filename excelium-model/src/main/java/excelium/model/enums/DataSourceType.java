@@ -38,7 +38,11 @@ public enum DataSourceType {
     /**
      * PostgreSQL
      */
-    POSTGRESQL("PostgreSQL", "org.postgresql.Driver", "jdbc:postgresql://<host>:<port>/<db>", 5432);
+    POSTGRESQL("PostgreSQL", "org.postgresql.Driver", "jdbc:postgresql://<host>:<port>/<db>", 5432),
+    /**
+     * Amazon DynamoDB
+     */
+    DYNAMODB("Amazon DynamoDB", null, null, 0);
 
     /**
      * Text

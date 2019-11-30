@@ -39,16 +39,19 @@ public class DataSourceTypeTest {
     public void testFromName() {
         Assert.assertEquals(DataSourceType.MYSQL, DataSourceType.fromName("MySQL"));
         Assert.assertEquals(DataSourceType.POSTGRESQL, DataSourceType.fromName("PostgreSQL"));
+        Assert.assertEquals(DataSourceType.DYNAMODB, DataSourceType.fromName("DynamoDB"));
     }
 
     @Test
     public void testGetListChoice() {
         String[][] listChoice = DataSourceType.getListChoice();
-        Assert.assertEquals(2, listChoice.length);
+        Assert.assertEquals(3, listChoice.length);
         Assert.assertEquals("MYSQL", listChoice[0][0]);
         Assert.assertEquals("MySQL", listChoice[0][1]);
         Assert.assertEquals("POSTGRESQL", listChoice[1][0]);
         Assert.assertEquals("PostgreSQL", listChoice[1][1]);
+        Assert.assertEquals("DYNAMODB", listChoice[2][0]);
+        Assert.assertEquals("Amazon DynamoDB", listChoice[2][1]);
     }
 
     @Test
