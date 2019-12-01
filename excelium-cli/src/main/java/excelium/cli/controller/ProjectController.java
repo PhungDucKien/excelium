@@ -25,9 +25,9 @@
 package excelium.cli.controller;
 
 import com.beust.jcommander.Parameter;
+import com.google.api.services.sheets.v4.Sheets;
 import excelium.cli.annotation.Command;
 import excelium.cli.annotation.Controller;
-import excelium.cli.annotation.Injectable;
 import excelium.common.TemplateUtil;
 import excelium.core.reader.TestReader;
 import excelium.core.reader.TestReaderFactory;
@@ -36,6 +36,10 @@ import excelium.model.enums.AppType;
 import excelium.model.enums.WorkbookType;
 import excelium.model.project.Project;
 import excelium.model.project.Template;
+import excelium.sheets.SheetsReaderFactory;
+import excelium.sheets.SheetsServiceProvider;
+import excelium.sheets.connection.GoogleConnection;
+import excelium.sheets.connection.GoogleConnectionService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.lang3.StringUtils;
 
@@ -61,12 +65,6 @@ public class ProjectController extends BaseController {
      */
     @Parameter(description = "Folder name")
     private String folderName;
-
-    /**
-     * Test reader factory
-     */
-    @Injectable
-    private TestReaderFactory testReaderFactory;
 
     /**
      * Creates an empty structured project folder.
@@ -136,6 +134,10 @@ public class ProjectController extends BaseController {
                     fileLocation = "1u1Wr4JrcaGp84joTFCRLSQA1cWXLaa9TK3fUv-EkX9w";
                 }
                 if (StringUtils.isNotBlank(fileLocation)) {
+                    GoogleConnection googleConnection = new GoogleConnectionService();
+                    SheetsServiceProvider sheetsServiceProvider = new SheetsServiceProvider(googleConnection);
+                    Sheets sheetsService = sheetsServiceProvider.createSheetsService();
+                    TestReaderFactory testReaderFactory = new SheetsReaderFactory(sheetsService);
                     TestReader testReader = testReaderFactory.createReader(fileLocation);
 
                     Template template = new Template();
