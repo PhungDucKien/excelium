@@ -17,8 +17,19 @@ Options:
                            commit's message.
       --source-only        Only build but not push
       --push-only          Only push but not build
+      --push-untracked     Push untracked files
 "
 
+push_untracked() {
+  git add .
+
+  set_user_id
+  git commit -m "publish new version doc"
+
+  disable_expanded_output
+  git push --quiet
+  enable_expanded_output
+}
 
 run_build() {
   bundle exec middleman build --clean
@@ -209,6 +220,8 @@ if [[ $1 = --source-only ]]; then
   run_build
 elif [[ $1 = --push-only ]]; then
   main "$@"
+elif [[ $1 = --push-untracked ]]; then
+  push_untracked
 else
   run_build
   main "$@"

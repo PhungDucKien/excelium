@@ -88,5 +88,22 @@ task "doc-publish"(type: Exec) {
 task build(dependsOn: [":excelium-cli:dist"]) {
 }
 
-beforeReleaseBuild.dependsOn ":excelium-cli:generateSources"
+task appendVersionDoc {
+    doFirst {
+        def docFile = new File("slate/source/includes/_versions.md")
+        docFile.append("* [v$project.version](/excelium/v/$project.version/)\n")
+    }
+}
+
+task copyVersionDoc(type: Copy) {
+    from "slate/build/current"
+    into "slate/source/v/$project.version"
+}
+
+task pushUntrackedDoc(type: Exec) {
+    workingDir './slate'
+    commandLine './deploy.sh', '--push-untracked'
+}
+
+beforeReleaseBuild.dependsOn ":excelium-common:generateSources", "appendVersionDoc", "doc-build", "copyVersionDoc", "pushUntrackedDoc"
 afterReleaseBuild.dependsOn "doc-build","doc-publish"
