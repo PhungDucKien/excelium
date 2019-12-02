@@ -70,22 +70,29 @@ public class DataSourceController extends BaseController {
         String dataSourceTypeId = promptList("What is the type of database you want to connect?", DataSourceType.getListChoice());
         DataSourceType dataSourceType = DataSourceType.fromName(dataSourceTypeId);
 
-        String driverClass = dataSourceType.getDriverClass();
-
-        String databaseHost = promptInput("Database Host", "localhost");
-        String databasePort = promptInput("Database Port", String.valueOf(dataSourceType.getDefaultPort()));
-        String databaseName = promptInput("Database Name", null);
-        String userName = promptInput("User Name", null);
-        String password = promptInput("Password", null);
-
-        String url = dataSourceType.getUrl(databaseHost, databasePort, databaseName);
-
         DataSource dataSource = new DataSource();
         dataSource.setType(dataSourceType);
-        dataSource.setDriverClass(driverClass);
-        dataSource.setUrl(url);
-        dataSource.setUserName(userName);
-        dataSource.setPassword(password);
+
+        String databaseName = null;
+
+        if (dataSourceType == DataSourceType.MYSQL || dataSourceType == DataSourceType.POSTGRESQL) {
+            String driverClass = dataSourceType.getDriverClass();
+
+            String databaseHost = promptInput("Database Host", "localhost");
+            String databasePort = promptInput("Database Port", String.valueOf(dataSourceType.getDefaultPort()));
+            databaseName = promptInput("Database Name", dataSourceType.getText());
+            String userName = promptInput("User Name", null);
+            String password = promptInput("Password", null);
+
+            String url = dataSourceType.getUrl(databaseHost, databasePort, databaseName);
+
+            dataSource.setDriverClass(driverClass);
+            dataSource.setUrl(url);
+            dataSource.setUserName(userName);
+            dataSource.setPassword(password);
+        } else if (dataSourceType == DataSourceType.DYNAMODB) {
+            databaseName = dataSourceType.getText();
+        }
 
         DatabaseService databaseService = DatabaseServiceFactory.createService(dataSource);
         boolean isConnectible = databaseService.testConnection();
