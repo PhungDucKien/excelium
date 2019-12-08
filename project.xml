@@ -8,6 +8,14 @@
     <downloadPath>download</downloadPath>
     <tests>
         <entry>
+            <key>1_gMTRSPbjrml0upfmM-bPGOmFewcKfaLSx_vwyO464Q</key>
+            <value>
+                <location>1_gMTRSPbjrml0upfmM-bPGOmFewcKfaLSx_vwyO464Q</location>
+                <name>1_gMTRSPbjrml0upfmM-bPGOmFewcKfaLSx_vwyO464Q - iOS Test</name>
+                <template>1u1Wr4JrcaGp84joTFCRLSQA1cWXLaa9TK3fUv-EkX9w</template>
+            </value>
+        </entry>
+        <entry>
             <key>1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE</key>
             <value>
                 <location>1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE</location>
@@ -48,6 +56,228 @@
                     </entry>
                 </markupLocations>
                 <name>10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY - Simple Template</name>
+                <testPattern>*</testPattern>
+            </value>
+        </entry>
+        <entry>
+            <key>1u1Wr4JrcaGp84joTFCRLSQA1cWXLaa9TK3fUv-EkX9w</key>
+            <value>
+                <actionPattern>Actions</actionPattern>
+                <dataPattern>Test Data</dataPattern>
+                <ignorePattern>Commands</ignorePattern>
+                <location>1u1Wr4JrcaGp84joTFCRLSQA1cWXLaa9TK3fUv-EkX9w</location>
+                <mappingPattern>Mapping</mappingPattern>
+                <markupLocations>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_ORIENTATION%</key>
+                        <value>Configuration!F33</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_CAPTURE%</key>
+                        <value>'Test Case'!D3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_DESC%</key>
+                        <value>'Test Data'!B2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_PARAM1%</key>
+                        <value>'Test Case'!H3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_UDID%</key>
+                        <value>Configuration!F35</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_DATA%</key>
+                        <value>Actions!K3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_DEVICE_NAME%</key>
+                        <value>Configuration!D31</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_NO%</key>
+                        <value>Actions!A3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%MAPPING_ITEM_NAME%</key>
+                        <value>Mapping!E2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_UDID%</key>
+                        <value>Configuration!D35</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_APP_ACTIVITY%</key>
+                        <value>Configuration!D41</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_ORIENTATION%</key>
+                        <value>Configuration!D33</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_COMMAND%</key>
+                        <value>'Test Case'!G3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_DATA%</key>
+                        <value>'Test Case'!K3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_APP_WAIT_PACKAGE%</key>
+                        <value>Configuration!D47</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_DATE%</key>
+                        <value>'Test Case'!M3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%MAPPING_PAGESET_TITLE%</key>
+                        <value>Mapping!D2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_PLATFORM_VERSION%</key>
+                        <value>Configuration!F29</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_BROWSER%</key>
+                        <value>Configuration!F37</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_PLATFORM_VERSION%</key>
+                        <value>Configuration!D29</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%USE_IOS%</key>
+                        <value>Configuration!E21</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%MAPPING_PAGESET_NAME%</key>
+                        <value>Mapping!B2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_PARAM3%</key>
+                        <value>Actions!J3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_IOS_GUTTER%</key>
+                        <value>'Test Case'!C3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_NO%</key>
+                        <value>'Test Case'!A3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_NAME%</key>
+                        <value>'Test Data'!A1</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_PARAM3%</key>
+                        <value>'Test Case'!J3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_RESULT%</key>
+                        <value>'Test Case'!N3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_BUNDLE_ID%</key>
+                        <value>Configuration!F49</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_ANDROID_GUTTER%</key>
+                        <value>'Test Case'!B3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_IOS_GUTTER%</key>
+                        <value>Actions!C3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DATA%</key>
+                        <value>'Test Data'!B4</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_PARAM2%</key>
+                        <value>Actions!I3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_APP%</key>
+                        <value>Configuration!F39</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_NAME%</key>
+                        <value>'Test Case'!F3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%DATA_TABLE_DEF%</key>
+                        <value>'Test Data'!B3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%IOS_DEVICE_NAME%</key>
+                        <value>Configuration!F31</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_APP_PACKAGE%</key>
+                        <value>Configuration!D43</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_PERSON%</key>
+                        <value>'Test Case'!L3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_CAPTURE%</key>
+                        <value>Actions!D3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%TEST_PARAM2%</key>
+                        <value>'Test Case'!I3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%MAPPING_ITEM_ANDROID_VALUE%</key>
+                        <value>Mapping!F2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_COMMAND%</key>
+                        <value>Actions!G3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%MAPPING_ITEM_IOS_VALUE%</key>
+                        <value>Mapping!G2</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%USE_ANDROID%</key>
+                        <value>Configuration!B21</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_APP%</key>
+                        <value>Configuration!D39</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_APP_WAIT_ACTIVITY%</key>
+                        <value>Configuration!D45</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_PARAM1%</key>
+                        <value>Actions!H3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_ANDROID_GUTTER%</key>
+                        <value>Actions!B3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ANDROID_BROWSER%</key>
+                        <value>Configuration!D37</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%ACTION_NAME%</key>
+                        <value>Actions!F3</value>
+                    </entry>
+                    <entry>
+                        <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">%MAPPING_PAGESET_PATH%</key>
+                        <value>Mapping!C2</value>
+                    </entry>
+                </markupLocations>
+                <name>1u1Wr4JrcaGp84joTFCRLSQA1cWXLaa9TK3fUv-EkX9w - Mobile Template</name>
                 <testPattern>*</testPattern>
             </value>
         </entry>
