@@ -1,6 +1,6 @@
 import { omit } from 'lodash';
 
-import { SET_SOURCE_AND_SCREENSHOT, QUIT_SESSION_REQUESTED, QUIT_SESSION_DONE,
+import { SET_SESSION_ID, SET_SOURCE_AND_SCREENSHOT, QUIT_SESSION_REQUESTED, QUIT_SESSION_DONE,
          SESSION_DONE, SELECT_ELEMENT, UNSELECT_ELEMENT, SELECT_HOVERED_ELEMENT, SET_SELECTED_ELEMENT_ID, SET_INTERACTIONS_NOT_AVAILABLE,
          UNSELECT_HOVERED_ELEMENT, METHOD_CALL_REQUESTED, METHOD_CALL_DONE,
          SET_FIELD_VALUE, SET_EXPANDED_PATHS, SHOW_SEND_KEYS_MODAL,
@@ -38,6 +38,7 @@ const INITIAL_STATE = {
   selectedSubActionGroup: null,
   selectedInteractionMode: INTERACTION_MODE.SOURCE,
   pendingAction: null,
+  sessionId: null,
 };
 
 /**
@@ -53,6 +54,12 @@ function findElementByPath (path, source) {
 
 export default function inspector (state = INITIAL_STATE, action) {
   switch (action.type) {
+    case SET_SESSION_ID:
+      return {
+        ...state,
+        sessionId: action.sessionId,
+      };
+
     case SET_SOURCE_AND_SCREENSHOT:
       return {
         ...state,

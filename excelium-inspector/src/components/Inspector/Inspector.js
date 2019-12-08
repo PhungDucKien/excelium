@@ -72,7 +72,8 @@ export default class Inspector extends Component {
       window.resizeTo(newWidth, newHeight);
     }
     this.didInitialResize = true;
-    this.props.applyClientMethod({methodName: 'source'});
+    this.props.setSessionId(this.props.match.params.sessionId);
+    this.props.fetchSessionDetails(this.props.match.params.sessionId);
     this.props.getSavedActionFramework();
     window.addEventListener('resize', this.updateSourceTreeWidth);
   }

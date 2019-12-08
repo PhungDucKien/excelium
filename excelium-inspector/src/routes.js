@@ -8,7 +8,7 @@ export default () => (
   <Suspense fallback={<Spinner />}>
     <App>
       <Switch>
-        <Route path="/inspector" component={InspectorPage} />
+        <Route path="/inspector/:sessionId" component={InspectorPage} />
       </Switch>
     </App>
   </Suspense>

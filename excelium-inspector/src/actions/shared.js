@@ -15,7 +15,7 @@ function hasValue (val) {
   return hasVal;
 }
 
-export function callClientMethod (params) {
+export function callClientMethod (sessionId, params) {
   const searchParams = Object.keys(params).map((key) => {
     return encodeURIComponent(key) + '=' + encodeURIComponent(key === 'args' ? JSON.stringify(params[key]) : params[key]);
   }).join('&');
@@ -27,7 +27,7 @@ export function callClientMethod (params) {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         'Accept': 'application/json; charset=utf-8',
       },
-      body: searchParams
+      body: `sessionId=${encodeURIComponent(sessionId)}&${searchParams}`
     })
     .then(res => res.json())
     .then(resp => {

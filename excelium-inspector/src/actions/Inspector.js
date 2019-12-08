@@ -7,6 +7,7 @@ import { getOptimalXPath } from '../util';
 import frameworks from '../lib/client-frameworks';
 import i18n from '../configs/i18next.config';
 
+export const SET_SESSION_ID = 'SET_SESSION_ID';
 export const SET_SESSION_DETAILS = 'SET_SESSION_DETAILS';
 export const SET_SOURCE_AND_SCREENSHOT = 'SET_SOURCE_AND_SCREENSHOT';
 export const SESSION_DONE = 'SESSION_DONE';
@@ -141,16 +142,17 @@ function xmlToJSON (source) {
 
 // A debounced function that calls findElement and gets info about the element
 const findElement = _.debounce(async function (strategyMap, dispatch, getState, path) {
+  const state = getState();
   for (let [strategy, selector] of strategyMap) {
     // Get the information about the element
-    let {elementId, variableName, variableType} = await callClientMethod({
+    let {elementId, variableName, variableType} = await callClientMethod(state.inspector.sessionId, {
       strategy,
       selector,
     });
 
     // Set the elementId, variableName and variableType for the selected element
     // (check first that the selectedElementPath didn't change, to avoid race conditions)
-    if (elementId && getState().inspector.selectedElementPath === path) {
+    if (elementId && state.inspector.selectedElementPath === path) {
       return dispatch({type: SET_SELECTED_ELEMENT_ID, elementId, variableName, variableType});
     }
   }
@@ -206,19 +208,48 @@ export function unselectHoveredElement (path) {
   };
 }
 
+export function fetchSessionDetails (sessionId) {
+  return async (dispatch, getState) => {
+    fetch('/api/session/details?sessionId=' + sessionId, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json; charset=utf-8',
+      }
+    })
+    .then(res => res.json())
+    .then(async resp => {
+      if (resp.e) {
+        showError({message: resp.e}, 0)
+      } else {
+        const { desiredCapabilities, host, port, path, https } = resp;
+        setSessionDetails({
+          desiredCapabilities,
+          host,
+          port,
+          path,
+          https,
+        })(dispatch);
+        await applyClientMethod({methodName: 'source'})(dispatch, getState);
+      }
+    })
+    .catch(e => showError(e, 0));
+  };
+}
+
 /**
  * Requests a method call on appium
  */
 export function applyClientMethod (params) {
   return async (dispatch, getState) => {
+    const state = getState();
     const isRecording = params.methodName !== 'quit' &&
                       params.methodName !== 'source' &&
-                      getState().inspector.isRecording;
+                      state.inspector.isRecording;
     try {
       dispatch({type: METHOD_CALL_REQUESTED});
       const {source, screenshot, windowSize, result, sourceError,
              screenshotError, windowSizeError, variableName,
-             variableIndex, strategy, selector} = await callClientMethod(params);
+             variableIndex, strategy, selector} = await callClientMethod(state.inspector.sessionId, params);
 
       if (isRecording) {
         // Add 'findAndAssign' line of code. Don't do it for arrays though. Arrays already have 'find' expression
@@ -288,11 +319,20 @@ export function setExpandedPaths (paths) {
 }
 
 /**
+ * Set the session id
+ */
+export function setSessionId (sessionId) {
+  return (dispatch) => {
+    dispatch({type: SET_SESSION_ID, sessionId});
+  };
+}
+
+/**
  * Quit the session and go back to the new session window
  */
 export function quitSession () {
-  return async (dispatch) => {
-    await applyClientMethod({methodName: 'quit'})(dispatch);
+  return async (dispatch, getState) => {
+    await applyClientMethod({methodName: 'quit'})(dispatch, getState);
   };
 }
 
@@ -385,9 +425,10 @@ export function setLocatorTestStrategy (locatorTestStrategy) {
 
 export function searchForElement (strategy, selector) {
   return async (dispatch, getState) => {
+    const state = getState();
     dispatch({type: SEARCHING_FOR_ELEMENTS});
     try {
-      let {elements, variableName} = await callClientMethod({strategy, selector, fetchArray: true});
+      let {elements, variableName} = await callClientMethod(state.inspector.sessionId, {strategy, selector, fetchArray: true});
       findAndAssign(strategy, selector, variableName, true)(dispatch, getState);
       elements = elements.map((el) => el.id);
       dispatch({type: SEARCHING_FOR_ELEMENTS_COMPLETED, elements});
@@ -411,14 +452,15 @@ export function findAndAssign (strategy, selector, variableName, isArray) {
 }
 
 export function setLocatorTestElement (elementId) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const state = getState();
     dispatch({type: SET_LOCATOR_TEST_ELEMENT, elementId});
     dispatch({type: CLEAR_SEARCHED_FOR_ELEMENT_BOUNDS});
     if (elementId) {
       try {
         const [location, size] = await (B.all([
-          callClientMethod({methodName: 'getLocation', args: [elementId], skipScreenshotAndSource: true, skipRecord: true, ignoreResult: true}),
-          callClientMethod({methodName: 'getSize', args: [elementId], skipScreenshotAndSource: true, skipRecord: true, ignoreResult: true}),
+          callClientMethod(state.inspector.sessionId, {methodName: 'getLocation', args: [elementId], skipScreenshotAndSource: true, skipRecord: true, ignoreResult: true}),
+          callClientMethod(state.inspector.sessionId, {methodName: 'getSize', args: [elementId], skipScreenshotAndSource: true, skipRecord: true, ignoreResult: true}),
         ]));
         dispatch({type: SET_SEARCHED_FOR_ELEMENT_BOUNDS, location: location.res, size: size.res});
       } catch (ign) { }
