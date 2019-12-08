@@ -100,6 +100,7 @@ public class HttpServer {
         ServletContextHandler servletContext = new ServletContextHandler();
         servletContext.setContextPath("/api");
         servletContext.addServlet(new ServletHolder(new HealthServlet()), "/health");
+        servletContext.addServlet(new ServletHolder(new SessionDetailsServlet()), "/session/details");
         servletContext.addServlet(new ServletHolder(new RestartRecorderServlet()), "/session/restart");
         servletContext.addServlet(new ServletHolder(new ClientMethodHandleServlet()), "/session/execute");
         handlers.addHandler(servletContext);

@@ -25,10 +25,7 @@
 package excelium.core.debug;
 
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.model.debug.ElementArray;
-import excelium.model.debug.ElementEntry;
-import excelium.model.debug.ExecuteResponse;
-import excelium.model.debug.SourceAndScreenshot;
+import excelium.model.debug.*;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
@@ -43,6 +40,7 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import javax.servlet.ServletException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -236,6 +234,19 @@ public class DebugSession {
         res.setWindowSize(windowSize);
         res.setWindowSizeError(windowSizeError);
         return res;
+    }
+
+    public SessionDetails getSessionDetails() {
+        SessionDetails sessionDetails = new SessionDetails();
+        sessionDetails.setDesiredCapabilities(webDriver.getCapabilities().asMap());
+        if (webDriver.isMobile()) {
+            URL remoteAddress = webDriver.getAppiumDriver().getRemoteAddress();
+            sessionDetails.setHost(remoteAddress.getHost());
+            sessionDetails.setPort(remoteAddress.getPort());
+            sessionDetails.setPath(remoteAddress.getPath());
+            sessionDetails.setHttps(remoteAddress.getProtocol().equals("https"));
+        }
+        return sessionDetails;
     }
 
     public void restart() {
