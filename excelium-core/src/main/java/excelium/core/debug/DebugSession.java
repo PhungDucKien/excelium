@@ -26,6 +26,8 @@ package excelium.core.debug;
 
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.debug.*;
+import excelium.model.enums.ExecutionState;
+import excelium.model.enums.StepMode;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
@@ -55,10 +57,31 @@ public class DebugSession {
 
     private int elVariableCounter = 1;
     private int elArrayVariableCounter = 1;
+    private ExecutionState executionState = ExecutionState.PAUSED;
+    private StepMode stepMode = StepMode.STEP_NEXT_BREAKPOINT;
 
     public DebugSession(ContextAwareWebDriver webDriver) {
         this.webDriver = webDriver;
         this.elementCache = new HashMap<>();
+    }
+
+    public void resume() {
+        this.executionState = ExecutionState.RUNNING;
+        this.stepMode = StepMode.STEP_NEXT_BREAKPOINT;
+    }
+
+    public void stepOver() {
+        this.executionState = ExecutionState.RUNNING;
+        this.stepMode = StepMode.STEP_OVER;
+    }
+
+    public void muteAndResume() {
+        this.executionState = ExecutionState.RUNNING;
+        this.stepMode = StepMode.STEP_MUTE;
+    }
+
+    public void pause() {
+        this.executionState = ExecutionState.PAUSED;
     }
 
     public ElementEntry fetchElement(String strategy, String selector) {
@@ -256,9 +279,13 @@ public class DebugSession {
         // Restart the variable counter
         this.elVariableCounter = 1;
         this.elArrayVariableCounter = 1;
+
+        this.executionState = ExecutionState.PAUSED;
+        this.stepMode = StepMode.STEP_NEXT_BREAKPOINT;
     }
 
     public void close(String reason, boolean killedByUser) {
+        this.executionState = ExecutionState.STOPPED;
     }
 
     private void applyMethod(Object obj, String methodName, Object[] args) throws ServletException {
@@ -273,5 +300,13 @@ public class DebugSession {
                 break;
             }
         }
+    }
+
+    public ExecutionState getExecutionState() {
+        return executionState;
+    }
+
+    public StepMode getStepMode() {
+        return stepMode;
     }
 }

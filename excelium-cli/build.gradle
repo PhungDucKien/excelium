@@ -2,7 +2,7 @@ apply plugin: 'application'
 
 mainClassName = 'excelium.cli.Application'
 applicationName = 'excelium'
-applicationDefaultJvmArgs = ["-Dapp.home=APP_HOME_PLACEHOLDER"]
+applicationDefaultJvmArgs = ["-Dapp.home=APP_HOME_PLACEHOLDER", "-Dapp.profile=prod"]
 
 dependencies {
     compile project(':excelium-model')

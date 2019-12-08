@@ -26,13 +26,19 @@ package excelium.core;
 
 import excelium.common.StringUtil;
 import excelium.common.WildcardUtil;
+import excelium.core.debug.DebugSession;
+import excelium.core.debug.DebugSessionHolder;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.core.driver.DriverPool;
 import excelium.core.exception.AssertFailedException;
+import excelium.core.profile.AppProfile;
 import excelium.core.report.TestReporter;
+import excelium.core.server.HttpServer;
 import excelium.core.writer.TestWriter;
+import excelium.model.enums.ExecutionState;
 import excelium.model.enums.Platform;
 import excelium.model.enums.Result;
+import excelium.model.enums.StepMode;
 import excelium.model.project.Project;
 import excelium.model.project.Template;
 import excelium.model.test.*;
@@ -56,6 +62,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static excelium.common.BrowserUtil.browse;
+
 /**
  * Executes all tests of a workbook test file
  *
@@ -63,6 +71,11 @@ import java.util.regex.Pattern;
  * @since 2018.05.05
  */
 public class TestRunner {
+
+    /**
+     * Debug server
+     */
+    private static HttpServer server;
 
     /**
      * Test object
@@ -98,6 +111,11 @@ public class TestRunner {
      * Current web driver
      */
     private ContextAwareWebDriver webDriver;
+
+    /**
+     * Debug session
+     */
+    private DebugSession debugSession;
 
     /**
      * Current test suite
@@ -174,6 +192,11 @@ public class TestRunner {
         } finally {
             excelium = null;
             if (webDriver != null) {
+                if (debugSession != null) {
+                    DebugSessionHolder.getInstance().killSession(webDriver.getSessionId().toString(), false);
+                    debugSession = null;
+                }
+
 //                webDriver.quit();
                 webDriver = null;
             }
@@ -214,6 +237,25 @@ public class TestRunner {
                 if (!testStep.isStepSkip(environment)) {
                     if (shouldContinue) {
                         testReporter.startTestStep(testStep);
+
+                        if (debugSession == null) {
+                            if (testStep.isStepDebug(environment)) {
+                                debugSession = createDebugSession(webDriver);
+                                startDebugServer();
+
+                                String serverUrl = AppProfile.get().equals("dev") ? "http://localhost:3000" : server.getServerUrl();
+                                browse(serverUrl + "/inspector/" + webDriver.getSessionId().toString());
+
+                                waitForStepRequest(webDriver.getSessionId().toString());
+                            }
+                        } else {
+                            if (debugSession.getStepMode() == StepMode.STEP_OVER || (debugSession.getStepMode() == StepMode.STEP_NEXT_BREAKPOINT && testStep.isStepDebug(environment))) {
+                                debugSession.pause();
+
+                                waitForStepRequest(webDriver.getSessionId().toString());
+                            }
+                        }
+
                         StepResult stepResult = runTestStep(testStep, testFlow instanceof TestCase);
                         testReporter.endTestStep(stepResult);
                         shouldContinue = stepResult.isShouldContinue();
@@ -303,6 +345,39 @@ public class TestRunner {
             for (TestAction action : test.getActions().values()) {
                 excelium.addAction(action.getName(), () -> runTestFlow(action, false));
             }
+        }
+    }
+
+    private static synchronized void startDebugServer() {
+        if (server == null) {
+            server = new HttpServer();
+            server.start();
+        } else if (!server.isRunning()) {
+            server.start();
+        }
+    }
+
+    private DebugSession createDebugSession(ContextAwareWebDriver webDriver) {
+        // get the session capabilities to prove things are working
+        webDriver.getAppiumDriver().getSessionDetails();
+
+        DebugSession currentSession = DebugSessionHolder.getInstance().getSession(webDriver.getSessionId().toString());
+        if (currentSession == null) {
+            return DebugSessionHolder.getInstance().createSession(webDriver);
+        }
+        return currentSession;
+    }
+
+    private void waitForStepRequest(String sessionId) {
+        DebugSession debugSession = DebugSessionHolder.getInstance().getSession(sessionId);
+        while (debugSession != null && debugSession.getExecutionState() == ExecutionState.PAUSED) {
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                System.out.println("Failed to wait for debug step request. Reason = " + e.getLocalizedMessage());
+                break;
+            }
+            debugSession = DebugSessionHolder.getInstance().getSession(sessionId);
         }
     }
 
