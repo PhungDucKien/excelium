@@ -345,7 +345,7 @@ public class TestStep {
      * @param environment the environment
      * @return true if the step should be skipped, otherwise, false
      */
-    public boolean isSkipOn(Environment environment) {
+    public boolean isStepSkip(Environment environment) {
         return (isStepSkip(getGutter()) && (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment)) ||
                 (isStepSkip(getAndroidGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.ANDROID) ||
                 (isStepSkip(getIosGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.IOS);
@@ -357,7 +357,7 @@ public class TestStep {
      * @param environment the environment
      * @return true if the step is a debug point, otherwise, false
      */
-    public boolean isDebugOn(Environment environment) {
+    public boolean isStepDebug(Environment environment) {
         return (isStepDebug(getGutter()) && (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment)) ||
                 (isStepDebug(getAndroidGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.ANDROID) ||
                 (isStepDebug(getIosGutter()) && environment instanceof MobileAppEnvironment && environment.getPlatform() == Platform.IOS);

@@ -211,7 +211,7 @@ public class TestRunner {
             testReporter.startTestFlow(testFlow);
             boolean shouldContinue = true;
             for (TestStep testStep : testFlow.getTestSteps()) {
-                if (!testStep.isSkipOn(environment)) {
+                if (!testStep.isStepSkip(environment)) {
                     if (shouldContinue) {
                         testReporter.startTestStep(testStep);
                         StepResult stepResult = runTestStep(testStep, testFlow instanceof TestCase);

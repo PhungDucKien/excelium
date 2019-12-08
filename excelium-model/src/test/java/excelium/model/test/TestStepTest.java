@@ -40,7 +40,7 @@ import org.junit.Test;
 public class TestStepTest {
 
     @Test
-    public void testIsSkipOn() {
+    public void testIsStepSkip() {
         TestStep testStep = new TestStep();
         testStep.setGutter(null);
         testStep.setAndroidGutter("M");
@@ -48,19 +48,19 @@ public class TestStepTest {
 
         PcEnvironment web = new PcEnvironment();
         web.setBrowser(Browser.CHROME);
-        Assert.assertFalse(testStep.isSkipOn(web));
+        Assert.assertFalse(testStep.isStepSkip(web));
 
         MobileAppEnvironment android = new MobileAppEnvironment();
         android.setPlatform(Platform.ANDROID);
-        Assert.assertFalse(testStep.isSkipOn(android));
+        Assert.assertFalse(testStep.isStepSkip(android));
 
         MobileAppEnvironment ios = new MobileAppEnvironment();
         ios.setPlatform(Platform.IOS);
-        Assert.assertTrue(testStep.isSkipOn(ios));
+        Assert.assertTrue(testStep.isStepSkip(ios));
     }
 
     @Test
-    public void testIsDebugOn() {
+    public void testIsStepDebug() {
         TestStep testStep = new TestStep();
         testStep.setGutter("D");
         testStep.setAndroidGutter(null);
@@ -68,14 +68,14 @@ public class TestStepTest {
 
         PcEnvironment web = new PcEnvironment();
         web.setBrowser(Browser.CHROME);
-        Assert.assertTrue(testStep.isDebugOn(web));
+        Assert.assertTrue(testStep.isStepDebug(web));
 
         MobileAppEnvironment android = new MobileAppEnvironment();
         android.setPlatform(Platform.ANDROID);
-        Assert.assertFalse(testStep.isDebugOn(android));
+        Assert.assertFalse(testStep.isStepDebug(android));
 
         MobileAppEnvironment ios = new MobileAppEnvironment();
         ios.setPlatform(Platform.IOS);
-        Assert.assertFalse(testStep.isDebugOn(ios));
+        Assert.assertFalse(testStep.isStepDebug(ios));
     }
 }

@@ -345,7 +345,7 @@ public class TestReporter {
         if (testCase == null || CollectionUtils.isEmpty(testCase.getTestSteps())) {
             return 0;
         }
-        return testCase.getTestSteps().stream().filter((step) -> !step.isSkipOn(environment)).count();
+        return testCase.getTestSteps().stream().filter((step) -> !step.isStepSkip(environment)).count();
     }
 
     /**
