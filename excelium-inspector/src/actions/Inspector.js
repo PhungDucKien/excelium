@@ -208,7 +208,7 @@ export function unselectHoveredElement (path) {
   };
 }
 
-export function fetchSessionDetails (sessionId) {
+export function fetchSessionDetails (sessionId, skipScreenshotAndSource = false) {
   return async (dispatch, getState) => {
     fetch('/api/session/details?sessionId=' + sessionId, {
       method: 'GET',
@@ -229,7 +229,9 @@ export function fetchSessionDetails (sessionId) {
           path,
           https,
         })(dispatch);
-        await applyClientMethod({methodName: 'source'})(dispatch, getState);
+        if (!skipScreenshotAndSource) {
+          await applyClientMethod({methodName: 'source'})(dispatch, getState);
+        }
       }
     })
     .catch(e => showError(e, 0));
@@ -507,7 +509,6 @@ export function promptKeepAlive () {
 export function keepSessionAlive () {
   return (dispatch) => {
     dispatch({type: HIDE_PROMPT_KEEP_ALIVE});
-    // ipcRenderer.send('appium-keep-session-alive');
   };
 }
 

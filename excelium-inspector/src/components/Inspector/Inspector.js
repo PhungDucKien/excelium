@@ -16,9 +16,14 @@ const { TabPane } = Tabs;
 
 const ButtonGroup = Button.Group;
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const MIN_WIDTH = 1080;
 const MIN_HEIGHT = 570;
 const MAX_SCREENSHOT_WIDTH = 500;
+const KEEP_ALIVE_PING_INTERVAL = 5 * 1000;
+const NO_NEW_COMMAND_LIMIT = isDevelopment ? 30 * 1000 : 24 * 60 * 60 * 1000; // Set timeout to 24 hours
+const WAIT_FOR_USER_KEEP_ALIVE = 60 * 60 * 1000; // Give user 1 hour to reply
 
 export default class Inspector extends Component {
 
@@ -29,6 +34,7 @@ export default class Inspector extends Component {
     this.screenAndSourceEl = null;
     this.lastScreenshot = null;
     this.updateSourceTreeWidth = debounce(this.updateSourceTreeWidth.bind(this), 50);
+    this._lastActiveMoment = +(new Date());
   }
 
   updateSourceTreeWidth () {
@@ -76,6 +82,7 @@ export default class Inspector extends Component {
     this.props.fetchSessionDetails(this.props.match.params.sessionId);
     this.props.getSavedActionFramework();
     window.addEventListener('resize', this.updateSourceTreeWidth);
+    this.runKeepAliveLoop();
   }
 
   componentDidUpdate () {
@@ -85,6 +92,49 @@ export default class Inspector extends Component {
     if (screenshot !== this.lastScreenshot) {
       this.updateSourceTreeWidth();
       this.lastScreenshot = screenshot;
+    }
+  }
+
+  /**
+   * Ping server every 30 seconds to prevent `newCommandTimeout` from killing session
+   */
+  runKeepAliveLoop () {
+    this.keepAlive = setInterval(() => {
+      this.props.fetchSessionDetails(this.props.match.params.sessionId, true); // Pings the Appium server to keep it alive
+      const now = +(new Date());
+
+      // If the new command limit has been surpassed, prompt user if they want to keep session going
+      // Give them 30 seconds to respond
+      if (now - this._lastActiveMoment > NO_NEW_COMMAND_LIMIT) {
+        this.props.promptKeepAlive();
+
+        // After the time limit kill the session (this timeout will be killed if they keep it alive)
+        this.waitForUserTimeout = setTimeout(() => {
+          this.killKeepAliveLoop();
+          this.props.applyClientMethod({methodName: 'quit', args: ['Session closed due to inactivity']});
+        }, WAIT_FOR_USER_KEEP_ALIVE);
+      }
+    }, KEEP_ALIVE_PING_INTERVAL);
+  }
+
+  /**
+   * Get rid of the intervals to keep the session alive
+   */
+  killKeepAliveLoop () {
+    clearInterval(this.keepAlive);
+    if (this.waitForUserTimeout) {
+      clearTimeout(this.waitForUserTimeout);
+    }
+  }
+
+  /**
+   * Reset the new command clock and kill the wait for user timeout
+   */
+  keepSessionAlive () {
+    this.props.keepSessionAlive();
+    this._lastActiveMoment = +(new Date());
+    if (this.waitForUserTimeout) {
+      clearTimeout(this.waitForUserTimeout);
     }
   }
 
@@ -100,7 +150,7 @@ export default class Inspector extends Component {
            pauseRecording, showLocatorTestModal,
            screenshotInteractionMode,
            selectedInteractionMode, selectInteractionMode,
-           showKeepAlivePrompt, keepSessionAlive, sourceXML, t} = this.props;
+           showKeepAlivePrompt, sourceXML, t} = this.props;
     const {path} = selectedElement;
 
     let main = <div className={InspectorStyles['inspector-main']} ref={(el) => {this.screenAndSourceEl = el;}}>
@@ -207,7 +257,7 @@ export default class Inspector extends Component {
       <Modal
         title={t('Session Inactive')}
         visible={showKeepAlivePrompt}
-        onOk={() => keepSessionAlive()}
+        onOk={() => this.keepSessionAlive()}
         onCancel={() => quitSession()}
         okText={t('Keep Session Running')}
         cancelText={t('Quit Session')}

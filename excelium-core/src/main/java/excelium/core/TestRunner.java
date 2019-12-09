@@ -359,7 +359,9 @@ public class TestRunner {
 
     private DebugSession createDebugSession(ContextAwareWebDriver webDriver) {
         // get the session capabilities to prove things are working
-        webDriver.getAppiumDriver().getSessionDetails();
+        if (webDriver.isMobile()) {
+            webDriver.getAppiumDriver().getSessionDetails();
+        }
 
         DebugSession currentSession = DebugSessionHolder.getInstance().getSession(webDriver.getSessionId().toString());
         if (currentSession == null) {

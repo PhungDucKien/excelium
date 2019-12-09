@@ -263,6 +263,8 @@ public class DebugSession {
         SessionDetails sessionDetails = new SessionDetails();
         sessionDetails.setDesiredCapabilities(webDriver.getCapabilities().asMap());
         if (webDriver.isMobile()) {
+            sessionDetails.setSessionDetails(webDriver.getAppiumDriver().getSessionDetails());
+
             URL remoteAddress = webDriver.getAppiumDriver().getRemoteAddress();
             sessionDetails.setHost(remoteAddress.getHost());
             sessionDetails.setPort(remoteAddress.getPort());

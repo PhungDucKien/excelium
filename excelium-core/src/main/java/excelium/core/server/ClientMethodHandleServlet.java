@@ -47,23 +47,22 @@ public class ClientMethodHandleServlet extends BaseServlet {
             String selector = request.getParameter("selector"); // Optional. Element fetch selector
             boolean fetchArray = Boolean.valueOf(request.getParameter("fetchArray")); // Optional. Are we fetching an array of elements or just one?
             String elementId = request.getParameter("elementId"); // Optional. Element being operated on
-            String args = request.getParameter("args"); // Optional. Arguments passed to method
+            Object[] args = gson.fromJson(request.getParameter("args"), Object[].class); // Optional. Arguments passed to method
             boolean skipScreenshotAndSource = Boolean.valueOf(request.getParameter("skipScreenshotAndSource")); // Optional. Do we want the updated source and screenshot?
             boolean ignoreResult = Boolean.valueOf(request.getParameter("ignoreResult")); // Optional. Do we want to send the result back to the renderer?
 
             DebugSession debugSession = DebugSessionHolder.getInstance().getSession(sessionId);
 
             if ("quit".equals(methodName)) {
-                DebugSessionHolder.getInstance().killSession(sessionId, true);
+                DebugSessionHolder.getInstance().killSession(sessionId, args == null || args[0] == null);
                 writeToResponse(new SourceAndScreenshot(), response);
             } else {
                 if (StringUtils.isNotBlank(methodName)) {
                     ExecuteResponse executeResponse;
-                    Object[] objs = gson.fromJson(args, Object[].class);
                     if (StringUtils.isNotBlank(elementId)) {
-                        executeResponse = debugSession.executeElementCommand(elementId, methodName, objs, skipScreenshotAndSource);
+                        executeResponse = debugSession.executeElementCommand(elementId, methodName, args, skipScreenshotAndSource);
                     } else {
-                        executeResponse = debugSession.executeMethod(methodName, objs, skipScreenshotAndSource);
+                        executeResponse = debugSession.executeMethod(methodName, args, skipScreenshotAndSource);
                     }
                     executeResponse.setMethodName(methodName);
                     executeResponse.setIgnoreResult(ignoreResult);

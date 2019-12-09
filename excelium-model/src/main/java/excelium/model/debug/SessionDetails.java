@@ -28,6 +28,7 @@ import java.util.Map;
 
 public class SessionDetails {
     private Map<String, Object> desiredCapabilities;
+    private Map<String, Object> sessionDetails;
     private String host;
     private Integer port;
     private String path;
@@ -39,6 +40,14 @@ public class SessionDetails {
 
     public void setDesiredCapabilities(Map<String, Object> desiredCapabilities) {
         this.desiredCapabilities = desiredCapabilities;
+    }
+
+    public Map<String, Object> getSessionDetails() {
+        return sessionDetails;
+    }
+
+    public void setSessionDetails(Map<String, Object> sessionDetails) {
+        this.sessionDetails = sessionDetails;
     }
 
     public String getHost() {
