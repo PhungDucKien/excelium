@@ -65,6 +65,7 @@ export const SELECT_SUB_ACTION_GROUP = 'SELECT_SUB_ACTION_GROUP';
 export const ENTERING_ACTION_ARGS = 'ENTERING_ACTION_ARGS';
 export const REMOVE_ACTION = 'REMOVE_ACTION';
 export const SET_ACTION_ARG = 'SET_ACTION_ARG';
+export const SET_LAST_ACTIVE_MOMENT = 'SET_LAST_ACTIVE_MOMENT';
 
 
 // Attributes on nodes that we know are unique to the node
@@ -271,6 +272,7 @@ export function applyClientMethod (params) {
                       state.inspector.isRecording;
     try {
       dispatch({type: METHOD_CALL_REQUESTED});
+      setLastActiveMoment()(dispatch);
       const {source, screenshot, windowSize, result, sourceError,
              screenshotError, windowSizeError, variableName,
              variableIndex, strategy, selector} = await callClientMethod(state.inspector.sessionId, params);
@@ -384,6 +386,7 @@ export function pauseRecording () {
 export function clearRecording () {
   return async (dispatch, getState) => {
     dispatch({type: CLEAR_RECORDING});
+    setLastActiveMoment()(dispatch);
 
     const state = getState();
     // Tell the server to start the variable count from 1
@@ -413,6 +416,7 @@ export function clearRecording () {
 export function stepOverDebugger () {
   return async (dispatch, getState) => {
     dispatch({type: METHOD_CALL_REQUESTED});
+    setLastActiveMoment()(dispatch);
 
     const state = getState();
     fetch('/api/session/step-over', {
@@ -445,6 +449,7 @@ export function stepOverDebugger () {
 export function resumeDebugger () {
   return async (dispatch, getState) => {
     dispatch({type: METHOD_CALL_REQUESTED});
+    setLastActiveMoment()(dispatch);
 
     const state = getState();
     fetch('/api/session/resume', {
@@ -477,6 +482,7 @@ export function resumeDebugger () {
 export function muteAndResumeDebugger () {
   return async (dispatch, getState) => {
     dispatch({type: METHOD_CALL_REQUESTED});
+    setLastActiveMoment()(dispatch);
 
     const state = getState();
     fetch('/api/session/mute-resume', {
@@ -503,6 +509,12 @@ export function muteAndResumeDebugger () {
       dispatch({type: METHOD_CALL_DONE});
       showError(e, 0);
     });
+  };
+}
+
+export function setLastActiveMoment () {
+  return (dispatch) => {
+    dispatch({type: SET_LAST_ACTIVE_MOMENT});
   };
 }
 

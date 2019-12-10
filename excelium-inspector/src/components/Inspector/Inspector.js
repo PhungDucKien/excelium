@@ -34,7 +34,6 @@ export default class Inspector extends Component {
     this.screenAndSourceEl = null;
     this.lastScreenshot = null;
     this.updateSourceTreeWidth = debounce(this.updateSourceTreeWidth.bind(this), 50);
-    this._lastActiveMoment = +(new Date());
   }
 
   updateSourceTreeWidth () {
@@ -113,7 +112,7 @@ export default class Inspector extends Component {
 
       // If the new command limit has been surpassed, prompt user if they want to keep session going
       // Give them 30 seconds to respond
-      if (now - this._lastActiveMoment > NO_NEW_COMMAND_LIMIT) {
+      if (now - this.props.lastActiveMoment > NO_NEW_COMMAND_LIMIT) {
         this.props.promptKeepAlive();
 
         // After the time limit kill the session (this timeout will be killed if they keep it alive)
@@ -140,7 +139,7 @@ export default class Inspector extends Component {
    */
   keepSessionAlive () {
     this.props.keepSessionAlive();
-    this._lastActiveMoment = +(new Date());
+    this.props.setLastActiveMoment();
     if (this.waitForUserTimeout) {
       clearTimeout(this.waitForUserTimeout);
     }
@@ -281,10 +280,10 @@ export default class Inspector extends Component {
       <Modal
         title={t('Session Inactive')}
         visible={showKeepAlivePrompt}
-        onOk={() => this.keepSessionAlive()}
-        onCancel={() => quitSession()}
-        okText={t('Keep Session Running')}
-        cancelText={t('Quit Session')}
+        onOk={() => quitSession()}
+        onCancel={() => this.keepSessionAlive()}
+        okText={t('Quit Session')}
+        cancelText={t('Keep Session Running')}
       >
         <p>{t('Your session is about to expire')}</p>
       </Modal>

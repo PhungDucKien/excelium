@@ -11,7 +11,7 @@ import { SET_SESSION_ID, SET_SOURCE_AND_SCREENSHOT, QUIT_SESSION_REQUESTED, QUIT
          ADD_ASSIGNED_VAR_CACHE, CLEAR_ASSIGNED_VAR_CACHE, SET_SCREENSHOT_INTERACTION_MODE,
          SET_SWIPE_START, SET_SWIPE_END, CLEAR_SWIPE_ACTION, SET_SEARCHED_FOR_ELEMENT_BOUNDS, CLEAR_SEARCHED_FOR_ELEMENT_BOUNDS,
          PROMPT_KEEP_ALIVE, HIDE_PROMPT_KEEP_ALIVE, START_KEEP_ALIVE, CLEAR_KEEP_ALIVE,
-         SELECT_ACTION_GROUP, SELECT_SUB_ACTION_GROUP,
+         SELECT_ACTION_GROUP, SELECT_SUB_ACTION_GROUP, SET_LAST_ACTIVE_MOMENT,
          SELECT_INTERACTION_MODE, ENTERING_ACTION_ARGS, SET_ACTION_ARG, REMOVE_ACTION
 } from '../actions/Inspector';
 import { SCREENSHOT_INTERACTION_MODE, INTERACTION_MODE } from '../components/Inspector/shared';
@@ -40,6 +40,7 @@ const INITIAL_STATE = {
   selectedInteractionMode: INTERACTION_MODE.SOURCE,
   pendingAction: null,
   sessionId: null,
+  lastActiveMoment: +(new Date()),
 };
 
 /**
@@ -60,6 +61,12 @@ export default function inspector (state = INITIAL_STATE, action) {
         ...state,
         sessionId: action.sessionId,
       };
+
+    case SET_LAST_ACTIVE_MOMENT:
+      return {
+        ...state,
+        lastActiveMoment: +(new Date()),
+      }
     
     case SET_SOURCE_AND_SCREENSHOT:
       return {
@@ -83,6 +90,7 @@ export default function inspector (state = INITIAL_STATE, action) {
     case QUIT_SESSION_DONE:
       return {
         ...INITIAL_STATE,
+        lastActiveMoment: +(new Date()),
         isSessionDone: true,
       };
 
