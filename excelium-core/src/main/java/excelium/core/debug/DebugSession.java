@@ -33,10 +33,7 @@ import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebElement;
 
 import javax.servlet.ServletException;
@@ -234,18 +231,27 @@ public class DebugSession {
         try {
             source = this.webDriver.getPageSource();
         } catch (Exception e) {
+            if (e instanceof NoSuchSessionException) {
+                throw e;
+            }
             sourceError = e.getMessage();
         }
 
         try {
             screenshot = this.webDriver.getScreenshotAs(OutputType.BASE64);
         } catch (Exception e) {
+            if (e instanceof NoSuchSessionException) {
+                throw e;
+            }
             screenshotError = e.getMessage();
         }
 
         try {
             windowSize = this.webDriver.manage().window().getSize();
         } catch (Exception e) {
+            if (e instanceof NoSuchSessionException) {
+                throw e;
+            }
             windowSizeError = e.getMessage();
         }
 

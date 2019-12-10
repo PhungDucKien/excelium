@@ -81,7 +81,8 @@ export default function inspector (state = INITIAL_STATE, action) {
 
     case QUIT_SESSION_DONE:
       return {
-        ...INITIAL_STATE
+        ...INITIAL_STATE,
+        isSessionDone: true,
       };
 
     case SESSION_DONE:

@@ -24,8 +24,10 @@
 
 package excelium.core.server;
 
+import excelium.core.debug.DebugSession;
 import excelium.core.debug.DebugSessionHolder;
 import excelium.model.debug.ErrorResponse;
+import org.openqa.selenium.NoSuchSessionException;
 import org.seleniumhq.jetty9.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,11 +40,22 @@ public class RestartRecorderServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String sessionId = request.getParameter("sessionId"); // Session ID
-            DebugSessionHolder.getInstance().getSession(sessionId).restart();
+            DebugSession debugSession = DebugSessionHolder.getInstance().getSession(sessionId);
+            if (debugSession == null) {
+                response.setStatus(HttpStatus.NOT_FOUND_404);
+                writeToResponse(new ErrorResponse(new NoSuchSessionException("Session is either terminated or not started")), response);
+                return;
+            }
+            debugSession.restart();
             writeToResponse("{\"result\":\"OK\"}", response);
         } catch (Exception e) {
-            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
-            writeToResponse(new ErrorResponse(e), response);
+            if (e instanceof NoSuchSessionException) {
+                response.setStatus(HttpStatus.NOT_FOUND_404);
+                writeToResponse(new ErrorResponse(new NoSuchSessionException("Session is either terminated or not started")), response);
+            } else {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
+                writeToResponse(new ErrorResponse(e), response);
+            }
         }
     }
 }

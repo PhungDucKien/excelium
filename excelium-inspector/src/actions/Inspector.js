@@ -139,6 +139,20 @@ function xmlToJSON (source) {
   return recursive(sourceXML);
 }
 
+export function sessionDone ({reason, killedByUser}) {
+  return async (dispatch) => {
+    dispatch({type: QUIT_SESSION_DONE});
+    if (!killedByUser) {
+      notification.error({
+        message: 'Error',
+        description: reason || i18n.t('Session has been terminated'),
+        duration: 0
+      });
+    } else {
+      window.close();
+    }
+  };
+}
 
 // A debounced function that calls findElement and gets info about the element
 const findElement = _.debounce(async function (strategyMap, dispatch, getState, path) {
@@ -219,7 +233,11 @@ export function fetchSessionDetails (sessionId, skipScreenshotAndSource = false)
     .then(res => res.json())
     .then(async resp => {
       if (resp.e) {
-        showError({message: resp.e}, 0)
+        if (resp.e.startsWith("org.openqa.selenium.NoSuchSessionException: ")) {
+          await sessionDone({reason: extractNoSuchSessionMessage(resp.e)})(dispatch);
+        } else {
+          showError({message: resp.e}, 0)
+        }
       } else {
         const { desiredCapabilities, host, port, path, https } = resp;
         setSessionDetails({
@@ -278,11 +296,20 @@ export function applyClientMethod (params) {
           windowSizeError,
         });
       }
+
+      if (params.methodName === 'quit') {
+        const reason = params.args && params.args[0] ? params.args[0] : null;
+        await sessionDone({reason, killedByUser: !reason})(dispatch);
+      }
       return result;
     } catch (error) {
       let methodName = params.methodName === 'click' ? 'tap' : params.methodName;
-      showError(error, methodName, 10);
-      dispatch({type: METHOD_CALL_DONE});
+      if (error.message && error.message.startsWith("org.openqa.selenium.NoSuchSessionException: ")) {
+        await sessionDone({reason: extractNoSuchSessionMessage(error)})(dispatch);
+      } else {
+        showError(error, methodName, 10);
+      }
+     dispatch({type: METHOD_CALL_DONE});
     }
   };
 }
@@ -367,7 +394,11 @@ export function clearRecording () {
     .then(res => res.json())
     .then(async resp => {
       if (resp.e) {
-        showError({message: resp.e}, 0);
+        if (resp.e.startsWith("org.openqa.selenium.NoSuchSessionException: ")) {
+          await sessionDone({reason: extractNoSuchSessionMessage(resp.e)})(dispatch);
+        } else {
+          showError({message: resp.e}, 0);
+        }
       }
     })
     .catch(e => showError(e, 0));
@@ -453,7 +484,11 @@ export function searchForElement (strategy, selector) {
       dispatch({type: SEARCHING_FOR_ELEMENTS_COMPLETED, elements});
     } catch (error) {
       dispatch({type: SEARCHING_FOR_ELEMENTS_COMPLETED});
-      showError(error, 10);
+      if (error.message && error.message.startsWith("org.openqa.selenium.NoSuchSessionException: ")) {
+        await sessionDone({reason: extractNoSuchSessionMessage(error)})(dispatch);
+      } else {
+        showError(error, 10);
+      }
     }
   };
 }
@@ -563,4 +598,12 @@ export function setActionArg (index, value) {
   return (dispatch) => {
     dispatch({type: SET_ACTION_ARG, index, value});
   };
+}
+
+function extractNoSuchSessionMessage(message) {
+  const match = message.match(/^org.openqa.selenium.NoSuchSessionException:\s+(.*)\s+Build info:.*$/mi);
+  if (match && match[1]) {
+    return match[1];
+  }
+  return message;
 }

@@ -86,12 +86,15 @@ export default class Inspector extends Component {
   }
 
   componentDidUpdate () {
-    const {screenshot} = this.props;
+    const { screenshot, isSessionDone } = this.props;
     // only update when the screenshot changed, not for any other kind of
     // update
     if (screenshot !== this.lastScreenshot) {
       this.updateSourceTreeWidth();
       this.lastScreenshot = screenshot;
+    }
+    if (isSessionDone) {
+      this.killKeepAliveLoop();
     }
   }
 

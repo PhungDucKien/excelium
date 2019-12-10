@@ -30,6 +30,7 @@ import excelium.model.debug.ErrorResponse;
 import excelium.model.debug.ExecuteResponse;
 import excelium.model.debug.SourceAndScreenshot;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.NoSuchSessionException;
 import org.seleniumhq.jetty9.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +53,11 @@ public class ClientMethodHandleServlet extends BaseServlet {
             boolean ignoreResult = Boolean.valueOf(request.getParameter("ignoreResult")); // Optional. Do we want to send the result back to the renderer?
 
             DebugSession debugSession = DebugSessionHolder.getInstance().getSession(sessionId);
+            if (debugSession == null) {
+                response.setStatus(HttpStatus.NOT_FOUND_404);
+                writeToResponse(new ErrorResponse(new NoSuchSessionException("Session is either terminated or not started")), response);
+                return;
+            }
 
             if ("quit".equals(methodName)) {
                 DebugSessionHolder.getInstance().killSession(sessionId, args == null || args[0] == null);
@@ -76,8 +82,13 @@ public class ClientMethodHandleServlet extends BaseServlet {
                 }
             }
         } catch (Exception e) {
-            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
-            writeToResponse(new ErrorResponse(e), response);
+            if (e instanceof NoSuchSessionException) {
+                response.setStatus(HttpStatus.NOT_FOUND_404);
+                writeToResponse(new ErrorResponse(new NoSuchSessionException("Session is either terminated or not started")), response);
+            } else {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
+                writeToResponse(new ErrorResponse(e), response);
+            }
         }
     }
 }
