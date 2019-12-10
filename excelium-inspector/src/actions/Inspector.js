@@ -351,9 +351,26 @@ export function pauseRecording () {
 }
 
 export function clearRecording () {
-  return (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch({type: CLEAR_RECORDING});
-    // ipcRenderer.send('appium-restart-recorder'); // Tell the main thread to start the variable count from 1
+
+    const state = getState();
+    // Tell the server to start the variable count from 1
+    fetch('/api/session/restart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Accept': 'application/json; charset=utf-8',
+      },
+      body: `sessionId=${encodeURIComponent(state.inspector.sessionId)}`
+    })
+    .then(res => res.json())
+    .then(async resp => {
+      if (resp.e) {
+        showError({message: resp.e}, 0);
+      }
+    })
+    .catch(e => showError(e, 0));
     dispatch({type: CLEAR_ASSIGNED_VAR_CACHE}); // Get rid of the variable cache
   };
 }

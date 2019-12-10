@@ -43,11 +43,14 @@ public class BaseServlet extends HttpServlet {
 
     void writeToResponse(Object obj, HttpServletResponse response) throws IOException {
         String employeeJsonString = this.gson.toJson(obj);
+        writeToResponse(employeeJsonString, response);
+    }
 
+    void writeToResponse(String string, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print(employeeJsonString);
+        out.print(string);
         out.flush();
     }
 

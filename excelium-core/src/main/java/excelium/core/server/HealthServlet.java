@@ -33,8 +33,6 @@ public class HealthServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        out.print("OK");
-        out.flush();
+        writeToResponse("{\"result\":\"OK\"}", response);
     }
 }

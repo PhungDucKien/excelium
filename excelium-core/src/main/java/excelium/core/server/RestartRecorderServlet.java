@@ -39,6 +39,7 @@ public class RestartRecorderServlet extends BaseServlet {
         try {
             String sessionId = request.getParameter("sessionId"); // Session ID
             DebugSessionHolder.getInstance().getSession(sessionId).restart();
+            writeToResponse("{\"result\":\"OK\"}", response);
         } catch (Exception e) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
             writeToResponse(new ErrorResponse(e), response);
