@@ -156,6 +156,7 @@ export default class Inspector extends Component {
     const {screenshot, screenshotError, selectedElement = {},
            applyClientMethod, quitSession, isRecording, showRecord, startRecording,
            pauseRecording, showLocatorTestModal,
+           stepOverDebugger, resumeDebugger, muteAndResumeDebugger,
            screenshotInteractionMode,
            selectedInteractionMode, selectInteractionMode,
            showKeepAlivePrompt, sourceXML, t} = this.props;
@@ -206,6 +207,20 @@ export default class Inspector extends Component {
       </div>
     </div>;
 
+    let debuggerControls = <div className={InspectorStyles['debugger-controls']}>
+    <ButtonGroup size="large">
+      <Tooltip title={t('Step Over')}>
+        <Button icon='step-forward' onClick={() => stepOverDebugger()}/>
+      </Tooltip>
+      <Tooltip title={t('Resume Test')}>
+        <Button icon='fast-forward' onClick={() => resumeDebugger()}/>
+      </Tooltip>
+      <Tooltip title={t('Mute Breakpoints and Resume Test')}>
+        <Button icon='forward' onClick={() => muteAndResumeDebugger()}/>
+      </Tooltip>
+    </ButtonGroup>
+    </div>;
+
     let actionControls = <div className={InspectorStyles['action-controls']}>
       <ButtonGroup size="large" value={screenshotInteractionMode}>
         <Tooltip title={t('Select Elements')}>
@@ -227,6 +242,7 @@ export default class Inspector extends Component {
     </div>;
 
     let controls = <div className={InspectorStyles['inspector-toolbar']}>
+      {debuggerControls}
       {actionControls}
       <ButtonGroup size="large">
         <Tooltip title={t('Back')}>

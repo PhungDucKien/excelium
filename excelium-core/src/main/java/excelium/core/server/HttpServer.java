@@ -103,6 +103,9 @@ public class HttpServer {
         servletContext.addServlet(new ServletHolder(new SessionDetailsServlet()), "/session/details");
         servletContext.addServlet(new ServletHolder(new RestartRecorderServlet()), "/session/restart");
         servletContext.addServlet(new ServletHolder(new ClientMethodHandleServlet()), "/session/execute");
+        servletContext.addServlet(new ServletHolder(new StepOverSessionServlet()), "/session/step-over");
+        servletContext.addServlet(new ServletHolder(new ResumeSessionServlet()), "/session/resume");
+        servletContext.addServlet(new ServletHolder(new MuteAndResumeSessionServlet()), "/session/mute-resume");
         handlers.addHandler(servletContext);
 
         server.setHandler(handlers);

@@ -326,6 +326,10 @@
     margin: 0 auto 2px auto;
  }
 
+ .debugger-controls {
+    margin-right: 20px;
+ }
+
  .action-controls {
     margin-right: 20px;
  }

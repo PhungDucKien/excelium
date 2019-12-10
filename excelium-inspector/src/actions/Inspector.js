@@ -410,6 +410,102 @@ export function clearRecording () {
   };
 }
 
+export function stepOverDebugger () {
+  return async (dispatch, getState) => {
+    dispatch({type: METHOD_CALL_REQUESTED});
+
+    const state = getState();
+    fetch('/api/session/step-over', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Accept': 'application/json; charset=utf-8',
+      },
+      body: `sessionId=${encodeURIComponent(state.inspector.sessionId)}`
+    })
+    .then(res => res.json())
+    .then(async resp => {
+      dispatch({type: METHOD_CALL_DONE});
+
+      if (resp.e) {
+        if (resp.e.startsWith("org.openqa.selenium.NoSuchSessionException: ")) {
+          await sessionDone({reason: extractNoSuchSessionMessage(resp.e)})(dispatch);
+        } else {
+          showError({message: resp.e}, 0);
+        }
+      }
+    })
+    .catch(e => {
+      dispatch({type: METHOD_CALL_DONE});
+      showError(e, 0);
+    });
+  };
+}
+
+export function resumeDebugger () {
+  return async (dispatch, getState) => {
+    dispatch({type: METHOD_CALL_REQUESTED});
+
+    const state = getState();
+    fetch('/api/session/resume', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Accept': 'application/json; charset=utf-8',
+      },
+      body: `sessionId=${encodeURIComponent(state.inspector.sessionId)}`
+    })
+    .then(res => res.json())
+    .then(async resp => {
+      dispatch({type: METHOD_CALL_DONE});
+
+      if (resp.e) {
+        if (resp.e.startsWith("org.openqa.selenium.NoSuchSessionException: ")) {
+          await sessionDone({reason: extractNoSuchSessionMessage(resp.e)})(dispatch);
+        } else {
+          showError({message: resp.e}, 0);
+        }
+      }
+    })
+    .catch(e => {
+      dispatch({type: METHOD_CALL_DONE});
+      showError(e, 0);
+    });
+  };
+}
+
+export function muteAndResumeDebugger () {
+  return async (dispatch, getState) => {
+    dispatch({type: METHOD_CALL_REQUESTED});
+
+    const state = getState();
+    fetch('/api/session/mute-resume', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Accept': 'application/json; charset=utf-8',
+      },
+      body: `sessionId=${encodeURIComponent(state.inspector.sessionId)}`
+    })
+    .then(res => res.json())
+    .then(async resp => {
+      dispatch({type: METHOD_CALL_DONE});
+
+      if (resp.e) {
+        if (resp.e.startsWith("org.openqa.selenium.NoSuchSessionException: ")) {
+          await sessionDone({reason: extractNoSuchSessionMessage(resp.e)})(dispatch);
+        } else {
+          showError({message: resp.e}, 0);
+        }
+      }
+    })
+    .catch(e => {
+      dispatch({type: METHOD_CALL_DONE});
+      showError(e, 0);
+    });
+  };
+}
+
 export function getSavedActionFramework () {
   return async (dispatch) => {
     let framework = localStorage.getItem(SAVED_FRAMEWORK) || 'java';
