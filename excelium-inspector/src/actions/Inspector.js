@@ -54,6 +54,8 @@ export const SET_SWIPE_END = 'SET_SWIPE_END';
 export const CLEAR_SWIPE_ACTION = 'CLEAR_SWIPE_ACTION';
 export const PROMPT_KEEP_ALIVE = 'PROMPT_KEEP_ALIVE';
 export const HIDE_PROMPT_KEEP_ALIVE = 'HIDE_PROMPT_KEEP_ALIVE';
+export const START_KEEP_ALIVE = 'START_KEEP_ALIVE';
+export const CLEAR_KEEP_ALIVE = 'CLEAR_KEEP_ALIVE';
 
 export const SELECT_INTERACTION_MODE = 'SELECT_INTERACTION_MODE';
 
@@ -141,6 +143,7 @@ function xmlToJSON (source) {
 
 export function sessionDone ({reason, killedByUser}) {
   return async (dispatch) => {
+    clearKeepAlive()(dispatch);
     dispatch({type: QUIT_SESSION_DONE});
     if (!killedByUser) {
       notification.error({
@@ -240,6 +243,7 @@ export function fetchSessionDetails (sessionId, skipScreenshotAndSource = false)
         }
       } else {
         const { desiredCapabilities, host, port, path, https } = resp;
+        startKeepAlive()(dispatch);
         setSessionDetails({
           desiredCapabilities,
           host,
@@ -561,6 +565,18 @@ export function promptKeepAlive () {
 export function keepSessionAlive () {
   return (dispatch) => {
     dispatch({type: HIDE_PROMPT_KEEP_ALIVE});
+  };
+}
+
+export function startKeepAlive () {
+  return (dispatch) => {
+    dispatch({type: START_KEEP_ALIVE});
+  };
+}
+
+export function clearKeepAlive () {
+  return (dispatch) => {
+    dispatch({type: CLEAR_KEEP_ALIVE});
   };
 }
 

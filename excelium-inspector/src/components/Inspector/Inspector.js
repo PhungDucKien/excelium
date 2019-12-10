@@ -82,19 +82,24 @@ export default class Inspector extends Component {
     this.props.fetchSessionDetails(this.props.match.params.sessionId);
     this.props.getSavedActionFramework();
     window.addEventListener('resize', this.updateSourceTreeWidth);
-    this.runKeepAliveLoop();
   }
 
   componentDidUpdate () {
-    const { screenshot, isSessionDone } = this.props;
+    const { screenshot, isSessionDone, isKeepingAlive } = this.props;
     // only update when the screenshot changed, not for any other kind of
     // update
     if (screenshot !== this.lastScreenshot) {
       this.updateSourceTreeWidth();
       this.lastScreenshot = screenshot;
     }
-    if (isSessionDone) {
-      this.killKeepAliveLoop();
+    if (!this.keepAlive) {
+      if (isKeepingAlive && !isSessionDone) {
+        this.runKeepAliveLoop();
+      }
+    } else {
+      if (!isKeepingAlive || isSessionDone) {
+        this.killKeepAliveLoop();
+      }
     }
   }
 
