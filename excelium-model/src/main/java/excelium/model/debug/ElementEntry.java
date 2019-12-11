@@ -27,19 +27,20 @@ package excelium.model.debug;
 import org.openqa.selenium.remote.RemoteWebElement;
 
 public class ElementEntry {
-    private RemoteWebElement el;
+    private WebElement el;
     private String variableName;
     private String variableType;
     private Integer variableIndex;
     private String strategy;
     private String selector;
     private String id;
+    private transient RemoteWebElement driverEl;
 
-    public RemoteWebElement getEl() {
+    public WebElement getEl() {
         return el;
     }
 
-    public void setEl(RemoteWebElement el) {
+    public void setEl(WebElement el) {
         this.el = el;
     }
 
@@ -89,5 +90,13 @@ public class ElementEntry {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public RemoteWebElement getDriverEl() {
+        return driverEl;
+    }
+
+    public void setDriverEl(RemoteWebElement driverEl) {
+        this.driverEl = driverEl;
     }
 }

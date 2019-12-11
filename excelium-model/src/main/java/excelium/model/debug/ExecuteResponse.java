@@ -25,7 +25,6 @@
 package excelium.model.debug;
 
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.remote.RemoteWebElement;
 
 public class ExecuteResponse {
     private String source;
@@ -34,7 +33,7 @@ public class ExecuteResponse {
     private String screenshotError;
     private Dimension windowSize;
     private String windowSizeError;
-    private RemoteWebElement el;
+    private WebElement el;
     private String variableName;
     private String variableType;
     private Integer variableIndex;
@@ -92,11 +91,11 @@ public class ExecuteResponse {
         this.windowSizeError = windowSizeError;
     }
 
-    public RemoteWebElement getEl() {
+    public WebElement getEl() {
         return el;
     }
 
-    public void setEl(RemoteWebElement el) {
+    public void setEl(WebElement el) {
         this.el = el;
     }
 

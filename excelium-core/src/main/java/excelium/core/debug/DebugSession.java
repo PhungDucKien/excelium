@@ -33,7 +33,10 @@ import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NoSuchSessionException;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.remote.RemoteWebElement;
 
 import javax.servlet.ServletException;
@@ -87,12 +90,16 @@ public class DebugSession {
             String id = element.getId();
 
             // Cache this ID along with its variable name, variable type and strategy/selector
+            WebElement webElement = new WebElement();
+            webElement.setId(element.getId());
+
             ElementEntry cachedEl = new ElementEntry();
-            cachedEl.setEl(element);
+            cachedEl.setEl(webElement);
             cachedEl.setVariableType("string");
             cachedEl.setStrategy(strategy);
             cachedEl.setSelector(selector);
             cachedEl.setId(id);
+            cachedEl.setDriverEl(element);
             this.elementCache.put(id, cachedEl);
 
             return cachedEl;
@@ -103,7 +110,7 @@ public class DebugSession {
 
     public ElementArray fetchElements(String strategy, String selector) {
         try {
-            List<WebElement> els = webDriver.findElements(strategy + "=" + selector);
+            List<org.openqa.selenium.WebElement> els = webDriver.findElements(strategy + "=" + selector);
 
             String variableName = "els" + this.elArrayVariableCounter++;
             String variableType = "array";
@@ -111,16 +118,20 @@ public class DebugSession {
             // Cache the elements that we find
             List<ElementEntry> elements = new ArrayList<>();
             int index = 0;
-            for (WebElement el : els) {
+            for (org.openqa.selenium.WebElement el : els) {
                 String id = ((RemoteWebElement) el).getId();
+                WebElement webElement = new WebElement();
+                webElement.setId(id);
+
                 ElementEntry cachedEl = new ElementEntry();
-                cachedEl.setEl((RemoteWebElement) el);
+                cachedEl.setEl(webElement);
                 cachedEl.setVariableName(variableName);
                 cachedEl.setVariableIndex(index);
                 cachedEl.setVariableType("string");
                 cachedEl.setStrategy(strategy);
                 cachedEl.setSelector(selector);
                 cachedEl.setId(id);
+                cachedEl.setDriverEl((RemoteWebElement) el);
                 this.elementCache.put(id, cachedEl);
                 elements.add(cachedEl);
 
@@ -149,7 +160,7 @@ public class DebugSession {
                 cachedEl.setVariableName("el" + this.elVariableCounter++);
             }
 
-            applyMethod(cachedEl.getEl(), methodName, args);
+            applyMethod(cachedEl.getDriverEl(), methodName, args);
         } else {
             // Specially handle the tap and swipe method
             if ("tap".equals(methodName)) {
