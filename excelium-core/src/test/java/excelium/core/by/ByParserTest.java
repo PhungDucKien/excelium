@@ -54,17 +54,29 @@ public class ByParserTest {
         Assert.assertTrue(by instanceof By.ById);
         Assert.assertEquals("By.id: id", by.toString());
 
+        by = ByParser.parseBy("link=link", webDriver);
+        Assert.assertTrue(by instanceof By.ByLinkText);
+        Assert.assertEquals("By.linkText: link", by.toString());
+
+        by = ByParser.parseBy("partial link=link", webDriver);
+        Assert.assertTrue(by instanceof By.ByPartialLinkText);
+        Assert.assertEquals("By.partialLinkText: link", by.toString());
+
+        by = ByParser.parseBy("tag=button", webDriver);
+        Assert.assertTrue(by instanceof By.ByTagName);
+        Assert.assertEquals("By.tagName: button", by.toString());
+
         by = ByParser.parseBy("name=name", webDriver);
         Assert.assertTrue(by instanceof By.ByName);
         Assert.assertEquals("By.name: name", by.toString());
 
+        by = ByParser.parseBy("class=class", webDriver);
+        Assert.assertTrue(by instanceof By.ByClassName);
+        Assert.assertEquals("By.className: class", by.toString());
+
         by = ByParser.parseBy("css=css", webDriver);
         Assert.assertTrue(by instanceof ByCss);
         Assert.assertEquals("By.css: css", by.toString());
-
-        by = ByParser.parseBy("link=link", webDriver);
-        Assert.assertTrue(by instanceof By.ByLinkText);
-        Assert.assertEquals("By.linkText: link", by.toString());
 
         by = ByParser.parseBy("xpath=//xpath", webDriver);
         Assert.assertTrue(by instanceof By.ByXPath);
@@ -74,6 +86,18 @@ public class ByParserTest {
         Assert.assertTrue(by instanceof ByIdOrName);
         Assert.assertEquals("by id or name \"identifier\"", by.toString());
 
+        by = ByParser.parseBy("alt=alt", webDriver);
+        Assert.assertTrue(by instanceof ByAlt);
+        Assert.assertEquals("By.alt: alt", by.toString());
+
+        by = ByParser.parseBy("dom=dom", webDriver);
+        Assert.assertTrue(by instanceof ByDom);
+        Assert.assertEquals("By.dom: dom", by.toString());
+
+        by = ByParser.parseBy("index=1", webDriver);
+        Assert.assertTrue(by instanceof ByIndex);
+        Assert.assertEquals("By.index: [null][1]", by.toString());
+
         by = ByParser.parseBy("variable=variable", webDriver);
         Assert.assertTrue(by instanceof ByVariable);
         Assert.assertEquals("By.variable: variable", by.toString());
@@ -81,6 +105,10 @@ public class ByParserTest {
         by = ByParser.parseBy("//xpath", webDriver);
         Assert.assertTrue(by instanceof By.ByXPath);
         Assert.assertEquals("By.xpath: //xpath", by.toString());
+
+        by = ByParser.parseBy("document.getElementById('login-btn')", webDriver);
+        Assert.assertTrue(by instanceof ByDom);
+        Assert.assertEquals("By.dom: document.getElementById('login-btn')", by.toString());
 
         by = ByParser.parseBy("identifier", webDriver);
         Assert.assertTrue(by instanceof ByIdOrName);
@@ -93,9 +121,9 @@ public class ByParserTest {
             webDriver.isWebContext(); result = false;
         }};
 
-        By by = ByParser.parseBy("accessibility_id=accessibility_id", webDriver);
+        By by = ByParser.parseBy("accessibility id=accessibility id", webDriver);
         Assert.assertTrue(by instanceof MobileBy.ByAccessibilityId);
-        Assert.assertEquals("By.AccessibilityId: accessibility_id", by.toString());
+        Assert.assertEquals("By.AccessibilityId: accessibility id", by.toString());
 
         by = ByParser.parseBy("class=class", webDriver);
         Assert.assertTrue(by instanceof MobileBy.ByClassName);
@@ -109,16 +137,47 @@ public class ByParserTest {
         Assert.assertTrue(by instanceof MobileBy.ByName);
         Assert.assertEquals("By.name: name", by.toString());
 
-        by = ByParser.parseBy("xpath=xpath", webDriver);
+        by = ByParser.parseBy("xpath=//xpath", webDriver);
         Assert.assertTrue(by instanceof MobileBy.ByXPath);
-        Assert.assertEquals("By.xpath: xpath", by.toString());
+        Assert.assertEquals("By.xpath: //xpath", by.toString());
 
-        by = ByParser.parseBy("android_uiautomator=android_uiautomator", webDriver);
+        by = ByParser.parseBy("android uiautomator=android uiautomator", webDriver);
         Assert.assertTrue(by instanceof MobileBy.ByAndroidUIAutomator);
-        Assert.assertEquals("By.AndroidUIAutomator: android_uiautomator", by.toString());
+        Assert.assertEquals("By.AndroidUIAutomator: android uiautomator", by.toString());
+
+        by = ByParser.parseBy("android viewtag=android viewtag", webDriver);
+        Assert.assertTrue(by instanceof MobileBy.ByAndroidViewTag);
+        Assert.assertEquals("By.AndroidViewTag: android viewtag", by.toString());
+
+        by = ByParser.parseBy("android datamatcher=android datamatcher", webDriver);
+        Assert.assertTrue(by instanceof MobileBy.ByAndroidDataMatcher);
+        Assert.assertEquals("By.FindsByAndroidDataMatcher: android datamatcher", by.toString());
+
+        by = ByParser.parseBy("ios predicate string=ios predicate string", webDriver);
+        Assert.assertTrue(by instanceof MobileBy.ByIosNsPredicate);
+        Assert.assertEquals("By.IosNsPredicate: ios predicate string", by.toString());
+
+        by = ByParser.parseBy("ios class chain=ios class chain", webDriver);
+        Assert.assertTrue(by instanceof MobileBy.ByIosClassChain);
+        Assert.assertEquals("By.IosClassChain: ios class chain", by.toString());
+
+        by = ByParser.parseBy("windows uiautomation=windows uiautomation", webDriver);
+        Assert.assertTrue(by instanceof MobileBy.ByWindowsAutomation);
+
+        by = ByParser.parseBy("index=1", webDriver);
+        Assert.assertTrue(by instanceof ByIndex);
+        Assert.assertEquals("By.index: [null][1]", by.toString());
 
         by = ByParser.parseBy("variable=variable", webDriver);
         Assert.assertTrue(by instanceof ByVariable);
         Assert.assertEquals("By.variable: variable", by.toString());
+
+        by = ByParser.parseBy("//xpath", webDriver);
+        Assert.assertTrue(by instanceof MobileBy.ByXPath);
+        Assert.assertEquals("By.xpath: //xpath", by.toString());
+
+        by = ByParser.parseBy("accessibility id", webDriver);
+        Assert.assertTrue(by instanceof MobileBy.ByAccessibilityId);
+        Assert.assertEquals("By.AccessibilityId: accessibility id", by.toString());
     }
 }

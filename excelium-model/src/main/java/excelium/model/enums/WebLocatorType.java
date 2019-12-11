@@ -32,62 +32,80 @@ package excelium.model.enums;
  */
 public enum WebLocatorType {
     /**
-     * Identifier web locator type.
-     */
-    IDENTIFIER,
-    /**
      * Id web locator type.
      */
-    ID,
-    /**
-     * Name web locator type.
-     */
-    NAME,
+    ID("id"),
     /**
      * Link web locator type.
      */
-    LINK,
+    LINK("link"),
     /**
-     * Css web locator type.
+     * Partial Link web locator type.
      */
-    CSS,
+    PARTIAL_LINK("partial link"),
     /**
-     * Alt web locator type.
+     * Tag web locator type.
      */
-    ALT,
+    TAG("tag"),
     /**
-     * Dom web locator type.
+     * Name web locator type.
      */
-    DOM,
-    /**
-     * Xpath web locator type.
-     */
-    XPATH,
+    NAME("name"),
     /**
      * Class web locator type.
      */
-    CLASS,
+    CLASS("class"),
     /**
-     * Variable web locator type.
+     * Css web locator type.
      */
-    VARIABLE,
+    CSS("css"),
+    /**
+     * Xpath web locator type.
+     */
+    XPATH("xpath"),
+    /**
+     * Identifier web locator type.
+     */
+    IDENTIFIER("identifier"),
+    /**
+     * Alt web locator type.
+     */
+    ALT("alt"),
+    /**
+     * Dom web locator type.
+     */
+    DOM("dom"),
     /**
      * Reserved locator type for specifying index.
      */
-    INDEX;
+    INDEX("index"),
+    /**
+     * Variable web locator type.
+     */
+    VARIABLE("variable");
+
+    private final String strategy;
+
+    WebLocatorType(String strategy) {
+        this.strategy = strategy;
+    }
 
     /**
-     * From name web locator type.
+     * From strategy web locator type.
      *
-     * @param name the name
+     * @param strategy the strategy
      * @return the web locator type
      */
-    public static WebLocatorType fromName(String name) {
+    public static WebLocatorType fromStrategy(String strategy) {
         for (WebLocatorType t : WebLocatorType.values()) {
-            if (t.name().equalsIgnoreCase(name)) {
+            if (t.strategy.equalsIgnoreCase(strategy)) {
                 return t;
             }
         }
         return null;
+    }
+
+    @Override public String toString() {
+        return strategy;
     }
 }

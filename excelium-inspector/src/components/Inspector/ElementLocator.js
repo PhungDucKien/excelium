@@ -36,13 +36,13 @@ class ElementLocator extends Component {
       ['id', 'Id'],
       ['xpath', 'XPath'],
       ['name', 'Name'],
-      ['class name', 'Class Name'],
+      ['class', 'Class Name'],
       ['accessibility id', 'Accessibility ID'],
-      ['-android uiautomator', 'UIAutomator Selector (Android UiAutomator2)'],
-      ['-android datamatcher', 'DataMatcher Selector (Android Espresso)'],
-      ['-android viewtag', 'Android View Tag (Android Espresso)'],
-      ['-ios predicate string', 'Predicate String (iOS)'],
-      ['-ios class chain', 'Class Chain (iOS)'],
+      ['android uiautomator', 'UIAutomator Selector (Android UiAutomator2)'],
+      ['android datamatcher', 'DataMatcher Selector (Android Espresso)'],
+      ['android viewtag', 'Android View Tag (Android Espresso)'],
+      ['ios predicate string', 'Predicate String (iOS)'],
+      ['ios class chain', 'Class Chain (iOS)'],
     ];
 
     return <div>

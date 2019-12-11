@@ -79,8 +79,8 @@ public class ByParser {
     /**
      * Parses the locator string to By mechanism of Web environment.
      *
-     * @param locator the locator string
-     * @param parentBy  the parent by (for querying index)
+     * @param locator  the locator string
+     * @param parentBy the parent by (for querying index)
      * @return By object
      */
     private static By parseWebBy(String locator, By parentBy) {
@@ -88,12 +88,18 @@ public class ByParser {
         switch (lc.getType()) {
             case ID:
                 return By.id(lc.getValue());
-            case NAME:
-                return By.name(lc.getValue());
-            case CSS:
-                return new ByCss(lc.getValue());
             case LINK:
                 return By.linkText(lc.getValue());
+            case PARTIAL_LINK:
+                return By.partialLinkText(lc.getValue());
+            case TAG:
+                return By.tagName(lc.getValue());
+            case NAME:
+                return By.name(lc.getValue());
+            case CLASS:
+                return By.className(lc.getValue());
+            case CSS:
+                return new ByCss(lc.getValue());
             case XPATH:
                 if (lc.getValue().endsWith("/")) {
                     return By.xpath(lc.getValue().substring(0, lc.getValue().length() - 1));
@@ -101,16 +107,14 @@ public class ByParser {
                 return By.xpath(lc.getValue());
             case IDENTIFIER:
                 return new ByIdOrName(lc.getValue());
-            case CLASS:
-                return By.className(lc.getValue());
             case ALT:
                 return new ByAlt(lc.getValue());
-            case VARIABLE:
-                return new ByVariable(lc.getValue());
             case DOM:
                 return new ByDom(lc.getValue());
             case INDEX:
                 return new ByIndex(parentBy, Integer.parseInt(lc.getValue()));
+            case VARIABLE:
+                return new ByVariable(lc.getValue());
             default:
                 break;
         }
@@ -120,8 +124,8 @@ public class ByParser {
     /**
      * Parses the locator string to By mechanism of Mobile environment.
      *
-     * @param locator the locator string
-     * @param parentBy  the parent by (for querying index)
+     * @param locator  the locator string
+     * @param parentBy the parent by (for querying index)
      * @return By object
      */
     private static By parseMobileBy(String locator, By parentBy) {
@@ -142,14 +146,20 @@ public class ByParser {
                 return MobileBy.xpath(lc.getValue());
             case ANDROID_UIAUTOMATOR:
                 return MobileBy.AndroidUIAutomator(lc.getValue());
-            case IOS_NS_PREDICATE:
+            case ANDROID_VIEWTAG:
+                return MobileBy.AndroidViewTag(lc.getValue());
+            case ANDROID_DATAMATCHER:
+                return MobileBy.androidDataMatcher(lc.getValue());
+            case IOS_PREDICATE_STRING:
                 return MobileBy.iOSNsPredicateString(lc.getValue());
             case IOS_CLASS_CHAIN:
                 return MobileBy.iOSClassChain(lc.getValue());
-            case VARIABLE:
-                return new ByVariable(lc.getValue());
+            case WINDOWS_UIAUTOMATION:
+                return MobileBy.windowsAutomation(lc.getValue());
             case INDEX:
                 return new ByIndex(parentBy, Integer.parseInt(lc.getValue()));
+            case VARIABLE:
+                return new ByVariable(lc.getValue());
             default:
                 break;
         }
@@ -163,11 +173,11 @@ public class ByParser {
      * @return Web locator
      */
     private static WebLocator parseWebLocator(String locator) {
-        Pattern p = Pattern.compile("^([A-Za-z_]+)=([\\S\\s]+)");
+        Pattern p = Pattern.compile("^([A-Za-z ]+)=([\\S\\s]+)");
         Matcher m = p.matcher(locator);
         WebLocator lc = new WebLocator();
         if (m.find()) {
-            lc.setType(WebLocatorType.fromName(m.group(1).toLowerCase()));
+            lc.setType(WebLocatorType.fromStrategy(m.group(1).toLowerCase()));
             lc.setValue(m.group(2));
         } else {
             if (locator.startsWith("/")) {
@@ -189,11 +199,11 @@ public class ByParser {
      * @return Mobile locator
      */
     private static MobileLocator parseMobileLocator(String locator) {
-        Pattern p = Pattern.compile("^([A-Za-z_]+)=([\\S\\s]+)");
+        Pattern p = Pattern.compile("^([A-Za-z ]+)=([\\S\\s]+)");
         Matcher m = p.matcher(locator);
         MobileLocator lc = new MobileLocator();
         if (m.find()) {
-            lc.setType(MobileLocatorType.fromName(m.group(1).toLowerCase()));
+            lc.setType(MobileLocatorType.fromStrategy(m.group(1).toLowerCase()));
             lc.setValue(m.group(2));
         } else {
             if (locator.startsWith("/")) {

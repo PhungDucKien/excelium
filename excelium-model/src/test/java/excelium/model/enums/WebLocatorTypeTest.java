@@ -36,14 +36,19 @@ import org.junit.Test;
 public class WebLocatorTypeTest {
 
     @Test
-    public void testFromName() {
-        Assert.assertEquals(WebLocatorType.IDENTIFIER, WebLocatorType.fromName("IDENTIFIER"));
-        Assert.assertEquals(WebLocatorType.ID, WebLocatorType.fromName("ID"));
-        Assert.assertEquals(WebLocatorType.NAME, WebLocatorType.fromName("NAME"));
-        Assert.assertEquals(WebLocatorType.LINK, WebLocatorType.fromName("LINK"));
-        Assert.assertEquals(WebLocatorType.CSS, WebLocatorType.fromName("CSS"));
-        Assert.assertEquals(WebLocatorType.DOM, WebLocatorType.fromName("DOM"));
-        Assert.assertEquals(WebLocatorType.XPATH, WebLocatorType.fromName("XPATH"));
-        Assert.assertEquals(WebLocatorType.VARIABLE, WebLocatorType.fromName("VARIABLE"));
+    public void testFromStrategy() {
+        Assert.assertEquals(WebLocatorType.ID, WebLocatorType.fromStrategy("id"));
+        Assert.assertEquals(WebLocatorType.LINK, WebLocatorType.fromStrategy("link"));
+        Assert.assertEquals(WebLocatorType.PARTIAL_LINK, WebLocatorType.fromStrategy("partial link"));
+        Assert.assertEquals(WebLocatorType.TAG, WebLocatorType.fromStrategy("tag"));
+        Assert.assertEquals(WebLocatorType.NAME, WebLocatorType.fromStrategy("name"));
+        Assert.assertEquals(WebLocatorType.CLASS, WebLocatorType.fromStrategy("class"));
+        Assert.assertEquals(WebLocatorType.CSS, WebLocatorType.fromStrategy("css"));
+        Assert.assertEquals(WebLocatorType.XPATH, WebLocatorType.fromStrategy("xpath"));
+        Assert.assertEquals(WebLocatorType.IDENTIFIER, WebLocatorType.fromStrategy("identifier"));
+        Assert.assertEquals(WebLocatorType.ALT, WebLocatorType.fromStrategy("alt"));
+        Assert.assertEquals(WebLocatorType.DOM, WebLocatorType.fromStrategy("dom"));
+        Assert.assertEquals(WebLocatorType.INDEX, WebLocatorType.fromStrategy("index"));
+        Assert.assertEquals(WebLocatorType.VARIABLE, WebLocatorType.fromStrategy("variable"));
     }
 }

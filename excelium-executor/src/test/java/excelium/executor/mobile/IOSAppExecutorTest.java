@@ -389,13 +389,13 @@ public class IOSAppExecutorTest {
 
         selenium.goBack();
 
-        selenium.tap("Accessibility_Id=Alert Views");
-        selenium.assertAttribute("Accessibility_Id=Okay / Cancel", "name", "Okay / Cancel");
-        selenium.assertElementNotPresent("Accessibility_Id=Okay / Cancel", "index=2");
+        selenium.tap("accessibility id=Alert Views");
+        selenium.assertAttribute("accessibility id=Okay / Cancel", "name", "Okay / Cancel");
+        selenium.assertElementNotPresent("accessibility id=Okay / Cancel", "index=2");
 
         selenium.goBack();
 
-        selenium.assertElementPresent("class=XCUIElementTypeTable", "Accessibility_Id=Alert Views");
+        selenium.assertElementPresent("class=XCUIElementTypeTable", "accessibility id=Alert Views");
 
         selenium.tap("Image View");
         selenium.assertElementPresent("class=XCUIElementTypeImage");
@@ -416,17 +416,17 @@ public class IOSAppExecutorTest {
         selenium.goBack();
         selenium.scrollUpTo("Alert Views");
 
-        selenium.assertElementPresent("ios_ns_predicate=visible = 1");
-        selenium.assertElementPresent("ios_ns_predicate=visible = 0");
-        selenium.assertElementPresent("ios_ns_predicate=wdRect.width >= 0");
-        selenium.assertElementPresent("ios_ns_predicate=wdRect.width BETWEEN {100,200}");
-        selenium.assertElementPresent("ios_ns_predicate=wdName LIKE '* View'", "index=2");
-        selenium.assertElementPresent("ios_ns_predicate=wdRect.x >= 0 AND wdRect.y >= 0", "index=2");
+        selenium.assertElementPresent("ios predicate string=visible = 1");
+        selenium.assertElementPresent("ios predicate string=visible = 0");
+        selenium.assertElementPresent("ios predicate string=wdRect.width >= 0");
+        selenium.assertElementPresent("ios predicate string=wdRect.width BETWEEN {100,200}");
+        selenium.assertElementPresent("ios predicate string=wdName LIKE '* View'", "index=2");
+        selenium.assertElementPresent("ios predicate string=wdRect.x >= 0 AND wdRect.y >= 0", "index=2");
 
-        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow");
-        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow/*");
-        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow[1]/*");
-        selenium.assertElementPresent("ios_class_chain=XCUIElementTypeWindow/*[-1]");
+        selenium.assertElementPresent("ios class chain=XCUIElementTypeWindow");
+        selenium.assertElementPresent("ios class chain=XCUIElementTypeWindow/*");
+        selenium.assertElementPresent("ios class chain=XCUIElementTypeWindow[1]/*");
+        selenium.assertElementPresent("ios class chain=XCUIElementTypeWindow/*[-1]");
 
         selenium.assertAttribute("//XCUIElementTypeTable//*[@visible=\"true\"][1]", "type", "XCUIElementTypeCell");
         selenium.assertAttribute("//XCUIElementTypeTable/*[@visible=\"true\"][1]/*[@visible = 'true'][1]", "name", "Action Sheets");

@@ -36,13 +36,19 @@ import org.junit.Test;
 public class MobileLocatorTypeTest {
 
     @Test
-    public void testFromName() {
-        Assert.assertEquals(MobileLocatorType.ACCESSIBILITY_ID, MobileLocatorType.fromName("ACCESSIBILITY_ID"));
-        Assert.assertEquals(MobileLocatorType.CLASS, MobileLocatorType.fromName("CLASS"));
-        Assert.assertEquals(MobileLocatorType.ID, MobileLocatorType.fromName("ID"));
-        Assert.assertEquals(MobileLocatorType.NAME, MobileLocatorType.fromName("NAME"));
-        Assert.assertEquals(MobileLocatorType.XPATH, MobileLocatorType.fromName("XPATH"));
-        Assert.assertEquals(MobileLocatorType.ANDROID_UIAUTOMATOR, MobileLocatorType.fromName("ANDROID_UIAUTOMATOR"));
-        Assert.assertEquals(MobileLocatorType.VARIABLE, MobileLocatorType.fromName("VARIABLE"));
+    public void testFromStrategy() {
+        Assert.assertEquals(MobileLocatorType.ACCESSIBILITY_ID, MobileLocatorType.fromStrategy("accessibility id"));
+        Assert.assertEquals(MobileLocatorType.CLASS, MobileLocatorType.fromStrategy("class"));
+        Assert.assertEquals(MobileLocatorType.ID, MobileLocatorType.fromStrategy("id"));
+        Assert.assertEquals(MobileLocatorType.NAME, MobileLocatorType.fromStrategy("name"));
+        Assert.assertEquals(MobileLocatorType.XPATH, MobileLocatorType.fromStrategy("xpath"));
+        Assert.assertEquals(MobileLocatorType.ANDROID_UIAUTOMATOR, MobileLocatorType.fromStrategy("android uiautomator"));
+        Assert.assertEquals(MobileLocatorType.ANDROID_VIEWTAG, MobileLocatorType.fromStrategy("android viewtag"));
+        Assert.assertEquals(MobileLocatorType.ANDROID_DATAMATCHER, MobileLocatorType.fromStrategy("android datamatcher"));
+        Assert.assertEquals(MobileLocatorType.IOS_PREDICATE_STRING, MobileLocatorType.fromStrategy("ios predicate string"));
+        Assert.assertEquals(MobileLocatorType.IOS_CLASS_CHAIN, MobileLocatorType.fromStrategy("ios class chain"));
+        Assert.assertEquals(MobileLocatorType.WINDOWS_UIAUTOMATION, MobileLocatorType.fromStrategy("windows uiautomation"));
+        Assert.assertEquals(MobileLocatorType.INDEX, MobileLocatorType.fromStrategy("index"));
+        Assert.assertEquals(MobileLocatorType.VARIABLE, MobileLocatorType.fromStrategy("variable"));
     }
 }

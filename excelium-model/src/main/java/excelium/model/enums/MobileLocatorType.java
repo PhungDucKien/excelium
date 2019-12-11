@@ -34,56 +34,78 @@ public enum MobileLocatorType {
     /**
      * Accessibility id mobile locator type.
      */
-    ACCESSIBILITY_ID,
+    ACCESSIBILITY_ID("accessibility id"),
     /**
      * Class mobile locator type.
      */
-    CLASS,
+    CLASS("class"),
     /**
      * Id mobile locator type.
      */
-    ID,
+    ID("id"),
     /**
      * Name mobile locator type.
      */
-    NAME,
+    NAME("name"),
     /**
      * Xpath mobile locator type.
      */
-    XPATH,
+    XPATH("xpath"),
     /**
      * Android uiautomator mobile locator type.
      */
-    ANDROID_UIAUTOMATOR,
+    ANDROID_UIAUTOMATOR("android uiautomator"),
     /**
-     * iOS NS Predicate mobile locator type.
+     * Android view tag mobile locator type.
      */
-    IOS_NS_PREDICATE,
+    ANDROID_VIEWTAG("android viewtag"),
+    /**
+     * Android data matcher mobile locator type.
+     */
+    ANDROID_DATAMATCHER("android datamatcher"),
+    /**
+     * iOS Predicate String mobile locator type.
+     */
+    IOS_PREDICATE_STRING("ios predicate string"),
     /**
      * iOS Class Chain mobile locator type.
      */
-    IOS_CLASS_CHAIN,
+    IOS_CLASS_CHAIN("ios class chain"),
     /**
-     * Variable mobile locator type.
+     * Windows uiautomation mobile locator type.
      */
-    VARIABLE,
+    WINDOWS_UIAUTOMATION("windows uiautomation"),
     /**
      * Reserved locator type for specifying index.
      */
-    INDEX;
+    INDEX("index"),
+    /**
+     * Variable web locator type.
+     */
+    VARIABLE("variable");
+
+    private final String strategy;
+
+    MobileLocatorType(String strategy) {
+        this.strategy = strategy;
+    }
 
     /**
-     * From name mobile locator type.
+     * From strategy mobile locator type.
      *
-     * @param name the name
+     * @param strategy the strategy
      * @return the mobile locator type
      */
-    public static MobileLocatorType fromName(String name) {
+    public static MobileLocatorType fromStrategy(String strategy) {
         for (MobileLocatorType t : MobileLocatorType.values()) {
-            if (t.name().equalsIgnoreCase(name)) {
+            if (t.strategy.equalsIgnoreCase(strategy)) {
                 return t;
             }
         }
         return null;
+    }
+
+    @Override public String toString() {
+        return strategy;
     }
 }
