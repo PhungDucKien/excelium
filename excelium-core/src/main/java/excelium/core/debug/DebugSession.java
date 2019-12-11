@@ -160,7 +160,11 @@ public class DebugSession {
                 cachedEl.setVariableName("el" + this.elVariableCounter++);
             }
 
-            applyMethod(cachedEl.getDriverEl(), methodName, args);
+            if ("sendKeys".equals(methodName)) {
+                cachedEl.getDriverEl().sendKeys((String) args[0]);
+            } else {
+                applyMethod(cachedEl.getDriverEl(), methodName, args);
+            }
         } else {
             // Specially handle the tap and swipe method
             if ("tap".equals(methodName)) {
