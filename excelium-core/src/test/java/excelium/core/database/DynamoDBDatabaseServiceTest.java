@@ -326,4 +326,101 @@ public class DynamoDBDatabaseServiceTest {
         tableDataList.add(tableData);
         databaseService.createTestData(tableDataList);
     }
+
+    @Test
+    public void testDataTypes() throws Exception {
+        Project project = new Project();
+        Map<String, DataSource> dataSourceMap = new HashMap<>();
+        dataSourceMap.put("default", dynamoDBDataSource);
+        project.setDefaultDataSource("default");
+        project.setDataSources(dataSourceMap);
+
+        DatabaseService databaseService = DatabaseServiceFactory.createService(project);
+
+        List<TableData> tableDataList = new ArrayList<>();
+        List<String> primaryKeys = new ArrayList<>();
+        primaryKeys.add("id");
+        List<Column> columns = new ArrayList<>();
+        Column column = new Column();
+        column.setName("id");
+        column.setType("Number");
+        columns.add(column);
+        column = new Column();
+        column.setName("name");
+        column.setType("String");
+        columns.add(column);
+        column = new Column();
+        column.setName("avatar");
+        column.setType("Binary");
+        columns.add(column);
+        column = new Column();
+        column.setName("nicknames");
+        column.setType("StringSet");
+        columns.add(column);
+        column = new Column();
+        column.setName("grades");
+        column.setType("NumberSet");
+        columns.add(column);
+        column = new Column();
+        column.setName("sports");
+        column.setType("List");
+        columns.add(column);
+        column = new Column();
+        column.setName("attributes");
+        column.setType("Map");
+        columns.add(column);
+        column = new Column();
+        column.setName("enabled");
+        column.setType("Boolean");
+        columns.add(column);
+        column = new Column();
+        column.setName("blank");
+        column.setType("Null");
+        columns.add(column);
+        TableData tableData = new TableData();
+        tableData.setMode(WriteMode.TRUNCATE);
+        tableData.setName("users");
+        tableData.setPrimaryKeys(primaryKeys);
+        tableData.setColumns(columns);
+
+        tableDataList.add(tableData);
+        databaseService.createTestData(tableDataList);
+
+        tableDataList.clear();
+        tableData = new TableData();
+        tableData.setMode(WriteMode.APPEND);
+        tableData.setName("users");
+        tableData.setPrimaryKeys(primaryKeys);
+        tableData.setColumns(columns);
+
+        List<Map<String, Object>> rowDataList = new ArrayList<>();
+        Map<String, Object> rowData = new HashMap<>();
+        rowData.put("id", 2);
+        rowData.put("name", "user2");
+        rowData.put("avatar", "YXZhdGFy");
+        rowData.put("nicknames", "{ \"a\", \"b\" }");
+        rowData.put("grades", "{ 1, 2, 3, 4 }");
+        rowData.put("sports", "[ { \"S\" : \"s\" }, { \"N\" : \"1\" }, { \"SS\" : [ \"a\", \"b\" ] }, { \"NS\" : [ \"1\", \"2\" ] }]");
+        rowData.put("attributes", "{  \"a\" : { \"SS\" : [      \"a\",      \"b\"    ]  },  \"age\" : { \"N\" : \"30\" },  \"color\" : { \"S\" : \"black\" },  \"sub\" : { \"M\" : {      \"a\" : { \"S\" : \"a\" }    }  }}");
+        rowData.put("enabled", "true");
+        rowData.put("blank", "");
+        rowDataList.add(rowData);
+        rowData = new HashMap<>();
+        rowData.put("id", 3);
+        rowData.put("name", "user3");
+        rowData.put("avatar", "YXZhdGFy");
+        rowData.put("nicknames", "{ \"a\", \"b\" }");
+        rowData.put("grades", "{ 1, 2, 3, 4 }");
+        rowData.put("sports", "[ { \"S\" : \"s\" }, { \"N\" : \"1\" }, { \"SS\" : [ \"a\", \"b\" ] }, { \"NS\" : [ \"1\", \"2\" ] }]");
+        rowData.put("attributes", "{  \"a\" : { \"SS\" : [      \"a\",      \"b\"    ]  },  \"age\" : { \"N\" : \"30\" },  \"color\" : { \"S\" : \"black\" },  \"sub\" : { \"M\" : {      \"a\" : { \"S\" : \"a\" }    }  }}");
+        rowData.put("enabled", "true");
+        rowData.put("blank", "");
+        rowDataList.add(rowData);
+        tableData.setRowData(rowDataList);
+
+        tableDataList.add(tableData);
+        databaseService.createTestData(tableDataList);
+
+        Assert.assertEquals(2, databaseService.count("FROM users"));
+    }
 }

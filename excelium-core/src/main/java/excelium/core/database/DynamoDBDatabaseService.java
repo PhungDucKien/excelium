@@ -28,7 +28,10 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.model.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import excelium.model.project.DataSource;
+import excelium.model.test.data.Column;
 import excelium.model.test.data.TableData;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.IOUtils;
@@ -37,11 +40,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,6 +56,10 @@ import java.util.regex.Pattern;
 public class DynamoDBDatabaseService implements DatabaseService {
 
     private static final Logger LOG = LogManager.getLogger();
+
+    Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
 
     /**
      * Data source
@@ -107,10 +113,10 @@ public class DynamoDBDatabaseService implements DatabaseService {
 
             switch (tableData.getMode()) {
                 case APPEND:
-                    appendRecords(connection, tableName, tableData.getRowData());
+                    appendRecords(connection, tableName, tableData.getColumns(), tableData.getRowData());
                     break;
                 case REPLACE:
-                    replaceRecords(connection, tableName, tableData.getRowData());
+                    replaceRecords(connection, tableName, tableData.getColumns(), tableData.getRowData());
                     break;
                 case REMOVE:
                     deleteRecords(connection, tableName, tableData.getPrimaryKeys(), tableData.getRowData());
@@ -201,17 +207,67 @@ public class DynamoDBDatabaseService implements DatabaseService {
      *
      * @param connection the connection
      * @param tableName  the table name
+     * @param columns    the columns
      * @param rowsData   the rows data
      */
-    private void appendRecords(DynamoDB connection, String tableName, List<Map<String, Object>> rowsData) {
+    private void appendRecords(DynamoDB connection, String tableName, List<Column> columns, List<Map<String, Object>> rowsData) throws IOException {
         if (CollectionUtils.isNotEmpty(rowsData)) {
+            Map<String, Column> columnMap = new HashMap<>();
+            for (Column column : columns) {
+                columnMap.put(column.getName(), column);
+            }
+
             List<Item> items = new ArrayList<>();
 
             for (Map<String, Object> rowData : rowsData) {
                 Item item = new Item();
 
                 for (String dataKey : rowData.keySet()) {
-                    item.with(dataKey, rowData.get(dataKey));
+                    Column column = columnMap.get(dataKey);
+                    String dataType = column.getType();
+                    if (StringUtils.equalsAnyIgnoreCase(dataType, "String", "varchar")) {
+                        String value = rowData.get(dataKey).toString();
+                        item.with(dataKey, value);
+                    } else if (StringUtils.equalsIgnoreCase(dataType, "Binary")) {
+                        ByteBuffer value = convertBase64ToByteBuffer(rowData.get(dataKey).toString());
+                        item.with(dataKey, value);
+                    } else if (StringUtils.equalsIgnoreCase(dataType, "Number")) {
+                        Object value = rowData.get(dataKey);
+                        if (value instanceof String) {
+                            if (((String) value).contains(".")) {
+                                item.with(dataKey, Double.parseDouble((String) value));
+                            } else {
+                                item.with(dataKey, Integer.parseInt((String) value));
+                            }
+                        } else {
+                            item.with(dataKey, value);
+                        }
+                    } else if (StringUtils.equalsIgnoreCase(dataType, "Boolean")) {
+                        Object value = rowData.get(dataKey);
+                        if (value instanceof Boolean) {
+                            item.with(dataKey, value);
+                        } else {
+                            item.with(dataKey, Boolean.parseBoolean(value.toString()));
+                        }
+                    } else if (StringUtils.equalsIgnoreCase(dataType, "Null")) {
+                        item.withNull(dataKey);
+                    } else if (StringUtils.equalsIgnoreCase(dataType, "StringSet")) {
+                        String stringRep = rowData.get(dataKey).toString().trim();
+                        String json = "[" + stringRep.substring(1, stringRep.length() - 2) + "]";
+                        item.withJSON(dataKey, json);
+                        Set value = new HashSet<>(Arrays.asList(gson.fromJson(json, String[].class)));
+                        item.with(dataKey, value);
+                    } else if (StringUtils.equalsIgnoreCase(dataType, "NumberSet")) {
+                        String stringRep = rowData.get(dataKey).toString().trim();
+                        String json = "[" + stringRep.substring(1, stringRep.length() - 2) + "]";
+                        Set value = new HashSet<>(Arrays.asList(gson.fromJson(json, Double[].class)));
+                        item.with(dataKey, value);
+                    } else if (StringUtils.equalsAnyIgnoreCase(dataType, "Map", "List")) {
+                        String json = rowData.get(dataKey).toString();
+                        item.withJSON(dataKey, json);
+                    } else {
+                        item.with(dataKey, rowData.get(dataKey));
+                    }
                 }
 
                 items.add(item);
@@ -230,14 +286,15 @@ public class DynamoDBDatabaseService implements DatabaseService {
      *
      * @param connection the connection
      * @param tableName  the table name
+     * @param columns    the columns
      * @param rowsData   the rows data
      * @throws InterruptedException the interrupted exception
      */
-    private void replaceRecords(DynamoDB connection, String tableName, List<Map<String, Object>> rowsData) throws InterruptedException {
+    private void replaceRecords(DynamoDB connection, String tableName, List<Column> columns, List<Map<String, Object>> rowsData) throws InterruptedException, IOException {
         truncateTable(connection, tableName);
 
         if (CollectionUtils.isNotEmpty(rowsData)) {
-            appendRecords(connection, tableName, rowsData);
+            appendRecords(connection, tableName, columns, rowsData);
         }
     }
 
@@ -307,5 +364,13 @@ public class DynamoDBDatabaseService implements DatabaseService {
         } catch (Exception e) {
             LOG.error(e);
         }
+    }
+
+    private static ByteBuffer convertBase64ToByteBuffer(String base64String) throws IOException {
+        byte[] bytes = Base64.getDecoder().decode(base64String.getBytes());
+        ByteBuffer buffer = ByteBuffer.allocate(bytes.length);
+        buffer.put(bytes, 0, bytes.length);
+        buffer.position(0);
+        return buffer;
     }
 }
