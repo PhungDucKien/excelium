@@ -28,9 +28,9 @@ import org.openqa.selenium.net.UrlChecker;
 import org.seleniumhq.jetty9.server.Connector;
 import org.seleniumhq.jetty9.server.Server;
 import org.seleniumhq.jetty9.server.ServerConnector;
-import org.seleniumhq.jetty9.server.handler.ContextHandler;
 import org.seleniumhq.jetty9.server.handler.HandlerList;
-import org.seleniumhq.jetty9.server.handler.ResourceHandler;
+import org.seleniumhq.jetty9.servlet.DefaultServlet;
+import org.seleniumhq.jetty9.servlet.ErrorPageErrorHandler;
 import org.seleniumhq.jetty9.servlet.ServletContextHandler;
 import org.seleniumhq.jetty9.servlet.ServletHolder;
 import org.seleniumhq.jetty9.util.resource.Resource;
@@ -90,22 +90,23 @@ public class HttpServer {
 
         HandlerList handlers = new HandlerList();
 
-        ContextHandler context = new ContextHandler();
-        context.setContextPath("/");
-        ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setBaseResource(Resource.newClassPathResource("/html"));
-        context.setHandler(resourceHandler);
-        handlers.addHandler(context);
+        ServletContextHandler servletContext = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
+        servletContext.setContextPath("/");
+        servletContext.setBaseResource(Resource.newClassPathResource("/html"));
 
-        ServletContextHandler servletContext = new ServletContextHandler();
-        servletContext.setContextPath("/api");
-        servletContext.addServlet(new ServletHolder(new HealthServlet()), "/health");
-        servletContext.addServlet(new ServletHolder(new SessionDetailsServlet()), "/session/details");
-        servletContext.addServlet(new ServletHolder(new RestartRecorderServlet()), "/session/restart");
-        servletContext.addServlet(new ServletHolder(new ClientMethodHandleServlet()), "/session/execute");
-        servletContext.addServlet(new ServletHolder(new StepOverSessionServlet()), "/session/step-over");
-        servletContext.addServlet(new ServletHolder(new ResumeSessionServlet()), "/session/resume");
-        servletContext.addServlet(new ServletHolder(new MuteAndResumeSessionServlet()), "/session/mute-resume");
+        servletContext.addServlet(new ServletHolder(new HealthServlet()), "/api/health");
+        servletContext.addServlet(new ServletHolder(new SessionDetailsServlet()), "/api/session/details");
+        servletContext.addServlet(new ServletHolder(new RestartRecorderServlet()), "/api/session/restart");
+        servletContext.addServlet(new ServletHolder(new ClientMethodHandleServlet()), "/api/session/execute");
+        servletContext.addServlet(new ServletHolder(new StepOverSessionServlet()), "/api/session/step-over");
+        servletContext.addServlet(new ServletHolder(new ResumeSessionServlet()), "/api/session/resume");
+        servletContext.addServlet(new ServletHolder(new MuteAndResumeSessionServlet()), "/api/session/mute-resume");
+        servletContext.addServlet(DefaultServlet.class, "/");
+
+        ErrorPageErrorHandler errorHandler = new ErrorPageErrorHandler();
+        errorHandler.addErrorPage(404, "/");
+        servletContext.setErrorHandler(errorHandler);
+
         handlers.addHandler(servletContext);
 
         server.setHandler(handlers);
@@ -118,5 +119,10 @@ public class HttpServer {
 
     public String getServerUrl() {
         return serverUrl;
+    }
+
+    public static void main(String[] args) {
+        HttpServer server = new HttpServer();
+        server.start();
     }
 }
