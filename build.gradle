@@ -72,12 +72,12 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
 
 task "doc-server"(type: Exec) {
     workingDir './slate'
-    commandLine '/usr/local/opt/ruby/bin/bundle', 'exec', 'middleman', 'server'
+    commandLine '/usr/bin/env', 'bundle', 'exec', 'middleman', 'server'
 }
 
 task "doc-build"(type: Exec, dependsOn: [':excelium-doclet:doc-generate']) {
     workingDir './slate'
-    commandLine '/usr/local/opt/ruby/bin/bundle', 'exec', 'middleman', 'build'
+    commandLine '/usr/bin/env', 'bundle', 'exec', 'middleman', 'build'
 }
 
 task "doc-publish"(type: Exec) {
