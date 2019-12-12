@@ -31,13 +31,12 @@ import com.amazonaws.services.dynamodbv2.model.*;
 import excelium.model.project.DataSource;
 import excelium.model.test.data.TableData;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -301,7 +300,7 @@ public class DynamoDBDatabaseService implements DatabaseService {
         reservedAttributeNames.clear();
 
         try {
-            List<String> reservedWords = FileUtils.readLines(new File(getClass().getClassLoader().getResource("dynamodb_reserved_words.txt").getFile()), Charset.defaultCharset());
+            List<String> reservedWords = IOUtils.readLines(getClass().getClassLoader().getResourceAsStream("dynamodb_reserved_words.txt"), Charset.defaultCharset());
             for (String word : reservedWords) {
                 reservedAttributeNames.put("#" + word.toLowerCase(), word.toLowerCase());
             }
