@@ -6,9 +6,8 @@ dependencies {
 }
 
 task generateSources {
-    def outputDir = file("$buildDir/../src/main/java/excelium/common")
-    outputs.dir outputDir
     doFirst {
+        def outputDir = file("$buildDir/../src/main/java/excelium/common")
         outputDir.exists() || outputDir.mkdirs()
         def srcFile = new File(outputDir, "Version.java")
         srcFile.write(
