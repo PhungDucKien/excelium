@@ -7,7 +7,7 @@ import SelectedElement from './SelectedElement';
 import Source from './Source';
 import InspectorStyles from './Inspector.module.css';
 import RecordedActions from './RecordedActions';
-import Actions from './Actions';
+// import Actions from './Actions';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const {SELECT, SWIPE, TAP} = SCREENSHOT_INTERACTION_MODE;
@@ -195,13 +195,13 @@ export default class Inspector extends Component {
               </div>
             </div>
           </TabPane>
-          <TabPane tab={t('Actions')} key={INTERACTION_MODE.ACTIONS}>
+          {/* <TabPane tab={t('Actions')} key={INTERACTION_MODE.ACTIONS}>
             <Card
               title={<span><Icon type="thunderbolt" /> {t('Actions')}</span>}
               className={InspectorStyles['interaction-tab-card']}>
               <Actions {...this.props} />
             </Card>
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </div>
     </div>;
