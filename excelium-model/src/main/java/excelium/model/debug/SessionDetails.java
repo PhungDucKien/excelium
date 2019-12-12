@@ -33,6 +33,14 @@ public class SessionDetails {
     private Integer port;
     private String path;
     private Boolean https;
+    private Boolean PC;
+    private Boolean mobile;
+    private Boolean webApp;
+    private Boolean mobileApp;
+    private Boolean webContext;
+    private Boolean nativeContext;
+    private Boolean android;
+    private Boolean IOS;
 
     public Map<String, Object> getDesiredCapabilities() {
         return desiredCapabilities;
@@ -74,11 +82,75 @@ public class SessionDetails {
         this.path = path;
     }
 
-    public Boolean isHttps() {
+    public Boolean getHttps() {
         return https;
     }
 
     public void setHttps(Boolean https) {
         this.https = https;
+    }
+
+    public Boolean getPC() {
+        return PC;
+    }
+
+    public void setPC(Boolean PC) {
+        this.PC = PC;
+    }
+
+    public Boolean getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(Boolean mobile) {
+        this.mobile = mobile;
+    }
+
+    public Boolean getWebApp() {
+        return webApp;
+    }
+
+    public void setWebApp(Boolean webApp) {
+        this.webApp = webApp;
+    }
+
+    public Boolean getMobileApp() {
+        return mobileApp;
+    }
+
+    public void setMobileApp(Boolean mobileApp) {
+        this.mobileApp = mobileApp;
+    }
+
+    public Boolean getWebContext() {
+        return webContext;
+    }
+
+    public void setWebContext(Boolean webContext) {
+        this.webContext = webContext;
+    }
+
+    public Boolean getNativeContext() {
+        return nativeContext;
+    }
+
+    public void setNativeContext(Boolean nativeContext) {
+        this.nativeContext = nativeContext;
+    }
+
+    public Boolean getAndroid() {
+        return android;
+    }
+
+    public void setAndroid(Boolean android) {
+        this.android = android;
+    }
+
+    public Boolean getIOS() {
+        return IOS;
+    }
+
+    public void setIOS(Boolean IOS) {
+        this.IOS = IOS;
     }
 }

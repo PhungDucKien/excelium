@@ -155,7 +155,7 @@ public class ExecuteResponse {
         this.methodName = methodName;
     }
 
-    public Boolean isIgnoreResult() {
+    public Boolean getIgnoreResult() {
         return ignoreResult;
     }
 

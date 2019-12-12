@@ -292,6 +292,15 @@ public class DebugSession {
             sessionDetails.setPath(remoteAddress.getPath());
             sessionDetails.setHttps(remoteAddress.getProtocol().equals("https"));
         }
+
+        sessionDetails.setPC(webDriver.isPC());
+        sessionDetails.setMobile(webDriver.isMobile());
+        sessionDetails.setWebApp(webDriver.isWebApp());
+        sessionDetails.setMobileApp(webDriver.isMobileApp());
+        sessionDetails.setWebContext(webDriver.isWebContext());
+        sessionDetails.setNativeContext(webDriver.isNativeContext());
+        sessionDetails.setAndroid(webDriver.isAndroid());
+        sessionDetails.setIOS(webDriver.isIOS());
         return sessionDetails;
     }
 

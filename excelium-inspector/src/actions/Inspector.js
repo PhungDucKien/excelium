@@ -111,7 +111,7 @@ export function showError (e, methodName, secs = 5) {
 /**
  * Translates sourceXML to JSON
  */
-function xmlToJSON (source) {
+function xmlToJSON (source, webContext) {
   let xmlDoc;
 
   // Replace strings with Unicode format &#012345 with #012345
@@ -137,7 +137,7 @@ function xmlToJSON (source) {
       path,
     };
   };
-  xmlDoc = (new DOMParser()).parseFromString(source, 'application/xml');
+  xmlDoc = (new DOMParser()).parseFromString(source, webContext ? 'text/html' : 'application/xml');
   let sourceXML = xmlDoc.children[0];
   return recursive(sourceXML);
 }
@@ -243,15 +243,11 @@ export function fetchSessionDetails (sessionId, skipScreenshotAndSource = false)
           showError({message: resp.e}, 0)
         }
       } else {
-        const { desiredCapabilities, host, port, path, https } = resp;
-        startKeepAlive()(dispatch);
-        setSessionDetails({
-          desiredCapabilities,
-          host,
-          port,
-          path,
-          https,
-        })(dispatch);
+        const state = getState();
+        if (!state.inspector.isKeepingAlive) {
+          startKeepAlive()(dispatch);
+        }
+        setSessionDetails(resp)(dispatch);
         if (!skipScreenshotAndSource) {
           await applyClientMethod({methodName: 'source'})(dispatch, getState);
         }
@@ -291,9 +287,10 @@ export function applyClientMethod (params) {
       dispatch({type: METHOD_CALL_DONE});
 
       if (source && screenshot) {
+        const webContext = state.inspector.sessionDetails.webContext;
         dispatch({
           type: SET_SOURCE_AND_SCREENSHOT,
-          source: source && xmlToJSON(source),
+          source: source && xmlToJSON(source, webContext),
           sourceXML: source,
           screenshot,
           windowSize,
