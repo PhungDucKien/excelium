@@ -245,7 +245,7 @@ export default class Inspector extends Component {
       {sessionDetails.mobile ? actionControls : null}
       <ButtonGroup size="large">
         <Tooltip title={t('Back')}>
-          <Button id='btnGoBack' icon='arrow-left' onClick={() => applyClientMethod({methodName: 'back'})}/>
+          <Button id='btnGoBack' icon='arrow-left' onClick={() => applyClientMethod({methodName: 'back', skipScreenshotAndSource: true})}/>
         </Tooltip>
         <Tooltip title={t('refreshSource')}>
           <Button id='btnReload' icon='reload' onClick={() => applyClientMethod({methodName: 'source'})}/>

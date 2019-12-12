@@ -24,7 +24,7 @@ class SelectedElement extends Component {
 
   handleSendKeys () {
     const {sendKeys, applyClientMethod, hideSendKeysModal, selectedElementId: elementId} = this.props;
-    applyClientMethod({methodName: 'sendKeys', elementId, args: [sendKeys]});
+    applyClientMethod({methodName: 'sendKeys', elementId, args: [sendKeys], skipScreenshotAndSource: true});
     hideSendKeysModal();
   }
 
@@ -117,7 +117,7 @@ class SelectedElement extends Component {
               disabled={!elementId}
               icon={!elementInteractionsNotAvailable && !elementId && 'loading'}
               id='btnTapElement'
-              onClick={() => applyClientMethod({methodName: 'click', elementId})}
+              onClick={() => applyClientMethod({methodName: 'click', elementId, skipScreenshotAndSource: true})}
             >
               {t('Tap')}
             </Button>
@@ -131,7 +131,7 @@ class SelectedElement extends Component {
             <Button
               disabled={!elementId}
               id='btnClearElement'
-              onClick={() => applyClientMethod({methodName: 'clear', elementId})}
+              onClick={() => applyClientMethod({methodName: 'clear', elementId, skipScreenshotAndSource: true})}
             >
               {t('Clear')}
             </Button>

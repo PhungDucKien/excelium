@@ -46,6 +46,7 @@ class Screenshot extends Component {
       applyClientMethod({
         methodName: 'tap',
         args: [x, y],
+        skipScreenshotAndSource: true,
       });
     } else if (screenshotInteractionMode === SWIPE) {
       if (!swipeStart) {
@@ -88,6 +89,7 @@ class Screenshot extends Component {
     await applyClientMethod({
       methodName: 'swipe',
       args: [swipeStart.x, swipeStart.y, swipeEnd.x, swipeEnd.y],
+      skipScreenshotAndSource: true,
     });
     clearSwipeAction();
   }

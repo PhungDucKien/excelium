@@ -41,6 +41,7 @@ export default class HighlighterRects extends Component {
       applyClientMethod({
         methodName: TAP,
         args: [x, y],
+        skipScreenshotAndSource: true,
       });
     } else if (screenshotInteractionMode === SWIPE) {
       if (!swipeStart) {
@@ -83,6 +84,7 @@ export default class HighlighterRects extends Component {
     await applyClientMethod({
       methodName: 'swipe',
       args: [swipeStart.x, swipeStart.y, swipeEnd.x, swipeEnd.y],
+      skipScreenshotAndSource: true,
     });
     clearSwipeAction();
   }

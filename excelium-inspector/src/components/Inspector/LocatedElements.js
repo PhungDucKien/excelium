@@ -60,7 +60,7 @@ class LocatedElements extends Component {
           <div>
             <Button size='small'
               disabled={!locatorTestElement}
-              onClick={() => applyClientMethod({methodName: 'click', elementId: locatorTestElement})}
+              onClick={() => applyClientMethod({methodName: 'click', elementId: locatorTestElement, skipScreenshotAndSource: true})}
             >
               {t('Tap Element')}
             </Button>
@@ -68,7 +68,7 @@ class LocatedElements extends Component {
           <div>
             <Button size='small'
               disabled={!locatorTestElement}
-              onClick={() => applyClientMethod({methodName: 'clear', elementId: locatorTestElement})}
+              onClick={() => applyClientMethod({methodName: 'clear', elementId: locatorTestElement, skipScreenshotAndSource: true})}
             >
               {t('Clear')}
             </Button>
@@ -77,7 +77,7 @@ class LocatedElements extends Component {
             <Input size='small' placeholder={t('Enter keys')} onChange={(e) => this.setState({...this.state, sendKeys: e.target.value})}/>
             <Button size='small'
               disabled={!locatorTestElement}
-              onClick={() => applyClientMethod({methodName: 'sendKeys', elementId: locatorTestElement, args: [this.state.sendKeys || '']})}
+              onClick={() => applyClientMethod({methodName: 'sendKeys', elementId: locatorTestElement, args: [this.state.sendKeys || ''], skipScreenshotAndSource: true})}
             >
               {t('Send Keys')}
             </Button>
