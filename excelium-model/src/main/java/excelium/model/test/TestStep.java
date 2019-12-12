@@ -370,7 +370,7 @@ public class TestStep {
      * @return true if the step gutter indicates a skip, otherwise, false
      */
     private boolean isStepSkip(String stepGutter) {
-        return StringUtils.isNotBlank(stepGutter) && !StringUtils.equalsAny(stepGutter, "D", "M");
+        return StringUtils.isNotBlank(stepGutter) && !StringUtils.equalsAnyIgnoreCase(stepGutter, "B", "D", "M");
     }
 
     /**
@@ -380,6 +380,6 @@ public class TestStep {
      * @return true if the step gutter indicates a debug, otherwise, false
      */
     private boolean isStepDebug(String stepGutter) {
-        return StringUtils.isNotBlank(stepGutter) && StringUtils.equals(stepGutter, "D");
+        return StringUtils.isNotBlank(stepGutter) && StringUtils.equalsAnyIgnoreCase(stepGutter, "B", "D");
     }
 }
