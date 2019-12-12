@@ -156,7 +156,7 @@ export default class Inspector extends Component {
            applyClientMethod, quitSession, isRecording, showRecord, startRecording,
            pauseRecording, showLocatorTestModal,
            stepOverDebugger, resumeDebugger, muteAndResumeDebugger,
-           screenshotInteractionMode,
+           screenshotInteractionMode, sessionDetails,
            selectedInteractionMode, selectInteractionMode,
            showKeepAlivePrompt, sourceXML, t} = this.props;
     const {path} = selectedElement;
@@ -242,7 +242,7 @@ export default class Inspector extends Component {
 
     let controls = <div className={InspectorStyles['inspector-toolbar']}>
       {debuggerControls}
-      {actionControls}
+      {sessionDetails.mobile ? actionControls : null}
       <ButtonGroup size="large">
         <Tooltip title={t('Back')}>
           <Button id='btnGoBack' icon='arrow-left' onClick={() => applyClientMethod({methodName: 'back'})}/>
