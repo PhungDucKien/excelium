@@ -1,0 +1,15 @@
+plugins {
+    id 'org.jenkins-ci.jpi' version '0.25.0'
+}
+
+repositories {
+    maven {
+        url('https://repo.jenkins-ci.org/public/')
+    }
+}
+
+jenkinsPlugin {
+    coreVersion = '2.153'
+    displayName = 'Jenkins Excelium Plugin'
+    url = 'https://github.com/PhungDucKien/excelium'
+}
