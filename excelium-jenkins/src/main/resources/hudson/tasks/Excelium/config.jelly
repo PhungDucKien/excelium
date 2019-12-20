@@ -36,14 +36,32 @@ THE SOFTWARE.
             </select>
         </f:entry>
     </j:if>
-    
-    <f:entry title="${%Targets}" field="targets">
-        <f:expandableTextbox />
+
+    <f:entry title="${%Project File}" field="projectFile">
+        <f:textbox />
     </f:entry>
-    
+
+    <f:entry title="${%Test File}" field="workbook">
+        <f:textbox />
+    </f:entry>
+
+    <f:entry title="${%Test Sheet}" field="sheet">
+        <f:textbox />
+    </f:entry>
+
+    <f:entry title="${%Test Case}" field="testCase">
+        <f:textbox />
+    </f:entry>
+
     <f:advanced>
-        <f:entry title="${%Build File}" field="buildFile">
-            <f:expandableTextbox />
+        <f:entry title="${%Use service account}" field="serviceAccount">
+            <f:checkbox />
+        </f:entry>
+        <f:entry title="${%Headless mode}" field="headless">
+            <f:checkbox />
+        </f:entry>
+        <f:entry title="${%Use file server}" field="fileServer">
+            <f:checkbox />
         </f:entry>
         <f:entry title="${%Properties}" field="properties">
             <f:expandableTextbox />
