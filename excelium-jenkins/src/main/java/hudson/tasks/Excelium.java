@@ -456,8 +456,16 @@ public class Excelium extends Builder {
                 if (!value.isDirectory())
                     return FormValidation.error(Messages.Excelium_NotADirectory(value));
 
-                File exceliumJar = new File(value, "lib/excelium.jar");
-                if (!exceliumJar.exists())
+                File lib = new File(value, "lib");
+                boolean exceliumJarExists = false;
+                for (File jar : lib.listFiles()) {
+                    if (jar.getName().matches("excelium-.*\\.jar")) {
+                        exceliumJarExists = true;
+                        break;
+                    }
+                }
+
+                if (!exceliumJarExists)
                     return FormValidation.error(Messages.Excelium_NotExceliumDirectory(value));
 
                 return FormValidation.ok();
