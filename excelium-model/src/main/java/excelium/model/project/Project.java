@@ -31,6 +31,7 @@ import excelium.model.enums.WorkbookType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
@@ -60,6 +61,12 @@ public class Project {
      * Workbook type
      */
     private WorkbookType workbookType;
+
+    /**
+     * Base path
+     */
+    @XmlTransient
+    private Path basePath;
 
     /**
      * Test path
@@ -184,6 +191,24 @@ public class Project {
      */
     public void setWorkbookType(WorkbookType workbookType) {
         this.workbookType = workbookType;
+    }
+
+    /**
+     * Gets base path.
+     *
+     * @return the base path
+     */
+    public Path getBasePath() {
+        return basePath;
+    }
+
+    /**
+     * Sets base path.
+     *
+     * @param basePath the base path
+     */
+    public void setBasePath(Path basePath) {
+        this.basePath = basePath;
     }
 
     /**

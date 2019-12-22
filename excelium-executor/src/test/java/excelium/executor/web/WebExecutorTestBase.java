@@ -79,6 +79,7 @@ public class WebExecutorTestBase {
 
         if (webDriver == null) {
             Project project = new Project();
+            project.setBasePath(Paths.get("."));
             project.setDownloadPath(Paths.get("download"));
             project.setFilePath(Paths.get("file"));
             Files.createDirectories(Paths.get("file"));

@@ -43,12 +43,14 @@ public class ProjectGenerator {
     /**
      * Creates an empty structured project folder.
      *
-     * @param project  Project model
-     * @param basePath Project base path
+     * @param project         Project model
+     * @param projectFilePath Project file path
      * @throws IOException   if any unexpected problem occurs during directory creation
      * @throws JAXBException if any unexpected problem occurs during the project marshalling
      */
-    public void createProject(Project project, Path basePath) throws IOException, JAXBException {
+    public void createProject(Project project, Path projectFilePath) throws IOException, JAXBException {
+
+        Path basePath = projectFilePath.getParent();
 
         Files.createDirectories(basePath);
         Files.createDirectories(basePath.resolve("config"));
@@ -72,19 +74,21 @@ public class ProjectGenerator {
             Files.createDirectories(basePath.resolve(project.getDownloadPath()));
         }
 
-        XmlMarshaller.marshall(project, basePath.resolve("project.xml"));
+        XmlMarshaller.marshall(project, projectFilePath);
     }
 
     /**
      * Update project configuration file.
      *
-     * @param project  Project model
-     * @param basePath Project base path
+     * @param project         Project model
+     * @param projectFilePath Project file path
      * @throws IOException   if any unexpected problem occurs during directory creation
      * @throws JAXBException if any unexpected problem occurs during the project marshalling
      */
-    public void updateProject(Project project, Path basePath) throws JAXBException, IOException {
+    public void updateProject(Project project, Path projectFilePath) throws JAXBException, IOException {
+        Path basePath = projectFilePath.getParent();
+
         Files.createDirectories(basePath);
-        XmlMarshaller.marshall(project, basePath.resolve("project.xml"));
+        XmlMarshaller.marshall(project, projectFilePath);
     }
 }

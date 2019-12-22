@@ -26,6 +26,7 @@ package excelium.cli;
 
 import com.google.api.services.sheets.v4.Sheets;
 import excelium.cli.annotation.Bean;
+import excelium.cli.controller.BaseController;
 import excelium.common.XmlMarshaller;
 import excelium.core.reader.TestReaderFactory;
 import excelium.core.writer.TestWriterFactory;
@@ -38,9 +39,11 @@ import excelium.sheets.connection.GoogleConnection;
 import excelium.sheets.connection.GoogleConnectionService;
 import excelium.xls.ExcelReaderFactory;
 import excelium.xls.ExcelWriterFactory;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -58,8 +61,12 @@ public class BeanFactory {
      * @throws JAXBException the jaxb exception
      */
     @Bean
-    public Project getProject() throws JAXBException {
-        return (Project) XmlMarshaller.unmarshall(Paths.get("project.xml"), Project.class);
+    public Project getProject(BaseController controller) throws JAXBException {
+        String customProjectFile = controller.getProjectFile();
+        Path projectFilePath = Paths.get(StringUtils.isBlank(customProjectFile) ? "project.xml" : customProjectFile);
+        Project project = (Project) XmlMarshaller.unmarshall(projectFilePath, Project.class);
+        project.setBasePath(projectFilePath.getParent());
+        return project;
     }
 
     /**

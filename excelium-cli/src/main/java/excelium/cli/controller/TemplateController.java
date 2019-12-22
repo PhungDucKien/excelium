@@ -30,14 +30,13 @@ import excelium.cli.annotation.Injectable;
 import excelium.common.TemplateUtil;
 import excelium.core.reader.TestReader;
 import excelium.core.reader.TestReaderFactory;
-import excelium.generator.ProjectGenerator;
 import excelium.model.project.Project;
 import excelium.model.project.Template;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 import static excelium.common.Prompt.*;
 
@@ -71,7 +70,9 @@ public class TemplateController extends BaseController {
      */
     @Command(name = "import")
     public void importTemplate() throws IOException, JAXBException, IllegalAccessException {
-        String fileLocation = promptFileLocation(project.getWorkbookType(), project.getTemplatePath(),
+        Path templatePath = project.getBasePath() != null && project.getTemplatePath() != null ?
+                project.getBasePath().resolve(project.getTemplatePath()) : project.getTemplatePath();
+        String fileLocation = promptFileLocation(project.getWorkbookType(), templatePath,
                 "What is the file path of the template you want to import?",
                 "What is the spreadsheet ID/URL of the template you want to import?");
         TestReader testReader = testReaderFactory.createReader(fileLocation);
@@ -111,8 +112,7 @@ public class TemplateController extends BaseController {
 
         project.addTemplate(template);
 
-        ProjectGenerator generator = new ProjectGenerator();
-        generator.updateProject(project, Paths.get("."));
+        updateProjectFile(project);
     }
 
     /**
@@ -131,7 +131,6 @@ public class TemplateController extends BaseController {
             project.getTemplates().remove(removeTemplate);
         }
 
-        ProjectGenerator generator = new ProjectGenerator();
-        generator.updateProject(project, Paths.get("."));
+        updateProjectFile(project);
     }
 }

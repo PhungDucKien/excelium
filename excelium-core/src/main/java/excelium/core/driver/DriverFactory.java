@@ -57,6 +57,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -155,9 +156,12 @@ public class DriverFactory {
     private ChromeDriver createChromeDriver(PcEnvironment environment, Project project) {
         System.setProperty("webdriver.chrome.driver", getPcDriverPath(environment));
 
+        Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
+                project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
+
         ChromeOptions chromeOptions = new ChromeOptions();
         Map<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("download.default_directory", project.getDownloadPath().toFile().getAbsolutePath());
+        chromePrefs.put("download.default_directory", downloadPath.toFile().getAbsolutePath());
         chromePrefs.put("download.prompt_for_download", "false");
         chromePrefs.put("download.directory_upgrade", "true");
         chromeOptions.setExperimentalOption("prefs", chromePrefs);
@@ -175,13 +179,16 @@ public class DriverFactory {
     private FirefoxDriver createFirefoxDriver(PcEnvironment environment, Project project) {
         System.setProperty("webdriver.gecko.driver", getPcDriverPath(environment));
 
+        Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
+                project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
+
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         firefoxProfile.setPreference("browser.startup.homepage", "about:blank");
         firefoxProfile.setPreference("browser.startup.homepage_override.mstone", "ignore");
         firefoxProfile.setPreference("startup.homepage_welcome_url", "about:blank");
         firefoxProfile.setPreference("startup.homepage_welcome_url.additional", "about:blank");
         firefoxProfile.setPreference("browser.download.folderList", 2);
-        firefoxProfile.setPreference("browser.download.dir", project.getDownloadPath().toFile().getAbsolutePath());
+        firefoxProfile.setPreference("browser.download.dir", downloadPath.toFile().getAbsolutePath());
 //        firefoxProfile.setPreference("browser.download.manager.showWhenStarting", "false");
         firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/csv,application/x-msexcel,application/excel,application/x-excel,application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,application/xml");
 
@@ -269,7 +276,9 @@ public class DriverFactory {
                 if (StringUtils.startsWith(appPath, "http") || StringUtils.startsWith(appPath, "/")) {
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
                 } else {
-                    File appFile = project.getAppPath().resolve(appPath).toFile();
+                    Path appFilePath = project.getBasePath() != null && project.getAppPath() != null ?
+                            project.getBasePath().resolve(project.getAppPath()).resolve(appPath) : project.getAppPath().resolve(appPath);
+                    File appFile = appFilePath.toFile();
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
                 }
             }
@@ -322,7 +331,9 @@ public class DriverFactory {
                 if (StringUtils.startsWith(appPath, "http") || StringUtils.startsWith(appPath, "/")) {
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
                 } else {
-                    File appFile = project.getAppPath().resolve(appPath).toFile();
+                    Path appFilePath = project.getBasePath() != null && project.getAppPath() != null ?
+                            project.getBasePath().resolve(project.getAppPath()).resolve(appPath) : project.getAppPath().resolve(appPath);
+                    File appFile = appFilePath.toFile();
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
                 }
             }

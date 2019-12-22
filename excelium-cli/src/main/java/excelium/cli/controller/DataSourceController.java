@@ -29,7 +29,6 @@ import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
 import excelium.core.database.DatabaseService;
 import excelium.core.database.DatabaseServiceFactory;
-import excelium.generator.ProjectGenerator;
 import excelium.model.enums.DataSourceType;
 import excelium.model.project.DataSource;
 import excelium.model.project.Project;
@@ -37,7 +36,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import static excelium.common.Prompt.promptInput;
 import static excelium.common.Prompt.promptList;
@@ -109,8 +107,7 @@ public class DataSourceController extends BaseController {
                 project.setDefaultDataSource(defaultDataSource);
             }
 
-            ProjectGenerator generator = new ProjectGenerator();
-            generator.updateProject(project, Paths.get("."));
+            updateProjectFile(project);
         } else {
             System.out.println("The database is not connectible.");
         }
@@ -143,7 +140,6 @@ public class DataSourceController extends BaseController {
             }
         }
 
-        ProjectGenerator generator = new ProjectGenerator();
-        generator.updateProject(project, Paths.get("."));
+        updateProjectFile(project);
     }
 }

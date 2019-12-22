@@ -44,7 +44,6 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.JAXBException;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -76,10 +75,12 @@ public class ProjectController extends BaseController {
     @Command(name = "create")
     public void create() throws IOException, JAXBException, IllegalAccessException {
         Path basePath = StringUtils.isBlank(folderName) ? Paths.get(".") : Paths.get(folderName);
-        File projectFile = basePath.resolve("project.xml").toFile();
+        String customProjectFile = getProjectFile();
+        String projectFile = StringUtils.isBlank(customProjectFile) ? "project.xml" : customProjectFile;
+        Path projectFilePath = basePath.resolve(projectFile);
 
-        if (projectFile.exists()) {
-            boolean overwrite = promptConfirm("Project configuration file (project.xml) already exists. Would you like to overwrite?");
+        if (projectFilePath.toFile().exists()) {
+            boolean overwrite = promptConfirm("Project configuration file (" + projectFile + ") already exists. Would you like to overwrite?");
             if (!overwrite) {
                 return;
             }
@@ -88,7 +89,7 @@ public class ProjectController extends BaseController {
         // Project instance
         Project project = new Project();
 
-        String name = promptInput("What is the name of your project?", getDefaultProjectName());
+        String name = promptInput("What is the name of your project?", projectFilePath.getParent().toAbsolutePath().getFileName().toString());
         project.setName(name);
 
         String appTypeId = promptList("Which type of application would you like to test?", AppType.getListChoice());
@@ -163,18 +164,6 @@ public class ProjectController extends BaseController {
         }
 
         ProjectGenerator generator = new ProjectGenerator();
-        generator.createProject(project, basePath);
-    }
-
-    /**
-     * Gets default project name.
-     *
-     * @return the default project name
-     */
-    private String getDefaultProjectName() {
-        if (StringUtils.isBlank(folderName)) {
-            return Paths.get(System.getProperty("user.dir")).getFileName().toString();
-        }
-        return folderName;
+        generator.createProject(project, projectFilePath);
     }
 }

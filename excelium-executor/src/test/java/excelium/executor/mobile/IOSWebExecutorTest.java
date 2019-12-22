@@ -76,6 +76,7 @@ public class IOSWebExecutorTest {
         }
 
         project = new Project();
+        project.setBasePath(Paths.get("."));
         project.setScreenshotPath(Paths.get("screenshot"));
         webDriver = DriverPool.getInstance().getDriver(environment, project);
         selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
