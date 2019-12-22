@@ -25,6 +25,7 @@
 package excelium.cli;
 
 import com.google.api.services.sheets.v4.Sheets;
+import excelium.cli.controller.BaseController;
 import excelium.common.XmlMarshaller;
 import excelium.model.enums.AppType;
 import excelium.model.enums.WorkbookType;
@@ -88,7 +89,7 @@ public class BeanFactoryTest {
         String currentDir = System.getProperty("user.dir");
         System.setProperty("user.dir", Paths.get("myproject").toFile().getAbsolutePath());
         BeanFactory beanFactory = new BeanFactory();
-        Project unmarshalled = beanFactory.getProject();
+        Project unmarshalled = beanFactory.getProject(new BaseController());
         System.setProperty("user.dir", currentDir);
 
         Assert.assertEquals("myproject", unmarshalled.getName());

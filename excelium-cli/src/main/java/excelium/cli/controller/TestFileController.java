@@ -29,13 +29,12 @@ import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
 import excelium.core.reader.TestReader;
 import excelium.core.reader.TestReaderFactory;
-import excelium.generator.ProjectGenerator;
 import excelium.model.project.Project;
 import excelium.model.project.TestFile;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 import static excelium.common.Prompt.promptFileLocation;
 import static excelium.common.Prompt.promptList;
@@ -79,7 +78,9 @@ public class TestFileController extends BaseController {
      */
     @Command(name = "add")
     public void add() throws IOException, JAXBException {
-        String fileLocation = promptFileLocation(project.getWorkbookType(), project.getTestPath(),
+        Path testPath = project.getBasePath() != null && project.getTestPath() != null ?
+                project.getBasePath().resolve(project.getTestPath()) : project.getTestPath();
+        String fileLocation = promptFileLocation(project.getWorkbookType(), testPath,
                 "What is the file path of the test file you want to add?",
                 "What is the spreadsheet ID/URL of the test file you want to add?");
         TestReader testReader = testReaderFactory.createReader(fileLocation);
@@ -93,8 +94,7 @@ public class TestFileController extends BaseController {
 
         project.addTest(testFile);
 
-        ProjectGenerator generator = new ProjectGenerator();
-        generator.updateProject(project, Paths.get("."));
+        updateProjectFile(project);
     }
 
     /**
@@ -113,7 +113,6 @@ public class TestFileController extends BaseController {
             project.getTests().remove(removeTestFile);
         }
 
-        ProjectGenerator generator = new ProjectGenerator();
-        generator.updateProject(project, Paths.get("."));
+        updateProjectFile(project);
     }
 }

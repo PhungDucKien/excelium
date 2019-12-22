@@ -240,7 +240,7 @@ public class ScreenshotService {
      * @return the screenshot image file
      */
     private File getScreenshotImageFile() {
-        Path path = project.getScreenshotPath()
+        Path path = project.getBasePath().resolve(project.getScreenshotPath())
                 .resolve(environment.getKey());
 
         if (testRunner != null) {

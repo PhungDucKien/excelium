@@ -154,6 +154,8 @@ public class Commander extends JCommander {
             controllerObject = controllerObjects.get(controller);
         }
 
+        beanMap.put(BaseController.class, controllerObject);
+
         if (controllerObject.isHelp()) {
             if (StringUtils.isBlank(controller)) {
                 usage();

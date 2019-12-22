@@ -26,7 +26,14 @@ package excelium.cli.controller;
 
 import com.beust.jcommander.DynamicParameter;
 import com.beust.jcommander.Parameter;
+import excelium.generator.ProjectGenerator;
+import excelium.model.project.Project;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +52,12 @@ public class BaseController {
     private boolean help = false;
 
     /**
+     * Project file
+     */
+    @Parameter(names = {"-f", "--project-file"}, description = "Force the use of an alternate project file", help = true)
+    private String projectFile;
+
+    /**
      * System properties
      */
     @DynamicParameter(names = "-D", description = "Define a system property")
@@ -60,11 +73,30 @@ public class BaseController {
     }
 
     /**
+     * Gets project file.
+     *
+     * @return the project file
+     */
+    public String getProjectFile() {
+        return projectFile;
+    }
+
+    /**
      * Gets system properties
      *
      * @return the system properties
      */
     public Map<String, String> getProperties() {
         return properties;
+    }
+
+    protected void updateProjectFile(Project project) throws JAXBException, IOException {
+        Path basePath = project.getBasePath();
+        String customProjectFile = getProjectFile();
+        String projectFile = StringUtils.isBlank(customProjectFile) ? "project.xml" : customProjectFile;
+        Path projectFilePath = basePath.resolve(projectFile);
+
+        ProjectGenerator generator = new ProjectGenerator();
+        generator.updateProject(project, projectFilePath);
     }
 }

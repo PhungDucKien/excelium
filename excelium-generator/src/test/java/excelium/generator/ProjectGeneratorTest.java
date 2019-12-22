@@ -77,10 +77,11 @@ public class ProjectGeneratorTest {
         templates.put("default", template);
         project.setTemplates(templates);
 
-        Path basePath = Paths.get("myproject");
+        Path projectFilePath = Paths.get("myproject/project.xml");
+        Path basePath = projectFilePath.getParent();
 
         ProjectGenerator generator = new ProjectGenerator();
-        generator.createProject(project, basePath);
+        generator.createProject(project, projectFilePath);
 
         Assert.assertEquals(true, Files.exists(basePath));
         Assert.assertEquals(true, Files.exists(basePath.resolve("config")));
@@ -140,10 +141,11 @@ public class ProjectGeneratorTest {
         templates.put("default", template);
         project.setTemplates(templates);
 
-        Path basePath = Paths.get("myproject");
+        Path projectFilePath = Paths.get("myproject/project.xml");
+        Path basePath = projectFilePath.getParent();
 
         ProjectGenerator generator = new ProjectGenerator();
-        generator.createProject(project, basePath);
+        generator.createProject(project, projectFilePath);
 
         Assert.assertEquals(true, Files.exists(basePath));
         Assert.assertEquals(true, Files.exists(basePath.resolve("config")));
@@ -215,10 +217,11 @@ public class ProjectGeneratorTest {
         templates.put("default", template);
         project.setTemplates(templates);
 
-        Path basePath = Paths.get("myproject");
+        Path projectFilePath = Paths.get("myproject/project.xml");
+        Path basePath = projectFilePath.getParent();
 
         ProjectGenerator generator = new ProjectGenerator();
-        generator.updateProject(project, basePath);
+        generator.updateProject(project, projectFilePath);
 
         Assert.assertEquals(true, Files.exists(basePath));
         Assert.assertEquals(true, Files.exists(basePath.resolve("project.xml")));

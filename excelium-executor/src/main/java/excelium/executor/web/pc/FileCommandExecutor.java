@@ -92,7 +92,9 @@ public class FileCommandExecutor extends CommandExecutor {
      */
     @Accessor(param1 = "filePattern")
     public boolean isFileDownloaded(String filePattern) throws IOException {
-        long matchCount = Files.walk(project.getDownloadPath())
+        Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
+                project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
+        long matchCount = Files.walk(downloadPath)
                 .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
                 .count();
         return matchCount > 0;
@@ -109,7 +111,9 @@ public class FileCommandExecutor extends CommandExecutor {
      */
     @Action(param1 = "filePattern", param2 = "charset", param3 = "text")
     public void verifyFileFirstLine(String filePattern, String charset, String text) throws Exception {
-        Optional<Path> filePath = Files.walk(project.getDownloadPath())
+        Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
+                project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
+        Optional<Path> filePath = Files.walk(downloadPath)
                 .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
                 .findFirst();
 
@@ -133,7 +137,9 @@ public class FileCommandExecutor extends CommandExecutor {
      */
     @Action(param1 = "filePattern", param2 = "charset", param3 = "text")
     public void verifyFileContainLine(String filePattern, String charset, String text) throws Exception {
-        Optional<Path> filePath = Files.walk(project.getDownloadPath())
+        Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
+                project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
+        Optional<Path> filePath = Files.walk(downloadPath)
                 .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
                 .findFirst();
 
@@ -152,7 +158,9 @@ public class FileCommandExecutor extends CommandExecutor {
      */
     @Action(param1 = "filePattern")
     public void deleteDownloadedFile(String filePattern) throws Exception {
-        Files.walk(project.getDownloadPath())
+        Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
+                project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
+        Files.walk(downloadPath)
                 .filter(path -> WildcardUtil.isMatch(path.toFile().getName(), filePattern))
                 .forEach(path -> {
                     try {
@@ -183,7 +191,9 @@ public class FileCommandExecutor extends CommandExecutor {
             return new URL(name);
         } catch (MalformedURLException e) {
             try {
-                return project.getFilePath().resolve(name).toUri().toURL();
+                Path filePath = project.getBasePath() != null && project.getFilePath() != null ?
+                        project.getBasePath().resolve(project.getFilePath()) : project.getFilePath();
+                return filePath.resolve(name).toUri().toURL();
             } catch (MalformedURLException e1) {
                 throw new SeleniumException("Malformed URL: " + name);
             }

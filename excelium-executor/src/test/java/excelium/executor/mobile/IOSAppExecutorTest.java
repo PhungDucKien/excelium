@@ -86,6 +86,7 @@ public class IOSAppExecutorTest {
         }
 
         project = new Project();
+        project.setBasePath(Paths.get("."));
         project.setAppPath(Paths.get("src/test/resources"));
         project.setScreenshotPath(Paths.get("screenshot"));
         webDriver = DriverPool.getInstance().getDriver(environment, project);
@@ -123,26 +124,26 @@ public class IOSAppExecutorTest {
 
     @Test
     public void testScreenshot() throws Throwable {
-        FileUtils.deleteDirectory(project.getScreenshotPath().toFile());
+        FileUtils.deleteDirectory(project.getBasePath().resolve(project.getScreenshotPath()).toFile());
         selenium.captureScreenshot();
-        Assert.assertTrue(project.getScreenshotPath().toFile().list().length == 1);
+        Assert.assertTrue(project.getBasePath().resolve(project.getScreenshotPath()).toFile().list().length == 1);
 
         // make sure WDA didn't crash, by using it again
         selenium.assertElementPresent("Alert Views");
 
         selenium.landscape();
         selenium.pause("1000");
-        FileUtils.deleteDirectory(project.getScreenshotPath().toFile());
+        FileUtils.deleteDirectory(project.getBasePath().resolve(project.getScreenshotPath()).toFile());
         selenium.captureScreenshot();
-        Assert.assertTrue(project.getScreenshotPath().toFile().list().length == 1);
+        Assert.assertTrue(project.getBasePath().resolve(project.getScreenshotPath()).toFile().list().length == 1);
 
         selenium.portrait();
         selenium.pause("1000");
-        FileUtils.deleteDirectory(project.getScreenshotPath().toFile());
+        FileUtils.deleteDirectory(project.getBasePath().resolve(project.getScreenshotPath()).toFile());
         selenium.captureViewport();
-        Assert.assertTrue(project.getScreenshotPath().toFile().list().length == 1);
+        Assert.assertTrue(project.getBasePath().resolve(project.getScreenshotPath()).toFile().list().length == 1);
 
-        FileUtils.deleteDirectory(project.getScreenshotPath().toFile());
+        FileUtils.deleteDirectory(project.getBasePath().resolve(project.getScreenshotPath()).toFile());
     }
 
     @Test

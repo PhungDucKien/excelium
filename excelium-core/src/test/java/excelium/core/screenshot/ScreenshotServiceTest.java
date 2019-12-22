@@ -94,6 +94,7 @@ public class ScreenshotServiceTest {
         ((PcEnvironment) environment).setBrowser(Browser.CHROME);
 
         Project project = new Project();
+        project.setBasePath(Paths.get("."));
         project.setScreenshotPath(Paths.get("dump"));
 
         new Expectations() {{

@@ -49,6 +49,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -103,7 +104,9 @@ public class ElementCommandExecutor extends CommandExecutor {
                 element.sendKeys(valueToUse);
             } else {
                 if (elementType != null && "file".equals(elementType.toLowerCase())) {
-                    File file = project.getFilePath().resolve(valueToUse).toFile();
+                    Path filePath = project.getBasePath() != null && project.getFilePath() != null ?
+                            project.getBasePath().resolve(project.getFilePath()) : project.getFilePath();
+                    File file = filePath.resolve(valueToUse).toFile();
                     element.clear();
                     element.sendKeys(file.getAbsolutePath());
                 } else {
