@@ -31,6 +31,7 @@ import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
 import excelium.cli.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -160,6 +161,10 @@ public class Commander extends JCommander {
                 usage(controller);
             }
             return;
+        }
+
+        if (!CollectionUtils.isEmpty(controllerObject.getProperties())) {
+            controllerObject.getProperties().forEach(System::setProperty);
         }
 
         // Finds injectable fields

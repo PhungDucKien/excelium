@@ -24,7 +24,11 @@
 
 package excelium.cli.controller;
 
+import com.beust.jcommander.DynamicParameter;
 import com.beust.jcommander.Parameter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Base controller.
@@ -37,8 +41,14 @@ public class BaseController {
     /**
      * Help flag
      */
-    @Parameter(names = {"-h", "-help"}, description = "Print help information", help = true)
+    @Parameter(names = {"-h", "--help"}, description = "Print help information", help = true)
     private boolean help = false;
+
+    /**
+     * System properties
+     */
+    @DynamicParameter(names = "-D", description = "Define a system property")
+    private Map<String, String> properties = new HashMap<>();
 
     /**
      * Gets help flag.
@@ -47,5 +57,14 @@ public class BaseController {
      */
     public boolean isHelp() {
         return help;
+    }
+
+    /**
+     * Gets system properties
+     *
+     * @return the system properties
+     */
+    public Map<String, String> getProperties() {
+        return properties;
     }
 }
