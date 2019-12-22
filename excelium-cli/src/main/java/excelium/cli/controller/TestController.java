@@ -24,6 +24,7 @@
 
 package excelium.cli.controller;
 
+import com.beust.jcommander.Parameter;
 import de.codeshelf.consoleui.prompt.ConsolePrompt;
 import de.codeshelf.consoleui.prompt.ExpandableChoiceResult;
 import de.codeshelf.consoleui.prompt.builder.ExpandableChoicePromptBuilder;
@@ -31,18 +32,23 @@ import de.codeshelf.consoleui.prompt.builder.PromptBuilder;
 import excelium.cli.annotation.Command;
 import excelium.cli.annotation.Controller;
 import excelium.cli.annotation.Injectable;
+import excelium.common.Version;
 import excelium.core.TestExecutor;
 import excelium.core.reader.TestReaderFactory;
 import excelium.core.writer.TestWriterFactory;
 import excelium.model.project.Project;
 import excelium.model.project.TestFile;
+import excelium.model.test.TestCase;
 import excelium.model.test.TestFilter;
+import excelium.model.test.TestSuite;
 import excelium.updater.AppUpdater;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
+import static excelium.common.CiInfoUtil.isCI;
 import static excelium.common.Prompt.promptList;
 
 /**
@@ -83,25 +89,88 @@ public class TestController extends BaseController {
     private TestWriterFactory testWriterFactory;
 
     /**
+     * All flag
+     */
+    @Parameter(names = {"-a", "--all"}, description = "Run all tests", help = true)
+    private boolean all = false;
+
+    /**
+     * Workbook filter
+     */
+    @Parameter(names = {"-w", "--workbook"}, description = "Run workbook tests", help = true)
+    private String workbook;
+
+    /**
+     * Sheet filter
+     */
+    @Parameter(names = {"-s", "--sheet"}, description = "Run sheet tests", help = true)
+    private String sheet;
+
+    /**
+     * Test case filter
+     */
+    @Parameter(names = {"-t", "--test-case"}, description = "Run test case", help = true)
+    private String testCase;
+
+    /**
      * Executes tests.
      */
     @Command
     public void execute() throws IOException {
-        AppUpdater updater = new AppUpdater();
-        boolean shouldRestart = updater.checkVersion();
+        System.out.println("Excelium " + Version.VERSION);
 
-        if (shouldRestart) {
-            System.exit(0);
-            return;
+        boolean isCI = isCI();
+
+        if (!isCI) {
+            AppUpdater updater = new AppUpdater();
+            boolean shouldRestart = updater.checkVersion();
+
+            if (shouldRestart) {
+                System.exit(0);
+                return;
+            }
         }
 
-        String action = "";
         TestExecutor testExecutor = new TestExecutor(project, testReaderFactory, testWriterFactory);
         TestFilter testFilter = new TestFilter();
         boolean testExecuted = false;
 
+        if (all) {
+            testFilter.setWorkbook(TestFile.ALL);
+            testExecutor.execute(testFilter);
+            testExecuted = true;
+
+            if (isCI) {
+                return;
+            }
+        }
+
+        if (StringUtils.isNotBlank(workbook)) {
+            testFilter.setWorkbook(workbook);
+
+            if (StringUtils.isNotBlank(sheet)) {
+                testFilter.setSheet(sheet);
+
+                if (StringUtils.isNotBlank(testCase)) {
+                    testFilter.setTestCase(testCase);
+                } else {
+                    testFilter.setTestCase(TestCase.ALL);
+                }
+            } else {
+                testFilter.setSheet(TestSuite.ALL);
+            }
+
+            testExecutor.execute(testFilter);
+            testExecuted = true;
+
+            if (isCI) {
+                return;
+            }
+        }
+
+        String action = "";
         while (!ACTION_QUIT.equals(action)) {
-            action = promptAction(testExecuted);
+            action = promptAction(testExecuted, all, StringUtils.isNotBlank(workbook), StringUtils.isNotBlank(sheet), StringUtils.isNotBlank(testCase));
             switch (action) {
                 case ACTION_ALL:
                     testFilter = new TestFilter();
@@ -114,13 +183,30 @@ public class TestController extends BaseController {
                     testExecuted = true;
                     break;
                 case ACTION_FILTER_TESTS:
-                    String runWorkbook = promptList("Choose the test file to run:", project.getTestListChoice(true));
-
                     testFilter = new TestFilter();
-                    testFilter.setWorkbook(runWorkbook);
+
+                    if (StringUtils.isNotBlank(workbook)) {
+                        testFilter.setWorkbook(workbook);
+
+                        if (StringUtils.isNotBlank(sheet)) {
+                            testFilter.setSheet(sheet);
+
+                            if (StringUtils.isNotBlank(testCase)) {
+                                testFilter.setTestCase(testCase);
+                            }
+                        }
+                    } else {
+                        String runWorkbook = promptList("Choose the test file to run:", project.getTestListChoice(true));
+                        testFilter.setWorkbook(runWorkbook);
+                    }
+
                     testExecutor.execute(testFilter);
                     testExecuted = true;
                     break;
+            }
+
+            if (isCI) {
+                break;
             }
         }
     }
@@ -131,18 +217,28 @@ public class TestController extends BaseController {
      * @return User selected action
      * @throws IOException if an I/O exception is thrown
      */
-    private String promptAction(boolean testExecuted) throws IOException {
+    private String promptAction(boolean testExecuted, boolean allFlag, boolean hasWorkbookFlag, boolean hasSheetFlag, boolean hasTestCaseFlag) throws IOException {
         ConsolePrompt prompt = new ConsolePrompt();
         PromptBuilder promptBuilder = prompt.getPromptBuilder();
 
         ExpandableChoicePromptBuilder actionPromptBuilder = promptBuilder.createChoicePrompt()
                 .message("Press one of the following keys to continue (or press <h> for help)");
-        actionPromptBuilder.newItem(ACTION_ALL).key('a').message("Run all tests").add();
-        if (testExecuted) {
-            actionPromptBuilder.newItem(ACTION_PREVIOUS_FILTER).key('p').message("Use previous filter and run tests").add();
+        if (!hasWorkbookFlag) {
+            actionPromptBuilder.newItem(ACTION_ALL).key('a').message("Run all tests").add();
         }
-        actionPromptBuilder.newItem(ACTION_FILTER_TESTS).key('t').message("Set filter and run tests").add();
-        actionPromptBuilder.newItem(ACTION_QUIT).key('q').message("Quit").add();
+        if (!allFlag) {
+            if (hasWorkbookFlag && hasSheetFlag && hasTestCaseFlag) {
+                actionPromptBuilder.newItem(ACTION_FILTER_TESTS).key('t').message("Run filter tests").add();
+            } else {
+                if (testExecuted) {
+                    actionPromptBuilder.newItem(ACTION_PREVIOUS_FILTER).key('p').message("Use previous filter and run tests").add();
+                }
+                actionPromptBuilder.newItem(ACTION_FILTER_TESTS).key('t').message("Set filter and run tests").add();
+            }
+        }
+        if (testExecuted) {
+            actionPromptBuilder.newItem(ACTION_QUIT).key('q').message("Quit").add();
+        }
 
         actionPromptBuilder.addPrompt();
 

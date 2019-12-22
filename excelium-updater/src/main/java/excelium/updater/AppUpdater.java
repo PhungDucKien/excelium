@@ -42,8 +42,6 @@ public class AppUpdater extends Downloader {
     private static final Logger LOG = LogManager.getLogger();
 
     public boolean checkVersion() throws IOException {
-        System.out.println("Excelium " + Version.VERSION);
-
         String latestTag = Version.VERSION;
         try {
             latestTag = getGithubLatestTag("PhungDucKien/excelium");

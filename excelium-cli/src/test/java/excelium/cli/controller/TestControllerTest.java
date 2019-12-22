@@ -27,10 +27,9 @@ package excelium.cli.controller;
 import de.codeshelf.consoleui.elements.PromptableElementIF;
 import de.codeshelf.consoleui.prompt.ConsolePrompt;
 import de.codeshelf.consoleui.prompt.ExpandableChoiceResult;
-import de.codeshelf.consoleui.prompt.InputResult;
 import de.codeshelf.consoleui.prompt.ListResult;
+import excelium.common.CiInfoUtil;
 import excelium.core.TestExecutor;
-import excelium.model.project.DataSource;
 import excelium.model.project.Project;
 import excelium.model.project.TestFile;
 import excelium.model.test.TestFilter;
@@ -215,6 +214,231 @@ public class TestControllerTest {
         new Verifications() {{
             testFilter.setWorkbook("Workbook1"); times = 1;
             testExecutor.execute((TestFilter) any); times = 2;
+        }};
+    }
+
+    @Test
+    public void testIgnoreUpdate() throws IOException {
+        new MockUp<CiInfoUtil>() {
+            @Mock
+            boolean isCI() {
+                return true;
+            }
+        };
+
+        new Expectations() {{
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("ALL")); }},
+                    new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }});
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            appUpdater.checkVersion(); times = 0;
+            testFilter.setWorkbook("ALL"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testAllOneTime() throws IOException {
+        Deencapsulation.setField(testController, "all", true);
+
+        new MockUp<CiInfoUtil>() {
+            @Mock
+            boolean isCI() {
+                return true;
+            }
+        };
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("ALL"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testAllAndQuit() throws IOException {
+        Deencapsulation.setField(testController, "all", true);
+
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            result = new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }};
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("ALL"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testWorkbookOneTime() throws IOException {
+        Deencapsulation.setField(testController, "workbook", "workbook-id");
+
+        new MockUp<CiInfoUtil>() {
+            @Mock
+            boolean isCI() {
+                return true;
+            }
+        };
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("workbook-id"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testWorkbookAndQuit() throws IOException {
+        Deencapsulation.setField(testController, "workbook", "workbook-id");
+
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            result = new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }};
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("workbook-id"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testSheetOneTime() throws IOException {
+        Deencapsulation.setField(testController, "workbook", "workbook-id");
+        Deencapsulation.setField(testController, "sheet", "sheet-name");
+
+        new MockUp<CiInfoUtil>() {
+            @Mock
+            boolean isCI() {
+                return true;
+            }
+        };
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("workbook-id"); times = 1;
+            testFilter.setSheet("sheet-name"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testSheetAndQuit() throws IOException {
+        Deencapsulation.setField(testController, "workbook", "workbook-id");
+        Deencapsulation.setField(testController, "sheet", "sheet-name");
+
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            result = new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }};
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("workbook-id"); times = 1;
+            testFilter.setSheet("sheet-name"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testCaseOneTime() throws IOException {
+        Deencapsulation.setField(testController, "workbook", "workbook-id");
+        Deencapsulation.setField(testController, "sheet", "sheet-name");
+        Deencapsulation.setField(testController, "testCase", "case-no");
+
+        new MockUp<CiInfoUtil>() {
+            @Mock
+            boolean isCI() {
+                return true;
+            }
+        };
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("workbook-id"); times = 1;
+            testFilter.setSheet("sheet-name"); times = 1;
+            testFilter.setTestCase("case-no"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testCaseAndQuit() throws IOException {
+        Deencapsulation.setField(testController, "workbook", "workbook-id");
+        Deencapsulation.setField(testController, "sheet", "sheet-name");
+        Deencapsulation.setField(testController, "testCase", "case-no");
+
+        new Expectations() {{
+            appUpdater.checkVersion();
+            result = false;
+
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            result = new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("QUIT")); }};
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("workbook-id"); times = 1;
+            testFilter.setSheet("sheet-name"); times = 1;
+            testFilter.setTestCase("case-no"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
+        }};
+    }
+
+    @Test
+    public void testOneTime() throws IOException {
+        Project project = new Project();
+        Deencapsulation.setField(testController, project);
+
+        String[][] testListChoices = new String[1][2];
+        testListChoices[0] = new String[]{"Workbook1", "Workbook 1"};
+
+        new MockUp<CiInfoUtil>() {
+            @Mock
+            boolean isCI() {
+                return true;
+            }
+        };
+
+        new Expectations() {{
+            consolePrompt.prompt((List<PromptableElementIF>) any);
+            returns(new HashMap<String, ExpandableChoiceResult>() {{ put("", new ExpandableChoiceResult("FILTER")); }},
+                    new HashMap<String, ListResult>() {{ put("", new ListResult("Workbook1")); }});
+
+            project.setTests(new HashMap<String, TestFile>() {{
+                put("Workbook1", new TestFile());
+            }});
+        }};
+
+        testController.execute();
+
+        new Verifications() {{
+            testFilter.setWorkbook("Workbook1"); times = 1;
+            testExecutor.execute((TestFilter) any); times = 1;
         }};
     }
 }
