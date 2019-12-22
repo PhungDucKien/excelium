@@ -29,11 +29,14 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+
+import static excelium.common.CiInfoUtil.isCI;
 
 /**
  * Implements {@link GoogleConnection} for uses in command line applications.
@@ -51,7 +54,7 @@ public class GoogleConnectionService extends GoogleConnection {
     /**
      * Command line client secret json file
      */
-    private static final String CLIENT_SECRETS = "cli_client_secret.json";
+    private static final String CLIENT_SECRETS = "installed_client_secret.json";
 
     /**
      * Directory to store user credentials for this application.
@@ -124,16 +127,21 @@ public class GoogleConnectionService extends GoogleConnection {
     @Override
     public Credential getCredential() throws IOException {
         if (credential == null) {
-            // Build flow and trigger user authorization request.
-            GoogleAuthorizationCodeFlow flow =
-                    new GoogleAuthorizationCodeFlow.Builder(
-                            HTTP_TRANSPORT, JSON_FACTORY, getClientSecrets(), SCOPES)
-                            .setDataStoreFactory(DATA_STORE_FACTORY)
-                            .setAccessType("offline")
-                            .build();
-            credential = new AuthorizationCodeInstalledApp(
-                    flow, new LocalServerReceiver()).authorize("user");
-            LOG.info("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+            if (isCI()) {
+                credential = GoogleCredential.fromStream(getClass().getClassLoader().getResourceAsStream("service_account.json"))
+                     .createScoped(SCOPES);
+            } else {
+                // Build flow and trigger user authorization request.
+                GoogleAuthorizationCodeFlow flow =
+                        new GoogleAuthorizationCodeFlow.Builder(
+                                HTTP_TRANSPORT, JSON_FACTORY, getClientSecrets(), SCOPES)
+                                .setDataStoreFactory(DATA_STORE_FACTORY)
+                                .setAccessType("offline")
+                                .build();
+                credential = new AuthorizationCodeInstalledApp(
+                        flow, new LocalServerReceiver()).authorize("user");
+                LOG.info("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+            }
         }
 
         return credential;
