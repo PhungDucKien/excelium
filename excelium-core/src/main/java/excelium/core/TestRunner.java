@@ -63,6 +63,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static excelium.common.BrowserUtil.browse;
+import static excelium.common.CiInfoUtil.isCI;
 
 /**
  * Executes all tests of a workbook test file
@@ -238,21 +239,23 @@ public class TestRunner {
                     if (shouldContinue) {
                         testReporter.startTestStep(testStep);
 
-                        if (debugSession == null) {
-                            if (testStep.isStepDebug(environment)) {
-                                debugSession = createDebugSession(webDriver);
-                                startDebugServer();
+                        if (!isCI()) {
+                            if (debugSession == null) {
+                                if (testStep.isStepDebug(environment)) {
+                                    debugSession = createDebugSession(webDriver);
+                                    startDebugServer();
 
-                                String serverUrl = AppProfile.get().equals("dev") ? "http://localhost:3000" : server.getServerUrl();
-                                browse(serverUrl + "/inspector/" + webDriver.getSessionId().toString());
+                                    String serverUrl = AppProfile.get().equals("dev") ? "http://localhost:3000" : server.getServerUrl();
+                                    browse(serverUrl + "/inspector/" + webDriver.getSessionId().toString());
 
-                                waitForStepRequest(webDriver.getSessionId().toString());
-                            }
-                        } else {
-                            if (debugSession.getStepMode() == StepMode.STEP_OVER || (debugSession.getStepMode() == StepMode.STEP_NEXT_BREAKPOINT && testStep.isStepDebug(environment))) {
-                                debugSession.pause();
+                                    waitForStepRequest(webDriver.getSessionId().toString());
+                                }
+                            } else {
+                                if (debugSession.getStepMode() == StepMode.STEP_OVER || (debugSession.getStepMode() == StepMode.STEP_NEXT_BREAKPOINT && testStep.isStepDebug(environment))) {
+                                    debugSession.pause();
 
-                                waitForStepRequest(webDriver.getSessionId().toString());
+                                    waitForStepRequest(webDriver.getSessionId().toString());
+                                }
                             }
                         }
 
