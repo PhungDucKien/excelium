@@ -24,42 +24,60 @@
 
 package excelium.core.server;
 
+import excelium.model.project.Project;
+import org.openqa.selenium.net.PortProber;
 import org.openqa.selenium.net.UrlChecker;
 import org.seleniumhq.jetty9.server.Connector;
 import org.seleniumhq.jetty9.server.Server;
 import org.seleniumhq.jetty9.server.ServerConnector;
+import org.seleniumhq.jetty9.server.handler.ContextHandler;
 import org.seleniumhq.jetty9.server.handler.HandlerList;
-import org.seleniumhq.jetty9.servlet.DefaultServlet;
-import org.seleniumhq.jetty9.servlet.ErrorPageErrorHandler;
-import org.seleniumhq.jetty9.servlet.ServletContextHandler;
-import org.seleniumhq.jetty9.servlet.ServletHolder;
+import org.seleniumhq.jetty9.server.handler.ResourceHandler;
 import org.seleniumhq.jetty9.util.resource.Resource;
 
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
-public class HttpServer {
+public class FileServer {
 
-    /**
-     * The port number the server should use.
-     */
-    private static final Integer PORT = 7714;
+    private static FileServer instance;
 
+    private Project project;
     private Server server;
     private boolean running;
     private String serverUrl;
 
+    private FileServer(Project project) {
+        this.project = project;
+    }
+
+    public static FileServer createInstance(Project project) {
+        instance = new FileServer(project);
+        return instance;
+    }
+
+    public static FileServer getInstance() {
+        return instance;
+    }
+
     public void start() {
         if (!isRunning()) {
-            int port = PORT;
+            int port = PortProber.findFreePort();
 
             try {
                 startServer(port);
 
-                serverUrl = "http://localhost:" + port;
+                Socket socket = new Socket();
+                socket.connect(new InetSocketAddress("google.com", 80));
+                serverUrl = "http://" + socket.getLocalAddress() + ":" + port;
 
-                URL status = new URL(serverUrl + "/api/health");
+                URL status = new URL("http://localhost:" + port);
                 new UrlChecker().waitUntilAvailable(60, TimeUnit.SECONDS, status);
+
+                System.out.println("Project files served at " + serverUrl);
 
                 running = true;
             } catch (Exception e) {
@@ -90,24 +108,14 @@ public class HttpServer {
 
         HandlerList handlers = new HandlerList();
 
-        ServletContextHandler servletContext = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
-        servletContext.setContextPath("/");
-        servletContext.setBaseResource(Resource.newClassPathResource("/html"));
+        ContextHandler context = new ContextHandler();
+        context.setContextPath("/");
+        ResourceHandler resourceHandler = new ResourceHandler();
+        resourceHandler.setBaseResource(Resource.newResource(project.getBasePath().toAbsolutePath().toFile().getCanonicalFile()));
+        resourceHandler.setDirectoriesListed(true);
+        context.setHandler(resourceHandler);
 
-        servletContext.addServlet(new ServletHolder(new HealthServlet()), "/api/health");
-        servletContext.addServlet(new ServletHolder(new SessionDetailsServlet()), "/api/session/details");
-        servletContext.addServlet(new ServletHolder(new RestartRecorderServlet()), "/api/session/restart");
-        servletContext.addServlet(new ServletHolder(new ClientMethodHandleServlet()), "/api/session/execute");
-        servletContext.addServlet(new ServletHolder(new StepOverSessionServlet()), "/api/session/step-over");
-        servletContext.addServlet(new ServletHolder(new ResumeSessionServlet()), "/api/session/resume");
-        servletContext.addServlet(new ServletHolder(new MuteAndResumeSessionServlet()), "/api/session/mute-resume");
-        servletContext.addServlet(DefaultServlet.class, "/");
-
-        ErrorPageErrorHandler errorHandler = new ErrorPageErrorHandler();
-        errorHandler.addErrorPage(404, "/");
-        servletContext.setErrorHandler(errorHandler);
-
-        handlers.addHandler(servletContext);
+        handlers.addHandler(context);
 
         server.setHandler(handlers);
         server.start();
@@ -122,7 +130,9 @@ public class HttpServer {
     }
 
     public static void main(String[] args) {
-        HttpServer server = new HttpServer();
+        Project project = new Project();
+        project.setBasePath(Paths.get("."));
+        FileServer server = new FileServer(project);
         server.start();
     }
 }

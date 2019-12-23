@@ -35,6 +35,7 @@ import excelium.cli.annotation.Injectable;
 import excelium.common.Version;
 import excelium.core.TestExecutor;
 import excelium.core.reader.TestReaderFactory;
+import excelium.core.server.FileServer;
 import excelium.core.writer.TestWriterFactory;
 import excelium.model.project.Project;
 import excelium.model.project.TestFile;
@@ -113,6 +114,18 @@ public class TestController extends BaseController {
     private String testCase;
 
     /**
+     * Remote host
+     */
+    @Parameter(names = {"--remote-host"}, description = "Remote WebDriver server host", help = true)
+    private String remoteHost;
+
+    /**
+     * Remote port
+     */
+    @Parameter(names = {"--remote-port"}, description = "Remote WebDriver server port", help = true)
+    private String remotePort;
+
+    /**
      * Executes tests.
      */
     @Command
@@ -131,82 +144,95 @@ public class TestController extends BaseController {
             }
         }
 
-        TestExecutor testExecutor = new TestExecutor(project, testReaderFactory, testWriterFactory);
-        TestFilter testFilter = new TestFilter();
-        boolean testExecuted = false;
+        FileServer fileServer = null;
 
-        if (all) {
-            testFilter.setWorkbook(TestFile.ALL);
-            testExecutor.execute(testFilter);
-            testExecuted = true;
-
-            if (isCI) {
-                return;
-            }
+        if (isRemoteHost(remoteHost)) {
+            fileServer = FileServer.createInstance(project);
+            fileServer.start();
         }
 
-        if (StringUtils.isNotBlank(workbook)) {
-            testFilter.setWorkbook(workbook);
+        try {
+            TestExecutor testExecutor = new TestExecutor(project, testReaderFactory, testWriterFactory);
+            TestFilter testFilter = new TestFilter();
+            boolean testExecuted = false;
 
-            if (StringUtils.isNotBlank(sheet)) {
-                testFilter.setSheet(sheet);
+            if (all) {
+                testFilter.setWorkbook(TestFile.ALL);
+                testExecutor.execute(testFilter);
+                testExecuted = true;
 
-                if (StringUtils.isNotBlank(testCase)) {
-                    testFilter.setTestCase(testCase);
-                } else {
-                    testFilter.setTestCase(TestCase.ALL);
+                if (isCI) {
+                    return;
                 }
-            } else {
-                testFilter.setSheet(TestSuite.ALL);
             }
 
-            testExecutor.execute(testFilter);
-            testExecuted = true;
+            if (StringUtils.isNotBlank(workbook)) {
+                testFilter.setWorkbook(workbook);
 
-            if (isCI) {
-                return;
-            }
-        }
+                if (StringUtils.isNotBlank(sheet)) {
+                    testFilter.setSheet(sheet);
 
-        String action = "";
-        while (!ACTION_QUIT.equals(action)) {
-            action = promptAction(testExecuted, all, StringUtils.isNotBlank(workbook), StringUtils.isNotBlank(sheet), StringUtils.isNotBlank(testCase));
-            switch (action) {
-                case ACTION_ALL:
-                    testFilter = new TestFilter();
-                    testFilter.setWorkbook(TestFile.ALL);
-                    testExecutor.execute(testFilter);
-                    testExecuted = true;
-                    break;
-                case ACTION_PREVIOUS_FILTER:
-                    testExecutor.execute(testFilter);
-                    testExecuted = true;
-                    break;
-                case ACTION_FILTER_TESTS:
-                    testFilter = new TestFilter();
-
-                    if (StringUtils.isNotBlank(workbook)) {
-                        testFilter.setWorkbook(workbook);
-
-                        if (StringUtils.isNotBlank(sheet)) {
-                            testFilter.setSheet(sheet);
-
-                            if (StringUtils.isNotBlank(testCase)) {
-                                testFilter.setTestCase(testCase);
-                            }
-                        }
+                    if (StringUtils.isNotBlank(testCase)) {
+                        testFilter.setTestCase(testCase);
                     } else {
-                        String runWorkbook = promptList("Choose the test file to run:", project.getTestListChoice(true));
-                        testFilter.setWorkbook(runWorkbook);
+                        testFilter.setTestCase(TestCase.ALL);
                     }
+                } else {
+                    testFilter.setSheet(TestSuite.ALL);
+                }
 
-                    testExecutor.execute(testFilter);
-                    testExecuted = true;
-                    break;
+                testExecutor.execute(testFilter);
+                testExecuted = true;
+
+                if (isCI) {
+                    return;
+                }
             }
 
-            if (isCI) {
-                break;
+            String action = "";
+            while (!ACTION_QUIT.equals(action)) {
+                action = promptAction(testExecuted, all, StringUtils.isNotBlank(workbook), StringUtils.isNotBlank(sheet), StringUtils.isNotBlank(testCase));
+                switch (action) {
+                    case ACTION_ALL:
+                        testFilter = new TestFilter();
+                        testFilter.setWorkbook(TestFile.ALL);
+                        testExecutor.execute(testFilter);
+                        testExecuted = true;
+                        break;
+                    case ACTION_PREVIOUS_FILTER:
+                        testExecutor.execute(testFilter);
+                        testExecuted = true;
+                        break;
+                    case ACTION_FILTER_TESTS:
+                        testFilter = new TestFilter();
+
+                        if (StringUtils.isNotBlank(workbook)) {
+                            testFilter.setWorkbook(workbook);
+
+                            if (StringUtils.isNotBlank(sheet)) {
+                                testFilter.setSheet(sheet);
+
+                                if (StringUtils.isNotBlank(testCase)) {
+                                    testFilter.setTestCase(testCase);
+                                }
+                            }
+                        } else {
+                            String runWorkbook = promptList("Choose the test file to run:", project.getTestListChoice(true));
+                            testFilter.setWorkbook(runWorkbook);
+                        }
+
+                        testExecutor.execute(testFilter);
+                        testExecuted = true;
+                        break;
+                }
+
+                if (isCI) {
+                    break;
+                }
+            }
+        } finally {
+            if (fileServer != null) {
+                fileServer.stop();
             }
         }
     }
@@ -244,5 +270,9 @@ public class TestController extends BaseController {
 
         ExpandableChoiceResult actionResult = (ExpandableChoiceResult) prompt.prompt(promptBuilder.build()).values().iterator().next();
         return actionResult.getSelectedId();
+    }
+
+    private boolean isRemoteHost(String remoteHost) {
+        return StringUtils.isNotBlank(remoteHost);
     }
 }
