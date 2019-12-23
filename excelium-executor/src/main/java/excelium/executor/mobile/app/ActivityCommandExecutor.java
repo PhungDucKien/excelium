@@ -30,7 +30,6 @@ import excelium.core.Excelium;
 import excelium.core.command.Accessor;
 import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
-import excelium.executor.util.ProcessUtil;
 import excelium.model.project.Project;
 import io.appium.java_client.android.Activity;
 
@@ -90,16 +89,5 @@ public class ActivityCommandExecutor extends CommandExecutor {
         Properties activityProps = StringUtil.parseProperties(activity, ",");
 
         return activityProps.getProperty("appActivity").equals(currentActivity) && activityProps.getProperty("appPackage").equals(currentPackage);
-    }
-
-    /**
-     * Issue a broadcast intent.
-     *
-     * @param intent Specify the intent action, such as android.intent.action.VIEW
-     * @throws Exception
-     */
-    @Action(param1 = "intent")
-    public void broadcastIntent(String intent) throws Exception {
-        ProcessUtil.execAdbShell(webDriver.getAndroidDriver(), "am", "broadcast", "-a", intent);
     }
 }
