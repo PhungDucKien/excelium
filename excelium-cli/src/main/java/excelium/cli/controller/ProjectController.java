@@ -40,7 +40,6 @@ import excelium.sheets.SheetsReaderFactory;
 import excelium.sheets.SheetsServiceProvider;
 import excelium.sheets.connection.GoogleConnection;
 import excelium.sheets.connection.GoogleConnectionService;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.JAXBException;
@@ -119,11 +118,6 @@ public class ProjectController extends BaseController {
 
         String screenshotFolder = promptInput("Where do you want to store screenshots?", "screenshot");
         project.setScreenshotPath(Paths.get(screenshotFolder));
-
-        String appiumHost = promptInput("What is the Appium server address?", AppiumServiceBuilder.DEFAULT_LOCAL_IP_ADDRESS);
-        project.setAppiumHost(appiumHost);
-        String appiumPort = promptInput("What is the Appium server port?", String.valueOf(AppiumServiceBuilder.DEFAULT_APPIUM_PORT));
-        project.setAppiumPort(Integer.parseInt(appiumPort));
 
         if (project.getWorkbookType() == WorkbookType.SHEETS) {
             boolean importDefault = promptConfirm("Would you like to import the default template?");
