@@ -41,6 +41,7 @@ import excelium.model.project.Project;
 import excelium.model.project.TestFile;
 import excelium.model.test.TestCase;
 import excelium.model.test.TestFilter;
+import excelium.model.test.TestRunConfig;
 import excelium.model.test.TestSuite;
 import excelium.updater.AppUpdater;
 import org.apache.commons.lang3.StringUtils;
@@ -126,6 +127,18 @@ public class TestController extends BaseController {
     private String remotePort;
 
     /**
+     * UDID
+     */
+    @Parameter(names = {"--udid"}, description = "Remote WebDriver server port", help = true)
+    private String udid;
+
+    /**
+     * Headless flag
+     */
+    @Parameter(names = {"--headless"}, description = "Run browser in headless mode (Only for Chrome and Firefox)", help = true)
+    private boolean headless = false;
+
+    /**
      * Executes tests.
      */
     @Command
@@ -152,7 +165,13 @@ public class TestController extends BaseController {
         }
 
         try {
-            TestExecutor testExecutor = new TestExecutor(project, testReaderFactory, testWriterFactory);
+            TestRunConfig runConfig = new TestRunConfig();
+            runConfig.setRemoteHost(remoteHost);
+            runConfig.setRemotePort(remotePort);
+            runConfig.setUdid(udid);
+            runConfig.setHeadless(headless);
+
+            TestExecutor testExecutor = new TestExecutor(project, runConfig, testReaderFactory, testWriterFactory);
             TestFilter testFilter = new TestFilter();
             boolean testExecuted = false;
 

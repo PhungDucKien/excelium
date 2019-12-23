@@ -30,6 +30,7 @@ import excelium.executor.MobileExcelium;
 import excelium.executor.web.env.GlobalWebEnvironment;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
+import excelium.model.test.TestRunConfig;
 import excelium.model.test.config.MobileAppEnvironment;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -89,7 +90,8 @@ public class IOSAppExecutorTest {
         project.setBasePath(Paths.get("."));
         project.setAppPath(Paths.get("src/test/resources"));
         project.setScreenshotPath(Paths.get("screenshot"));
-        webDriver = DriverPool.getInstance().getDriver(environment, project);
+        TestRunConfig testRunConfig = new TestRunConfig();
+        webDriver = DriverPool.getInstance().getDriver(environment, project, testRunConfig);
         selenium = new MobileExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
     }
 

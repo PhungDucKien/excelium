@@ -25,8 +25,8 @@
 package excelium.core.driver;
 
 import excelium.core.server.FileServer;
-import excelium.model.enums.Platform;
 import excelium.model.project.Project;
+import excelium.model.test.TestRunConfig;
 import excelium.model.test.config.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileCommand;
@@ -47,10 +47,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
-import org.openqa.selenium.remote.CommandInfo;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.DriverCommand;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.*;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
@@ -77,17 +74,18 @@ public class DriverFactory {
     /**
      * Creates context aware web driver for an environment.
      *
-     * @param environment the environment
-     * @param project     the project
+     * @param environment   the environment
+     * @param project       the project
+     * @param testRunConfig the test run config
      * @return the context aware web driver
      * @throws IOException the io exception
      */
-    public RemoteWebDriver createDriver(Environment environment, Project project) throws IOException {
+    public RemoteWebDriver createDriver(Environment environment, Project project, TestRunConfig testRunConfig) throws IOException {
         RemoteWebDriver webDriver = null;
         if (environment instanceof PcEnvironment) {
-            webDriver = createPcDriver((PcEnvironment) environment, project);
+            webDriver = createPcDriver((PcEnvironment) environment, project, testRunConfig);
         } else if (environment instanceof MobileEnvironment) {
-            webDriver = createMobileDriver((MobileEnvironment) environment, project);
+            webDriver = createMobileDriver((MobileEnvironment) environment, project, testRunConfig);
         }
         return webDriver;
     }
@@ -95,54 +93,62 @@ public class DriverFactory {
     /**
      * Creates web driver for the PC environment.
      *
-     * @param environment the environment
-     * @param project     the project
+     * @param environment   the environment
+     * @param project       the project
+     * @param testRunConfig the test run config
      * @return the PC web driver
      * @throws IOException the io exception
      */
-    private RemoteWebDriver createPcDriver(PcEnvironment environment, Project project) throws IOException {
-        ensurePcDriverDownloaded(environment);
+    private RemoteWebDriver createPcDriver(PcEnvironment environment, Project project, TestRunConfig testRunConfig) throws IOException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
+        if (isLocalHost) {
+            ensurePcDriverDownloaded(environment);
+        }
         RemoteWebDriver webDriver = null;
         switch (environment.getBrowser()) {
             case CHROME:
-                webDriver = createChromeDriver(environment, project);
+                webDriver = createChromeDriver(environment, project, testRunConfig);
                 break;
             case FIREFOX:
-                webDriver = createFirefoxDriver(environment, project);
+                webDriver = createFirefoxDriver(environment, project, testRunConfig);
                 break;
             case IE:
-                webDriver = createInternetExplorerDriver(environment);
+                webDriver = createInternetExplorerDriver(environment, testRunConfig);
                 break;
             case EDGE:
-                webDriver = createEdgeDriver(environment);
+                webDriver = createEdgeDriver(environment, testRunConfig);
                 break;
             case SAFARI:
-                webDriver = createSafariDriver();
+                webDriver = createSafariDriver(environment, testRunConfig);
                 break;
             case OPERA:
-                webDriver = createOperaDriver(environment);
+                webDriver = createOperaDriver(environment, testRunConfig);
                 break;
         }
 
+        if (!isLocalHost && webDriver != null) {
+            webDriver.setFileDetector(new LocalFileDetector());
+        }
         return webDriver;
     }
 
     /**
      * Creates web driver for the mobile environment.
      *
-     * @param environment the environment
-     * @param project     the project
+     * @param environment   the environment
+     * @param project       the project
+     * @param testRunConfig the test run config
      * @return the mobile web driver
      * @throws MalformedURLException the malformed URL exception
      */
-    private AppiumDriver createMobileDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
+    private AppiumDriver createMobileDriver(MobileEnvironment environment, Project project, TestRunConfig testRunConfig) throws MalformedURLException {
         AppiumDriver appiumDriver = null;
         switch (environment.getPlatform()) {
             case ANDROID:
-                appiumDriver = createAndroidDriver(environment, project);
+                appiumDriver = createAndroidDriver(environment, project, testRunConfig);
                 break;
             case IOS:
-                appiumDriver = createIOSDriver(environment, project);
+                appiumDriver = createIOSDriver(environment, project, testRunConfig);
                 break;
         }
         return appiumDriver;
@@ -151,35 +157,48 @@ public class DriverFactory {
     /**
      * Creates web driver for Chrome browser.
      *
-     * @param environment the environment
-     * @param project     the project
+     * @param environment   the environment
+     * @param project       the project
+     * @param testRunConfig the test run config
      * @return the Chrome web driver
      */
-    private ChromeDriver createChromeDriver(PcEnvironment environment, Project project) {
-        System.setProperty("webdriver.chrome.driver", getPcDriverPath(environment));
+    private RemoteWebDriver createChromeDriver(PcEnvironment environment, Project project, TestRunConfig testRunConfig) throws MalformedURLException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
 
         Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
                 project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
 
         ChromeOptions chromeOptions = new ChromeOptions();
         Map<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("download.default_directory", downloadPath.toFile().getAbsolutePath());
+        if (isLocalHost && downloadPath != null) {
+            chromePrefs.put("download.default_directory", downloadPath.toFile().getAbsolutePath());
+        }
         chromePrefs.put("download.prompt_for_download", "false");
         chromePrefs.put("download.directory_upgrade", "true");
         chromeOptions.setExperimentalOption("prefs", chromePrefs);
         chromeOptions.setExperimentalOption("excludeSwitches", Arrays.asList("test-type", "ignore-certificate-errors"));
-        return new ChromeDriver(chromeOptions);
+        if (testRunConfig != null) {
+            chromeOptions.setHeadless(testRunConfig.isHeadless());
+        }
+
+        if (isLocalHost) {
+            System.setProperty("webdriver.chrome.driver", getPcDriverPath(environment));
+            return new ChromeDriver(chromeOptions);
+        } else {
+            return new RemoteWebDriver(getServerAddress(environment, testRunConfig), chromeOptions);
+        }
     }
 
     /**
      * Creates web driver for Firefox browser.
      *
-     * @param environment the environment
-     * @param project     the project
+     * @param environment   the environment
+     * @param project       the project
+     * @param testRunConfig the test run config
      * @return the Firefox web driver
      */
-    private FirefoxDriver createFirefoxDriver(PcEnvironment environment, Project project) {
-        System.setProperty("webdriver.gecko.driver", getPcDriverPath(environment));
+    private RemoteWebDriver createFirefoxDriver(PcEnvironment environment, Project project, TestRunConfig testRunConfig) throws MalformedURLException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
 
         Path downloadPath = project.getBasePath() != null && project.getDownloadPath() != null ?
                 project.getBasePath().resolve(project.getDownloadPath()) : project.getDownloadPath();
@@ -190,7 +209,9 @@ public class DriverFactory {
         firefoxProfile.setPreference("startup.homepage_welcome_url", "about:blank");
         firefoxProfile.setPreference("startup.homepage_welcome_url.additional", "about:blank");
         firefoxProfile.setPreference("browser.download.folderList", 2);
-        firefoxProfile.setPreference("browser.download.dir", downloadPath.toFile().getAbsolutePath());
+        if (isLocalHost && downloadPath != null) {
+            firefoxProfile.setPreference("browser.download.dir", downloadPath.toFile().getAbsolutePath());
+        }
 //        firefoxProfile.setPreference("browser.download.manager.showWhenStarting", "false");
         firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/csv,application/x-msexcel,application/excel,application/x-excel,application/vnd.ms-excel,image/png,image/jpeg,text/html,text/plain,application/msword,application/xml");
 
@@ -198,78 +219,124 @@ public class DriverFactory {
         firefoxOptions.setCapability("marionette", true);
         firefoxOptions.setCapability("firefox_profile", firefoxProfile);
 //            firefoxOptions.setCapability("unexpectedAlertBehaviour", UnexpectedAlertBehaviour.IGNORE);
-        return new FirefoxDriver(firefoxOptions);
+        if (testRunConfig != null) {
+            firefoxOptions.setHeadless(testRunConfig.isHeadless());
+        }
+
+        if (isLocalHost) {
+            System.setProperty("webdriver.gecko.driver", getPcDriverPath(environment));
+            return new FirefoxDriver(firefoxOptions);
+        } else {
+            return new RemoteWebDriver(getServerAddress(environment, testRunConfig), firefoxOptions);
+        }
     }
 
     /**
      * Creates web driver for Internet Explorer browser.
      *
-     * @param environment the environment
+     * @param environment   the environment
+     * @param testRunConfig the test run config
      * @return the Internet Explorer web driver
      */
-    private InternetExplorerDriver createInternetExplorerDriver(PcEnvironment environment) {
-        System.setProperty("webdriver.ie.driver", getPcDriverPath(environment));
+    private RemoteWebDriver createInternetExplorerDriver(PcEnvironment environment, TestRunConfig testRunConfig) throws MalformedURLException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
 
         InternetExplorerOptions ieOptions = new InternetExplorerOptions();
         ieOptions.setCapability("ignoreProtectedModeSettings", true);
         ieOptions.setCapability("unexpectedAlertBehaviour", UnexpectedAlertBehaviour.IGNORE);
-        return new InternetExplorerDriver(ieOptions);
+
+        if (isLocalHost) {
+            System.setProperty("webdriver.ie.driver", getPcDriverPath(environment));
+            return new InternetExplorerDriver(ieOptions);
+        } else {
+            return new RemoteWebDriver(getServerAddress(environment, testRunConfig), ieOptions);
+        }
     }
 
     /**
      * Creates web driver for Microsoft Edge browser.
      *
-     * @param environment the environment
+     * @param environment   the environment
+     * @param testRunConfig the test run config
      * @return the Microsoft Edge web driver
      */
-    private EdgeDriver createEdgeDriver(PcEnvironment environment) {
-        System.setProperty("webdriver.edge.driver", getPcDriverPath(environment));
+    private RemoteWebDriver createEdgeDriver(PcEnvironment environment, TestRunConfig testRunConfig) throws MalformedURLException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
 
         EdgeOptions edgeOptions = new EdgeOptions();
-        return new EdgeDriver(edgeOptions);
+
+        if (isLocalHost) {
+            System.setProperty("webdriver.edge.driver", getPcDriverPath(environment));
+            return new EdgeDriver(edgeOptions);
+        } else {
+            return new RemoteWebDriver(getServerAddress(environment, testRunConfig), edgeOptions);
+        }
     }
 
     /**
      * Creates web driver for Opera browser.
      *
-     * @param environment the environment
+     * @param environment   the environment
+     * @param testRunConfig the test run config
      * @return the Opera web driver
      */
-    private OperaDriver createOperaDriver(PcEnvironment environment) {
-        System.setProperty("webdriver.opera.driver", getPcDriverPath(environment));
+    private RemoteWebDriver createOperaDriver(PcEnvironment environment, TestRunConfig testRunConfig) throws MalformedURLException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
 
         OperaOptions operaOptions = new OperaOptions();
-        return new OperaDriver(operaOptions);
+
+        if (isLocalHost) {
+            System.setProperty("webdriver.opera.driver", getPcDriverPath(environment));
+            return new OperaDriver(operaOptions);
+        } else {
+            return new RemoteWebDriver(getServerAddress(environment, testRunConfig), operaOptions);
+        }
     }
 
     /**
      * Creates web driver for Safari browser.
      *
+     * @param environment   the environment
+     * @param testRunConfig the test run config
      * @return the Safari web driver
      */
-    private SafariDriver createSafariDriver() {
-        // Safari 10+ included Apple's SafariDriver
+    private RemoteWebDriver createSafariDriver(PcEnvironment environment, TestRunConfig testRunConfig) throws MalformedURLException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
 
         SafariOptions safariOptions = new SafariOptions();
-        return new SafariDriver(safariOptions);
+
+        if (isLocalHost) {
+            // Safari 10+ included Apple's SafariDriver
+            return new SafariDriver(safariOptions);
+        } else {
+            return new RemoteWebDriver(getServerAddress(environment, testRunConfig), safariOptions);
+        }
     }
 
     /**
      * Creates web driver for Android platform.
      *
-     * @param environment the environment
-     * @param project     the project
+     * @param environment   the environment
+     * @param project       the project
+     * @param testRunConfig the test run config
      * @return the Android driver
      * @throws MalformedURLException the malformed URL exception
      */
-    private AndroidDriver createAndroidDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
+    private AndroidDriver createAndroidDriver(MobileEnvironment environment, Project project, TestRunConfig testRunConfig) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
         if (StringUtils.isNotBlank(environment.getPlatformVersion())) {
             desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, environment.getPlatformVersion());
         }
         desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, StringUtils.isBlank(environment.getDeviceName()) ? "Android" : environment.getDeviceName());
-        desiredCapabilities.setCapability(MobileCapabilityType.UDID, StringUtils.isBlank(environment.getUdid()) ? "auto" : environment.getUdid());
+        String udid = testRunConfig.getUdid();
+        if (StringUtils.isBlank(udid)) {
+            udid = environment.getUdid();
+        }
+        if (StringUtils.isBlank(udid)) {
+            udid = "auto";
+        }
+        desiredCapabilities.setCapability(MobileCapabilityType.UDID, udid);
         if (environment instanceof MobileWebEnvironment) {
             desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, ((MobileWebEnvironment) environment).getBrowser().getText());
         } else if (environment instanceof MobileAppEnvironment) {
@@ -309,25 +376,33 @@ public class DriverFactory {
         desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
         desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
 
-        return new AndroidDriver(new AppiumCommandExecutor(getCommandRepository(), getAppiumAddress(project)), desiredCapabilities);
+        return new AndroidDriver(new AppiumCommandExecutor(getCommandRepository(), getServerAddress(environment, testRunConfig)), desiredCapabilities);
     }
 
     /**
      * Creates web driver for iOS platform.
      *
-     * @param environment the environment
-     * @param project     the project
+     * @param environment   the environment
+     * @param project       the project
+     * @param testRunConfig the test run config
      * @return the iOS driver
      * @throws MalformedURLException the malformed URL exception
      */
-    private IOSDriver createIOSDriver(MobileEnvironment environment, Project project) throws MalformedURLException {
+    private IOSDriver createIOSDriver(MobileEnvironment environment, Project project, TestRunConfig testRunConfig) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.IOS);
         if (StringUtils.isNotBlank(environment.getPlatformVersion())) {
             desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, environment.getPlatformVersion());
         }
         desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, StringUtils.isBlank(environment.getDeviceName()) ? "iPhone" : environment.getDeviceName());
-        desiredCapabilities.setCapability(MobileCapabilityType.UDID, StringUtils.isBlank(environment.getUdid()) ? "auto" : environment.getUdid());
+        String udid = testRunConfig.getUdid();
+        if (StringUtils.isBlank(udid)) {
+            udid = environment.getUdid();
+        }
+        if (StringUtils.isBlank(udid)) {
+            udid = "auto";
+        }
+        desiredCapabilities.setCapability(MobileCapabilityType.UDID, udid);
         if (environment instanceof MobileWebEnvironment) {
             desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, ((MobileWebEnvironment) environment).getBrowser().getText());
             desiredCapabilities.setCapability(IOSMobileCapabilityType.SAFARI_INITIAL_URL, ((MobileWebEnvironment) environment).getBaseUrl());
@@ -364,30 +439,46 @@ public class DriverFactory {
         desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
 
         // For testing on real devices
-        String xcodeConfigFilePath = System.getProperty("user.home") + File.separator + ".xcconfig";
-        desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_CONFIG_FILE, xcodeConfigFilePath);
-        desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, System.getenv("UPDATE_WDA_BUNDLEID"));
+        String xcodeConfigFile = System.getProperty(IOSMobileCapabilityType.XCODE_CONFIG_FILE);
+        if (StringUtils.isBlank(xcodeConfigFile)) {
+            xcodeConfigFile = System.getenv("XCODE_CONFIG_FILE");
+        }
+        if (StringUtils.isNotBlank(xcodeConfigFile)) {
+            desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_CONFIG_FILE, xcodeConfigFile);
+        } else {
+            desiredCapabilities.setCapability(IOSMobileCapabilityType.XCODE_CONFIG_FILE, System.getProperty("user.home") + File.separator + ".xcconfig");
+        }
+        String updatedWDABundleId = System.getProperty(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID);
+        if (StringUtils.isBlank(updatedWDABundleId)) {
+            updatedWDABundleId = System.getenv("UPDATE_WDA_BUNDLEID");
+        }
+        if (StringUtils.isNotBlank(updatedWDABundleId)) {
+            desiredCapabilities.setCapability(IOSMobileCapabilityType.UPDATE_WDA_BUNDLEID, updatedWDABundleId);
+        }
 
-        return new IOSDriver(new AppiumCommandExecutor(getCommandRepository(), getAppiumAddress(project)), desiredCapabilities);
+        return new IOSDriver(new AppiumCommandExecutor(getCommandRepository(), getServerAddress(environment, testRunConfig)), desiredCapabilities);
     }
 
     /**
-     * Get Appium remote address.
+     * Get remote server address.
      *
-     * @param project the project
-     * @return Appium remote address
+     * @param environment   the environment
+     * @param testRunConfig the test run config
+     * @return the remote server address
      * @throws MalformedURLException the malformed URL exception
      */
-    private URL getAppiumAddress(Project project) throws MalformedURLException {
-        String appiumHost = project.getAppiumHost();
-        if (StringUtils.isBlank(appiumHost)) {
-            appiumHost = AppiumServiceBuilder.DEFAULT_LOCAL_IP_ADDRESS;
+    private URL getServerAddress(Environment environment, TestRunConfig testRunConfig) throws MalformedURLException {
+        boolean isLocalHost = isLocalHost(testRunConfig);
+        String remoteHost = isLocalHost ? "localhost" : testRunConfig.getRemoteHost();
+        String remotePort = isLocalHost ? "" : testRunConfig.getRemotePort();
+        if (StringUtils.isBlank(remotePort)) {
+            if (environment instanceof PcEnvironment) {
+                remotePort = "4444";
+            } else {
+                remotePort = String.valueOf(AppiumServiceBuilder.DEFAULT_APPIUM_PORT);
+            }
         }
-        Integer appiumPort = project.getAppiumPort();
-        if (appiumPort == null) {
-            appiumPort = AppiumServiceBuilder.DEFAULT_APPIUM_PORT;
-        }
-        return new URL("http://" + appiumHost + ":" + appiumPort + "/wd/hub");
+        return new URL("http://" + remoteHost + ":" + remotePort + "/wd/hub");
     }
 
     /**
@@ -417,11 +508,16 @@ public class DriverFactory {
         if (StringUtils.isBlank(appHome)) {
             appHome = System.getProperty("user.dir");
         }
-        String driverPath = appHome + File.separator + "driver" + File.separator + environment.getBrowser().name().toLowerCase() + "_" + environment.getPlatform().name().toLowerCase();
-        if (environment.getPlatform() == Platform.WINDOWS_32 || environment.getPlatform() == Platform.WINDOWS_64) {
+        String driverPath = appHome + File.separator + "driver" + File.separator + environment.getBrowser().name().toLowerCase();
+        if (driverPath.matches("^[a-zA-Z]:\\\\")) {
             driverPath += ".exe";
         }
         return driverPath;
+    }
+
+    private boolean isLocalHost(TestRunConfig testRunConfig) {
+        return testRunConfig == null
+                || StringUtils.isBlank(testRunConfig.getRemoteHost());
     }
 
     private Map<String, CommandInfo> getCommandRepository() {

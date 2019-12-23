@@ -31,6 +31,7 @@ import excelium.executor.web.env.GlobalWebEnvironment;
 import excelium.model.enums.Browser;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
+import excelium.model.test.TestRunConfig;
 import excelium.model.test.config.MobileWebEnvironment;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.*;
@@ -78,7 +79,8 @@ public class IOSWebExecutorTest {
         project = new Project();
         project.setBasePath(Paths.get("."));
         project.setScreenshotPath(Paths.get("screenshot"));
-        webDriver = DriverPool.getInstance().getDriver(environment, project);
+        TestRunConfig testRunConfig = new TestRunConfig();
+        webDriver = DriverPool.getInstance().getDriver(environment, project, testRunConfig);
         selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
 
         if (isRealDevice) {
