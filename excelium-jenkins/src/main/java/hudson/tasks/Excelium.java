@@ -54,11 +54,6 @@ import java.util.*;
  * @author Kohsuke Kawaguchi
  */
 public class Excelium extends Builder {
-    /**
-     * The targets, properties, and other Excelium options.
-     * Either separated by whitespace or newline.
-     */
-    private final String targets;
 
     /**
      * Identifies {@link ExceliumInstallation} to be used.
@@ -66,40 +61,81 @@ public class Excelium extends Builder {
     private final String exceliumName;
 
     /**
-     * EXCELIUM_OPTS if not null.
+     * Remote host
      */
-    private final String exceliumOpts;
+    private final String remoteHost;
 
     /**
-     * Optional build script path relative to the workspace.
+     * Remote port
+     */
+    private final String remotePort;
+
+    /**
+     * Workbook filter
+     */
+    private final String workbook;
+
+    /**
+     * Sheet filter
+     */
+    private final String sheet;
+
+    /**
+     * Test case filter
+     */
+    private final String testCase;
+
+    /**
+     * UDID
+     */
+    private final String udid;
+
+    /**
+     * Headless flag
+     */
+    private boolean headless;
+
+    /**
+     * Optional project file path relative to the workspace.
      * Used for the Excelium '-f' option.
      */
-    private final String buildFile;
+    private final String projectFile;
 
     /**
      * Optional properties to be passed to Excelium. Follows {@link Properties} syntax.
      */
     private final String properties;
 
+    /**
+     * EXCELIUM_OPTS if not null.
+     */
+    private final String exceliumOpts;
+
     @DataBoundConstructor
-    public Excelium(String targets, String exceliumName, String exceliumOpts, String buildFile, String properties) {
-        this.targets = targets;
+    public Excelium(
+            String exceliumName,
+            String remoteHost,
+            String remotePort,
+            String workbook,
+            String sheet,
+            String testCase,
+            String udid,
+            boolean headless,
+            String projectFile,
+            String properties,
+            String exceliumOpts
+    ) {
         this.exceliumName = exceliumName;
-        this.exceliumOpts = Util.fixEmptyAndTrim(exceliumOpts);
-        this.buildFile = Util.fixEmptyAndTrim(buildFile);
+        this.remoteHost = Util.fixEmptyAndTrim(remoteHost);
+        this.remotePort = Util.fixEmptyAndTrim(remotePort);
+        this.workbook = Util.fixEmptyAndTrim(workbook);
+        this.sheet = Util.fixEmptyAndTrim(sheet);
+        this.testCase = Util.fixEmptyAndTrim(testCase);
+        this.udid = Util.fixEmptyAndTrim(udid);
+        this.headless = headless;
+        this.projectFile = Util.fixEmptyAndTrim(projectFile);
         this.properties = Util.fixEmptyAndTrim(properties);
-    }
-
-    public String getBuildFile() {
-        return buildFile;
-    }
-
-    public String getProperties() {
-        return properties;
-    }
-
-    public String getTargets() {
-        return targets;
+        this.exceliumOpts = Util.fixEmptyAndTrim(exceliumOpts);
     }
 
     /**
@@ -112,6 +148,42 @@ public class Excelium extends Builder {
                 return i;
         }
         return null;
+    }
+
+    public String getRemoteHost() {
+        return remoteHost;
+    }
+
+    public String getRemotePort() {
+        return remotePort;
+    }
+
+    public String getWorkbook() {
+        return workbook;
+    }
+
+    public String getSheet() {
+        return sheet;
+    }
+
+    public String getTestCase() {
+        return testCase;
+    }
+
+    public String getUdid() {
+        return udid;
+    }
+
+    public boolean isHeadless() {
+        return headless;
+    }
+
+    public String getProjectFile() {
+        return projectFile;
+    }
+
+    public String getProperties() {
+        return properties;
     }
 
     /**
@@ -155,35 +227,68 @@ public class Excelium extends Builder {
         }
 
         VariableResolver<String> vr = new VariableResolver.ByMap<String>(env);
-        String buildFile = env.expand(this.buildFile);
-        String targets = env.expand(this.targets);
+        String projectFile = env.expand(this.projectFile);
+        String remoteHost = env.expand(this.remoteHost);
+        String remotePort = env.expand(this.remotePort);
+        String workbook = env.expand(this.workbook);
+        String sheet = env.expand(this.sheet);
+        String testCase = env.expand(this.testCase);
+        String udid = env.expand(this.udid);
 
-        FilePath buildFilePath = buildFilePath(build.getModuleRoot(), buildFile, targets);
+        FilePath projectFilePath = projectFilePath(build.getModuleRoot(), projectFile);
 
-        if (!buildFilePath.exists()) {
+        if (!projectFilePath.exists()) {
             // because of the poor choice of getModuleRoot() with CVS/Subversion, people often get confused
-            // with where the build file path is relative to. Now it's too late to change this behavior
+            // with where the project file path is relative to. Now it's too late to change this behavior
             // due to compatibility issue, but at least we can make this less painful by looking for errors
             // and diagnosing it nicely. See HUDSON-1782
 
             // first check if this appears to be a valid relative path from workspace root
             FilePath workspaceFilePath = build.getWorkspace();
             if (workspaceFilePath != null) {
-                FilePath buildFilePath2 = buildFilePath(workspaceFilePath, buildFile, targets);
-                if (buildFilePath2.exists()) {
+                FilePath projectFilePath2 = projectFilePath(workspaceFilePath, projectFile);
+                if (projectFilePath2.exists()) {
                     // This must be what the user meant. Let it continue.
-                    buildFilePath = buildFilePath2;
+                    projectFilePath = projectFilePath2;
                 } else {
                     // neither file exists. So this now really does look like an error.
-                    throw new AbortException("Unable to find build script at " + buildFilePath);
+                    throw new AbortException("Unable to find project file at " + projectFilePath);
                 }
             } else {
                 throw new AbortException("Workspace is not available. Agent may be disconnected.");
             }
         }
 
-        if (buildFile != null) {
-            args.add("-file", buildFilePath.getName());
+        if (projectFile != null) {
+            args.add("-f", projectFilePath.getName());
+        }
+
+        if (remoteHost != null) {
+            args.add("--remote-host", remoteHost);
+        }
+
+        if (remotePort != null) {
+            args.add("--remote-port", remotePort);
+        }
+
+        if (workbook != null) {
+            args.add("-w", workbook);
+            if (sheet != null) {
+                args.add("-s", sheet);
+                if (testCase != null) {
+                    args.add("-t", testCase);
+                }
+            }
+        } else {
+            args.add("-a");
+        }
+
+        if (udid != null) {
+            args.add("--udid", udid);
+        }
+
+        if (headless) {
+            args.add("--headless");
         }
 
         Set<String> sensitiveVars = build.getSensitiveBuildVariables();
@@ -191,8 +296,6 @@ public class Excelium extends Builder {
         args.addKeyValuePairs("-D", build.getBuildVariables(), sensitiveVars);
 
         args.addKeyValuePairsFromPropertyString("-D", properties, vr, sensitiveVars);
-
-        args.addTokenized(targets.replaceAll("[\t\r\n]+", " "));
 
         if (ai != null)
             ai.buildEnvVars(env);
@@ -208,7 +311,7 @@ public class Excelium extends Builder {
             ExceliumConsoleAnnotator eca = new ExceliumConsoleAnnotator(listener.getLogger());
             int r;
             try {
-                r = launcher.launch().cmds(args).envs(env).stdout(eca).pwd(buildFilePath.getParent()).join();
+                r = launcher.launch().cmds(args).envs(env).stdout(eca).pwd(projectFilePath.getParent()).join();
             } finally {
                 eca.forceEol();
             }
@@ -266,17 +369,9 @@ public class Excelium extends Builder {
         return args;
     }
 
-    private static FilePath buildFilePath(FilePath base, String buildFile, String targets) {
-        if (buildFile != null) return base.child(buildFile);
-        // some users specify the -f option in the targets field, so take that into account as well.
-        // see 
-        String[] tokens = Util.tokenize(targets);
-        for (int i = 0; i < tokens.length - 1; i++) {
-            String a = tokens[i];
-            if (a.equals("-f") || a.equals("-file") || a.equals("-buildfile"))
-                return base.child(tokens[i + 1]);
-        }
-        return base.child("build.xml");
+    private static FilePath projectFilePath(FilePath base, String projectFile) {
+        if (projectFile != null) return base.child(projectFile);
+        return base.child("project.xml");
     }
 
     @Override
