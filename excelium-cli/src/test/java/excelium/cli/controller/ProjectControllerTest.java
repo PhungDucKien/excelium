@@ -86,12 +86,6 @@ public class ProjectControllerTest {
                     new HashMap<String, InputResult>() {{
                         put("", new InputResult("screenshot"));
                     }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("localhost"));
-                    }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("4723"));
-                    }},
                     new HashMap<String, ConfirmResult>() {{
                         put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.NO));
                     }});
@@ -134,12 +128,6 @@ public class ProjectControllerTest {
                     }},
                     new HashMap<String, InputResult>() {{
                         put("", new InputResult("screenshot"));
-                    }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("localhost"));
-                    }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("4723"));
                     }});
         }};
 
@@ -171,12 +159,6 @@ public class ProjectControllerTest {
                     }},
                     new HashMap<String, InputResult>() {{
                         put("", new InputResult("screenshot"));
-                    }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("localhost"));
-                    }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("4723"));
                     }},
                     new HashMap<String, ConfirmResult>() {{
                         put("", new ConfirmResult(ConfirmChoice.ConfirmationValue.NO));
@@ -217,12 +199,6 @@ public class ProjectControllerTest {
                     }},
                     new HashMap<String, InputResult>() {{
                         put("", new InputResult("screenshot"));
-                    }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("localhost"));
-                    }},
-                    new HashMap<String, InputResult>() {{
-                        put("", new InputResult("4723"));
                     }});
         }};
 
