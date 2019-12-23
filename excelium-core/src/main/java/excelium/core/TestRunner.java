@@ -89,6 +89,11 @@ public class TestRunner {
     private Project project;
 
     /**
+     * Test run config
+     */
+    private TestRunConfig testRunConfig;
+
+    /**
      * Test reporter
      */
     private TestReporter testReporter;
@@ -146,15 +151,17 @@ public class TestRunner {
     /**
      * Instantiates a new Test runner.
      *
-     * @param test         the test
-     * @param project      the project
-     * @param testReporter the test reporter
-     * @param testWriter   the test writer
-     * @param template     the template
+     * @param test          the test
+     * @param project       the project
+     * @param testRunConfig the test run config
+     * @param testReporter  the test reporter
+     * @param testWriter    the test writer
+     * @param template      the template
      */
-    public TestRunner(Test test, Project project, TestReporter testReporter, TestWriter testWriter, Template template) {
+    public TestRunner(Test test, Project project, TestRunConfig testRunConfig, TestReporter testReporter, TestWriter testWriter, Template template) {
         this.test = test;
         this.project = project;
+        this.testRunConfig = testRunConfig;
         this.testReporter = testReporter;
         this.testWriter = testWriter;
         this.template = template;
@@ -183,7 +190,7 @@ public class TestRunner {
     private void runEnvironment(Environment environment) throws Exception {
         setEnvironment(environment);
         try {
-            webDriver = DriverPool.getInstance().getDriver(this);
+            webDriver = DriverPool.getInstance().getDriver(this, testRunConfig);
             if (test.getTestSuites() != null) {
                 initializeExcelium(webDriver);
                 for (TestSuite testSuite : test.getTestSuites().values()) {

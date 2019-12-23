@@ -33,6 +33,7 @@ import excelium.executor.WebExcelium;
 import excelium.executor.web.env.GlobalWebEnvironment;
 import excelium.model.enums.Browser;
 import excelium.model.project.Project;
+import excelium.model.test.TestRunConfig;
 import excelium.model.test.config.PcEnvironment;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -83,7 +84,8 @@ public class WebExecutorTestBase {
             project.setDownloadPath(Paths.get("download"));
             project.setFilePath(Paths.get("file"));
             Files.createDirectories(Paths.get("file"));
-            webDriver = DriverPool.getInstance().getDriver(environment, project);
+            TestRunConfig testRunConfig = new TestRunConfig();
+            webDriver = DriverPool.getInstance().getDriver(environment, project, testRunConfig);
             selenium = new WebExcelium(webDriver, GlobalWebEnvironment.get().getServerUrl(), project);
             originalHandle = webDriver.getWindowHandle();
         }

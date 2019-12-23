@@ -36,10 +36,7 @@ import excelium.model.enums.Platform;
 import excelium.model.enums.Result;
 import excelium.model.project.Project;
 import excelium.model.project.Template;
-import excelium.model.test.Test;
-import excelium.model.test.TestCase;
-import excelium.model.test.TestStep;
-import excelium.model.test.TestSuite;
+import excelium.model.test.*;
 import excelium.model.test.action.TestAction;
 import excelium.model.test.command.Command;
 import excelium.model.test.config.Environment;
@@ -102,7 +99,7 @@ public class TestRunnerTest {
         commandMap.put("click(1)", command);
 
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any); result = driver;
             webDriver.isWebApp(); result = true;
             webDriver.getWebDriver(); result = driver;
         }};
@@ -166,8 +163,9 @@ public class TestRunnerTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(System.out);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
         Assert.assertEquals(250, runCount.get());
@@ -182,7 +180,7 @@ public class TestRunnerTest {
         Map<String, Command> commandMap = new HashMap<>();
 
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any); result = driver;
             webDriver.isWebApp(); result = true;
             webDriver.getWebDriver(); result = driver;
         }};
@@ -225,8 +223,9 @@ public class TestRunnerTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(consoleStream);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
         new Verifications() {{
@@ -249,7 +248,7 @@ public class TestRunnerTest {
         commandMap.put("click(1)", command);
 
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any); result = driver;
             webDriver.isWebApp(); result = true;
             webDriver.getWebDriver(); result = driver;
         }};
@@ -323,8 +322,9 @@ public class TestRunnerTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(System.out);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
 
         command = new Command();
         command.setParam1("action");
@@ -360,7 +360,7 @@ public class TestRunnerTest {
         commandMap.put("click(1)", command);
 
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any); result = driver;
             webDriver.isWebApp(); result = true;
             webDriver.getWebDriver(); result = driver;
         }};
@@ -433,8 +433,9 @@ public class TestRunnerTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(consoleStream);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
 
         command = new Command();
         command.setName("Run Action");
@@ -469,7 +470,7 @@ public class TestRunnerTest {
         commandMap.put("clickArray(1)", command);
 
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any); result = driver;
             webDriver.isWebApp(); result = true;
             webDriver.getWebDriver(); result = driver;
         }};
@@ -534,8 +535,9 @@ public class TestRunnerTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(System.out);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
         Assert.assertEquals("id=id", param.get()[0]);
@@ -626,7 +628,7 @@ public class TestRunnerTest {
         commandMap.put("click(1)", command);
 
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any); result = driver;
             webDriver.isWebApp(); result = true;
             webDriver.getWebDriver(); result = driver;
         }};
@@ -875,8 +877,9 @@ public class TestRunnerTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(System.out);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
         Assert.assertEquals(6, runCount.get());
@@ -897,7 +900,7 @@ public class TestRunnerTest {
         commandMap.put("click(1)", command);
 
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any); result = driver;
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any); result = driver;
             webDriver.isWebApp(); result = true;
             webDriver.getWebDriver(); result = driver;
         }};
@@ -958,8 +961,9 @@ public class TestRunnerTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(System.out);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
         Assert.assertEquals("id=id", param.get());
@@ -986,7 +990,7 @@ public class TestRunnerTest {
 
         testReporter = new TestReporter(System.out);
 
-        testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
         Assert.assertEquals("androidId=androidId", param.get());
@@ -1013,7 +1017,7 @@ public class TestRunnerTest {
 
         testReporter = new TestReporter(System.out);
 
-        testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
         Assert.assertEquals("iOSId=iOSId", param.get());

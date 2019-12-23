@@ -30,6 +30,7 @@ import excelium.core.report.TestReporter;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.Browser;
 import excelium.model.project.Project;
+import excelium.model.test.TestRunConfig;
 import excelium.model.test.config.Environment;
 import excelium.model.test.config.PcEnvironment;
 import excelium.model.test.config.TestConfig;
@@ -61,7 +62,7 @@ public class MyExecutorProviderServiceTest {
     @Test
     public void testGetWebExecutorClasses() throws Exception {
         new Expectations() {{
-            driverFactory.createDriver((Environment) any, (Project) any);
+            driverFactory.createDriver((Environment) any, (Project) any, (TestRunConfig) any);
             result = driver;
         }};
 
@@ -77,8 +78,9 @@ public class MyExecutorProviderServiceTest {
         test.setConfig(testConfig);
 
         TestReporter testReporter = new TestReporter(System.out);
+        TestRunConfig testRunConfig = new TestRunConfig();
 
-        TestRunner testRunner = new TestRunner(test, null, testReporter, testWriter, null);
+        TestRunner testRunner = new TestRunner(test, null, testRunConfig, testReporter, testWriter, null);
         testRunner.runAll();
 
 //        List<Class<? extends CommandExecutor>> webCommandExecutorClasses = Deencapsulation.getField(testRunner, "webCommandExecutorClasses");

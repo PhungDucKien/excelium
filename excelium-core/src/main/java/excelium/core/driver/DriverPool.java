@@ -29,6 +29,7 @@ import excelium.core.database.DatabaseService;
 import excelium.core.database.DatabaseServiceFactory;
 import excelium.core.screenshot.ScreenshotService;
 import excelium.model.project.Project;
+import excelium.model.test.TestRunConfig;
 import excelium.model.test.config.Environment;
 import excelium.model.test.config.MobileAppEnvironment;
 import excelium.model.test.config.MobileWebEnvironment;
@@ -61,37 +62,37 @@ public class DriverPool {
         return INSTANCE;
     }
 
-    public ContextAwareWebDriver getDriver(TestRunner testRunner) throws IOException {
-        RemoteWebDriver webDriver = getInnerDriver(testRunner.getEnvironment(), testRunner.getProject());
+    public ContextAwareWebDriver getDriver(TestRunner testRunner, TestRunConfig testRunConfig) throws IOException {
+        RemoteWebDriver webDriver = getInnerDriver(testRunner.getEnvironment(), testRunner.getProject(), testRunConfig);
         DatabaseService databaseService = DatabaseServiceFactory.createService(testRunner.getProject());
         ScreenshotService screenshotService = new ScreenshotService(testRunner);
 
         return new ContextAwareWebDriver(webDriver, databaseService, screenshotService);
     }
 
-    public ContextAwareWebDriver getDriver(Environment environment, Project project) throws IOException {
-        RemoteWebDriver webDriver = getInnerDriver(environment, project);
+    public ContextAwareWebDriver getDriver(Environment environment, Project project, TestRunConfig testRunConfig) throws IOException {
+        RemoteWebDriver webDriver = getInnerDriver(environment, project, testRunConfig);
         DatabaseService databaseService = DatabaseServiceFactory.createService(project);
         ScreenshotService screenshotService = new ScreenshotService(environment, project);
 
         return new ContextAwareWebDriver(webDriver, databaseService, screenshotService);
     }
 
-    private RemoteWebDriver getInnerDriver(Environment environment, Project project) throws IOException {
+    private RemoteWebDriver getInnerDriver(Environment environment, Project project, TestRunConfig testRunConfig) throws IOException {
         String driverKey = createKey(environment);
         if (!drivers.keySet().contains(driverKey)) {
-            createNewDriver(environment, project);
+            createNewDriver(environment, project, testRunConfig);
         } else {
             RemoteWebDriver driver = drivers.get(driverKey);
 
             if (driver == null) {
-                createNewDriver(environment, project);
+                createNewDriver(environment, project, testRunConfig);
             } else if (!alivenessChecker.isAlive(driver)) {
                 dismissDriver(driver);
-                createNewDriver(environment, project);
+                createNewDriver(environment, project, testRunConfig);
             } else if (!driverCleaner.clean(driver, environment, originalHandles.get(driver))) {
                 dismissDriver(driver);
-                createNewDriver(environment, project);
+                createNewDriver(environment, project, testRunConfig);
             }
         }
 
@@ -219,9 +220,9 @@ public class DriverPool {
         return drivers.isEmpty();
     }
 
-    private void createNewDriver(Environment environment, Project project) throws IOException {
+    private void createNewDriver(Environment environment, Project project, TestRunConfig testRunConfig) throws IOException {
         String driverKey = createKey(environment);
-        RemoteWebDriver driver = driverFactory.createDriver(environment, project);
+        RemoteWebDriver driver = driverFactory.createDriver(environment, project, testRunConfig);
         drivers.remove(driverKey);
         drivers.put(driverKey, driver);
         environments.remove(driver);

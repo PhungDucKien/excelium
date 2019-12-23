@@ -34,6 +34,7 @@ import excelium.model.project.Template;
 import excelium.model.project.TestFile;
 import excelium.model.test.Test;
 import excelium.model.test.TestFilter;
+import excelium.model.test.TestRunConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -60,6 +61,11 @@ public class TestExecutor {
     private Project project;
 
     /**
+     * Test run config
+     */
+    private TestRunConfig testRunConfig;
+
+    /**
      * Test reader factory
      */
     private TestReaderFactory testReaderFactory;
@@ -73,11 +79,13 @@ public class TestExecutor {
      * Instantiates a new Test executor.
      *
      * @param project           the project
+     * @param testRunConfig     the test run config
      * @param testReaderFactory the test reader factory
      * @param testWriterFactory the test writer factory
      */
-    public TestExecutor(Project project, TestReaderFactory testReaderFactory, TestWriterFactory testWriterFactory) {
+    public TestExecutor(Project project, TestRunConfig testRunConfig, TestReaderFactory testReaderFactory, TestWriterFactory testWriterFactory) {
         this.project = project;
+        this.testRunConfig = testRunConfig;
         this.testReaderFactory = testReaderFactory;
         this.testWriterFactory = testWriterFactory;
     }
@@ -101,7 +109,7 @@ public class TestExecutor {
                 TestReporter testReporter = new TestReporter(System.out);
 
                 // Executes all tests of workbook
-                TestRunner testRunner = new TestRunner(test, project, testReporter, testWriter, template);
+                TestRunner testRunner = new TestRunner(test, project, testRunConfig, testReporter, testWriter, template);
                 testRunner.runAll();
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);

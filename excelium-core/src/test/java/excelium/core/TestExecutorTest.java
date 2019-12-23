@@ -34,6 +34,7 @@ import excelium.model.project.Project;
 import excelium.model.project.Template;
 import excelium.model.project.TestFile;
 import excelium.model.test.TestFilter;
+import excelium.model.test.TestRunConfig;
 import mockit.Expectations;
 import mockit.Mocked;
 import mockit.Verifications;
@@ -62,6 +63,8 @@ public class TestExecutorTest {
 
     @Mocked
     private TestReader testReader;
+
+    private TestRunConfig testRunConfig = new TestRunConfig();
 
     private Project createTestProject() {
         Project project = new Project();
@@ -113,7 +116,7 @@ public class TestExecutorTest {
             testReaderFactory.createReader(anyString); result = testReader;
         }};
 
-        TestExecutor testExecutor = new TestExecutor(createTestProject(), testReaderFactory, testWriterFactory);
+        TestExecutor testExecutor = new TestExecutor(createTestProject(), testRunConfig, testReaderFactory, testWriterFactory);
         testExecutor.execute(null);
 
         new Verifications() {{
@@ -130,7 +133,7 @@ public class TestExecutorTest {
         TestFilter testFilter = new TestFilter();
         testFilter.setWorkbook("testFile2");
 
-        TestExecutor testExecutor = new TestExecutor(createTestProject(), testReaderFactory, testWriterFactory);
+        TestExecutor testExecutor = new TestExecutor(createTestProject(), testRunConfig, testReaderFactory, testWriterFactory);
         testExecutor.execute(testFilter);
 
         new Verifications() {{
@@ -145,7 +148,7 @@ public class TestExecutorTest {
             testReader.parseTest((Template) any, null, (TestWriter) any); result = new IOException();
         }};
 
-        TestExecutor testExecutor = new TestExecutor(createTestProject(), testReaderFactory, testWriterFactory);
+        TestExecutor testExecutor = new TestExecutor(createTestProject(), testRunConfig, testReaderFactory, testWriterFactory);
         testExecutor.execute(null);
     }
 }
