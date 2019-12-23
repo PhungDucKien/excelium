@@ -24,6 +24,7 @@
 
 package excelium.core.driver;
 
+import excelium.core.server.FileServer;
 import excelium.model.enums.Platform;
 import excelium.model.project.Project;
 import excelium.model.test.config.*;
@@ -58,6 +59,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -276,10 +278,16 @@ public class DriverFactory {
                 if (StringUtils.startsWith(appPath, "http") || StringUtils.startsWith(appPath, "/")) {
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
                 } else {
-                    Path appFilePath = project.getBasePath() != null && project.getAppPath() != null ?
-                            project.getBasePath().resolve(project.getAppPath()).resolve(appPath) : project.getAppPath().resolve(appPath);
-                    File appFile = appFilePath.toFile();
-                    desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
+                    FileServer fileServer = FileServer.getInstance();
+                    if (fileServer != null) {
+                        Path appFile = Paths.get(fileServer.getServerUrl()).resolve(project.getAppPath()).resolve(appPath);
+                        desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.toAbsolutePath().toString());
+                    } else {
+                        Path appFilePath = project.getBasePath() != null && project.getAppPath() != null ?
+                                project.getBasePath().resolve(project.getAppPath()).resolve(appPath) : project.getAppPath().resolve(appPath);
+                        File appFile = appFilePath.toFile();
+                        desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
+                    }
                 }
             }
             desiredCapabilities.setCapability(AndroidMobileCapabilityType.DONT_STOP_APP_ON_RESET, true);
@@ -331,10 +339,16 @@ public class DriverFactory {
                 if (StringUtils.startsWith(appPath, "http") || StringUtils.startsWith(appPath, "/")) {
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, appPath);
                 } else {
-                    Path appFilePath = project.getBasePath() != null && project.getAppPath() != null ?
-                            project.getBasePath().resolve(project.getAppPath()).resolve(appPath) : project.getAppPath().resolve(appPath);
-                    File appFile = appFilePath.toFile();
-                    desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
+                    FileServer fileServer = FileServer.getInstance();
+                    if (fileServer != null) {
+                        Path appFile = Paths.get(fileServer.getServerUrl()).resolve(project.getAppPath()).resolve(appPath);
+                        desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.toAbsolutePath().toString());
+                    } else {
+                        Path appFilePath = project.getBasePath() != null && project.getAppPath() != null ?
+                                project.getBasePath().resolve(project.getAppPath()).resolve(appPath) : project.getAppPath().resolve(appPath);
+                        File appFile = appFilePath.toFile();
+                        desiredCapabilities.setCapability(MobileCapabilityType.APP, appFile.getAbsolutePath());
+                    }
                 }
             }
             if (StringUtils.isNotBlank(((MobileAppEnvironment) environment).getBundleId())) {

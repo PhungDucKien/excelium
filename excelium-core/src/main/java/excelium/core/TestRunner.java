@@ -33,7 +33,7 @@ import excelium.core.driver.DriverPool;
 import excelium.core.exception.AssertFailedException;
 import excelium.core.profile.AppProfile;
 import excelium.core.report.TestReporter;
-import excelium.core.server.HttpServer;
+import excelium.core.server.DebugServer;
 import excelium.core.writer.TestWriter;
 import excelium.model.enums.ExecutionState;
 import excelium.model.enums.Platform;
@@ -76,7 +76,7 @@ public class TestRunner {
     /**
      * Debug server
      */
-    private static HttpServer server;
+    private static DebugServer server;
 
     /**
      * Test object
@@ -353,7 +353,7 @@ public class TestRunner {
 
     private static synchronized void startDebugServer() {
         if (server == null) {
-            server = new HttpServer();
+            server = new DebugServer();
             server.start();
         } else if (!server.isRunning()) {
             server.start();
