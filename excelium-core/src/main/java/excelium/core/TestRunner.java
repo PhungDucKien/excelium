@@ -170,31 +170,46 @@ public class TestRunner {
     /**
      * Run all tests on all environments.
      *
+     * @return Result of the test
      * @throws Exception the exception
      */
-    public void runAll() throws Exception {
+    public Result runAll() throws Exception {
+        Result testResult = Result.OK;
         testReporter.startTest(test);
         testStepResultMap = new HashMap<>();
         testFlows = new ArrayList<>();
         for (Environment environment : test.getConfig().getEnvironments()) {
-            runEnvironment(environment);
+            Result envResult = runEnvironment(environment);
+            if (envResult == Result.ERROR) {
+                testResult = Result.ERROR;
+            } else if (envResult == Result.FAIL && testResult != Result.ERROR) {
+                testResult = Result.FAIL;
+            }
         }
+        return testResult;
     }
 
     /**
      * Run all tests on an environment.
      *
      * @param environment the environment
+     * @return Result of the test on environment
      * @throws Exception the exception
      */
-    private void runEnvironment(Environment environment) throws Exception {
+    private Result runEnvironment(Environment environment) throws Exception {
+        Result envResult = Result.OK;
         setEnvironment(environment);
         try {
             webDriver = DriverPool.getInstance().getDriver(this, testRunConfig);
             if (test.getTestSuites() != null) {
                 initializeExcelium(webDriver);
                 for (TestSuite testSuite : test.getTestSuites().values()) {
-                    runTestSuite(testSuite);
+                    Result suiteResult = runTestSuite(testSuite);
+                    if (suiteResult == Result.ERROR) {
+                        envResult = Result.ERROR;
+                    } else if (suiteResult == Result.FAIL && envResult != Result.ERROR) {
+                        envResult = Result.FAIL;
+                    }
                 }
             }
         } finally {
@@ -209,19 +224,28 @@ public class TestRunner {
                 webDriver = null;
             }
         }
+        return envResult;
     }
 
     /**
      * Run a test suite.
      *
      * @param testSuite the test suite
+     * @return Result of the test suite
      * @throws Exception the exception
      */
-    private void runTestSuite(TestSuite testSuite) throws Exception {
+    private Result runTestSuite(TestSuite testSuite) throws Exception {
+        Result suiteResult = Result.OK;
         setTestSuite(testSuite);
         for (TestCase testCase : testSuite.getTestCases()) {
-            runTestFlow(testCase, true);
+            Result flowResult = runTestFlow(testCase, true);
+            if (flowResult == Result.ERROR) {
+                suiteResult = Result.ERROR;
+            } else if (flowResult == Result.FAIL && suiteResult != Result.ERROR) {
+                suiteResult = Result.FAIL;
+            }
         }
+        return suiteResult;
     }
 
     /**
@@ -269,6 +293,11 @@ public class TestRunner {
                         StepResult stepResult = runTestStep(testStep, testFlow instanceof TestCase);
                         testReporter.endTestStep(stepResult);
                         shouldContinue = stepResult.isShouldContinue();
+                        if (stepResult.getResult() == Result.ERROR) {
+                            flowResult = Result.ERROR;
+                        } else if (stepResult.getResult() == Result.FAIL && flowResult != Result.ERROR) {
+                            flowResult = Result.FAIL;
+                        }
                     } else {
                         testReporter.startTestStep(testStep);
                         testReporter.endTestStep(new StepResult(Result.SKIP));

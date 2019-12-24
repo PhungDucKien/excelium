@@ -37,6 +37,7 @@ import excelium.core.TestExecutor;
 import excelium.core.reader.TestReaderFactory;
 import excelium.core.server.FileServer;
 import excelium.core.writer.TestWriterFactory;
+import excelium.model.enums.Result;
 import excelium.model.project.Project;
 import excelium.model.project.TestFile;
 import excelium.model.test.TestCase;
@@ -174,13 +175,15 @@ public class TestController extends BaseController {
             TestExecutor testExecutor = new TestExecutor(project, runConfig, testReaderFactory, testWriterFactory);
             TestFilter testFilter = new TestFilter();
             boolean testExecuted = false;
+            Result testResult = null;
 
             if (all) {
                 testFilter.setWorkbook(TestFile.ALL);
-                testExecutor.execute(testFilter);
+                testResult = testExecutor.execute(testFilter);
                 testExecuted = true;
 
                 if (isCI) {
+                    System.exit(getExitCode(testResult));
                     return;
                 }
             }
@@ -200,10 +203,11 @@ public class TestController extends BaseController {
                     testFilter.setSheet(TestSuite.ALL);
                 }
 
-                testExecutor.execute(testFilter);
+                testResult = testExecutor.execute(testFilter);
                 testExecuted = true;
 
                 if (isCI) {
+                    System.exit(getExitCode(testResult));
                     return;
                 }
             }
@@ -215,11 +219,11 @@ public class TestController extends BaseController {
                     case ACTION_ALL:
                         testFilter = new TestFilter();
                         testFilter.setWorkbook(TestFile.ALL);
-                        testExecutor.execute(testFilter);
+                        testResult = testExecutor.execute(testFilter);
                         testExecuted = true;
                         break;
                     case ACTION_PREVIOUS_FILTER:
-                        testExecutor.execute(testFilter);
+                        testResult = testExecutor.execute(testFilter);
                         testExecuted = true;
                         break;
                     case ACTION_FILTER_TESTS:
@@ -240,12 +244,13 @@ public class TestController extends BaseController {
                             testFilter.setWorkbook(runWorkbook);
                         }
 
-                        testExecutor.execute(testFilter);
+                        testResult = testExecutor.execute(testFilter);
                         testExecuted = true;
                         break;
                 }
 
                 if (isCI) {
+                    System.exit(getExitCode(testResult));
                     break;
                 }
             }
@@ -293,5 +298,15 @@ public class TestController extends BaseController {
 
     private boolean isRemoteHost(String remoteHost) {
         return StringUtils.isNotBlank(remoteHost);
+    }
+
+    private int getExitCode(Result result) {
+        if (result == null || result == Result.ERROR) {
+            return 9;
+        } else if (result == Result.FAIL) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

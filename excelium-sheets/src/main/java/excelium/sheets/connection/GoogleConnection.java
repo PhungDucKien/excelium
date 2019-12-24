@@ -74,7 +74,7 @@ public abstract class GoogleConnection {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         } catch (Throwable t) {
             LOG.error(t.getMessage(), t);
-            System.exit(1);
+            System.exit(9);
         }
     }
 

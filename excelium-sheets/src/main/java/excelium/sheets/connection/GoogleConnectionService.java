@@ -87,7 +87,7 @@ public class GoogleConnectionService extends GoogleConnection {
             DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
         } catch (Throwable t) {
             LOG.error(t.getMessage(), t);
-            System.exit(1);
+            System.exit(9);
         }
     }
 
@@ -118,6 +118,7 @@ public class GoogleConnectionService extends GoogleConnection {
                 clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, clientSecretsReader);
             } catch (IOException e) {
                 LOG.error(e.getMessage(), e);
+                System.exit(9);
             }
         }
 

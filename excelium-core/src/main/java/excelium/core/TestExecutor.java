@@ -29,6 +29,7 @@ import excelium.core.reader.TestReaderFactory;
 import excelium.core.report.TestReporter;
 import excelium.core.writer.TestWriter;
 import excelium.core.writer.TestWriterFactory;
+import excelium.model.enums.Result;
 import excelium.model.project.Project;
 import excelium.model.project.Template;
 import excelium.model.project.TestFile;
@@ -94,8 +95,10 @@ public class TestExecutor {
      * Executes tests.
      *
      * @param testFilter the test filter
+     * @return Result of the test
      */
-    public void execute(TestFilter testFilter) {
+    public Result execute(TestFilter testFilter) {
+        Result result = Result.OK;
         List<TestFile> testFiles = filterTestFiles(testFilter);
         for (TestFile testFile : testFiles) {
             Template template = project.getTemplates().get(testFile.getTemplate());
@@ -110,11 +113,18 @@ public class TestExecutor {
 
                 // Executes all tests of workbook
                 TestRunner testRunner = new TestRunner(test, project, testRunConfig, testReporter, testWriter, template);
-                testRunner.runAll();
+                Result testResult = testRunner.runAll();
+                if (testResult == Result.ERROR) {
+                    result = Result.ERROR;
+                } else if (testResult == Result.FAIL && result != Result.ERROR) {
+                    result = Result.FAIL;
+                }
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
+                result = Result.ERROR;
             }
         }
+        return result;
     }
 
     /**
