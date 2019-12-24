@@ -32,6 +32,7 @@ import excelium.model.project.Project;
 import org.fusesource.jansi.Ansi;
 import org.openqa.selenium.WebElement;
 
+import static excelium.common.CiInfoUtil.isCI;
 import static org.apache.commons.lang3.StringUtils.rightPad;
 
 /**
@@ -62,9 +63,13 @@ public class DebugCommandExecutor extends CommandExecutor {
      */
     @Action(param1 = "message")
     public void echo(String message) {
-        System.out.print(Ansi.ansi().cursorUp(1).eraseLine());
+        if (!isCI()) {
+            System.out.print(Ansi.ansi().cursorUp(1).eraseLine());
+        }
         System.out.println(Ansi.ansi().fg(Ansi.Color.GREEN).a(rightPad("", 10) + message).reset());
-        System.out.println();
+        if (!isCI()) {
+            System.out.println();
+        }
     }
 
     /**

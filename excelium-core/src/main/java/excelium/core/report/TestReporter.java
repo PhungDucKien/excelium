@@ -33,6 +33,7 @@ import org.fusesource.jansi.Ansi;
 
 import java.io.PrintStream;
 
+import static excelium.common.CiInfoUtil.isCI;
 import static org.apache.commons.lang3.StringUtils.rightPad;
 
 /**
@@ -365,7 +366,9 @@ public class TestReporter {
      * @param padding the padding
      */
     private void printFixLine(String text, int padding, boolean bold, Ansi.Color color) {
-        consoleStream.print(Ansi.ansi().cursorUp(1).eraseLine());
+        if (!isCI()) {
+            consoleStream.print(Ansi.ansi().cursorUp(1).eraseLine());
+        }
         Ansi ansi = Ansi.ansi();
         if (bold) {
             ansi = ansi.bold();
@@ -374,7 +377,9 @@ public class TestReporter {
             ansi = ansi.fg(color);
         }
         consoleStream.println(ansi.a(rightPad("", padding) + text).reset().toString());
-        consoleStream.println();
+        if (!isCI()) {
+            consoleStream.println();
+        }
     }
 
     /**
@@ -384,7 +389,9 @@ public class TestReporter {
      * @param padding the padding
      */
     private void printTempLine(String text, int padding) {
-        consoleStream.print(Ansi.ansi().cursorUp(1).eraseLine());
-        consoleStream.println(rightPad("", padding) + text);
+        if (!isCI()) {
+            consoleStream.print(Ansi.ansi().cursorUp(1).eraseLine());
+            consoleStream.println(rightPad("", padding) + text);
+        }
     }
 }
