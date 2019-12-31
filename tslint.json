@@ -1,0 +1,36 @@
+{
+  "extends": ["tslint:recommended", "tslint-eslint-rules", "tslint-config-prettier"],
+  "rules": {
+    "prefer-const": true,
+    "no-var-keyword": true,
+    "object-literal-sort-keys": false,
+    "object-literal-shorthand": true,
+    "no-eval": true,
+    "ter-prefer-arrow-callback": [true],
+    "arrow-parens": false,
+    "ter-arrow-parens": [
+      false,
+      "as-needed",
+      {
+        "requireForBlockBody": true
+      }
+    ],
+    "one-variable-per-declaration": [true, "ignore-for-loop"],
+    "triple-equals": [true, "allow-null-check"],
+    "comment-format": {
+      "options": ["check-space"],
+      "severity": "warning"
+    },
+    "max-classes-per-file": false,
+    "radix": true,
+    "no-construct": true,
+    "no-console": false,
+    "no-unused-variable": true,
+    "variable-name": [true, "check-format", "allow-leading-underscore", "allow-pascal-case"],
+    "interface-name": [true, "never-prefix"],
+    "class-name": true,
+    "no-boolean-literal-compare": true,
+    "no-namespace": false,
+    "no-duplicate-imports": true
+  }
+}

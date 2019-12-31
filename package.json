@@ -1,0 +1,64 @@
+{
+  "name": "excelium",
+  "repository": "git@github.com:PhungDucKien/excelium.git",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "prettier:format": "prettier --write \"{,packages/*/!(build)/**/}*.{md,js,jsx,ts,tsx,css,scss,yml}\"",
+    "start": "yarn build && yarn lint && yarn test",
+    "lint": "yarn lint:scripts && yarn lint:styles",
+    "lint:scripts": "tslint --project . -e *.js",
+    "lint:styles": "stylelint \"packages/*/!(build)/**/*.css\"",
+    "lint:fix": "yarn lint:scripts --fix && yarn lint:styles --fix",
+    "test": "jest",
+    "test:unit": "jest --testMatch \"**/packages/**/__test?(s)__/**/*.spec.(j|t)s?(x)\"",
+    "test:integration": "jest --testMatch \"**/packages/**/__test?(s)__/**/*.ispec.(j|t)s?(x)\"",
+    "test:watch": "yarn test --watch",
+    "test:unit:watch": "yarn test:unit --watch",
+    "test:integration:watch": "yarn test:integration --watch",
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna run clean",
+    "compile": "lerna run compile",
+    "build": "lerna run build",
+    "watch": "lerna run --no-bail --parallel watch",
+    "release-prep": "yarn && yarn test && yarn lint",
+    "preinstall": "node ./scripts/check-yarn.js",
+    "pub": "lerna publish"
+  },
+  "jest": {
+    "testURL": "http://localhost/index.html",
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy",
+      "@excelium/(.*)": "<rootDir>/packages/$1/src"
+    },
+    "testMatch": [
+      "**/packages/**/__test?(s)__/**/*.?(i)spec.(j|t)s?(x)"
+    ]
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.17",
+    "@types/vfile-message": "^2.0.0",
+    "husky": "3.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "lerna": "~3.14.0",
+    "lint-staged": "9.5.0",
+    "prettier": "^1.14.3",
+    "stylelint": "^9.7.1",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-prettier": "^1.0.3",
+    "tslint": "^5.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "3.7.5"
+  }
+}
