@@ -27,20 +27,9 @@ package excelium.model.enums;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Tests for {@link DataSourceType}.
- *
- * @author PhungDucKien
- * @since 2018.05.26
- */
+
 public class DataSourceTypeTest {
 
-    @Test
-    public void testFromName() {
-        Assert.assertEquals(DataSourceType.MYSQL, DataSourceType.fromName("MySQL"));
-        Assert.assertEquals(DataSourceType.POSTGRESQL, DataSourceType.fromName("PostgreSQL"));
-        Assert.assertEquals(DataSourceType.DYNAMODB, DataSourceType.fromName("DynamoDB"));
-    }
 
     @Test
     public void testGetListChoice() {

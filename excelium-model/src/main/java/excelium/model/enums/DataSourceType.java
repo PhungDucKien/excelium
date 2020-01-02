@@ -24,30 +24,10 @@
 
 package excelium.model.enums;
 
-/**
- * Represents type of data source.
- *
- * @author PhungDucKien
- * @since 2018.05.25
- */
 public enum DataSourceType {
-    /**
-     * MySQL
-     */
     MYSQL("MySQL", "com.mysql.cj.jdbc.Driver", "jdbc:mysql://<host>:<port>/<db>", 3306),
-    /**
-     * PostgreSQL
-     */
     POSTGRESQL("PostgreSQL", "org.postgresql.Driver", "jdbc:postgresql://<host>:<port>/<db>", 5432),
-    /**
-     * Amazon DynamoDB
-     */
     DYNAMODB("Amazon DynamoDB", null, null, 0);
-
-    /**
-     * Text
-     */
-    private String text;
 
     /**
      * Driver class
@@ -63,22 +43,6 @@ public enum DataSourceType {
      * Default port
      */
     private int defaultPort;
-
-    DataSourceType(String text, String driverClass, String urlPattern, int defaultPort) {
-        this.text = text;
-        this.driverClass = driverClass;
-        this.urlPattern = urlPattern;
-        this.defaultPort = defaultPort;
-    }
-
-    /**
-     * Gets text.
-     *
-     * @return the text
-     */
-    public String getText() {
-        return text;
-    }
 
     /**
      * Gets driver class.
@@ -108,21 +72,6 @@ public enum DataSourceType {
      */
     public String getUrl(String host, String port, String db) {
         return urlPattern.replace("<host>", host).replace("<port>", port).replace("<db>", db);
-    }
-
-    /**
-     * From name data source type.
-     *
-     * @param name the name
-     * @return the data source type
-     */
-    public static DataSourceType fromName(String name) {
-        for (DataSourceType d : DataSourceType.values()) {
-            if (d.name().equalsIgnoreCase(name)) {
-                return d;
-            }
-        }
-        return null;
     }
 
     /**

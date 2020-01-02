@@ -27,19 +27,8 @@ package excelium.model.enums;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Tests for {@link AppType}.
- *
- * @author PhungDucKien
- * @since 2018.03.26
- */
-public class AppTypeTest {
 
-    @Test
-    public void testFromName() {
-        Assert.assertEquals(AppType.WEB, AppType.fromName("WEB"));
-        Assert.assertEquals(AppType.MOBILE, AppType.fromName("MOBILE"));
-    }
+public class AppTypeTest {
 
     @Test
     public void testGetListChoice() {

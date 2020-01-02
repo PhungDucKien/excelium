@@ -27,19 +27,8 @@ package excelium.model.enums;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Tests for {@link WorkbookType}.
- *
- * @author PhungDucKien
- * @since 2018.03.27
- */
-public class WorkbookTypeTest {
 
-    @Test
-    public void testFromName() {
-        Assert.assertEquals(WorkbookType.SHEETS, WorkbookType.fromName("SHEETS"));
-        Assert.assertEquals(WorkbookType.EXCEL, WorkbookType.fromName("EXCEL"));
-    }
+public class WorkbookTypeTest {
 
     @Test
     public void testGetListChoice() {

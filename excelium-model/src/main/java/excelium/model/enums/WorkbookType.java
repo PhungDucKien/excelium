@@ -24,55 +24,7 @@
 
 package excelium.model.enums;
 
-/**
- * Represents type of workbook.
- *
- * @author PhungDucKien
- * @since 2018.03.27
- */
 public enum WorkbookType {
-    /**
-     * The Sheets.
-     */
-    SHEETS("Google Spreadsheet"),
-    /**
-     * The Excel.
-     */
-    EXCEL("Excel Workbook");
-
-    /**
-     * Text
-     */
-    private String text;
-
-    WorkbookType(String text) {
-        this.text = text;
-    }
-
-    /**
-     * Gets text.
-     *
-     * @return the text
-     */
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * From name workbook type.
-     *
-     * @param name the name
-     * @return the workbook type
-     */
-    public static WorkbookType fromName(String name) {
-        for (WorkbookType t : WorkbookType.values()) {
-            if (t.name().equalsIgnoreCase(name)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
     /**
      * Get list choice.
      *

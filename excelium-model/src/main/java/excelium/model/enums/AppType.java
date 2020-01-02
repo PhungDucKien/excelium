@@ -24,55 +24,7 @@
 
 package excelium.model.enums;
 
-/**
- * Represents type of application.
- *
- * @author PhungDucKien
- * @since 2018.03.26
- */
 public enum AppType {
-    /**
-     * The Web.
-     */
-    WEB("Web application"),
-    /**
-     * The Mobile.
-     */
-    MOBILE("Mobile application");
-
-    /**
-     * Text
-     */
-    private String text;
-
-    AppType(String text) {
-        this.text = text;
-    }
-
-    /**
-     * Gets text.
-     *
-     * @return the text
-     */
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * From name app type.
-     *
-     * @param name the name
-     * @return the app type
-     */
-    public static AppType fromName(String name) {
-        for (AppType t : AppType.values()) {
-            if (t.name().equalsIgnoreCase(name)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
     /**
      * Get list choice.
      *

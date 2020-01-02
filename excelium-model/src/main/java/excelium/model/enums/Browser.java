@@ -24,79 +24,7 @@
 
 package excelium.model.enums;
 
-/**
- * Represents type of browser.
- *
- * @author PhungDucKien
- * @since 2018.03.27
- */
 public enum Browser {
-    /**
-     * Chrome browser.
-     */
-    CHROME("Chrome"),
-    /**
-     * Firefox browser.
-     */
-    FIREFOX("Firefox"),
-    /**
-     * The Ie.
-     */
-    IE("Internet Explorer"),
-    /**
-     * The Edge.
-     */
-    EDGE("Microsoft Edge"),
-    /**
-     * Safari browser.
-     */
-    SAFARI("Safari"),
-    /**
-     * Opera browser.
-     */
-    OPERA("Opera"),
-    /**
-     * Chromium browser.
-     */
-    CHROMIUM("Chromium"),
-    /**
-     * Browser browser.
-     */
-    BROWSER("Browser");
-
-    /**
-     * Text
-     */
-    private String text;
-
-    Browser(String text) {
-        this.text = text;
-    }
-
-    /**
-     * Gets text.
-     *
-     * @return the text
-     */
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * From name browser.
-     *
-     * @param name the name
-     * @return the browser
-     */
-    public static Browser fromName(String name) {
-        for (Browser t : Browser.values()) {
-            if (t.name().equalsIgnoreCase(name)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
     /**
      * Get list choice.
      *

@@ -27,24 +27,8 @@ package excelium.model.enums;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Tests for {@link Platform}.
- *
- * @author PhungDucKien
- * @since 2018.03.27
- */
-public class PlatformTest {
 
-    @Test
-    public void testFromName() {
-        Assert.assertEquals(Platform.WINDOWS_32, Platform.fromName("WINDOWS_32"));
-        Assert.assertEquals(Platform.WINDOWS_64, Platform.fromName("WINDOWS_64"));
-        Assert.assertEquals(Platform.MAC_OS, Platform.fromName("MAC_OS"));
-        Assert.assertEquals(Platform.LINUX, Platform.fromName("LINUX"));
-        Assert.assertEquals(Platform.ANDROID, Platform.fromName("ANDROID"));
-        Assert.assertEquals(Platform.IOS, Platform.fromName("IOS"));
-        Assert.assertEquals(Platform.OTHER, Platform.fromName("OTHER"));
-    }
+public class PlatformTest {
 
     @Test
     public void testGetListChoice() {
@@ -64,27 +48,5 @@ public class PlatformTest {
         Assert.assertEquals("iOS", listChoice[5][1]);
         Assert.assertEquals("OTHER", listChoice[6][0]);
         Assert.assertEquals("Other", listChoice[6][1]);
-    }
-
-    @Test
-    public void testIsWindows() {
-        Assert.assertTrue(Platform.WINDOWS_32.isWindows());
-        Assert.assertTrue(Platform.WINDOWS_64.isWindows());
-        Assert.assertFalse(Platform.MAC_OS.isWindows());
-        Assert.assertFalse(Platform.LINUX.isWindows());
-        Assert.assertFalse(Platform.ANDROID.isWindows());
-        Assert.assertFalse(Platform.IOS.isWindows());
-        Assert.assertFalse(Platform.OTHER.isWindows());
-    }
-
-    @Test
-    public void testIsMac() {
-        Assert.assertFalse(Platform.WINDOWS_32.isMac());
-        Assert.assertFalse(Platform.WINDOWS_64.isMac());
-        Assert.assertTrue(Platform.MAC_OS.isMac());
-        Assert.assertFalse(Platform.LINUX.isMac());
-        Assert.assertFalse(Platform.ANDROID.isMac());
-        Assert.assertFalse(Platform.IOS.isMac());
-        Assert.assertFalse(Platform.OTHER.isMac());
     }
 }

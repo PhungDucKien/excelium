@@ -27,25 +27,8 @@ package excelium.model.enums;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Tests for {@link Browser}.
- *
- * @author PhungDucKien
- * @since 2018.03.27
- */
-public class BrowserTest {
 
-    @Test
-    public void testFromName() {
-        Assert.assertEquals(Browser.CHROME, Browser.fromName("CHROME"));
-        Assert.assertEquals(Browser.FIREFOX, Browser.fromName("FIREFOX"));
-        Assert.assertEquals(Browser.IE, Browser.fromName("IE"));
-        Assert.assertEquals(Browser.EDGE, Browser.fromName("EDGE"));
-        Assert.assertEquals(Browser.SAFARI, Browser.fromName("SAFARI"));
-        Assert.assertEquals(Browser.OPERA, Browser.fromName("OPERA"));
-        Assert.assertEquals(Browser.CHROMIUM, Browser.fromName("CHROMIUM"));
-        Assert.assertEquals(Browser.BROWSER, Browser.fromName("BROWSER"));
-    }
+public class BrowserTest {
 
     @Test
     public void testGetListChoice() {
