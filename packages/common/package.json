@@ -1,0 +1,33 @@
+{
+  "name": "@excelium/common",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "https://github.com/PhungDucKien/excelium",
+  "keywords": [
+    "excelium"
+  ],
+  "license": "Apache-2.0",
+  "private": false,
+  "main": "build/index.js",
+  "types": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "watch": "yarn compile -w",
+    "clean": "rm -rf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@excelium/model": "^1.0.0",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.3"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "@types/inquirer": "^6.5.0",
+    "typescript": "3.7.5"
+  }
+}
