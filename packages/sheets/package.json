@@ -1,5 +1,5 @@
 {
-  "name": "@excelium/core",
+  "name": "@excelium/sheets",
   "version": "1.0.0",
   "description": "",
   "repository": "https://github.com/PhungDucKien/excelium",
@@ -21,18 +21,11 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@excelium/model": "^1.0.0",
     "@excelium/common": "^1.0.0",
-    "lodash": "^4.17.15",
-    "moment": "^2.24.0",
-    "is-ci": "^2.0.0",
-    "open": "^7.0.0",
-    "server-destroy": "^1.0.1"
+    "@excelium/core": "^1.0.0",
+    "googleapis": "^46.0.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.149",
-    "@types/is-ci": "^1.1.0",
-    "@types/server-destroy": "^1.0.0",
     "typescript": "3.7.5"
   }
 }
