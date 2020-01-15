@@ -30,19 +30,6 @@ import org.junit.Test;
 
 public class DataSourceTypeTest {
 
-
-    @Test
-    public void testGetListChoice() {
-        String[][] listChoice = DataSourceType.getListChoice();
-        Assert.assertEquals(3, listChoice.length);
-        Assert.assertEquals("MYSQL", listChoice[0][0]);
-        Assert.assertEquals("MySQL", listChoice[0][1]);
-        Assert.assertEquals("POSTGRESQL", listChoice[1][0]);
-        Assert.assertEquals("PostgreSQL", listChoice[1][1]);
-        Assert.assertEquals("DYNAMODB", listChoice[2][0]);
-        Assert.assertEquals("Amazon DynamoDB", listChoice[2][1]);
-    }
-
     @Test
     public void testGetUrl() {
         Assert.assertEquals("jdbc:mysql://localhost:1234/dbname", DataSourceType.MYSQL.getUrl("localhost", "1234", "dbname"));

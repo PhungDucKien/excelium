@@ -73,18 +73,4 @@ public enum DataSourceType {
     public String getUrl(String host, String port, String db) {
         return urlPattern.replace("<host>", host).replace("<port>", port).replace("<db>", db);
     }
-
-    /**
-     * Get list choice.
-     *
-     * @return the list choice
-     */
-    public static String[][] getListChoice() {
-        String[][] listChoice = new String[DataSourceType.values().length][2];
-        int i = 0;
-        for (DataSourceType d : DataSourceType.values()) {
-            listChoice[i++] = new String[]{d.name(), d.getText()};
-        }
-        return listChoice;
-    }
 }
