@@ -1,0 +1,30 @@
+{
+  "name": "@excelium/generator",
+  "version": "1.0.0",
+  "description": "",
+  "repository": "https://github.com/PhungDucKien/excelium",
+  "keywords": [
+    "excelium"
+  ],
+  "license": "Apache-2.0",
+  "private": false,
+  "main": "build/index.js",
+  "types": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "watch": "yarn compile -w",
+    "clean": "rm -rf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@excelium/model": "^1.0.0",
+    "@excelium/common": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "3.7.5"
+  }
+}
