@@ -37,25 +37,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Base controller.
- *
- * @author PhungDucKien
- * @since 2018.04.15
- */
 public class BaseController {
-
-    /**
-     * Help flag
-     */
-    @Parameter(names = {"-h", "--help"}, description = "Print help information", help = true)
-    private boolean help = false;
-
-    /**
-     * Project file
-     */
-    @Parameter(names = {"-f", "--project-file"}, description = "Force the use of an alternate project file", help = true)
-    private String projectFile;
 
     /**
      * System properties
@@ -64,39 +46,11 @@ public class BaseController {
     private Map<String, String> properties = new HashMap<>();
 
     /**
-     * Gets help flag.
-     *
-     * @return the help flag
-     */
-    public boolean isHelp() {
-        return help;
-    }
-
-    /**
-     * Gets project file.
-     *
-     * @return the project file
-     */
-    public String getProjectFile() {
-        return projectFile;
-    }
-
-    /**
      * Gets system properties
      *
      * @return the system properties
      */
     public Map<String, String> getProperties() {
         return properties;
-    }
-
-    protected void updateProjectFile(Project project) throws JAXBException, IOException {
-        Path basePath = project.getBasePath();
-        String customProjectFile = getProjectFile();
-        String projectFile = StringUtils.isBlank(customProjectFile) ? "project.xml" : customProjectFile;
-        Path projectFilePath = basePath.resolve(projectFile);
-
-        ProjectGenerator generator = new ProjectGenerator();
-        generator.updateProject(project, projectFilePath);
     }
 }
