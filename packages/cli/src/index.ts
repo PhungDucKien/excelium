@@ -1,4 +1,5 @@
-import meaningOfLife from '@excelium/core';
+#!/usr/bin/env node
 
-// tslint:disable:no-console
-console.log(meaningOfLife());
+import Application from './Application';
+
+Application.main(process.argv.slice(2));

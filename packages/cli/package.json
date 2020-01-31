@@ -8,11 +8,14 @@
   ],
   "license": "Apache-2.0",
   "private": false,
-  "main": "build/index.js",
-  "types": "build/index.js",
+  "main": "build/src/index.js",
+  "types": "build/src/index.js",
   "files": [
     "build"
   ],
+  "bin": {
+    "excelium": "build/src/index.js"
+  },
   "scripts": {
     "build": "yarn clean && yarn compile",
     "watch": "yarn compile -w",
@@ -21,9 +24,21 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@excelium/core": "^1.0.0"
+    "@excelium/model": "^1.0.0",
+    "@excelium/common": "^1.0.0",
+    "@excelium/core": "^1.0.0",
+    "@excelium/generator": "^1.0.0",
+    "@excelium/sheets": "^1.0.0",
+    "@excelium/xls": "^1.0.0",
+    "class-transformer": "^0.2.3",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.12",
+    "update-notifier": "^4.0.0",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
+    "@types/update-notifier": "^2.5.0",
+    "@types/yargs": "^15.0.1",
     "typescript": "3.7.5"
   }
 }

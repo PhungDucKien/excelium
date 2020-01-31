@@ -15,3 +15,5 @@ export { default as WorkbookReader } from './reader/WorkbookReader';
 export { default as AbstractTestWriter } from './writer/AbstractTestWriter';
 export { default as AbstractWorkbookWriter } from './writer/AbstractWorkbookWriter';
 export { default as WorkbookWriter } from './writer/WorkbookWriter';
+
+export { default as TestExecutor } from './TestExecutor';

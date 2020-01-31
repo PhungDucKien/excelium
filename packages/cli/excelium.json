@@ -1,0 +1,265 @@
+{
+  "name": "excelium",
+  "appType": "Web application",
+  "workbookType": "Google Spreadsheet",
+  "filePath": "file",
+  "downloadPath": "download",
+  "screenshotPath": "screenshot",
+  "templates": {
+    "dataType": "Map",
+    "value": [
+      [
+        "1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50",
+        {
+          "location": "1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50",
+          "name": "1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50 - Web Template",
+          "markupLocations": {
+            "dataType": "Map",
+            "value": [
+              [
+                "%BASE_URL%",
+                "Configuration!B19"
+              ],
+              [
+                "%USE_PC%",
+                "Configuration!B27"
+              ],
+              [
+                "%USE_ANDROID%",
+                "Configuration!D27"
+              ],
+              [
+                "%USE_IOS%",
+                "Configuration!F27"
+              ],
+              [
+                "%USE_CHROME%",
+                "Configuration!B35"
+              ],
+              [
+                "%USE_FIREFOX%",
+                "Configuration!C35"
+              ],
+              [
+                "%USE_IE%",
+                "Configuration!D35"
+              ],
+              [
+                "%USE_EDGE%",
+                "Configuration!E35"
+              ],
+              [
+                "%USE_SAFARI%",
+                "Configuration!F35"
+              ],
+              [
+                "%USE_OPERA%",
+                "Configuration!G35"
+              ],
+              [
+                "%CHROME_RESOLUTION%",
+                "Configuration!B37"
+              ],
+              [
+                "%FIREFOX_RESOLUTION%",
+                "Configuration!C37"
+              ],
+              [
+                "%IE_RESOLUTION%",
+                "Configuration!D37"
+              ],
+              [
+                "%EDGE_RESOLUTION%",
+                "Configuration!E37"
+              ],
+              [
+                "%SAFARI_RESOLUTION%",
+                "Configuration!F37"
+              ],
+              [
+                "%OPERA_RESOLUTION%",
+                "Configuration!G37"
+              ],
+              [
+                "%ANDROID_PLATFORM_VERSION%",
+                "Configuration!D45"
+              ],
+              [
+                "%ANDROID_DEVICE_NAME%",
+                "Configuration!D47"
+              ],
+              [
+                "%ANDROID_ORIENTATION%",
+                "Configuration!D49"
+              ],
+              [
+                "%ANDROID_UDID%",
+                "Configuration!D51"
+              ],
+              [
+                "%ANDROID_BROWSER%",
+                "Configuration!D53"
+              ],
+              [
+                "%IOS_PLATFORM_VERSION%",
+                "Configuration!F45"
+              ],
+              [
+                "%IOS_DEVICE_NAME%",
+                "Configuration!F47"
+              ],
+              [
+                "%IOS_ORIENTATION%",
+                "Configuration!F49"
+              ],
+              [
+                "%IOS_UDID%",
+                "Configuration!F51"
+              ],
+              [
+                "%IOS_BROWSER%",
+                "Configuration!F53"
+              ],
+              [
+                "%MAPPING_PAGESET_NAME%",
+                "Mapping!B2"
+              ],
+              [
+                "%MAPPING_PAGESET_PATH%",
+                "Mapping!C2"
+              ],
+              [
+                "%MAPPING_PAGESET_TITLE%",
+                "Mapping!D2"
+              ],
+              [
+                "%MAPPING_ITEM_NAME%",
+                "Mapping!E2"
+              ],
+              [
+                "%MAPPING_ITEM_VALUE%",
+                "Mapping!F2"
+              ],
+              [
+                "%DATA_NAME%",
+                "'Test Data'!A1"
+              ],
+              [
+                "%DATA_DESC%",
+                "'Test Data'!B2"
+              ],
+              [
+                "%DATA_TABLE_DEF%",
+                "'Test Data'!B3"
+              ],
+              [
+                "%DATA_TABLE_DATA%",
+                "'Test Data'!B4"
+              ],
+              [
+                "%ACTION_NO%",
+                "Actions!A3"
+              ],
+              [
+                "%ACTION_CAPTURE%",
+                "Actions!C3"
+              ],
+              [
+                "%ACTION_NAME%",
+                "Actions!E3"
+              ],
+              [
+                "%ACTION_COMMAND%",
+                "Actions!F3"
+              ],
+              [
+                "%ACTION_PARAM1%",
+                "Actions!G3"
+              ],
+              [
+                "%ACTION_PARAM2%",
+                "Actions!H3"
+              ],
+              [
+                "%ACTION_PARAM3%",
+                "Actions!I3"
+              ],
+              [
+                "%ACTION_DATA%",
+                "Actions!J3"
+              ],
+              [
+                "%TEST_NO%",
+                "'Test Case'!A3"
+              ],
+              [
+                "%TEST_GUTTER%",
+                "'Test Case'!B3"
+              ],
+              [
+                "%TEST_CAPTURE%",
+                "'Test Case'!C3"
+              ],
+              [
+                "%TEST_NAME%",
+                "'Test Case'!E3"
+              ],
+              [
+                "%TEST_COMMAND%",
+                "'Test Case'!F3"
+              ],
+              [
+                "%TEST_PARAM1%",
+                "'Test Case'!G3"
+              ],
+              [
+                "%TEST_PARAM2%",
+                "'Test Case'!H3"
+              ],
+              [
+                "%TEST_PARAM3%",
+                "'Test Case'!I3"
+              ],
+              [
+                "%TEST_DATA%",
+                "'Test Case'!J3"
+              ],
+              [
+                "%TEST_DATE%",
+                "'Test Case'!L3"
+              ],
+              [
+                "%TEST_PERSON%",
+                "'Test Case'!K3"
+              ],
+              [
+                "%TEST_RESULT%",
+                "'Test Case'!M3"
+              ]
+            ]
+          },
+          "mappingPattern": "Mapping",
+          "actionPattern": "Actions",
+          "dataPattern": "Test Data",
+          "testPattern": "*",
+          "ignorePatterns": [
+            "Commands"
+          ]
+        }
+      ]
+    ]
+  },
+  "tests": {
+    "dataType": "Map",
+    "value": [
+      [
+        "1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE",
+        {
+          "location": "1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE",
+          "name": "1mNKWaLq-vmXJOGEVEJzUUTfkoBM22Bn6OZz99d6X0DE - Web Test",
+          "template": "1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50"
+        }
+      ]
+    ]
+  }
+}
