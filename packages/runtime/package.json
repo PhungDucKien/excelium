@@ -1,0 +1,35 @@
+{
+  "name": "@excelium/runtime",
+  "version": "1.0.0",
+  "description": "Excelium playback and execution",
+  "repository": "https://github.com/PhungDucKien/excelium",
+  "keywords": [
+    "excelium"
+  ],
+  "license": "Apache-2.0",
+  "private": false,
+  "main": "build/index.js",
+  "types": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "watch": "yarn compile -w",
+    "clean": "rm -rf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@excelium/common": "^1.0.0",
+    "@excelium/model": "^1.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  },
+  "peerDependencies": {
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  },
+  "devDependencies": {
+    "@types/selenium-webdriver": "^4.0.6",
+    "typescript": "3.7.5"
+  }
+}
