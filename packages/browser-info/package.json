@@ -1,0 +1,26 @@
+{
+  "name": "@excelium/browser-info",
+  "version": "1.0.0",
+  "description": "Get information about installed browsers",
+  "repository": "https://github.com/PhungDucKien/excelium",
+  "keywords": [
+    "excelium"
+  ],
+  "license": "Apache-2.0",
+  "private": false,
+  "main": "build/index.js",
+  "types": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "watch": "yarn compile -w",
+    "clean": "rm -rf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "typescript": "3.7.5"
+  }
+}
