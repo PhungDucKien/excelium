@@ -1,0 +1,37 @@
+{
+  "name": "@excelium/get-driver",
+  "version": "1.0.0",
+  "description": "Download browser drivers",
+  "repository": "https://github.com/PhungDucKien/excelium",
+  "keywords": [
+    "excelium"
+  ],
+  "license": "Apache-2.0",
+  "private": false,
+  "main": "build/index.js",
+  "types": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "watch": "yarn compile -w",
+    "clean": "rm -rf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "node-fetch": "^2.6.0",
+    "tar": "^5.0.5",
+    "unzipper": "^0.10.5"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "@types/node-fetch": "^2.5.2",
+    "@types/tar": "^4.0.3",
+    "@types/unzipper": "^0.10.0",
+    "nock": "^11.6.0",
+    "typescript": "3.7.5"
+  }
+}
