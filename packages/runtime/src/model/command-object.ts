@@ -24,4 +24,7 @@ export default interface CommandObject {
   value?: string;
   skip?: boolean;
   isBreakpoint?: boolean;
+  opensWindow?: boolean;
+  windowTimeout?: number;
+  windowHandleName?: string;
 }
