@@ -1,0 +1,36 @@
+<style>
+body {
+    margin: 0;
+}
+</style>
+<div id="cont" style="position: fixed;background: blue;">
+</div>
+
+<script>
+    const cont = document.getElementById('cont')
+    const rect = window.location.search.substr(1).split('&').reduce((r, q) => {
+        const [n, v] = q.split('=')
+        r[n] = v
+        return r
+    }, {})
+    cont.style.top = `${rect.y || 0}px`
+    cont.style.left = `${rect.x || 0}px`
+    cont.style.width = `${rect.w || 500}px`
+    cont.style.height = `${rect.h || 500}px`
+
+    cont.addEventListener('mouseout', (event) => {
+        let c = getClickCoord(event)
+        cont.innerText = `out ${c.left},${c.top}`;
+    });
+    function getClickCoord(event) {
+        let top = event.pageY,
+            left = event.pageX;
+        let element = event.target;
+        do {
+            top -= element.offsetTop;
+            left -= element.offsetLeft;
+            element = element.offsetParent;
+        } while (element);
+        return { top, left }
+    }
+</script>

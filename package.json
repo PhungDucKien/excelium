@@ -21,6 +21,7 @@
     "compile": "lerna run compile",
     "build": "lerna run build",
     "cli": "cd packages/cli && node build/src/index.js",
+    "download-drivers": "cd packages/testkit && yarn download-drivers",
     "watch": "lerna run --no-bail --parallel watch",
     "release-prep": "yarn && yarn test && yarn lint",
     "preinstall": "node ./scripts/check-yarn.js",

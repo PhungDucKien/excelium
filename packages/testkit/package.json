@@ -1,0 +1,40 @@
+{
+  "name": "@excelium/testkit",
+  "version": "1.0.0",
+  "description": "Excelium test stuff",
+  "repository": "https://github.com/PhungDucKien/excelium",
+  "keywords": [
+    "excelium"
+  ],
+  "license": "Apache-2.0",
+  "private": false,
+  "main": "build/index.js",
+  "types": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "watch": "yarn compile -w",
+    "clean": "rm -rf ./build",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build",
+    "download-drivers": "node ./scripts/download-drivers.js"
+  },
+  "dependencies": {
+    "@excelium/browser-info": "*",
+    "@excelium/get-driver": "*",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  },
+  "peerDependencies": {
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/fs-extra": "^8.0.1",
+    "@types/selenium-webdriver": "^4.0.6",
+    "typescript": "3.7.5"
+  }
+}
