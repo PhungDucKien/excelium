@@ -1,6 +1,0 @@
-dependencies {
-    compile project(':excelium-common')
-
-    compile group: 'org.fusesource.jansi', name: 'jansi', version: '1.11'
-    compile group: 'jline', name: 'jline', version: '2.12'
-}

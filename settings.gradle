@@ -2,7 +2,6 @@ rootProject.name = 'excelium'
 
 include 'excelium-model'
 include 'excelium-common'
-include 'excelium-progressbar'
 include 'excelium-core'
 include 'excelium-executor'
 include 'excelium-doclet'
