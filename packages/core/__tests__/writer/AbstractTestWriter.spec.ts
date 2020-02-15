@@ -32,11 +32,9 @@ jest.mock('os');
 describe('test AbstractTestWriter', () => {
   test('write result', () => {
     const fake = new Date(2018, 0, 1);
-    // @ts-ignore
-    jest.spyOn(global, 'Date').mockImplementationOnce(() => fake);
+    (jest.spyOn(global, 'Date') as any).mockImplementationOnce(() => fake);
 
-    // @ts-ignore
-    os.userInfo.mockReturnValueOnce({ username: 'username' });
+    (os.userInfo as any).mockReturnValueOnce({ username: 'username' });
 
     const template = new Template();
     const markupLocations = new Map<string, string>();

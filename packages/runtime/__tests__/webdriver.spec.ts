@@ -29,7 +29,6 @@ jest.setTimeout(30000);
 describe('webdriver executor', () => {
   it('should implement all the Selenium commands', () => {
     Object.keys(Commands).forEach(command => {
-      // @ts-ignore
       if (!ControlFlowCommandNames[command]) {
         expect(() => {
           if (!WebDriverExecutor.prototype[`do${command.charAt(0).toUpperCase() + command.slice(1)}`]) {
@@ -80,8 +79,7 @@ describe('webdriver executor', () => {
     describe('plugins', () => {
       it('should be able to register a command', async () => {
         expect.assertions(3);
-        executor.registerCommand('commandName', async function(target, value) {
-          // @ts-ignore
+        executor.registerCommand('commandName', async function(this: any, target, value) {
           expect(this).toBe(executor);
           expect(target).toBe('target');
           expect(value).toBe('value');

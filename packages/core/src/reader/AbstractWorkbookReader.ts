@@ -130,8 +130,8 @@ export default abstract class AbstractWorkbookReader<W, S> implements WorkbookRe
    * @param values 2-dimension list of objects
    * @return first value
    */
-  private getFirstValue(values: any[][]): any {
-    if (CollectionUtil.isNotEmpty(values) && CollectionUtil.isNotEmpty(values[0])) {
+  public getFirstValue(values?: any[][]): any {
+    if (values && CollectionUtil.isNotEmpty(values) && CollectionUtil.isNotEmpty(values[0])) {
       return values[0][0];
     }
     return null;
@@ -143,8 +143,8 @@ export default abstract class AbstractWorkbookReader<W, S> implements WorkbookRe
    * @param values 2-dimension list of objects
    * @return first row values
    */
-  private getFirstRowValues(values: any[][]): any[] {
-    if (CollectionUtil.isNotEmpty(values)) {
+  public getFirstRowValues(values?: any[][]): any[] {
+    if (values && CollectionUtil.isNotEmpty(values)) {
       return values[0];
     }
     return [];
@@ -156,9 +156,9 @@ export default abstract class AbstractWorkbookReader<W, S> implements WorkbookRe
    * @param values 2-dimension list of objects
    * @return first column values
    */
-  private getFirstColumnValues(values: any[][]): any[] {
+  public getFirstColumnValues(values?: any[][]): any[] {
     const columnValues = [] as any[];
-    if (CollectionUtil.isNotEmpty(values)) {
+    if (values && CollectionUtil.isNotEmpty(values)) {
       for (const rowValues of values) {
         if (CollectionUtil.isNotEmpty(rowValues)) {
           columnValues.push(rowValues[0]);

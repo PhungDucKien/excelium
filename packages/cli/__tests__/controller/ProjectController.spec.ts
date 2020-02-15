@@ -38,8 +38,7 @@ describe('test ProjectController', () => {
 
     const projectController = new ProjectController();
 
-    inquirer.prompt
-      // @ts-ignore
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'myproject' });
       })
@@ -62,12 +61,12 @@ describe('test ProjectController', () => {
         return Promise.resolve({ prompt: false });
       });
 
-    // @ts-ignore
-    ProjectGenerator.mockImplementationOnce(() => {
+    (ProjectGenerator as jest.Mock<ProjectGenerator>).mockImplementationOnce(() => {
       return {
-        createProject: () => {
+        createProject: async () => {
           updated = true;
         },
+        updateProject: async () => undefined,
       };
     });
 
@@ -81,8 +80,7 @@ describe('test ProjectController', () => {
 
     const projectController = new ProjectController();
 
-    inquirer.prompt
-      // @ts-ignore
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'myproject' });
       })
@@ -108,12 +106,12 @@ describe('test ProjectController', () => {
         return Promise.resolve({ prompt: 'screenshot' });
       });
 
-    // @ts-ignore
-    ProjectGenerator.mockImplementationOnce(() => {
+    (ProjectGenerator as jest.Mock<ProjectGenerator>).mockImplementationOnce(() => {
       return {
-        createProject: () => {
+        createProject: async () => {
           updated = true;
         },
+        updateProject: async () => undefined,
       };
     });
 
@@ -127,8 +125,7 @@ describe('test ProjectController', () => {
 
     const projectController = new ProjectController();
 
-    inquirer.prompt
-      // @ts-ignore
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'myproject' });
       })
@@ -148,12 +145,12 @@ describe('test ProjectController', () => {
         return Promise.resolve({ prompt: false });
       });
 
-    // @ts-ignore
-    ProjectGenerator.mockImplementationOnce(() => {
+    (ProjectGenerator as jest.Mock<ProjectGenerator>).mockImplementationOnce(() => {
       return {
-        createProject: () => {
+        createProject: async () => {
           updated = true;
         },
+        updateProject: async () => undefined,
       };
     });
 
@@ -167,8 +164,7 @@ describe('test ProjectController', () => {
 
     const projectController = new ProjectController();
 
-    inquirer.prompt
-      // @ts-ignore
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'myproject' });
       })
@@ -191,12 +187,12 @@ describe('test ProjectController', () => {
         return Promise.resolve({ prompt: 'screenshot' });
       });
 
-    // @ts-ignore
-    ProjectGenerator.mockImplementationOnce(() => {
+    (ProjectGenerator as jest.Mock<ProjectGenerator>).mockImplementationOnce(() => {
       return {
-        createProject: () => {
+        createProject: async () => {
           updated = true;
         },
+        updateProject: async () => undefined,
       };
     });
 

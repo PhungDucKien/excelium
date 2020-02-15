@@ -38,13 +38,13 @@ export default class TemplateController extends BaseController {
    * Project instance
    */
   @inject(BeanFactory.projectProvider)
-  private projectProvider: () => Promise<Project>;
+  protected projectProvider: () => Promise<Project>;
 
   /**
    * Test reader factory
    */
   @inject(BeanFactory.testReaderFactoryProvider)
-  private testReaderFactoryProvider: () => Promise<GenericTestReaderFactory>;
+  protected testReaderFactoryProvider: () => Promise<GenericTestReaderFactory>;
 
   /**
    * Imports test template.

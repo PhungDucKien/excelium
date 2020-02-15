@@ -37,24 +37,23 @@ jest.mock('@excelium/core');
 describe('test TestController', () => {
   test('execute all', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'ALL' });
       })
@@ -62,8 +61,7 @@ describe('test TestController', () => {
         return Promise.resolve({ prompt: 'QUIT' });
       });
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('ALL');
@@ -72,6 +70,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({});
 
     expect(times).toBe(1);
@@ -79,24 +78,23 @@ describe('test TestController', () => {
 
   test('execute all twice', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'ALL' });
       })
@@ -107,8 +105,7 @@ describe('test TestController', () => {
         return Promise.resolve({ prompt: 'QUIT' });
       });
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('ALL');
@@ -117,6 +114,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({});
 
     expect(times).toBe(2);
@@ -124,25 +122,24 @@ describe('test TestController', () => {
 
   test('execute filter', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      project.tests = new Map([['Workbook1', new TestFile()]]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.tests = new Map([['Workbook1', new TestFile()]]);
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'FILTER' });
       })
@@ -153,8 +150,7 @@ describe('test TestController', () => {
         return Promise.resolve({ prompt: 'QUIT' });
       });
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('Workbook1');
@@ -163,6 +159,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({});
 
     expect(times).toBe(1);
@@ -170,25 +167,24 @@ describe('test TestController', () => {
 
   test('execute filter twice', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      project.tests = new Map([['Workbook1', new TestFile()]]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.tests = new Map([['Workbook1', new TestFile()]]);
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'FILTER' });
       })
@@ -205,8 +201,7 @@ describe('test TestController', () => {
         return Promise.resolve({ prompt: 'QUIT' });
       });
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('Workbook1');
@@ -215,6 +210,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({});
 
     expect(times).toBe(2);
@@ -222,25 +218,24 @@ describe('test TestController', () => {
 
   test('execute previous filter', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      project.tests = new Map([['Workbook1', new TestFile()]]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.tests = new Map([['Workbook1', new TestFile()]]);
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'FILTER' });
       })
@@ -254,8 +249,7 @@ describe('test TestController', () => {
         return Promise.resolve({ prompt: 'QUIT' });
       });
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('Workbook1');
@@ -264,6 +258,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({});
 
     expect(times).toBe(2);
@@ -271,30 +266,27 @@ describe('test TestController', () => {
 
   test('execute all and quit', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
-      .mockImplementationOnce(() => {
-        return Promise.resolve({ prompt: 'QUIT' });
-      });
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any).mockImplementationOnce(() => {
+      return Promise.resolve({ prompt: 'QUIT' });
+    });
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('ALL');
@@ -303,6 +295,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ all: true });
 
     expect(times).toBe(1);
@@ -310,30 +303,27 @@ describe('test TestController', () => {
 
   test('execute workbook and quit', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
-      .mockImplementationOnce(() => {
-        return Promise.resolve({ prompt: 'QUIT' });
-      });
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any).mockImplementationOnce(() => {
+      return Promise.resolve({ prompt: 'QUIT' });
+    });
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('workbook-id');
@@ -342,6 +332,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ workbook: 'workbook-id' });
 
     expect(times).toBe(1);
@@ -349,30 +340,27 @@ describe('test TestController', () => {
 
   test('execute sheet and quit', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
-      .mockImplementationOnce(() => {
-        return Promise.resolve({ prompt: 'QUIT' });
-      });
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any).mockImplementationOnce(() => {
+      return Promise.resolve({ prompt: 'QUIT' });
+    });
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('workbook-id');
@@ -382,6 +370,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ workbook: 'workbook-id', sheet: 'sheet-name' });
 
     expect(times).toBe(1);
@@ -389,30 +378,27 @@ describe('test TestController', () => {
 
   test('execute test case and quit', async () => {
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
-      .mockImplementationOnce(() => {
-        return Promise.resolve({ prompt: 'QUIT' });
-      });
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any).mockImplementationOnce(() => {
+      return Promise.resolve({ prompt: 'QUIT' });
+    });
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('workbook-id');
@@ -423,6 +409,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ workbook: 'workbook-id', sheet: 'sheet-name', testCase: 'case-no' });
 
     expect(times).toBe(1);

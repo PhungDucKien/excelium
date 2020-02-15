@@ -17,7 +17,11 @@
 
 import CommandObject from '../model/command-object';
 
-export const ControlFlowCommandNames = {
+interface CommandNames {
+  [key: string]: string;
+}
+
+export const ControlFlowCommandNames: CommandNames = {
   do: 'do',
   else: 'else',
   elseIf: 'elseIf',

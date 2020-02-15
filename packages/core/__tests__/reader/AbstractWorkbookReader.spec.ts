@@ -17,7 +17,6 @@
  * under the License.
  */
 
-// @ts-nocheck
 import AbstractWorkbookReader from '../../src/reader/AbstractWorkbookReader';
 
 /**
@@ -29,7 +28,7 @@ import AbstractWorkbookReader from '../../src/reader/AbstractWorkbookReader';
 describe('test AbstractWorkbookReader', () => {
   test('get first value', () => {
     const workbookReader = new MyWorkbookReader();
-    expect(workbookReader.getFirstValue(null)).toBe(null);
+    expect(workbookReader.getFirstValue()).toBe(null);
     expect(workbookReader.getFirstValue([])).toBe(null);
     expect(workbookReader.getFirstValue([[]])).toBe(null);
     expect(workbookReader.getFirstValue([['abc']])).toBe('abc');
@@ -37,7 +36,7 @@ describe('test AbstractWorkbookReader', () => {
 
   test('get first row values', () => {
     const workbookReader = new MyWorkbookReader();
-    expect(workbookReader.getFirstRowValues(null).length).toBe(0);
+    expect(workbookReader.getFirstRowValues().length).toBe(0);
     expect(workbookReader.getFirstRowValues([]).length).toBe(0);
     expect(workbookReader.getFirstRowValues([[]]).length).toBe(0);
     expect(workbookReader.getFirstRowValues([['abc', 'def']]).length).toBe(2);
@@ -65,7 +64,7 @@ describe('test AbstractWorkbookReader', () => {
 
   test('get first column values', () => {
     const workbookReader = new MyWorkbookReader();
-    expect(workbookReader.getFirstColumnValues(null).length).toBe(0);
+    expect(workbookReader.getFirstColumnValues().length).toBe(0);
     expect(workbookReader.getFirstColumnValues([]).length).toBe(0);
     expect(workbookReader.getFirstColumnValues([[]]).length).toBe(1);
     expect(workbookReader.getFirstColumnValues([[]])[0]).toBe(null);

@@ -37,10 +37,9 @@ export default class TemplateUtil {
    */
   public static getMarkups(): string[] {
     const values = [] as string[];
-    const propertyNames = Object.getOwnPropertyNames(Template);
+    const propertyNames = Object.getOwnPropertyNames(Template) as Array<keyof typeof Template>;
     if (CollectionUtil.isNotEmpty(propertyNames)) {
       for (const propertyName of propertyNames) {
-        // @ts-ignore
         const propertyValue = Template[propertyName];
         if (propertyValue && (typeof propertyValue === 'string' || propertyValue instanceof String)) {
           if (/^\%.*\%$/.test(propertyValue as string)) {

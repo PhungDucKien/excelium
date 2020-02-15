@@ -46,19 +46,19 @@ export default class TestController extends BaseController {
    * Project instance
    */
   @inject(BeanFactory.projectProvider)
-  private projectProvider: () => Promise<Project>;
+  protected projectProvider: () => Promise<Project>;
 
   /**
    * Test reader factory
    */
   @inject(BeanFactory.testReaderFactoryProvider)
-  private testReaderFactoryProvider: () => Promise<GenericTestReaderFactory>;
+  protected testReaderFactoryProvider: () => Promise<GenericTestReaderFactory>;
 
   /**
    * Test writer factory
    */
   @inject(BeanFactory.testWriterFactoryProvider)
-  private testWriterFactoryProvider: () => Promise<GenericTestWriterFactory>;
+  protected testWriterFactoryProvider: () => Promise<GenericTestWriterFactory>;
 
   /**
    * Executes tests.

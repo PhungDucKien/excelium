@@ -18,9 +18,17 @@
 import EventEmitter from 'events';
 
 export function mergeEventEmitter(target: any, emitter: EventEmitter) {
-  const whiteList = ['addListener', 'removeListener', 'listenerCount', 'on', 'off', 'once', 'prependListener', 'prependOnceListener'];
+  const whiteList: Array<keyof EventEmitter> = [
+    'addListener',
+    'removeListener',
+    'listenerCount',
+    'on',
+    'off',
+    'once',
+    'prependListener',
+    'prependOnceListener',
+  ];
   whiteList.forEach(emitterProperty => {
-    // @ts-ignore
     const emitterFn = emitter[emitterProperty];
     target[emitterProperty] = emitterFn ? emitterFn.bind(emitter) : undefined;
   });

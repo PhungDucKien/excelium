@@ -53,6 +53,13 @@ export default class PlatformDetector {
   }
 
   /**
+   * Resets detected platform
+   */
+  public static resetPlatform() {
+    PlatformDetector.detectedPlatform = undefined;
+  }
+
+  /**
    * Gets OS name
    *
    * @return OS name
@@ -73,5 +80,5 @@ export default class PlatformDetector {
   /**
    * Detected platform. For later uses
    */
-  private static detectedPlatform: Platform;
+  private static detectedPlatform?: Platform;
 }

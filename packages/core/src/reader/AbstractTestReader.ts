@@ -98,6 +98,63 @@ export default abstract class AbstractTestReader<W, S> extends AbstractWorkbookR
   }
 
   /**
+   * Returns consecutive sub-lists of column cell values, each of the same size
+   * (the final list may be smaller).
+   * The returned sub-lists have the same key as the source column cell values.
+   *
+   * @param columnCellValues Map of column cell values. The key of the return map is column location.
+   * @param dataHeight       the desired size of each sublist (the last may be smaller)
+   * @return a list of consecutive sublists
+   */
+  public partitionColumnCellValues(columnCellValues: Map<string, any[]>, dataHeight: number): Array<Map<string, any[]>> {
+    const partitioned = new Array<Map<string, any[]>>();
+    columnCellValues.forEach((columnValues, column) => {
+      const partitionColumnValues = _.chunk(columnValues, dataHeight);
+      let i = 0;
+      for (const partitionColumnValue of partitionColumnValues) {
+        let map;
+        if (i < partitioned.length) {
+          map = partitioned[i];
+        } else {
+          map = new Map<string, any[]>();
+          partitioned.push(map);
+        }
+        map.set(column, partitionColumnValue);
+        i++;
+      }
+    });
+    return partitioned;
+  }
+
+  /**
+   * Returns list of map of markups and their values from partitioned column cell values
+   * and the markup data locations.
+   * The markup data locations is a map that maps a markup with its location in the data window.
+   *
+   * @param columnCellValues the partitioned list of map of column values
+   * @param dataLocations    the map of data locations
+   * @return the list of item data
+   */
+  public getItemListByColumnCellValues(
+    columnCellValues: Array<Map<string, any[]>>,
+    dataLocations: Map<string, DataLocation>
+  ): Array<Map<string, any>> {
+    const itemDataList = new Array<Map<string, any>>();
+    for (const columnValues of columnCellValues) {
+      const itemData = new Map<string, any>();
+      dataLocations.forEach((location, key) => {
+        const columnValue = columnValues.get(location.column);
+        if (columnValue && CollectionUtil.isNotEmpty(columnValue) && columnValue.length > location.row) {
+          const object = columnValue[location.row];
+          itemData.set(key, object);
+        }
+      });
+      itemDataList.push(itemData);
+    }
+    return itemDataList;
+  }
+
+  /**
    * Parses test file.
    *
    * @param test       Test object
@@ -891,63 +948,6 @@ export default abstract class AbstractTestReader<W, S> extends AbstractWorkbookR
 
     const partitionedColumnCellValues = this.partitionColumnCellValues(await this.batchGetColumnCellValues(ranges, workbook), height);
     return this.getItemListByColumnCellValues(partitionedColumnCellValues, dataLocations);
-  }
-
-  /**
-   * Returns consecutive sub-lists of column cell values, each of the same size
-   * (the final list may be smaller).
-   * The returned sub-lists have the same key as the source column cell values.
-   *
-   * @param columnCellValues Map of column cell values. The key of the return map is column location.
-   * @param dataHeight       the desired size of each sublist (the last may be smaller)
-   * @return a list of consecutive sublists
-   */
-  private partitionColumnCellValues(columnCellValues: Map<string, any[]>, dataHeight: number): Array<Map<string, any[]>> {
-    const partitioned = new Array<Map<string, any[]>>();
-    columnCellValues.forEach((columnValues, column) => {
-      const partitionColumnValues = _.chunk(columnValues, dataHeight);
-      let i = 0;
-      for (const partitionColumnValue of partitionColumnValues) {
-        let map;
-        if (i < partitioned.length) {
-          map = partitioned[i];
-        } else {
-          map = new Map<string, any[]>();
-          partitioned.push(map);
-        }
-        map.set(column, partitionColumnValue);
-        i++;
-      }
-    });
-    return partitioned;
-  }
-
-  /**
-   * Returns list of map of markups and their values from partitioned column cell values
-   * and the markup data locations.
-   * The markup data locations is a map that maps a markup with its location in the data window.
-   *
-   * @param columnCellValues the partitioned list of map of column values
-   * @param dataLocations    the map of data locations
-   * @return the list of item data
-   */
-  private getItemListByColumnCellValues(
-    columnCellValues: Array<Map<string, any[]>>,
-    dataLocations: Map<string, DataLocation>
-  ): Array<Map<string, any>> {
-    const itemDataList = new Array<Map<string, any>>();
-    for (const columnValues of columnCellValues) {
-      const itemData = new Map<string, any>();
-      dataLocations.forEach((location, key) => {
-        const columnValue = columnValues.get(location.column);
-        if (columnValue && CollectionUtil.isNotEmpty(columnValue) && columnValue.length > location.row) {
-          const object = columnValue[location.row];
-          itemData.set(key, object);
-        }
-      });
-      itemDataList.push(itemData);
-    }
-    return itemDataList;
   }
 
   /**

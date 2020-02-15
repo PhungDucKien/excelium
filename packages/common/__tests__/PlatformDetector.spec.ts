@@ -31,49 +31,41 @@ describe('test PlatformDetector', () => {
     jest.spyOn(PlatformDetector, 'getOsName').mockImplementationOnce(() => 'win32');
     jest.spyOn(PlatformDetector, 'getOsArch').mockImplementationOnce(() => 'x32');
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
 
     expect(PlatformDetector.getPlatform()).toBe(Platform.WINDOWS_32);
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
   });
 
   test('get platform win64', () => {
     jest.spyOn(PlatformDetector, 'getOsName').mockImplementationOnce(() => 'win32');
     jest.spyOn(PlatformDetector, 'getOsArch').mockImplementationOnce(() => 'x64');
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
 
     expect(PlatformDetector.getPlatform()).toBe(Platform.WINDOWS_64);
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
   });
 
   test('get platform mac', () => {
     jest.spyOn(PlatformDetector, 'getOsName').mockImplementationOnce(() => 'darwin');
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
 
     expect(PlatformDetector.getPlatform()).toBe(Platform.MAC_OS);
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
   });
 
   test('get platform linux', () => {
     jest.spyOn(PlatformDetector, 'getOsName').mockImplementationOnce(() => 'linux');
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
 
     expect(PlatformDetector.getPlatform()).toBe(Platform.LINUX);
 
-    // @ts-ignore
-    PlatformDetector.detectedPlatform = null;
+    PlatformDetector.resetPlatform();
   });
 });

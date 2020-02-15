@@ -39,28 +39,26 @@ describe('test TestController', () => {
   test('execute all one time', async () => {
     jest.mock('is-ci', () => true);
 
-    // @ts-ignore
-    jest.spyOn(process, 'exit').mockImplementationOnce(() => null);
+    (jest.spyOn(process, 'exit') as any).mockImplementationOnce(() => null);
 
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('ALL');
@@ -69,34 +67,33 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ all: true });
 
     expect(times).toBe(1);
   });
 
   test('execute workbook one time', async () => {
-    // @ts-ignore
-    jest.spyOn(process, 'exit').mockImplementationOnce(() => null);
+    (jest.spyOn(process, 'exit') as any).mockImplementationOnce(() => null);
 
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('workbook-id');
@@ -105,34 +102,33 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ workbook: 'workbook-id' });
 
     expect(times).toBe(1);
   });
 
   test('execute sheet one time', async () => {
-    // @ts-ignore
-    jest.spyOn(process, 'exit').mockImplementationOnce(() => null);
+    (jest.spyOn(process, 'exit') as any).mockImplementationOnce(() => null);
 
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('workbook-id');
@@ -142,34 +138,33 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ workbook: 'workbook-id', sheet: 'sheet-name' });
 
     expect(times).toBe(1);
   });
 
   test('execute test case one time', async () => {
-    // @ts-ignore
-    jest.spyOn(process, 'exit').mockImplementationOnce(() => null);
+    (jest.spyOn(process, 'exit') as any).mockImplementationOnce(() => null);
 
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('workbook-id');
@@ -180,35 +175,34 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({ workbook: 'workbook-id', sheet: 'sheet-name', testCase: 'case-no' });
 
     expect(times).toBe(1);
   });
 
   test('execute one time', async () => {
-    // @ts-ignore
-    jest.spyOn(process, 'exit').mockImplementationOnce(() => null);
+    (jest.spyOn(process, 'exit') as any).mockImplementationOnce(() => null);
 
     let times = 0;
-    const testController = new TestController();
 
-    // @ts-ignore
-    testController.projectProvider = () => {
-      const project = new Project();
-      project.tests = new Map([['Workbook1', new TestFile()]]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testController.testReaderFactoryProvider = async () => {
-      return Promise.resolve(new ExcelReaderFactory());
-    };
-    // @ts-ignore
-    testController.testWriterFactoryProvider = async () => {
-      return Promise.resolve(new ExcelWriterFactory());
-    };
+    class MyTestController extends TestController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.tests = new Map([['Workbook1', new TestFile()]]);
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected testReaderFactoryProvider = async () => {
+        return Promise.resolve(new ExcelReaderFactory());
+      };
+
+      protected testWriterFactoryProvider = async () => {
+        return Promise.resolve(new ExcelWriterFactory());
+      };
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'FILTER' });
       })
@@ -216,8 +210,7 @@ describe('test TestController', () => {
         return Promise.resolve({ prompt: 'Workbook1' });
       });
 
-    // @ts-ignore
-    TestExecutor.mockImplementationOnce(() => {
+    (TestExecutor as any).mockImplementationOnce(() => {
       return {
         execute: (testFilter: TestFilter) => {
           expect(testFilter.workbook).toBe('Workbook1');
@@ -226,6 +219,7 @@ describe('test TestController', () => {
       };
     });
 
+    const testController = new MyTestController();
     await testController.execute({});
 
     expect(times).toBe(1);

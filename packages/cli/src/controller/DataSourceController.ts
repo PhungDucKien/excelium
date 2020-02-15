@@ -36,7 +36,7 @@ export default class DataSourceController extends BaseController {
    * Project instance
    */
   @inject(BeanFactory.projectProvider)
-  private projectProvider: () => Promise<Project>;
+  protected projectProvider: () => Promise<Project>;
 
   /**
    * Adds data source.

@@ -29,29 +29,23 @@ export function composePreprocessors(...args: any[]) {
   if (params.length === 0) {
     return func;
   } else if (params.length === 1) {
-    return function preprocess(target: any) {
-      // @ts-ignore
-      const _self = this;
-      return func.call(_self, runPreprocessor(params[0], target, _self.variables));
+    return function preprocess(this: any, target: any) {
+      return func.call(this, runPreprocessor(params[0], target, this.variables));
     };
   } else if (params.length === 2) {
-    return function preprocess(target: any, value: any) {
-      // @ts-ignore
-      const _self = this;
-      return func.call(_self, runPreprocessor(params[0], target, _self.variables), runPreprocessor(params[1], value, _self.variables));
+    return function preprocess(this: any, target: any, value: any) {
+      return func.call(this, runPreprocessor(params[0], target, this.variables), runPreprocessor(params[1], value, this.variables));
     };
   } else {
-    return function preprocess(target: any, value: any, options: any) {
-      // @ts-ignore
-      const _self = this;
+    return function preprocess(this: any, target: any, value: any, options: any) {
       if (!options) {
-        return func.call(_self, runPreprocessor(params[0], target, _self.variables), runPreprocessor(params[1], value, _self.variables));
+        return func.call(this, runPreprocessor(params[0], target, this.variables), runPreprocessor(params[1], value, this.variables));
       }
       return func.call(
-        _self,
-        runPreprocessor(params[0], target, _self.variables),
-        runPreprocessor(params[1], value, _self.variables),
-        preprocessObject(params[2], options, _self.variables)
+        this,
+        runPreprocessor(params[0], target, this.variables),
+        runPreprocessor(params[1], value, this.variables),
+        preprocessObject(params[2], options, this.variables)
       );
     };
   }

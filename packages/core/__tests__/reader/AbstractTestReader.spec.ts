@@ -81,7 +81,6 @@ describe('test AbstractTestReader', () => {
     columnValuesMap.set('C', column2);
     columnValuesMap.set('E', column3);
 
-    // @ts-ignore
     const tableValues = testReader.partitionColumnCellValues(columnValuesMap, 2);
     expect(tableValues.length).toBe(3);
 
@@ -162,7 +161,6 @@ describe('test AbstractTestReader', () => {
     dataLocations.set('PHONE1', new DataLocation('E', 0));
     dataLocations.set('PHONE2', new DataLocation('E', 1));
 
-    // @ts-ignore
     const tableValues = testReader.getItemListByColumnCellValues(columnCellValues, dataLocations);
     expect(tableValues.length).toBe(3);
 

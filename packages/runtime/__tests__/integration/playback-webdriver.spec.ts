@@ -125,12 +125,12 @@ describe('Playback using webdriver', () => {
     await (await playback.play(test))();
     expect(executor.hooks.onBeforeCommand).toHaveBeenCalledTimes(3);
     expect(executor.hooks.onAfterCommand).toHaveBeenCalledTimes(3);
-    expect(executor.hooks.onBeforeCommand.mock.calls[0]).toEqual([
+    expect((executor.hooks.onBeforeCommand as any).mock.calls[0]).toEqual([
       {
         command: test.commands[0],
       },
     ]);
-    expect(executor.hooks.onAfterCommand.mock.calls[0]).toEqual([
+    expect((executor.hooks.onAfterCommand as any).mock.calls[0]).toEqual([
       {
         command: test.commands[0],
       },
@@ -165,7 +165,7 @@ describe('Playback using webdriver', () => {
     };
     await (await playback.play(test))();
     expect(executor.hooks.onWindowAppeared).toHaveBeenCalledTimes(1);
-    expect(executor.hooks.onWindowAppeared.mock.calls[0]).toMatchObject([
+    expect((executor.hooks.onWindowAppeared as any).mock.calls[0]).toMatchObject([
       {
         command: test.commands[1],
         windowHandleName: test.commands[1].windowHandleName,

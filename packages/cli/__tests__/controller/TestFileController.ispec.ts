@@ -36,34 +36,32 @@ describe('test TestFileController', () => {
   test('add', async () => {
     let updated = false;
 
-    const testFileController = new TestFileController();
-    // @ts-ignore
-    testFileController.projectProvider = () => {
-      const project = new Project();
-      project.workbookType = WorkbookType.SHEETS;
-      project.templates = new Map([
-        ['Template1', new Template()],
-        ['Template2', new Template()],
-        ['Template3', new Template()],
-      ]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    testFileController.testReaderFactoryProvider = async () => {
-      const connection = new GoogleConnectionService();
-      const sheetsServiceProvider = new SheetsServiceProvider(connection);
-      const sheetsService = await sheetsServiceProvider.createSheetsService();
-      return Promise.resolve(new SheetsReaderFactory(sheetsService));
-    };
+    class MyTestFileController extends TestFileController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.workbookType = WorkbookType.SHEETS;
+        project.templates = new Map([
+          ['Template1', new Template()],
+          ['Template2', new Template()],
+          ['Template3', new Template()],
+        ]);
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    testFileController.updateProjectFile = project => {
-      expect(project.tests.size).toBe(1);
-      updated = true;
-    };
+      protected testReaderFactoryProvider = async () => {
+        const connection = new GoogleConnectionService();
+        const sheetsServiceProvider = new SheetsServiceProvider(connection);
+        const sheetsService = await sheetsServiceProvider.createSheetsService();
+        return Promise.resolve(new SheetsReaderFactory(sheetsService));
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected async updateProjectFile(project: Project): Promise<void> {
+        expect(project.tests.size).toBe(1);
+        updated = true;
+      }
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'https://docs.google.com/spreadsheets/u/2/d/10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY/edit#gid=0' });
       })
@@ -71,6 +69,7 @@ describe('test TestFileController', () => {
         return Promise.resolve({ prompt: 'Template1' });
       });
 
+    const testFileController = new MyTestFileController();
     await testFileController.add();
 
     expect(updated).toBeTruthy();
@@ -79,30 +78,28 @@ describe('test TestFileController', () => {
   test('remove', async () => {
     let updated = false;
 
-    const testFileController = new TestFileController();
-    // @ts-ignore
-    testFileController.projectProvider = () => {
-      const project = new Project();
-      project.tests = new Map([
-        ['File1', new TestFile()],
-        ['File2', new TestFile()],
-        ['File3', new TestFile()],
-      ]);
-      return Promise.resolve(project);
-    };
+    class MyTestFileController extends TestFileController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.tests = new Map([
+          ['File1', new TestFile()],
+          ['File2', new TestFile()],
+          ['File3', new TestFile()],
+        ]);
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    testFileController.updateProjectFile = project => {
-      expect(project.tests.size).toBe(2);
-      updated = true;
-    };
+      protected async updateProjectFile(project: Project): Promise<void> {
+        expect(project.tests.size).toBe(2);
+        updated = true;
+      }
+    }
 
-    inquirer.prompt
-      // @ts-ignore
-      .mockImplementationOnce(() => {
-        return Promise.resolve({ prompt: 'File2' });
-      });
+    (inquirer.prompt as any).mockImplementationOnce(() => {
+      return Promise.resolve({ prompt: 'File2' });
+    });
 
+    const testFileController = new MyTestFileController();
     await testFileController.remove();
 
     expect(updated).toBeTruthy();

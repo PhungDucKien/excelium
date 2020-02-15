@@ -133,7 +133,6 @@ export default class WebDriverExecutor {
 
     const upperCase = command.charAt(0).toUpperCase() + command.slice(1);
     const func = 'do' + upperCase;
-    // @ts-ignore
     if (!this[func]) {
       throw new Error(`Unknown command ${command}`);
     }
@@ -176,7 +175,6 @@ export default class WebDriverExecutor {
   }
 
   public registerCommand(commandName: string, fn: (target?: string, value?: string) => void) {
-    // @ts-ignore
     this['do' + commandName.charAt(0).toUpperCase() + commandName.slice(1)] = fn;
   }
 
@@ -1192,9 +1190,8 @@ function parseLocator(locator: string) {
     return By.xpath(locator);
   }
   const fragments = locator.split('=');
-  const type = fragments.shift();
+  const type = fragments.shift()!;
   const selector = fragments.join('=');
-  // @ts-ignore
   const locatorFn = LOCATORS[type];
   if (locatorFn && selector) {
     return locatorFn(selector);
@@ -1207,7 +1204,6 @@ function parseOptionLocator(locator: string) {
   const fragments = locator.split('=');
   const type = fragments.shift()!;
   const selector = fragments.join('=');
-  // @ts-ignore
   const locatorFn = OPTIONS_LOCATORS[type];
   if (locatorFn && selector) {
     return locatorFn(selector);
@@ -1247,8 +1243,7 @@ function preprocessKeys(_str: string, variables?: Variables) {
       if (currentKey) {
         if (/^\$\{KEY_\w+\}/.test(currentKey)) {
           // is a key
-          const keyName = currentKey.match(/\$\{KEY_(\w+)\}/)![1];
-          // @ts-ignore
+          const keyName = currentKey.match(/\$\{KEY_(\w+)\}/)![1] as keyof typeof Key;
           const key = Key[keyName];
           if (key) {
             keys.push(key);
@@ -1270,7 +1265,11 @@ function preprocessKeys(_str: string, variables?: Variables) {
   return keys;
 }
 
-const LOCATORS = {
+interface Locators {
+  [key: string]: (value: string) => webdriver.By;
+}
+
+const LOCATORS: Locators = {
   id: By.id,
   name: By.name,
   link: By.linkText,
@@ -1280,7 +1279,7 @@ const LOCATORS = {
   xpath: By.xpath,
 };
 
-const OPTIONS_LOCATORS = {
+const OPTIONS_LOCATORS: Locators = {
   id: (id: string) => By.css(`*[id="${id}"]`),
   value: (value: string) => By.css(`*[value="${value}"]`),
   label: (label: string) => By.xpath(`//option[. = '${label}']`),

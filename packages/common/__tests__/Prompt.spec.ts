@@ -32,8 +32,7 @@ jest.mock('inquirer');
  */
 describe('test Prompt', () => {
   test('prompt input', async () => {
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(questions => {
+    (inquirer.prompt as any).mockImplementationOnce((questions: any) => {
       expect(questions.type).toBe('input');
       expect(questions.message).toBe('Question');
       return Promise.resolve({ prompt: 'result' });
@@ -44,8 +43,7 @@ describe('test Prompt', () => {
   });
 
   test('prompt string array', async () => {
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(questions => {
+    (inquirer.prompt as any).mockImplementationOnce((questions: any) => {
       expect(questions.type).toBe('list');
       expect(questions.message).toBe('Question');
       expect(questions.choices.length).toBe(1);
@@ -59,8 +57,7 @@ describe('test Prompt', () => {
   });
 
   test('prompt list', async () => {
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(questions => {
+    (inquirer.prompt as any).mockImplementationOnce((questions: any) => {
       expect(questions.type).toBe('list');
       expect(questions.message).toBe('Question');
       expect(questions.choices.length).toBe(1);
@@ -74,8 +71,7 @@ describe('test Prompt', () => {
   });
 
   test('prompt confirm', async () => {
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(questions => {
+    (inquirer.prompt as any).mockImplementationOnce((questions: any) => {
       expect(questions.type).toBe('confirm');
       expect(questions.message).toBe('Question');
       return Promise.resolve({ prompt: true });
@@ -86,8 +82,7 @@ describe('test Prompt', () => {
   });
 
   test('prompt file location excel', async () => {
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(questions => {
+    (inquirer.prompt as any).mockImplementationOnce((questions: any) => {
       expect(questions.type).toBe('list');
       expect(questions.message).toBe('Question');
       expect(questions.choices.length).toBe(1);
@@ -107,8 +102,7 @@ describe('test Prompt', () => {
   });
 
   test('prompt file location sheets', async () => {
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(questions => {
+    (inquirer.prompt as any).mockImplementationOnce((questions: any) => {
       expect(questions.type).toBe('input');
       expect(questions.message).toBe('Question');
       return Promise.resolve({ prompt: 'result' });

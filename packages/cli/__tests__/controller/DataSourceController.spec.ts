@@ -122,29 +122,29 @@ describe('test DataSourceController', () => {
   test('remove non default', async () => {
     let updated = false;
 
-    const dataSourceController = new DataSourceController();
-    // @ts-ignore
-    dataSourceController.projectProvider = () => {
-      const project = new Project();
-      project.defaultDataSource = 'ds3';
-      project.dataSources = new Map([
-        ['ds1', new DataSource()],
-        ['ds2', new DataSource()],
-        ['ds3', new DataSource()],
-      ]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    dataSourceController.updateProjectFile = project => {
-      expect(project.dataSources.size).toBe(2);
-      updated = true;
-    };
+    class MyDataSourceController extends DataSourceController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.defaultDataSource = 'ds3';
+        project.dataSources = new Map([
+          ['ds1', new DataSource()],
+          ['ds2', new DataSource()],
+          ['ds3', new DataSource()],
+        ]);
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(() => {
+      protected async updateProjectFile(project: Project): Promise<void> {
+        expect(project.dataSources.size).toBe(2);
+        updated = true;
+      }
+    }
+
+    (inquirer.prompt as any).mockImplementationOnce(() => {
       return Promise.resolve({ prompt: 'ds2' });
     });
 
+    const dataSourceController = new MyDataSourceController();
     await dataSourceController.remove();
 
     expect(updated).toBeTruthy();
@@ -153,27 +153,26 @@ describe('test DataSourceController', () => {
   test('remove default', async () => {
     let updated = false;
 
-    const dataSourceController = new DataSourceController();
-    // @ts-ignore
-    dataSourceController.projectProvider = () => {
-      const project = new Project();
-      project.defaultDataSource = 'ds2';
-      project.dataSources = new Map([
-        ['ds1', new DataSource()],
-        ['ds2', new DataSource()],
-        ['ds3', new DataSource()],
-      ]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    dataSourceController.updateProjectFile = project => {
-      expect(project.dataSources.size).toBe(2);
-      expect(project.defaultDataSource).toBe('ds3');
-      updated = true;
-    };
+    class MyDataSourceController extends DataSourceController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.defaultDataSource = 'ds2';
+        project.dataSources = new Map([
+          ['ds1', new DataSource()],
+          ['ds2', new DataSource()],
+          ['ds3', new DataSource()],
+        ]);
+        return Promise.resolve(project);
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected async updateProjectFile(project: Project): Promise<void> {
+        expect(project.dataSources.size).toBe(2);
+        expect(project.defaultDataSource).toBe('ds3');
+        updated = true;
+      }
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'ds2' });
       })
@@ -181,6 +180,7 @@ describe('test DataSourceController', () => {
         return Promise.resolve({ prompt: 'ds3' });
       });
 
+    const dataSourceController = new MyDataSourceController();
     await dataSourceController.remove();
 
     expect(updated).toBeTruthy();
@@ -189,29 +189,29 @@ describe('test DataSourceController', () => {
   test('remove default 2', async () => {
     let updated = false;
 
-    const dataSourceController = new DataSourceController();
-    // @ts-ignore
-    dataSourceController.projectProvider = () => {
-      const project = new Project();
-      project.defaultDataSource = 'ds2';
-      project.dataSources = new Map([
-        ['ds1', new DataSource()],
-        ['ds2', new DataSource()],
-      ]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    dataSourceController.updateProjectFile = project => {
-      expect(project.dataSources.size).toBe(1);
-      expect(project.defaultDataSource).toBe('ds1');
-      updated = true;
-    };
+    class MyDataSourceController extends DataSourceController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.defaultDataSource = 'ds2';
+        project.dataSources = new Map([
+          ['ds1', new DataSource()],
+          ['ds2', new DataSource()],
+        ]);
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(() => {
+      protected async updateProjectFile(project: Project): Promise<void> {
+        expect(project.dataSources.size).toBe(1);
+        expect(project.defaultDataSource).toBe('ds1');
+        updated = true;
+      }
+    }
+
+    (inquirer.prompt as any).mockImplementationOnce(() => {
       return Promise.resolve({ prompt: 'ds2' });
     });
 
+    const dataSourceController = new MyDataSourceController();
     await dataSourceController.remove();
 
     expect(updated).toBeTruthy();
@@ -220,26 +220,26 @@ describe('test DataSourceController', () => {
   test('remove last', async () => {
     let updated = false;
 
-    const dataSourceController = new DataSourceController();
-    // @ts-ignore
-    dataSourceController.projectProvider = () => {
-      const project = new Project();
-      project.defaultDataSource = 'ds2';
-      project.dataSources = new Map([['ds2', new DataSource()]]);
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    dataSourceController.updateProjectFile = project => {
-      expect(project.dataSources.size).toBe(0);
-      expect(project.defaultDataSource).toBe(null);
-      updated = true;
-    };
+    class MyDataSourceController extends DataSourceController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.defaultDataSource = 'ds2';
+        project.dataSources = new Map([['ds2', new DataSource()]]);
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    inquirer.prompt.mockImplementationOnce(() => {
+      protected async updateProjectFile(project: Project): Promise<void> {
+        expect(project.dataSources.size).toBe(0);
+        expect(project.defaultDataSource).toBe(null);
+        updated = true;
+      }
+    }
+
+    (inquirer.prompt as any).mockImplementationOnce(() => {
       return Promise.resolve({ prompt: 'ds2' });
     });
 
+    const dataSourceController = new MyDataSourceController();
     await dataSourceController.remove();
 
     expect(updated).toBeTruthy();

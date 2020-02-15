@@ -36,28 +36,26 @@ describe('test TemplateController', () => {
   test('import template simple', async () => {
     let updated = false;
 
-    const templateController = new TemplateController();
-    // @ts-ignore
-    templateController.projectProvider = () => {
-      const project = new Project();
-      project.workbookType = WorkbookType.SHEETS;
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    templateController.testReaderFactoryProvider = async () => {
-      const connection = new GoogleConnectionService();
-      const sheetsServiceProvider = new SheetsServiceProvider(connection);
-      const sheetsService = await sheetsServiceProvider.createSheetsService();
-      return Promise.resolve(new SheetsReaderFactory(sheetsService));
-    };
+    class MyTemplateController extends TemplateController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.workbookType = WorkbookType.SHEETS;
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    templateController.updateProjectFile = project => {
-      updated = true;
-    };
+      protected testReaderFactoryProvider = async () => {
+        const connection = new GoogleConnectionService();
+        const sheetsServiceProvider = new SheetsServiceProvider(connection);
+        const sheetsService = await sheetsServiceProvider.createSheetsService();
+        return Promise.resolve(new SheetsReaderFactory(sheetsService));
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected async updateProjectFile(): Promise<void> {
+        updated = true;
+      }
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'https://docs.google.com/spreadsheets/u/2/d/10jtBkmwYw4fTBAU1iSj4QkjCfBRNNuTPqW5mA1qgYqY/edit#gid=0' });
       })
@@ -68,6 +66,7 @@ describe('test TemplateController', () => {
         return Promise.resolve({ prompt: false });
       });
 
+    const templateController = new MyTemplateController();
     await templateController.importTemplate();
 
     expect(updated).toBeTruthy();
@@ -76,28 +75,26 @@ describe('test TemplateController', () => {
   test('import template complex', async () => {
     let updated = false;
 
-    const templateController = new TemplateController();
-    // @ts-ignore
-    templateController.projectProvider = () => {
-      const project = new Project();
-      project.workbookType = WorkbookType.SHEETS;
-      return Promise.resolve(project);
-    };
-    // @ts-ignore
-    templateController.testReaderFactoryProvider = async () => {
-      const connection = new GoogleConnectionService();
-      const sheetsServiceProvider = new SheetsServiceProvider(connection);
-      const sheetsService = await sheetsServiceProvider.createSheetsService();
-      return Promise.resolve(new SheetsReaderFactory(sheetsService));
-    };
+    class MyTemplateController extends TemplateController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.workbookType = WorkbookType.SHEETS;
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    templateController.updateProjectFile = project => {
-      updated = true;
-    };
+      protected testReaderFactoryProvider = async () => {
+        const connection = new GoogleConnectionService();
+        const sheetsServiceProvider = new SheetsServiceProvider(connection);
+        const sheetsService = await sheetsServiceProvider.createSheetsService();
+        return Promise.resolve(new SheetsReaderFactory(sheetsService));
+      };
 
-    inquirer.prompt
-      // @ts-ignore
+      protected async updateProjectFile(): Promise<void> {
+        updated = true;
+      }
+    }
+
+    (inquirer.prompt as any)
       .mockImplementationOnce(() => {
         return Promise.resolve({ prompt: 'https://docs.google.com/spreadsheets/d/1iQNDv7fLjWhXZr4Jgs3oKvy5AlK4wib4RJEi79n9s50/edit#gid=0' });
       })
@@ -123,6 +120,7 @@ describe('test TemplateController', () => {
         return Promise.resolve({ prompt: false });
       });
 
+    const templateController = new MyTemplateController();
     await templateController.importTemplate();
 
     expect(updated).toBeTruthy();
@@ -131,30 +129,28 @@ describe('test TemplateController', () => {
   test('import remove', async () => {
     let updated = false;
 
-    const templateController = new TemplateController();
-    // @ts-ignore
-    templateController.projectProvider = () => {
-      const project = new Project();
-      project.templates = new Map([
-        ['Template1', new Template()],
-        ['Template2', new Template()],
-        ['Template3', new Template()],
-      ]);
-      return Promise.resolve(project);
-    };
+    class MyTemplateController extends TemplateController {
+      protected projectProvider = () => {
+        const project = new Project();
+        project.templates = new Map([
+          ['Template1', new Template()],
+          ['Template2', new Template()],
+          ['Template3', new Template()],
+        ]);
+        return Promise.resolve(project);
+      };
 
-    // @ts-ignore
-    templateController.updateProjectFile = project => {
-      expect(project.templates.size).toBe(2);
-      updated = true;
-    };
+      protected async updateProjectFile(project: Project): Promise<void> {
+        expect(project.templates.size).toBe(2);
+        updated = true;
+      }
+    }
 
-    inquirer.prompt
-      // @ts-ignore
-      .mockImplementationOnce(() => {
-        return Promise.resolve({ prompt: 'Template2' });
-      });
+    (inquirer.prompt as any).mockImplementationOnce(() => {
+      return Promise.resolve({ prompt: 'Template2' });
+    });
 
+    const templateController = new MyTemplateController();
     await templateController.remove();
 
     expect(updated).toBeTruthy();
