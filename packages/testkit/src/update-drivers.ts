@@ -18,12 +18,15 @@
 import { Chrome } from '@excelium/browser-info';
 import { downloadDriver } from '@excelium/get-driver';
 import * as fs from 'fs-extra';
+import MultiProgress from 'multi-progress';
 import os from 'os';
 import { CACHE_PATH } from './cache';
 
 export async function updateDrivers() {
   const downloadDirectory = CACHE_PATH;
   await fs.mkdirp(downloadDirectory);
+
+  const multiProgress = new MultiProgress(process.stderr);
 
   console.log('updating chromedriver...');
   const chromeInfo = (await Chrome.getBrowserInfo(Chrome.ChromeChannel.stable)) as Chrome.BrowserInfo;
@@ -34,6 +37,7 @@ export async function updateDrivers() {
     arch: os.arch(),
     version: chromeInfo.version,
     artifactName: 'chromedriver',
+    multiProgress,
   });
 
   console.log('updating geckodriver...');
@@ -44,5 +48,6 @@ export async function updateDrivers() {
     arch: os.arch(),
     version: '70.0', // hard coded until browser-info will support firefox
     artifactName: 'geckodriver',
+    multiProgress,
   });
 }

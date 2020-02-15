@@ -21,13 +21,16 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
+    "@excelium/common": "^1.0.0",
     "fs-extra": "^8.1.0",
+    "multi-progress": "^2.0.0",
     "node-fetch": "^2.6.0",
     "tar": "^5.0.5",
     "unzipper": "^0.10.5"
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.1",
+    "@types/multi-progress": "^2.0.3",
     "@types/node-fetch": "^2.5.2",
     "@types/tar": "^4.0.3",
     "@types/unzipper": "^0.10.0",

@@ -15,12 +15,16 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import { StringUtil } from '@excelium/common';
 import * as fs from 'fs-extra';
+import moment from 'moment';
+import MultiProgress from 'multi-progress';
 import fetch from 'node-fetch';
 import * as path from 'path';
 import * as stream from 'stream';
 import tar from 'tar';
 import * as unzipper from 'unzipper';
+import URL from 'url';
 import { Browser, Platform, resolveDriverName, resolveDriverUrl } from './resolve-driver';
 
 export default async function downloadDriver({
@@ -30,6 +34,7 @@ export default async function downloadDriver({
   arch,
   version,
   artifactName,
+  multiProgress,
 }: {
   downloadDirectory: string;
   browser: Browser;
@@ -37,6 +42,7 @@ export default async function downloadDriver({
   arch: string;
   version: string;
   artifactName?: string;
+  multiProgress?: MultiProgress;
 }) {
   let end: () => Promise<undefined>;
   const p = new Promise(resolve => {
@@ -47,6 +53,46 @@ export default async function downloadDriver({
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error('Failed to download driver');
+  }
+
+  if (multiProgress) {
+    const contentLen = res.headers.get('content-length');
+    if (contentLen) {
+      const total = parseInt(contentLen, 10);
+      const fileName = path.basename(URL.parse(url).pathname!);
+
+      const bar = multiProgress.newBar(fileName + ' :percent [:bar] :currLen/:contentLen (:elapseTime / :completeTime)', {
+        complete: '=',
+        incomplete: ' ',
+        width: Math.max(10, process.stdout.columns! - fileName.length - 50),
+        total,
+      });
+
+      let start: Date;
+
+      res.body.on('data', chunk => {
+        if (bar.curr === 0) {
+          start = new Date();
+        }
+
+        if (bar.tick) {
+          const elapsed = start ? new Date().getTime() - start.getTime() : NaN;
+          const curr = bar.curr + chunk.length;
+          const eta = curr >= bar.total ? 0 : elapsed * (bar.total / curr - 1);
+
+          bar.tick(chunk.length, {
+            currLen: StringUtil.humanReadableByteCount(curr, true),
+            contentLen: StringUtil.humanReadableByteCount(bar.total, true),
+            elapseTime: isNaN(elapsed) ? '00:00:00' : moment.utc(elapsed).format('HH:mm:ss'),
+            completeTime: isNaN(eta) || !isFinite(eta) ? '-:-:-' : moment.utc(eta).format('HH:mm:ss'),
+          });
+        }
+      });
+
+      res.body.on('end', () => {
+        console.log('\n');
+      });
+    }
   }
 
   if (url.endsWith('.zip')) {
