@@ -53,7 +53,7 @@ export type Browser = 'electron' | 'chrome' | 'firefox';
 
 export type Platform = NodeJS.Platform;
 
-const DriverNames: BrowserToDriver = {
+const DriverNames: MappedBrowserNames = {
   electron: 'chromedriver',
   chrome: 'chromedriver',
   firefox: 'geckodriver',
@@ -95,4 +95,3 @@ function getGeckodriverVersion(version: string) {
 }
 
 type MappedBrowserNames = { [key in Browser]: string };
-interface BrowserToDriver extends MappedBrowserNames {}

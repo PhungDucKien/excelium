@@ -34,7 +34,6 @@ describe('Lib', () => {
     cleanUpMetadata();
 
     @group({ name: 'testGroup' })
-    // tslint:disable-next-line: no-unused-variable
     class TestGroup {
       @action({ name: 'aTestAction' })
       public testA() {

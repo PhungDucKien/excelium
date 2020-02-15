@@ -78,7 +78,7 @@ export namespace Chrome {
             getChromeInfo(CHROME_STABLE_MACOS_INSTALL_LOCATIONS),
             getChromeInfo(CHROME_BETA_MACOS_INSTALL_LOCATIONS),
             getChromeInfo(CHROME_CANARY_MACOS_INSTALL_LOCATIONS),
-          ].map(p => p.catch(() => {})) // tslint:disable-line: no-empty
+          ].map(p => p.catch(() => undefined))
         )
       ).filter(Boolean) as BrowserInfo[];
     } else if (platform === 'linux') {
@@ -97,7 +97,9 @@ export namespace Chrome {
       }
       return (
         await Promise.all(
-          [getChromeInfo(CHROME_STABLE_LINUX_INSTALL_LOCATIONS), getChromeInfo(CHROME_BETA_LINUX_INSTALL_LOCATIONS)].map(p => p.catch(() => {})) // tslint:disable-line: no-empty
+          [getChromeInfo(CHROME_STABLE_LINUX_INSTALL_LOCATIONS), getChromeInfo(CHROME_BETA_LINUX_INSTALL_LOCATIONS)].map(p =>
+            p.catch(() => undefined)
+          )
         )
       ).filter(Boolean) as BrowserInfo[];
     } else {
@@ -113,7 +115,9 @@ export namespace Chrome {
           binary,
           ...parseChromeEdition(stdout),
         };
-      } catch {} // tslint:disable-line: no-empty
+      } catch (error) {
+        // Empty
+      }
     }
     throw new Error('Unable to find Chrome installation');
   }

@@ -43,6 +43,8 @@ export function confirmCell(
   expect(cf.formatAsString()).toBe(expText);
 }
 
+// tslint:disable: no-unused-expression
+
 /**
  * Tests that the common CellLocation works as we need it to.
  */
@@ -245,7 +247,6 @@ describe('test SheetNameFormatter', () => {
 
   test('invalid reference', () => {
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ cellRef: 'Sheet1!#REF!' });
       fail("Shouldn't be able to create a #REF! refence");
     } catch (e) {
@@ -253,7 +254,6 @@ describe('test SheetNameFormatter', () => {
     }
 
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ cellRef: "'MySheetName'!#REF!" });
       fail("Shouldn't be able to create a #REF! refence");
     } catch (e) {
@@ -261,7 +261,6 @@ describe('test SheetNameFormatter', () => {
     }
 
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ cellRef: '#REF!' });
       fail("Shouldn't be able to create a #REF! refence");
     } catch (e) {
@@ -352,7 +351,6 @@ describe('test SheetNameFormatter', () => {
 
   test('unquoted sheet name', () => {
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ cellRef: "'Sheet 1!A5" });
       fail('Should throw exception here');
     } catch (e) {
@@ -362,7 +360,6 @@ describe('test SheetNameFormatter', () => {
 
   test('mismatched quotes sheet name', () => {
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ cellRef: 'Sheet 1!A5' });
       fail('Should throw exception here');
     } catch (e) {
@@ -373,10 +370,8 @@ describe('test SheetNameFormatter', () => {
   test('escaped sheet name', () => {
     const escapedName = "'Don''t Touch'!A5";
     const unescapedName = "'Don't Touch'!A5";
-    // tslint:disable-next-line: no-unused-expression
     new CellLocation({ cellRef: escapedName });
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ cellRef: unescapedName });
       fail("Sheet names containing apostrophe's must be escaped via a repeated apostrophe");
     } catch (e) {
@@ -386,7 +381,6 @@ describe('test SheetNameFormatter', () => {
 
   test('negative row', () => {
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ sheetName: 'sheet', row: -2, col: 0, absRow: false, absCol: false });
       fail('Should throw exception here');
     } catch (e) {
@@ -396,7 +390,6 @@ describe('test SheetNameFormatter', () => {
 
   test('negative column', () => {
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ sheetName: 'sheet', row: 0, col: -2, absRow: false, absCol: false });
       fail('Should throw exception here');
     } catch (e) {
@@ -491,7 +484,6 @@ describe('test SheetNameFormatter', () => {
 
   test('separate ref parts invalid', () => {
     try {
-      // tslint:disable-next-line: no-unused-expression
       new CellLocation({ cellRef: 'Sheet1!1A' });
       fail('Should throw exception here');
     } catch (e) {

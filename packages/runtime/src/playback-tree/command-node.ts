@@ -45,7 +45,7 @@ export class CommandNode {
     this.left = undefined;
     this.right = undefined;
     this.timesVisited = 0;
-    this.emitControlFlowEvent = emitControlFlowEvent ? emitControlFlowEvent : () => {}; // tslint:disable-line: no-empty
+    this.emitControlFlowEvent = emitControlFlowEvent ? emitControlFlowEvent : () => undefined;
   }
 
   public isControlFlow() {

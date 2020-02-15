@@ -261,7 +261,7 @@ export default class Playback {
 
     // play will throw but the user will catch it with this.play()
     // this.stop() should resolve once play finishes
-    await this[state].playPromise!.catch(() => {}); // tslint:disable-line: no-empty
+    await this[state].playPromise!.catch(() => undefined);
   }
 
   public async abort() {
@@ -280,7 +280,7 @@ export default class Playback {
 
     // play will throw but the user will catch it with this.play()
     // this.abort() should resolve once play finishes
-    await this[state].playPromise!.catch(() => {}); // tslint:disable-line: no-empty
+    await this[state].playPromise!.catch(() => undefined);
   }
 
   public async cleanup() {

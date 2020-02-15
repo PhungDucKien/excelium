@@ -25,7 +25,9 @@
     "radix": true,
     "no-construct": true,
     "no-console": false,
-    "no-unused-variable": true,
+    "no-unused-variable": {
+      "severity": "warning"
+    },
     "variable-name": [true, "check-format", "allow-leading-underscore", "allow-pascal-case"],
     "interface-name": [true, "never-prefix"],
     "class-name": true,

@@ -73,8 +73,7 @@ export default class NumberUtil {
     const trimmed = text ? text.trim() : text;
     if (trimmed && StringUtil.isNotBlank(trimmed)) {
       try {
-        // tslint:disable-next-line: radix
-        const number = parseInt(trimmed);
+        const number = parseInt(trimmed, undefined);
         if (Number.isNaN(number)) {
           return defaultValue;
         }

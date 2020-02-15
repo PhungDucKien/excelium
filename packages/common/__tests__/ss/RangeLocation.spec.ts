@@ -40,6 +40,8 @@ function confirmCell(cell: CellLocation, row: number, col: number, isRowAbs: boo
   expect(cell.isColAbsolute()).toBe(isColAbs);
 }
 
+// tslint:disable: no-unused-expression
+
 /**
  * Test for {@link RangeLocation} handling of max rows.
  *
@@ -161,26 +163,21 @@ describe('test RangeLocation', () => {
     expect(RangeLocation.isContiguous(refDC3D)).toBe(false);
 
     // Check we can only create contiguous entries
-    // tslint:disable-next-line: no-unused-expression
     new RangeLocation({ reference: refSimple });
-    // tslint:disable-next-line: no-unused-expression
     new RangeLocation({ reference: ref2D });
     try {
-      // tslint:disable-next-line: no-unused-expression
       new RangeLocation({ reference: refDCSimple });
       fail('expected error');
     } catch (e) {
       // expected during successful test
     }
     try {
-      // tslint:disable-next-line: no-unused-expression
       new RangeLocation({ reference: refDC2D });
       fail('expected error');
     } catch (e) {
       // expected during successful test
     }
     try {
-      // tslint:disable-next-line: no-unused-expression
       new RangeLocation({ reference: refDC3D });
       fail('expected error');
     } catch (e) {

@@ -21,8 +21,6 @@ import Playback, { CallstackChange, CommandStates, PlaybackEvents, PlaybackState
 import Variables from '../src/Variables';
 import FakeExecutor from './util/FakeExecutor';
 
-/* tslint:disable:no-empty */
-
 describe('Playback', () => {
   describe('Event emitting', () => {
     describe('Control Flow', () => {
@@ -51,7 +49,7 @@ describe('Playback', () => {
           ],
         };
         const executor = new FakeExecutor();
-        executor.doOpen = jest.fn(async () => {});
+        executor.doOpen = jest.fn(async () => undefined);
         const variables = new Variables();
         variables.set('collectionVarName', ['a', 'b', 'c']);
         const playback = new Playback({
@@ -60,7 +58,7 @@ describe('Playback', () => {
         });
         const cb = jest.fn();
         playback.on(PlaybackEvents.CONTROL_FLOW_CHANGED, cb);
-        await (await playback.play(test))().catch(() => {});
+        await (await playback.play(test))().catch(() => undefined);
         const results = flat(cb.mock.calls);
         expect(results).toMatchSnapshot();
       });
@@ -89,7 +87,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -119,7 +117,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -150,7 +148,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -186,7 +184,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -221,7 +219,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -280,7 +278,7 @@ describe('Playback', () => {
         value: '',
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -295,7 +293,7 @@ describe('Playback', () => {
         value: '',
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -613,7 +611,7 @@ describe('Playback', () => {
         executor,
       });
       const playPromise = await playback.play(test, { pauseImmediately: true });
-      playPromise().catch(() => {});
+      playPromise().catch(() => undefined);
       await psetTimeout(1);
       await playback.step();
       expect.assertions(2);
@@ -650,7 +648,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -704,7 +702,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const variables = new Variables();
       variables.set('collectionVarName', [0, 1, 2]);
       const playback = new Playback({
@@ -742,7 +740,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       executor.evaluateConditional = jest.fn(async () => false);
       const playback = new Playback({
         executor,
@@ -776,7 +774,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -812,7 +810,7 @@ describe('Playback', () => {
       };
 
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -879,7 +877,7 @@ describe('Playback', () => {
       const commandResults = [] as CommandStateChangePayload[];
       playback.on(PlaybackEvents.COMMAND_STATE_CHANGED, (r: CommandStateChangePayload) => commandResults.push(r));
       const playbackPromise = await playback.play(test);
-      playbackPromise().catch(() => {});
+      playbackPromise().catch(() => undefined);
 
       await psetTimeout(15);
       await playback.pause();
@@ -930,7 +928,7 @@ describe('Playback', () => {
       const playbackPromise = await playback.play(test);
       expect(() => playback.resume()).not.toThrow();
 
-      await playbackPromise().catch(() => {});
+      await playbackPromise().catch(() => undefined);
     });
 
     it('resume after hitting a breakpoint', async () => {
@@ -1271,12 +1269,12 @@ describe('Playback', () => {
       const commandResults = [] as CommandStateChangePayload[];
       playback.on(PlaybackEvents.COMMAND_STATE_CHANGED, (r: CommandStateChangePayload) => commandResults.push(r));
       const playbackPromise = await playback.play(test);
-      playbackPromise().catch(() => {});
+      playbackPromise().catch(() => undefined);
 
       await psetTimeout(5);
       await playback.resume();
       await psetTimeout(5);
-      executor.doOpen.mockImplementation(async () => {});
+      executor.doOpen.mockImplementation(async () => undefined);
       await playback.resume();
       await psetTimeout(100);
       await playbackPromise();
@@ -1339,16 +1337,16 @@ describe('Playback', () => {
       const commandResults = [] as CommandStateChangePayload[];
       playback.on(PlaybackEvents.COMMAND_STATE_CHANGED, (r: CommandStateChangePayload) => commandResults.push(r));
       const playbackPromise = await playback.play(test);
-      playbackPromise().catch(() => {});
+      playbackPromise().catch(() => undefined);
 
       await psetTimeout(5);
-      executor.doOpen.mockImplementation(async () => {});
+      executor.doOpen.mockImplementation(async () => undefined);
       await playback.resume();
       await psetTimeout(5);
-      executor.doVerify.mockImplementation(async () => {});
+      executor.doVerify.mockImplementation(async () => undefined);
       await playback.resume();
       await psetTimeout(5);
-      executor.doAssert.mockImplementation(async () => {});
+      executor.doAssert.mockImplementation(async () => undefined);
       await psetTimeout(5);
       await playback.resume();
       await playbackPromise();
@@ -1444,7 +1442,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
         options: {
@@ -1469,7 +1467,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
         options: {
@@ -1496,7 +1494,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
         options: {
@@ -1523,7 +1521,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
         options: {
@@ -1566,7 +1564,7 @@ describe('Playback', () => {
         ],
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -1617,7 +1615,7 @@ describe('Playback', () => {
         skip: true,
       };
       const executor = new FakeExecutor();
-      executor.doOpen = jest.fn(async () => {});
+      executor.doOpen = jest.fn(async () => undefined);
       const playback = new Playback({
         executor,
       });
@@ -1804,7 +1802,7 @@ describe('Playback', () => {
           ],
         };
         const executor = new FakeExecutor();
-        executor.doOpen = jest.fn(async () => {});
+        executor.doOpen = jest.fn(async () => undefined);
         const playback = new Playback({
           executor,
         });
@@ -1836,7 +1834,7 @@ describe('Playback', () => {
         });
         const cb = jest.fn();
         playback.on(PlaybackEvents.COMMAND_STATE_CHANGED, cb);
-        await (await playback.play(test))().catch(() => {});
+        await (await playback.play(test))().catch(() => undefined);
         const results = flat(cb.mock.calls);
         expect(results.length).toBe(2);
         expect(results[0].state).toBe(CommandStates.EXECUTING);
@@ -1859,7 +1857,7 @@ describe('Playback', () => {
         });
         const cb = jest.fn();
         playback.on(PlaybackEvents.COMMAND_STATE_CHANGED, cb);
-        await (await playback.play(test))().catch(() => {});
+        await (await playback.play(test))().catch(() => undefined);
         const results = flat(cb.mock.calls);
         expect(results.length).toBe(2);
         expect(results[0].state).toBe(CommandStates.EXECUTING);
@@ -1879,7 +1877,7 @@ describe('Playback', () => {
           ],
         };
         const executor = new FakeExecutor();
-        executor.doOpen = jest.fn(async () => {});
+        executor.doOpen = jest.fn(async () => undefined);
         const playback = new Playback({
           executor,
         });
@@ -1914,7 +1912,7 @@ describe('Playback', () => {
           ],
         };
         const executor = new FakeExecutor();
-        executor.doOpen = jest.fn(async () => {});
+        executor.doOpen = jest.fn(async () => undefined);
         executor.doVerifyText = jest.fn(async () => {
           throw new VerificationError('failed to verify');
         });
@@ -1952,7 +1950,7 @@ describe('Playback', () => {
           ],
         };
         const executor = new FakeExecutor();
-        executor.doOpen = jest.fn(async () => {});
+        executor.doOpen = jest.fn(async () => undefined);
         executor.doAssertText = jest.fn(async () => {
           throw new AssertionError('failed to assert');
         });
@@ -1961,7 +1959,7 @@ describe('Playback', () => {
         });
         const cb = jest.fn();
         playback.on(PlaybackEvents.PLAYBACK_STATE_CHANGED, cb);
-        await (await playback.play(test))().catch(() => {});
+        await (await playback.play(test))().catch(() => undefined);
         const results = flat(cb.mock.calls);
         expect(results.length).toBe(3);
         expect(results[0].state).toBe(PlaybackStates.PREPARATION);
@@ -1990,7 +1988,7 @@ describe('Playback', () => {
           ],
         };
         const executor = new FakeExecutor();
-        executor.doOpen = jest.fn(async () => {});
+        executor.doOpen = jest.fn(async () => undefined);
         executor.doAssertText = jest.fn(async () => {
           throw new Error('error in command');
         });
@@ -1999,7 +1997,7 @@ describe('Playback', () => {
         });
         const cb = jest.fn();
         playback.on(PlaybackEvents.PLAYBACK_STATE_CHANGED, cb);
-        await (await playback.play(test))().catch(() => {});
+        await (await playback.play(test))().catch(() => undefined);
         const results = flat(cb.mock.calls);
         expect(results.length).toBe(3);
         expect(results[0].state).toBe(PlaybackStates.PREPARATION);
@@ -2009,8 +2007,6 @@ describe('Playback', () => {
     });
   });
 });
-
-/* tslint:enable:no-empty */
 
 const psetTimeout = (timeout: number) =>
   new Promise(res => {
