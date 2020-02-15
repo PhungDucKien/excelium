@@ -35,8 +35,9 @@ describe('Command Node', () => {
   it('retry limit defaults to 1000', () => {
     const command = {
       command: ControlFlowCommandNames.times,
-      target: '',
-      value: '',
+      param1: '',
+      param2: '',
+      param3: '',
     };
     const node = new CommandNode(command);
     node.timesVisited = 999;
@@ -47,8 +48,9 @@ describe('Command Node', () => {
   it('retry limit can be overriden', () => {
     const command = {
       command: ControlFlowCommandNames.repeatIf,
-      target: '',
-      value: '5',
+      param1: '',
+      param2: '5',
+      param3: '',
     };
     const node = new CommandNode(command);
     node.timesVisited = 5;
@@ -62,8 +64,9 @@ describe('Command Node', () => {
     ]);
     const command = {
       command: ControlFlowCommandNames.forEach,
-      target: collectionName,
-      value: 'iteratorVar',
+      param1: collectionName,
+      param2: 'iteratorVar',
+      param3: '',
     };
     const node = new CommandNode(command);
     expect(node.evaluateForEach(variables)).toEqual(true);
@@ -71,8 +74,9 @@ describe('Command Node', () => {
   it('forEach errors without a valid variable', () => {
     const command = {
       command: ControlFlowCommandNames.forEach,
-      target: 'asdf',
-      value: '',
+      param1: 'asdf',
+      param2: '',
+      param3: '',
     };
     const node = new CommandNode(command);
     expect(node.evaluateForEach(variables)).toEqual(false);
@@ -85,30 +89,33 @@ describe('Command Node', () => {
     ]);
     const command = {
       command: ControlFlowCommandNames.forEach,
-      target: collectionName,
-      value: 'iteratorVar',
+      param1: collectionName,
+      param2: 'iteratorVar',
+      param3: '',
     };
     const node = new CommandNode(command);
     node.evaluateForEach(variables);
     expect(variables.get('iteratorVar')).toEqual({ a: 'a1', b: 'b1' });
   });
   it('forEach resets timesVisited after completing', () => {
-    const collection = { name: 'asdf', value: [{ a: 'a' }, { b: 'b' }] };
-    variables.set(collection.name, collection.value);
+    const collection = { name: 'asdf', param2: [{ a: 'a' }, { b: 'b' }] };
+    variables.set(collection.name, collection.param2);
     const node = new CommandNode({
       command: ControlFlowCommandNames.forEach,
-      target: collection.name,
-      value: 'iteratorVar',
+      param1: collection.name,
+      param2: 'iteratorVar',
+      param3: '',
     });
-    node.timesVisited = collection.value.length + 1;
+    node.timesVisited = collection.param2.length + 1;
     node.evaluateForEach(variables);
     expect(node.timesVisited).toEqual(-1);
   });
   it('execute resolves with an error message when too many retries attempted in a loop', () => {
     const command = {
       command: ControlFlowCommandNames.while,
-      target: '',
-      value: '2',
+      param1: '',
+      param2: '2',
+      param3: '',
     };
     const node = new CommandNode(command);
     node.timesVisited = 3;
@@ -119,8 +126,9 @@ describe('Command Node', () => {
   it("evaluate resolves with an error message on 'times' when an invalid number is provided", () => {
     const command = {
       command: ControlFlowCommandNames.times,
-      target: 'asdf',
-      value: '',
+      param1: 'asdf',
+      param2: '',
+      param3: '',
     };
     const node = new CommandNode(command);
     return node._evaluate({ variables: new Variables() }).catch((err: Error) => {
@@ -130,8 +138,9 @@ describe('Command Node', () => {
   it('timesVisited only incremenrts for control flow commands', () => {
     let command = {
       command: ControlFlowCommandNames.times,
-      target: '',
-      value: '',
+      param1: '',
+      param2: '',
+      param3: '',
     };
     let node = new CommandNode(command);
     expect(node.timesVisited).toBe(0);
@@ -139,8 +148,9 @@ describe('Command Node', () => {
     expect(node.timesVisited).toBe(1);
     command = {
       command: 'command',
-      target: '',
-      value: '',
+      param1: '',
+      param2: '',
+      param3: '',
     };
     node = new CommandNode(command);
     expect(node.timesVisited).toBe(0);
@@ -150,8 +160,9 @@ describe('Command Node', () => {
   it("evaluationResult returns the 'right' node on true", () => {
     const command = {
       command: 'a',
-      target: '',
-      value: '',
+      param1: '',
+      param2: '',
+      param3: '',
     };
     const node = new CommandNode(command);
     const nodeRight = new CommandNode({ command: 'b' });
@@ -164,8 +175,9 @@ describe('Command Node', () => {
   it("evaluationResult returns the 'left' node on false", () => {
     const command = {
       command: 'a',
-      target: '',
-      value: '',
+      param1: '',
+      param2: '',
+      param3: '',
     };
     const node = new CommandNode(command);
     const nodeRight = new CommandNode({ command: 'b' });
@@ -178,8 +190,9 @@ describe('Command Node', () => {
   it("executionResult returns the 'next' node on non-controlflow commands", () => {
     const command = {
       command: 'open',
-      target: '',
-      value: '',
+      param1: '',
+      param2: '',
+      param3: '',
     };
     const nodeA = new CommandNode(command);
     const nodeB = new CommandNode(command);
@@ -189,8 +202,9 @@ describe('Command Node', () => {
   it("executionResult returns a 'next' node on control flow", () => {
     const command = {
       command: ControlFlowCommandNames.if,
-      target: '',
-      value: '',
+      param1: '',
+      param2: '',
+      param3: '',
     };
     const nodeA = new CommandNode(command);
     nodeA.left = new CommandNode({ command: 'asdf' });

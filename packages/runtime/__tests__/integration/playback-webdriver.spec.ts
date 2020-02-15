@@ -68,18 +68,21 @@ describe('Playback using webdriver', () => {
       commands: [
         {
           command: 'open',
-          target: '/check.html',
-          value: '',
+          param1: '/check.html',
+          param2: '',
+          param3: '',
         },
         {
           command: 'uncheck',
-          target: 'id=t',
-          value: '',
+          param1: 'id=t',
+          param2: '',
+          param3: '',
         },
         {
           command: 'check',
-          target: 'id=f',
-          value: '',
+          param1: 'id=f',
+          param2: '',
+          param3: '',
         },
       ],
     };
@@ -98,18 +101,21 @@ describe('Playback using webdriver', () => {
       commands: [
         {
           command: 'open',
-          target: '/check.html',
-          value: '',
+          param1: '/check.html',
+          param2: '',
+          param3: '',
         },
         {
           command: 'uncheck',
-          target: 'id=t',
-          value: '',
+          param1: 'id=t',
+          param2: '',
+          param3: '',
         },
         {
           command: 'check',
-          target: 'id=f',
-          value: '',
+          param1: 'id=f',
+          param2: '',
+          param3: '',
         },
       ],
     };
@@ -142,13 +148,15 @@ describe('Playback using webdriver', () => {
       commands: [
         {
           command: 'open',
-          target: '/windows.html',
-          value: '',
+          param1: '/windows.html',
+          param2: '',
+          param3: '',
         },
         {
           command: 'click',
-          target: 'css=a',
-          value: '',
+          param1: 'css=a',
+          param2: '',
+          param3: '',
           opensWindow: true,
           windowHandleName: 'new',
           windowTimeout: 200,
@@ -180,13 +188,15 @@ describe('Playback using webdriver', () => {
       commands: [
         {
           command: 'open',
-          target: '/windows.html',
-          value: '',
+          param1: '/windows.html',
+          param2: '',
+          param3: '',
         },
         {
           command: 'click',
-          target: 'css=a',
-          value: '',
+          param1: 'css=a',
+          param2: '',
+          param3: '',
           opensWindow: true,
           windowHandleName: 'new',
           windowTimeout: 200,
@@ -217,14 +227,16 @@ describe('Playback using webdriver', () => {
       commands: [
         {
           command: 'open',
-          target: '/check.html',
-          value: '',
+          param1: '/check.html',
+          param2: '',
+          param3: '',
         },
         {
           command: 'uncheck',
-          target: 'id=nan',
-          value: '',
-          targetFallback: [
+          param1: 'id=nan',
+          param2: '',
+          param3: '',
+          param1Fallback: [
             ['id=stillnan', 'id'],
             ['id=t', 'id'],
             ['id=broken', 'id'],

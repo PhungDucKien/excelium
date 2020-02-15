@@ -24,8 +24,9 @@ describe('Call stack', () => {
       commands: [
         {
           command: 'open',
-          target: '',
-          value: '',
+          param1: '',
+          param2: '',
+          param3: '',
         },
       ],
     };

@@ -78,13 +78,16 @@ describe('webdriver executor', () => {
     });
     describe('plugins', () => {
       it('should be able to register a command', async () => {
-        expect.assertions(3);
-        executor.registerCommand('commandName', async function(this: any, target, value) {
+        expect.assertions(5);
+        const command = {};
+        executor.registerCommand('commandName', async function(this: any, param1, param2, param3, commandObject) {
           expect(this).toBe(executor);
-          expect(target).toBe('target');
-          expect(value).toBe('value');
+          expect(param1).toBe('param1');
+          expect(param2).toBe('param2');
+          expect(param3).toBe('param3');
+          expect(commandObject).toBe(command);
         });
-        await executor.doCommandName('target', 'value');
+        await executor.doCommandName('param1', 'param2', 'param3', command);
       });
     });
     describe('accept alert', () => {

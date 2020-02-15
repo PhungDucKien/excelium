@@ -29,23 +29,38 @@ export function composePreprocessors(...args: any[]) {
   if (params.length === 0) {
     return func;
   } else if (params.length === 1) {
-    return function preprocess(this: any, target: any) {
-      return func.call(this, runPreprocessor(params[0], target, this.variables));
+    return function preprocess(this: any, param1: any) {
+      return func.call(this, runPreprocessor(params[0], param1, this.variables));
     };
   } else if (params.length === 2) {
-    return function preprocess(this: any, target: any, value: any) {
-      return func.call(this, runPreprocessor(params[0], target, this.variables), runPreprocessor(params[1], value, this.variables));
+    return function preprocess(this: any, param1: any, param2: any) {
+      return func.call(this, runPreprocessor(params[0], param1, this.variables), runPreprocessor(params[1], param2, this.variables));
+    };
+  } else if (params.length === 3) {
+    return function preprocess(this: any, param1: any, param2: any, param3: any) {
+      return func.call(
+        this,
+        runPreprocessor(params[0], param1, this.variables),
+        runPreprocessor(params[1], param2, this.variables),
+        runPreprocessor(params[2], param3, this.variables)
+      );
     };
   } else {
-    return function preprocess(this: any, target: any, value: any, options: any) {
+    return function preprocess(this: any, param1: any, param2: any, param3: any, options: any) {
       if (!options) {
-        return func.call(this, runPreprocessor(params[0], target, this.variables), runPreprocessor(params[1], value, this.variables));
+        return func.call(
+          this,
+          runPreprocessor(params[0], param1, this.variables),
+          runPreprocessor(params[1], param2, this.variables),
+          runPreprocessor(params[2], param3, this.variables)
+        );
       }
       return func.call(
         this,
-        runPreprocessor(params[0], target, this.variables),
-        runPreprocessor(params[1], value, this.variables),
-        preprocessObject(params[2], options, this.variables)
+        runPreprocessor(params[0], param1, this.variables),
+        runPreprocessor(params[1], param2, this.variables),
+        runPreprocessor(params[2], param3, this.variables),
+        preprocessObject(params[3], options, this.variables)
       );
     };
   }

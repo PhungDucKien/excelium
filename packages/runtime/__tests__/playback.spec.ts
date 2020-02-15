@@ -31,20 +31,23 @@ describe('Playback', () => {
             {
               id: 'asdf0',
               command: 'forEach',
-              target: 'collectionVarName',
-              value: 'iteratorVarName',
+              param1: 'collectionVarName',
+              param2: 'iteratorVarName',
+              param3: '',
             },
             {
               id: 'asdf1',
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
             {
               id: 'asdf2',
               command: 'end',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };
@@ -71,18 +74,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -101,18 +107,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -132,18 +141,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -168,18 +180,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -203,18 +218,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'error',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -233,8 +251,9 @@ describe('Playback', () => {
         commands: [
           {
             command: 'fail',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -256,8 +275,9 @@ describe('Playback', () => {
         commands: [
           {
             command: 'verifyText',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -274,8 +294,9 @@ describe('Playback', () => {
     it('should play a single command', async () => {
       const command = {
         command: 'open',
-        target: '',
-        value: '',
+        param1: '',
+        param2: '',
+        param3: '',
       };
       const executor = new FakeExecutor();
       executor.doOpen = jest.fn(async () => undefined);
@@ -289,8 +310,9 @@ describe('Playback', () => {
     it('should play a single command twice', async () => {
       const command = {
         command: 'open',
-        target: '',
-        value: '',
+        param1: '',
+        param2: '',
+        param3: '',
       };
       const executor = new FakeExecutor();
       executor.doOpen = jest.fn(async () => undefined);
@@ -305,8 +327,9 @@ describe('Playback', () => {
     it('should not be able to play a single command twice at the same time', async () => {
       const command = {
         command: 'open',
-        target: '',
-        value: '',
+        param1: '',
+        param2: '',
+        param3: '',
       };
       const executor = new FakeExecutor();
       executor.doOpen = jest.fn(async () => psetTimeout(1));
@@ -328,18 +351,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -353,8 +379,9 @@ describe('Playback', () => {
       await playback.pause();
       await playback.playSingleCommand({
         command: 'open',
-        target: '',
-        value: '',
+        param1: '',
+        param2: '',
+        param3: '',
       });
       await playback.resume();
       await playPromise();
@@ -367,18 +394,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -393,8 +423,9 @@ describe('Playback', () => {
       try {
         await playback.playSingleCommand({
           command: 'open',
-          target: '',
-          value: '',
+          param1: '',
+          param2: '',
+          param3: '',
         });
       } catch (err) {
         expect(err.message).toBe("Can't play a command while playback is running");
@@ -408,20 +439,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'run',
-            target: 'test2',
-            value: '',
+            param1: 'test2',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -432,20 +466,23 @@ describe('Playback', () => {
           {
             id: 4,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 5,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 6,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -477,20 +514,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'run',
-            target: 'test2',
-            value: '',
+            param1: 'test2',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -515,20 +555,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'run',
-            target: 'test2',
-            value: '',
+            param1: 'test2',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -552,18 +595,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -590,18 +636,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'fail',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -632,18 +681,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -664,8 +716,9 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -686,18 +739,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'forEach',
-            target: 'collectionVarName',
-            value: 'iteratorVarName',
+            param1: 'collectionVarName',
+            param2: 'iteratorVarName',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'end',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -719,23 +775,27 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'if',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'end',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -758,18 +818,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -788,23 +851,27 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: 't1',
-            value: '',
+            param1: 't1',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: 't2',
-            value: '',
+            param1: 't2',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: 't3',
-            value: '',
+            param1: 't3',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: 't4',
-            value: '',
+            param1: 't4',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -816,7 +883,7 @@ describe('Playback', () => {
       });
       await playback.playTo(test, test.commands[2], test.commands[1]);
       expect(executor.doOpen).toHaveBeenCalledTimes(1);
-      expect(executor.doOpen).toHaveBeenCalledWith('t2', '', test.commands[1]);
+      expect(executor.doOpen).toHaveBeenCalledWith('t2', '', '', test.commands[1]);
     });
     it('should fail to play to a point that exists, from a point that does not exist in the test', async () => {
       const test = {
@@ -824,8 +891,9 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -850,20 +918,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -903,20 +974,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -938,21 +1012,24 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             isBreakpoint: true,
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -991,20 +1068,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1039,20 +1119,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1092,20 +1175,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1140,20 +1226,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1193,20 +1282,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1249,8 +1341,9 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1299,20 +1392,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'verify',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'assert',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1375,21 +1471,24 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             isBreakpoint: true,
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1426,18 +1525,21 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1461,8 +1563,9 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1488,8 +1591,9 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1515,8 +1619,9 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1547,19 +1652,22 @@ describe('Playback', () => {
         commands: [
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             skip: true,
           },
           {
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1578,21 +1686,24 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             skip: true,
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1610,8 +1721,9 @@ describe('Playback', () => {
     it('should skip when playing single command', async () => {
       const command = {
         command: 'open',
-        target: '',
-        value: '',
+        param1: '',
+        param2: '',
+        param3: '',
         skip: true,
       };
       const executor = new FakeExecutor();
@@ -1634,21 +1746,24 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'if',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             skip: true,
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'end',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             skip: true,
           },
         ],
@@ -1673,21 +1788,24 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'if',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             skip: true,
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'end',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1715,20 +1833,23 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'if',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 3,
             command: 'end',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
             skip: true,
           },
         ],
@@ -1757,21 +1878,24 @@ describe('Playback', () => {
           {
             id: 1,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
           {
             id: 2,
             command: 'run',
-            target: 'test',
-            value: '',
+            param1: 'test',
+            param2: '',
+            param3: '',
             skip: true,
           },
           {
             id: 3,
             command: 'open',
-            target: '',
-            value: '',
+            param1: '',
+            param2: '',
+            param3: '',
           },
         ],
       };
@@ -1796,8 +1920,9 @@ describe('Playback', () => {
           commands: [
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };
@@ -1820,8 +1945,9 @@ describe('Playback', () => {
           commands: [
             {
               command: 'verifyText',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };
@@ -1846,8 +1972,9 @@ describe('Playback', () => {
           commands: [
             {
               command: 'fatal',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };
@@ -1871,8 +1998,9 @@ describe('Playback', () => {
           commands: [
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };
@@ -1896,18 +2024,21 @@ describe('Playback', () => {
           commands: [
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
             {
               command: 'verifyText',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };
@@ -1934,18 +2065,21 @@ describe('Playback', () => {
           commands: [
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
             {
               command: 'assertText',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };
@@ -1972,18 +2106,21 @@ describe('Playback', () => {
           commands: [
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
             {
               command: 'assertText',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
             {
               command: 'open',
-              target: '',
-              value: '',
+              param1: '',
+              param2: '',
+              param3: '',
             },
           ],
         };

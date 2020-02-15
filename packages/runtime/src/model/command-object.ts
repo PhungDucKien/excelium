@@ -20,8 +20,12 @@ export default interface CommandObject {
   index?: number;
   level?: number;
   id?: string | number;
-  target?: string;
-  value?: string;
+  param1?: string;
+  param2?: string;
+  param3?: string;
+  param1Fallback?: string[][];
+  param2Fallback?: string[][];
+  param3Fallback?: string[][];
   skip?: boolean;
   isBreakpoint?: boolean;
   opensWindow?: boolean;

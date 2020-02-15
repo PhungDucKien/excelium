@@ -21,8 +21,9 @@ import { validateControlFlowSyntax } from '../../src/playback-tree/syntax-valida
 function createCommand(command: string) {
   return {
     command,
-    target: '',
-    value: '',
+    param1: '',
+    param2: '',
+    param3: '',
   };
 }
 

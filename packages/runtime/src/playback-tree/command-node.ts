@@ -26,7 +26,7 @@ interface CommandNodeOpts {
 }
 
 interface ExecuteArgs {
-  executorOverride?: (target?: string, value?: string) => Promise<void>;
+  executorOverride?: (param1?: string, param2?: string, param3?: string) => Promise<void>;
 }
 
 export class CommandNode {
@@ -78,13 +78,13 @@ export class CommandNode {
 
   public _executeCommand(commandExecutor: any, { executorOverride }: ExecuteArgs = {}) {
     if (executorOverride) {
-      return executorOverride(this.command.target, this.command.value);
+      return executorOverride(this.command.param1, this.command.param2, this.command.param3);
     } else if (this.isControlFlow()) {
       return Promise.resolve(this._evaluate(commandExecutor));
     } else if (this.isTerminal()) {
       return Promise.resolve();
     } else {
-      return commandExecutor[commandExecutor.name(this.command.command)](this.command.target, this.command.value, this.command);
+      return commandExecutor[commandExecutor.name(this.command.command)](this.command.param1, this.command.param2, this.command.param3, this.command);
     }
   }
 
@@ -97,12 +97,12 @@ export class CommandNode {
   }
 
   public evaluateForEach(variables: Variables) {
-    const collection = variables.get(interpolateScript(this.command.target || '', variables).script);
+    const collection = variables.get(interpolateScript(this.command.param1 || '', variables).script);
     if (!collection) {
       console.error('Invalid variable provided.');
       return false;
     }
-    variables.set(interpolateScript(this.command.value || '', variables).script, collection[this.timesVisited]);
+    variables.set(interpolateScript(this.command.param2 || '', variables).script, collection[this.timesVisited]);
     const result = this.timesVisited < collection.length;
     if (result) {
       this.emitControlFlowEvent({
@@ -123,7 +123,7 @@ export class CommandNode {
   }
 
   public _evaluate(commandExecutor: any) {
-    const expression = interpolateScript(this.command.target || '', commandExecutor.variables);
+    const expression = interpolateScript(this.command.param1 || '', commandExecutor.variables);
     if (ControlFlowCommandChecks.isTimes(this.command)) {
       const number = Math.floor(+expression);
       if (isNaN(number)) {
@@ -169,8 +169,8 @@ export class CommandNode {
   public _isRetryLimit() {
     if (ControlFlowCommandChecks.isLoop(this.command)) {
       let limit = 1000;
-      if (this.command.value) {
-        const value = Math.floor(+this.command.value);
+      if (this.command.param2) {
+        const value = Math.floor(+this.command.param2);
         if (!isNaN(value)) {
           limit = value;
         }

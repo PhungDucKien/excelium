@@ -174,7 +174,7 @@ export default class WebDriverExecutor {
     return currentHandles.find(handle => !this[state].openedWindows!.includes(handle));
   }
 
-  public registerCommand(commandName: string, fn: (target?: string, value?: string) => void) {
+  public registerCommand(commandName: string, fn: (param1?: string, param2?: string, param3?: string, command?: CommandObject) => Promise<any>) {
     this['do' + commandName.charAt(0).toUpperCase() + commandName.slice(1)] = fn;
   }
 
@@ -236,8 +236,8 @@ export default class WebDriverExecutor {
 
   // mouse commands
 
-  public async doAddSelection(locator: string, optionLocator: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAddSelection(locator: string, optionLocator: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const option = await element.findElement(parseOptionLocator(optionLocator));
     const selections = await this.driver.executeScript('return arguments[0].selectedOptions', element);
     if (!(await findElement(selections as WebElement[], option))) {
@@ -245,8 +245,8 @@ export default class WebDriverExecutor {
     }
   }
 
-  public async doRemoveSelection(locator: string, optionLocator: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doRemoveSelection(locator: string, optionLocator: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
 
     if (!(await element.getAttribute('multiple'))) {
       throw new Error('Given element is not a multiple select type element');
@@ -259,28 +259,28 @@ export default class WebDriverExecutor {
     }
   }
 
-  public async doCheck(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doCheck(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (!(await element.isSelected())) {
       await element.click();
     }
   }
 
-  public async doUncheck(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doUncheck(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (await element.isSelected()) {
       await element.click();
     }
   }
 
-  public async doClick(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doClick(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await element.click();
   }
 
-  public async doClickAt(locator: string, coordString: string, commandObject: { targetFallback?: string[][] } = {}) {
+  public async doClickAt(locator: string, coordString: string, _?: string, commandObject?: CommandObject) {
     const coords = parseCoordString(coordString);
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element, ...coords })
@@ -288,17 +288,17 @@ export default class WebDriverExecutor {
       .perform();
   }
 
-  public async doDoubleClick(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doDoubleClick(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .doubleClick(element)
       .perform();
   }
 
-  public async doDoubleClickAt(locator: string, coordString: string, commandObject: { targetFallback?: string[][] } = {}) {
+  public async doDoubleClickAt(locator: string, coordString: string, _?: string, commandObject?: CommandObject) {
     const coords = parseCoordString(coordString);
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element, ...coords })
@@ -306,21 +306,17 @@ export default class WebDriverExecutor {
       .perform();
   }
 
-  public async doDragAndDropToObject(
-    dragLocator: string,
-    dropLocator: string,
-    commandObject: { targetFallback?: string[][]; valueFallback?: string[][] } = {}
-  ) {
-    const drag = await this.waitForElement(dragLocator, commandObject.targetFallback);
-    const drop = await this.waitForElement(dropLocator, commandObject.valueFallback);
+  public async doDragAndDropToObject(dragLocator: string, dropLocator: string, _?: string, commandObject?: CommandObject) {
+    const drag = await this.waitForElement(dragLocator, commandObject?.param1Fallback);
+    const drop = await this.waitForElement(dropLocator, commandObject?.param2Fallback);
     await this.driver
       .actions({ bridge: true })
       .dragAndDrop(drag, drop)
       .perform();
   }
 
-  public async doMouseDown(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doMouseDown(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element })
@@ -328,9 +324,9 @@ export default class WebDriverExecutor {
       .perform();
   }
 
-  public async doMouseDownAt(locator: string, coordString: string, commandObject: { targetFallback?: string[][] } = {}) {
+  public async doMouseDownAt(locator: string, coordString: string, _?: string, commandObject?: CommandObject) {
     const coords = parseCoordString(coordString);
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element, ...coords })
@@ -338,17 +334,17 @@ export default class WebDriverExecutor {
       .perform();
   }
 
-  public async doMouseMoveAt(locator: string, coordString: string, commandObject: { targetFallback?: string[][] } = {}) {
+  public async doMouseMoveAt(locator: string, coordString: string, _?: string, commandObject?: CommandObject) {
     const coords = parseCoordString(coordString);
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element, ...coords })
       .perform();
   }
 
-  public async doMouseOut(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doMouseOut(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const [rect, vp] = await this.driver.executeScript(
       'return [arguments[0].getBoundingClientRect(), {height: window.innerHeight, width: window.innerWidth}];',
       element
@@ -390,16 +386,16 @@ export default class WebDriverExecutor {
     throw new Error('Unable to perform mouse out as the element takes up the entire viewport');
   }
 
-  public async doMouseOver(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doMouseOver(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element })
       .perform();
   }
 
-  public async doMouseUp(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doMouseUp(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element })
@@ -407,9 +403,9 @@ export default class WebDriverExecutor {
       .perform();
   }
 
-  public async doMouseUpAt(locator: string, coordString: string, commandObject: { targetFallback?: string[][] } = {}) {
+  public async doMouseUpAt(locator: string, coordString: string, _?: string, commandObject?: CommandObject) {
     const coords = parseCoordString(coordString);
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver
       .actions({ bridge: true })
       .move({ origin: element, ...coords })
@@ -417,16 +413,16 @@ export default class WebDriverExecutor {
       .perform();
   }
 
-  public async doSelect(locator: string, optionLocator: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doSelect(locator: string, optionLocator: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const option = await element.findElement(parseOptionLocator(optionLocator));
     await option.click();
   }
 
   // keyboard commands
 
-  public async doEditContent(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doEditContent(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await this.driver.executeScript(
       "if(arguments[0].contentEditable === 'true') {arguments[0].innerText = arguments[1]} else {throw new Error('Element is not content editable')}",
       element,
@@ -434,14 +430,14 @@ export default class WebDriverExecutor {
     );
   }
 
-  public async doType(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doType(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await element.clear();
     await element.sendKeys(value);
   }
 
-  public async doSendKeys(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doSendKeys(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     await element.sendKeys(...value);
   }
 
@@ -573,8 +569,8 @@ export default class WebDriverExecutor {
     return Promise.resolve();
   }
 
-  public async doStoreText(locator: string, variable: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doStoreText(locator: string, variable: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const text = await element.getText();
     this.variables.set(variable, text);
   }
@@ -584,8 +580,8 @@ export default class WebDriverExecutor {
     this.variables.set(variable, title);
   }
 
-  public async doStoreValue(locator: string, variable: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doStoreValue(locator: string, variable: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const value = await element.getAttribute('value');
     this.variables.set(variable, value);
   }
@@ -624,15 +620,15 @@ export default class WebDriverExecutor {
     }
   }
 
-  public async doAssertEditable(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertEditable(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (!(await this.isElementEditable(element))) {
       throw new AssertionError('Element is not editable');
     }
   }
 
-  public async doAssertNotEditable(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertNotEditable(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (await this.isElementEditable(element)) {
       throw new AssertionError('Element is editable');
     }
@@ -653,8 +649,8 @@ export default class WebDriverExecutor {
     }
   }
 
-  public async doAssertElementPresent(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertElementPresent(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    await this.waitForElement(locator, commandObject?.param1Fallback);
   }
 
   public async doAssertElementNotPresent(locator: string) {
@@ -664,24 +660,24 @@ export default class WebDriverExecutor {
     }
   }
 
-  public async doAssertText(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertText(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const text = await element.getText();
     if (text !== value) {
       throw new AssertionError("Actual value '" + text + "' did not match '" + value + "'");
     }
   }
 
-  public async doAssertNotText(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertNotText(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const text = await element.getText();
     if (text === value) {
       throw new AssertionError("Actual value '" + text + "' did match '" + value + "'");
     }
   }
 
-  public async doAssertValue(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertValue(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const elementValue = await element.getAttribute('value');
     if (elementValue !== value) {
       throw new AssertionError("Actual value '" + elementValue + "' did not match '" + value + "'");
@@ -689,46 +685,46 @@ export default class WebDriverExecutor {
   }
 
   // not generally implemented
-  public async doAssertNotValue(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertNotValue(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const elementValue = await element.getAttribute('value');
     if (elementValue === value) {
       throw new AssertionError("Actual value '" + elementValue + "' did match '" + value + "'");
     }
   }
 
-  public async doAssertChecked(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertChecked(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (!(await element.isSelected())) {
       throw new AssertionError('Element is not checked, expected to be checked');
     }
   }
 
-  public async doAssertNotChecked(locator: string, _?: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertNotChecked(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (await element.isSelected()) {
       throw new AssertionError('Element is checked, expected to be unchecked');
     }
   }
 
-  public async doAssertSelectedValue(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertSelectedValue(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const elementValue = await element.getAttribute('value');
     if (elementValue !== value) {
       throw new AssertionError("Actual value '" + elementValue + "' did not match '" + value + "'");
     }
   }
 
-  public async doAssertNotSelectedValue(locator: string, value: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertNotSelectedValue(locator: string, value: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const elementValue = await element.getAttribute('value');
     if (elementValue === value) {
       throw new AssertionError("Actual value '" + elementValue + "' did match '" + value + "'");
     }
   }
 
-  public async doAssertSelectedLabel(locator: string, label: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertSelectedLabel(locator: string, label: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const selectedValue = await element.getAttribute('value');
     const selectedOption = await element.findElement(By.xpath(`option[@value="${selectedValue}"]`));
     const selectedOptionLabel = await selectedOption.getText();
@@ -737,8 +733,8 @@ export default class WebDriverExecutor {
     }
   }
 
-  public async doAssertNotSelectedLabel(locator: string, label: string, commandObject: { targetFallback?: string[][] } = {}) {
-    const element = await this.waitForElement(locator, commandObject.targetFallback);
+  public async doAssertNotSelectedLabel(locator: string, label: string, _?: string, commandObject?: CommandObject) {
+    const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     const selectedValue = await element.getAttribute('value');
     const selectedOption = await element.findElement(By.xpath(`option[@value="${selectedValue}"]`));
     const selectedOptionLabel = await selectedOption.getText();
@@ -929,9 +925,10 @@ WebDriverExecutor.prototype.doAnswerPrompt = composePreprocessors(interpolateStr
 WebDriverExecutor.prototype.doAddSelection = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
-    valueFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
+    param2Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doAddSelection
 );
@@ -939,9 +936,10 @@ WebDriverExecutor.prototype.doAddSelection = composePreprocessors(
 WebDriverExecutor.prototype.doRemoveSelection = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
-    valueFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
+    param2Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doRemoveSelection
 );
@@ -949,51 +947,58 @@ WebDriverExecutor.prototype.doRemoveSelection = composePreprocessors(
 WebDriverExecutor.prototype.doCheck = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doCheck
 );
 
 WebDriverExecutor.prototype.doUncheck = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doUncheck
 );
 
 WebDriverExecutor.prototype.doClick = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doClick
 );
 
 WebDriverExecutor.prototype.doClickAt = composePreprocessors(
   interpolateString,
   interpolateString,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doClickAt
 );
 
 WebDriverExecutor.prototype.doDoubleClick = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doDoubleClick
 );
 
 WebDriverExecutor.prototype.doDoubleClickAt = composePreprocessors(
   interpolateString,
   interpolateString,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doDoubleClickAt
 );
 
 WebDriverExecutor.prototype.doDragAndDropToObject = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
-    valueFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
+    param2Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doDragAndDropToObject
 );
@@ -1001,8 +1006,9 @@ WebDriverExecutor.prototype.doDragAndDropToObject = composePreprocessors(
 WebDriverExecutor.prototype.doMouseDown = composePreprocessors(
   interpolateString,
   null,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doMouseDown
 );
@@ -1010,8 +1016,9 @@ WebDriverExecutor.prototype.doMouseDown = composePreprocessors(
 WebDriverExecutor.prototype.doMouseDownAt = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doMouseDownAt
 );
@@ -1019,8 +1026,9 @@ WebDriverExecutor.prototype.doMouseDownAt = composePreprocessors(
 WebDriverExecutor.prototype.doMouseMoveAt = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doMouseMoveAt
 );
@@ -1028,8 +1036,9 @@ WebDriverExecutor.prototype.doMouseMoveAt = composePreprocessors(
 WebDriverExecutor.prototype.doMouseOut = composePreprocessors(
   interpolateString,
   null,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doMouseOut
 );
@@ -1037,8 +1046,9 @@ WebDriverExecutor.prototype.doMouseOut = composePreprocessors(
 WebDriverExecutor.prototype.doMouseOver = composePreprocessors(
   interpolateString,
   null,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doMouseOver
 );
@@ -1046,8 +1056,9 @@ WebDriverExecutor.prototype.doMouseOver = composePreprocessors(
 WebDriverExecutor.prototype.doMouseUp = composePreprocessors(
   interpolateString,
   null,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doMouseUp
 );
@@ -1055,8 +1066,9 @@ WebDriverExecutor.prototype.doMouseUp = composePreprocessors(
 WebDriverExecutor.prototype.doMouseUpAt = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doMouseUpAt
 );
@@ -1064,9 +1076,10 @@ WebDriverExecutor.prototype.doMouseUpAt = composePreprocessors(
 WebDriverExecutor.prototype.doSelect = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
-    valueFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
+    param2Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doSelect
 );
@@ -1074,8 +1087,9 @@ WebDriverExecutor.prototype.doSelect = composePreprocessors(
 WebDriverExecutor.prototype.doEditContent = composePreprocessors(
   interpolateString,
   interpolateString,
+  null,
   {
-    targetFallback: preprocessArray(interpolateString),
+    param1Fallback: preprocessArray(interpolateString),
   },
   WebDriverExecutor.prototype.doEditContent
 );
@@ -1083,14 +1097,16 @@ WebDriverExecutor.prototype.doEditContent = composePreprocessors(
 WebDriverExecutor.prototype.doType = composePreprocessors(
   interpolateString,
   interpolateString,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doType
 );
 
 WebDriverExecutor.prototype.doSendKeys = composePreprocessors(
   interpolateString,
   preprocessKeys,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doSendKeys
 );
 
@@ -1105,14 +1121,16 @@ WebDriverExecutor.prototype.doStore = composePreprocessors(interpolateString, nu
 WebDriverExecutor.prototype.doStoreAttribute = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doStoreAttribute
 );
 
 WebDriverExecutor.prototype.doStoreElementCount = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doStoreElementCount
 );
 
@@ -1121,14 +1139,16 @@ WebDriverExecutor.prototype.doStoreJson = composePreprocessors(interpolateString
 WebDriverExecutor.prototype.doStoreText = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doStoreText
 );
 
 WebDriverExecutor.prototype.doStoreValue = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doStoreValue
 );
 
@@ -1141,14 +1161,16 @@ WebDriverExecutor.prototype.doAssertConfirmation = composePreprocessors(interpol
 WebDriverExecutor.prototype.doAssertEditable = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doAssertEditable
 );
 
 WebDriverExecutor.prototype.doAssertNotEditable = composePreprocessors(
   interpolateString,
   null,
-  { targetFallback: preprocessArray(interpolateString) },
+  null,
+  { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doAssertNotEditable
 );
 

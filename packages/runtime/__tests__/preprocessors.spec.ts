@@ -31,7 +31,7 @@ describe('preprocessor composition', () => {
     f();
     expect(fn).toHaveBeenCalledWith();
   });
-  it('should compose target preprocessor', () => {
+  it('should compose param1 preprocessor', () => {
     variables.set('a', 'a');
     const fn = jest.fn();
     FakeExecutor.prototype.doFake = composePreprocessors(interpolateString, fn);
@@ -40,7 +40,7 @@ describe('preprocessor composition', () => {
     exec.doFake('${a}');
     expect(fn).toHaveBeenCalledWith('a');
   });
-  it('should compose value preprocessor', () => {
+  it('should compose param2 preprocessor', () => {
     variables.set('a', 'a');
     const fn = jest.fn();
     FakeExecutor.prototype.doFake = composePreprocessors(interpolateString, interpolateString, fn);
@@ -49,20 +49,37 @@ describe('preprocessor composition', () => {
     exec.doFake('${a}', '${a}');
     expect(fn).toHaveBeenCalledWith('a', 'a');
   });
-  it('should compose targets preprocessor', () => {
+  it('should compose param3 preprocessor', () => {
     variables.set('a', 'a');
     const fn = jest.fn();
-    FakeExecutor.prototype.doFake = composePreprocessors(interpolateString, interpolateString, { targets: preprocessArray(interpolateString) }, fn);
+    FakeExecutor.prototype.doFake = composePreprocessors(interpolateString, interpolateString, interpolateString, fn);
     const exec = new FakeExecutor();
     exec.init({ variables });
-    exec.doFake('${a}', '${a}', {
-      targets: [
+    exec.doFake('${a}', '${a}', '${a}');
+    expect(fn).toHaveBeenCalledWith('a', 'a', 'a');
+  });
+  it('should compose params preprocessor', () => {
+    variables.set('a', 'a');
+    const fn = jest.fn();
+    FakeExecutor.prototype.doFake = composePreprocessors(
+      interpolateString,
+      interpolateString,
+      interpolateString,
+      { params: preprocessArray(interpolateString) },
+      fn
+    );
+    const exec = new FakeExecutor();
+    exec.init({ variables });
+    exec.doFake('${a}', '${a}', '${a}', {
+      params: [
+        ['${a}', 's'],
         ['${a}', 's'],
         ['${a}', 's'],
       ],
     });
-    expect(fn).toHaveBeenCalledWith('a', 'a', {
-      targets: [
+    expect(fn).toHaveBeenCalledWith('a', 'a', 'a', {
+      params: [
+        ['a', 's'],
         ['a', 's'],
         ['a', 's'],
       ],
@@ -77,14 +94,20 @@ describe('preprocessor composition', () => {
     exec.doFake('${a}', '${a}');
     expect(fn).toHaveBeenCalledWith('a', '${a}');
   });
-  it('should skip targets preprocessing if it is undefined', () => {
+  it('should skip params preprocessing if it is undefined', () => {
     variables.set('a', 'a');
     const fn = jest.fn();
-    FakeExecutor.prototype.doFake = composePreprocessors(interpolateString, interpolateString, preprocessArray(interpolateString), fn);
+    FakeExecutor.prototype.doFake = composePreprocessors(
+      interpolateString,
+      interpolateString,
+      interpolateString,
+      preprocessArray(interpolateString),
+      fn
+    );
     const exec = new FakeExecutor();
     exec.init({ variables });
-    exec.doFake('${a}', '${a}');
-    expect(fn).toHaveBeenCalledWith('a', 'a');
+    exec.doFake('${a}', '${a}', '${a}');
+    expect(fn).toHaveBeenCalledWith('a', 'a', 'a');
   });
 });
 

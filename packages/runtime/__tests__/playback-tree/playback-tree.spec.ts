@@ -21,8 +21,9 @@ import { ControlFlowCommandNames } from '../../src/playback-tree/commands';
 function createCommand(command: string) {
   return {
     command,
-    target: '',
-    value: '',
+    param1: '',
+    param2: '',
+    param3: '',
   };
 }
 
