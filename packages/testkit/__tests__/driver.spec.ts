@@ -15,18 +15,24 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import { createHeadlessChrome, createHeadlessFirefox } from '../src/driver';
+import { createHeadlessChrome, createHeadlessFirefox, createServices } from '../src/driver';
 
 jest.setTimeout(60000);
 
 describe('driver testkit', () => {
   it('should create headless chrome', async () => {
-    const driver = await createHeadlessChrome();
-    await driver.quit();
+    const driverService = createServices().chromeService.build();
+    const url = await driverService.start();
+    const driver = await createHeadlessChrome(url);
+    await driver.deleteSession();
+    await driverService.kill();
   });
 
   it('should create headless firefox', async () => {
-    const driver = await createHeadlessFirefox();
-    await driver.quit();
+    const driverService = createServices().firefoxService.build();
+    const url = await driverService.start();
+    const driver = await createHeadlessFirefox(url);
+    await driver.deleteSession();
+    await driverService.kill();
   });
 });

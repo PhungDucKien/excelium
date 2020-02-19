@@ -26,10 +26,12 @@
     "@excelium/get-driver": "*",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
-    "selenium-webdriver": "^4.0.0-alpha.5"
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "webdriverio": "^5.18.7"
   },
   "peerDependencies": {
-    "selenium-webdriver": "^4.0.0-alpha.5"
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "webdriverio": "^5.18.7"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",

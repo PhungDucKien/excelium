@@ -17,30 +17,42 @@
 
 import * as os from 'os';
 import * as path from 'path';
-import { Builder, Capabilities } from 'selenium-webdriver';
 import * as chrome from 'selenium-webdriver/chrome';
 import * as firefox from 'selenium-webdriver/firefox';
+import { remote } from 'webdriverio';
 import { CACHE_PATH } from './cache';
 
-export async function createDriver({ capabilities }: { capabilities: {} | Capabilities }) {
-  const { chromeService, firefoxService } = createServices();
-  return await new Builder()
-    .setChromeService(chromeService)
-    .setFirefoxService(firefoxService)
-    .withCapabilities(capabilities)
-    .build();
+export async function createDriver({ url, capabilities }: { url?: string; capabilities: any }) {
+  if (url) {
+    const { protocol, hostname, port, pathname } = new URL(url);
+    return await remote({
+      protocol: protocol.substr(0, protocol.length - 1),
+      hostname,
+      port: parseInt(port, 10),
+      path: pathname,
+      logLevel: 'error',
+      capabilities,
+    });
+  } else {
+    return await remote({
+      logLevel: 'error',
+      capabilities,
+    });
+  }
 }
 
-export async function createChrome() {
+export async function createChrome(url?: string) {
   return await createDriver({
+    url,
     capabilities: {
       browserName: 'chrome',
     },
   });
 }
 
-export async function createHeadlessChrome() {
+export async function createHeadlessChrome(url?: string) {
   return await createDriver({
+    url,
     capabilities: {
       browserName: 'chrome',
       'goog:chromeOptions': { args: ['headless', 'disable-gpu'] },
@@ -48,16 +60,18 @@ export async function createHeadlessChrome() {
   });
 }
 
-export async function createFirefox() {
+export async function createFirefox(url?: string) {
   return await createDriver({
+    url,
     capabilities: {
       browserName: 'firefox',
     },
   });
 }
 
-export async function createHeadlessFirefox() {
+export async function createHeadlessFirefox(url?: string) {
   return await createDriver({
+    url,
     capabilities: {
       browserName: 'firefox',
       'moz:firefoxOptions': { args: ['-headless'] },
@@ -65,7 +79,7 @@ export async function createHeadlessFirefox() {
   });
 }
 
-function createServices() {
+export function createServices() {
   return {
     chromeService: new chrome.ServiceBuilder(path.join(CACHE_PATH, `chromedriver${os.platform() === 'win32' ? '.exe' : ''}`)),
     firefoxService: new firefox.ServiceBuilder(path.join(CACHE_PATH, `geckodriver${os.platform() === 'win32' ? '.exe' : ''}`)),

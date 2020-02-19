@@ -15,10 +15,11 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import { createHeadlessChrome, createStaticSite } from '@excelium/testkit';
+import { createHeadlessChrome, createServices, createStaticSite } from '@excelium/testkit';
 import { AddressInfo } from 'net';
-import { By, WebDriver } from 'selenium-webdriver';
+import { DriverService } from 'selenium-webdriver/remote';
 import { promisify } from 'util';
+import { BrowserObject } from 'webdriverio';
 import Playback from '../../src/playback';
 import Variables from '../../src/Variables';
 import WebDriverExecutor from '../../src/webdriver';
@@ -29,7 +30,8 @@ describe('Playback using webdriver', () => {
   const app = createStaticSite();
   let port: number;
   let close: () => void;
-  let driver: WebDriver;
+  let driverService: DriverService;
+  let driver: BrowserObject;
   let executor: WebDriverExecutor;
   let variables: Variables;
   beforeAll(async () => {
@@ -49,15 +51,17 @@ describe('Playback using webdriver', () => {
   });
   beforeAll(async () => {
     variables = new Variables();
-    driver = await createHeadlessChrome();
+    driverService = createServices().chromeService.build();
+    driver = await createHeadlessChrome(await driverService.start());
     executor = new WebDriverExecutor({ driver, implicitWait: 50 });
   });
   afterAll(async () => {
-    await driver.quit();
+    await driver.deleteSession();
+    await driverService.kill();
   });
   afterEach(async () => {
     try {
-      await driver.actions({ bridge: true }).clear();
+      await driver.releaseActions();
     } catch (err) {
       // chromedriver doesn't support clear()
     }
@@ -92,7 +96,7 @@ describe('Playback using webdriver', () => {
       baseUrl: `http://localhost:${port}/`,
     });
     await (await playback.play(test))();
-    const element = await driver.findElement(By.id('f'));
+    const element = await driver.$('#f');
     expect(await element.isSelected()).toBeTruthy();
   });
   it('should utilize before and after commands', async () => {
@@ -250,7 +254,7 @@ describe('Playback using webdriver', () => {
       baseUrl: `http://localhost:${port}/`,
     });
     await (await playback.play(test))();
-    const element = await driver.findElement(By.id('t'));
+    const element = await driver.$('#t');
     expect(await element.isSelected()).toBeFalsy();
   });
 });
