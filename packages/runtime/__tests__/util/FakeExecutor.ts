@@ -15,6 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import { StringUtil } from '@excelium/common';
 import CommandObject from '../../src/model/command-object';
 import Variables from '../../src/Variables';
 
@@ -41,7 +42,7 @@ export default class FakeExecutor {
       return 'skip';
     }
 
-    const upperCase = command.charAt(0).toUpperCase() + command.slice(1);
+    const upperCase = StringUtil.capitalize(command);
     const func = 'do' + upperCase;
     if (!this[func]) {
       throw new Error(`Unknown command ${command}`);

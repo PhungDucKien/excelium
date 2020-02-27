@@ -17,6 +17,7 @@
  * under the License.
  */
 
+import Color from 'color';
 import ObjectUtil from '../src/ObjectUtil';
 
 /**
@@ -79,15 +80,14 @@ describe('test ObjectUtil', () => {
 
   test('check equals', () => {
     expect(ObjectUtil.checkEquals(null, null)).toBe(true);
-    // Assert.assertTrue(ObjectUtil.checkEquals("#ff0000", new Color(255, 0, 0, 1)));
-    // Assert.assertTrue(ObjectUtil.checkEquals("red", new Color(255, 0, 0, 1)));
+    expect(ObjectUtil.checkEquals('#ff0000', Color.rgb(255, 0, 0))).toBe(true);
+    expect(ObjectUtil.checkEquals('red', Color.rgb(255, 0, 0))).toBe(true);
 
     expect(ObjectUtil.checkEquals('abc', null)).toBe(false);
-    // Assert.assertFalse(ObjectUtil.checkEquals("#ff0001", new Color(255, 0, 0, 1)));
-    // Assert.assertFalse(ObjectUtil.checkEquals("blue", new Color(255, 0, 0, 1)));
+    expect(ObjectUtil.checkEquals('#ff0001', Color.rgb(255, 0, 0))).toBe(false);
+    expect(ObjectUtil.checkEquals('blue', Color.rgb(255, 0, 0))).toBe(false);
 
     expect(ObjectUtil.checkEquals('1', 1)).toBe(true);
-    // Assert.assertTrue(ObjectUtil.checkEquals("1", 1L));
     expect(ObjectUtil.checkEquals('1', 1.0)).toBe(true);
     expect(ObjectUtil.checkEquals('true', true)).toBe(true);
     expect(ObjectUtil.checkEquals('false', false)).toBe(true);

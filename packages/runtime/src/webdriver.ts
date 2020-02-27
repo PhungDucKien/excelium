@@ -15,6 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import { StringUtil } from '@excelium/common';
 import { By, Key } from 'selenium-webdriver';
 import { BrowserObject, Element, ElementArray, remote } from 'webdriverio';
 import { enhanceElementsArray } from 'webdriverio/build/utils';
@@ -153,7 +154,7 @@ export default class WebDriverExecutor {
       return 'skip';
     }
 
-    const upperCase = command.charAt(0).toUpperCase() + command.slice(1);
+    const upperCase = StringUtil.capitalize(command);
     const func = 'do' + upperCase;
     if (!this[func]) {
       throw new Error(`Unknown command ${command}`);
@@ -197,7 +198,7 @@ export default class WebDriverExecutor {
   }
 
   public registerCommand(commandName: string, fn: (param1?: string, param2?: string, param3?: string, command?: CommandObject) => Promise<any>) {
-    this['do' + commandName.charAt(0).toUpperCase() + commandName.slice(1)] = fn;
+    this['do' + StringUtil.capitalize(commandName)] = fn;
   }
 
   public waitElementLocated(locator: By) {

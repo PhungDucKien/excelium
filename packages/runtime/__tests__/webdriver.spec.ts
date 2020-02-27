@@ -15,6 +15,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import { StringUtil } from '@excelium/common';
 import { createHeadlessChrome, createHeadlessFirefox, createServices, createStaticSite } from '@excelium/testkit';
 import { AddressInfo } from 'net';
 import { By } from 'selenium-webdriver';
@@ -33,7 +34,7 @@ describe('webdriver executor', () => {
     Object.keys(Commands).forEach(command => {
       if (!ControlFlowCommandNames[command]) {
         expect(() => {
-          if (!WebDriverExecutor.prototype[`do${command.charAt(0).toUpperCase() + command.slice(1)}`]) {
+          if (!WebDriverExecutor.prototype[`do${StringUtil.capitalize(command)}`]) {
             throw new Error(`${command} is not implemented!`);
           }
         }).not.toThrow();

@@ -95,4 +95,26 @@ describe('test StringUtil', () => {
     expect(StringUtil.getFirstSentence('This is first (e.g. 1st) sentence. And the second one.')).toBe('This is first (e.g. 1st) sentence.');
     expect(StringUtil.getFirstSentence('I need this domain.com! Another sentence. And another sentence.')).toBe('I need this domain.com!');
   });
+
+  test('capitalize', () => {
+    expect(StringUtil.capitalize('')).toBe('');
+    expect(StringUtil.capitalize('x')).toBe('X');
+    expect(StringUtil.capitalize('Foo')).toBe('Foo');
+    expect(StringUtil.capitalize('foo')).toBe('Foo');
+
+    expect(StringUtil.capitalize('cat')).toBe('Cat');
+    expect(StringUtil.capitalize('cAt')).toBe('CAt');
+    expect(StringUtil.capitalize("'cat'")).toBe("'cat'");
+  });
+
+  test('uncapitalize', () => {
+    expect(StringUtil.uncapitalize('Foo')).toBe('foo');
+    expect(StringUtil.uncapitalize('foo')).toBe('foo');
+    expect(StringUtil.uncapitalize('')).toBe('');
+    expect(StringUtil.uncapitalize('X')).toBe('x');
+
+    expect(StringUtil.uncapitalize('cat')).toBe('cat');
+    expect(StringUtil.uncapitalize('Cat')).toBe('cat');
+    expect(StringUtil.uncapitalize('CAT')).toBe('cAT');
+  });
 });

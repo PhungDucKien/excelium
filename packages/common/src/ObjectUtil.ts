@@ -17,6 +17,8 @@
  * under the License.
  */
 
+import Color from 'color';
+import _ from 'lodash';
 import BooleanUtil from './BooleanUtil';
 import StringUtil from './StringUtil';
 
@@ -96,32 +98,18 @@ export default class ObjectUtil {
     if (actual == null) {
       return expected == null;
     }
-    // TODO
-    // Class clazz = actual.getClass();
-    // if (clazz.equals(Color.class)) {
-    //     return actual.equals(Color.fromString(expected));
-    // }
-    // if (clazz.equals(Byte.class)) {
-    //     return actual.equals(Byte.parseByte(expected));
-    // }
-    // if (clazz.equals(Short.class)) {
-    //     return actual.equals(Short.parseShort(expected));
-    // }
-    // if (clazz.equals(Integer.class)) {
-    //     return actual.equals(Integer.parseInt(expected));
-    // }
-    // if (clazz.equals(Long.class)) {
-    //     return actual.equals(Long.parseLong(expected));
-    // }
-    // if (clazz.equals(Float.class)) {
-    //     return actual.equals(Float.parseFloat(expected));
-    // }
-    // if (clazz.equals(Double.class)) {
-    //     return actual.equals(Double.parseDouble(expected));
-    // }
-    // if (clazz.equals(Boolean.class)) {
-    //     return actual.equals(Boolean.parseBoolean(expected));
-    // }
+    if (actual instanceof Color) {
+      return _.isEqual(actual, new Color(expected!));
+    }
+    if (typeof actual === 'number' && Number.isInteger(actual)) {
+      return actual === parseInt(expected!, 10);
+    }
+    if (typeof actual === 'number' && !Number.isInteger(actual)) {
+      return actual === parseFloat(expected!);
+    }
+    if (typeof actual === 'boolean') {
+      return actual === BooleanUtil.toBoolean(expected);
+    }
     // Compares as string
     return actual.toString() === expected;
   }

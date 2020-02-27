@@ -174,6 +174,14 @@ export default class StringUtil {
     return false;
   }
 
+  public static capitalize(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  public static uncapitalize(str: string) {
+    return str.charAt(0).toLowerCase() + str.slice(1);
+  }
+
   /**
    * Get first sentence regex
    */
