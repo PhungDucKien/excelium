@@ -15,18 +15,17 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import { ArgType, Command, text as _text, variable as _variable } from '../../../src/model';
+import Action, { ActionOptions, CommandArguments } from './action';
 
-export default new Command({
-  name: 'store',
-  displayName: 'Store',
-  description: 'Save a target string as a variable for easy re-use.',
-  args: {
-    text: ArgType.exact(_text).isRequired(),
-    variable: ArgType.exact(_variable).isRequired(),
-  },
-  validate({ text, variable }) {
-    return this.args!.text.validate(text) && this.args!.variable.validate(variable);
-  },
-  execute: () => Promise.resolve(),
-});
+export default class Accessor<T extends CommandArguments> extends Action<T> {
+  public readonly exclude?: Array<'store' | 'verify' | 'wait' | 'execute'>;
+
+  constructor({ exclude, ...rest }: AccessorOptions<T>) {
+    super(rest);
+    this.exclude = exclude;
+  }
+}
+
+export interface AccessorOptions<T extends CommandArguments> extends ActionOptions<T> {
+  exclude?: Array<'store' | 'verify' | 'wait' | 'execute'>;
+}

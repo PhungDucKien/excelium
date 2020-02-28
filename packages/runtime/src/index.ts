@@ -15,6 +15,13 @@
 // specific language governing permissions and limitations
 // under the License.
 
+export { default as CommandExecutor } from './command-executor';
+export { default as CommandFactory } from './command-factory';
 export { default as Playback } from './playback';
-export * from './playback';
+export { default as Variables } from './Variables';
+export { default as WebDriverExecutor } from './webdriver';
 export { CommandType } from './playback-tree/command-node';
+export * from './model';
+export * from './playback';
+export * from './preprocessors';
+export * from './utils';

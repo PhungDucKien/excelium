@@ -16,13 +16,16 @@
 // under the License.
 
 import { StringUtil } from '@excelium/common';
+import { Project } from '@excelium/model';
 import { By, Key } from 'selenium-webdriver';
 import { BrowserObject, Element, ElementArray, remote } from 'webdriverio';
 import { enhanceElementsArray } from 'webdriverio/build/utils';
 import { getElement, getElements } from 'webdriverio/build/utils/getElementObject';
+import CommandExecutor from './command-executor';
+import CommandFactory from './command-factory';
 import { AssertionError, VerificationError } from './errors';
-import CommandObject from './model/command-object';
-import { composePreprocessors, interpolateScript, interpolateString, preprocessArray } from './preprocessors';
+import { Command, CommandObject } from './model';
+import { composeMapper, composePreprocessors, composeValidator, interpolateScript, interpolateString, preprocessArray } from './preprocessors';
 import { absolutifyUrl } from './utils';
 import Variables from './Variables';
 
@@ -197,6 +200,40 @@ export default class WebDriverExecutor {
     return currentHandles.find(handle => !this[state].openedWindows!.includes(handle));
   }
 
+  public registerCommandExecutors(constructors: Array<new (webDriver: WebDriverExecutor, project: Project) => CommandExecutor>, project: Project) {
+    const commandExecutors = [] as CommandExecutor[];
+    for (const constructorFn of constructors) {
+      commandExecutors.push(new constructorFn(this, project));
+    }
+    const commands = CommandFactory.createCommandMap(commandExecutors);
+    for (const command of commands.values()) {
+      this.registerExecutorCommand(command);
+    }
+  }
+
+  public registerExecutorCommand(command: Command<any>) {
+    const { execute, name, preprocessors, validate } = command;
+    if (preprocessors && preprocessors.length > 0) {
+      const fallbacks = {} as { [key: string]: (value?: any, variables?: any) => any };
+      if (preprocessors[0] === interpolateString) {
+        fallbacks.param1Fallback = preprocessArray(preprocessors[0]);
+      }
+      if (preprocessors[1] === interpolateString) {
+        fallbacks.param2Fallback = preprocessArray(preprocessors[1]);
+      }
+      if (preprocessors[2] === interpolateString) {
+        fallbacks.param3Fallback = preprocessArray(preprocessors[2]);
+      }
+      const nulls = Array(3 - preprocessors.length).fill(null);
+      this['do' + StringUtil.capitalize(name)] = composeMapper(
+        command,
+        composePreprocessors(...preprocessors, ...nulls, fallbacks, composeValidator(command, validate, execute))
+      );
+    } else {
+      this['do' + StringUtil.capitalize(name)] = composeMapper(command, composeValidator(command, validate, execute));
+    }
+  }
+
   public registerCommand(commandName: string, fn: (param1?: string, param2?: string, param3?: string, command?: CommandObject) => Promise<any>) {
     this['do' + StringUtil.capitalize(commandName)] = fn;
   }
@@ -274,6 +311,14 @@ export default class WebDriverExecutor {
       throw new Error(res.error.message);
     }
     return enhanceElementsArray(getElements.call(this.driver, null, res), this.driver, null);
+  }
+
+  public setVariable(string: string, variable: string) {
+    this.variables.set(variable, string);
+  }
+
+  public getVariable(variable: string) {
+    return this.variables.get(variable);
   }
 
   public async moveTo(element: Element, xoffset?: number, yoffset?: number) {
@@ -1364,45 +1409,49 @@ function parseCoordString(coord: string) {
   };
 }
 
-function preprocessKeys(_str: string, variables?: Variables) {
-  const str = interpolateString(_str, variables);
-  const keys = [];
-  const match = str.match(/\$\{\w+\}/g);
-  if (!match) {
-    keys.push(str);
-  } else {
-    let i = 0;
-    while (i < str.length) {
-      const currentKey = match.shift()!;
-      const currentKeyIndex = str.indexOf(currentKey, i);
-      if (currentKeyIndex > i) {
-        // push the string before the current key
-        keys.push(str.substr(i, currentKeyIndex - i));
-        i = currentKeyIndex;
-      }
-      if (currentKey) {
-        if (/^\$\{KEY_\w+\}/.test(currentKey)) {
-          // is a key
-          const keyName = currentKey.match(/\$\{KEY_(\w+)\}/)![1] as keyof typeof Key;
-          const key = Key[keyName];
-          if (key) {
-            keys.push(key);
-          } else {
-            throw new Error(`Unrecognised key ${keyName}`);
-          }
-        } else {
-          // not a key, and not a stored variable, push it as-is
-          keys.push(currentKey);
+function preprocessKeys(_str?: string, variables?: Variables) {
+  if (_str != null) {
+    const str = interpolateString(_str, variables)!;
+    const keys = [];
+    const match = str.match(/\$\{\w+\}/g);
+    if (!match) {
+      keys.push(str);
+    } else {
+      let i = 0;
+      while (i < str.length) {
+        const currentKey = match.shift()!;
+        const currentKeyIndex = str.indexOf(currentKey, i);
+        if (currentKeyIndex > i) {
+          // push the string before the current key
+          keys.push(str.substr(i, currentKeyIndex - i));
+          i = currentKeyIndex;
         }
-        i += currentKey.length;
-      } else if (i < str.length) {
-        // push the rest of the string
-        keys.push(str.substr(i, str.length));
-        i = str.length;
+        if (currentKey) {
+          if (/^\$\{KEY_\w+\}/.test(currentKey)) {
+            // is a key
+            const keyName = currentKey.match(/\$\{KEY_(\w+)\}/)![1] as keyof typeof Key;
+            const key = Key[keyName];
+            if (key) {
+              keys.push(key);
+            } else {
+              throw new Error(`Unrecognised key ${keyName}`);
+            }
+          } else {
+            // not a key, and not a stored variable, push it as-is
+            keys.push(currentKey);
+          }
+          i += currentKey.length;
+        } else if (i < str.length) {
+          // push the rest of the string
+          keys.push(str.substr(i, str.length));
+          i = str.length;
+        }
       }
     }
+    return keys;
+  } else {
+    return _str;
   }
-  return keys;
 }
 
 interface Locators {

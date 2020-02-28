@@ -21,9 +21,11 @@ describe('command', () => {
   it('should have name and description', () => {
     const cmd = new Command({
       name: 'cmd',
+      displayName: 'cmd',
       description: 'desc',
       args: {},
       validate: () => true,
+      execute: () => Promise.resolve(),
     });
 
     expect(cmd.name).toBe('cmd');
@@ -40,11 +42,13 @@ describe('command', () => {
     const at = new ArgType([arg]);
     const cmd = new Command({
       name: 'cmd',
+      displayName: 'cmd',
       description: 'desc',
       args: { num: at },
       validate: ({ num }) => at.validate(num),
+      execute: () => Promise.resolve(),
     });
-    expect(cmd.validate({ num: 1 })).toBeTruthy();
-    expect(cmd.validate({ num: 2 })).toBeFalsy();
+    expect(cmd.validate!({ num: 1 })).toBeTruthy();
+    expect(cmd.validate!({ num: 2 })).toBeFalsy();
   });
 });

@@ -20,15 +20,15 @@ import store from './store';
 describe('store schema', () => {
   describe('validate', () => {
     it('text should be required', () => {
-      expect(() => store.validate({ text: undefined, variable: 'a' })).toThrow('Argument is required');
+      expect(() => store.validate!({ text: undefined, variable: 'a' })).toThrow('Argument is required');
     });
 
     it('variable should be required', () => {
-      expect(() => store.validate({ text: 'a', variable: undefined })).toThrow('Argument is required');
+      expect(() => store.validate!({ text: 'a', variable: undefined })).toThrow('Argument is required');
     });
 
     it('should validate', () => {
-      expect(store.validate({ text: 'a', variable: 'a' })).toBeTruthy();
+      expect(store.validate!({ text: 'a', variable: 'a' })).toBeTruthy();
     });
   });
 });

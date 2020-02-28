@@ -97,12 +97,12 @@ export class CommandNode {
   }
 
   public evaluateForEach(variables: Variables) {
-    const collection = variables.get(interpolateScript(this.command.param1 || '', variables).script);
+    const collection = variables.get(interpolateScript(this.command.param1 || '', variables).script!);
     if (!collection) {
       console.error('Invalid variable provided.');
       return false;
     }
-    variables.set(interpolateScript(this.command.param2 || '', variables).script, collection[this.timesVisited]);
+    variables.set(interpolateScript(this.command.param2 || '', variables).script!, collection[this.timesVisited]);
     const result = this.timesVisited < collection.length;
     if (result) {
       this.emitControlFlowEvent({

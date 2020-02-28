@@ -15,4 +15,6 @@
 // specific language governing permissions and limitations
 // under the License.
 
+export { default as Accessor } from './accessor';
+export { default as Action } from './action';
 export { default as Command } from './command';

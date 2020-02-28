@@ -16,14 +16,17 @@
 // under the License.
 
 import { StringUtil } from '@excelium/common';
+import { Project } from '@excelium/model';
 import { createHeadlessChrome, createHeadlessFirefox, createServices, createStaticSite } from '@excelium/testkit';
 import { AddressInfo } from 'net';
 import { By } from 'selenium-webdriver';
 import { DriverService } from 'selenium-webdriver/remote';
 import { promisify } from 'util';
 import { BrowserObject } from 'webdriverio';
-import { Commands } from '../src/model';
+import CommandExecutor from '../src/command-executor';
+import { Action, ArgType, CommandObject, Commands, text } from '../src/model';
 import { ControlFlowCommandNames } from '../src/playback-tree/commands';
+import { interpolateString } from '../src/preprocessors';
 import Variables from '../src/Variables';
 import WebDriverExecutor from '../src/webdriver';
 
@@ -92,9 +95,62 @@ describe('webdriver executor', () => {
           expect(param1).toBe('param1');
           expect(param2).toBe('param2');
           expect(param3).toBe('param3');
-          expect(commandObject).toBe(command);
+          expect(commandObject).toStrictEqual(command);
         });
         await executor.doCommandName('param1', 'param2', 'param3', command);
+      });
+
+      it('should be able to register a command executor', async () => {
+        expect.assertions(5);
+        const command = {
+          param1Fallback: [
+            ['${a}', 's'],
+            ['${a}', 's'],
+            ['${a}', 's'],
+          ],
+        };
+
+        const p = new Project();
+
+        class MyCommandExecutor extends CommandExecutor {
+          public constructor(webDriver: WebDriverExecutor, project: Project) {
+            super(webDriver, project);
+          }
+
+          public getActions() {
+            return [
+              new Action({
+                name: 'executorCommandName',
+                args: {
+                  param1: ArgType.exact(text).isRequired(),
+                  param2: ArgType.exact(text).isRequired(),
+                  param3: ArgType.exact(text).isRequired(),
+                },
+                preprocessors: [interpolateString, interpolateString, interpolateString],
+                execute: async (param1?: string, param2?: string, param3?: string, commandObject?: CommandObject) => {
+                  expect(param1).toBe('a');
+                  expect(param2).toBe('b');
+                  expect(param3).toBe('c');
+                  expect(commandObject).toStrictEqual({
+                    param1Fallback: [
+                      ['a', 's'],
+                      ['a', 's'],
+                      ['a', 's'],
+                    ],
+                  });
+                  expect(this.project).toBe(p);
+                },
+              }),
+            ];
+          }
+        }
+
+        variables.set('a', 'a');
+        variables.set('b', 'b');
+        variables.set('c', 'c');
+
+        executor.registerCommandExecutors([MyCommandExecutor], p);
+        await executor.doExecutorCommandName('${a}', '${b}', '${c}', command);
       });
     });
     describe('accept alert', () => {

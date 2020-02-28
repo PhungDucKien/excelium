@@ -15,29 +15,17 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ArgType, { ExtractArgument } from '../args/arg-type';
-import Argument from '../args/argument';
+import Action, { ActionOptions, CommandArguments } from './action';
 
-export default class Command<T extends CommandArguments> {
-  public readonly name: string;
-  public readonly description: string;
-  public readonly args: T;
-  public readonly validate: CommandValidationFunction<T>;
+export default class Command<T extends CommandArguments> extends Action<T> {
+  public readonly displayName: string;
 
-  constructor({ name, description, validate, args }: { name: string; description: string; validate: CommandValidationFunction<T>; args: T }) {
-    this.name = name;
-    this.description = description;
-    this.args = args;
-    this.validate = validate;
+  constructor({ displayName, ...rest }: CommandOptions<T>) {
+    super(rest);
+    this.displayName = displayName;
   }
 }
 
-interface CommandArguments {
-  [key: string]: ArgType<Array<Argument<any, any>>>;
+export interface CommandOptions<T extends CommandArguments> extends ActionOptions<T> {
+  displayName: string;
 }
-
-type ExtractArgType<A> = A extends ArgType<infer B> ? ExtractArgument<B[number]> | undefined : never;
-type ExtractArgumentFromArgType<A extends CommandArguments> = {
-  [K in keyof A]: ExtractArgType<A[K]>;
-};
-type CommandValidationFunction<A extends CommandArguments> = (value: ExtractArgumentFromArgType<A>) => boolean;
