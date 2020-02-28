@@ -1,27 +1,3 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018 Excelium
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 package excelium.core;
 
 import excelium.common.NumberUtil;
@@ -31,18 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-/**
- * Base class for command executors.
- *
- * @author PhungDucKien
- * @since 2018.05.07
- */
 public class CommandExecutor {
-
-    /**
-     * Web driver
-     */
-    protected final ContextAwareWebDriver webDriver;
 
     /**
      * Base URL
@@ -54,24 +19,9 @@ public class CommandExecutor {
      */
     protected final Excelium excelium;
 
-    /**
-     * Project instance
-     */
-    protected final Project project;
-
-    /**
-     * Instantiates a new Command executor.
-     *
-     * @param webDriver the web driver
-     * @param baseUrl   the base url
-     * @param excelium  the excelium
-     * @param project   the project
-     */
     public CommandExecutor(ContextAwareWebDriver webDriver, String baseUrl, Excelium excelium, Project project) {
-        this.webDriver = webDriver;
         this.baseUrl = baseUrl;
         this.excelium = excelium;
-        this.project = project;
     }
 
     /**
@@ -88,18 +38,10 @@ public class CommandExecutor {
         }
     }
 
-    /**
-     * Normalize text string.
-     *
-     * @param text the text
-     * @return the string
-     */
     public String normalizeText(String text) {
-        text = text.replace("\r\n", "\n");
         if (webDriver.isNativeContext()) {
             text = text.replace("\n", "&#10;");
         }
-        return text;
     }
 
     /**
@@ -124,15 +66,6 @@ public class CommandExecutor {
         WebDriverWait wait = new WebDriverWait(webDriver, 0);
         wait.withTimeout(Duration.ofMillis(timeout));
         return wait;
-    }
-
-    /**
-     * Gets web driver.
-     *
-     * @return the web driver
-     */
-    public ContextAwareWebDriver getWebDriver() {
-        return webDriver;
     }
 
     /**
