@@ -705,37 +705,7 @@ export default class WebDriverExecutor {
     }
   }
 
-  // alert commands
-
-  public async doAcceptAlert() {
-    await this.driver.acceptAlert();
-  }
-
-  public async doAcceptConfirmation() {
-    await this.driver.acceptAlert();
-  }
-
-  public async doAnswerPrompt(optAnswer?: string) {
-    if (optAnswer) {
-      await this.driver.sendAlertText(optAnswer);
-    }
-    await this.driver.acceptAlert();
-  }
-
-  public async doDismissConfirmation() {
-    await this.driver.dismissAlert();
-  }
-
-  public async doDismissPrompt() {
-    await this.driver.dismissAlert();
-  }
-
   // store commands
-
-  public async doStore(string: string, variable: string) {
-    this.variables.set(variable, string);
-    return Promise.resolve();
-  }
 
   public async doStoreAttribute(attributeLocator: string, variable: string) {
     const attributePos = attributeLocator.lastIndexOf('@');
@@ -785,27 +755,6 @@ export default class WebDriverExecutor {
 
   // assertions
 
-  public async doAssert(variableName: string, value: string) {
-    const variable = `${this.variables.get(variableName)}`;
-    if (variable !== value) {
-      throw new AssertionError("Actual value '" + variable + "' did not match '" + value + "'");
-    }
-  }
-
-  public async doAssertAlert(expectedText: string) {
-    const actualText = await this.driver.getAlertText();
-    if (actualText !== expectedText) {
-      throw new AssertionError("Actual alert text '" + actualText + "' did not match '" + expectedText + "'");
-    }
-  }
-
-  public async doAssertConfirmation(expectedText: string) {
-    const actualText = await this.driver.getAlertText();
-    if (actualText !== expectedText) {
-      throw new AssertionError("Actual confirm text '" + actualText + "' did not match '" + expectedText + "'");
-    }
-  }
-
   public async doAssertEditable(locator: string, _?: string, __?: string, commandObject?: CommandObject) {
     const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (!(await this.isElementEditable(element))) {
@@ -817,13 +766,6 @@ export default class WebDriverExecutor {
     const element = await this.waitForElement(locator, commandObject?.param1Fallback);
     if (await this.isElementEditable(element)) {
       throw new AssertionError('Element is editable');
-    }
-  }
-
-  public async doAssertPrompt(expectedText: string) {
-    const actualText = await this.driver.getAlertText();
-    if (actualText !== expectedText) {
-      throw new AssertionError("Actual prompt text '" + actualText + "' did not match '" + expectedText + "'");
     }
   }
 
@@ -1083,8 +1025,6 @@ WebDriverExecutor.prototype.doSelectWindow = composePreprocessors(interpolateStr
 
 WebDriverExecutor.prototype.doSelectFrame = composePreprocessors(interpolateString, WebDriverExecutor.prototype.doSelectFrame);
 
-WebDriverExecutor.prototype.doAnswerPrompt = composePreprocessors(interpolateString, null, WebDriverExecutor.prototype.doAnswerPrompt);
-
 WebDriverExecutor.prototype.doAddSelection = composePreprocessors(
   interpolateString,
   interpolateString,
@@ -1279,8 +1219,6 @@ WebDriverExecutor.prototype.doExecuteScript = composePreprocessors(interpolateSc
 
 WebDriverExecutor.prototype.doExecuteAsyncScript = composePreprocessors(interpolateScript, null, WebDriverExecutor.prototype.doExecuteAsyncScript);
 
-WebDriverExecutor.prototype.doStore = composePreprocessors(interpolateString, null, WebDriverExecutor.prototype.doStore);
-
 WebDriverExecutor.prototype.doStoreAttribute = composePreprocessors(
   interpolateString,
   null,
@@ -1315,12 +1253,6 @@ WebDriverExecutor.prototype.doStoreValue = composePreprocessors(
   WebDriverExecutor.prototype.doStoreValue
 );
 
-WebDriverExecutor.prototype.doAssert = composePreprocessors(null, interpolateString, WebDriverExecutor.prototype.doAssert);
-
-WebDriverExecutor.prototype.doAssertAlert = composePreprocessors(interpolateString, null, WebDriverExecutor.prototype.doAssertAlert);
-
-WebDriverExecutor.prototype.doAssertConfirmation = composePreprocessors(interpolateString, null, WebDriverExecutor.prototype.doAssertConfirmation);
-
 WebDriverExecutor.prototype.doAssertEditable = composePreprocessors(
   interpolateString,
   null,
@@ -1336,8 +1268,6 @@ WebDriverExecutor.prototype.doAssertNotEditable = composePreprocessors(
   { param1Fallback: preprocessArray(interpolateString) },
   WebDriverExecutor.prototype.doAssertNotEditable
 );
-
-WebDriverExecutor.prototype.doAssertPrompt = composePreprocessors(interpolateString, null, WebDriverExecutor.prototype.doAssertPrompt);
 
 WebDriverExecutor.prototype.doAssertText = composePreprocessors(interpolateString, interpolateString, WebDriverExecutor.prototype.doAssertText);
 
