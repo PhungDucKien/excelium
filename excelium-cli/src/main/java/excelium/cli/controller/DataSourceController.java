@@ -37,8 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-import static excelium.common.Prompt.promptInput;
-import static excelium.common.Prompt.promptList;
+import static excelium.common.Prompt.*;
 
 /**
  * Provides commands for controlling data source.
@@ -75,17 +74,24 @@ public class DataSourceController extends BaseController {
 
         if (dataSourceType == DataSourceType.MYSQL || dataSourceType == DataSourceType.POSTGRESQL) {
             String driverClass = dataSourceType.getDriverClass();
+            dataSource.setDriverClass(driverClass);
 
-            String databaseHost = promptInput("Database Host", "localhost");
-            String databasePort = promptInput("Database Port", String.valueOf(dataSourceType.getDefaultPort()));
-            databaseName = promptInput("Database Name", dataSourceType.getText());
+            boolean agree = promptConfirm("Do you want to use connection string?");
+            if (agree) {
+                String defaultUrl = dataSourceType.getUrl("localhost", String.valueOf(dataSourceType.getDefaultPort()), dataSourceType.getText());
+                String url = promptInput("Database Connection String", defaultUrl);
+                dataSource.setUrl(url);
+            } else {
+                String databaseHost = promptInput("Database Host", "localhost");
+                String databasePort = promptInput("Database Port", String.valueOf(dataSourceType.getDefaultPort()));
+                databaseName = promptInput("Database Name", dataSourceType.getText());
+
+                String url = dataSourceType.getUrl(databaseHost, databasePort, databaseName);
+                dataSource.setUrl(url);
+            }
+
             String userName = promptInput("User Name", null);
             String password = promptInput("Password", null);
-
-            String url = dataSourceType.getUrl(databaseHost, databasePort, databaseName);
-
-            dataSource.setDriverClass(driverClass);
-            dataSource.setUrl(url);
             dataSource.setUserName(userName);
             dataSource.setPassword(password);
         } else if (dataSourceType == DataSourceType.DYNAMODB) {

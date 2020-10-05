@@ -79,6 +79,7 @@ public class SQLDatabaseService implements DatabaseService {
                 return true;
             }
         } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
             return false;
         }
         return false;

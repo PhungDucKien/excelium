@@ -91,6 +91,7 @@ public class DynamoDBDatabaseService implements DatabaseService {
             connection.listTables();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
