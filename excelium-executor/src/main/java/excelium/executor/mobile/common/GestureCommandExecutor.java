@@ -441,8 +441,8 @@ public class GestureCommandExecutor extends CommandExecutor {
         }
 
         double anchorPercentage = 0.5f;
-        double startPercentage = (direction.equals("up") || direction.equals("right")) ? 0.1f : 0.9f;
-        double finalPercentage = (direction.equals("up") || direction.equals("right")) ? 0.9f : 0.1f;
+        double startPercentage = (direction.equals("up") || direction.equals("right")) ? 0.25f : 0.75f;
+        double finalPercentage = (direction.equals("up") || direction.equals("right")) ? 0.75f : 0.25f;
         long duration = 1000;
 
         PointOption startPoint = PointOption.point(
