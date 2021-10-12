@@ -387,976 +387,975 @@ No | Command | Method | Param 1 | Param 2 | Param 3
 381 | Attach File | attachFile | parentLocator | locator | filePath
 382 | Blur | blur | locator |  | 
 383 | Blur | blur | parentLocator | locator | 
-384 | Broadcast Intent | broadcastIntent | intent |  | 
-385 | Capture Element Screenshot | captureElementScreenshot | locator |  | 
-386 | Capture Element Screenshot | captureElementScreenshot | parentLocator | locator | 
-387 | Capture Screenshot | captureScreenshot |  |  | 
-388 | Capture Viewport | captureViewport |  |  | 
-389 | Check | check | locator |  | 
-390 | Check | check | parentLocator | locator | 
-391 | Choose Cancel Confirmation | chooseCancelConfirmation |  |  | 
-392 | Choose Cancel Prompt | chooseCancelPrompt |  |  | 
-393 | Choose Ok Alert | chooseOkAlert |  |  | 
-394 | Choose Ok Confirmation | chooseOkConfirmation |  |  | 
-395 | Clean Driver | cleanDriver |  |  | 
-396 | Clear | clear | locator |  | 
-397 | Clear | clear | parentLocator | locator | 
-398 | Clear Log | clearLog |  |  | 
-399 | Click | click | locator |  | 
-400 | Click | click | parentLocator | locator | 
-401 | Click At | clickAt | locator | coordString | 
-402 | Click At | clickAt | parentLocator | locator | coordString
-403 | Click Button | clickButton | indexOrText |  | 
-404 | Click Text | clickText | indexOrText |  | 
-405 | Close | close |  |  | 
-406 | Close App | closeApp |  |  | 
-407 | Close Control Center | closeControlCenter |  |  | 
-408 | Context Menu | contextMenu | locator |  | 
-409 | Context Menu | contextMenu | parentLocator | locator | 
-410 | Context Menu At | contextMenuAt | locator | coordString | 
-411 | Context Menu At | contextMenuAt | parentLocator | locator | coordString
-412 | Control Key Down | controlKeyDown |  |  | 
-413 | Control Key Up | controlKeyUp |  |  | 
-414 | Create Cookie | createCookie | nameValuePair |  | 
-415 | Create Cookie | createCookie | nameValuePair | optionsString | 
-416 | Delete All Visible Cookies | deleteAllVisibleCookies |  |  | 
-417 | Delete Cookie | deleteCookie | name |  | 
-418 | Delete Downloaded File | deleteDownloadedFile | filePattern |  | 
-419 | Deselect Pop Up | deselectPopUp |  |  | 
-420 | Double Click | doubleClick | locator |  | 
-421 | Double Click | doubleClick | parentLocator | locator | 
-422 | Double Click At | doubleClickAt | locator | coordString | 
-423 | Double Click At | doubleClickAt | parentLocator | locator | coordString
-424 | Double Tap | doubleTap | locator |  | 
-425 | Double Tap | doubleTap | parentLocator | locator | 
-426 | Double Tap At | doubleTapAt | coordinate |  | 
-427 | Double Tap At | doubleTapAt | locator | coordString | 
-428 | Double Tap At | doubleTapAt | parentLocator | locator | coordString
-429 | Drag And Drop | dragAndDrop | locator | movementsString | 
-430 | Drag And Drop | dragAndDrop | parentLocator | locator | movementsString
-431 | Drag And Drop To Object | dragAndDropToObject | toBeDraggedObjectLocator | dragDestinationObjectLocator | 
-432 | Echo | echo | message |  | 
-433 | Execute | execute | action |  | 
-434 | Execute Each | executeEach | action | locator | variable
-435 | Execute If Activity | executeIfActivity | action | activity | 
-436 | Execute If Alert | executeIfAlert | action | text | 
-437 | Execute If Alert Match | executeIfAlertMatch | action | text | 
-438 | Execute If Alert Not Match | executeIfAlertNotMatch | action | text | 
-439 | Execute If Alert Not Present | executeIfAlertNotPresent | action |  | 
-440 | Execute If Alert Present | executeIfAlertPresent | action |  | 
-441 | Execute If Body Text | executeIfBodyText | action | text | 
-442 | Execute If Body Text Match | executeIfBodyTextMatch | action | text | 
-443 | Execute If Body Text Not Match | executeIfBodyTextNotMatch | action | text | 
-444 | Execute If Checked | executeIfChecked | action | locator | 
-445 | Execute If Checked | executeIfChecked | action | parentLocator | locator
-446 | Execute If Confirmation | executeIfConfirmation | action | text | 
-447 | Execute If Confirmation Match | executeIfConfirmationMatch | action | text | 
-448 | Execute If Confirmation Not Match | executeIfConfirmationNotMatch | action | text | 
-449 | Execute If Confirmation Not Present | executeIfConfirmationNotPresent | action |  | 
-450 | Execute If Confirmation Present | executeIfConfirmationPresent | action |  | 
-451 | Execute If Context | executeIfContext | action | text | 
-452 | Execute If Context Count | executeIfContextCount | action | text | 
-453 | Execute If Context Match | executeIfContextMatch | action | text | 
-454 | Execute If Context Not Match | executeIfContextNotMatch | action | text | 
-455 | Execute If Cookie | executeIfCookie | action | text | 
-456 | Execute If Cookie By Name | executeIfCookieByName | action | name | text
-457 | Execute If Cookie By Name Match | executeIfCookieByNameMatch | action | name | text
-458 | Execute If Cookie By Name Not Match | executeIfCookieByNameNotMatch | action | name | text
-459 | Execute If Cookie Match | executeIfCookieMatch | action | text | 
-460 | Execute If Cookie Not Match | executeIfCookieNotMatch | action | text | 
-461 | Execute If Cookie Not Present | executeIfCookieNotPresent | action | name | 
-462 | Execute If Cookie Present | executeIfCookiePresent | action | name | 
-463 | Execute If Editable | executeIfEditable | action | locator | 
-464 | Execute If Editable | executeIfEditable | action | parentLocator | locator
-465 | Execute If Element Not Present | executeIfElementNotPresent | action | locator | 
-466 | Execute If Element Not Present | executeIfElementNotPresent | action | parentLocator | locator
-467 | Execute If Element Present | executeIfElementPresent | action | locator | 
-468 | Execute If Element Present | executeIfElementPresent | action | parentLocator | locator
-469 | Execute If Enabled | executeIfEnabled | action | locator | 
-470 | Execute If Enabled | executeIfEnabled | action | parentLocator | locator
-471 | Execute If Eval | executeIfEval | action | expression | text
-472 | Execute If Eval Script | executeIfEvalScript | action | script | text
-473 | Execute If Eval Script Match | executeIfEvalScriptMatch | action | script | text
-474 | Execute If Eval Script Not Match | executeIfEvalScriptNotMatch | action | script | text
-475 | Execute If Exists In Database | executeIfExistsInDatabase | action | query | 
-476 | Execute If Exists In Database | executeIfExistsInDatabase | action | query | values
-477 | Execute If Expression | executeIfExpression | action | expression | text
-478 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
-479 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
-480 | Execute If File Downloaded | executeIfFileDownloaded | action | filePattern | 
-481 | Execute If List Contain | executeIfListContain | action | variable | text
-482 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
-483 | Execute If Location | executeIfLocation | action | text | 
-484 | Execute If Location Match | executeIfLocationMatch | action | text | 
-485 | Execute If Location Not Match | executeIfLocationNotMatch | action | text | 
-486 | Execute If Not Activity | executeIfNotActivity | action | activity | 
-487 | Execute If Not Alert | executeIfNotAlert | action | text | 
-488 | Execute If Not Body Text | executeIfNotBodyText | action | text | 
-489 | Execute If Not Checked | executeIfNotChecked | action | locator | 
-490 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
-491 | Execute If Not Confirmation | executeIfNotConfirmation | action | text | 
-492 | Execute If Not Context | executeIfNotContext | action | text | 
-493 | Execute If Not Context Count | executeIfNotContextCount | action | text | 
-494 | Execute If Not Cookie | executeIfNotCookie | action | text | 
-495 | Execute If Not Cookie By Name | executeIfNotCookieByName | action | name | text
-496 | Execute If Not Editable | executeIfNotEditable | action | locator | 
-497 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
-498 | Execute If Not Enabled | executeIfNotEnabled | action | locator | 
-499 | Execute If Not Enabled | executeIfNotEnabled | action | parentLocator | locator
-500 | Execute If Not Eval | executeIfNotEval | action | expression | text
-501 | Execute If Not Eval Script | executeIfNotEvalScript | action | script | text
-502 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | query | 
-503 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | query | values
-504 | Execute If Not Expression | executeIfNotExpression | action | expression | text
-505 | Execute If Not File Downloaded | executeIfNotFileDownloaded | action | filePattern | 
-506 | Execute If Not Location | executeIfNotLocation | action | text | 
-507 | Execute If Not Page Source | executeIfNotPageSource | action | text | 
-508 | Execute If Not Prompt | executeIfNotPrompt | action | text | 
-509 | Execute If Not QR | executeIfNotQR | action | locator | text
-510 | Execute If Not Selected Id | executeIfNotSelectedId | action | locator | text
-511 | Execute If Not Selected Index | executeIfNotSelectedIndex | action | locator | text
-512 | Execute If Not Selected Label | executeIfNotSelectedLabel | action | locator | text
-513 | Execute If Not Selected Value | executeIfNotSelectedValue | action | locator | text
-514 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | locator | 
-515 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | parentLocator | locator
-516 | Execute If Not Tag Name | executeIfNotTagName | action | locator | text
-517 | Execute If Not Text | executeIfNotText | action | locator | text
-518 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
-519 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
-520 | Execute If Not Title | executeIfNotTitle | action | text | 
-521 | Execute If Not Value | executeIfNotValue | action | locator | text
-522 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
-523 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
-524 | Execute If Not Variable | executeIfNotVariable | action | variable | text
-525 | Execute If Not Visible | executeIfNotVisible | action | locator | 
-526 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
-527 | Execute If Not Window Count | executeIfNotWindowCount | action | text | 
-528 | Execute If Not Window Handle | executeIfNotWindowHandle | action | text | 
-529 | Execute If Page Source | executeIfPageSource | action | text | 
-530 | Execute If Page Source Match | executeIfPageSourceMatch | action | text | 
-531 | Execute If Page Source Not Match | executeIfPageSourceNotMatch | action | text | 
-532 | Execute If Prompt | executeIfPrompt | action | text | 
-533 | Execute If Prompt Match | executeIfPromptMatch | action | text | 
-534 | Execute If Prompt Not Match | executeIfPromptNotMatch | action | text | 
-535 | Execute If Prompt Not Present | executeIfPromptNotPresent | action |  | 
-536 | Execute If Prompt Present | executeIfPromptPresent | action |  | 
-537 | Execute If QR | executeIfQR | action | locator | text
-538 | Execute If QR Match | executeIfQRMatch | action | locator | text
-539 | Execute If QR Not Match | executeIfQRNotMatch | action | locator | text
-540 | Execute If Selected Id | executeIfSelectedId | action | locator | text
-541 | Execute If Selected Id Match | executeIfSelectedIdMatch | action | locator | text
-542 | Execute If Selected Id Not Match | executeIfSelectedIdNotMatch | action | locator | text
-543 | Execute If Selected Index | executeIfSelectedIndex | action | locator | text
-544 | Execute If Selected Index Match | executeIfSelectedIndexMatch | action | locator | text
-545 | Execute If Selected Index Not Match | executeIfSelectedIndexNotMatch | action | locator | text
-546 | Execute If Selected Label | executeIfSelectedLabel | action | locator | text
-547 | Execute If Selected Label Match | executeIfSelectedLabelMatch | action | locator | text
-548 | Execute If Selected Label Not Match | executeIfSelectedLabelNotMatch | action | locator | text
-549 | Execute If Selected Value | executeIfSelectedValue | action | locator | text
-550 | Execute If Selected Value Match | executeIfSelectedValueMatch | action | locator | text
-551 | Execute If Selected Value Not Match | executeIfSelectedValueNotMatch | action | locator | text
-552 | Execute If Something Selected | executeIfSomethingSelected | action | locator | 
-553 | Execute If Something Selected | executeIfSomethingSelected | action | parentLocator | locator
-554 | Execute If Tag Name | executeIfTagName | action | locator | text
-555 | Execute If Tag Name Match | executeIfTagNameMatch | action | locator | text
-556 | Execute If Tag Name Not Match | executeIfTagNameNotMatch | action | locator | text
-557 | Execute If Text | executeIfText | action | locator | text
-558 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
-559 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
-560 | Execute If Text Match | executeIfTextMatch | action | locator | text
-561 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
-562 | Execute If Text Not Present | executeIfTextNotPresent | action | pattern | 
-563 | Execute If Text Present | executeIfTextPresent | action | pattern | 
-564 | Execute If Title | executeIfTitle | action | text | 
-565 | Execute If Title Match | executeIfTitleMatch | action | text | 
-566 | Execute If Title Not Match | executeIfTitleNotMatch | action | text | 
-567 | Execute If Value | executeIfValue | action | locator | text
-568 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
-569 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
-570 | Execute If Value Match | executeIfValueMatch | action | locator | text
-571 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
-572 | Execute If Variable | executeIfVariable | action | variable | text
-573 | Execute If Visible | executeIfVisible | action | locator | 
-574 | Execute If Visible | executeIfVisible | action | parentLocator | locator
-575 | Execute If Window Count | executeIfWindowCount | action | text | 
-576 | Execute If Window Handle | executeIfWindowHandle | action | text | 
-577 | Execute If Window Handle Match | executeIfWindowHandleMatch | action | text | 
-578 | Execute If Window Handle Not Match | executeIfWindowHandleNotMatch | action | text | 
-579 | Execute Loop | executeLoop | action | times | 
-580 | Finger Print | fingerPrint | fingerPrintId |  | 
-581 | Fire Event | fireEvent | locator | eventName | 
-582 | Fire Event | fireEvent | parentLocator | locator | eventName
-583 | Focus | focus | locator |  | 
-584 | Focus | focus | parentLocator | locator | 
-585 | Go Back | goBack |  |  | 
-586 | Go Forward | goForward |  |  | 
-587 | Hide Keyboard | hideKeyboard |  |  | 
-588 | Hide Keyboard | hideKeyboard | name |  | 
-589 | Highlight | highlight | locator |  | 
-590 | Highlight | highlight | parentLocator | locator | 
-591 | Key Down | keyDown | keycode |  | 
-592 | Key Down | keyDown | locator | keySequence | 
-593 | Key Down | keyDown | parentLocator | locator | keySequence
-594 | Key Press | keyPress | keycode |  | 
-595 | Key Press | keyPress | locator | keySequence | 
-596 | Key Press | keyPress | parentLocator | locator | keySequence
-597 | Key Up | keyUp | keycode |  | 
-598 | Key Up | keyUp | locator | keySequence | 
-599 | Key Up | keyUp | parentLocator | locator | keySequence
-600 | Landscape | landscape |  |  | 
-601 | Launch App | launchApp |  |  | 
-602 | Lock | lock |  |  | 
-603 | Long Press | longPress | locator |  | 
-604 | Long Press | longPress | parentLocator | locator | 
-605 | Long Press At | longPressAt | coordinate |  | 
-606 | Long Press At | longPressAt | locator | coordString | 
-607 | Long Press At | longPressAt | parentLocator | locator | coordString
-608 | Meta Key Down | metaKeyDown |  |  | 
-609 | Meta Key Up | metaKeyUp |  |  | 
-610 | Mouse Down | mouseDown | locator |  | 
-611 | Mouse Down | mouseDown | parentLocator | locator | 
-612 | Mouse Down At | mouseDownAt | locator | coordString | 
-613 | Mouse Down At | mouseDownAt | parentLocator | locator | coordString
-614 | Mouse Move | mouseMove | locator |  | 
-615 | Mouse Move | mouseMove | parentLocator | locator | 
-616 | Mouse Move At | mouseMoveAt | locator | coordString | 
-617 | Mouse Move At | mouseMoveAt | parentLocator | locator | coordString
-618 | Mouse Out | mouseOut | locator |  | 
-619 | Mouse Out | mouseOut | parentLocator | locator | 
-620 | Mouse Over | mouseOver | locator |  | 
-621 | Mouse Over | mouseOver | parentLocator | locator | 
-622 | Mouse Up | mouseUp | locator |  | 
-623 | Mouse Up | mouseUp | parentLocator | locator | 
-624 | Mouse Up At | mouseUpAt | locator | coordString | 
-625 | Mouse Up At | mouseUpAt | parentLocator | locator | coordString
-626 | Open | open | url |  | 
-627 | Open Control Center | openControlCenter |  |  | 
-628 | Open Notifications | openNotifications |  |  | 
-629 | Open Window | openWindow | url |  | 
-630 | Open Window | openWindow | url | windowID | 
-631 | Pause | pause | waitTime |  | 
-632 | Pinch | pinch | scale |  | 
-633 | Pinch | pinch | locator | scale | 
-634 | Pinch | pinch | parentLocator | locator | scale
-635 | Portrait | portrait |  |  | 
-636 | Refresh | refresh |  |  | 
-637 | Reject Touch ID | rejectTouchID |  |  | 
-638 | Reload App | reloadApp |  |  | 
-639 | Remove All Selections | removeAllSelections | locator |  | 
-640 | Remove All Selections | removeAllSelections | parentLocator | locator | 
-641 | Remove Selection | removeSelection | locator | optionLocator | 
-642 | Remove Selection | removeSelection | parentLocator | locator | optionLocator
-643 | Remove Selection Id | removeSelectionId | locator | id | 
-644 | Remove Selection Id | removeSelectionId | parentLocator | locator | id
-645 | Remove Selection Index | removeSelectionIndex | locator | index | 
-646 | Remove Selection Index | removeSelectionIndex | parentLocator | locator | index
-647 | Remove Selection Label | removeSelectionLabel | locator | label | 
-648 | Remove Selection Label | removeSelectionLabel | parentLocator | locator | label
-649 | Remove Selection Value | removeSelectionValue | locator | value | 
-650 | Remove Selection Value | removeSelectionValue | parentLocator | locator | value
-651 | Reset App | resetApp |  |  | 
-652 | Rotate | rotate | rotation |  | 
-653 | Run App In Background | runAppInBackground | secs |  | 
-654 | Run Script | runScript | script |  | 
-655 | Scroll Down | scrollDown |  |  | 
-656 | Scroll Down | scrollDown | locator |  | 
-657 | Scroll Down | scrollDown | parentLocator | locator | 
-658 | Scroll Down To | scrollDownTo | locator |  | 
-659 | Scroll Down To | scrollDownTo | parentLocator | locator | 
-660 | Scroll Left | scrollLeft |  |  | 
-661 | Scroll Left | scrollLeft | locator |  | 
-662 | Scroll Left | scrollLeft | parentLocator | locator | 
-663 | Scroll Left To | scrollLeftTo | locator |  | 
-664 | Scroll Left To | scrollLeftTo | parentLocator | locator | 
-665 | Scroll Right | scrollRight |  |  | 
-666 | Scroll Right | scrollRight | locator |  | 
-667 | Scroll Right | scrollRight | parentLocator | locator | 
-668 | Scroll Right To | scrollRightTo | locator |  | 
-669 | Scroll Right To | scrollRightTo | parentLocator | locator | 
-670 | Scroll Up | scrollUp |  |  | 
-671 | Scroll Up | scrollUp | locator |  | 
-672 | Scroll Up | scrollUp | parentLocator | locator | 
-673 | Scroll Up To | scrollUpTo | locator |  | 
-674 | Scroll Up To | scrollUpTo | parentLocator | locator | 
-675 | Select | select | locator | optionLocator | 
-676 | Select | select | parentLocator | locator | optionLocator
-677 | Select First Window | selectFirstWindow |  |  | 
-678 | Select Frame | selectFrame | locator |  | 
-679 | Select Id | selectId | locator | id | 
-680 | Select Id | selectId | parentLocator | locator | id
-681 | Select Index | selectIndex | locator | index | 
-682 | Select Index | selectIndex | parentLocator | locator | index
-683 | Select Label | selectLabel | locator | label | 
-684 | Select Label | selectLabel | parentLocator | locator | label
-685 | Select Last Window | selectLastWindow |  |  | 
-686 | Select Next Window | selectNextWindow |  |  | 
-687 | Select Original Window | selectOriginalWindow |  |  | 
-688 | Select Parent Frame | selectParentFrame |  |  | 
-689 | Select Pop Up | selectPopUp | windowID |  | 
-690 | Select Previous Window | selectPreviousWindow |  |  | 
-691 | Select Value | selectValue | locator | value | 
-692 | Select Value | selectValue | parentLocator | locator | value
-693 | Select Window | selectWindow | windowID |  | 
-694 | Set Clipboard | setClipboard | text |  | 
-695 | Set Context | setContext | context |  | 
-696 | Set Cursor Position | setCursorPosition | locator | position | 
-697 | Set Cursor Position | setCursorPosition | parentLocator | locator | position
-698 | Set Geolocation | setGeolocation | location |  | 
-699 | Set Last Context | setLastContext |  |  | 
-700 | Set Native App Context | setNativeAppContext |  |  | 
-701 | Set Next Context | setNextContext |  |  | 
-702 | Set Original Context | setOriginalContext |  |  | 
-703 | Set Page Load Timeout | setPageLoadTimeout | timeout |  | 
-704 | Set Previous Context | setPreviousContext |  |  | 
-705 | Set Timeout | setTimeout | timeout |  | 
-706 | Set Web View Context | setWebViewContext | index |  | 
-707 | Shake | shake |  |  | 
-708 | Shift Key Down | shiftKeyDown |  |  | 
-709 | Shift Key Up | shiftKeyUp |  |  | 
-710 | Start Activity | startActivity | activity |  | 
-711 | Store | store | text | variable | 
-712 | Store Alert | storeAlert | variable |  | 
-713 | Store All Buttons | storeAllButtons | variable |  | 
-714 | Store All Fields | storeAllFields | variable |  | 
-715 | Store All Links | storeAllLinks | variable |  | 
-716 | Store All Window Names | storeAllWindowNames | variable |  | 
-717 | Store All Window Titles | storeAllWindowTitles | variable |  | 
-718 | Store Attribute | storeAttribute | locator | name | variable
-719 | Store Attribute From All Windows | storeAttributeFromAllWindows | attributeName | variable | 
-720 | Store Body Text | storeBodyText | variable |  | 
-721 | Store Confirmation | storeConfirmation | variable |  | 
-722 | Store Context | storeContext | variable |  | 
-723 | Store Context Count | storeContextCount | variable |  | 
-724 | Store Cookie | storeCookie | variable |  | 
-725 | Store Cookie By Name | storeCookieByName | name | variable | 
-726 | Store Current Date | storeCurrentDate | variable |  | 
-727 | Store Cursor Position | storeCursorPosition | locator | variable | 
-728 | Store Cursor Position | storeCursorPosition | parentLocator | locator | variable
-729 | Store Eval | storeEval | expression | variable | 
-730 | Store Eval Script | storeEvalScript | script | variable | 
-731 | Store Expression | storeExpression | expression | variable | 
-732 | Store Location | storeLocation | variable |  | 
-733 | Store Page Source | storePageSource | variable |  | 
-734 | Store Prompt | storePrompt | variable |  | 
-735 | Store Push | storePush | text | variable | 
-736 | Store QR | storeQR | locator | variable | 
-737 | Store QR | storeQR | parentLocator | locator | variable
-738 | Store Select Options | storeSelectOptions | locator | variable | 
-739 | Store Select Options | storeSelectOptions | parentLocator | locator | variable
-740 | Store Selected Id | storeSelectedId | locator | variable | 
-741 | Store Selected Id | storeSelectedId | parentLocator | locator | variable
-742 | Store Selected Ids | storeSelectedIds | locator | variable | 
-743 | Store Selected Ids | storeSelectedIds | parentLocator | locator | variable
-744 | Store Selected Index | storeSelectedIndex | locator | variable | 
-745 | Store Selected Index | storeSelectedIndex | parentLocator | locator | variable
-746 | Store Selected Indexes | storeSelectedIndexes | locator | variable | 
-747 | Store Selected Indexes | storeSelectedIndexes | parentLocator | locator | variable
-748 | Store Selected Label | storeSelectedLabel | locator | variable | 
-749 | Store Selected Label | storeSelectedLabel | parentLocator | locator | variable
-750 | Store Selected Labels | storeSelectedLabels | locator | variable | 
-751 | Store Selected Labels | storeSelectedLabels | parentLocator | locator | variable
-752 | Store Selected Value | storeSelectedValue | locator | variable | 
-753 | Store Selected Value | storeSelectedValue | parentLocator | locator | variable
-754 | Store Selected Values | storeSelectedValues | locator | variable | 
-755 | Store Selected Values | storeSelectedValues | parentLocator | locator | variable
-756 | Store Table | storeTable | locator | cellAddress | variable
-757 | Store Tag Name | storeTagName | locator | variable | 
-758 | Store Tag Name | storeTagName | parentLocator | locator | variable
-759 | Store Text | storeText | locator | variable | 
-760 | Store Text | storeText | parentLocator | locator | variable
-761 | Store Title | storeTitle | variable |  | 
-762 | Store Value | storeValue | locator | variable | 
-763 | Store Value | storeValue | parentLocator | locator | variable
-764 | Store Window Count | storeWindowCount | variable |  | 
-765 | Store Window Handle | storeWindowHandle | variable |  | 
-766 | Submit | submit | locator |  | 
-767 | Submit | submit | parentLocator | locator | 
-768 | Swipe Down | swipeDown |  |  | 
-769 | Swipe Down | swipeDown | locator |  | 
-770 | Swipe Down | swipeDown | parentLocator | locator | 
-771 | Swipe Left | swipeLeft |  |  | 
-772 | Swipe Left | swipeLeft | locator |  | 
-773 | Swipe Left | swipeLeft | parentLocator | locator | 
-774 | Swipe Right | swipeRight |  |  | 
-775 | Swipe Right | swipeRight | locator |  | 
-776 | Swipe Right | swipeRight | parentLocator | locator | 
-777 | Swipe Up | swipeUp |  |  | 
-778 | Swipe Up | swipeUp | locator |  | 
-779 | Swipe Up | swipeUp | parentLocator | locator | 
-780 | Tap | tap | locator |  | 
-781 | Tap | tap | parentLocator | locator | 
-782 | Tap At | tapAt | coordinate |  | 
-783 | Tap At | tapAt | locator | coordString | 
-784 | Tap At | tapAt | parentLocator | locator | coordString
-785 | Terminate App | terminateApp | bundleId |  | 
-786 | Toggle Airplane Mode | toggleAirplaneMode |  |  | 
-787 | Toggle Location Services | toggleLocationServices |  |  | 
-788 | Toggle Wifi | toggleWifi |  |  | 
-789 | Type | type | locator | value | 
-790 | Type | type | parentLocator | locator | value
-791 | Type And Tab | typeAndTab | locator | value | 
-792 | Type And Tab | typeAndTab | parentLocator | locator | value
-793 | Type Keys | typeKeys | value |  | 
-794 | Type Keys | typeKeys | locator | value | 
-795 | Type Keys | typeKeys | parentLocator | locator | value
-796 | Uncheck | uncheck | locator |  | 
-797 | Uncheck | uncheck | parentLocator | locator | 
-798 | Unlock | unlock |  |  | 
-799 | Verify Activity | verifyActivity | activity |  | 
-800 | Verify Alert | verifyAlert | text |  | 
-801 | Verify Alert Match | verifyAlertMatch | text |  | 
-802 | Verify Alert Not Match | verifyAlertNotMatch | text |  | 
-803 | Verify Alert Not Present | verifyAlertNotPresent |  |  | 
-804 | Verify Alert Present | verifyAlertPresent |  |  | 
-805 | Verify All Buttons | verifyAllButtons | text |  | 
-806 | Verify All Buttons Match | verifyAllButtonsMatch | text |  | 
-807 | Verify All Buttons Not Match | verifyAllButtonsNotMatch | text |  | 
-808 | Verify All Fields | verifyAllFields | text |  | 
-809 | Verify All Fields Match | verifyAllFieldsMatch | text |  | 
-810 | Verify All Fields Not Match | verifyAllFieldsNotMatch | text |  | 
-811 | Verify All Links | verifyAllLinks | text |  | 
-812 | Verify All Links Match | verifyAllLinksMatch | text |  | 
-813 | Verify All Links Not Match | verifyAllLinksNotMatch | text |  | 
-814 | Verify All Window Names | verifyAllWindowNames | text |  | 
-815 | Verify All Window Names Match | verifyAllWindowNamesMatch | text |  | 
-816 | Verify All Window Names Not Match | verifyAllWindowNamesNotMatch | text |  | 
-817 | Verify All Window Titles | verifyAllWindowTitles | text |  | 
-818 | Verify All Window Titles Match | verifyAllWindowTitlesMatch | text |  | 
-819 | Verify All Window Titles Not Match | verifyAllWindowTitlesNotMatch | text |  | 
-820 | Verify Attribute | verifyAttribute | locator | name | text
-821 | Verify Attribute From All Windows | verifyAttributeFromAllWindows | attributeName | text | 
-822 | Verify Attribute From All Windows Match | verifyAttributeFromAllWindowsMatch | attributeName | text | 
-823 | Verify Attribute From All Windows Not Match | verifyAttributeFromAllWindowsNotMatch | attributeName | text | 
-824 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
-825 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
-826 | Verify Background Color | verifyBackgroundColor | locator | text | 
-827 | Verify Background Color | verifyBackgroundColor | parentLocator | locator | text
-828 | Verify Body Text | verifyBodyText | text |  | 
-829 | Verify Body Text Match | verifyBodyTextMatch | text |  | 
-830 | Verify Body Text Not Match | verifyBodyTextNotMatch | text |  | 
-831 | Verify Border Color | verifyBorderColor | locator | text | 
-832 | Verify Border Color | verifyBorderColor | parentLocator | locator | text
-833 | Verify Checked | verifyChecked | locator |  | 
-834 | Verify Checked | verifyChecked | parentLocator | locator | 
-835 | Verify Color | verifyColor | locator | text | 
-836 | Verify Color | verifyColor | parentLocator | locator | text
-837 | Verify Confirmation | verifyConfirmation | text |  | 
-838 | Verify Confirmation Match | verifyConfirmationMatch | text |  | 
-839 | Verify Confirmation Not Match | verifyConfirmationNotMatch | text |  | 
-840 | Verify Confirmation Not Present | verifyConfirmationNotPresent |  |  | 
-841 | Verify Confirmation Present | verifyConfirmationPresent |  |  | 
-842 | Verify Context | verifyContext | text |  | 
-843 | Verify Context Count | verifyContextCount | text |  | 
-844 | Verify Context Match | verifyContextMatch | text |  | 
-845 | Verify Context Not Match | verifyContextNotMatch | text |  | 
-846 | Verify Cookie | verifyCookie | text |  | 
-847 | Verify Cookie By Name | verifyCookieByName | name | text | 
-848 | Verify Cookie By Name Match | verifyCookieByNameMatch | name | text | 
-849 | Verify Cookie By Name Not Match | verifyCookieByNameNotMatch | name | text | 
-850 | Verify Cookie Match | verifyCookieMatch | text |  | 
-851 | Verify Cookie Not Match | verifyCookieNotMatch | text |  | 
-852 | Verify Cookie Not Present | verifyCookieNotPresent | name |  | 
-853 | Verify Cookie Present | verifyCookiePresent | name |  | 
-854 | Verify Css Count | verifyCssCount | css | text | 
-855 | Verify Cursor Position | verifyCursorPosition | locator | text | 
-856 | Verify Cursor Position | verifyCursorPosition | parentLocator | locator | text
-857 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
-858 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
-859 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
-860 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
-861 | Verify Editable | verifyEditable | locator |  | 
-862 | Verify Editable | verifyEditable | parentLocator | locator | 
-863 | Verify Element Height | verifyElementHeight | locator | text | 
-864 | Verify Element Height | verifyElementHeight | parentLocator | locator | text
-865 | Verify Element Index | verifyElementIndex | locator | text | 
-866 | Verify Element Index | verifyElementIndex | parentLocator | locator | text
-867 | Verify Element Not Present | verifyElementNotPresent | locator |  | 
-868 | Verify Element Not Present | verifyElementNotPresent | parentLocator | locator | 
-869 | Verify Element Position Left | verifyElementPositionLeft | locator | text | 
-870 | Verify Element Position Left | verifyElementPositionLeft | parentLocator | locator | text
-871 | Verify Element Position Top | verifyElementPositionTop | locator | text | 
-872 | Verify Element Position Top | verifyElementPositionTop | parentLocator | locator | text
-873 | Verify Element Present | verifyElementPresent | locator |  | 
-874 | Verify Element Present | verifyElementPresent | parentLocator | locator | 
-875 | Verify Element Width | verifyElementWidth | locator | text | 
-876 | Verify Element Width | verifyElementWidth | parentLocator | locator | text
-877 | Verify Enabled | verifyEnabled | locator |  | 
-878 | Verify Enabled | verifyEnabled | parentLocator | locator | 
-879 | Verify Eval | verifyEval | expression | text | 
-880 | Verify Eval Script | verifyEvalScript | script | text | 
-881 | Verify Eval Script Match | verifyEvalScriptMatch | script | text | 
-882 | Verify Eval Script Not Match | verifyEvalScriptNotMatch | script | text | 
-883 | Verify Exists In Database | verifyExistsInDatabase | query |  | 
-884 | Verify Exists In Database | verifyExistsInDatabase | query | values | 
-885 | Verify Expression | verifyExpression | expression | text | 
-886 | Verify Expression Match | verifyExpressionMatch | expression | text | 
-887 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
-888 | Verify File Contain Line | verifyFileContainLine | filePattern | charset | text
-889 | Verify File Downloaded | verifyFileDownloaded | filePattern |  | 
-890 | Verify File First Line | verifyFileFirstLine | filePattern | charset | text
-891 | Verify Font Family | verifyFontFamily | locator | text | 
-892 | Verify Font Family | verifyFontFamily | parentLocator | locator | text
-893 | Verify Font Family Match | verifyFontFamilyMatch | locator | text | 
-894 | Verify Font Family Match | verifyFontFamilyMatch | parentLocator | locator | text
-895 | Verify Font Family Not Match | verifyFontFamilyNotMatch | locator | text | 
-896 | Verify Font Family Not Match | verifyFontFamilyNotMatch | parentLocator | locator | text
-897 | Verify Font Size | verifyFontSize | locator | text | 
-898 | Verify Font Size | verifyFontSize | parentLocator | locator | text
-899 | Verify Font Size Match | verifyFontSizeMatch | locator | text | 
-900 | Verify Font Size Match | verifyFontSizeMatch | parentLocator | locator | text
-901 | Verify Font Size Not Match | verifyFontSizeNotMatch | locator | text | 
-902 | Verify Font Size Not Match | verifyFontSizeNotMatch | parentLocator | locator | text
-903 | Verify Font Style | verifyFontStyle | locator | text | 
-904 | Verify Font Style | verifyFontStyle | parentLocator | locator | text
-905 | Verify Font Style Match | verifyFontStyleMatch | locator | text | 
-906 | Verify Font Style Match | verifyFontStyleMatch | parentLocator | locator | text
-907 | Verify Font Style Not Match | verifyFontStyleNotMatch | locator | text | 
-908 | Verify Font Style Not Match | verifyFontStyleNotMatch | parentLocator | locator | text
-909 | Verify Font Weight | verifyFontWeight | locator | text | 
-910 | Verify Font Weight | verifyFontWeight | parentLocator | locator | text
-911 | Verify Font Weight Match | verifyFontWeightMatch | locator | text | 
-912 | Verify Font Weight Match | verifyFontWeightMatch | parentLocator | locator | text
-913 | Verify Font Weight Not Match | verifyFontWeightNotMatch | locator | text | 
-914 | Verify Font Weight Not Match | verifyFontWeightNotMatch | parentLocator | locator | text
-915 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
-916 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
-917 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
-918 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
-919 | Verify List Contain | verifyListContain | variable | text | 
-920 | Verify List Not Contain | verifyListNotContain | variable | text | 
-921 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
-922 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
-923 | Verify Location | verifyLocation | text |  | 
-924 | Verify Location Match | verifyLocationMatch | text |  | 
-925 | Verify Location Not Match | verifyLocationNotMatch | text |  | 
-926 | Verify Log Contain Line | verifyLogContainLine | text |  | 
-927 | Verify Log Not Contain Line | verifyLogNotContainLine | text |  | 
-928 | Verify Not Activity | verifyNotActivity | activity |  | 
-929 | Verify Not Alert | verifyNotAlert | text |  | 
-930 | Verify Not All Buttons | verifyNotAllButtons | text |  | 
-931 | Verify Not All Fields | verifyNotAllFields | text |  | 
-932 | Verify Not All Links | verifyNotAllLinks | text |  | 
-933 | Verify Not All Window Names | verifyNotAllWindowNames | text |  | 
-934 | Verify Not All Window Titles | verifyNotAllWindowTitles | text |  | 
-935 | Verify Not Attribute | verifyNotAttribute | locator | name | text
-936 | Verify Not Attribute From All Windows | verifyNotAttributeFromAllWindows | attributeName | text | 
-937 | Verify Not Background Color | verifyNotBackgroundColor | locator | text | 
-938 | Verify Not Background Color | verifyNotBackgroundColor | parentLocator | locator | text
-939 | Verify Not Body Text | verifyNotBodyText | text |  | 
-940 | Verify Not Border Color | verifyNotBorderColor | locator | text | 
-941 | Verify Not Border Color | verifyNotBorderColor | parentLocator | locator | text
-942 | Verify Not Checked | verifyNotChecked | locator |  | 
-943 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
-944 | Verify Not Color | verifyNotColor | locator | text | 
-945 | Verify Not Color | verifyNotColor | parentLocator | locator | text
-946 | Verify Not Confirmation | verifyNotConfirmation | text |  | 
-947 | Verify Not Context | verifyNotContext | text |  | 
-948 | Verify Not Context Count | verifyNotContextCount | text |  | 
-949 | Verify Not Cookie | verifyNotCookie | text |  | 
-950 | Verify Not Cookie By Name | verifyNotCookieByName | name | text | 
-951 | Verify Not Css Count | verifyNotCssCount | css | text | 
-952 | Verify Not Cursor Position | verifyNotCursorPosition | locator | text | 
-953 | Verify Not Cursor Position | verifyNotCursorPosition | parentLocator | locator | text
-954 | Verify Not Editable | verifyNotEditable | locator |  | 
-955 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
-956 | Verify Not Element Height | verifyNotElementHeight | locator | text | 
-957 | Verify Not Element Height | verifyNotElementHeight | parentLocator | locator | text
-958 | Verify Not Element Index | verifyNotElementIndex | locator | text | 
-959 | Verify Not Element Index | verifyNotElementIndex | parentLocator | locator | text
-960 | Verify Not Element Position Left | verifyNotElementPositionLeft | locator | text | 
-961 | Verify Not Element Position Left | verifyNotElementPositionLeft | parentLocator | locator | text
-962 | Verify Not Element Position Top | verifyNotElementPositionTop | locator | text | 
-963 | Verify Not Element Position Top | verifyNotElementPositionTop | parentLocator | locator | text
-964 | Verify Not Element Width | verifyNotElementWidth | locator | text | 
-965 | Verify Not Element Width | verifyNotElementWidth | parentLocator | locator | text
-966 | Verify Not Enabled | verifyNotEnabled | locator |  | 
-967 | Verify Not Enabled | verifyNotEnabled | parentLocator | locator | 
-968 | Verify Not Eval | verifyNotEval | expression | text | 
-969 | Verify Not Eval Script | verifyNotEvalScript | script | text | 
-970 | Verify Not Exists In Database | verifyNotExistsInDatabase | query |  | 
-971 | Verify Not Exists In Database | verifyNotExistsInDatabase | query | values | 
-972 | Verify Not Expression | verifyNotExpression | expression | text | 
-973 | Verify Not File Downloaded | verifyNotFileDownloaded | filePattern |  | 
-974 | Verify Not Font Family | verifyNotFontFamily | locator | text | 
-975 | Verify Not Font Family | verifyNotFontFamily | parentLocator | locator | text
-976 | Verify Not Font Size | verifyNotFontSize | locator | text | 
-977 | Verify Not Font Size | verifyNotFontSize | parentLocator | locator | text
-978 | Verify Not Font Style | verifyNotFontStyle | locator | text | 
-979 | Verify Not Font Style | verifyNotFontStyle | parentLocator | locator | text
-980 | Verify Not Font Weight | verifyNotFontWeight | locator | text | 
-981 | Verify Not Font Weight | verifyNotFontWeight | parentLocator | locator | text
-982 | Verify Not Location | verifyNotLocation | text |  | 
-983 | Verify Not Ordered | verifyNotOrdered | firstLocator | secondLocator | 
-984 | Verify Not Page Source | verifyNotPageSource | text |  | 
-985 | Verify Not Prompt | verifyNotPrompt | text |  | 
-986 | Verify Not QR | verifyNotQR | locator | text | 
-987 | Verify Not QR | verifyNotQR | parentLocator | locator | text
-988 | Verify Not Select Options | verifyNotSelectOptions | locator | text | 
-989 | Verify Not Select Options | verifyNotSelectOptions | parentLocator | locator | text
-990 | Verify Not Selected Id | verifyNotSelectedId | locator | text | 
-991 | Verify Not Selected Id | verifyNotSelectedId | parentLocator | locator | text
-992 | Verify Not Selected Ids | verifyNotSelectedIds | locator | text | 
-993 | Verify Not Selected Ids | verifyNotSelectedIds | parentLocator | locator | text
-994 | Verify Not Selected Index | verifyNotSelectedIndex | locator | text | 
-995 | Verify Not Selected Index | verifyNotSelectedIndex | parentLocator | locator | text
-996 | Verify Not Selected Indexes | verifyNotSelectedIndexes | locator | text | 
-997 | Verify Not Selected Indexes | verifyNotSelectedIndexes | parentLocator | locator | text
-998 | Verify Not Selected Label | verifyNotSelectedLabel | locator | text | 
-999 | Verify Not Selected Label | verifyNotSelectedLabel | parentLocator | locator | text
-1,000 | Verify Not Selected Labels | verifyNotSelectedLabels | locator | text | 
-1,001 | Verify Not Selected Labels | verifyNotSelectedLabels | parentLocator | locator | text
-1,002 | Verify Not Selected Value | verifyNotSelectedValue | locator | text | 
-1,003 | Verify Not Selected Value | verifyNotSelectedValue | parentLocator | locator | text
-1,004 | Verify Not Selected Values | verifyNotSelectedValues | locator | text | 
-1,005 | Verify Not Selected Values | verifyNotSelectedValues | parentLocator | locator | text
-1,006 | Verify Not Something Selected | verifyNotSomethingSelected | locator |  | 
-1,007 | Verify Not Something Selected | verifyNotSomethingSelected | parentLocator | locator | 
-1,008 | Verify Not Table | verifyNotTable | locator | cellAddress | text
-1,009 | Verify Not Tag Name | verifyNotTagName | locator | text | 
-1,010 | Verify Not Tag Name | verifyNotTagName | parentLocator | locator | text
-1,011 | Verify Not Text | verifyNotText | locator | text | 
-1,012 | Verify Not Text | verifyNotText | parentLocator | locator | text
-1,013 | Verify Not Text Alignment | verifyNotTextAlignment | locator | text | 
-1,014 | Verify Not Text Alignment | verifyNotTextAlignment | parentLocator | locator | text
-1,015 | Verify Not Text Decoration | verifyNotTextDecoration | locator | text | 
-1,016 | Verify Not Text Decoration | verifyNotTextDecoration | parentLocator | locator | text
-1,017 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
-1,018 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
-1,019 | Verify Not Title | verifyNotTitle | text |  | 
-1,020 | Verify Not Value | verifyNotValue | locator | text | 
-1,021 | Verify Not Value | verifyNotValue | parentLocator | locator | text
-1,022 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
-1,023 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
-1,024 | Verify Not Variable | verifyNotVariable | variable | text | 
-1,025 | Verify Not Visible | verifyNotVisible | locator |  | 
-1,026 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
-1,027 | Verify Not Window Count | verifyNotWindowCount | text |  | 
-1,028 | Verify Not Window Handle | verifyNotWindowHandle | text |  | 
-1,029 | Verify Not Xpath Count | verifyNotXpathCount | xpath | text | 
-1,030 | Verify Ordered | verifyOrdered | firstLocator | secondLocator | 
-1,031 | Verify Page Source | verifyPageSource | text |  | 
-1,032 | Verify Page Source Match | verifyPageSourceMatch | text |  | 
-1,033 | Verify Page Source Not Match | verifyPageSourceNotMatch | text |  | 
-1,034 | Verify Prompt | verifyPrompt | text |  | 
-1,035 | Verify Prompt Match | verifyPromptMatch | text |  | 
-1,036 | Verify Prompt Not Match | verifyPromptNotMatch | text |  | 
-1,037 | Verify Prompt Not Present | verifyPromptNotPresent |  |  | 
-1,038 | Verify Prompt Present | verifyPromptPresent |  |  | 
-1,039 | Verify QR | verifyQR | locator | text | 
-1,040 | Verify QR | verifyQR | parentLocator | locator | text
-1,041 | Verify QR Match | verifyQRMatch | locator | text | 
-1,042 | Verify QR Match | verifyQRMatch | parentLocator | locator | text
-1,043 | Verify QR Not Match | verifyQRNotMatch | locator | text | 
-1,044 | Verify QR Not Match | verifyQRNotMatch | parentLocator | locator | text
-1,045 | Verify Row Count | verifyRowCount | query | count | 
-1,046 | Verify Row Count | verifyRowCount | query | values | count
-1,047 | Verify Row Count Greater Than | verifyRowCountGreaterThan | query | count | 
-1,048 | Verify Row Count Greater Than | verifyRowCountGreaterThan | query | values | count
-1,049 | Verify Row Count Less Than | verifyRowCountLessThan | query | count | 
-1,050 | Verify Row Count Less Than | verifyRowCountLessThan | query | values | count
-1,051 | Verify Select Options | verifySelectOptions | locator | text | 
-1,052 | Verify Select Options | verifySelectOptions | parentLocator | locator | text
-1,053 | Verify Select Options Match | verifySelectOptionsMatch | locator | text | 
-1,054 | Verify Select Options Match | verifySelectOptionsMatch | parentLocator | locator | text
-1,055 | Verify Select Options Not Match | verifySelectOptionsNotMatch | locator | text | 
-1,056 | Verify Select Options Not Match | verifySelectOptionsNotMatch | parentLocator | locator | text
-1,057 | Verify Selected Id | verifySelectedId | locator | text | 
-1,058 | Verify Selected Id | verifySelectedId | parentLocator | locator | text
-1,059 | Verify Selected Id Match | verifySelectedIdMatch | locator | text | 
-1,060 | Verify Selected Id Match | verifySelectedIdMatch | parentLocator | locator | text
-1,061 | Verify Selected Id Not Match | verifySelectedIdNotMatch | locator | text | 
-1,062 | Verify Selected Id Not Match | verifySelectedIdNotMatch | parentLocator | locator | text
-1,063 | Verify Selected Ids | verifySelectedIds | locator | text | 
-1,064 | Verify Selected Ids | verifySelectedIds | parentLocator | locator | text
-1,065 | Verify Selected Ids Match | verifySelectedIdsMatch | locator | text | 
-1,066 | Verify Selected Ids Match | verifySelectedIdsMatch | parentLocator | locator | text
-1,067 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | locator | text | 
-1,068 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | parentLocator | locator | text
-1,069 | Verify Selected Index | verifySelectedIndex | locator | text | 
-1,070 | Verify Selected Index | verifySelectedIndex | parentLocator | locator | text
-1,071 | Verify Selected Index Match | verifySelectedIndexMatch | locator | text | 
-1,072 | Verify Selected Index Match | verifySelectedIndexMatch | parentLocator | locator | text
-1,073 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | locator | text | 
-1,074 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | parentLocator | locator | text
-1,075 | Verify Selected Indexes | verifySelectedIndexes | locator | text | 
-1,076 | Verify Selected Indexes | verifySelectedIndexes | parentLocator | locator | text
-1,077 | Verify Selected Indexes Match | verifySelectedIndexesMatch | locator | text | 
-1,078 | Verify Selected Indexes Match | verifySelectedIndexesMatch | parentLocator | locator | text
-1,079 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | locator | text | 
-1,080 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | parentLocator | locator | text
-1,081 | Verify Selected Label | verifySelectedLabel | locator | text | 
-1,082 | Verify Selected Label | verifySelectedLabel | parentLocator | locator | text
-1,083 | Verify Selected Label Match | verifySelectedLabelMatch | locator | text | 
-1,084 | Verify Selected Label Match | verifySelectedLabelMatch | parentLocator | locator | text
-1,085 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | locator | text | 
-1,086 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | parentLocator | locator | text
-1,087 | Verify Selected Labels | verifySelectedLabels | locator | text | 
-1,088 | Verify Selected Labels | verifySelectedLabels | parentLocator | locator | text
-1,089 | Verify Selected Labels Match | verifySelectedLabelsMatch | locator | text | 
-1,090 | Verify Selected Labels Match | verifySelectedLabelsMatch | parentLocator | locator | text
-1,091 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | locator | text | 
-1,092 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | parentLocator | locator | text
-1,093 | Verify Selected Value | verifySelectedValue | locator | text | 
-1,094 | Verify Selected Value | verifySelectedValue | parentLocator | locator | text
-1,095 | Verify Selected Value Match | verifySelectedValueMatch | locator | text | 
-1,096 | Verify Selected Value Match | verifySelectedValueMatch | parentLocator | locator | text
-1,097 | Verify Selected Value Not Match | verifySelectedValueNotMatch | locator | text | 
-1,098 | Verify Selected Value Not Match | verifySelectedValueNotMatch | parentLocator | locator | text
-1,099 | Verify Selected Values | verifySelectedValues | locator | text | 
-1,100 | Verify Selected Values | verifySelectedValues | parentLocator | locator | text
-1,101 | Verify Selected Values Match | verifySelectedValuesMatch | locator | text | 
-1,102 | Verify Selected Values Match | verifySelectedValuesMatch | parentLocator | locator | text
-1,103 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | locator | text | 
-1,104 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | parentLocator | locator | text
-1,105 | Verify Something Selected | verifySomethingSelected | locator |  | 
-1,106 | Verify Something Selected | verifySomethingSelected | parentLocator | locator | 
-1,107 | Verify Table | verifyTable | locator | cellAddress | text
-1,108 | Verify Table Match | verifyTableMatch | locator | cellAddress | text
-1,109 | Verify Table Not Match | verifyTableNotMatch | locator | cellAddress | text
-1,110 | Verify Tag Name | verifyTagName | locator | text | 
-1,111 | Verify Tag Name | verifyTagName | parentLocator | locator | text
-1,112 | Verify Tag Name Match | verifyTagNameMatch | locator | text | 
-1,113 | Verify Tag Name Match | verifyTagNameMatch | parentLocator | locator | text
-1,114 | Verify Tag Name Not Match | verifyTagNameNotMatch | locator | text | 
-1,115 | Verify Tag Name Not Match | verifyTagNameNotMatch | parentLocator | locator | text
-1,116 | Verify Text | verifyText | locator | text | 
-1,117 | Verify Text | verifyText | parentLocator | locator | text
-1,118 | Verify Text Alignment | verifyTextAlignment | locator | text | 
-1,119 | Verify Text Alignment | verifyTextAlignment | parentLocator | locator | text
-1,120 | Verify Text Alignment Match | verifyTextAlignmentMatch | locator | text | 
-1,121 | Verify Text Alignment Match | verifyTextAlignmentMatch | parentLocator | locator | text
-1,122 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | locator | text | 
-1,123 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | parentLocator | locator | text
-1,124 | Verify Text Decoration | verifyTextDecoration | locator | text | 
-1,125 | Verify Text Decoration | verifyTextDecoration | parentLocator | locator | text
-1,126 | Verify Text Decoration Match | verifyTextDecorationMatch | locator | text | 
-1,127 | Verify Text Decoration Match | verifyTextDecorationMatch | parentLocator | locator | text
-1,128 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | locator | text | 
-1,129 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | parentLocator | locator | text
-1,130 | Verify Text Empty | verifyTextEmpty | locator |  | 
-1,131 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
-1,132 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
-1,133 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
-1,134 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
-1,135 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
-1,136 | Verify Text Match | verifyTextMatch | locator | text | 
-1,137 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
-1,138 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
-1,139 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
-1,140 | Verify Text Not Present | verifyTextNotPresent | pattern |  | 
-1,141 | Verify Text Present | verifyTextPresent | pattern |  | 
-1,142 | Verify Title | verifyTitle | text |  | 
-1,143 | Verify Title Match | verifyTitleMatch | text |  | 
-1,144 | Verify Title Not Match | verifyTitleNotMatch | text |  | 
-1,145 | Verify Value | verifyValue | locator | text | 
-1,146 | Verify Value | verifyValue | parentLocator | locator | text
-1,147 | Verify Value Empty | verifyValueEmpty | locator |  | 
-1,148 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
-1,149 | Verify Value Match | verifyValueMatch | locator | text | 
-1,150 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
-1,151 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
-1,152 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
-1,153 | Verify Variable | verifyVariable | variable | text | 
-1,154 | Verify Visible | verifyVisible | locator |  | 
-1,155 | Verify Visible | verifyVisible | parentLocator | locator | 
-1,156 | Verify Window Count | verifyWindowCount | text |  | 
-1,157 | Verify Window Handle | verifyWindowHandle | text |  | 
-1,158 | Verify Window Handle Match | verifyWindowHandleMatch | text |  | 
-1,159 | Verify Window Handle Not Match | verifyWindowHandleNotMatch | text |  | 
-1,160 | Verify Xpath Count | verifyXpathCount | xpath | text | 
-1,161 | Wait For Activity | waitForActivity | activity |  | 
-1,162 | Wait For Alert | waitForAlert | text |  | 
-1,163 | Wait For Alert Match | waitForAlertMatch | text |  | 
-1,164 | Wait For Alert Not Match | waitForAlertNotMatch | text |  | 
-1,165 | Wait For Alert Not Present | waitForAlertNotPresent |  |  | 
-1,166 | Wait For Alert Present | waitForAlertPresent |  |  | 
-1,167 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
-1,168 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
-1,169 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
-1,170 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
-1,171 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
-1,172 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
-1,173 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
-1,174 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
-1,175 | Wait For Attribute | waitForAttribute | locator | name | text
-1,176 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
-1,177 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
-1,178 | Wait For Body Text | waitForBodyText | text |  | 
-1,179 | Wait For Body Text Match | waitForBodyTextMatch | text |  | 
-1,180 | Wait For Body Text Not Match | waitForBodyTextNotMatch | text |  | 
-1,181 | Wait For Checked | waitForChecked | locator |  | 
-1,182 | Wait For Checked | waitForChecked | parentLocator | locator | 
-1,183 | Wait For Condition | waitForCondition | script | timeout | 
-1,184 | Wait For Confirmation | waitForConfirmation | text |  | 
-1,185 | Wait For Confirmation Match | waitForConfirmationMatch | text |  | 
-1,186 | Wait For Confirmation Not Match | waitForConfirmationNotMatch | text |  | 
-1,187 | Wait For Confirmation Not Present | waitForConfirmationNotPresent |  |  | 
-1,188 | Wait For Confirmation Present | waitForConfirmationPresent |  |  | 
-1,189 | Wait For Context | waitForContext | text |  | 
-1,190 | Wait For Context Count | waitForContextCount | text |  | 
-1,191 | Wait For Context Match | waitForContextMatch | text |  | 
-1,192 | Wait For Context Not Match | waitForContextNotMatch | text |  | 
-1,193 | Wait For Cookie | waitForCookie | text |  | 
-1,194 | Wait For Cookie By Name | waitForCookieByName | name | text | 
-1,195 | Wait For Cookie By Name Match | waitForCookieByNameMatch | name | text | 
-1,196 | Wait For Cookie By Name Not Match | waitForCookieByNameNotMatch | name | text | 
-1,197 | Wait For Cookie Match | waitForCookieMatch | text |  | 
-1,198 | Wait For Cookie Not Match | waitForCookieNotMatch | text |  | 
-1,199 | Wait For Cookie Not Present | waitForCookieNotPresent | name |  | 
-1,200 | Wait For Cookie Present | waitForCookiePresent | name |  | 
-1,201 | Wait For Editable | waitForEditable | locator |  | 
-1,202 | Wait For Editable | waitForEditable | parentLocator | locator | 
-1,203 | Wait For Element Not Present | waitForElementNotPresent | locator |  | 
-1,204 | Wait For Element Not Present | waitForElementNotPresent | parentLocator | locator | 
-1,205 | Wait For Element Present | waitForElementPresent | locator |  | 
-1,206 | Wait For Element Present | waitForElementPresent | parentLocator | locator | 
-1,207 | Wait For Enabled | waitForEnabled | locator |  | 
-1,208 | Wait For Enabled | waitForEnabled | parentLocator | locator | 
-1,209 | Wait For Eval | waitForEval | expression | text | 
-1,210 | Wait For Eval Script | waitForEvalScript | script | text | 
-1,211 | Wait For Eval Script Match | waitForEvalScriptMatch | script | text | 
-1,212 | Wait For Eval Script Not Match | waitForEvalScriptNotMatch | script | text | 
-1,213 | Wait For Exists In Database | waitForExistsInDatabase | query |  | 
-1,214 | Wait For Exists In Database | waitForExistsInDatabase | query | values | 
-1,215 | Wait For Expression | waitForExpression | expression | text | 
-1,216 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
-1,217 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
-1,218 | Wait For File Downloaded | waitForFileDownloaded | filePattern |  | 
-1,219 | Wait For Location | waitForLocation | text |  | 
-1,220 | Wait For Location Match | waitForLocationMatch | text |  | 
-1,221 | Wait For Location Not Match | waitForLocationNotMatch | text |  | 
-1,222 | Wait For Not Activity | waitForNotActivity | activity |  | 
-1,223 | Wait For Not Alert | waitForNotAlert | text |  | 
-1,224 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
-1,225 | Wait For Not Body Text | waitForNotBodyText | text |  | 
-1,226 | Wait For Not Checked | waitForNotChecked | locator |  | 
-1,227 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
-1,228 | Wait For Not Confirmation | waitForNotConfirmation | text |  | 
-1,229 | Wait For Not Context | waitForNotContext | text |  | 
-1,230 | Wait For Not Context Count | waitForNotContextCount | text |  | 
-1,231 | Wait For Not Cookie | waitForNotCookie | text |  | 
-1,232 | Wait For Not Cookie By Name | waitForNotCookieByName | name | text | 
-1,233 | Wait For Not Editable | waitForNotEditable | locator |  | 
-1,234 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
-1,235 | Wait For Not Enabled | waitForNotEnabled | locator |  | 
-1,236 | Wait For Not Enabled | waitForNotEnabled | parentLocator | locator | 
-1,237 | Wait For Not Eval | waitForNotEval | expression | text | 
-1,238 | Wait For Not Eval Script | waitForNotEvalScript | script | text | 
-1,239 | Wait For Not Exists In Database | waitForNotExistsInDatabase | query |  | 
-1,240 | Wait For Not Exists In Database | waitForNotExistsInDatabase | query | values | 
-1,241 | Wait For Not Expression | waitForNotExpression | expression | text | 
-1,242 | Wait For Not File Downloaded | waitForNotFileDownloaded | filePattern |  | 
-1,243 | Wait For Not Location | waitForNotLocation | text |  | 
-1,244 | Wait For Not Page Source | waitForNotPageSource | text |  | 
-1,245 | Wait For Not Prompt | waitForNotPrompt | text |  | 
-1,246 | Wait For Not QR | waitForNotQR | locator | text | 
-1,247 | Wait For Not QR | waitForNotQR | parentLocator | locator | text
-1,248 | Wait For Not Selected Id | waitForNotSelectedId | locator | text | 
-1,249 | Wait For Not Selected Id | waitForNotSelectedId | parentLocator | locator | text
-1,250 | Wait For Not Selected Index | waitForNotSelectedIndex | locator | text | 
-1,251 | Wait For Not Selected Index | waitForNotSelectedIndex | parentLocator | locator | text
-1,252 | Wait For Not Selected Label | waitForNotSelectedLabel | locator | text | 
-1,253 | Wait For Not Selected Label | waitForNotSelectedLabel | parentLocator | locator | text
-1,254 | Wait For Not Selected Value | waitForNotSelectedValue | locator | text | 
-1,255 | Wait For Not Selected Value | waitForNotSelectedValue | parentLocator | locator | text
-1,256 | Wait For Not Something Selected | waitForNotSomethingSelected | locator |  | 
-1,257 | Wait For Not Something Selected | waitForNotSomethingSelected | parentLocator | locator | 
-1,258 | Wait For Not Table | waitForNotTable | locator | cellAddress | text
-1,259 | Wait For Not Tag Name | waitForNotTagName | locator | text | 
-1,260 | Wait For Not Tag Name | waitForNotTagName | parentLocator | locator | text
-1,261 | Wait For Not Text | waitForNotText | locator | text | 
-1,262 | Wait For Not Text | waitForNotText | parentLocator | locator | text
-1,263 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
-1,264 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
-1,265 | Wait For Not Title | waitForNotTitle | text |  | 
-1,266 | Wait For Not Value | waitForNotValue | locator | text | 
-1,267 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
-1,268 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
-1,269 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
-1,270 | Wait For Not Visible | waitForNotVisible | locator |  | 
-1,271 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
-1,272 | Wait For Not Window Count | waitForNotWindowCount | text |  | 
-1,273 | Wait For Not Window Handle | waitForNotWindowHandle | text |  | 
-1,274 | Wait For Page Source | waitForPageSource | text |  | 
-1,275 | Wait For Page Source Match | waitForPageSourceMatch | text |  | 
-1,276 | Wait For Page Source Not Match | waitForPageSourceNotMatch | text |  | 
-1,277 | Wait For Page To Load | waitForPageToLoad | timeout |  | 
-1,278 | Wait For Pop Up | waitForPopUp | windowID | timeout | 
-1,279 | Wait For Prompt | waitForPrompt | text |  | 
-1,280 | Wait For Prompt Match | waitForPromptMatch | text |  | 
-1,281 | Wait For Prompt Not Match | waitForPromptNotMatch | text |  | 
-1,282 | Wait For Prompt Not Present | waitForPromptNotPresent |  |  | 
-1,283 | Wait For Prompt Present | waitForPromptPresent |  |  | 
-1,284 | Wait For QR | waitForQR | locator | text | 
-1,285 | Wait For QR | waitForQR | parentLocator | locator | text
-1,286 | Wait For QR Match | waitForQRMatch | locator | text | 
-1,287 | Wait For QR Match | waitForQRMatch | parentLocator | locator | text
-1,288 | Wait For QR Not Match | waitForQRNotMatch | locator | text | 
-1,289 | Wait For QR Not Match | waitForQRNotMatch | parentLocator | locator | text
-1,290 | Wait For Selected Id | waitForSelectedId | locator | text | 
-1,291 | Wait For Selected Id | waitForSelectedId | parentLocator | locator | text
-1,292 | Wait For Selected Id Match | waitForSelectedIdMatch | locator | text | 
-1,293 | Wait For Selected Id Match | waitForSelectedIdMatch | parentLocator | locator | text
-1,294 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | locator | text | 
-1,295 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | parentLocator | locator | text
-1,296 | Wait For Selected Index | waitForSelectedIndex | locator | text | 
-1,297 | Wait For Selected Index | waitForSelectedIndex | parentLocator | locator | text
-1,298 | Wait For Selected Index Match | waitForSelectedIndexMatch | locator | text | 
-1,299 | Wait For Selected Index Match | waitForSelectedIndexMatch | parentLocator | locator | text
-1,300 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | locator | text | 
-1,301 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | parentLocator | locator | text
-1,302 | Wait For Selected Label | waitForSelectedLabel | locator | text | 
-1,303 | Wait For Selected Label | waitForSelectedLabel | parentLocator | locator | text
-1,304 | Wait For Selected Label Match | waitForSelectedLabelMatch | locator | text | 
-1,305 | Wait For Selected Label Match | waitForSelectedLabelMatch | parentLocator | locator | text
-1,306 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | locator | text | 
-1,307 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | parentLocator | locator | text
-1,308 | Wait For Selected Value | waitForSelectedValue | locator | text | 
-1,309 | Wait For Selected Value | waitForSelectedValue | parentLocator | locator | text
-1,310 | Wait For Selected Value Match | waitForSelectedValueMatch | locator | text | 
-1,311 | Wait For Selected Value Match | waitForSelectedValueMatch | parentLocator | locator | text
-1,312 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | locator | text | 
-1,313 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | parentLocator | locator | text
-1,314 | Wait For Something Selected | waitForSomethingSelected | locator |  | 
-1,315 | Wait For Something Selected | waitForSomethingSelected | parentLocator | locator | 
-1,316 | Wait For Table | waitForTable | locator | cellAddress | text
-1,317 | Wait For Table Match | waitForTableMatch | locator | cellAddress | text
-1,318 | Wait For Table Not Match | waitForTableNotMatch | locator | cellAddress | text
-1,319 | Wait For Tag Name | waitForTagName | locator | text | 
-1,320 | Wait For Tag Name | waitForTagName | parentLocator | locator | text
-1,321 | Wait For Tag Name Match | waitForTagNameMatch | locator | text | 
-1,322 | Wait For Tag Name Match | waitForTagNameMatch | parentLocator | locator | text
-1,323 | Wait For Tag Name Not Match | waitForTagNameNotMatch | locator | text | 
-1,324 | Wait For Tag Name Not Match | waitForTagNameNotMatch | parentLocator | locator | text
-1,325 | Wait For Text | waitForText | locator | text | 
-1,326 | Wait For Text | waitForText | parentLocator | locator | text
-1,327 | Wait For Text Empty | waitForTextEmpty | locator |  | 
-1,328 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
-1,329 | Wait For Text Match | waitForTextMatch | locator | text | 
-1,330 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
-1,331 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
-1,332 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
-1,333 | Wait For Text Not Present | waitForTextNotPresent | pattern |  | 
-1,334 | Wait For Text Present | waitForTextPresent | pattern |  | 
-1,335 | Wait For Title | waitForTitle | text |  | 
-1,336 | Wait For Title Match | waitForTitleMatch | text |  | 
-1,337 | Wait For Title Not Match | waitForTitleNotMatch | text |  | 
-1,338 | Wait For Value | waitForValue | locator | text | 
-1,339 | Wait For Value | waitForValue | parentLocator | locator | text
-1,340 | Wait For Value Empty | waitForValueEmpty | locator |  | 
-1,341 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
-1,342 | Wait For Value Match | waitForValueMatch | locator | text | 
-1,343 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
-1,344 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
-1,345 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
-1,346 | Wait For Visible | waitForVisible | locator |  | 
-1,347 | Wait For Visible | waitForVisible | parentLocator | locator | 
-1,348 | Wait For Window Count | waitForWindowCount | text |  | 
-1,349 | Wait For Window Handle | waitForWindowHandle | text |  | 
-1,350 | Wait For Window Handle Match | waitForWindowHandleMatch | text |  | 
-1,351 | Wait For Window Handle Not Match | waitForWindowHandleNotMatch | text |  | 
-1,352 | Window Focus | windowFocus |  |  | 
-1,353 | Window Maximize | windowMaximize |  |  | 
+384 | Capture Element Screenshot | captureElementScreenshot | locator |  | 
+385 | Capture Element Screenshot | captureElementScreenshot | parentLocator | locator | 
+386 | Capture Screenshot | captureScreenshot |  |  | 
+387 | Capture Viewport | captureViewport |  |  | 
+388 | Check | check | locator |  | 
+389 | Check | check | parentLocator | locator | 
+390 | Choose Cancel Confirmation | chooseCancelConfirmation |  |  | 
+391 | Choose Cancel Prompt | chooseCancelPrompt |  |  | 
+392 | Choose Ok Alert | chooseOkAlert |  |  | 
+393 | Choose Ok Confirmation | chooseOkConfirmation |  |  | 
+394 | Clean Driver | cleanDriver |  |  | 
+395 | Clear | clear | locator |  | 
+396 | Clear | clear | parentLocator | locator | 
+397 | Clear Log | clearLog |  |  | 
+398 | Click | click | locator |  | 
+399 | Click | click | parentLocator | locator | 
+400 | Click At | clickAt | locator | coordString | 
+401 | Click At | clickAt | parentLocator | locator | coordString
+402 | Click Button | clickButton | indexOrText |  | 
+403 | Click Text | clickText | indexOrText |  | 
+404 | Close | close |  |  | 
+405 | Close App | closeApp |  |  | 
+406 | Close Control Center | closeControlCenter |  |  | 
+407 | Context Menu | contextMenu | locator |  | 
+408 | Context Menu | contextMenu | parentLocator | locator | 
+409 | Context Menu At | contextMenuAt | locator | coordString | 
+410 | Context Menu At | contextMenuAt | parentLocator | locator | coordString
+411 | Control Key Down | controlKeyDown |  |  | 
+412 | Control Key Up | controlKeyUp |  |  | 
+413 | Create Cookie | createCookie | nameValuePair |  | 
+414 | Create Cookie | createCookie | nameValuePair | optionsString | 
+415 | Delete All Visible Cookies | deleteAllVisibleCookies |  |  | 
+416 | Delete Cookie | deleteCookie | name |  | 
+417 | Delete Downloaded File | deleteDownloadedFile | filePattern |  | 
+418 | Deselect Pop Up | deselectPopUp |  |  | 
+419 | Double Click | doubleClick | locator |  | 
+420 | Double Click | doubleClick | parentLocator | locator | 
+421 | Double Click At | doubleClickAt | locator | coordString | 
+422 | Double Click At | doubleClickAt | parentLocator | locator | coordString
+423 | Double Tap | doubleTap | locator |  | 
+424 | Double Tap | doubleTap | parentLocator | locator | 
+425 | Double Tap At | doubleTapAt | coordinate |  | 
+426 | Double Tap At | doubleTapAt | locator | coordString | 
+427 | Double Tap At | doubleTapAt | parentLocator | locator | coordString
+428 | Drag And Drop | dragAndDrop | locator | movementsString | 
+429 | Drag And Drop | dragAndDrop | parentLocator | locator | movementsString
+430 | Drag And Drop To Object | dragAndDropToObject | toBeDraggedObjectLocator | dragDestinationObjectLocator | 
+431 | Echo | echo | message |  | 
+432 | Execute | execute | action |  | 
+433 | Execute Each | executeEach | action | locator | variable
+434 | Execute If Activity | executeIfActivity | action | activity | 
+435 | Execute If Alert | executeIfAlert | action | text | 
+436 | Execute If Alert Match | executeIfAlertMatch | action | text | 
+437 | Execute If Alert Not Match | executeIfAlertNotMatch | action | text | 
+438 | Execute If Alert Not Present | executeIfAlertNotPresent | action |  | 
+439 | Execute If Alert Present | executeIfAlertPresent | action |  | 
+440 | Execute If Body Text | executeIfBodyText | action | text | 
+441 | Execute If Body Text Match | executeIfBodyTextMatch | action | text | 
+442 | Execute If Body Text Not Match | executeIfBodyTextNotMatch | action | text | 
+443 | Execute If Checked | executeIfChecked | action | locator | 
+444 | Execute If Checked | executeIfChecked | action | parentLocator | locator
+445 | Execute If Confirmation | executeIfConfirmation | action | text | 
+446 | Execute If Confirmation Match | executeIfConfirmationMatch | action | text | 
+447 | Execute If Confirmation Not Match | executeIfConfirmationNotMatch | action | text | 
+448 | Execute If Confirmation Not Present | executeIfConfirmationNotPresent | action |  | 
+449 | Execute If Confirmation Present | executeIfConfirmationPresent | action |  | 
+450 | Execute If Context | executeIfContext | action | text | 
+451 | Execute If Context Count | executeIfContextCount | action | text | 
+452 | Execute If Context Match | executeIfContextMatch | action | text | 
+453 | Execute If Context Not Match | executeIfContextNotMatch | action | text | 
+454 | Execute If Cookie | executeIfCookie | action | text | 
+455 | Execute If Cookie By Name | executeIfCookieByName | action | name | text
+456 | Execute If Cookie By Name Match | executeIfCookieByNameMatch | action | name | text
+457 | Execute If Cookie By Name Not Match | executeIfCookieByNameNotMatch | action | name | text
+458 | Execute If Cookie Match | executeIfCookieMatch | action | text | 
+459 | Execute If Cookie Not Match | executeIfCookieNotMatch | action | text | 
+460 | Execute If Cookie Not Present | executeIfCookieNotPresent | action | name | 
+461 | Execute If Cookie Present | executeIfCookiePresent | action | name | 
+462 | Execute If Editable | executeIfEditable | action | locator | 
+463 | Execute If Editable | executeIfEditable | action | parentLocator | locator
+464 | Execute If Element Not Present | executeIfElementNotPresent | action | locator | 
+465 | Execute If Element Not Present | executeIfElementNotPresent | action | parentLocator | locator
+466 | Execute If Element Present | executeIfElementPresent | action | locator | 
+467 | Execute If Element Present | executeIfElementPresent | action | parentLocator | locator
+468 | Execute If Enabled | executeIfEnabled | action | locator | 
+469 | Execute If Enabled | executeIfEnabled | action | parentLocator | locator
+470 | Execute If Eval | executeIfEval | action | expression | text
+471 | Execute If Eval Script | executeIfEvalScript | action | script | text
+472 | Execute If Eval Script Match | executeIfEvalScriptMatch | action | script | text
+473 | Execute If Eval Script Not Match | executeIfEvalScriptNotMatch | action | script | text
+474 | Execute If Exists In Database | executeIfExistsInDatabase | action | query | 
+475 | Execute If Exists In Database | executeIfExistsInDatabase | action | query | values
+476 | Execute If Expression | executeIfExpression | action | expression | text
+477 | Execute If Expression Match | executeIfExpressionMatch | action | expression | text
+478 | Execute If Expression Not Match | executeIfExpressionNotMatch | action | expression | text
+479 | Execute If File Downloaded | executeIfFileDownloaded | action | filePattern | 
+480 | Execute If List Contain | executeIfListContain | action | variable | text
+481 | Execute If List Not Contain | executeIfListNotContain | action | variable | text
+482 | Execute If Location | executeIfLocation | action | text | 
+483 | Execute If Location Match | executeIfLocationMatch | action | text | 
+484 | Execute If Location Not Match | executeIfLocationNotMatch | action | text | 
+485 | Execute If Not Activity | executeIfNotActivity | action | activity | 
+486 | Execute If Not Alert | executeIfNotAlert | action | text | 
+487 | Execute If Not Body Text | executeIfNotBodyText | action | text | 
+488 | Execute If Not Checked | executeIfNotChecked | action | locator | 
+489 | Execute If Not Checked | executeIfNotChecked | action | parentLocator | locator
+490 | Execute If Not Confirmation | executeIfNotConfirmation | action | text | 
+491 | Execute If Not Context | executeIfNotContext | action | text | 
+492 | Execute If Not Context Count | executeIfNotContextCount | action | text | 
+493 | Execute If Not Cookie | executeIfNotCookie | action | text | 
+494 | Execute If Not Cookie By Name | executeIfNotCookieByName | action | name | text
+495 | Execute If Not Editable | executeIfNotEditable | action | locator | 
+496 | Execute If Not Editable | executeIfNotEditable | action | parentLocator | locator
+497 | Execute If Not Enabled | executeIfNotEnabled | action | locator | 
+498 | Execute If Not Enabled | executeIfNotEnabled | action | parentLocator | locator
+499 | Execute If Not Eval | executeIfNotEval | action | expression | text
+500 | Execute If Not Eval Script | executeIfNotEvalScript | action | script | text
+501 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | query | 
+502 | Execute If Not Exists In Database | executeIfNotExistsInDatabase | action | query | values
+503 | Execute If Not Expression | executeIfNotExpression | action | expression | text
+504 | Execute If Not File Downloaded | executeIfNotFileDownloaded | action | filePattern | 
+505 | Execute If Not Location | executeIfNotLocation | action | text | 
+506 | Execute If Not Page Source | executeIfNotPageSource | action | text | 
+507 | Execute If Not Prompt | executeIfNotPrompt | action | text | 
+508 | Execute If Not QR | executeIfNotQR | action | locator | text
+509 | Execute If Not Selected Id | executeIfNotSelectedId | action | locator | text
+510 | Execute If Not Selected Index | executeIfNotSelectedIndex | action | locator | text
+511 | Execute If Not Selected Label | executeIfNotSelectedLabel | action | locator | text
+512 | Execute If Not Selected Value | executeIfNotSelectedValue | action | locator | text
+513 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | locator | 
+514 | Execute If Not Something Selected | executeIfNotSomethingSelected | action | parentLocator | locator
+515 | Execute If Not Tag Name | executeIfNotTagName | action | locator | text
+516 | Execute If Not Text | executeIfNotText | action | locator | text
+517 | Execute If Not Text Empty | executeIfNotTextEmpty | action | locator | 
+518 | Execute If Not Text Empty | executeIfNotTextEmpty | action | parentLocator | locator
+519 | Execute If Not Title | executeIfNotTitle | action | text | 
+520 | Execute If Not Value | executeIfNotValue | action | locator | text
+521 | Execute If Not Value Empty | executeIfNotValueEmpty | action | locator | 
+522 | Execute If Not Value Empty | executeIfNotValueEmpty | action | parentLocator | locator
+523 | Execute If Not Variable | executeIfNotVariable | action | variable | text
+524 | Execute If Not Visible | executeIfNotVisible | action | locator | 
+525 | Execute If Not Visible | executeIfNotVisible | action | parentLocator | locator
+526 | Execute If Not Window Count | executeIfNotWindowCount | action | text | 
+527 | Execute If Not Window Handle | executeIfNotWindowHandle | action | text | 
+528 | Execute If Page Source | executeIfPageSource | action | text | 
+529 | Execute If Page Source Match | executeIfPageSourceMatch | action | text | 
+530 | Execute If Page Source Not Match | executeIfPageSourceNotMatch | action | text | 
+531 | Execute If Prompt | executeIfPrompt | action | text | 
+532 | Execute If Prompt Match | executeIfPromptMatch | action | text | 
+533 | Execute If Prompt Not Match | executeIfPromptNotMatch | action | text | 
+534 | Execute If Prompt Not Present | executeIfPromptNotPresent | action |  | 
+535 | Execute If Prompt Present | executeIfPromptPresent | action |  | 
+536 | Execute If QR | executeIfQR | action | locator | text
+537 | Execute If QR Match | executeIfQRMatch | action | locator | text
+538 | Execute If QR Not Match | executeIfQRNotMatch | action | locator | text
+539 | Execute If Selected Id | executeIfSelectedId | action | locator | text
+540 | Execute If Selected Id Match | executeIfSelectedIdMatch | action | locator | text
+541 | Execute If Selected Id Not Match | executeIfSelectedIdNotMatch | action | locator | text
+542 | Execute If Selected Index | executeIfSelectedIndex | action | locator | text
+543 | Execute If Selected Index Match | executeIfSelectedIndexMatch | action | locator | text
+544 | Execute If Selected Index Not Match | executeIfSelectedIndexNotMatch | action | locator | text
+545 | Execute If Selected Label | executeIfSelectedLabel | action | locator | text
+546 | Execute If Selected Label Match | executeIfSelectedLabelMatch | action | locator | text
+547 | Execute If Selected Label Not Match | executeIfSelectedLabelNotMatch | action | locator | text
+548 | Execute If Selected Value | executeIfSelectedValue | action | locator | text
+549 | Execute If Selected Value Match | executeIfSelectedValueMatch | action | locator | text
+550 | Execute If Selected Value Not Match | executeIfSelectedValueNotMatch | action | locator | text
+551 | Execute If Something Selected | executeIfSomethingSelected | action | locator | 
+552 | Execute If Something Selected | executeIfSomethingSelected | action | parentLocator | locator
+553 | Execute If Tag Name | executeIfTagName | action | locator | text
+554 | Execute If Tag Name Match | executeIfTagNameMatch | action | locator | text
+555 | Execute If Tag Name Not Match | executeIfTagNameNotMatch | action | locator | text
+556 | Execute If Text | executeIfText | action | locator | text
+557 | Execute If Text Empty | executeIfTextEmpty | action | locator | 
+558 | Execute If Text Empty | executeIfTextEmpty | action | parentLocator | locator
+559 | Execute If Text Match | executeIfTextMatch | action | locator | text
+560 | Execute If Text Not Match | executeIfTextNotMatch | action | locator | text
+561 | Execute If Text Not Present | executeIfTextNotPresent | action | pattern | 
+562 | Execute If Text Present | executeIfTextPresent | action | pattern | 
+563 | Execute If Title | executeIfTitle | action | text | 
+564 | Execute If Title Match | executeIfTitleMatch | action | text | 
+565 | Execute If Title Not Match | executeIfTitleNotMatch | action | text | 
+566 | Execute If Value | executeIfValue | action | locator | text
+567 | Execute If Value Empty | executeIfValueEmpty | action | locator | 
+568 | Execute If Value Empty | executeIfValueEmpty | action | parentLocator | locator
+569 | Execute If Value Match | executeIfValueMatch | action | locator | text
+570 | Execute If Value Not Match | executeIfValueNotMatch | action | locator | text
+571 | Execute If Variable | executeIfVariable | action | variable | text
+572 | Execute If Visible | executeIfVisible | action | locator | 
+573 | Execute If Visible | executeIfVisible | action | parentLocator | locator
+574 | Execute If Window Count | executeIfWindowCount | action | text | 
+575 | Execute If Window Handle | executeIfWindowHandle | action | text | 
+576 | Execute If Window Handle Match | executeIfWindowHandleMatch | action | text | 
+577 | Execute If Window Handle Not Match | executeIfWindowHandleNotMatch | action | text | 
+578 | Execute Loop | executeLoop | action | times | 
+579 | Finger Print | fingerPrint | fingerPrintId |  | 
+580 | Fire Event | fireEvent | locator | eventName | 
+581 | Fire Event | fireEvent | parentLocator | locator | eventName
+582 | Focus | focus | locator |  | 
+583 | Focus | focus | parentLocator | locator | 
+584 | Go Back | goBack |  |  | 
+585 | Go Forward | goForward |  |  | 
+586 | Hide Keyboard | hideKeyboard |  |  | 
+587 | Hide Keyboard | hideKeyboard | name |  | 
+588 | Highlight | highlight | locator |  | 
+589 | Highlight | highlight | parentLocator | locator | 
+590 | Key Down | keyDown | keycode |  | 
+591 | Key Down | keyDown | locator | keySequence | 
+592 | Key Down | keyDown | parentLocator | locator | keySequence
+593 | Key Press | keyPress | keycode |  | 
+594 | Key Press | keyPress | locator | keySequence | 
+595 | Key Press | keyPress | parentLocator | locator | keySequence
+596 | Key Up | keyUp | keycode |  | 
+597 | Key Up | keyUp | locator | keySequence | 
+598 | Key Up | keyUp | parentLocator | locator | keySequence
+599 | Landscape | landscape |  |  | 
+600 | Launch App | launchApp |  |  | 
+601 | Lock | lock |  |  | 
+602 | Long Press | longPress | locator |  | 
+603 | Long Press | longPress | parentLocator | locator | 
+604 | Long Press At | longPressAt | coordinate |  | 
+605 | Long Press At | longPressAt | locator | coordString | 
+606 | Long Press At | longPressAt | parentLocator | locator | coordString
+607 | Meta Key Down | metaKeyDown |  |  | 
+608 | Meta Key Up | metaKeyUp |  |  | 
+609 | Mouse Down | mouseDown | locator |  | 
+610 | Mouse Down | mouseDown | parentLocator | locator | 
+611 | Mouse Down At | mouseDownAt | locator | coordString | 
+612 | Mouse Down At | mouseDownAt | parentLocator | locator | coordString
+613 | Mouse Move | mouseMove | locator |  | 
+614 | Mouse Move | mouseMove | parentLocator | locator | 
+615 | Mouse Move At | mouseMoveAt | locator | coordString | 
+616 | Mouse Move At | mouseMoveAt | parentLocator | locator | coordString
+617 | Mouse Out | mouseOut | locator |  | 
+618 | Mouse Out | mouseOut | parentLocator | locator | 
+619 | Mouse Over | mouseOver | locator |  | 
+620 | Mouse Over | mouseOver | parentLocator | locator | 
+621 | Mouse Up | mouseUp | locator |  | 
+622 | Mouse Up | mouseUp | parentLocator | locator | 
+623 | Mouse Up At | mouseUpAt | locator | coordString | 
+624 | Mouse Up At | mouseUpAt | parentLocator | locator | coordString
+625 | Open | open | url |  | 
+626 | Open Control Center | openControlCenter |  |  | 
+627 | Open Notifications | openNotifications |  |  | 
+628 | Open Window | openWindow | url |  | 
+629 | Open Window | openWindow | url | windowID | 
+630 | Pause | pause | waitTime |  | 
+631 | Pinch | pinch | scale |  | 
+632 | Pinch | pinch | locator | scale | 
+633 | Pinch | pinch | parentLocator | locator | scale
+634 | Portrait | portrait |  |  | 
+635 | Refresh | refresh |  |  | 
+636 | Reject Touch ID | rejectTouchID |  |  | 
+637 | Reload App | reloadApp |  |  | 
+638 | Remove All Selections | removeAllSelections | locator |  | 
+639 | Remove All Selections | removeAllSelections | parentLocator | locator | 
+640 | Remove Selection | removeSelection | locator | optionLocator | 
+641 | Remove Selection | removeSelection | parentLocator | locator | optionLocator
+642 | Remove Selection Id | removeSelectionId | locator | id | 
+643 | Remove Selection Id | removeSelectionId | parentLocator | locator | id
+644 | Remove Selection Index | removeSelectionIndex | locator | index | 
+645 | Remove Selection Index | removeSelectionIndex | parentLocator | locator | index
+646 | Remove Selection Label | removeSelectionLabel | locator | label | 
+647 | Remove Selection Label | removeSelectionLabel | parentLocator | locator | label
+648 | Remove Selection Value | removeSelectionValue | locator | value | 
+649 | Remove Selection Value | removeSelectionValue | parentLocator | locator | value
+650 | Reset App | resetApp |  |  | 
+651 | Rotate | rotate | rotation |  | 
+652 | Run App In Background | runAppInBackground | secs |  | 
+653 | Run Script | runScript | script |  | 
+654 | Scroll Down | scrollDown |  |  | 
+655 | Scroll Down | scrollDown | locator |  | 
+656 | Scroll Down | scrollDown | parentLocator | locator | 
+657 | Scroll Down To | scrollDownTo | locator |  | 
+658 | Scroll Down To | scrollDownTo | parentLocator | locator | 
+659 | Scroll Left | scrollLeft |  |  | 
+660 | Scroll Left | scrollLeft | locator |  | 
+661 | Scroll Left | scrollLeft | parentLocator | locator | 
+662 | Scroll Left To | scrollLeftTo | locator |  | 
+663 | Scroll Left To | scrollLeftTo | parentLocator | locator | 
+664 | Scroll Right | scrollRight |  |  | 
+665 | Scroll Right | scrollRight | locator |  | 
+666 | Scroll Right | scrollRight | parentLocator | locator | 
+667 | Scroll Right To | scrollRightTo | locator |  | 
+668 | Scroll Right To | scrollRightTo | parentLocator | locator | 
+669 | Scroll Up | scrollUp |  |  | 
+670 | Scroll Up | scrollUp | locator |  | 
+671 | Scroll Up | scrollUp | parentLocator | locator | 
+672 | Scroll Up To | scrollUpTo | locator |  | 
+673 | Scroll Up To | scrollUpTo | parentLocator | locator | 
+674 | Select | select | locator | optionLocator | 
+675 | Select | select | parentLocator | locator | optionLocator
+676 | Select First Window | selectFirstWindow |  |  | 
+677 | Select Frame | selectFrame | locator |  | 
+678 | Select Id | selectId | locator | id | 
+679 | Select Id | selectId | parentLocator | locator | id
+680 | Select Index | selectIndex | locator | index | 
+681 | Select Index | selectIndex | parentLocator | locator | index
+682 | Select Label | selectLabel | locator | label | 
+683 | Select Label | selectLabel | parentLocator | locator | label
+684 | Select Last Window | selectLastWindow |  |  | 
+685 | Select Next Window | selectNextWindow |  |  | 
+686 | Select Original Window | selectOriginalWindow |  |  | 
+687 | Select Parent Frame | selectParentFrame |  |  | 
+688 | Select Pop Up | selectPopUp | windowID |  | 
+689 | Select Previous Window | selectPreviousWindow |  |  | 
+690 | Select Value | selectValue | locator | value | 
+691 | Select Value | selectValue | parentLocator | locator | value
+692 | Select Window | selectWindow | windowID |  | 
+693 | Set Clipboard | setClipboard | text |  | 
+694 | Set Context | setContext | context |  | 
+695 | Set Cursor Position | setCursorPosition | locator | position | 
+696 | Set Cursor Position | setCursorPosition | parentLocator | locator | position
+697 | Set Geolocation | setGeolocation | location |  | 
+698 | Set Last Context | setLastContext |  |  | 
+699 | Set Native App Context | setNativeAppContext |  |  | 
+700 | Set Next Context | setNextContext |  |  | 
+701 | Set Original Context | setOriginalContext |  |  | 
+702 | Set Page Load Timeout | setPageLoadTimeout | timeout |  | 
+703 | Set Previous Context | setPreviousContext |  |  | 
+704 | Set Timeout | setTimeout | timeout |  | 
+705 | Set Web View Context | setWebViewContext | index |  | 
+706 | Shake | shake |  |  | 
+707 | Shift Key Down | shiftKeyDown |  |  | 
+708 | Shift Key Up | shiftKeyUp |  |  | 
+709 | Start Activity | startActivity | activity |  | 
+710 | Store | store | text | variable | 
+711 | Store Alert | storeAlert | variable |  | 
+712 | Store All Buttons | storeAllButtons | variable |  | 
+713 | Store All Fields | storeAllFields | variable |  | 
+714 | Store All Links | storeAllLinks | variable |  | 
+715 | Store All Window Names | storeAllWindowNames | variable |  | 
+716 | Store All Window Titles | storeAllWindowTitles | variable |  | 
+717 | Store Attribute | storeAttribute | locator | name | variable
+718 | Store Attribute From All Windows | storeAttributeFromAllWindows | attributeName | variable | 
+719 | Store Body Text | storeBodyText | variable |  | 
+720 | Store Confirmation | storeConfirmation | variable |  | 
+721 | Store Context | storeContext | variable |  | 
+722 | Store Context Count | storeContextCount | variable |  | 
+723 | Store Cookie | storeCookie | variable |  | 
+724 | Store Cookie By Name | storeCookieByName | name | variable | 
+725 | Store Current Date | storeCurrentDate | variable |  | 
+726 | Store Cursor Position | storeCursorPosition | locator | variable | 
+727 | Store Cursor Position | storeCursorPosition | parentLocator | locator | variable
+728 | Store Eval | storeEval | expression | variable | 
+729 | Store Eval Script | storeEvalScript | script | variable | 
+730 | Store Expression | storeExpression | expression | variable | 
+731 | Store Location | storeLocation | variable |  | 
+732 | Store Page Source | storePageSource | variable |  | 
+733 | Store Prompt | storePrompt | variable |  | 
+734 | Store Push | storePush | text | variable | 
+735 | Store QR | storeQR | locator | variable | 
+736 | Store QR | storeQR | parentLocator | locator | variable
+737 | Store Select Options | storeSelectOptions | locator | variable | 
+738 | Store Select Options | storeSelectOptions | parentLocator | locator | variable
+739 | Store Selected Id | storeSelectedId | locator | variable | 
+740 | Store Selected Id | storeSelectedId | parentLocator | locator | variable
+741 | Store Selected Ids | storeSelectedIds | locator | variable | 
+742 | Store Selected Ids | storeSelectedIds | parentLocator | locator | variable
+743 | Store Selected Index | storeSelectedIndex | locator | variable | 
+744 | Store Selected Index | storeSelectedIndex | parentLocator | locator | variable
+745 | Store Selected Indexes | storeSelectedIndexes | locator | variable | 
+746 | Store Selected Indexes | storeSelectedIndexes | parentLocator | locator | variable
+747 | Store Selected Label | storeSelectedLabel | locator | variable | 
+748 | Store Selected Label | storeSelectedLabel | parentLocator | locator | variable
+749 | Store Selected Labels | storeSelectedLabels | locator | variable | 
+750 | Store Selected Labels | storeSelectedLabels | parentLocator | locator | variable
+751 | Store Selected Value | storeSelectedValue | locator | variable | 
+752 | Store Selected Value | storeSelectedValue | parentLocator | locator | variable
+753 | Store Selected Values | storeSelectedValues | locator | variable | 
+754 | Store Selected Values | storeSelectedValues | parentLocator | locator | variable
+755 | Store Table | storeTable | locator | cellAddress | variable
+756 | Store Tag Name | storeTagName | locator | variable | 
+757 | Store Tag Name | storeTagName | parentLocator | locator | variable
+758 | Store Text | storeText | locator | variable | 
+759 | Store Text | storeText | parentLocator | locator | variable
+760 | Store Title | storeTitle | variable |  | 
+761 | Store Value | storeValue | locator | variable | 
+762 | Store Value | storeValue | parentLocator | locator | variable
+763 | Store Window Count | storeWindowCount | variable |  | 
+764 | Store Window Handle | storeWindowHandle | variable |  | 
+765 | Submit | submit | locator |  | 
+766 | Submit | submit | parentLocator | locator | 
+767 | Swipe Down | swipeDown |  |  | 
+768 | Swipe Down | swipeDown | locator |  | 
+769 | Swipe Down | swipeDown | parentLocator | locator | 
+770 | Swipe Left | swipeLeft |  |  | 
+771 | Swipe Left | swipeLeft | locator |  | 
+772 | Swipe Left | swipeLeft | parentLocator | locator | 
+773 | Swipe Right | swipeRight |  |  | 
+774 | Swipe Right | swipeRight | locator |  | 
+775 | Swipe Right | swipeRight | parentLocator | locator | 
+776 | Swipe Up | swipeUp |  |  | 
+777 | Swipe Up | swipeUp | locator |  | 
+778 | Swipe Up | swipeUp | parentLocator | locator | 
+779 | Tap | tap | locator |  | 
+780 | Tap | tap | parentLocator | locator | 
+781 | Tap At | tapAt | coordinate |  | 
+782 | Tap At | tapAt | locator | coordString | 
+783 | Tap At | tapAt | parentLocator | locator | coordString
+784 | Terminate App | terminateApp | bundleId |  | 
+785 | Toggle Airplane Mode | toggleAirplaneMode |  |  | 
+786 | Toggle Location Services | toggleLocationServices |  |  | 
+787 | Toggle Wifi | toggleWifi |  |  | 
+788 | Type | type | locator | value | 
+789 | Type | type | parentLocator | locator | value
+790 | Type And Tab | typeAndTab | locator | value | 
+791 | Type And Tab | typeAndTab | parentLocator | locator | value
+792 | Type Keys | typeKeys | value |  | 
+793 | Type Keys | typeKeys | locator | value | 
+794 | Type Keys | typeKeys | parentLocator | locator | value
+795 | Uncheck | uncheck | locator |  | 
+796 | Uncheck | uncheck | parentLocator | locator | 
+797 | Unlock | unlock |  |  | 
+798 | Verify Activity | verifyActivity | activity |  | 
+799 | Verify Alert | verifyAlert | text |  | 
+800 | Verify Alert Match | verifyAlertMatch | text |  | 
+801 | Verify Alert Not Match | verifyAlertNotMatch | text |  | 
+802 | Verify Alert Not Present | verifyAlertNotPresent |  |  | 
+803 | Verify Alert Present | verifyAlertPresent |  |  | 
+804 | Verify All Buttons | verifyAllButtons | text |  | 
+805 | Verify All Buttons Match | verifyAllButtonsMatch | text |  | 
+806 | Verify All Buttons Not Match | verifyAllButtonsNotMatch | text |  | 
+807 | Verify All Fields | verifyAllFields | text |  | 
+808 | Verify All Fields Match | verifyAllFieldsMatch | text |  | 
+809 | Verify All Fields Not Match | verifyAllFieldsNotMatch | text |  | 
+810 | Verify All Links | verifyAllLinks | text |  | 
+811 | Verify All Links Match | verifyAllLinksMatch | text |  | 
+812 | Verify All Links Not Match | verifyAllLinksNotMatch | text |  | 
+813 | Verify All Window Names | verifyAllWindowNames | text |  | 
+814 | Verify All Window Names Match | verifyAllWindowNamesMatch | text |  | 
+815 | Verify All Window Names Not Match | verifyAllWindowNamesNotMatch | text |  | 
+816 | Verify All Window Titles | verifyAllWindowTitles | text |  | 
+817 | Verify All Window Titles Match | verifyAllWindowTitlesMatch | text |  | 
+818 | Verify All Window Titles Not Match | verifyAllWindowTitlesNotMatch | text |  | 
+819 | Verify Attribute | verifyAttribute | locator | name | text
+820 | Verify Attribute From All Windows | verifyAttributeFromAllWindows | attributeName | text | 
+821 | Verify Attribute From All Windows Match | verifyAttributeFromAllWindowsMatch | attributeName | text | 
+822 | Verify Attribute From All Windows Not Match | verifyAttributeFromAllWindowsNotMatch | attributeName | text | 
+823 | Verify Attribute Match | verifyAttributeMatch | locator | name | text
+824 | Verify Attribute Not Match | verifyAttributeNotMatch | locator | name | text
+825 | Verify Background Color | verifyBackgroundColor | locator | text | 
+826 | Verify Background Color | verifyBackgroundColor | parentLocator | locator | text
+827 | Verify Body Text | verifyBodyText | text |  | 
+828 | Verify Body Text Match | verifyBodyTextMatch | text |  | 
+829 | Verify Body Text Not Match | verifyBodyTextNotMatch | text |  | 
+830 | Verify Border Color | verifyBorderColor | locator | text | 
+831 | Verify Border Color | verifyBorderColor | parentLocator | locator | text
+832 | Verify Checked | verifyChecked | locator |  | 
+833 | Verify Checked | verifyChecked | parentLocator | locator | 
+834 | Verify Color | verifyColor | locator | text | 
+835 | Verify Color | verifyColor | parentLocator | locator | text
+836 | Verify Confirmation | verifyConfirmation | text |  | 
+837 | Verify Confirmation Match | verifyConfirmationMatch | text |  | 
+838 | Verify Confirmation Not Match | verifyConfirmationNotMatch | text |  | 
+839 | Verify Confirmation Not Present | verifyConfirmationNotPresent |  |  | 
+840 | Verify Confirmation Present | verifyConfirmationPresent |  |  | 
+841 | Verify Context | verifyContext | text |  | 
+842 | Verify Context Count | verifyContextCount | text |  | 
+843 | Verify Context Match | verifyContextMatch | text |  | 
+844 | Verify Context Not Match | verifyContextNotMatch | text |  | 
+845 | Verify Cookie | verifyCookie | text |  | 
+846 | Verify Cookie By Name | verifyCookieByName | name | text | 
+847 | Verify Cookie By Name Match | verifyCookieByNameMatch | name | text | 
+848 | Verify Cookie By Name Not Match | verifyCookieByNameNotMatch | name | text | 
+849 | Verify Cookie Match | verifyCookieMatch | text |  | 
+850 | Verify Cookie Not Match | verifyCookieNotMatch | text |  | 
+851 | Verify Cookie Not Present | verifyCookieNotPresent | name |  | 
+852 | Verify Cookie Present | verifyCookiePresent | name |  | 
+853 | Verify Css Count | verifyCssCount | css | text | 
+854 | Verify Cursor Position | verifyCursorPosition | locator | text | 
+855 | Verify Cursor Position | verifyCursorPosition | parentLocator | locator | text
+856 | Verify Date List Order Asc | verifyDateListOrderAsc | locator | format | 
+857 | Verify Date List Order Asc | verifyDateListOrderAsc | parentLocator | locator | format
+858 | Verify Date List Order Desc | verifyDateListOrderDesc | locator | format | 
+859 | Verify Date List Order Desc | verifyDateListOrderDesc | parentLocator | locator | format
+860 | Verify Editable | verifyEditable | locator |  | 
+861 | Verify Editable | verifyEditable | parentLocator | locator | 
+862 | Verify Element Height | verifyElementHeight | locator | text | 
+863 | Verify Element Height | verifyElementHeight | parentLocator | locator | text
+864 | Verify Element Index | verifyElementIndex | locator | text | 
+865 | Verify Element Index | verifyElementIndex | parentLocator | locator | text
+866 | Verify Element Not Present | verifyElementNotPresent | locator |  | 
+867 | Verify Element Not Present | verifyElementNotPresent | parentLocator | locator | 
+868 | Verify Element Position Left | verifyElementPositionLeft | locator | text | 
+869 | Verify Element Position Left | verifyElementPositionLeft | parentLocator | locator | text
+870 | Verify Element Position Top | verifyElementPositionTop | locator | text | 
+871 | Verify Element Position Top | verifyElementPositionTop | parentLocator | locator | text
+872 | Verify Element Present | verifyElementPresent | locator |  | 
+873 | Verify Element Present | verifyElementPresent | parentLocator | locator | 
+874 | Verify Element Width | verifyElementWidth | locator | text | 
+875 | Verify Element Width | verifyElementWidth | parentLocator | locator | text
+876 | Verify Enabled | verifyEnabled | locator |  | 
+877 | Verify Enabled | verifyEnabled | parentLocator | locator | 
+878 | Verify Eval | verifyEval | expression | text | 
+879 | Verify Eval Script | verifyEvalScript | script | text | 
+880 | Verify Eval Script Match | verifyEvalScriptMatch | script | text | 
+881 | Verify Eval Script Not Match | verifyEvalScriptNotMatch | script | text | 
+882 | Verify Exists In Database | verifyExistsInDatabase | query |  | 
+883 | Verify Exists In Database | verifyExistsInDatabase | query | values | 
+884 | Verify Expression | verifyExpression | expression | text | 
+885 | Verify Expression Match | verifyExpressionMatch | expression | text | 
+886 | Verify Expression Not Match | verifyExpressionNotMatch | expression | text | 
+887 | Verify File Contain Line | verifyFileContainLine | filePattern | charset | text
+888 | Verify File Downloaded | verifyFileDownloaded | filePattern |  | 
+889 | Verify File First Line | verifyFileFirstLine | filePattern | charset | text
+890 | Verify Font Family | verifyFontFamily | locator | text | 
+891 | Verify Font Family | verifyFontFamily | parentLocator | locator | text
+892 | Verify Font Family Match | verifyFontFamilyMatch | locator | text | 
+893 | Verify Font Family Match | verifyFontFamilyMatch | parentLocator | locator | text
+894 | Verify Font Family Not Match | verifyFontFamilyNotMatch | locator | text | 
+895 | Verify Font Family Not Match | verifyFontFamilyNotMatch | parentLocator | locator | text
+896 | Verify Font Size | verifyFontSize | locator | text | 
+897 | Verify Font Size | verifyFontSize | parentLocator | locator | text
+898 | Verify Font Size Match | verifyFontSizeMatch | locator | text | 
+899 | Verify Font Size Match | verifyFontSizeMatch | parentLocator | locator | text
+900 | Verify Font Size Not Match | verifyFontSizeNotMatch | locator | text | 
+901 | Verify Font Size Not Match | verifyFontSizeNotMatch | parentLocator | locator | text
+902 | Verify Font Style | verifyFontStyle | locator | text | 
+903 | Verify Font Style | verifyFontStyle | parentLocator | locator | text
+904 | Verify Font Style Match | verifyFontStyleMatch | locator | text | 
+905 | Verify Font Style Match | verifyFontStyleMatch | parentLocator | locator | text
+906 | Verify Font Style Not Match | verifyFontStyleNotMatch | locator | text | 
+907 | Verify Font Style Not Match | verifyFontStyleNotMatch | parentLocator | locator | text
+908 | Verify Font Weight | verifyFontWeight | locator | text | 
+909 | Verify Font Weight | verifyFontWeight | parentLocator | locator | text
+910 | Verify Font Weight Match | verifyFontWeightMatch | locator | text | 
+911 | Verify Font Weight Match | verifyFontWeightMatch | parentLocator | locator | text
+912 | Verify Font Weight Not Match | verifyFontWeightNotMatch | locator | text | 
+913 | Verify Font Weight Not Match | verifyFontWeightNotMatch | parentLocator | locator | text
+914 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | locator |  | 
+915 | Verify Integer List Order Asc | verifyIntegerListOrderAsc | parentLocator | locator | 
+916 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | locator |  | 
+917 | Verify Integer List Order Desc | verifyIntegerListOrderDesc | parentLocator | locator | 
+918 | Verify List Contain | verifyListContain | variable | text | 
+919 | Verify List Not Contain | verifyListNotContain | variable | text | 
+920 | Verify List Order Asc | verifyListOrderAsc | variable |  | 
+921 | Verify List Order Desc | verifyListOrderDesc | variable |  | 
+922 | Verify Location | verifyLocation | text |  | 
+923 | Verify Location Match | verifyLocationMatch | text |  | 
+924 | Verify Location Not Match | verifyLocationNotMatch | text |  | 
+925 | Verify Log Contain Line | verifyLogContainLine | text |  | 
+926 | Verify Log Not Contain Line | verifyLogNotContainLine | text |  | 
+927 | Verify Not Activity | verifyNotActivity | activity |  | 
+928 | Verify Not Alert | verifyNotAlert | text |  | 
+929 | Verify Not All Buttons | verifyNotAllButtons | text |  | 
+930 | Verify Not All Fields | verifyNotAllFields | text |  | 
+931 | Verify Not All Links | verifyNotAllLinks | text |  | 
+932 | Verify Not All Window Names | verifyNotAllWindowNames | text |  | 
+933 | Verify Not All Window Titles | verifyNotAllWindowTitles | text |  | 
+934 | Verify Not Attribute | verifyNotAttribute | locator | name | text
+935 | Verify Not Attribute From All Windows | verifyNotAttributeFromAllWindows | attributeName | text | 
+936 | Verify Not Background Color | verifyNotBackgroundColor | locator | text | 
+937 | Verify Not Background Color | verifyNotBackgroundColor | parentLocator | locator | text
+938 | Verify Not Body Text | verifyNotBodyText | text |  | 
+939 | Verify Not Border Color | verifyNotBorderColor | locator | text | 
+940 | Verify Not Border Color | verifyNotBorderColor | parentLocator | locator | text
+941 | Verify Not Checked | verifyNotChecked | locator |  | 
+942 | Verify Not Checked | verifyNotChecked | parentLocator | locator | 
+943 | Verify Not Color | verifyNotColor | locator | text | 
+944 | Verify Not Color | verifyNotColor | parentLocator | locator | text
+945 | Verify Not Confirmation | verifyNotConfirmation | text |  | 
+946 | Verify Not Context | verifyNotContext | text |  | 
+947 | Verify Not Context Count | verifyNotContextCount | text |  | 
+948 | Verify Not Cookie | verifyNotCookie | text |  | 
+949 | Verify Not Cookie By Name | verifyNotCookieByName | name | text | 
+950 | Verify Not Css Count | verifyNotCssCount | css | text | 
+951 | Verify Not Cursor Position | verifyNotCursorPosition | locator | text | 
+952 | Verify Not Cursor Position | verifyNotCursorPosition | parentLocator | locator | text
+953 | Verify Not Editable | verifyNotEditable | locator |  | 
+954 | Verify Not Editable | verifyNotEditable | parentLocator | locator | 
+955 | Verify Not Element Height | verifyNotElementHeight | locator | text | 
+956 | Verify Not Element Height | verifyNotElementHeight | parentLocator | locator | text
+957 | Verify Not Element Index | verifyNotElementIndex | locator | text | 
+958 | Verify Not Element Index | verifyNotElementIndex | parentLocator | locator | text
+959 | Verify Not Element Position Left | verifyNotElementPositionLeft | locator | text | 
+960 | Verify Not Element Position Left | verifyNotElementPositionLeft | parentLocator | locator | text
+961 | Verify Not Element Position Top | verifyNotElementPositionTop | locator | text | 
+962 | Verify Not Element Position Top | verifyNotElementPositionTop | parentLocator | locator | text
+963 | Verify Not Element Width | verifyNotElementWidth | locator | text | 
+964 | Verify Not Element Width | verifyNotElementWidth | parentLocator | locator | text
+965 | Verify Not Enabled | verifyNotEnabled | locator |  | 
+966 | Verify Not Enabled | verifyNotEnabled | parentLocator | locator | 
+967 | Verify Not Eval | verifyNotEval | expression | text | 
+968 | Verify Not Eval Script | verifyNotEvalScript | script | text | 
+969 | Verify Not Exists In Database | verifyNotExistsInDatabase | query |  | 
+970 | Verify Not Exists In Database | verifyNotExistsInDatabase | query | values | 
+971 | Verify Not Expression | verifyNotExpression | expression | text | 
+972 | Verify Not File Downloaded | verifyNotFileDownloaded | filePattern |  | 
+973 | Verify Not Font Family | verifyNotFontFamily | locator | text | 
+974 | Verify Not Font Family | verifyNotFontFamily | parentLocator | locator | text
+975 | Verify Not Font Size | verifyNotFontSize | locator | text | 
+976 | Verify Not Font Size | verifyNotFontSize | parentLocator | locator | text
+977 | Verify Not Font Style | verifyNotFontStyle | locator | text | 
+978 | Verify Not Font Style | verifyNotFontStyle | parentLocator | locator | text
+979 | Verify Not Font Weight | verifyNotFontWeight | locator | text | 
+980 | Verify Not Font Weight | verifyNotFontWeight | parentLocator | locator | text
+981 | Verify Not Location | verifyNotLocation | text |  | 
+982 | Verify Not Ordered | verifyNotOrdered | firstLocator | secondLocator | 
+983 | Verify Not Page Source | verifyNotPageSource | text |  | 
+984 | Verify Not Prompt | verifyNotPrompt | text |  | 
+985 | Verify Not QR | verifyNotQR | locator | text | 
+986 | Verify Not QR | verifyNotQR | parentLocator | locator | text
+987 | Verify Not Select Options | verifyNotSelectOptions | locator | text | 
+988 | Verify Not Select Options | verifyNotSelectOptions | parentLocator | locator | text
+989 | Verify Not Selected Id | verifyNotSelectedId | locator | text | 
+990 | Verify Not Selected Id | verifyNotSelectedId | parentLocator | locator | text
+991 | Verify Not Selected Ids | verifyNotSelectedIds | locator | text | 
+992 | Verify Not Selected Ids | verifyNotSelectedIds | parentLocator | locator | text
+993 | Verify Not Selected Index | verifyNotSelectedIndex | locator | text | 
+994 | Verify Not Selected Index | verifyNotSelectedIndex | parentLocator | locator | text
+995 | Verify Not Selected Indexes | verifyNotSelectedIndexes | locator | text | 
+996 | Verify Not Selected Indexes | verifyNotSelectedIndexes | parentLocator | locator | text
+997 | Verify Not Selected Label | verifyNotSelectedLabel | locator | text | 
+998 | Verify Not Selected Label | verifyNotSelectedLabel | parentLocator | locator | text
+999 | Verify Not Selected Labels | verifyNotSelectedLabels | locator | text | 
+1,000 | Verify Not Selected Labels | verifyNotSelectedLabels | parentLocator | locator | text
+1,001 | Verify Not Selected Value | verifyNotSelectedValue | locator | text | 
+1,002 | Verify Not Selected Value | verifyNotSelectedValue | parentLocator | locator | text
+1,003 | Verify Not Selected Values | verifyNotSelectedValues | locator | text | 
+1,004 | Verify Not Selected Values | verifyNotSelectedValues | parentLocator | locator | text
+1,005 | Verify Not Something Selected | verifyNotSomethingSelected | locator |  | 
+1,006 | Verify Not Something Selected | verifyNotSomethingSelected | parentLocator | locator | 
+1,007 | Verify Not Table | verifyNotTable | locator | cellAddress | text
+1,008 | Verify Not Tag Name | verifyNotTagName | locator | text | 
+1,009 | Verify Not Tag Name | verifyNotTagName | parentLocator | locator | text
+1,010 | Verify Not Text | verifyNotText | locator | text | 
+1,011 | Verify Not Text | verifyNotText | parentLocator | locator | text
+1,012 | Verify Not Text Alignment | verifyNotTextAlignment | locator | text | 
+1,013 | Verify Not Text Alignment | verifyNotTextAlignment | parentLocator | locator | text
+1,014 | Verify Not Text Decoration | verifyNotTextDecoration | locator | text | 
+1,015 | Verify Not Text Decoration | verifyNotTextDecoration | parentLocator | locator | text
+1,016 | Verify Not Text Empty | verifyNotTextEmpty | locator |  | 
+1,017 | Verify Not Text Empty | verifyNotTextEmpty | parentLocator | locator | 
+1,018 | Verify Not Title | verifyNotTitle | text |  | 
+1,019 | Verify Not Value | verifyNotValue | locator | text | 
+1,020 | Verify Not Value | verifyNotValue | parentLocator | locator | text
+1,021 | Verify Not Value Empty | verifyNotValueEmpty | locator |  | 
+1,022 | Verify Not Value Empty | verifyNotValueEmpty | parentLocator | locator | 
+1,023 | Verify Not Variable | verifyNotVariable | variable | text | 
+1,024 | Verify Not Visible | verifyNotVisible | locator |  | 
+1,025 | Verify Not Visible | verifyNotVisible | parentLocator | locator | 
+1,026 | Verify Not Window Count | verifyNotWindowCount | text |  | 
+1,027 | Verify Not Window Handle | verifyNotWindowHandle | text |  | 
+1,028 | Verify Not Xpath Count | verifyNotXpathCount | xpath | text | 
+1,029 | Verify Ordered | verifyOrdered | firstLocator | secondLocator | 
+1,030 | Verify Page Source | verifyPageSource | text |  | 
+1,031 | Verify Page Source Match | verifyPageSourceMatch | text |  | 
+1,032 | Verify Page Source Not Match | verifyPageSourceNotMatch | text |  | 
+1,033 | Verify Prompt | verifyPrompt | text |  | 
+1,034 | Verify Prompt Match | verifyPromptMatch | text |  | 
+1,035 | Verify Prompt Not Match | verifyPromptNotMatch | text |  | 
+1,036 | Verify Prompt Not Present | verifyPromptNotPresent |  |  | 
+1,037 | Verify Prompt Present | verifyPromptPresent |  |  | 
+1,038 | Verify QR | verifyQR | locator | text | 
+1,039 | Verify QR | verifyQR | parentLocator | locator | text
+1,040 | Verify QR Match | verifyQRMatch | locator | text | 
+1,041 | Verify QR Match | verifyQRMatch | parentLocator | locator | text
+1,042 | Verify QR Not Match | verifyQRNotMatch | locator | text | 
+1,043 | Verify QR Not Match | verifyQRNotMatch | parentLocator | locator | text
+1,044 | Verify Row Count | verifyRowCount | query | count | 
+1,045 | Verify Row Count | verifyRowCount | query | values | count
+1,046 | Verify Row Count Greater Than | verifyRowCountGreaterThan | query | count | 
+1,047 | Verify Row Count Greater Than | verifyRowCountGreaterThan | query | values | count
+1,048 | Verify Row Count Less Than | verifyRowCountLessThan | query | count | 
+1,049 | Verify Row Count Less Than | verifyRowCountLessThan | query | values | count
+1,050 | Verify Select Options | verifySelectOptions | locator | text | 
+1,051 | Verify Select Options | verifySelectOptions | parentLocator | locator | text
+1,052 | Verify Select Options Match | verifySelectOptionsMatch | locator | text | 
+1,053 | Verify Select Options Match | verifySelectOptionsMatch | parentLocator | locator | text
+1,054 | Verify Select Options Not Match | verifySelectOptionsNotMatch | locator | text | 
+1,055 | Verify Select Options Not Match | verifySelectOptionsNotMatch | parentLocator | locator | text
+1,056 | Verify Selected Id | verifySelectedId | locator | text | 
+1,057 | Verify Selected Id | verifySelectedId | parentLocator | locator | text
+1,058 | Verify Selected Id Match | verifySelectedIdMatch | locator | text | 
+1,059 | Verify Selected Id Match | verifySelectedIdMatch | parentLocator | locator | text
+1,060 | Verify Selected Id Not Match | verifySelectedIdNotMatch | locator | text | 
+1,061 | Verify Selected Id Not Match | verifySelectedIdNotMatch | parentLocator | locator | text
+1,062 | Verify Selected Ids | verifySelectedIds | locator | text | 
+1,063 | Verify Selected Ids | verifySelectedIds | parentLocator | locator | text
+1,064 | Verify Selected Ids Match | verifySelectedIdsMatch | locator | text | 
+1,065 | Verify Selected Ids Match | verifySelectedIdsMatch | parentLocator | locator | text
+1,066 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | locator | text | 
+1,067 | Verify Selected Ids Not Match | verifySelectedIdsNotMatch | parentLocator | locator | text
+1,068 | Verify Selected Index | verifySelectedIndex | locator | text | 
+1,069 | Verify Selected Index | verifySelectedIndex | parentLocator | locator | text
+1,070 | Verify Selected Index Match | verifySelectedIndexMatch | locator | text | 
+1,071 | Verify Selected Index Match | verifySelectedIndexMatch | parentLocator | locator | text
+1,072 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | locator | text | 
+1,073 | Verify Selected Index Not Match | verifySelectedIndexNotMatch | parentLocator | locator | text
+1,074 | Verify Selected Indexes | verifySelectedIndexes | locator | text | 
+1,075 | Verify Selected Indexes | verifySelectedIndexes | parentLocator | locator | text
+1,076 | Verify Selected Indexes Match | verifySelectedIndexesMatch | locator | text | 
+1,077 | Verify Selected Indexes Match | verifySelectedIndexesMatch | parentLocator | locator | text
+1,078 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | locator | text | 
+1,079 | Verify Selected Indexes Not Match | verifySelectedIndexesNotMatch | parentLocator | locator | text
+1,080 | Verify Selected Label | verifySelectedLabel | locator | text | 
+1,081 | Verify Selected Label | verifySelectedLabel | parentLocator | locator | text
+1,082 | Verify Selected Label Match | verifySelectedLabelMatch | locator | text | 
+1,083 | Verify Selected Label Match | verifySelectedLabelMatch | parentLocator | locator | text
+1,084 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | locator | text | 
+1,085 | Verify Selected Label Not Match | verifySelectedLabelNotMatch | parentLocator | locator | text
+1,086 | Verify Selected Labels | verifySelectedLabels | locator | text | 
+1,087 | Verify Selected Labels | verifySelectedLabels | parentLocator | locator | text
+1,088 | Verify Selected Labels Match | verifySelectedLabelsMatch | locator | text | 
+1,089 | Verify Selected Labels Match | verifySelectedLabelsMatch | parentLocator | locator | text
+1,090 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | locator | text | 
+1,091 | Verify Selected Labels Not Match | verifySelectedLabelsNotMatch | parentLocator | locator | text
+1,092 | Verify Selected Value | verifySelectedValue | locator | text | 
+1,093 | Verify Selected Value | verifySelectedValue | parentLocator | locator | text
+1,094 | Verify Selected Value Match | verifySelectedValueMatch | locator | text | 
+1,095 | Verify Selected Value Match | verifySelectedValueMatch | parentLocator | locator | text
+1,096 | Verify Selected Value Not Match | verifySelectedValueNotMatch | locator | text | 
+1,097 | Verify Selected Value Not Match | verifySelectedValueNotMatch | parentLocator | locator | text
+1,098 | Verify Selected Values | verifySelectedValues | locator | text | 
+1,099 | Verify Selected Values | verifySelectedValues | parentLocator | locator | text
+1,100 | Verify Selected Values Match | verifySelectedValuesMatch | locator | text | 
+1,101 | Verify Selected Values Match | verifySelectedValuesMatch | parentLocator | locator | text
+1,102 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | locator | text | 
+1,103 | Verify Selected Values Not Match | verifySelectedValuesNotMatch | parentLocator | locator | text
+1,104 | Verify Something Selected | verifySomethingSelected | locator |  | 
+1,105 | Verify Something Selected | verifySomethingSelected | parentLocator | locator | 
+1,106 | Verify Table | verifyTable | locator | cellAddress | text
+1,107 | Verify Table Match | verifyTableMatch | locator | cellAddress | text
+1,108 | Verify Table Not Match | verifyTableNotMatch | locator | cellAddress | text
+1,109 | Verify Tag Name | verifyTagName | locator | text | 
+1,110 | Verify Tag Name | verifyTagName | parentLocator | locator | text
+1,111 | Verify Tag Name Match | verifyTagNameMatch | locator | text | 
+1,112 | Verify Tag Name Match | verifyTagNameMatch | parentLocator | locator | text
+1,113 | Verify Tag Name Not Match | verifyTagNameNotMatch | locator | text | 
+1,114 | Verify Tag Name Not Match | verifyTagNameNotMatch | parentLocator | locator | text
+1,115 | Verify Text | verifyText | locator | text | 
+1,116 | Verify Text | verifyText | parentLocator | locator | text
+1,117 | Verify Text Alignment | verifyTextAlignment | locator | text | 
+1,118 | Verify Text Alignment | verifyTextAlignment | parentLocator | locator | text
+1,119 | Verify Text Alignment Match | verifyTextAlignmentMatch | locator | text | 
+1,120 | Verify Text Alignment Match | verifyTextAlignmentMatch | parentLocator | locator | text
+1,121 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | locator | text | 
+1,122 | Verify Text Alignment Not Match | verifyTextAlignmentNotMatch | parentLocator | locator | text
+1,123 | Verify Text Decoration | verifyTextDecoration | locator | text | 
+1,124 | Verify Text Decoration | verifyTextDecoration | parentLocator | locator | text
+1,125 | Verify Text Decoration Match | verifyTextDecorationMatch | locator | text | 
+1,126 | Verify Text Decoration Match | verifyTextDecorationMatch | parentLocator | locator | text
+1,127 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | locator | text | 
+1,128 | Verify Text Decoration Not Match | verifyTextDecorationNotMatch | parentLocator | locator | text
+1,129 | Verify Text Empty | verifyTextEmpty | locator |  | 
+1,130 | Verify Text Empty | verifyTextEmpty | parentLocator | locator | 
+1,131 | Verify Text List Order Asc | verifyTextListOrderAsc | locator |  | 
+1,132 | Verify Text List Order Asc | verifyTextListOrderAsc | parentLocator | locator | 
+1,133 | Verify Text List Order Desc | verifyTextListOrderDesc | locator |  | 
+1,134 | Verify Text List Order Desc | verifyTextListOrderDesc | parentLocator | locator | 
+1,135 | Verify Text Match | verifyTextMatch | locator | text | 
+1,136 | Verify Text Match | verifyTextMatch | parentLocator | locator | text
+1,137 | Verify Text Not Match | verifyTextNotMatch | locator | text | 
+1,138 | Verify Text Not Match | verifyTextNotMatch | parentLocator | locator | text
+1,139 | Verify Text Not Present | verifyTextNotPresent | pattern |  | 
+1,140 | Verify Text Present | verifyTextPresent | pattern |  | 
+1,141 | Verify Title | verifyTitle | text |  | 
+1,142 | Verify Title Match | verifyTitleMatch | text |  | 
+1,143 | Verify Title Not Match | verifyTitleNotMatch | text |  | 
+1,144 | Verify Value | verifyValue | locator | text | 
+1,145 | Verify Value | verifyValue | parentLocator | locator | text
+1,146 | Verify Value Empty | verifyValueEmpty | locator |  | 
+1,147 | Verify Value Empty | verifyValueEmpty | parentLocator | locator | 
+1,148 | Verify Value Match | verifyValueMatch | locator | text | 
+1,149 | Verify Value Match | verifyValueMatch | parentLocator | locator | text
+1,150 | Verify Value Not Match | verifyValueNotMatch | locator | text | 
+1,151 | Verify Value Not Match | verifyValueNotMatch | parentLocator | locator | text
+1,152 | Verify Variable | verifyVariable | variable | text | 
+1,153 | Verify Visible | verifyVisible | locator |  | 
+1,154 | Verify Visible | verifyVisible | parentLocator | locator | 
+1,155 | Verify Window Count | verifyWindowCount | text |  | 
+1,156 | Verify Window Handle | verifyWindowHandle | text |  | 
+1,157 | Verify Window Handle Match | verifyWindowHandleMatch | text |  | 
+1,158 | Verify Window Handle Not Match | verifyWindowHandleNotMatch | text |  | 
+1,159 | Verify Xpath Count | verifyXpathCount | xpath | text | 
+1,160 | Wait For Activity | waitForActivity | activity |  | 
+1,161 | Wait For Alert | waitForAlert | text |  | 
+1,162 | Wait For Alert Match | waitForAlertMatch | text |  | 
+1,163 | Wait For Alert Not Match | waitForAlertNotMatch | text |  | 
+1,164 | Wait For Alert Not Present | waitForAlertNotPresent |  |  | 
+1,165 | Wait For Alert Present | waitForAlertPresent |  |  | 
+1,166 | Wait For All Element Not Present | waitForAllElementNotPresent | locatorArray |  | 
+1,167 | Wait For All Element Present | waitForAllElementPresent | locatorArray |  | 
+1,168 | Wait For All Text Not Present | waitForAllTextNotPresent | textArray |  | 
+1,169 | Wait For All Text Present | waitForAllTextPresent | textArray |  | 
+1,170 | Wait For Any Element Not Present | waitForAnyElementNotPresent | locatorArray |  | 
+1,171 | Wait For Any Element Present | waitForAnyElementPresent | locatorArray |  | 
+1,172 | Wait For Any Text Not Present | waitForAnyTextNotPresent | textArray |  | 
+1,173 | Wait For Any Text Present | waitForAnyTextPresent | textArray |  | 
+1,174 | Wait For Attribute | waitForAttribute | locator | name | text
+1,175 | Wait For Attribute Match | waitForAttributeMatch | locator | name | text
+1,176 | Wait For Attribute Not Match | waitForAttributeNotMatch | locator | name | text
+1,177 | Wait For Body Text | waitForBodyText | text |  | 
+1,178 | Wait For Body Text Match | waitForBodyTextMatch | text |  | 
+1,179 | Wait For Body Text Not Match | waitForBodyTextNotMatch | text |  | 
+1,180 | Wait For Checked | waitForChecked | locator |  | 
+1,181 | Wait For Checked | waitForChecked | parentLocator | locator | 
+1,182 | Wait For Condition | waitForCondition | script | timeout | 
+1,183 | Wait For Confirmation | waitForConfirmation | text |  | 
+1,184 | Wait For Confirmation Match | waitForConfirmationMatch | text |  | 
+1,185 | Wait For Confirmation Not Match | waitForConfirmationNotMatch | text |  | 
+1,186 | Wait For Confirmation Not Present | waitForConfirmationNotPresent |  |  | 
+1,187 | Wait For Confirmation Present | waitForConfirmationPresent |  |  | 
+1,188 | Wait For Context | waitForContext | text |  | 
+1,189 | Wait For Context Count | waitForContextCount | text |  | 
+1,190 | Wait For Context Match | waitForContextMatch | text |  | 
+1,191 | Wait For Context Not Match | waitForContextNotMatch | text |  | 
+1,192 | Wait For Cookie | waitForCookie | text |  | 
+1,193 | Wait For Cookie By Name | waitForCookieByName | name | text | 
+1,194 | Wait For Cookie By Name Match | waitForCookieByNameMatch | name | text | 
+1,195 | Wait For Cookie By Name Not Match | waitForCookieByNameNotMatch | name | text | 
+1,196 | Wait For Cookie Match | waitForCookieMatch | text |  | 
+1,197 | Wait For Cookie Not Match | waitForCookieNotMatch | text |  | 
+1,198 | Wait For Cookie Not Present | waitForCookieNotPresent | name |  | 
+1,199 | Wait For Cookie Present | waitForCookiePresent | name |  | 
+1,200 | Wait For Editable | waitForEditable | locator |  | 
+1,201 | Wait For Editable | waitForEditable | parentLocator | locator | 
+1,202 | Wait For Element Not Present | waitForElementNotPresent | locator |  | 
+1,203 | Wait For Element Not Present | waitForElementNotPresent | parentLocator | locator | 
+1,204 | Wait For Element Present | waitForElementPresent | locator |  | 
+1,205 | Wait For Element Present | waitForElementPresent | parentLocator | locator | 
+1,206 | Wait For Enabled | waitForEnabled | locator |  | 
+1,207 | Wait For Enabled | waitForEnabled | parentLocator | locator | 
+1,208 | Wait For Eval | waitForEval | expression | text | 
+1,209 | Wait For Eval Script | waitForEvalScript | script | text | 
+1,210 | Wait For Eval Script Match | waitForEvalScriptMatch | script | text | 
+1,211 | Wait For Eval Script Not Match | waitForEvalScriptNotMatch | script | text | 
+1,212 | Wait For Exists In Database | waitForExistsInDatabase | query |  | 
+1,213 | Wait For Exists In Database | waitForExistsInDatabase | query | values | 
+1,214 | Wait For Expression | waitForExpression | expression | text | 
+1,215 | Wait For Expression Match | waitForExpressionMatch | expression | text | 
+1,216 | Wait For Expression Not Match | waitForExpressionNotMatch | expression | text | 
+1,217 | Wait For File Downloaded | waitForFileDownloaded | filePattern |  | 
+1,218 | Wait For Location | waitForLocation | text |  | 
+1,219 | Wait For Location Match | waitForLocationMatch | text |  | 
+1,220 | Wait For Location Not Match | waitForLocationNotMatch | text |  | 
+1,221 | Wait For Not Activity | waitForNotActivity | activity |  | 
+1,222 | Wait For Not Alert | waitForNotAlert | text |  | 
+1,223 | Wait For Not Attribute | waitForNotAttribute | locator | name | text
+1,224 | Wait For Not Body Text | waitForNotBodyText | text |  | 
+1,225 | Wait For Not Checked | waitForNotChecked | locator |  | 
+1,226 | Wait For Not Checked | waitForNotChecked | parentLocator | locator | 
+1,227 | Wait For Not Confirmation | waitForNotConfirmation | text |  | 
+1,228 | Wait For Not Context | waitForNotContext | text |  | 
+1,229 | Wait For Not Context Count | waitForNotContextCount | text |  | 
+1,230 | Wait For Not Cookie | waitForNotCookie | text |  | 
+1,231 | Wait For Not Cookie By Name | waitForNotCookieByName | name | text | 
+1,232 | Wait For Not Editable | waitForNotEditable | locator |  | 
+1,233 | Wait For Not Editable | waitForNotEditable | parentLocator | locator | 
+1,234 | Wait For Not Enabled | waitForNotEnabled | locator |  | 
+1,235 | Wait For Not Enabled | waitForNotEnabled | parentLocator | locator | 
+1,236 | Wait For Not Eval | waitForNotEval | expression | text | 
+1,237 | Wait For Not Eval Script | waitForNotEvalScript | script | text | 
+1,238 | Wait For Not Exists In Database | waitForNotExistsInDatabase | query |  | 
+1,239 | Wait For Not Exists In Database | waitForNotExistsInDatabase | query | values | 
+1,240 | Wait For Not Expression | waitForNotExpression | expression | text | 
+1,241 | Wait For Not File Downloaded | waitForNotFileDownloaded | filePattern |  | 
+1,242 | Wait For Not Location | waitForNotLocation | text |  | 
+1,243 | Wait For Not Page Source | waitForNotPageSource | text |  | 
+1,244 | Wait For Not Prompt | waitForNotPrompt | text |  | 
+1,245 | Wait For Not QR | waitForNotQR | locator | text | 
+1,246 | Wait For Not QR | waitForNotQR | parentLocator | locator | text
+1,247 | Wait For Not Selected Id | waitForNotSelectedId | locator | text | 
+1,248 | Wait For Not Selected Id | waitForNotSelectedId | parentLocator | locator | text
+1,249 | Wait For Not Selected Index | waitForNotSelectedIndex | locator | text | 
+1,250 | Wait For Not Selected Index | waitForNotSelectedIndex | parentLocator | locator | text
+1,251 | Wait For Not Selected Label | waitForNotSelectedLabel | locator | text | 
+1,252 | Wait For Not Selected Label | waitForNotSelectedLabel | parentLocator | locator | text
+1,253 | Wait For Not Selected Value | waitForNotSelectedValue | locator | text | 
+1,254 | Wait For Not Selected Value | waitForNotSelectedValue | parentLocator | locator | text
+1,255 | Wait For Not Something Selected | waitForNotSomethingSelected | locator |  | 
+1,256 | Wait For Not Something Selected | waitForNotSomethingSelected | parentLocator | locator | 
+1,257 | Wait For Not Table | waitForNotTable | locator | cellAddress | text
+1,258 | Wait For Not Tag Name | waitForNotTagName | locator | text | 
+1,259 | Wait For Not Tag Name | waitForNotTagName | parentLocator | locator | text
+1,260 | Wait For Not Text | waitForNotText | locator | text | 
+1,261 | Wait For Not Text | waitForNotText | parentLocator | locator | text
+1,262 | Wait For Not Text Empty | waitForNotTextEmpty | locator |  | 
+1,263 | Wait For Not Text Empty | waitForNotTextEmpty | parentLocator | locator | 
+1,264 | Wait For Not Title | waitForNotTitle | text |  | 
+1,265 | Wait For Not Value | waitForNotValue | locator | text | 
+1,266 | Wait For Not Value | waitForNotValue | parentLocator | locator | text
+1,267 | Wait For Not Value Empty | waitForNotValueEmpty | locator |  | 
+1,268 | Wait For Not Value Empty | waitForNotValueEmpty | parentLocator | locator | 
+1,269 | Wait For Not Visible | waitForNotVisible | locator |  | 
+1,270 | Wait For Not Visible | waitForNotVisible | parentLocator | locator | 
+1,271 | Wait For Not Window Count | waitForNotWindowCount | text |  | 
+1,272 | Wait For Not Window Handle | waitForNotWindowHandle | text |  | 
+1,273 | Wait For Page Source | waitForPageSource | text |  | 
+1,274 | Wait For Page Source Match | waitForPageSourceMatch | text |  | 
+1,275 | Wait For Page Source Not Match | waitForPageSourceNotMatch | text |  | 
+1,276 | Wait For Page To Load | waitForPageToLoad | timeout |  | 
+1,277 | Wait For Pop Up | waitForPopUp | windowID | timeout | 
+1,278 | Wait For Prompt | waitForPrompt | text |  | 
+1,279 | Wait For Prompt Match | waitForPromptMatch | text |  | 
+1,280 | Wait For Prompt Not Match | waitForPromptNotMatch | text |  | 
+1,281 | Wait For Prompt Not Present | waitForPromptNotPresent |  |  | 
+1,282 | Wait For Prompt Present | waitForPromptPresent |  |  | 
+1,283 | Wait For QR | waitForQR | locator | text | 
+1,284 | Wait For QR | waitForQR | parentLocator | locator | text
+1,285 | Wait For QR Match | waitForQRMatch | locator | text | 
+1,286 | Wait For QR Match | waitForQRMatch | parentLocator | locator | text
+1,287 | Wait For QR Not Match | waitForQRNotMatch | locator | text | 
+1,288 | Wait For QR Not Match | waitForQRNotMatch | parentLocator | locator | text
+1,289 | Wait For Selected Id | waitForSelectedId | locator | text | 
+1,290 | Wait For Selected Id | waitForSelectedId | parentLocator | locator | text
+1,291 | Wait For Selected Id Match | waitForSelectedIdMatch | locator | text | 
+1,292 | Wait For Selected Id Match | waitForSelectedIdMatch | parentLocator | locator | text
+1,293 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | locator | text | 
+1,294 | Wait For Selected Id Not Match | waitForSelectedIdNotMatch | parentLocator | locator | text
+1,295 | Wait For Selected Index | waitForSelectedIndex | locator | text | 
+1,296 | Wait For Selected Index | waitForSelectedIndex | parentLocator | locator | text
+1,297 | Wait For Selected Index Match | waitForSelectedIndexMatch | locator | text | 
+1,298 | Wait For Selected Index Match | waitForSelectedIndexMatch | parentLocator | locator | text
+1,299 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | locator | text | 
+1,300 | Wait For Selected Index Not Match | waitForSelectedIndexNotMatch | parentLocator | locator | text
+1,301 | Wait For Selected Label | waitForSelectedLabel | locator | text | 
+1,302 | Wait For Selected Label | waitForSelectedLabel | parentLocator | locator | text
+1,303 | Wait For Selected Label Match | waitForSelectedLabelMatch | locator | text | 
+1,304 | Wait For Selected Label Match | waitForSelectedLabelMatch | parentLocator | locator | text
+1,305 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | locator | text | 
+1,306 | Wait For Selected Label Not Match | waitForSelectedLabelNotMatch | parentLocator | locator | text
+1,307 | Wait For Selected Value | waitForSelectedValue | locator | text | 
+1,308 | Wait For Selected Value | waitForSelectedValue | parentLocator | locator | text
+1,309 | Wait For Selected Value Match | waitForSelectedValueMatch | locator | text | 
+1,310 | Wait For Selected Value Match | waitForSelectedValueMatch | parentLocator | locator | text
+1,311 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | locator | text | 
+1,312 | Wait For Selected Value Not Match | waitForSelectedValueNotMatch | parentLocator | locator | text
+1,313 | Wait For Something Selected | waitForSomethingSelected | locator |  | 
+1,314 | Wait For Something Selected | waitForSomethingSelected | parentLocator | locator | 
+1,315 | Wait For Table | waitForTable | locator | cellAddress | text
+1,316 | Wait For Table Match | waitForTableMatch | locator | cellAddress | text
+1,317 | Wait For Table Not Match | waitForTableNotMatch | locator | cellAddress | text
+1,318 | Wait For Tag Name | waitForTagName | locator | text | 
+1,319 | Wait For Tag Name | waitForTagName | parentLocator | locator | text
+1,320 | Wait For Tag Name Match | waitForTagNameMatch | locator | text | 
+1,321 | Wait For Tag Name Match | waitForTagNameMatch | parentLocator | locator | text
+1,322 | Wait For Tag Name Not Match | waitForTagNameNotMatch | locator | text | 
+1,323 | Wait For Tag Name Not Match | waitForTagNameNotMatch | parentLocator | locator | text
+1,324 | Wait For Text | waitForText | locator | text | 
+1,325 | Wait For Text | waitForText | parentLocator | locator | text
+1,326 | Wait For Text Empty | waitForTextEmpty | locator |  | 
+1,327 | Wait For Text Empty | waitForTextEmpty | parentLocator | locator | 
+1,328 | Wait For Text Match | waitForTextMatch | locator | text | 
+1,329 | Wait For Text Match | waitForTextMatch | parentLocator | locator | text
+1,330 | Wait For Text Not Match | waitForTextNotMatch | locator | text | 
+1,331 | Wait For Text Not Match | waitForTextNotMatch | parentLocator | locator | text
+1,332 | Wait For Text Not Present | waitForTextNotPresent | pattern |  | 
+1,333 | Wait For Text Present | waitForTextPresent | pattern |  | 
+1,334 | Wait For Title | waitForTitle | text |  | 
+1,335 | Wait For Title Match | waitForTitleMatch | text |  | 
+1,336 | Wait For Title Not Match | waitForTitleNotMatch | text |  | 
+1,337 | Wait For Value | waitForValue | locator | text | 
+1,338 | Wait For Value | waitForValue | parentLocator | locator | text
+1,339 | Wait For Value Empty | waitForValueEmpty | locator |  | 
+1,340 | Wait For Value Empty | waitForValueEmpty | parentLocator | locator | 
+1,341 | Wait For Value Match | waitForValueMatch | locator | text | 
+1,342 | Wait For Value Match | waitForValueMatch | parentLocator | locator | text
+1,343 | Wait For Value Not Match | waitForValueNotMatch | locator | text | 
+1,344 | Wait For Value Not Match | waitForValueNotMatch | parentLocator | locator | text
+1,345 | Wait For Visible | waitForVisible | locator |  | 
+1,346 | Wait For Visible | waitForVisible | parentLocator | locator | 
+1,347 | Wait For Window Count | waitForWindowCount | text |  | 
+1,348 | Wait For Window Handle | waitForWindowHandle | text |  | 
+1,349 | Wait For Window Handle Match | waitForWindowHandleMatch | text |  | 
+1,350 | Wait For Window Handle Not Match | waitForWindowHandleNotMatch | text |  | 
+1,351 | Window Focus | windowFocus |  |  | 
+1,352 | Window Maximize | windowMaximize |  |  | 
 
 ## Accept Touch ID
 
@@ -6388,22 +6387,6 @@ Parameter | Description
 --------- | -----------
 parentLocator | an element locator of parent element
 locator | an element locator
-
-## Broadcast Intent
-
-Issue a broadcast intent.
-
-### Usage
-
-`
-broadcastIntent(intent)
-`
-
-### Parameters
-
-Parameter | Description
---------- | -----------
-intent | Specify the intent action, such as android.intent.action.VIEW
 
 ## Capture Element Screenshot
 
