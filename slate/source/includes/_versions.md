@@ -10,3 +10,4 @@ Documentation is available for all previous releases:
 * [v0.3.1](/excelium/v/0.3.1/)
 * [v0.4.0](/excelium/v/0.4.0/)
 * [v0.4.2](/excelium/v/0.4.2/)
+* [v0.4.2](/excelium/v/0.4.2/)
