@@ -376,6 +376,8 @@ public class DriverFactory {
         desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, true);
         desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
 
+        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.ANDROID_UIAUTOMATOR2);
+
         return new AndroidDriver(new AppiumCommandExecutor(getCommandRepository(), getServerAddress(environment, testRunConfig)), desiredCapabilities);
     }
 

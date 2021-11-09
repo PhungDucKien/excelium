@@ -30,16 +30,15 @@ import excelium.core.command.Action;
 import excelium.core.driver.ContextAwareWebDriver;
 import excelium.model.project.Project;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.Dimension;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -427,43 +426,29 @@ public class GestureCommandExecutor extends CommandExecutor {
     }
 
     private void swipeAndroid(AndroidDriver driver, String direction, WebElement element) {
-        int xOffset = 0;
-        int yOffset = 0;
-        Dimension size = driver.manage().window().getSize();
-        int width = size.getWidth();
-        int height = size.getHeight();
-
-        if (element != null) {
-            xOffset = element.getRect().getX();
-            yOffset = element.getRect().getY();
-            width = element.getRect().getWidth();
-            height = element.getRect().getHeight();
+        try {
+            String uiScrollable = getAndroidUIScrollable(direction, element);
+            if (direction.equals("down") || direction.equals("right")) {
+                driver.findElement(MobileBy.AndroidUIAutomator(uiScrollable + ".flingForward()"));
+            } else {
+                driver.findElement(MobileBy.AndroidUIAutomator(uiScrollable + ".flingBackward()"));
+            }
+        } catch (InvalidSelectorException e) {
+            // ignore
         }
-
-        double anchorPercentage = 0.5f;
-        double startPercentage = (direction.equals("up") || direction.equals("right")) ? 0.25f : 0.75f;
-        double finalPercentage = (direction.equals("up") || direction.equals("right")) ? 0.75f : 0.25f;
-        long duration = 1000;
-
-        PointOption startPoint = PointOption.point(
-                (int) (xOffset + width * ((direction.equals("up") || direction.equals("down")) ? anchorPercentage : startPercentage)),
-                (int) (yOffset + height * ((direction.equals("up") || direction.equals("down")) ? startPercentage : anchorPercentage))
-        );
-
-        PointOption finalPoint = PointOption.point(
-                (int) (xOffset + width * ((direction.equals("up") || direction.equals("down")) ? anchorPercentage : finalPercentage)),
-                (int) (yOffset + height * ((direction.equals("up") || direction.equals("down")) ? finalPercentage : anchorPercentage))
-        );
-
-        new TouchAction(driver)
-                .press(startPoint)
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(duration)))
-                .moveTo(finalPoint)
-                .release().perform();
     }
 
     private void scrollAndroid(AndroidDriver driver, String direction, WebElement element) {
-        swipeAndroid(driver, direction, element);
+        try {
+            String uiScrollable = getAndroidUIScrollable(direction, element);
+            if (direction.equals("down") || direction.equals("right")) {
+                driver.findElement(MobileBy.AndroidUIAutomator(uiScrollable + ".scrollForward()"));
+            } else {
+                driver.findElement(MobileBy.AndroidUIAutomator(uiScrollable + ".scrollBackward()"));
+            }
+        } catch (InvalidSelectorException e) {
+            // ignore
+        }
     }
 
     private void scrollToAndroid(AndroidDriver driver, String direction, String parentLocator, String locator) {
@@ -472,6 +457,27 @@ public class GestureCommandExecutor extends CommandExecutor {
             scrollAndroid(driver, direction, null);
             isFound = webDriver.findElements(parentLocator, locator).size() > 0;
         }
+    }
+
+    private String getAndroidUIScrollable(String direction, WebElement element) {
+        String scrollableSelector = "new UiSelector().scrollable(true)";
+        if (element != null) {
+            String resourceId = element.getAttribute("resource-id");
+            if (StringUtils.isNotBlank(resourceId)) {
+                scrollableSelector += ".resourceId(\"" + StringEscapeUtils.escapeJava(resourceId) + "\")";
+            }
+            String contentDesc = element.getAttribute("content-desc");
+            if (StringUtils.isNotBlank(contentDesc)) {
+                scrollableSelector += ".description(\"" + StringEscapeUtils.escapeJava(contentDesc) + "\")";
+            }
+        }
+        String uiScrollable = "new UiScrollable(" + scrollableSelector + ")";
+        if (direction.equals("up") || direction.equals("down")) {
+            uiScrollable += ".setAsVerticalList()";
+        } else {
+            uiScrollable += ".setAsHorizontalList()";
+        }
+        return uiScrollable;
     }
 
     private void pinchAndroid(AndroidDriver driver, WebElement element, double scale) {

@@ -67,10 +67,11 @@ public class DriverCleaner {
         }
         try {
             webDriver.manage().timeouts().implicitlyWait(WEBDRIVER_DEFAULT_IMPLICIT_WAIT, TimeUnit.MILLISECONDS);
-            webDriver.manage().timeouts().setScriptTimeout(WEBDRIVER_DEFAULT_SCRIPT_TIMEOUT, TimeUnit.MILLISECONDS);
-            webDriver.manage().timeouts().pageLoadTimeout(WEBDRIVER_DEFAULT_PAGE_LOAD_TIMEOUT, TimeUnit.MILLISECONDS);
 
             if (environment instanceof PcEnvironment || environment instanceof MobileWebEnvironment) {
+                webDriver.manage().timeouts().setScriptTimeout(WEBDRIVER_DEFAULT_SCRIPT_TIMEOUT, TimeUnit.MILLISECONDS);
+                webDriver.manage().timeouts().pageLoadTimeout(WEBDRIVER_DEFAULT_PAGE_LOAD_TIMEOUT, TimeUnit.MILLISECONDS);
+
                 if (webDriver.switchTo() != null) {
                     if (isAlertPresent(webDriver)) {
                         Alert alert = webDriver.switchTo().alert();
