@@ -1576,10 +1576,6 @@ public class MobileExcelium extends Excelium {
         runCommand("blur", parentLocator, locator, null);
     }
 
-    public void broadcastIntent(String intent) throws Throwable {
-        runCommand("broadcastIntent", intent, null, null);
-    }
-
     public void captureElementScreenshot(String locator) throws Throwable {
         runCommand("captureElementScreenshot", locator, null, null);
     }
